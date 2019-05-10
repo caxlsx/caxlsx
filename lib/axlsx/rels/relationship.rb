@@ -104,12 +104,12 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       h = self.instance_values.reject{|k, _| k == "source_obj"}
-      str << '<Relationship '
-      str << (h.map { |key, value| '' << key.to_s << '="' << Axlsx::coder.encode(value.to_s) << '"'}.join(' '))
+      str << '<Relationship'
+      h.each { |key, value| str << " #{key}=\"#{Axlsx::coder.encode(value.to_s)}\"" }
       str << '/>'
     end
     
-    # A key that determines whether this relationship should use already generated id.
+    # Whether this relationship should use the same id as `other`.
     #
     # Instances designating the same relationship need to use the same id. We can not simply
     # compare the {#Target} attribute, though: `foo/bar.xml`, `../foo/bar.xml`, 
@@ -125,6 +125,6 @@ module Axlsx
       key << self.Target if self.TargetMode == :External
       key
     end
-    
+
   end
 end
