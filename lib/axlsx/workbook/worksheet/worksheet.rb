@@ -390,6 +390,12 @@ module Axlsx
     # @example - use << alias
     #     ws << [3, 4, 5], :types => [nil, :float]
     #
+    # @example - specify whether a row should escape formulas or not
+    #     ws.add_row ['=IF(2+2=4,4,5)', 2, 3], :escape_formulas=>true
+    #
+    # @example - specify whether a certain cells in a row should escape formulas or not
+    #     ws.add_row ['=IF(2+2=4,4,5)', '=IF(13+13=4,4,5)'], :escape_formulas=>[true, false]
+    #
     # @see Worksheet#column_widths
     # @return [Row]
     # @option options [Array] values
@@ -397,6 +403,10 @@ module Axlsx
     # @option options [Array, Integer] style
     # @option options [Array] widths each member of the widths array will affect how auto_fit behavies.
     # @option options [Float] height the row's height (in points)
+    # @option options [Array, Boolean] escape_formulas - Whether to treat a value starting with an equal
+    #    sign as formula (default) or as simple string.
+    #    Allowing user generated data to be interpreted as formulas can be dangerous
+    #   (see https://www.owasp.org/index.php/CSV_Injection for details).
     def add_row(values=[], options={})
       row = Row.new(self, values, options)
       update_column_info row, options.delete(:widths)

@@ -30,6 +30,10 @@ module Axlsx
     # @option options [String] color an 8 letter rgb specification
     # @option options [Number] formula_value The value to cache for a formula cell.
     # @option options [Symbol] scheme must be one of :none, major, :minor
+    # @option options [Boolean] escape_formulas - Whether to treat a value starting with an equal
+    #    sign as formula (default) or as simple string.
+    #    Allowing user generated data to be interpreted as formulas can be dangerous
+    #   (see https://www.owasp.org/index.php/CSV_Injection for details).
     def initialize(row, value = nil, options = {})
       @row = row
       # Do not use instance vars if not needed to use less RAM
@@ -38,6 +42,8 @@ module Axlsx
       type = options.delete(:type) || cell_type_from_value(value)
       self.type = type unless type == :string
 
+      escape_formulas = options[:escape_formulas]
+      self.escape_formulas = escape_formulas unless escape_formulas.nil?
 
       val = options.delete(:style)
       self.style = val unless val.nil? || val == 0
@@ -100,6 +106,18 @@ module Axlsx
       RestrictionValidator.validate :cell_type, CELL_TYPES, v
       @type = v
       self.value = @value unless !defined?(@value) || @value.nil?
+    end
+
+    # Whether to treat a value starting with an equal
+    #    sign as formula (default) or as simple string.
+    #    Allowing user generated data to be interpreted as formulas can be dangerous
+    #   (see https://www.owasp.org/index.php/CSV_Injection for details).
+    # @return [Boolean]
+    attr_reader :escape_formulas
+
+    def escape_formulas=(v)
+      Axlsx.validate_boolean(v)
+      @escape_formulas = v
     end
 
     # The value of this cell.
@@ -324,6 +342,8 @@ module Axlsx
     end
 
     def is_formula?
+      return false if escape_formulas
+
       type == :string && @value.to_s.start_with?(?=)
     end
 
