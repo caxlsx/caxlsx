@@ -1,6 +1,6 @@
 language: ruby
 sudo: required
-dist: trusty
+dist: bionic
 group: beta
 cache: bundler
 bundler_args: --without profile
@@ -12,25 +12,30 @@ notifications:
       - digital.ipseity@gmail.com
     on_success: always
 
+# Use the pre-installed Ruby versions listed at
+# https://docs.travis-ci.com/user/reference/bionic/#ruby-support
 matrix:
   include:
     - rvm: 2.1
     - rvm: 2.2.10
-    - rvm: 2.3.5
-    - rvm: 2.4.7
-    - rvm: 2.5.6
-    - rvm: 2.6.4
+    - rvm: 2.3.8
+    - rvm: 2.4.5
+    - rvm: 2.5.3
+    - rvm: 2.6.3
     - rvm: rbx-3
     - rvm: jruby-19mode
     - rvm: jruby-9.1.17.0
+    - rvm: jruby-9.2.8.0    
     - rvm: ruby-head
     - rvm: jruby-head
   allow_failures:
     - rvm: rbx-3
     - rvm: ruby-head
     - rvm: jruby-9.1.17.0
+    - rvm: jruby-9.2.8.0
     - rvm: jruby-head
-
+jdk:
+  - openjdk8
 env:
   global:
     - JRUBY_OPTS="-Xcli.debug=true --debug"
