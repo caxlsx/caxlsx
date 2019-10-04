@@ -7,9 +7,9 @@ notifications:
       - digital.ipseity@gmail.com
     on_success: always
 rvm:
-  - 2.3.5
-  - 2.4.7
-  - 2.5.6
+  - 2.3.8
+  - 2.4.5
+  - 2.5.3
   - 2.6.4
   - rbx-3
   - jruby-19mode
