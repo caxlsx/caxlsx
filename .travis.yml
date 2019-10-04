@@ -7,15 +7,19 @@ notifications:
       - digital.ipseity@gmail.com
     on_success: always
 rvm:
-  - 1.9.2
-  - 1.9.3
-  - 2.0.0
-  - rbx-19mode
+  - 2.3.5
+  - 2.4.7
+  - 2.5.6
+  - 2.6.4
+  - rbx-3
   - jruby-19mode
+  - jruby-9.1.17.0e
   - ruby-head
   - jruby-head
 matrix:
   allow_failures:
+    - rvm: rbx-3
+    - rvm: jruby-9.1.17.0
     - rvm: ruby-head
     - rvm: jruby-head
 before_install:
