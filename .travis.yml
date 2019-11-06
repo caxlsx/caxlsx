@@ -23,14 +23,14 @@ matrix:
     - rvm: rbx-3
     - rvm: jruby-19mode
     - rvm: jruby-9.1.17.0
-    - rvm: jruby-9.2.8.0    
+    - rvm: jruby-9.2.9.0    
     - rvm: ruby-head
     - rvm: jruby-head
   allow_failures:
     - rvm: rbx-3
     - rvm: ruby-head
     - rvm: jruby-9.1.17.0
-    - rvm: jruby-9.2.8.0
+    - rvm: jruby-9.2.9.0
     - rvm: jruby-head
 jdk:
   - openjdk8
