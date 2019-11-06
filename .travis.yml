@@ -23,6 +23,7 @@ matrix:
     - rvm: rbx-3
     - rvm: jruby-19mode
     - rvm: jruby-9.1.17.0
+      jdk: openjdk9
     - rvm: jruby-9.2.9.0
       jdk: openjdk11
     - rvm: ruby-head
