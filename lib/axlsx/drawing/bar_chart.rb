@@ -1,7 +1,7 @@
 # encoding: UTF-8
 module Axlsx
 
-  # The BarChart is a three dimentional barchart (who would have guessed?) that you can add to your worksheet.
+  # The BarChart is a two dimentional barchart that you can add to your worksheet.
   # @see Worksheet#add_chart
   # @see Chart#add_series
   # @see Package#serialize
@@ -49,7 +49,7 @@ module Axlsx
       @grouping ||= :clustered
     end
 
-    # The shabe of the bars or columns
+    # The shape of the bars or columns
     # must be one of  [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax]
     # @return [Symbol]
     def shape
@@ -106,7 +106,7 @@ module Axlsx
     end
     alias :gapDepth= :gap_depth=
 
-    # The shabe of the bars or columns
+    # The shape of the bars or columns
     # must be one of  [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax]
     def shape=(v)
       RestrictionValidator.validate "BarChart.shape", [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax], v
