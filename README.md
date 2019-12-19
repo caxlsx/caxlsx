@@ -120,7 +120,7 @@ Currently the following additional gems are available:
 
 - [acts_as_caxlsx](https://github.com/caxlsx/acts_as_caxlsx)
   * Provides simple ActiveRecord integration
-- [axlsx_rails](https://github.com/caxlsx/axlsx_rails)
+- [caxlsx_rails](https://github.com/caxlsx/caxlsx_rails)
   * Provides a `.axlsx` renderer to Rails so you can move all your spreadsheet code from your controller into view files.
 - [activeadmin-caxlsx](https://github.com/caxlsx/activeadmin-caxlsx)
   * An Active Admin plugin that includes DSL to create downloadable reports.
