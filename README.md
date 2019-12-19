@@ -1,4 +1,4 @@
-# Axlsx (Community Continued Version)
+# Caxlsx (Community Continued Version)
 [![Build Status](https://travis-ci.com/caxlsx/caxlsx.svg?branch=master)](https://travis-ci.com/caxlsx/caxlsx)
 
 ## Notice: Community Axlsx Organization
@@ -13,20 +13,20 @@ http://github.com/caxlsx
 Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
 With Axlsx you can create excel worksheets with charts, images (with links), automated and fixed column widths, customized styles, functions, tables, conditional formatting, print options, comments, merged cells, auto filters, file and stream serialization  as well as full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification.
 
-![Screen 1](https://github.com/caxlsx/axlsx/raw/master/examples/sample.png)
+![Screen 1](https://github.com/caxlsx/caxlsx/raw/master/examples/sample.png)
 
 
 ## Feature List
 
-1. Author xlsx documents: Axlsx is made to let you easily and quickly generate professional xlsx based reports that can be validated before serialization.
+1. Author xlsx documents: Caxlsx is made to let you easily and quickly generate professional xlsx based reports that can be validated before serialization.
 
-2. Generate 3D Pie, Line, Scatter and Bar Charts: With Axlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all. Customize gridlines, label rotation and series colors as well.
+2. Generate 3D Pie, Line, Scatter and Bar Charts: With Caxlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all. Customize gridlines, label rotation and series colors as well.
 
 3. Custom Styles: With guaranteed document validity, you can style borders, alignment, fills, fonts, and number formats in a single line of code. Those styles can be applied to an entire row, or a single cell anywhere in your workbook.
 
-4. Automatic type support: Axlsx will automatically determine the type of data you are generating. In this release Float, Integer, String, Date, Time and Boolean types are automatically identified and serialized to your spreadsheet.
+4. Automatic type support: Caxlsx will automatically determine the type of data you are generating. In this release Float, Integer, String, Date, Time and Boolean types are automatically identified and serialized to your spreadsheet.
 
-5. Automatic and fixed column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet, or use any value you specify for the really funky stuff.
+5. Automatic and fixed column widths: Caxlsx will automatically determine the appropriate width for your columns based on the content in the worksheet, or use any value you specify for the really funky stuff.
 
 6. Support for automatically formatted 1904 and 1900 epochs configurable in the workbook.
 
@@ -93,7 +93,7 @@ Axlsx::Package.new do |p|
 end
 ```
 
-Please see the [examples](https://github.com/caxlsx/axlsx/tree/master/examples/example.rb) for more.
+Please see the [examples](https://github.com/caxlsx/caxlsx/tree/master/examples/example.rb) for more.
 
 There is much, much more you can do with this gem. Chances are that it has already been implemented. If it hasn't, let's take a look at adding it in.
 
@@ -110,7 +110,7 @@ Additional documentation is listed below:
 - [Style Reference](https://github.com/caxlsx/caxlsx/blob/master/docs/style_reference.md)
 - [Header and Footer Codes](https://github.com/caxlsx/caxlsx/blob/master/docs/header_and_footer_codes.md)
 
-⚠ Please __do not create issues__ for questions regarding the usage of axlsx / caxlsx. Look through this README, the [examples](https://github.com/caxlsx/axlsx/tree/master/examples/example.rb), and the [FAQ](https://github.com/caxlsx/caxlsx/wiki/FAQ), and also check [questions tagged `axlsx` on Stack Overflow](https://stackoverflow.com/questions/tagged/axlsx).
+⚠ Please __do not create issues__ for questions regarding the usage of axlsx / caxlsx. Look through this README, the [examples](https://github.com/caxlsx/caxlsx/tree/master/examples/example.rb), and the [FAQ](https://github.com/caxlsx/caxlsx/wiki/FAQ), and also check [questions tagged `axlsx` on Stack Overflow](https://stackoverflow.com/questions/tagged/axlsx).
 
 Feel free to add your question (including an answer!) to the FAQ if you think it is of general interest.
 
