@@ -60,6 +60,23 @@ class TestRow < Test::Unit::TestCase
 
   end
 
+  def test_array_to_cells_with_escape_formulas
+    row = ['=HYPERLINK("http://www.example.com", "CSV Payload")', '=Bar']
+    @ws.add_row row, escape_formulas: true
+
+    assert_equal @ws.rows.last.cells[0].escape_formulas, true
+    assert_equal @ws.rows.last.cells[1].escape_formulas, true
+  end
+
+  def test_array_to_cells_with_escape_formulas_as_an_array
+    row = ['=HYPERLINK("http://www.example.com", "CSV Payload")', '+Foo', '-Bar']
+    @ws.add_row row, escape_formulas: [true, false, true]
+
+    assert_equal @ws.rows.last.cells.first.escape_formulas, true
+    assert_equal @ws.rows.last.cells[1].escape_formulas, false
+    assert_equal @ws.rows.last.cells[2].escape_formulas, true
+  end
+
   def test_custom_height
     @row.height = 20
     assert(@row.custom_height)

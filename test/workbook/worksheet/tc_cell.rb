@@ -8,7 +8,7 @@ class TestCell < Test::Unit::TestCase
     @ws = p.workbook.add_worksheet :name=>"hmmm"
     p.workbook.styles.add_style :sz=>20
     @row = @ws.add_row
-    @c = @row.add_cell 1, :type=>:float, :style=>1
+    @c = @row.add_cell 1, :type=>:float, :style=>1, :escape_formulas=>true
     data = (0..26).map { |index| index }
     @ws.add_row data
     @cAA = @ws["AA2"]
@@ -19,6 +19,7 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.type, :float, "type option is applied")
     assert_equal(@c.style, 1, "style option is applied")
     assert_equal(@c.value, 1.0, "type option is applied and value is casted")
+    assert_equal(@c.escape_formulas, true, "escape formulas option is applied")
   end
 
   def test_style_date_data
@@ -319,6 +320,33 @@ class TestCell < Test::Unit::TestCase
     doc = Nokogiri::XML(ws.to_xml_string)
     doc.remove_namespaces!
     assert(doc.xpath("//f[text()='IF(2+2=4,4,5)']").any?)
+  end
+
+  def test_to_xml_string_formula_escaped
+    p = Axlsx::Package.new
+    ws = p.workbook.add_worksheet do |sheet|
+      sheet.add_row ["=IF(2+2=4,4,5)"], escape_formulas: true
+    end
+    doc = Nokogiri::XML(ws.to_xml_string)
+    doc.remove_namespaces!
+    assert(doc.xpath("//t[text()='=IF(2+2=4,4,5)']").any?)
+  end
+
+  def test_to_xml_string_formula_escape_array_parameter
+    p = Axlsx::Package.new
+    ws = p.workbook.add_worksheet do |sheet|
+      sheet.add_row [
+        "=IF(2+2=4,4,5)",
+        "=IF(13+13=4,4,5)",
+        "=IF(99+99=4,4,5)"
+      ], escape_formulas: [true, false, true]
+    end
+    doc = Nokogiri::XML(ws.to_xml_string)
+    doc.remove_namespaces!
+
+    assert(doc.xpath("//t[text()='=IF(2+2=4,4,5)']").any?)
+    assert(doc.xpath("//f[text()='IF(13+13=4,4,5)']").any?)
+    assert(doc.xpath("//t[text()='=IF(99+99=4,4,5)']").any?)
   end
 
   def test_to_xml_string_array_formula

@@ -21,6 +21,7 @@ examples << :images
 examples << :format_dates
 examples << :mbcs
 examples << :formula
+examples << :escape_formulas
 examples << :auto_filter
 examples << :sheet_protection
 examples << :data_types
@@ -361,6 +362,21 @@ if examples.include? :formula
     sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
     sheet.add_row [1, 2, 3, "=SUM(A2:C2)"]
   end
+end
+##```
+
+##Escaping formulas for cells
+#```ruby
+if examples.include? :escape_formulas
+  wb.add_worksheet(:name => "Escaping Formulas") do |sheet|
+    sheet.add_row [1, 2, 3, "=SUM(A2:C2)"], escape_formulas: true
+    sheet.add_row [
+      "=IF(2+2=4,4,5)",
+      "=IF(13+13=4,4,5)",
+      "=IF(99+99=4,4,5)"
+    ], escape_formulas: [true, false, true]
+  end
+  p.serialize("escaped_formulas.xlsx")
 end
 ##```
 
@@ -882,4 +898,3 @@ if examples.include? :tab_color
   p.serialize 'tab_color.xlsx'
 end
 ##```
-
