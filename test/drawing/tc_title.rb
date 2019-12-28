@@ -51,4 +51,20 @@ class TestTitle < Test::Unit::TestCase
     assert_equal(1, doc.xpath('//c:v[text()="one"]').size)
   end
 
+  def test_to_xml_string_for_special_characters
+    @chart.title.text = "&><'\""
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    errors = doc.errors.map { |error| puts error.message; error }
+    assert(errors.empty?, "escape special characters")
+  end
+
+  def test_to_xml_string_for_special_characters_in_cell
+    cell = @row.cells.first
+    cell.value = "&><'\""
+
+    @chart.title.cell = cell
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    errors = doc.errors.map { |error| puts error.message; error }
+    assert(errors.empty?, "escape special characters")
+  end
 end

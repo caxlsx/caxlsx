@@ -24,8 +24,12 @@ class TestAxlsx < Test::Unit::TestCase
 
 
   def test_trust_input_can_be_set_to_true
+    old = Axlsx.trust_input
+
     Axlsx.trust_input = true
     assert_equal true, Axlsx.trust_input
+
+    Axlsx.trust_input = old
   end
   def test_cell_range_relative
     p = Axlsx::Package.new
