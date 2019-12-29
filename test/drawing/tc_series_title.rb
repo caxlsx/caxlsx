@@ -30,4 +30,25 @@ class TestSeriesTitle < Test::Unit::TestCase
     assert(@title.text == "one")
   end
 
+  def test_to_xml_string_for_special_characters
+    @chart.add_series(title: @title, data: [3, 7], labels: ['A', 'B'])
+
+    @title.text = "&><'\""
+
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    errors = doc.errors
+    assert(errors.empty?, "invalid xml: #{errors.map(&:to_s).join(', ')}")
+  end
+
+  def test_to_xml_string_for_special_characters_in_cell
+    @chart.add_series(title: @title, data: [3, 7], labels: ['A', 'B'])
+
+    cell = @row.cells.first
+    cell.value = "&><'\""
+    @title.cell = cell
+
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    errors = doc.errors
+    assert(errors.empty?, "invalid xml: #{errors.map(&:to_s).join(', ')}")
+  end
 end

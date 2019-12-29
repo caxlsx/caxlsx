@@ -7,13 +7,15 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
+      clean_value = Axlsx::trust_input ? @text.to_s : ::CGI.escapeHTML(Axlsx::sanitize(@text.to_s))
+
       str << '<c:tx>'
       str << '<c:strRef>'
       str << ('<c:f>' << Axlsx::cell_range([@cell]) << '</c:f>')
       str << '<c:strCache>'
       str << '<c:ptCount val="1"/>'
       str << '<c:pt idx="0">'
-      str << ('<c:v>' << @text << '</c:v>')
+      str << ('<c:v>' << clean_value << '</c:v>')
       str << '</c:pt>'
       str << '</c:strCache>'
       str << '</c:strRef>'
