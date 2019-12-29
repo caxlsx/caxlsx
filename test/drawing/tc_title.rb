@@ -54,8 +54,8 @@ class TestTitle < Test::Unit::TestCase
   def test_to_xml_string_for_special_characters
     @chart.title.text = "&><'\""
     doc = Nokogiri::XML(@chart.to_xml_string)
-    errors = doc.errors.map { |error| puts error.message; error }
-    assert(errors.empty?, "escape special characters")
+    errors = doc.errors
+    assert(errors.empty?, "invalid xml: #{errors.map(&:to_s).join(', ')}")
   end
 
   def test_to_xml_string_for_special_characters_in_cell
@@ -64,7 +64,7 @@ class TestTitle < Test::Unit::TestCase
 
     @chart.title.cell = cell
     doc = Nokogiri::XML(@chart.to_xml_string)
-    errors = doc.errors.map { |error| puts error.message; error }
-    assert(errors.empty?, "escape special characters")
+    errors = doc.errors
+    assert(errors.empty?, "invalid xml: #{errors.map(&:to_s).join(', ')}")
   end
 end
