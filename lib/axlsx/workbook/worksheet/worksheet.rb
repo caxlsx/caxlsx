@@ -5,9 +5,6 @@ module Axlsx
   class Worksheet
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
-    # definition of characters which are less than the maximum width of 0-9 in the default font for use in String#count.
-    # This is used for autowidth calculations
-    THIN_CHARS = '^.acfijklrstxzFIJL()-'.freeze
 
     # Creates a new worksheet.
     # @note the recommended way to manage worksheets is Workbook#add_worksheet

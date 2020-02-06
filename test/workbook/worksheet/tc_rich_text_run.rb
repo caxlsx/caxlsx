@@ -148,8 +148,9 @@ class RichTextRun < Test::Unit::TestCase
     @ws.add_row [rt], :style => wrap
     ar = [0]
     awtr.autowidth(ar)
-    assert_equal(ar.length, 2)
-    assert_equal(ar.last, 0)
+    assert_equal(2, ar.length)
+    assert_equal(13.2, ar[0])
+    assert_equal(0, ar[1])
   end
 
   def test_to_xml

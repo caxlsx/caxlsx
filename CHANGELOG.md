@@ -1,6 +1,9 @@
 CHANGELOG
 ---------
 
+- **Unreleased**
+  - [PR #44](https://github.com/caxlsx/caxlsx/pull/44) - Improve cell autowidth calculations. Previously columns with undefined/auto width would tend to be just slightly too small for the content. This is because certain letters were being excluded from the width calculation because they were deemed not wide enough. We now treat all characters as equal width which helps ensure columns auto-widths are actually large enough for the content. This will gain us a very slight performance improvement because of we are no longer searching the string for specific characters.
+
 - **October.4.19**: 3.0.1
   - Support for ruby versions limited to officially supported version (Ruby v2.3+)
   - Updates to dependency gems, especially nokogiri and ruby-zip
