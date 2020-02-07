@@ -7,6 +7,7 @@ To better maintain the Axlsx ecosystem, all related gems have been forked or mov
 
 http://github.com/caxlsx
 
+[Join the Caxlsx Slack channel](https://join.slack.com/t/caxlsx/shared_invite/enQtOTI5OTM0MzI1Njk5LTBlMDQzNDk2YzkwODMxMmVkODMyYzJiZGU5NTQ3YTg5NTBlN2IwZTlmNTRjNzhiY2E0MDY2OTEyYmFlODI5NjA)
 
 ## Synopsis
 
