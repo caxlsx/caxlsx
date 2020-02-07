@@ -69,14 +69,7 @@ and Numbers
 gem 'caxlsx'
 ```
 
-## Contributing
-
-See [CONTRIBUTING.md](https://github.com/caxlsx/caxlsx/blob/master/CONTRIBUTING.md)
-
-## Examples
-
-The example listing is getting overly large to maintain here.
-If you are using Yard, you will be able to see the examples in line below.
+## Usage
 
 Here's a teaser that kicks about 2% of what the gem can do.
 
@@ -93,10 +86,7 @@ Axlsx::Package.new do |p|
 end
 ```
 
-Please see the [examples](https://github.com/caxlsx/caxlsx/tree/master/examples/example.rb) for more.
-
-There is much, much more you can do with this gem. Chances are that it has already been implemented. If it hasn't, let's take a look at adding it in.
-
+Please see the [examples folder](https://github.com/caxlsx/caxlsx/tree/master/examples) for further information on what you can do with this gem  Chances are that it has already been implemented. If it hasn't, let's take a look at adding it in.
 
 ## Documentation
 
@@ -106,6 +96,7 @@ Detailed documentation is available at:
 
 Additional documentation is listed below:
 
+- [Examples](https://github.com/caxlsx/caxlsx/tree/master/examples)
 - [FAQ](https://github.com/caxlsx/caxlsx/wiki/FAQ) (work in progress)
 - [Style Reference](https://github.com/caxlsx/caxlsx/blob/master/docs/style_reference.md)
 - [Header and Footer Codes](https://github.com/caxlsx/caxlsx/blob/master/docs/header_and_footer_codes.md)
@@ -159,6 +150,9 @@ p.use_shared_strings = true
 p.serialize('simple.xlsx')
 ```
 
+## Contributing
+
+See [CONTRIBUTING.md](https://github.com/caxlsx/caxlsx/blob/master/CONTRIBUTING.md)
 
 ## Credits
 
