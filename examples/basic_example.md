@@ -15,9 +15,9 @@ wb.add_worksheet(name: 'Basic Worksheet') do |sheet|
   sheet.add_row [1, 2, 3]
 end
 
-p.serialize 'example.xlsx'
+p.serialize 'basic_example.xlsx'
 ```
 
 ## Output
 
-![Output](images/Basic-Example.png "Output")
+![Output](images/basic_example.png "Output")

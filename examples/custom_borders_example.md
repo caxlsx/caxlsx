@@ -19,9 +19,9 @@ wb.add_worksheet(name: 'Custom Borders') do |sheet|
   sheet.add_row [1, 2, 3], style: blue_border
 end
 
-p.serialize 'example.xlsx'
+p.serialize 'custom_borders_example.xlsx'
 ```
 
 ## Output
 
-![Output](images/Custom-Borders-Example.png "Output")
+![Output](images/custom_borders_example.png "Output")

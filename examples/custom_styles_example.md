@@ -23,9 +23,9 @@ wb.add_worksheet(name: 'Custom Styles') do |sheet|
   sheet.add_row [1, 2, 3], style: Axlsx::STYLE_THIN_BORDER
 end
 
-p.serialize 'example.xlsx'
+p.serialize 'custom_styles_example.xlsx'
 ```
 
 ## Output
 
-![Output](images/Custom-Styles-Example.png "Output")
+![Output](images/custom_styles_example.png "Output")

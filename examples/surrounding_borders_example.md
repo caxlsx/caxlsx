@@ -30,9 +30,9 @@ wb.add_worksheet(name: 'Surrounding Border') do |sheet|
   sheet.rows.last.style = bottom_row
 end
 
-p.serialize 'example.xlsx'
+p.serialize 'surrounding_borders_example.xlsx'
 ```
 
 ## Output
 
-![Output](images/Surrounding-Borders-Example.png "Output")
+![Output](images/surrounding_borders_example.png "Output")
