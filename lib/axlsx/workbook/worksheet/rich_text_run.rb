@@ -215,7 +215,7 @@ module Axlsx
     #  - scaling is not linear as font sizes increase
     def string_width(string, font_size)
       font_scale = font_size / 10.0
-      string.count(Worksheet::THIN_CHARS) * font_scale
+      string.size * font_scale
     end
 
     # we scale the font size if bold style is applied to either the style font or

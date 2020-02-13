@@ -61,7 +61,7 @@ class TestCell < Test::Unit::TestCase
   def test_autowidth
     style = @c.row.worksheet.workbook.styles.add_style({:alignment => {:horizontal => :center, :vertical => :center, :wrap_text => true}}  )
     @c.style = style
-    assert_equal(@c.autowidth, 5.5)
+    assert_in_delta(6.6, @c.autowidth, 0.01)
   end
 
   def test_time

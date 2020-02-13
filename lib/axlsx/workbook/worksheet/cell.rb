@@ -373,6 +373,7 @@ module Axlsx
     # @return [Float]
     def autowidth
       return if is_formula? || value.nil?
+
       if contains_rich_text?
         string_width('', font_size) + value.autowidth
       elsif styles.cellXfs[style].alignment && styles.cellXfs[style].alignment.wrap_text
@@ -409,7 +410,7 @@ module Axlsx
     #  - scaling is not linear as font sizes increase
     def string_width(string, font_size)
       font_scale = font_size / 10.0
-      (string.to_s.count(Worksheet::THIN_CHARS) + 3.0) * font_scale
+      (string.to_s.size + 3) * font_scale
     end
 
     # we scale the font size if bold style is applied to either the style font or
