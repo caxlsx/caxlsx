@@ -62,7 +62,7 @@ module Axlsx
     # This requires ruby 1.9.3 or higher
     def declared_attributes
       instance_values.select do |key, value|
-        value != nil && self.class.xml_attributes.include?(key.to_sym)
+        value != nil && self.class.xml_attributes&.include?(key.to_sym)
       end
     end
 
