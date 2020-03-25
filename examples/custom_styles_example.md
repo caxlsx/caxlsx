@@ -1,6 +1,6 @@
 ## Description
 
-Each cell allows a single, predified style. When using `add_row`, the value in the `style` array at the same index as the cell's column will be applied to that cell. Alternatively, you can apply a style to an entire row by using an integer value for `style`.
+Each cell allows a single, predefined style. When using `add_row`, the value in the `style` array at the same index as the cell's column will be applied to that cell. Alternatively, you can apply a style to an entire row by using an integer value for `style`.
 
 
 ## Code
