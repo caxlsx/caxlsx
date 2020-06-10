@@ -16,6 +16,13 @@
 
 ## Helping to resolve existing issues
 
+There are two main ways you can help the community to resolve existing issues: **Triaging new issues**, and **fixing known bugs**.
+
+If you have any questions about contributing, or need some help: Feel free to [join the Caxlsx Slack channel](https://join.slack.com/t/caxlsx/shared_invite/enQtOTI5OTM0MzI1Njk5LTBlMDQzNDk2YzkwODMxMmVkODMyYzJiZGU5NTQ3YTg5NTBlN2IwZTlmNTRjNzhiY2E0MDY2OTEyYmFlODI5NjA)! 
+
+
+### Triaging new issues
+
 Triaging issues can be very time-consuming, so we especially appreciate any help in this area!
 
 Start by looking for (issues labelled “needs triage”)[https://github.com/caxlsx/caxlsx/labels/needs%20triage]. Choose one of these issues, then perform the following checks:
@@ -27,6 +34,11 @@ Start by looking for (issues labelled “needs triage”)[https://github.com/cax
  * How did the relevant code came into the state causing the issue? Has it been there since the beginning, or is it the result of some later change?
  
 Add comments to the issue to share your findings. Anything you can do to make bug reports more succinct or easier to reproduce helps folks trying to write code to fix those bugs - whether you end up writing the code yourself or not.
+
+### Fixing known bugs
+
+Look for [issues labelled “known bug”](https://github.com/caxlsx/caxlsx/labels/known%20bug). Choose one, and try to come up with a fix.
+
 
 ---
 
