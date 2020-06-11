@@ -25,7 +25,7 @@ If you have any questions about contributing, or need some help: Feel free to [j
 
 Triaging issues can be very time-consuming, so we especially appreciate any help in this area!
 
-Start by looking for (issues labelled “needs triage”)[https://github.com/caxlsx/caxlsx/labels/needs%20triage]. Choose one of these issues, then perform the following checks:
+Start by looking for [issues labelled “needs triage”](https://github.com/caxlsx/caxlsx/issues?q=label%3A%22needs+triage%22). Choose one of these issues, then perform the following checks:
 
  * Is the issue still relevant? It may have been fixed or made obsolete in the meantime.
  * Can the issue be reproduced? If necessary, ask the person who reported the issue originally to provide more information.
@@ -37,7 +37,7 @@ Add comments to the issue to share your findings. Anything you can do to make bu
 
 ### Fixing known bugs
 
-Look for [issues labelled “known bug”](https://github.com/caxlsx/caxlsx/labels/known%20bug). Choose one, and try to come up with a fix.
+Look for [issues labelled “known bug”](https://github.com/caxlsx/caxlsx/issues?q=label%3A%22known+bug%22). Choose one, and try to come up with a fix.
 
 
 ---
