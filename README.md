@@ -153,7 +153,7 @@ p.serialize('simple.xlsx')
 
 ## Known Bugs
 
-There’s a [list of known bugs](https://github.com/caxlsx/caxlsx/issues?q=is%3Aissue+is%3Aopen+label%3A%22known+bug%22). (If you want to contribute to caxlsx, this is a good place to start!)
+There’s a [list of known bugs](https://github.com/caxlsx/caxlsx/issues?q=label%3A%22known+bug%22). (If you want to contribute to caxlsx, this is a good place to start!)
 
 ## Contributing
 
