@@ -55,7 +55,7 @@ module Axlsx
 
     # @see DLbls#d_lbl_pos
     # Assigns the label postion for this data labels on this chart.
-    # Allowed positions are :bestFilt, :b, :ctr, :inBase, :inEnd, :l,
+    # Allowed positions are :bestFit, :b, :ctr, :inBase, :inEnd, :l,
     # :outEnd, :r and :t
     # The default is :bestFit
     # @param [Symbol] label_position the postion you want to use.
