@@ -1,7 +1,8 @@
 CHANGELOG
 ---------
 
-- **Unreleased**
+- **July.16.20**: 3.0.2
+  - [I #51](https://github.com/caxlsx/caxlsx/issues/51) - Images do not import on Windows. IO read set explicitly to binary mode.
   - [PR #53](https://github.com/caxlsx/caxlsx/pull/53) - Limit column width to 255. Maximum column width limit in MS Excel is 255 characters, see https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3
   - [PR #44](https://github.com/caxlsx/caxlsx/pull/44) - Improve cell autowidth calculations. Previously columns with undefined/auto width would tend to be just slightly too small for the content. This is because certain letters were being excluded from the width calculation because they were deemed not wide enough. We now treat all characters as equal width which helps ensure columns auto-widths are actually large enough for the content. This will gain us a very slight performance improvement because of we are no longer searching the string for specific characters.
 
