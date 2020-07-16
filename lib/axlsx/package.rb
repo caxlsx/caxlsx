@@ -164,7 +164,7 @@ module Axlsx
         end
         unless part[:path].nil?
           zip.put_next_entry(zip_entry_for_part(part))
-          zip.write IO.read(part[:path])
+          zip.write IO.read(part[:path], mode: "rb")
         end
       end
       zip
