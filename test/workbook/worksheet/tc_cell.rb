@@ -100,6 +100,12 @@ class TestCell < Test::Unit::TestCase
 
   def test_cell_type_from_value
     assert_equal(@c.send(:cell_type_from_value, 1.0), :float)
+    assert_equal(@c.send(:cell_type_from_value, "1e1"), :float)
+    assert_equal(@c.send(:cell_type_from_value, "1e#{Float::MAX_10_EXP}"), :float)
+    assert_equal(@c.send(:cell_type_from_value, "1e#{Float::MAX_10_EXP + 1}"), :string)
+    assert_equal(@c.send(:cell_type_from_value, "1e-1"), :float)
+    assert_equal(@c.send(:cell_type_from_value, "1e#{Float::MIN_10_EXP}"), :float)
+    assert_equal(@c.send(:cell_type_from_value, "1e#{Float::MIN_10_EXP - 1}"), :string)
     assert_equal(@c.send(:cell_type_from_value, 1), :integer)
     assert_equal(@c.send(:cell_type_from_value, Date.today), :date)
     assert_equal(@c.send(:cell_type_from_value, Time.now), :time)

@@ -453,7 +453,9 @@ module Axlsx
         :boolean
       elsif v.to_s =~ Axlsx::NUMERIC_REGEX
         :integer
-      elsif v.to_s =~ Axlsx::FLOAT_REGEX
+      elsif v.to_s =~ Axlsx::SAFE_FLOAT_REGEX
+        :float
+      elsif (matchdata = v.to_s.match(MAYBE_FLOAT_REGEX)) && (Float::MIN_10_EXP..Float::MAX_10_EXP).cover?(matchdata[:exp].to_i)
         :float
       elsif v.to_s =~ Axlsx::ISO_8601_REGEX
         :iso_8601
