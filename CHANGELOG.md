@@ -1,6 +1,9 @@
 CHANGELOG
 ---------
 
+- **Unreleased**
+  - [PR #54](https://github.com/caxlsx/caxlsx/pull/54) - Fix type detection for floats with out-of-rage exponents
+  
 - **July.16.20**: 3.0.2
   - [I #51](https://github.com/caxlsx/caxlsx/issues/51) - Images do not import on Windows. IO read set explicitly to binary mode.
   - [PR #53](https://github.com/caxlsx/caxlsx/pull/53) - Limit column width to 255. Maximum column width limit in MS Excel is 255 characters, see https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3
