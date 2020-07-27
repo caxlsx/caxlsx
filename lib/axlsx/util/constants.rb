@@ -393,7 +393,8 @@ module Axlsx
   ISO_8601_REGEX = /\A(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?\Z/.freeze
 
   # FLOAT recognition
-  FLOAT_REGEX = /\A[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\Z/.freeze
+  SAFE_FLOAT_REGEX = /\A[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]{1,2})?\Z/.freeze
+  MAYBE_FLOAT_REGEX = /\A[-+]?[0-9]*\.?[0-9]+[eE](?<exp>[-+]?[0-9]{3})\Z/.freeze
 
   # Numeric recognition
   NUMERIC_REGEX = /\A[+-]?\d+?\Z/.freeze
