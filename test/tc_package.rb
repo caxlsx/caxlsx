@@ -128,9 +128,32 @@ class TestPackage < Test::Unit::TestCase
 
   def test_serialization
     @package.serialize(@fname)
-    zf = Zip::File.open(@fname)
-    @package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
+    assert_zip_file_matches_package(@fname, @package)
     File.delete(@fname)
+  end
+
+  def test_serialization_with_zip_command
+    @package.serialize(@fname, false, zip_command: "zip")
+    assert_zip_file_matches_package(@fname, @package)
+    File.delete(@fname)
+  end
+
+  def test_serialization_with_zip_command_and_absolute_path
+    fname = "#{Dir.tmpdir}/#{@fname}"
+    @package.serialize(fname, false, zip_command: "zip")
+    assert_zip_file_matches_package(fname, @package)
+    File.delete(fname)
+  end
+
+  def test_serialization_with_invalid_zip_command
+    assert_raises Axlsx::ZipCommand::ZipError do
+      @package.serialize(@fname, false, zip_command: "invalid_zip")
+    end
+  end
+
+  def assert_zip_file_matches_package(fname, package)
+    zf = Zip::File.open(fname)
+    package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
   end
 
   # See comment for Package#zip_entry_for_part

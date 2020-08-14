@@ -2,6 +2,7 @@ CHANGELOG
 ---------
 
 - **Unreleased**
+  - [PR #56](https://github.com/caxlsx/caxlsx/pull/56) - Add `zip_command` option to `#serialize` for faster serialization of large Excel files by using a zip binary
   - [PR #54](https://github.com/caxlsx/caxlsx/pull/54) - Fix type detection for floats with out-of-rage exponents
   
 - **July.16.20**: 3.0.2
