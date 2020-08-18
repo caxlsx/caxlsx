@@ -127,16 +127,10 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def test_serialization
-    assert_nothing_raised do
-      begin
-        @package.serialize(@fname)
-        zf = Zip::File.open(@fname)
-        @package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
-        File.delete(@fname)
-      rescue Errno::EACCES
-        puts "WARNING:: test_serialization requires write access."
-      end
-    end
+    @package.serialize(@fname)
+    zf = Zip::File.open(@fname)
+    @package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
+    File.delete(@fname)
   end
 
   # See comment for Package#zip_entry_for_part
