@@ -75,6 +75,9 @@ module Axlsx
     #
     # @param [String] output The name of the file you want to serialize your package to
     # @param [Boolean] confirm_valid Validate the package prior to serialization.
+    # @param [String, nil] zip_command When `nil`, `#serialize` with RubyZip to
+    #   zip the XLSX file contents. When a String, the provided zip command (e.g.,
+    #   "zip") is used to zip the file contents (may be faster for large files)
     # @return [Boolean] False if confirm_valid and validation errors exist. True if the package was serialized
     # @note A tremendous amount of effort has gone into ensuring that you cannot create invalid xlsx documents.
     #   confirm_valid should be used in the rare case that you cannot open the serialized file.
@@ -88,13 +91,23 @@ module Axlsx
     #   # ......add cool stuff to your workbook......
     #   p.serialize("example.xlsx")
     #
+    #   # Serialize to a file, using a system zip binary
+    #   p.serialize("example.xlsx", false, zip_command: "zip")
+    #   p.serialize("example.xlsx", false, zip_command: "/path/to/zip")
+    #   p.serialize("example.xlsx", false, zip_command: "zip -1")
+    #
     #   # Serialize to a stream
     #   s = p.to_stream()
     #   File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
-    def serialize(output, confirm_valid=false)
+    def serialize(output, confirm_valid=false, zip_command: nil)
       return false unless !confirm_valid || self.validate.empty?
+      zip_provider = if zip_command
+                       ZipCommand.new(zip_command)
+                     else
+                       Zip::OutputStream
+                     end
       Relationship.initialize_ids_cache
-      Zip::OutputStream.open(output) do |zip|
+      zip_provider.open(output) do |zip|
         write_parts(zip)
       end
       true
@@ -153,8 +166,8 @@ module Axlsx
     private
 
     # Writes the package parts to a zip archive.
-    # @param [Zip::OutputStream] zip
-    # @return [Zip::OutputStream]
+    # @param [Zip::OutputStream, ZipCommand] zip
+    # @return [Zip::OutputStream, ZipCommand]
     def write_parts(zip)
       p = parts
       p.each do |part|
