@@ -133,27 +133,47 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def test_serialization_with_zip_command
-    @package.serialize(@fname, false, zip_command: "zip")
+    @package.serialize(@fname, zip_command: "zip")
     assert_zip_file_matches_package(@fname, @package)
     File.delete(@fname)
   end
 
   def test_serialization_with_zip_command_and_absolute_path
     fname = "#{Dir.tmpdir}/#{@fname}"
-    @package.serialize(fname, false, zip_command: "zip")
+    @package.serialize(fname, zip_command: "zip")
     assert_zip_file_matches_package(fname, @package)
     File.delete(fname)
   end
 
   def test_serialization_with_invalid_zip_command
     assert_raises Axlsx::ZipCommand::ZipError do
-      @package.serialize(@fname, false, zip_command: "invalid_zip")
+      @package.serialize(@fname, zip_command: "invalid_zip")
     end
   end
 
   def assert_zip_file_matches_package(fname, package)
     zf = Zip::File.open(fname)
     package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
+  end
+
+  def test_serialization_with_deprecated_argument
+    warnings = capture_warnings do
+      @package.serialize(@fname, false)
+    end
+    assert_equal 1, warnings.size
+    assert_includes warnings.first, "confirm_valid as a boolean is deprecated"
+  end
+
+  def capture_warnings(&block)
+    original_warn = Kernel.method(:warn)
+    warnings = []
+    Kernel.define_method(:warn){ |string| warnings << string }
+    block.call
+    original_verbose = $VERBOSE
+    $VERBOSE = nil
+    Kernel.define_method(:warn, &original_warn)
+    $VERBOSE = original_verbose
+    warnings
   end
 
   # See comment for Package#zip_entry_for_part
