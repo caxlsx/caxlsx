@@ -165,15 +165,21 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def capture_warnings(&block)
-    original_warn = Kernel.method(:warn)
-    warnings = []
-    Kernel.define_method(:warn){ |string| warnings << string }
-    block.call
-    original_verbose = $VERBOSE
-    $VERBOSE = nil
-    Kernel.define_method(:warn, &original_warn)
-    $VERBOSE = original_verbose
-    warnings
+    # Only capture warnings on versions of ruby that expose `:define_method` as
+    # a public method
+    if Kernel.respond_to?(:define_method)
+      original_warn = Kernel.method(:warn)
+      warnings = []
+      Kernel.define_method(:warn){ |string| warnings << string }
+      block.call
+      original_verbose = $VERBOSE
+      $VERBOSE = nil
+      Kernel.define_method(:warn, &original_warn)
+      $VERBOSE = original_verbose
+      warnings
+    else
+      &block.call
+    end
   end
 
   # See comment for Package#zip_entry_for_part
