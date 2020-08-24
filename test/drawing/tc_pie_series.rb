@@ -20,12 +20,13 @@ class TestPieSeries < Test::Unit::TestCase
     assert_raise(ArgumentError, "require valid explosion") { @series.explosion = :lots }
     assert_nothing_raised("allow valid explosion") { @series.explosion = 20 }
     assert(@series.explosion == 20)
+    # issue 58 - explosion caused to_xml_string to fail - now tested
+    assert_nothing_raised("allow to_xml_string") { @series.to_xml_string }
   end
 
   def test_to_xml_string
     doc = Nokogiri::XML(@series.to_xml_string)
     assert(doc.xpath("//srgbClr[@val='#{@series.colors[0]}']"))
-
   end
   #TODO test unique serialization parts
 
