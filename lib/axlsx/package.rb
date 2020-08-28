@@ -93,9 +93,9 @@ module Axlsx
     #   p.serialize("example.xlsx")
     #
     #   # Serialize to a file, using a system zip binary
-    #   p.serialize("example.xlsx", false, zip_command: "zip")
-    #   p.serialize("example.xlsx", false, zip_command: "/path/to/zip")
-    #   p.serialize("example.xlsx", false, zip_command: "zip -1")
+    #   p.serialize("example.xlsx", zip_command: "zip", confirm_valid: false)
+    #   p.serialize("example.xlsx", zip_command: "/path/to/zip")
+    #   p.serialize("example.xlsx", zip_command: "zip -1")
     #
     #   # Serialize to a stream
     #   s = p.to_stream()
