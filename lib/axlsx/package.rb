@@ -100,8 +100,8 @@ module Axlsx
     #   # Serialize to a stream
     #   s = p.to_stream()
     #   File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
-    def serialize(output, options = {})
-      confirm_valid, zip_command = parse_serialize_options(options)
+    def serialize(output, options = {}, secondary_options = nil)
+      confirm_valid, zip_command = parse_serialize_options(options, secondary_options)
       return false unless !confirm_valid || self.validate.empty?
       zip_provider = if zip_command
                        ZipCommand.new(zip_command)
@@ -366,8 +366,13 @@ module Axlsx
     # @return [Boolean, (String or nil)] Returns an array where the first value is
     #   `confirm_valid` and the second is the `zip_command`.
     # @private
-    def parse_serialize_options(options)
+    def parse_serialize_options(options, secondary_options)
+      if secondary_options
+        warn "[DEPRECATION] Axlsx::Package#serialize with 3 arguments is deprecated. " +
+          "Use keyword args instead e.g., package.serialize(output, confirm_valid: false, zip_command: 'zip')"
+      end
       if options.is_a?(Hash)
+        options.merge!(secondary_options || {})
         invalid_keys = options.keys - [:confirm_valid, :zip_command]
         if invalid_keys.any?
           raise ArgumentError.new("Invalid keyword arguments: #{invalid_keys}")
@@ -376,7 +381,7 @@ module Axlsx
       else
         warn "[DEPRECATION] Axlsx::Package#serialize with confirm_valid as a boolean is deprecated. " +
           "Use keyword args instead e.g., package.serialize(output, confirm_valid: false)"
-        [options, nil]
+        parse_serialize_options((secondary_options || {}).merge(confirm_valid: options), nil)
       end
     end
   end

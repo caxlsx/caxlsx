@@ -180,6 +180,18 @@ class TestPackage < Test::Unit::TestCase
     end
     assert_equal 1, warnings.size
     assert_includes warnings.first, "confirm_valid as a boolean is deprecated"
+    File.delete(@fname)
+  end
+
+  def test_serialization_with_deprecated_three_arguments
+    warnings = capture_warnings do
+      @package.serialize(@fname, true, zip_command: "zip")
+    end
+    assert_zip_file_matches_package(@fname, @package)
+    assert_created_with_zip_command(@fname, @package)
+    assert_equal 2, warnings.size
+    assert_includes warnings.first, "with 3 arguments is deprecated"
+    File.delete(@fname)
   end
 
   def capture_warnings(&block)
