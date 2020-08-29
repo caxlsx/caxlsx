@@ -195,13 +195,13 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def capture_warnings(&block)
-    original_warn = Kernel.method(:warn)
+    original_warn = Kernel.instance_method(:warn)
     warnings = []
     Kernel.send(:define_method, :warn) { |string| warnings << string }
     block.call
     original_verbose = $VERBOSE
     $VERBOSE = nil
-    Kernel.send(:define_method, :warn, &original_warn)
+    Kernel.send(:define_method, :warn, original_warn)
     $VERBOSE = original_verbose
     warnings
   end
