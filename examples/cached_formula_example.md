@@ -10,7 +10,7 @@ require 'axlsx'
 p = Axlsx::Package.new
 wb = p.workbook
 
-wb.add_worksheet(name: 'Cached formula') do | sheet |
+wb.add_worksheet(name: 'Cached formula') do |sheet|
   sheet.add_row [1, 2, 3]
   sheet.add_row [1, 2, '=A2+B2'], formula_values: [nil, nil, 3]
 end

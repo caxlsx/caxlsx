@@ -15,16 +15,16 @@ wb.add_worksheet(name: 'Basic Worksheet') do |sheet|
 
   # Generate some data
   30.times do
-   sheet.add_row [
-     %w(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec).sample,
-     %w(2010 2011 2012).sample,
-     %w(Meat Dairy Beverages Produce).sample,
-     rand(5000),
-     %w(East West North South).sample
-   ]
+    sheet.add_row [
+      ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].sample,
+      [2010, 2011, 2012].sample,
+      ['Meat', 'Dairy', 'Beverages', 'Produce'].sample,
+      rand(5000),
+      ['East', 'West', 'North', 'South'].sample
+    ]
   end
 
-  sheet.add_pivot_table 'G4:L17', "A1:E31" do |pivot_table|
+  sheet.add_pivot_table 'G4:L17', 'A1:E31' do |pivot_table|
     pivot_table.rows = ['Month', 'Year']
     pivot_table.columns = ['Type']
     pivot_table.data = ['Sales']

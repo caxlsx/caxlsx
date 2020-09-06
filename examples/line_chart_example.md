@@ -18,8 +18,8 @@ wb.add_worksheet(name: 'Line Chart') do |sheet|
   sheet.add_row ['C', 7, 6]
 
   sheet.add_chart(Axlsx::LineChart, start_at: 'A6', end_at: 'F20') do |chart|
-    chart.add_series data: sheet["B2:B4"], title: sheet['B1'], color: '0000FF'
-    chart.add_series data: sheet["C2:C4"], title: sheet['C1'], color: 'FF0000'
+    chart.add_series data: sheet['B2:B4'], title: sheet['B1'], color: '0000FF'
+    chart.add_series data: sheet['C2:C4'], title: sheet['C1'], color: 'FF0000'
   end
 end
 

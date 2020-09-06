@@ -32,11 +32,10 @@ options = {
   horizontal_centered: true
 }
 
-wb.add_worksheet(
-  name: 'Print settings',
-  page_margins: margins,
-  page_setup: setup,
-  print_options: options) do |sheet|
+wb.add_worksheet(name: 'Print settings',
+                 page_margins: margins,
+                 page_setup: setup,
+                 print_options: options) do |sheet|
   sheet.add_row ['this sheet uses customized print settings']
 end
 

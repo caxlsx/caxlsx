@@ -15,16 +15,16 @@ wb.add_worksheet(name: 'Basic Worksheet') do |sheet|
   sheet.add_row [1, 6, 11]
 
   sheet.add_data_validation('A2:A2',
-   type: :list,
-   formula1: 'A1:C1',
-   showDropDown: false,
-   showErrorMessage: true,
-   errorTitle: '',
-   error: 'Only values from A1:C1',
-   errorStyle: :stop,
-   showInputMessage: true,
-   promptTitle: '',
-   prompt: 'Only values from A1:C1')
+    type: :list,
+    formula1: 'A1:C1',
+    showDropDown: false,
+    showErrorMessage: true,
+    errorTitle: '',
+    error: 'Only values from A1:C1',
+    errorStyle: :stop,
+    showInputMessage: true,
+    promptTitle: '',
+    prompt: 'Only values from A1:C1')
 
   sheet.add_data_validation('B2:B2',
     type: :list,

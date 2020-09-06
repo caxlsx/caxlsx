@@ -1,6 +1,6 @@
 ## Description
 
-You can split the sheet into panes. `pane.state` could have three options: `split`, `frozen` or `frozen_split` 
+You can split the sheet into panes. `pane.state` could have three options: `split`, `frozen` or `frozen_split`
 
 ## Code
 
@@ -13,10 +13,10 @@ wb = p.workbook
 wb.add_worksheet(name: 'Panes') do |sheet|
   # Generate a big dataset
   sheet.add_row [''] + (0..99).map { |i| "column header #{i}" }
-  100.times { |index| sheet.add_row ["row header"] + (0..index).to_a }
+  100.times { |index| sheet.add_row ['row header'] + (0..index).to_a }
 
   sheet.sheet_view.pane do |pane|
-    pane.top_left_cell = "B2"
+    pane.top_left_cell = 'B2'
     pane.state = :frozen_split
     pane.y_split = 1
     pane.x_split = 1

@@ -19,7 +19,7 @@ wb.add_worksheet(name: 'Sheet Protection') do |sheet|
     protection.auto_filter = false
   end
 
-  sheet.add_row [1, 2 ,3], style: unlocked # These cells won't be locked
+  sheet.add_row [1, 2, 3], style: unlocked # These cells won't be locked
   sheet.add_row [4, 5, 6]
   sheet.add_row [7, 8, 9]
 

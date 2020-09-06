@@ -11,7 +11,7 @@ p = Axlsx::Package.new
 wb = p.workbook
 
 s = wb.styles
-wrap_text = s.add_style(alignment: {horizontal: :center, vertical: :center, wrap_text: true})
+wrap_text = s.add_style(alignment: { horizontal: :center, vertical: :center, wrap_text: true })
 
 wb.add_worksheet(name: 'Basic Worksheet') do |sheet|
   rt = Axlsx::RichText.new

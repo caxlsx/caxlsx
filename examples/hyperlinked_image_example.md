@@ -14,7 +14,7 @@ image = File.expand_path('assets/image1.jpeg')
 
 wb.add_worksheet(name: 'Image') do |sheet|
   sheet.add_image(image_src: image, start_at: 'B2', width: 300, height: 300, hyperlink: 'https://github.com/caxlsx') do |img|
-    img.hyperlink.tooltip = "Labeled Link"
+    img.hyperlink.tooltip = 'Labeled Link'
   end
 end
 

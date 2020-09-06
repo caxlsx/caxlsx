@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-files = if ARGV.length > 0
-          ARGV.select { |file| File.exists?(file) }
+files = if !ARGV.empty?
+          ARGV.select { |file| File.exist?(file) }
         else
           Dir['*_example.md']
         end

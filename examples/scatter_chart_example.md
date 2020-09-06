@@ -11,10 +11,10 @@ p = Axlsx::Package.new
 wb = p.workbook
 
 wb.add_worksheet(name: 'Bar Chart') do |sheet|
-  sheet.add_row ["First",  1,  5,  7,  9]
-  sheet.add_row ["",       1, 25, 49, 81]
-  sheet.add_row ["Second", 5,  2, 14,  9]
-  sheet.add_row ["",       5, 10, 15, 20]
+  sheet.add_row ['First',  1,  5,  7,  9]
+  sheet.add_row ['',       1, 25, 49, 81]
+  sheet.add_row ['Second', 5,  2, 14,  9]
+  sheet.add_row ['',       5, 10, 15, 20]
 
   sheet.add_chart(Axlsx::ScatterChart, start_at: 'A6', end_at: 'F20') do |chart|
     chart.add_series xData: sheet['B1:E1'], yData: sheet['B2:E2'], title: sheet['A1']
