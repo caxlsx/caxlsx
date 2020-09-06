@@ -1,7 +1,7 @@
 require 'tc_helper.rb'
 class TestMimeTypeUtils < Test::Unit::TestCase
   def setup
-    @test_img = File.dirname(__FILE__) + "/../../examples/image1.jpeg"
+    @test_img = File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
   end
 
   def teardown
