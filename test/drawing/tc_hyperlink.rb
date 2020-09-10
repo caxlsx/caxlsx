@@ -5,7 +5,7 @@ class TestHyperlink < Test::Unit::TestCase
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
-    @test_img =  File.dirname(__FILE__) + "/../../examples/image1.jpeg"
+    @test_img =  File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
     @image = ws.add_image :image_src => @test_img, :hyperlink => "http://axlsx.blogspot.com"
     @hyperlink = @image.hyperlink
   end

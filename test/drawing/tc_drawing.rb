@@ -23,7 +23,7 @@ class TestDrawing < Test::Unit::TestCase
   end
 
   def test_add_image
-    src = File.dirname(__FILE__) + "/../../examples/image1.jpeg"
+    src = File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
     image = @ws.add_image(:image_src => src, :start_at=>[0,0], :width=>600, :height=>400)
     assert(@ws.drawing.anchors.last.is_a?(Axlsx::OneCellAnchor))
     assert(image.is_a?(Axlsx::Pic))
@@ -31,7 +31,7 @@ class TestDrawing < Test::Unit::TestCase
     assert_equal(400, image.height)
   end
   def test_add_two_cell_anchor_image
-     src = File.dirname(__FILE__) + "/../../examples/image1.jpeg"
+     src = File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
      image = @ws.add_image(:image_src => src, :start_at=>[0,0], :end_at => [15,0])
     assert(@ws.drawing.anchors.last.is_a?(Axlsx::TwoCellAnchor))
     assert(image.is_a?(Axlsx::Pic))

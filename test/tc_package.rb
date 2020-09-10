@@ -65,7 +65,7 @@ class TestPackage < Test::Unit::TestCase
     end
 
     @fname = 'axlsx_test_serialization.xlsx'
-    img = File.expand_path('../../examples/image1.jpeg', __FILE__)
+    img = File.expand_path('../fixtures/image1.jpeg', __FILE__)
     ws.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
       image.width=720
       image.height=666
@@ -73,12 +73,12 @@ class TestPackage < Test::Unit::TestCase
       image.start_at 5, 5
       image.end_at 10, 10
     end
-    ws.add_image :image_src => File.expand_path('../../examples/image1.gif', __FILE__) do |image|
+    ws.add_image :image_src => File.expand_path('../fixtures/image1.gif', __FILE__) do |image|
       image.start_at 0, 20
       image.width=360
       image.height=333
     end
-    ws.add_image :image_src => File.expand_path('../../examples/image1.png', __FILE__) do |image|
+    ws.add_image :image_src => File.expand_path('../fixtures/image1.png', __FILE__) do |image|
       image.start_at 9, 20
       image.width = 180
       image.height = 167
