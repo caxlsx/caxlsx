@@ -451,11 +451,11 @@ module Axlsx
         :time
       elsif v.is_a?(TrueClass) || v.is_a?(FalseClass)
         :boolean
-      elsif v.to_s =~ Axlsx::NUMERIC_REGEX
+      elsif v.to_s =~ Axlsx::NUMERIC_REGEX && v.respond_to?(:to_i)
         :integer
-      elsif v.to_s =~ Axlsx::SAFE_FLOAT_REGEX
+      elsif v.to_s =~ Axlsx::SAFE_FLOAT_REGEX && v.respond_to?(:to_f)
         :float
-      elsif (matchdata = v.to_s.match(MAYBE_FLOAT_REGEX)) && (Float::MIN_10_EXP..Float::MAX_10_EXP).cover?(matchdata[:exp].to_i)
+      elsif (matchdata = v.to_s.match(MAYBE_FLOAT_REGEX)) && (Float::MIN_10_EXP..Float::MAX_10_EXP).cover?(matchdata[:exp].to_i) && v.respond_to?(:to_f)
         :float
       elsif v.to_s =~ Axlsx::ISO_8601_REGEX
         :iso_8601

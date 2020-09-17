@@ -120,6 +120,31 @@ class TestCell < Test::Unit::TestCase
     assert_equal(:iso_8601, @c.send(:cell_type_from_value, '2008-08-30T01:45:36.123+09:00'))
   end
 
+  def test_cell_type_from_value_looks_like_number_but_is_not
+    mimic_number = Class.new do
+      def initialize(to_s_value)
+        @to_s_value = to_s_value
+      end
+
+      def to_s
+        @to_s_value
+      end
+    end
+
+    number_strings = [
+      '1',
+      '1234567890',
+      '1.0',
+      '1e1',
+      '0',
+      "1e#{Float::MIN_10_EXP}"
+    ]
+
+    number_strings.each do |number_string|
+      assert_equal(@c.send(:cell_type_from_value, mimic_number.new(number_string)), :string)
+    end
+  end
+
   def test_cast_value
     @c.type = :string
     assert_equal(@c.send(:cast_value, 1.0), "1.0")
