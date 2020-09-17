@@ -67,7 +67,7 @@ and Numbers
 ## Install
 
 ```ruby
-gem 'caxlsx'
+gem 'caxlsx', :require => 'axlsx'
 ```
 
 ## Usage
