@@ -2,12 +2,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :test do
-  if RUBY_VERSION.to_i < 2
-    gem 'rake', '>= 0.8.7', '< 11'
-    gem 'json', '< 2'
-  else
-    gem 'rake'
-  end
+  gem 'rake'
   gem 'simplecov', '>= 0.14.1'
   gem 'test-unit'
 end
