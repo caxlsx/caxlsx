@@ -4,6 +4,7 @@ CHANGELOG
 - **Unreleased**
   - [PR #56](https://github.com/caxlsx/caxlsx/pull/56) - Add `zip_command` option to `#serialize` for faster serialization of large Excel files by using a zip binary
   - [PR #54](https://github.com/caxlsx/caxlsx/pull/54) - Fix type detection for floats with out-of-rage exponents
+  - [I #67](https://github.com/caxlsx/caxlsx/issues/67) - Fix regression in worksheet name length enforcement: Some unicode characters were counted incorrectly, so that names that previously worked fine now stopped working. (This was introduced in 3.0.2)
   
 - **July.16.20**: 3.0.2
   - [I #51](https://github.com/caxlsx/caxlsx/issues/51) - Images do not import on Windows. IO read set explicitly to binary mode.
