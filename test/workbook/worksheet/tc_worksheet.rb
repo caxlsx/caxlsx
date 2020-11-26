@@ -459,11 +459,6 @@ class TestWorksheet < Test::Unit::TestCase
     assert_nothing_raised { Axlsx::Package.new.workbook.add_worksheet :name => 'Sheet1' }
   end
 
-  def test_name_size
-    assert_raise(ArgumentError, "name too long!") { @ws.name = Array.new(32, "A").join() }
-    assert_nothing_raised { @ws.name = Array.new(31, "A").join() }
-  end
-
   def test_exception_if_name_too_long
     assert_nothing_raised { @ws.name = 'x' * 31 }
     assert_raises(ArgumentError) { @ws.name = 'x' * 32 }
