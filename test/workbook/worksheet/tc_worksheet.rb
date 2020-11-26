@@ -29,17 +29,6 @@ class TestWorksheet < Test::Unit::TestCase
     assert_raises(ArgumentError) { @ws.name = 'foo?bar' }
   end
 
-  def test_exception_if_name_too_long
-    assert_nothing_raised { @ws.name = 'x' * 31 }
-    assert_raises(ArgumentError) { @ws.name = 'x' * 32 }
-  end
-
-  def test_exception_if_name_too_long_because_of_multibyte_characters
-    three_byte_character = "✔"
-    assert_nothing_raised { @ws.name = 'x' * 28 + three_byte_character}
-    assert_raises(ArgumentError) { @ws.name = 'x' * 29 + three_byte_character }
-  end
-
   def test_page_margins
     assert(@ws.page_margins.is_a? Axlsx::PageMargins)
   end
@@ -473,6 +462,17 @@ class TestWorksheet < Test::Unit::TestCase
   def test_name_size
     assert_raise(ArgumentError, "name too long!") { @ws.name = Array.new(32, "A").join() }
     assert_nothing_raised { @ws.name = Array.new(31, "A").join() }
+  end
+
+  def test_exception_if_name_too_long
+    assert_nothing_raised { @ws.name = 'x' * 31 }
+    assert_raises(ArgumentError) { @ws.name = 'x' * 32 }
+  end
+
+  def test_exception_if_name_too_long_because_of_multibyte_characters
+    three_byte_character = "✔"
+    assert_nothing_raised { @ws.name = 'x' * 28 + three_byte_character}
+    assert_raises(ArgumentError) { @ws.name = 'x' * 29 + three_byte_character }
   end
 
   def test_set_fixed_width_column
