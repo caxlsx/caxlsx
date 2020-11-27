@@ -475,7 +475,11 @@ module Axlsx
       case type
       when :date
         self.style = STYLE_DATE if self.style == 0
-        v
+        if !v.is_a?(Date) && v.respond_to?(:to_date)
+          v.to_date
+        else
+          v
+        end
       when :time
         self.style = STYLE_DATE if self.style == 0
         if !v.is_a?(Time) && v.respond_to?(:to_time)
