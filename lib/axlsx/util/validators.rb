@@ -269,7 +269,7 @@ module Axlsx
   # valid types must be one of custom, data, decimal, list, none, textLength, time, whole
   # @param [Any] v The value validated
   def self.validate_data_validation_type(v)
-    RestrictionValidator.validate :data_validation_type, [:custom, :data, :decimal, :list, :none, :textLength, :time, :whole], v
+    RestrictionValidator.validate :data_validation_type, [:custom, :data, :decimal, :list, :none, :textLength, :date, :time, :whole], v
   end
 
   # Requires that the value is a valid sheet view type.
