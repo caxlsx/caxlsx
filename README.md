@@ -1,5 +1,7 @@
 # Caxlsx (Community Continued Version)
 [![Build Status](https://travis-ci.com/caxlsx/caxlsx.svg?branch=master)](https://travis-ci.com/caxlsx/caxlsx)
+[![Gem
+Version](https://badge.fury.io/rb/caxlsx.svg)](http://badge.fury.io/rb/caxlsx)
 
 ## Notice: Community Axlsx Organization
 
