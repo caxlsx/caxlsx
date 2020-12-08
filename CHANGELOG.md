@@ -2,6 +2,8 @@ CHANGELOG
 ---------
 
 - **Unreleased**
+
+- **December.7.20**: 3.0.3
   - [PR #62](https://github.com/caxlsx/caxlsx/pull/62) - Fix edge cases in format detection for objects whose string representation made them look like numbers but the object didn’t respond to `#to_i` or `#to_f`.
   - [PR #56](https://github.com/caxlsx/caxlsx/pull/56) - Add `zip_command` option to `#serialize` for faster serialization of large Excel files by using a zip binary
   - [PR #54](https://github.com/caxlsx/caxlsx/pull/54) - Fix type detection for floats with out-of-rage exponents
