@@ -1,7 +1,7 @@
 language: ruby
 sudo: required
-dist: trusty
-group: beta
+dist: bionic
+group: edge
 cache: bundler
 bundler_args: --without profile
 
