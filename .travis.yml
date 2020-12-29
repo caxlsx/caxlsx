@@ -12,12 +12,6 @@ notifications:
       - noel@peden.biz
     on_success: always
 
-before_install:
-  - sudo apt-get update
-  - sudo apt-get -y install haveged gnupg2
-  - gpg2 --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-  - gpg2 --verify binscripts/rvm-installer.asc binscripts/rvm-installer
-
 matrix:
   include:
     - rvm: 2.3.8
