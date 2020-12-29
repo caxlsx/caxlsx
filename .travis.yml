@@ -19,7 +19,7 @@ matrix:
     - rvm: 2.5.8
     - rvm: 2.6.6
     - rvm: 2.7.1
-    - rvm: 3.0.0-preview1
+    - rvm: 3.0.0
     - rvm: rbx-3
     - rvm: jruby-19mode
     - rvm: jruby-9.1.17.0
