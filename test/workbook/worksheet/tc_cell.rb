@@ -71,6 +71,13 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.value, now.to_time)
   end
 
+  def test_date
+    @c.type = :date
+    now = Time.now
+    @c.value = now
+    assert_equal(@c.value, now.to_date)
+  end
+
   def test_style
     assert_raise(ArgumentError, "must reject invalid style indexes") { @c.style=@c.row.worksheet.workbook.styles.cellXfs.size }
     assert_nothing_raised("must allow valid style index changes") {@c.style=1}

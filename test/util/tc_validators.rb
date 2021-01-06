@@ -127,7 +127,7 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 0 }
 
     #data_validation_type
-    [:custom, :data, :decimal, :list, :none, :textLength, :time, :whole].each do |sym|
+    [:custom, :data, :decimal, :list, :none, :textLength, :date, :time, :whole].each do |sym|
       assert_nothing_raised { Axlsx.validate_data_validation_type sym }
     end
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style :other_symbol }
