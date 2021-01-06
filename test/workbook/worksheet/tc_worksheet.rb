@@ -29,15 +29,28 @@ class TestWorksheet < Test::Unit::TestCase
     assert_raises(ArgumentError) { @ws.name = 'foo?bar' }
   end
 
+  def test_name_unique
+    assert_raise(ArgumentError, "worksheet name must be unique") { n = @ws.name; @ws.workbook.add_worksheet(:name=> n) }
+  end
+
+  def test_name_unique_only_checks_other_worksheet_names
+    assert_nothing_raised { @ws.name = @ws.name }
+    assert_nothing_raised { Axlsx::Package.new.workbook.add_worksheet :name => 'Sheet1' }
+  end
+
   def test_exception_if_name_too_long
     assert_nothing_raised { @ws.name = 'x' * 31 }
     assert_raises(ArgumentError) { @ws.name = 'x' * 32 }
   end
 
   def test_exception_if_name_too_long_because_of_multibyte_characters
-    three_byte_character = "✔"
-    assert_nothing_raised { @ws.name = 'x' * 28 + three_byte_character}
-    assert_raises(ArgumentError) { @ws.name = 'x' * 29 + three_byte_character }
+    four_characters_for_excel = "\u{1F1EB 1F1F7}" # french flag emoji
+    assert_raises(ArgumentError, "name too long!") do
+      @ws.name = four_characters_for_excel + "x" * 28
+    end
+    assert_nothing_raised { @ws.name = "#{four_characters_for_excel}123456789012345678901234567" }
+    assert_nothing_raised { @ws.name = "123456789012345678901234567890…" }
+    assert_nothing_raised { @ws.name = "123456789012345678901234567890✔" }
   end
 
   def test_page_margins
@@ -458,21 +471,6 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.relationships.size, 3, "adding multiple comments in the same worksheet should not add any additional comment relationships")
     @ws.add_pivot_table 'G5:G6', 'A1:D10'
     assert_equal(@ws.relationships.size, 4, "adding a pivot table adds 1 relationship")
-  end
-
-
-  def test_name_unique
-    assert_raise(ArgumentError, "worksheet name must be unique") { n = @ws.name; @ws.workbook.add_worksheet(:name=> n) }
-  end
-
-  def test_name_unique_only_checks_other_worksheet_names
-    assert_nothing_raised { @ws.name = @ws.name }
-    assert_nothing_raised { Axlsx::Package.new.workbook.add_worksheet :name => 'Sheet1' }
-  end
-
-  def test_name_size
-    assert_raise(ArgumentError, "name too long!") { @ws.name = Array.new(32, "A").join() }
-    assert_nothing_raised { @ws.name = Array.new(31, "A").join() }
   end
 
   def test_set_fixed_width_column
