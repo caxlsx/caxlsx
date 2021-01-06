@@ -3,6 +3,12 @@ CHANGELOG
 
 - **Unreleased**
 
+- **January.5.21**: 3.0.4
+  - [PR #72](https://github.com/caxlsx/caxlsx/pull/72) - Relax Ruby dependency to allow for Ruby 3. This required Travis to be upgraded from Ubuntu Trusty to Ubuntu Bionic. rbx-3 was dropped.
+  - [PR #71](https://github.com/caxlsx/caxlsx/pull/71) - Adds date type to validator so sheet.add_data_validation works with date type. Addresses [I #26](https://github.com/caxlsx/caxlsx/issues/26) - Date Data Validation not working
+  - [PR #70](https://github.com/caxlsx/caxlsx/pull/70) - Fix worksheet title length enforcement caused by switching from size to bytesize. Addresses [I #67](https://github.com/caxlsx/caxlsx/issues/67) - character length error in worksheet name when using Japanese, which was introduced by addressing [I #588](https://github.com/randym/axlsx/issues/588) in the old Axlsx repo. 
+
+
 - **December.7.20**: 3.0.3
   - [PR #62](https://github.com/caxlsx/caxlsx/pull/62) - Fix edge cases in format detection for objects whose string representation made them look like numbers but the object didn’t respond to `#to_i` or `#to_f`.
   - [PR #56](https://github.com/caxlsx/caxlsx/pull/56) - Add `zip_command` option to `#serialize` for faster serialization of large Excel files by using a zip binary
