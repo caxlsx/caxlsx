@@ -1,7 +1,7 @@
 language: ruby
 sudo: required
-dist: trusty
-group: beta
+dist: bionic
+group: edge
 cache: bundler
 bundler_args: --without profile
 
@@ -19,13 +19,12 @@ matrix:
     - rvm: 2.5.8
     - rvm: 2.6.6
     - rvm: 2.7.1
-    - rvm: rbx-3
+    - rvm: 3.0.0
     - rvm: jruby-19mode
     - rvm: jruby-9.1.17.0
     - rvm: ruby-head
     - rvm: jruby-head
   allow_failures:
-    - rvm: rbx-3
     - rvm: ruby-head
     - rvm: jruby-9.1.17.0
     - rvm: jruby-head
@@ -35,8 +34,3 @@ env:
     - JRUBY_OPTS="-Xcli.debug=true --debug"
 
 # https://github.com/jruby/jruby/wiki/FAQs#why-is-jruby-so-slow-to-install-via-rvm
-# https://docs.travis-ci.com/user/installing-dependencies#Installing-Packages-with-the-APT-Addon
-addons:
-  apt:
-    packages:
-    - haveged
