@@ -70,13 +70,8 @@ class TestTable < Test::Unit::TestCase
     cell.value = "&><'\""
 
     table = @ws.add_table("A1:D5")
-    schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(table.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      errors.push error
-      puts error.message
-    end
-    assert(errors.empty?, "error free validation")
+    errors = doc.errors
+    assert(errors.empty?, "invalid xml: #{errors.map(&:to_s).join(', ')}")
   end
 end
