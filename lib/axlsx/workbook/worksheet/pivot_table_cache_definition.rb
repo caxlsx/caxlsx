@@ -53,7 +53,7 @@ module Axlsx
       str <<   '</cacheSource>'
       str << (  '<cacheFields count="' << pivot_table.header_cells_count.to_s << '">')
       pivot_table.header_cells.each do |cell|
-        str << (  '<cacheField name="' << cell.value << '" numFmtId="0">')
+        str << (  '<cacheField name="' << cell.clean_value << '" numFmtId="0">')
         str <<     '<sharedItems count="0">'
         str <<     '</sharedItems>'
         str <<   '</cacheField>'

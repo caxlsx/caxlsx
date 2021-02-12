@@ -51,4 +51,12 @@ class TestPivotTableCacheDefinition < Test::Unit::TestCase
     assert(errors.empty?, "error free validation")
   end
 
+  def test_to_xml_string_for_special_characters
+    cell = @ws.rows.first.cells.first
+    cell.value = "&><'\""
+
+    doc = Nokogiri::XML(@cache_definition.to_xml_string)
+    errors = doc.errors
+    assert(errors.empty?, "invalid xml: #{errors.map(&:to_s).join(', ')}")
+  end
 end
