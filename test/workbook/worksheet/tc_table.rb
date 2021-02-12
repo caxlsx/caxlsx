@@ -64,4 +64,14 @@ class TestTable < Test::Unit::TestCase
     end
     assert(errors.empty?, "error free validation")
   end
+
+  def test_to_xml_string_for_special_characters
+    cell = @ws.rows.first.cells.first
+    cell.value = "&><'\""
+
+    table = @ws.add_table("A1:D5")
+    doc = Nokogiri::XML(table.to_xml_string)
+    errors = doc.errors
+    assert(errors.empty?, "invalid xml: #{errors.map(&:to_s).join(', ')}")
+  end
 end

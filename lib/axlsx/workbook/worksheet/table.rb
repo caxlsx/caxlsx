@@ -80,7 +80,7 @@ module Axlsx
       str << ('<autoFilter ref="' << @ref << '"/>')
       str << ('<tableColumns count="' << header_cells.length.to_s << '">')
       header_cells.each_with_index do |cell,index|
-        str << ('<tableColumn id ="' << (index+1).to_s << '" name="' << cell.value << '"/>')
+        str << ('<tableColumn id ="' << (index+1).to_s << '" name="' << cell.clean_value << '"/>')
       end
       str << '</tableColumns>'
       table_style_info.to_xml_string(str)
