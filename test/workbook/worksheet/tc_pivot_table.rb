@@ -128,7 +128,7 @@ class TestPivotTable < Test::Unit::TestCase
 
   def test_to_xml_string_with_options_on_data_field
     pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5') do |pt|
-      pt.data = [{:ref=>"Sales", :subtotal => 'average'}]
+      pt.data = [{:ref=>"Sales", :subtotal => 'average', num_fmt: 4}]
     end
     shared_test_pivot_table_xml_validity(pivot_table)
   end
