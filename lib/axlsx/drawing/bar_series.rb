@@ -22,6 +22,11 @@ module Axlsx
     # An array of rgb colors to apply to your bar chart.
     attr_reader :colors
 
+    # The fill color for this series.
+    # Red, green, and blue is expressed as sequence of hex digits, RRGGBB. A perceptual gamma of 2.2 is used.
+    # @return [String]
+    attr_reader :color
+
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
     # @option options [Array, SimpleTypedList] labels
@@ -39,6 +44,10 @@ module Axlsx
 
     # @see colors
     def colors=(v) DataTypeValidator.validate "BarSeries.colors", [Array], v; @colors = v end
+
+    def color=(v)
+      @color = v
+    end
 
     # @see shape
     def shape=(v)
@@ -58,6 +67,13 @@ module Axlsx
           str << '<c:spPr><a:solidFill>'
           str << ('<a:srgbClr val="' << c << '"/>')
           str << '</a:solidFill></c:spPr></c:dPt>'
+        end
+
+        if color
+          str << '<c:spPr><a:solidFill>'
+          str << ('<a:srgbClr val="' << color << '"/>')
+          str << '</a:solidFill>'
+          str << '</c:spPr>'
         end
 
         @labels.to_xml_string(str) unless @labels.nil?
