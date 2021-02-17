@@ -74,13 +74,14 @@ module Axlsx
     # Serialize your workbook to disk as an xlsx document.
     #
     # @param [String] output The name of the file you want to serialize your package to
-    # @param [Boolean] confirm_valid Validate the package prior to serialization.
-    # @param [String, nil] zip_command When `nil`, `#serialize` with RubyZip to
+    # @param [Hash] options
+    # @option options [Boolean] :confirm_valid Validate the package prior to serialization.
+    # @option options [String] :zip_command When `nil`, `#serialize` with RubyZip to
     #   zip the XLSX file contents. When a String, the provided zip command (e.g.,
     #   "zip") is used to zip the file contents (may be faster for large files)
     # @return [Boolean] False if confirm_valid and validation errors exist. True if the package was serialized
     # @note A tremendous amount of effort has gone into ensuring that you cannot create invalid xlsx documents.
-    #   confirm_valid should be used in the rare case that you cannot open the serialized file.
+    #   options[:confirm_valid] should be used in the rare case that you cannot open the serialized file.
     # @see Package#validate
     # @example
     #   # This is how easy it is to create a valid xlsx file. Of course you might want to add a sheet or two, and maybe some data, styles and charts.
@@ -92,14 +93,15 @@ module Axlsx
     #   p.serialize("example.xlsx")
     #
     #   # Serialize to a file, using a system zip binary
-    #   p.serialize("example.xlsx", false, zip_command: "zip")
-    #   p.serialize("example.xlsx", false, zip_command: "/path/to/zip")
-    #   p.serialize("example.xlsx", false, zip_command: "zip -1")
+    #   p.serialize("example.xlsx", zip_command: "zip", confirm_valid: false)
+    #   p.serialize("example.xlsx", zip_command: "/path/to/zip")
+    #   p.serialize("example.xlsx", zip_command: "zip -1")
     #
     #   # Serialize to a stream
     #   s = p.to_stream()
     #   File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
-    def serialize(output, confirm_valid=false, zip_command: nil)
+    def serialize(output, options = {}, secondary_options = nil)
+      confirm_valid, zip_command = parse_serialize_options(options, secondary_options)
       return false unless !confirm_valid || self.validate.empty?
       zip_provider = if zip_command
                        ZipCommand.new(zip_command)
@@ -358,6 +360,29 @@ module Axlsx
       rels << Relationship.new(self, APP_R, APP_PN)
       rels.lock
       rels
+    end
+
+    # Parse the arguments of `#serialize`
+    # @return [Boolean, (String or nil)] Returns an array where the first value is
+    #   `confirm_valid` and the second is the `zip_command`.
+    # @private
+    def parse_serialize_options(options, secondary_options)
+      if secondary_options
+        warn "[DEPRECATION] Axlsx::Package#serialize with 3 arguments is deprecated. " +
+          "Use keyword args instead e.g., package.serialize(output, confirm_valid: false, zip_command: 'zip')"
+      end
+      if options.is_a?(Hash)
+        options.merge!(secondary_options || {})
+        invalid_keys = options.keys - [:confirm_valid, :zip_command]
+        if invalid_keys.any?
+          raise ArgumentError.new("Invalid keyword arguments: #{invalid_keys}")
+        end
+        [options.fetch(:confirm_valid, false), options.fetch(:zip_command, nil)]
+      else
+        warn "[DEPRECATION] Axlsx::Package#serialize with confirm_valid as a boolean is deprecated. " +
+          "Use keyword args instead e.g., package.serialize(output, confirm_valid: false)"
+        parse_serialize_options((secondary_options || {}).merge(confirm_valid: options), nil)
+      end
     end
   end
 end

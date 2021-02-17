@@ -129,31 +129,81 @@ class TestPackage < Test::Unit::TestCase
   def test_serialization
     @package.serialize(@fname)
     assert_zip_file_matches_package(@fname, @package)
+    assert_created_with_rubyzip(@fname, @package)
     File.delete(@fname)
   end
 
   def test_serialization_with_zip_command
-    @package.serialize(@fname, false, zip_command: "zip")
+    @package.serialize(@fname, zip_command: "zip")
     assert_zip_file_matches_package(@fname, @package)
+    assert_created_with_zip_command(@fname, @package)
     File.delete(@fname)
   end
 
   def test_serialization_with_zip_command_and_absolute_path
     fname = "#{Dir.tmpdir}/#{@fname}"
-    @package.serialize(fname, false, zip_command: "zip")
+    @package.serialize(fname, zip_command: "zip")
     assert_zip_file_matches_package(fname, @package)
+    assert_created_with_zip_command(fname, @package)
     File.delete(fname)
   end
 
   def test_serialization_with_invalid_zip_command
     assert_raises Axlsx::ZipCommand::ZipError do
-      @package.serialize(@fname, false, zip_command: "invalid_zip")
+      @package.serialize(@fname, zip_command: "invalid_zip")
     end
   end
 
   def assert_zip_file_matches_package(fname, package)
     zf = Zip::File.open(fname)
     package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
+  end
+
+  def assert_created_with_rubyzip(fname, package)
+    assert_equal 2098, get_mtime(fname, package).year, "XLSX files created with RubyZip have 2098 as the file mtime"
+  end
+
+  def assert_created_with_zip_command(fname, package)
+    assert_equal Time.now.utc.year, get_mtime(fname, package).year, "XLSX files created with a zip command have the current year as the file mtime"
+  end
+
+  def get_mtime(fname, package)
+    zf = Zip::File.open(fname)
+    part = package.send(:parts).first
+    entry = zf.get_entry(part[:entry])
+    entry.mtime.utc
+  end
+
+  def test_serialization_with_deprecated_argument
+    warnings = capture_warnings do
+      @package.serialize(@fname, false)
+    end
+    assert_equal 1, warnings.size
+    assert_includes warnings.first, "confirm_valid as a boolean is deprecated"
+    File.delete(@fname)
+  end
+
+  def test_serialization_with_deprecated_three_arguments
+    warnings = capture_warnings do
+      @package.serialize(@fname, true, zip_command: "zip")
+    end
+    assert_zip_file_matches_package(@fname, @package)
+    assert_created_with_zip_command(@fname, @package)
+    assert_equal 2, warnings.size
+    assert_includes warnings.first, "with 3 arguments is deprecated"
+    File.delete(@fname)
+  end
+
+  def capture_warnings(&block)
+    original_warn = Kernel.instance_method(:warn)
+    warnings = []
+    Kernel.send(:define_method, :warn) { |string| warnings << string }
+    block.call
+    original_verbose = $VERBOSE
+    $VERBOSE = nil
+    Kernel.send(:define_method, :warn, original_warn)
+    $VERBOSE = original_verbose
+    warnings
   end
 
   # See comment for Package#zip_entry_for_part
