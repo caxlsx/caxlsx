@@ -34,6 +34,7 @@ Usage:
 * [Color scale](conditional_formatting_color_scale_example.md)
 * [Data bar](conditional_formatting_data_bar_example.md)
 * [Icon set](conditional_formatting_icon_set_example.md)
+* [Text equal](conditional_formatting_text_equal_example.md)
 
 ### Charts
 
