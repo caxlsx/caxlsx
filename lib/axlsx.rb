@@ -62,6 +62,14 @@ module Axlsx
     end
   end
 
+  # sorts the array of cells provided to start from the minimum x,y to
+  # the maximum x.y#
+  # @param [Array] cells
+  # @return [Array]
+  def self.sort_cells(cells)
+    cells.sort_by(&:pos)
+  end
+
   #global reference html entity encoding
   # @return [HtmlEntities]
   def self.coder
