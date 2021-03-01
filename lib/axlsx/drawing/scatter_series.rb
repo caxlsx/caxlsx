@@ -41,7 +41,8 @@ module Axlsx
       end
       @ln_width = options[:ln_width] unless options[:ln_width].nil?
       super(chart, options)
-      @xData = AxDataSource.new(:tag_name => :xVal, :data => options[:xData]) unless options[:xData].nil?
+
+      @xData = NumDataSource.new(:tag_name => :xVal, :data => options[:xData]) unless options[:xData].nil?
       @yData = NumDataSource.new({:tag_name => :yVal, :data => options[:yData]}) unless options[:yData].nil?
     end
 
