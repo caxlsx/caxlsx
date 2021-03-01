@@ -30,11 +30,15 @@ module Axlsx
 
     # Line markers presence
     # @return [Boolean]
-    attr_reader :marker
+    attr_reader :show_marker
+
+    # custom marker symbol
+    # @return [String]
+    attr_reader :marker_symbol
 
     # Creates a new ScatterSeries
     def initialize(chart, options={})
-      @xData, @yData = nil
+      @xData, @yData, @marker_symbol = nil
       if options[:smooth].nil?
         # If caller hasn't specified smoothing or not, turn smoothing on or off based on scatter style
         @smooth = [:smooth, :smoothMarker].include?(chart.scatter_style)
@@ -44,7 +48,7 @@ module Axlsx
         @smooth = options[:smooth]
       end
       @ln_width = options[:ln_width] unless options[:ln_width].nil?
-      @marker = [:lineMarker, :marker, :smoothMarker].include?(chart.scatter_style)
+      @show_marker = [:lineMarker, :marker, :smoothMarker].include?(chart.scatter_style)
 
       super(chart, options)
       @xData = AxDataSource.new(:tag_name => :xVal, :data => options[:xData]) unless options[:xData].nil?
@@ -67,6 +71,12 @@ module Axlsx
       @ln_width = v
     end
 
+    # @see marker_symbol
+    def marker_symbol=(v)
+      Axlsx::validate_marker_symbol(v)
+      @marker_symbol = v
+    end
+
     # Serializes the object
     # @param [String] str
     # @return [String]
@@ -87,7 +97,13 @@ module Axlsx
           str << '<a:ln><a:solidFill>'
           str << ('<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
           str << '</c:spPr>'
-          str << '<c:symbol val="none"/>' unless marker
+
+          if !@show_marker
+            str << '<c:marker><c:symbol val="none"/></c:marker>'
+          elsif @marker_symbol != :default
+            str << '<c:marker><c:symbol val="' + @marker_symbol.to_s + '"/></c:marker>'
+          end
+
           str << '</c:marker>'
         end
         if ln_width
