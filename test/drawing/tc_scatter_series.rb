@@ -54,21 +54,21 @@ class TestScatterSeries < Test::Unit::TestCase
   end
 
   def test_false_show_marker
-    @chart = @ws.add_chart Axlsx::ScatterChart, :title => "Smooth Chart", :scatter_style => :smoothMarker
+    @chart = @ws.add_chart Axlsx::ScatterChart, :title => 'Smooth Chart', :scatter_style => :smoothMarker
     @series = @chart.add_series :xData=>[1,2,4], :yData=>[1,3,9]
-    assert(@series.show_marker, "markers are enabled for marker-related styles")
+    assert(@series.show_marker, 'markers are enabled for marker-related styles')
   end
 
   def test_true_show_marker
-    @chart = @ws.add_chart Axlsx::ScatterChart, :title => "Line chart", :scatter_style => :line
+    @chart = @ws.add_chart Axlsx::ScatterChart, :title => 'Line chart', :scatter_style => :line
     @series = @chart.add_series :xData=>[1,2,4], :yData=>[1,3,9]
-    assert(!@series.show_marker, "markers are disabled for markerless scatter styles")
+    assert(!@series.show_marker, 'markers are disabled for markerless scatter styles')
   end
 
   def test_marker_symbol
-    @chart = @ws.add_chart Axlsx::ScatterChart, :title => "Line chart", :scatter_style => :line
+    @chart = @ws.add_chart Axlsx::ScatterChart, :title => 'Line chart', :scatter_style => :line
     @series = @chart.add_series :xData=>[1,2,4], :yData=>[1,3,9], :marker_symbol => :diamond
-    assert_equal(@series.marker_symbol, :diamond, "markers are disabled for markerless scatter styles")
+    assert_equal(@series.marker_symbol, :diamond, 'series could have own custom marker symbol')
   end
 
 end
