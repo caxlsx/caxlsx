@@ -28,6 +28,10 @@ module Axlsx
     # @return [Boolean]
     attr_reader :smooth
 
+    # Line markers presence
+    # @return [Boolean]
+    attr_reader :marker
+
     # Creates a new ScatterSeries
     def initialize(chart, options={})
       @xData, @yData = nil
@@ -40,6 +44,8 @@ module Axlsx
         @smooth = options[:smooth]
       end
       @ln_width = options[:ln_width] unless options[:ln_width].nil?
+      @marker = [:lineMarker, :marker, :smoothMarker].include?(chart.scatter_style)
+
       super(chart, options)
       @xData = AxDataSource.new(:tag_name => :xVal, :data => options[:xData]) unless options[:xData].nil?
       @yData = NumDataSource.new({:tag_name => :yVal, :data => options[:yData]}) unless options[:yData].nil?
@@ -81,6 +87,7 @@ module Axlsx
           str << '<a:ln><a:solidFill>'
           str << ('<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
           str << '</c:spPr>'
+          str << '<c:symbol val="none"/>' unless marker
           str << '</c:marker>'
         end
         if ln_width
