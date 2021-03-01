@@ -53,4 +53,16 @@ class TestScatterSeries < Test::Unit::TestCase
     assert_equal(doc.xpath("//a:ln[@w='#{@series.ln_width}']").length, 1)
   end
 
+  def test_chart_style_with_marker
+    @chart = @ws.add_chart Axlsx::ScatterChart, :title => "Smooth Chart", :scatter_style => :smoothMarker
+    @series = @chart.add_series :xData=>[1,2,4], :yData=>[1,3,9]
+    assert(@series.marker, "markers are enabled for marker-related styles")
+  end
+
+  def test_chart_style_without_marker
+    @chart = @ws.add_chart Axlsx::ScatterChart, :title => "Line chart", :scatter_style => :line
+    @series = @chart.add_series :xData=>[1,2,4], :yData=>[1,3,9]
+    assert(!@series.marker, "markers are disabled for markerless scatter styles")
+  end
+
 end
