@@ -38,7 +38,7 @@ module Axlsx
 
     # Creates a new ScatterSeries
     def initialize(chart, options={})
-      @xData, @yData, @marker_symbol = nil
+      @xData, @yData = nil
       if options[:smooth].nil?
         # If caller hasn't specified smoothing or not, turn smoothing on or off based on scatter style
         @smooth = [:smooth, :smoothMarker].include?(chart.scatter_style)
@@ -49,6 +49,7 @@ module Axlsx
       end
       @ln_width = options[:ln_width] unless options[:ln_width].nil?
       @show_marker = [:lineMarker, :marker, :smoothMarker].include?(chart.scatter_style)
+      @marker_symbol = options[:marker_symbol] || :default
 
       super(chart, options)
       @xData = AxDataSource.new(:tag_name => :xVal, :data => options[:xData]) unless options[:xData].nil?
