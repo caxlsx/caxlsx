@@ -49,7 +49,7 @@ module Axlsx
       end
       @ln_width = options[:ln_width] unless options[:ln_width].nil?
       @show_marker = [:lineMarker, :marker, :smoothMarker].include?(chart.scatter_style)
-      @marker_symbol = options[:marker_symbol] || :default
+      @marker_symbol = :default
 
       super(chart, options)
       @xData = AxDataSource.new(:tag_name => :xVal, :data => options[:xData]) unless options[:xData].nil?
