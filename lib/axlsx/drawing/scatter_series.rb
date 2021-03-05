@@ -98,10 +98,10 @@ module Axlsx
           str << '<a:ln><a:solidFill>'
           str << ('<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
           str << '</c:spPr>'
-          str << marker_xml
+          str << marker_symbol_xml
           str << '</c:marker>'
         else
-          str << "<c:marker>#{marker_xml}</c:marker>"
+          str << "<c:marker>#{marker_symbol_xml}</c:marker>"
         end
 
         if ln_width
@@ -118,7 +118,7 @@ module Axlsx
 
     private
 
-    def marker_xml
+    def marker_symbol_xml
       if !@show_marker
         '<c:symbol val="none"/>'
       elsif @marker_symbol != :default
