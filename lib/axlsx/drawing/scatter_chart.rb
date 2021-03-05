@@ -1,4 +1,5 @@
 # encoding: UTF-8
+
 module Axlsx
 
   # The ScatterChart allows you to insert a scatter chart into your worksheet
@@ -20,14 +21,17 @@ module Axlsx
     def x_val_axis
       axes[:x_val_axis]
     end
-    alias :xValAxis :x_val_axis
 
     # the y value axis
     # @return [ValAxis]
     def y_val_axis
       axes[:y_val_axis]
     end
-    alias :yValAxis :y_val_axis
+
+    # secondary y value axis
+    def secondary_y_val_axis
+      secondary_axes[:secondary_y_val_axis]
+    end
 
     # Creates a new scatter chart
     def initialize(frame, options={})
@@ -51,15 +55,24 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
+      axes_set = [axes, secondary_axes]
+
       super(str) do
-        str << '<c:scatterChart>'
-        str << ('<c:scatterStyle val="' << scatter_style.to_s << '"/>')
-        str << ('<c:varyColors val="' << vary_colors.to_s << '"/>')
-        @series.each { |ser| ser.to_xml_string(str) }
-        d_lbls.to_xml_string(str) if @d_lbls
-        axes.to_xml_string(str, :ids => true)
-        str << '</c:scatterChart>'
+        @series.partition(&:on_primary_y_axis).each do |series_set|
+          next unless series_set.any?
+
+          str << '<c:scatterChart>'
+          str << ('<c:scatterStyle val="' << scatter_style.to_s << '"/>')
+          str << ('<c:varyColors val="' << vary_colors.to_s << '"/>')
+          series_set.each { |ser| ser.to_xml_string(str) }
+          d_lbls.to_xml_string(str) if @d_lbls
+
+          axes_set.shift.to_xml_string(str, ids: true)
+          str << '</c:scatterChart>'
+        end
+
         axes.to_xml_string(str)
+        secondary_axes.to_xml_string(str) unless @series.all?(&:on_primary_y_axis)
       end
       str
     end
@@ -69,6 +82,24 @@ module Axlsx
     # @return [Axes]
     def axes
       @axes ||= Axes.new(:x_val_axis => ValAxis, :y_val_axis => ValAxis)
+    end
+
+    # Secondary axes for the scatter chart.
+    # @return [Axes]
+    def secondary_axes
+      @secondary_axes ||= Axes.new.tap do |axes|
+        axes.add_axis(:secondary_x_val_axis, ValAxis).last.tap do |_, sec_x|
+          sec_x.ax_pos = :b
+          sec_x.delete = 1
+          sec_x.gridlines = false
+        end
+
+        axes.add_axis(:secondary_y_val_axis, ValAxis).last.tap do |_, sec_y|
+          sec_y.ax_pos = :r
+          sec_y.crosses = :max
+          sec_y.gridlines = false
+        end
+      end
     end
   end
 end
