@@ -123,7 +123,7 @@ module Axlsx
         '<c:symbol val="none"/>'
       elsif @marker_symbol != :default
         '<c:symbol val="' + @marker_symbol.to_s + '"/>'
-      end
+      end.to_s
     end
   end
 end
