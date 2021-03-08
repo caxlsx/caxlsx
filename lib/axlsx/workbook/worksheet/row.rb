@@ -25,11 +25,12 @@ module Axlsx
     # @option options [Array, Symbol] types
     # @option options [Array, Integer] style
     # @option options [Float] height the row's height (in points)
+    # @option options [Integer] offset - add empty columns before values
     # @see Row#array_to_cells
     # @see Cell
     def initialize(worksheet, values=[], options={})
       self.worksheet = worksheet
-      super(Cell, nil, values.size)
+      super(Cell, nil, values.size + options[:offset].to_i)
       self.height = options.delete(:height)
       worksheet.rows << self
       array_to_cells(values, options)
@@ -147,14 +148,15 @@ module Axlsx
     # @option options [Array, Integer] style
     def array_to_cells(values, options={})
       DataTypeValidator.validate :array_to_cells, Array, values
-      types, style, formula_values, escape_formulas = options.delete(:types), options.delete(:style), options.delete(:formula_values), options.delete(:escape_formulas)
+      types, style, formula_values, escape_formulas, offset = options.delete(:types), options.delete(:style), options.delete(:formula_values), options.delete(:escape_formulas), options.delete(:offset)
+      offset.to_i.times { |index| self[index] = Cell.new(self) } if offset
       values.each_with_index do |value, index|
         options[:style] = style.is_a?(Array) ? style[index] : style if style
         options[:type] = types.is_a?(Array) ? types[index] : types if types
         options[:escape_formulas] = escape_formulas.is_a?(Array) ? escape_formulas[index] : escape_formulas if escape_formulas
         options[:formula_value] = formula_values[index] if formula_values.is_a?(Array)
 
-        self[index] = Cell.new(self, value, options)
+        self[index + offset.to_i] = Cell.new(self, value, options)
       end
     end
   end

@@ -400,6 +400,7 @@ module Axlsx
     # @option options [Array, Integer] style
     # @option options [Array] widths each member of the widths array will affect how auto_fit behavies.
     # @option options [Float] height the row's height (in points)
+    # @option options [Integer] offset - add empty columns before values
     # @option options [Array, Boolean] escape_formulas - Whether to treat a value starting with an equal
     #    sign as formula (default) or as simple string.
     #    Allowing user generated data to be interpreted as formulas can be dangerous
