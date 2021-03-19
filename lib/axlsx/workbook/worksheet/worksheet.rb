@@ -393,6 +393,9 @@ module Axlsx
     # @example - specify whether a certain cells in a row should escape formulas or not
     #     ws.add_row ['=IF(2+2=4,4,5)', '=IF(13+13=4,4,5)'], :escape_formulas=>[true, false]
     #
+    # @example - add a column offset when adding a row (inserts 'n' blank, unstyled columns before data)
+    #     ws.add_row ['I wish', 'for a fish', 'on my fish wish dish'], offset: 3
+    #
     # @see Worksheet#column_widths
     # @return [Row]
     # @option options [Array] values
@@ -400,6 +403,7 @@ module Axlsx
     # @option options [Array, Integer] style
     # @option options [Array] widths each member of the widths array will affect how auto_fit behavies.
     # @option options [Float] height the row's height (in points)
+    # @option options [Integer] offset - add empty columns before values
     # @option options [Array, Boolean] escape_formulas - Whether to treat a value starting with an equal
     #    sign as formula (default) or as simple string.
     #    Allowing user generated data to be interpreted as formulas can be dangerous
