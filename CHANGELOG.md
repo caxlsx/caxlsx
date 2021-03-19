@@ -5,7 +5,7 @@ CHANGELOG
   - [PR #57](https://github.com/caxlsx/caxlsx/pull/57) - Deprecate using #serialize with boolean argument: Calls like `Package#serialize("name.xlsx", false)` should be replaced with `Package#serialize("name.xlsx", confirm_valid: false)`.
   - [PR #77](https://github.com/caxlsx/caxlsx/pull/77) - Fix special characters in table header
   - [PR #79](https://github.com/caxlsx/caxlsx/pull/79) - Add support for format in pivot tables
-  - [PR #87|(https://github.com/caxlsx/caxlsx/pull/87) - Implement :offset option for worksheet#add_row
+  - [PR #87](https://github.com/caxlsx/caxlsx/pull/87) - Implement :offset option for worksheet#add_row
 
 - **January.5.21**: 3.0.4
   - [PR #72](https://github.com/caxlsx/caxlsx/pull/72) - Relax Ruby dependency to allow for Ruby 3. This required Travis to be upgraded from Ubuntu Trusty to Ubuntu Bionic. rbx-3 was dropped.
