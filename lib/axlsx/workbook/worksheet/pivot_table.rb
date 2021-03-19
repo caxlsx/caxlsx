@@ -111,8 +111,12 @@ module Axlsx
         if data_field.is_a? String
           data_field = {:ref => data_field}
         end
-        data_field.values.each do |value|
-          DataTypeValidator.validate "#{self.class}.data[]", [String], value
+        data_field.each do |key, value|
+          if key == :num_fmt
+            DataTypeValidator.validate "#{self.class}.data[]", [Integer], value
+          else
+            DataTypeValidator.validate "#{self.class}.data[]", [String], value
+          end
         end
         @data << data_field
       end
@@ -212,6 +216,7 @@ module Axlsx
         data.each do |datum_value|
           # The correct name prefix in ["Sum","Average", etc...]
           str << "<dataField name='#{(datum_value[:subtotal]||'')} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
+          str << " numFmtId='#{datum_value[:num_fmt]}'" if datum_value[:num_fmt]
           str << " subtotal='#{datum_value[:subtotal]}' " if datum_value[:subtotal]
           str << "/>"
         end
