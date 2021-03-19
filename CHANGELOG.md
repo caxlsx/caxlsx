@@ -2,6 +2,7 @@ CHANGELOG
 ---------
 
 - **Unreleased**
+  - [PR #79](https://github.com/caxlsx/caxlsx/pull/79) - Add support for format in pivot tables
 
 - **January.5.21**: 3.0.4
   - [PR #72](https://github.com/caxlsx/caxlsx/pull/72) - Relax Ruby dependency to allow for Ruby 3. This required Travis to be upgraded from Ubuntu Trusty to Ubuntu Bionic. rbx-3 was dropped.
