@@ -393,6 +393,9 @@ module Axlsx
     # @example - specify whether a certain cells in a row should escape formulas or not
     #     ws.add_row ['=IF(2+2=4,4,5)', '=IF(13+13=4,4,5)'], :escape_formulas=>[true, false]
     #
+    # @example - add a column offset when adding a row (inserts 'n' blank, unstyled columns before data)
+    #     ws.add_row ['I wish', 'for a fish', 'on my fish wish dish'], offset: 3
+    #
     # @see Worksheet#column_widths
     # @return [Row]
     # @option options [Array] values
