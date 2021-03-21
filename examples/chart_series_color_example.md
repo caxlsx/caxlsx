@@ -1,6 +1,6 @@
 ## Description
 
-You could change the colors of the series with providing a color. Do not confuse it with defining colors for each datapoint in the series.
+You could change the colors of the series with providing a series_color. Do not confuse it with defining colors for each datapoint in the series.
 
 ## Code
 
@@ -21,9 +21,9 @@ wb.add_worksheet(name: 'Bar Chart') do |sheet|
     chart.barDir = :col
     chart.bg_color = 'FFFFFF'
     # The first series will be red, but some bars will be overwritten to blue and green
-    chart.add_series data: sheet['B3:D3'], title: sheet['A3'], labels: sheet['B2:D2'], color: 'FF0000', colors: ['0000FF', '00FF00']
+    chart.add_series data: sheet['B3:D3'], title: sheet['A3'], labels: sheet['B2:D2'], series_color: 'FF0000', colors: ['0000FF', '00FF00']
     # The second series will be green
-    chart.add_series data: sheet['B4:D4'], title: sheet['A4'], labels: sheet['B2:D2'], color: '00FF00'
+    chart.add_series data: sheet['B4:D4'], title: sheet['A4'], labels: sheet['B2:D2'], series_color: '00FF00'
   end
 end
 

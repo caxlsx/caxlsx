@@ -23,9 +23,9 @@ module Axlsx
     attr_reader :colors
 
     # The fill color for this series.
-    # Red, green, and blue is expressed as sequence of hex digits, RRGGBB. A perceptual gamma of 2.2 is used.
+    # Red, green, and blue is expressed as sequence of hex digits, RRGGBB.
     # @return [String]
-    attr_reader :color
+    attr_reader :series_color
 
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
@@ -45,8 +45,8 @@ module Axlsx
     # @see colors
     def colors=(v) DataTypeValidator.validate "BarSeries.colors", [Array], v; @colors = v end
 
-    def color=(v)
-      @color = v
+    def series_color=(v)
+      @series_color = v
     end
 
     # @see shape
@@ -69,9 +69,9 @@ module Axlsx
           str << '</a:solidFill></c:spPr></c:dPt>'
         end
 
-        if color
+        if series_color
           str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/>')
+          str << ('<a:srgbClr val="' << series_color << '"/>')
           str << '</a:solidFill>'
           str << '</c:spPr>'
         end
