@@ -51,10 +51,11 @@ module Axlsx
   # determines the cell range for the items provided
   def self.cell_range(cells, absolute=true)
     return "" unless cells.first.is_a? Cell
-    cells = sort_cells(cells)
-    reference = "#{cells.first.reference(absolute)}:#{cells.last.reference(absolute)}"
+
+    first_cell, last_cell = cells.minmax_by(&:pos)
+    reference = "#{first_cell.reference(absolute)}:#{last_cell.reference(absolute)}"
     if absolute
-      escaped_name = cells.first.row.worksheet.name.gsub '&apos;', "''"
+      escaped_name = first_cell.row.worksheet.name.gsub '&apos;', "''"
       "'#{escaped_name}'!#{reference}"
     else
       reference
@@ -66,7 +67,7 @@ module Axlsx
   # @param [Array] cells
   # @return [Array]
   def self.sort_cells(cells)
-    cells.sort { |x, y| [x.index, x.row.row_index] <=> [y.index, y.row.row_index] }
+    cells.sort_by(&:pos)
   end
 
   #global reference html entity encoding
