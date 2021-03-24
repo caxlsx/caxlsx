@@ -71,7 +71,8 @@ class TestPic < Test::Unit::TestCase
 
   def test_image_src
     assert_raise(ArgumentError) { @image.image_src = __FILE__ }
-    assert_raise(ArgumentError) { @image.image_src = @test_img_fake }
+    # Functionality changed! no longer detects bad/fake images!
+    assert_nothing_raised { @image.image_src = @test_img_fake }
     assert_nothing_raised { @image.image_src = @test_img_gif }
     assert_nothing_raised { @image.image_src = @test_img_png }
     assert_nothing_raised { @image.image_src = @test_img_jpg }

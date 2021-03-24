@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'htmlentities'
 require 'axlsx/version.rb'
-require 'mimemagic'
+require 'mime-types'
 
 require 'axlsx/util/simple_typed_list.rb'
 require 'axlsx/util/constants.rb'
