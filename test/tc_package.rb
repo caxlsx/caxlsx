@@ -228,7 +228,7 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def test_serialization_creates_files_with_excel_mime_type
-    assert_equal(MimeMagic.by_magic(@package.to_stream).type,
+    assert_equal(Marcel::MimeType.for(@package.to_stream),
                  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
   end
 
