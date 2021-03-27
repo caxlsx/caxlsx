@@ -33,6 +33,7 @@ module Axlsx
     # @option options [String] title
     # @option options [String] shape
     # @option options [String] colors an array of colors to use when rendering each data point
+    # @option options [String] series_color a color to use when rendering series
     # @param [Chart] chart
     def initialize(chart, options={})
       @shape = :box
@@ -78,7 +79,7 @@ module Axlsx
 
         @labels.to_xml_string(str) unless @labels.nil?
         @data.to_xml_string(str) unless @data.nil?
-        # this is actually only required for shapes other than box 
+        # this is actually only required for shapes other than box
         str << ('<c:shape val="' << shape.to_s << '"></c:shape>')
       end
     end
