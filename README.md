@@ -3,7 +3,7 @@
 [![Gem
 Version](https://badge.fury.io/rb/caxlsx.svg)](http://badge.fury.io/rb/caxlsx)
 ![Total downloads](http://ruby-gem-downloads-badge.herokuapp.com/caxlsx?type=total)
-![Downloads for 3.1.0 (latest)](http://ruby-gem-downloads-badge.herokuapp.com/caxlsx/3.1.0?label=downloads%203.0.4)
+![Downloads for 3.1.0 (latest)](http://ruby-gem-downloads-badge.herokuapp.com/caxlsx/3.1.0?label=downloads%203.1.0)
 
 ## Notice: Community Axlsx Organization
 
