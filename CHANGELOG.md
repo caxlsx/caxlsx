@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 
-- **Unreleased**
+- **March.27.21**: 3.1.0
   - [PR #95](https://github.com/caxlsx/caxlsx/pull/95) - Replace mimemagic with marcel  
   - [PR #87](https://github.com/caxlsx/caxlsx/pull/87) - Implement :offset option for worksheet#add_row
   - [PR #79](https://github.com/caxlsx/caxlsx/pull/79) - Add support for format in pivot tables
