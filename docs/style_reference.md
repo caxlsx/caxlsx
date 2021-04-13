@@ -7,6 +7,8 @@
 - `alignment` (Hash) - Text alignment. 
     - Available sub-options are `:horizontal`, `:vertical`, `:wrap_text`. 
     - Example:  `alignment: {horizontal: true, vertical: true, wrap_text: false}`
+- `sheet alignment` (Boolean) - aligning the document as right-to-left
+    - sheet.sheet_view.right_to_left = true
 - `strike` (Boolean) - Indicates if the text should be rendered with a strikethrough
 - `outline` (Boolean) - Indicates if the text should be rendered with a shadow
 - `sz` (Integer) - Font Size
