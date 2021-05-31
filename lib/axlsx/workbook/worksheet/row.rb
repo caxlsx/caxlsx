@@ -57,7 +57,7 @@ module Axlsx
     attr_reader :outline_level
     alias :outlineLevel :outline_level
 
-    # The style applied ot the row. This affects the entire row.
+    # The style applied to the row. This affects the entire row.
     # @return [Integer]
     attr_reader :s
 
