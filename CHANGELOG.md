@@ -193,23 +193,23 @@ in value caches
    - Added support for specifying the color of data series in charts.
    - bugfix using add_cell on row mismanaged calls to update_column_info.
 
-- ** April.25.12:**: 1.1.3
+- **April.25.12:**: 1.1.3
    - Primarily because I am stupid.....Updates to readme to properly report version, add in missing docs and restructure example directory.
 
-- ** April.25.12:**: 1.1.2
+- **April.25.12:**: 1.1.2
    - Conditional Formatting completely implemented.
    - refactoring / documentation for Style#add_style
    - added in label rotation for chart axis labels
    - bugfix to properly assign style and type info to cells when only partial information is provided in the types/style option
 
-- ** April.18.12**: 1.1.1
+- **April.18.12**: 1.1.1
    - bugfix for autowidth calculations across multiple rows
    - bugfix for dimension calculations with nil cells.
    - REMOVED RMAGICK dependency WOOT!
    - Update readme to show screenshot of gem output.
    - Cleanup benchmark and add benchmark rake task
 
-- ** April.3.12**: 1.1.0
+- **April.3.12**: 1.1.0
    - bugfix patch name_to_indecies to properly handle extended ranges.
    - bugfix properly serialize chart title.
    - lower rake minimum requirement for 1.8.7 apps that don't want to move on to 0.9 NOTE this will be reverted for 2.0.0 with workbook parsing!
@@ -224,7 +224,7 @@ in value caches
    - Major (like 7x faster!) performance updates.
    - Gem now supports for JRuby 1.6.7, as well as experimental support for Rubinius
 
-- ** March.5.12**: 1.0.18
+- **March.5.12**: 1.0.18
    https://github.com/randym/axlsx/compare/1.0.17...1.0.18
    - bugfix custom borders are not properly applied when using styles.add_style
    - interop worksheet names must be 31 characters or less or some versions of office complain about repairs
@@ -234,14 +234,14 @@ in value caches
    - added << alias for add_row
    - removed presetting of date1904 based on authoring platform. Now defaults to use 1900 epoch (date1904 = false)
 
-- ** February.14.12**: 1.0.17
+- **February.14.12**: 1.0.17
    https://github.com/randym/axlsx/compare/1.0.16...1.0.17
    - Added in support for serializing to StringIO
    - Added in support for using shared strings table. This makes most of the features in axlsx interoperable with iWorks Numbers
    - Added in support for fixed column_widths
    - Removed unneeded dependencies on active-support and i18n
 
-- ** February.2.12**: 1.0.16
+- **February.2.12**: 1.0.16
    https://github.com/randym/axlsx/compare/1.0.15...1.0.16
    - Bug fix for schema file locations when validating in rails
    - Added hyperlink to images
