@@ -1,6 +1,6 @@
 # encoding: UTF-8
-require 'htmlentities'
 require 'axlsx/version.rb'
+require 'axlsx/coder'
 require 'marcel'
 
 require 'axlsx/util/simple_typed_list.rb'
@@ -55,7 +55,7 @@ module Axlsx
     first_cell, last_cell = cells.minmax_by(&:pos)
     reference = "#{first_cell.reference(absolute)}:#{last_cell.reference(absolute)}"
     if absolute
-      escaped_name = first_cell.row.worksheet.name.gsub '&apos;', "''"
+      escaped_name = first_cell.row.worksheet.name.gsub "'", "''"
       "'#{escaped_name}'!#{reference}"
     else
       reference
@@ -70,10 +70,10 @@ module Axlsx
     cells.sort_by(&:pos)
   end
 
-  #global reference html entity encoding
-  # @return [HtmlEntities]
+  #global reference xml entity encoding
+  # @return [Axlsx::Coder]
   def self.coder
-    @@coder ||= ::HTMLEntities.new
+    @@coder ||= Coder.new
   end
 
   # returns the x, y position of a cell

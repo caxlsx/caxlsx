@@ -19,6 +19,11 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.name, '&lt;foo&gt; &amp; &lt;bar&gt;')
   end
 
+  def test_non_printable_ascii_characters_are_removed
+    @ws.name = "foo\bbar"
+    assert_equal(@ws.name, 'foobar')
+  end
+
   def test_name_exception_on_invalid_character
     assert_raises(ArgumentError) { @ws.name = 'foo:bar' }
     assert_raises(ArgumentError) { @ws.name = 'foo[bar' }
