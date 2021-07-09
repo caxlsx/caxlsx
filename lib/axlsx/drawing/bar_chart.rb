@@ -36,7 +36,7 @@ module Axlsx
     alias :gapDepth :gap_depth
 
     # space between bar or column clusters, as a percentage of the bar or column width.
-    # @return [String]
+    # @return [Integer]
     def gap_width
       @gap_width ||= 150
     end
@@ -100,7 +100,7 @@ module Axlsx
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     def gap_width=(v)
-      RegexValidator.validate "BarChart.gap_width", GAP_AMOUNT_PERCENT, v
+      RangeValidator.validate "BarChart.gap_width", 0, 500, v
       @gap_width=(v)
     end
     alias :gapWidth= :gap_width=
