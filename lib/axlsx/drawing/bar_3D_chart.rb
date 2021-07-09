@@ -31,17 +31,17 @@ module Axlsx
     alias :barDir :bar_dir
 
     # space between bar or column clusters, as a percentage of the bar or column width.
-    # @return [String]
+    # @return [Integer]
     attr_reader :gap_depth
     alias :gapDepth :gap_depth
 
     # space between bar or column clusters, as a percentage of the bar or column width.
-    # @return [String]
+    # @return [Integer]
     def gap_width
       @gap_width ||= 150
     end
     alias :gapWidth :gap_width
-    
+
     #grouping for a column, line, or area chart.
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     # @return [Symbol]
@@ -55,9 +55,6 @@ module Axlsx
     def shape
       @shape ||= :box
     end
-
-    # validation regex for gap amount percent
-    GAP_AMOUNT_PERCENT = /0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/
 
     # Creates a new bar chart object
     # @param [GraphicFrame] frame The workbook that owns this chart.
@@ -102,14 +99,14 @@ module Axlsx
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     def gap_width=(v)
-      RegexValidator.validate "Bar3DChart.gap_width", GAP_AMOUNT_PERCENT, v
+      RangeValidator.validate "Bar3DChart.gap_width", 0, 500, v
       @gap_width=(v)
     end
     alias :gapWidth= :gap_width=
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     def gap_depth=(v)
-      RegexValidator.validate "Bar3DChart.gap_didth", GAP_AMOUNT_PERCENT, v
+      RangeValidator.validate "Bar3DChart.gap_depth", 0, 500, v
       @gap_depth=(v)
     end
     alias :gapDepth= :gap_depth=
