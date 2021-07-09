@@ -49,6 +49,12 @@ module Axlsx
       @grouping ||= :clustered
     end
 
+    # Overlap between series
+    # @return [Integer]
+    def overlap
+      @overlap ||= 0
+    end
+
     # The shape of the bars or columns
     # must be one of  [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax]
     # @return [Symbol]
@@ -71,7 +77,7 @@ module Axlsx
     # @see Chart
     def initialize(frame, options={})
       @vary_colors = true
-      @gap_width, @gap_depth, @shape = nil, nil, nil
+      @gap_width, @gap_depth, @overlap, @shape = nil, nil, nil, nil
       super(frame, options)
       @series_type = BarSeries
       @d_lbls = nil
@@ -106,6 +112,11 @@ module Axlsx
     end
     alias :gapDepth= :gap_depth=
 
+    def overlap=(v)
+      RangeValidator.validate "BarChart.overlap", -100, 100, v
+      @overlap=(v)
+    end
+
     # The shape of the bars or columns
     # must be one of  [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax]
     def shape=(v)
@@ -124,6 +135,7 @@ module Axlsx
         str << ('<c:varyColors val="' << vary_colors.to_s << '"/>')
         @series.each { |ser| ser.to_xml_string(str) }
         @d_lbls.to_xml_string(str) if @d_lbls
+        str << ('<c:overlap val="' << @overlap.to_s << '"/>') unless @overlap.nil?
         str << ('<c:gapWidth val="' << @gap_width.to_s << '"/>') unless @gap_width.nil?
         str << ('<c:gapDepth val="' << @gap_depth.to_s << '"/>') unless @gap_depth.nil?
         str << ('<c:shape val="' << @shape.to_s << '"/>') unless @shape.nil?
