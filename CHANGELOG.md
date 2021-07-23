@@ -1,6 +1,9 @@
 CHANGELOG
 ---------
 
+- **Unreleased**
+  - [PR #107](https://github.com/caxlsx/caxlsx/pull/107) - Add overlap to bar charts
+
 - **March.27.21**: 3.1.0
   - [PR #95](https://github.com/caxlsx/caxlsx/pull/95) - Replace mimemagic with marcel  
   - [PR #87](https://github.com/caxlsx/caxlsx/pull/87) - Implement :offset option for worksheet#add_row
@@ -11,7 +14,7 @@ CHANGELOG
 - **January.5.21**: 3.0.4
   - [PR #72](https://github.com/caxlsx/caxlsx/pull/72) - Relax Ruby dependency to allow for Ruby 3. This required Travis to be upgraded from Ubuntu Trusty to Ubuntu Bionic. rbx-3 was dropped.
   - [PR #71](https://github.com/caxlsx/caxlsx/pull/71) - Adds date type to validator so sheet.add_data_validation works with date type. Addresses [I #26](https://github.com/caxlsx/caxlsx/issues/26) - Date Data Validation not working
-  - [PR #70](https://github.com/caxlsx/caxlsx/pull/70) - Fix worksheet title length enforcement caused by switching from size to bytesize. Addresses [I #67](https://github.com/caxlsx/caxlsx/issues/67) - character length error in worksheet name when using Japanese, which was introduced by addressing [I #588](https://github.com/randym/axlsx/issues/588) in the old Axlsx repo. 
+  - [PR #70](https://github.com/caxlsx/caxlsx/pull/70) - Fix worksheet title length enforcement caused by switching from size to bytesize. Addresses [I #67](https://github.com/caxlsx/caxlsx/issues/67) - character length error in worksheet name when using Japanese, which was introduced by addressing [I #588](https://github.com/randym/axlsx/issues/588) in the old Axlsx repo.
 
 
 - **December.7.20**: 3.0.3
@@ -19,7 +22,7 @@ CHANGELOG
   - [PR #56](https://github.com/caxlsx/caxlsx/pull/56) - Add `zip_command` option to `#serialize` for faster serialization of large Excel files by using a zip binary
   - [PR #54](https://github.com/caxlsx/caxlsx/pull/54) - Fix type detection for floats with out-of-rage exponents
   - [I #67](https://github.com/caxlsx/caxlsx/issues/67) - Fix regression in worksheet name length enforcement: Some unicode characters were counted incorrectly, so that names that previously worked fine now stopped working. (This was introduced in 3.0.2)
-  
+
 - **July.16.20**: 3.0.2
   - [I #51](https://github.com/caxlsx/caxlsx/issues/51) - Images do not import on Windows. IO read set explicitly to binary mode.
   - [PR #53](https://github.com/caxlsx/caxlsx/pull/53) - Limit column width to 255. Maximum column width limit in MS Excel is 255 characters, see https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3
@@ -152,7 +155,7 @@ CHANGELOG
    - added in interop requirements so that charts are properly exported
      to PDF from Libra Office
    - various readability improvements and work standardizing attribute
-     names to snake_case. Aliases are provided for backward compatiblity 
+     names to snake_case. Aliases are provided for backward compatiblity
 
 - **June.11.12**: 1.1.7
    - fix chart rendering issue when label offset is specified as a
