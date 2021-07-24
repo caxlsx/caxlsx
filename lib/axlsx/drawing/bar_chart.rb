@@ -31,11 +31,6 @@ module Axlsx
     alias :barDir :bar_dir
 
     # space between bar or column clusters, as a percentage of the bar or column width.
-    # @return [String]
-    attr_reader :gap_depth
-    alias :gapDepth :gap_depth
-
-    # space between bar or column clusters, as a percentage of the bar or column width.
     # @return [Integer]
     def gap_width
       @gap_width ||= 150
@@ -62,9 +57,6 @@ module Axlsx
       @shape ||= :box
     end
 
-    # validation regex for gap amount percent
-    GAP_AMOUNT_PERCENT = /0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/
-
     # Creates a new bar chart object
     # @param [GraphicFrame] frame The workbook that owns this chart.
     # @option options [Cell, String] title
@@ -72,12 +64,11 @@ module Axlsx
     # @option options [Symbol] bar_dir
     # @option options [Symbol] grouping
     # @option options [String] gap_width
-    # @option options [String] gap_depth
     # @option options [Symbol] shape
     # @see Chart
     def initialize(frame, options={})
       @vary_colors = true
-      @gap_width, @gap_depth, @overlap, @shape = nil, nil, nil, nil
+      @gap_width, @overlap, @shape = nil, nil, nil
       super(frame, options)
       @series_type = BarSeries
       @d_lbls = nil
@@ -105,13 +96,6 @@ module Axlsx
     end
     alias :gapWidth= :gap_width=
 
-    # space between bar or column clusters, as a percentage of the bar or column width.
-    def gap_depth=(v)
-      RegexValidator.validate "BarChart.gap_didth", GAP_AMOUNT_PERCENT, v
-      @gap_depth=(v)
-    end
-    alias :gapDepth= :gap_depth=
-
     def overlap=(v)
       RangeValidator.validate "BarChart.overlap", -100, 100, v
       @overlap=(v)
@@ -137,7 +121,6 @@ module Axlsx
         @d_lbls.to_xml_string(str) if @d_lbls
         str << ('<c:overlap val="' << @overlap.to_s << '"/>') unless @overlap.nil?
         str << ('<c:gapWidth val="' << @gap_width.to_s << '"/>') unless @gap_width.nil?
-        str << ('<c:gapDepth val="' << @gap_depth.to_s << '"/>') unless @gap_depth.nil?
         str << ('<c:shape val="' << @shape.to_s << '"/>') unless @shape.nil?
         axes.to_xml_string(str, :ids => true)
         str << '</c:barChart>'

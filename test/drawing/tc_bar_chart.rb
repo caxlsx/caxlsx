@@ -39,12 +39,6 @@ class TestBarChart < Test::Unit::TestCase
     assert_equal(@chart.gap_width, 200, 'gap width is incorrect')
   end
 
- def test_gapDepth
-   assert_raise(ArgumentError, "require valid gap_depth") { @chart.gap_depth = 200 }
-   assert_nothing_raised("allow valid gap_depth") { @chart.gap_depth = "200%" }
-   assert(@chart.gap_depth == "200%")
- end
-
   def test_overlap
     assert_raise(ArgumentError, "require valid overlap") { @chart.overlap = -101 }
     assert_raise(ArgumentError, "require valid overlap") { @chart.overlap = 101 }
