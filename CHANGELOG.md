@@ -3,6 +3,7 @@ CHANGELOG
 
 - **Unreleased**
   - [PR #107](https://github.com/caxlsx/caxlsx/pull/107) - Add overlap to bar charts
+  - [PR #108](https://github.com/caxlsx/caxlsx/pull/108) - Fix gap depth and gap depth validators for bar charts and 3D bar charts
 
 - **March.27.21**: 3.1.0
   - [PR #95](https://github.com/caxlsx/caxlsx/pull/95) - Replace mimemagic with marcel  
