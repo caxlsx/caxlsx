@@ -103,7 +103,7 @@ Customizations:
 
 * [Fonts](font_example.md)
 * [Format codes](format_codes_example.md)
-* [Number formats and currencyc](number_format_example.md)
+* [Number formats and currency](number_format_example.md)
 * [Rich text](rich_text_example.md)
 * [Wrap text](wrap_text_example.md)
 
