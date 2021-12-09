@@ -409,7 +409,7 @@ module Axlsx
     # This is still not perfect...
     #  - scaling is not linear as font sizes increase
     def string_width(string, font_size)
-      font_scale = font_size / 10.0
+      font_scale = font_size / 11.0
       (string.to_s.size + 3) * font_scale
     end
 
@@ -419,7 +419,7 @@ module Axlsx
     def font_size
       return sz if sz
       font = styles.fonts[styles.cellXfs[style].fontId] || styles.fonts[0]
-      (font.b || (defined?(@b) && @b)) ? (font.sz * 1.5) : font.sz
+      (font.b || (defined?(@b) && @b)) ? (font.sz * 1.1) : font.sz
     end
 
     # Utility method for setting inline style attributes
