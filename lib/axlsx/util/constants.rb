@@ -286,6 +286,9 @@ module Axlsx
   # error message for RangeValidator
   ERR_RANGE = "Invalid Data. %s must be between %s and %s, (inclusive:%s) you gave: %s".freeze
 
+  # error message for sheets that use explicit empty string name
+  ERR_SHEET_NAME_EMPTY = "Your worksheet name is empty. Worksheet name can't be empty. Please assign name of your sheet or don't use name option at all.".freeze
+
   # error message for sheets that use a name which is longer than 31 bytes
   ERR_SHEET_NAME_TOO_LONG = "Your worksheet name '%s' is too long. Worksheet names must be 31 characters (bytes) or less".freeze
 
