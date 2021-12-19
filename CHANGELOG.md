@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+- Unreleased
+  - Allow passing an Array of border hashes to the `border` style
+  - Change previous behaviour where `border_top`, `border_*` styles would not be applied unless `border` style was also defined.
+
 - **October.4.19**: 3.0.1
   - Support for ruby versions limited to officially supported version (Ruby v2.3+)
   - Updates to dependency gems, especially nokogiri and ruby-zip
