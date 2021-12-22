@@ -1,5 +1,5 @@
 # Caxlsx (Community Continued Version)
-[![Build Status](https://travis-ci.com/caxlsx/caxlsx.svg?branch=master)](https://travis-ci.com/caxlsx/caxlsx)
+[![Build Status](https://github.com/caxlsx/caxlsx/workflows/Test/badge.svg)](https://github.com/caxlsx/caxlsx/actions)
 [![Gem
 Version](https://badge.fury.io/rb/caxlsx.svg)](http://badge.fury.io/rb/caxlsx)
 ![Total downloads](http://ruby-gem-downloads-badge.herokuapp.com/caxlsx?type=total)
