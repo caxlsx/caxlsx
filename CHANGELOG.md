@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+- **Unreleased**
+  - Allow passing an Array of border hashes to the `border` style
+  - Change previous behaviour where `border_top`, `border_*` styles would not be applied unless `border` style was also defined.
+
 - **September.22.21**: 3.1.1
   - [PR #107](https://github.com/caxlsx/caxlsx/pull/107) - Add overlap to bar charts
   - [PR #108](https://github.com/caxlsx/caxlsx/pull/108) - Fix gap depth and gap depth validators for bar charts and 3D bar charts
