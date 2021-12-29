@@ -1,6 +1,9 @@
 CHANGELOG
 ---------
 
+- **Unreleased**
+  - Improve error messages when incorrect ranges are provided to `Worksheet#[]`
+
 - **September.22.21**: 3.1.1
   - [PR #107](https://github.com/caxlsx/caxlsx/pull/107) - Add overlap to bar charts
   - [PR #108](https://github.com/caxlsx/caxlsx/pull/108) - Fix gap depth and gap depth validators for bar charts and 3D bar charts
