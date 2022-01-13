@@ -1,6 +1,9 @@
 CHANGELOG
 ---------
 
+- **Unreleased**
+  - [PR #123](https://github.com/caxlsx/caxlsx/pull/123) - Fix invalid xml when pivot table created with more than one column in data field. Solves [Issue #110](https://github.com/caxlsx/caxlsx/issues/110)
+
 - **September.22.21**: 3.1.1
   - [PR #107](https://github.com/caxlsx/caxlsx/pull/107) - Add overlap to bar charts
   - [PR #108](https://github.com/caxlsx/caxlsx/pull/108) - Fix gap depth and gap depth validators for bar charts and 3D bar charts
