@@ -606,11 +606,11 @@ module Axlsx
         parts.first
       else
         if parts.size > 2
-          raise ArgumentError.new("Invalid cell definition `#{cell_def}`")
+          raise ArgumentError, (ERR_CELL_REFERENCE_INVALID % cell_def)
         elsif parts.first.nil?
-          raise ArgumentError.new("Missing cell `#{cell_def.split(":").first}` for the specified range `#{cell_def}`")
+          raise ArgumentError, (ERR_CELL_REFERENCE_MISSING_CELL % [cell_def.split(":").first, cell_def])
         elsif parts.last.nil?
-          raise ArgumentError.new("Missing cell `#{cell_def.split(":").last}` for the specified range `#{cell_def}`")
+          raise ArgumentError, (ERR_CELL_REFERENCE_MISSING_CELL % [cell_def.split(":").last, cell_def])
         end
 
         range(*parts)
