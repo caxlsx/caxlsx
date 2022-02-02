@@ -746,11 +746,12 @@ module Axlsx
 
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
 
-    def update_column_info(cells, widths=nil)
+    def update_column_info(cells, widths = nil)
       cells.each_with_index do |cell, index|
         width = widths ? widths[index] : nil
         col = find_or_create_column_info(index)
         next if width == :ignore
+
         col.update_width(cell, width, workbook.use_autowidth)
       end
     end

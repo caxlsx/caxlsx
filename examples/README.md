@@ -57,6 +57,7 @@ Customizations:
 * [Column widths](column_widths_example.md)
 * [Outlines](column_outlines_example.md)
 * [No autowidth](no_autowidth_example.md)
+* [Fine tuned autowidth](fine_tuned_autowidth_example.md)
 
 ### Filters
 

@@ -85,6 +85,9 @@ require 'axlsx/workbook/worksheet/selection.rb'
   #   *workbookPr is only supported to the extend of date1904
   class Workbook
 
+    BOLD_FONT_MULTIPLIER = 1.5
+    FONT_SCALE_DIVISOR = 10.0
+
     # When true, the Package will be generated with a shared string table. This may be required by some OOXML processors that do not
     # adhere to the ECMA specification that dictates string may be inline in the sheet.
     # Using this option will increase the time required to serialize the document as every string in every cell must be analzed and referenced.
@@ -213,6 +216,8 @@ require 'axlsx/workbook/worksheet/selection.rb'
 
 
       @use_autowidth = true
+      @bold_font_multiplier = BOLD_FONT_MULTIPLIER
+      @font_scale_divisor = FONT_SCALE_DIVISOR
 
       self.date1904= !options[:date1904].nil? && options[:date1904]
       yield self if block_given?
@@ -242,6 +247,26 @@ require 'axlsx/workbook/worksheet/selection.rb'
 
     # see @use_autowidth
     def use_autowidth=(v=true) Axlsx::validate_boolean v; @use_autowidth = v; end
+
+    # Font size of bold fonts is multiplied with this
+    # Used for automatic calculation of cell widths with bold text
+    # @return [Float]
+    attr_reader :bold_font_multiplier
+
+    def bold_font_multiplier=(v)
+      Axlsx::validate_float v
+      @bold_font_multiplier = v
+    end
+
+    # Font scale is calculated with this value (font_size / font_scale_divisor)
+    # Used for automatic calculation of cell widths
+    # @return [Float]
+    attr_reader :font_scale_divisor
+
+    def font_scale_divisor=(v)
+      Axlsx::validate_float v
+      @font_scale_divisor = v
+    end
 
     # inserts a worksheet into this workbook at the position specified.
     # It the index specified is out of range, the worksheet will be added to the end of the
