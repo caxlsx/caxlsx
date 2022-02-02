@@ -44,7 +44,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_wide_r
-      assert_equal(@cAA.r, "AA2", "calculate cell reference")
+    assert_equal(@cAA.r, "AA2", "calculate cell reference")
   end
 
   def test_r_abs
@@ -62,6 +62,18 @@ class TestCell < Test::Unit::TestCase
     style = @c.row.worksheet.workbook.styles.add_style({:alignment => {:horizontal => :center, :vertical => :center, :wrap_text => true}}  )
     @c.style = style
     assert_in_delta(6.6, @c.autowidth, 0.01)
+  end
+
+  def test_autowidth_with_bold_font_multiplier
+    style = @c.row.worksheet.workbook.styles.add_style(b: true)
+    @c.row.worksheet.workbook.bold_font_multiplier = 1.05
+    @c.style = style
+    assert_in_delta(6.93, @c.autowidth, 0.01)
+  end
+
+  def test_autowidth_with_font_scale_divisor
+    @c.row.worksheet.workbook.font_scale_divisor = 11.0
+    assert_in_delta(6.0, @c.autowidth, 0.01)
   end
 
   def test_time
