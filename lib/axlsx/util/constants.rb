@@ -307,6 +307,12 @@ module Axlsx
   # error message for non 'integerish' value
   ERR_INTEGERISH = "You value must be, or be castable via to_i, an Integer. You provided %s".freeze
 
+  # error message for invalid cell reference
+  ERR_CELL_REFERENCE_INVALID = "Invalid cell definition `%s`".freeze
+
+  # error message for cell reference with last cell missing
+  ERR_CELL_REFERENCE_MISSING_CELL = "Missing cell `%s` for the specified range `%s`".freeze
+
   # Regex to match forbidden control characters
   # The following will be automatically stripped from worksheets.
   #
