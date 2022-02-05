@@ -17,6 +17,7 @@ class TestStyles < Test::Unit::TestCase
     end
     assert(errors.size == 0)
   end
+
   def test_add_style_border_hash
     border_count = @styles.borders.size
     @styles.add_style :border => {:style => :thin, :color => "FFFF0000"}
@@ -24,6 +25,32 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(@styles.borders.last.prs.last.color.rgb, "FFFF0000")
     assert_raise(ArgumentError) { @styles.add_style :border => {:color => "FFFF0000"} }
     assert_equal @styles.borders.last.prs.size, 4
+  end
+
+  def test_add_style_border_array
+    prev_border_count = @styles.borders.size
+
+    borders_array = [
+      {:style => :thin, :color => "DDDDDD"},
+      {:edges => [:top], :style => :thin, :color => "000000"},
+      {:edges => [:bottom], :style => :thick, :color => "FF0000"},
+      {:edges => [:left], :style => :dotted, :color => "FFFF00"},
+      {:edges => [:right], :style => :dashed, :color => "FFFFFF"},
+      {:style => :thick, :color => "CCCCCC"},
+    ]
+
+    @styles.add_style(border: borders_array)
+
+    assert_equal(@styles.borders.size, (prev_border_count+1))
+
+    current_border = @styles.borders.last
+  
+    borders_array.each do |b_opts|
+      if b_opts[:edges]
+        border_pr = current_border.prs.detect{|x| x.name == b_opts[:edges].first }
+        assert_equal(border_pr.color.rgb, "FF#{b_opts[:color]}")
+      end
+    end
   end
 
   def test_add_style_border_edges
@@ -257,5 +284,26 @@ class TestStyles < Test::Unit::TestCase
       puts error.message
     end
     assert(errors.size == 0)
+  end
+
+  def test_border_top_without_border_regression
+    ### https://github.com/axlsx-styler-gem/axlsx_styler/issues/31
+    
+    borders = {
+      top: { style: :double, color: '0000FF' },
+      right: { style: :thick, color: 'FF0000' },
+      bottom: { style: :double, color: '0000FF' },
+      left: { style: :thick, color: 'FF0000' }
+    }
+
+    borders.each do |edge, b_opts|
+      @styles.add_style("border_#{edge}".to_sym => b_opts)
+
+      current_border = @styles.borders.last
+
+      border_pr = current_border.prs.detect{|x| x.name == edge }
+      assert_equal(border_pr.color.rgb, "FF#{b_opts[:color]}")
+    end
+  
   end
 end

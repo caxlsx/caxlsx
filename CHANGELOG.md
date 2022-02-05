@@ -2,6 +2,7 @@ CHANGELOG
 ---------
 
 - **Unreleased**
+  - [PR #117](https://github.com/caxlsx/caxlsx/pull/117) - Allow passing an Array of border hashes to the `border` style. Change previous behaviour where `border_top`, `border_*` styles would not be applied unless `border` style was also defined.
   - [PR #122](https://github.com/caxlsx/caxlsx/pull/122) - Improve error messages when incorrect ranges are provided to `Worksheet#[]`
   - [PR #123](https://github.com/caxlsx/caxlsx/pull/123) - Fix invalid xml when pivot table created with more than one column in data field. Solves [Issue #110](https://github.com/caxlsx/caxlsx/issues/110)
 

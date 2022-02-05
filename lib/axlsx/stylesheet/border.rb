@@ -6,6 +6,8 @@ module Axlsx
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
 
+    EDGES = [:left, :right, :top, :bottom].freeze
+
     # Creates a new Border object
     # @option options [Boolean] diagonal_up
     # @option options [Boolean] diagonal_down
