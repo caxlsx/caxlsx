@@ -493,6 +493,37 @@ class TestWorksheet < Test::Unit::TestCase
     assert_raise(ArgumentError, 'only accept Integer or Float') { @ws.column_widths 2, 7, "-1" }
   end
 
+  def test_ranges
+    @ws.add_row(["foo", "bar"])
+    @ws.add_row(["a", "b", "c", "d", "e"])
+
+    valid_range = "A1:B2"
+    @ws[valid_range]
+
+    valid_range = "A1:E2" ### Missing middle cells (C1 - E1), still allowed
+    @ws[valid_range]
+
+    assert_raise ArgumentError, "Invalid cell definition" do
+      invalid_range_format = "A1:B2:C3"
+      @ws[invalid_range_format]
+    end
+
+    assert_raise ArgumentError, "Missing cell `Z1` for the specified range." do
+      invalid_row_range = "A1:Z1"
+      @ws[invalid_row_range]
+    end
+
+    assert_raise ArgumentError, "Missing cell `D1` for the specified range." do
+      invalid_cell_range = "D1:E2" ### Missing start cell, not allowed
+      @ws[invalid_cell_range]
+    end
+
+    assert_raise ArgumentError, "Missing cell `A99` for the specified range." do
+      invalid_cell_range = "A1:A99" ### Missing end cell, not allowed
+      @ws[invalid_cell_range]
+    end
+  end
+
   def test_protect_range
     assert(@ws.send(:protected_ranges).is_a?(Axlsx::SimpleTypedList))
     assert_equal(0, @ws.send(:protected_ranges).size)
@@ -504,8 +535,8 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1, 2, 3]
     assert_nothing_raised {@ws.protect_range(@ws.rows.first.cells) }
     assert_equal('A1:C1', @ws.send(:protected_ranges).last.sqref)
-
   end
+
   def test_merge_cells
     @ws.add_row [1,2,3]
     @ws.add_row [4,5,6]

@@ -124,7 +124,7 @@ module Axlsx
     def to_stream(confirm_valid=false)
       return false unless !confirm_valid || self.validate.empty?
       Relationship.initialize_ids_cache
-      zip = write_parts(Zip::OutputStream.new(StringIO.new, true))
+      zip = write_parts(Zip::OutputStream.new(StringIO.new.binmode, true))
       stream = zip.close_buffer
       stream.rewind
       stream

@@ -599,10 +599,20 @@ module Axlsx
     # @return [Cell, Array]
     def [](cell_def)
       return rows[cell_def] if cell_def.is_a?(Integer)
+
       parts = cell_def.split(':').map{ |part| name_to_cell part }
+
       if parts.size == 1
         parts.first
       else
+        if parts.size > 2
+          raise ArgumentError, (ERR_CELL_REFERENCE_INVALID % cell_def)
+        elsif parts.first.nil?
+          raise ArgumentError, (ERR_CELL_REFERENCE_MISSING_CELL % [cell_def.split(":").first, cell_def])
+        elsif parts.last.nil?
+          raise ArgumentError, (ERR_CELL_REFERENCE_MISSING_CELL % [cell_def.split(":").last, cell_def])
+        end
+
         range(*parts)
       end
     end
@@ -612,8 +622,12 @@ module Axlsx
     # @return [Cell]
     def name_to_cell(name)
       col_index, row_index = *Axlsx::name_to_indices(name)
+
       r = rows[row_index]
-      r[col_index] if r
+
+      if r
+        return r[col_index] 
+      end
     end
 
     # shortcut method to access styles direclty from the worksheet
@@ -688,11 +702,13 @@ module Axlsx
     def range(*cell_def)
       first, last = cell_def
       cells = []
+
       rows[(first.row.row_index..last.row.row_index)].each do |r|
         r[(first.index..last.index)].each do |c|
           cells << c
         end
       end
+
       cells
     end
 
