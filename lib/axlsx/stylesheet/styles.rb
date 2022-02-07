@@ -310,32 +310,107 @@ module Axlsx
     # may include an :edges entry that references an array of symbols identifying which border edges 
     # you wish to apply the style or any other valid Border initializer options.
     # If the :edges entity is not provided the style is applied to all edges of cells that reference this style.
-	# Also available :border_top, :border_right, :border_bottom and :border_left options with :style and/or :color 
-	# key-value entries, which override :border values.
+    # Also available :border_top, :border_right, :border_bottom and :border_left options with :style and/or :color 
+    # key-value entries, which override :border values.
     # @example
     #   #apply a thick red border to the top and bottom
     #   { :border => { :style => :thick, :color => "FFFF0000", :edges => [:top, :bottom] }
     # @return [Border|Integer]
     def parse_border_options(options={})
-      return unless options[:border]
-      b_opts = options[:border]
-      if b_opts.is_a?(Hash)
-        raise ArgumentError, (ERR_INVALID_BORDER_OPTIONS % b_opts) unless b_opts.keys.include?(:style) && b_opts.keys.include?(:color)
-        border = Border.new b_opts
-        (b_opts[:edges] || [:left, :right, :top, :bottom]).each do |edge|
-          edge_options = options["border_#{edge}".to_sym] || {}
-          border_edge = b_opts.merge(edge_options)
-          b_options = { :name => edge, :style => border_edge[:style], :color => Color.new(:rgb => border_edge[:color]) }
-          border.prs << BorderPr.new(b_options)
+      if options[:border].nil? && Border::EDGES.all?{|x| options["border_#{x}".to_sym].nil? }
+        return nil
+      end
+
+      if options[:border].is_a?(Integer)
+        if options[:border] >= borders.size
+          raise ArgumentError, (ERR_INVALID_BORDER_ID % options[:border])
         end
-        options[:type] == :dxf ? border : borders << border
-      elsif b_opts.is_a? Integer
-        raise ArgumentError, (ERR_INVALID_BORDER_ID % b_opts) unless b_opts < borders.size
+
         if options[:type] == :dxf
-          borders[b_opts].clone
+          return borders[options[:border]].clone
         else
-          border = b_opts
+          return options[:border]
         end
+      end
+
+      validate_border_hash = ->(val){
+        if !(val.keys.include?(:style) && val.keys.include?(:color))
+          raise ArgumentError, (ERR_INVALID_BORDER_OPTIONS % options[:border])
+        end
+      }
+
+      borders_array = []
+
+      if options[:border].nil?
+        base_border_opts = {}
+      else
+        if options[:border].is_a?(Array)
+          borders_array += options[:border]
+
+          base_border_opts = {}
+
+          options[:border].each do |b_opts|
+            if b_opts[:edges].nil?
+              base_border_opts = base_border_opts.merge(b_opts)
+            end
+          end
+        else
+          borders_array << options[:border]
+
+          base_border_opts = options[:border]
+
+          validate_border_hash.call(base_border_opts)
+        end
+      end
+
+      Border::EDGES.each do |edge|
+        val = options["border_#{edge}".to_sym]
+
+        if val
+          borders_array << val.merge(edges: [edge])
+        end
+      end
+
+      border = Border.new(base_border_opts)
+
+      Border::EDGES.each do |edge|
+        edge_b_opts = base_border_opts
+
+        skip_edge = true
+
+        borders_array.each do |b_opts|
+          if b_opts[:edges] && b_opts[:edges].include?(edge)
+            edge_b_opts = edge_b_opts.merge(b_opts)
+            skip_edge = false
+          end
+        end
+
+        if options["border_#{edge}".to_sym]
+          edge_b_opts = edge_b_opts.merge(options["border_#{edge}".to_sym])
+          skip_edge = false
+        end
+
+        if skip_edge && base_border_opts[:edges]
+          next
+        end
+
+        if !edge_b_opts.empty?
+          if base_border_opts.empty?
+            validate_border_hash.call(edge_b_opts)
+          end
+
+          border.prs << BorderPr.new({
+            :name => edge, 
+            :style => edge_b_opts[:style], 
+            :color => Color.new(:rgb => edge_b_opts[:color]) },
+          )
+        end
+      end
+
+      if options[:type] == :dxf
+        return border
+      else
+        return borders << border
       end
     end
 
@@ -417,4 +492,3 @@ module Axlsx
     end
   end
 end
-

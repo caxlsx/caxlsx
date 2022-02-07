@@ -34,6 +34,7 @@ Usage:
 * [Color scale](conditional_formatting_color_scale_example.md)
 * [Data bar](conditional_formatting_data_bar_example.md)
 * [Icon set](conditional_formatting_icon_set_example.md)
+* [Text equal](conditional_formatting_text_equal_example.md)
 
 ### Charts
 
@@ -43,10 +44,12 @@ Types:
 * [Line chart (3D)](3d_line_chart_example.md)
 * [Pie chart (3D)](3d_pie_chart_example.md)
 * [Scatter chart](scatter_chart_example.md)
+* [Stacked bar chart](stacked_bar_chart_example.md)
 
 Customizations:
 * [Chart colors](chart_colors_example.md)
 * [Hide gridlines](hide_gridlines_in_chart_example.md)
+* [Chart series color](chart_series_example.md)
 
 ### Columns
 
@@ -54,6 +57,7 @@ Customizations:
 * [Column widths](column_widths_example.md)
 * [Outlines](column_outlines_example.md)
 * [No autowidth](no_autowidth_example.md)
+* [Fine tuned autowidth](fine_tuned_autowidth_example.md)
 
 ### Filters
 
@@ -100,7 +104,7 @@ Customizations:
 
 * [Fonts](font_example.md)
 * [Format codes](format_codes_example.md)
-* [Number formats and currencyc](number_format_example.md)
+* [Number formats and currency](number_format_example.md)
 * [Rich text](rich_text_example.md)
 * [Wrap text](wrap_text_example.md)
 

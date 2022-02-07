@@ -111,8 +111,12 @@ module Axlsx
         if data_field.is_a? String
           data_field = {:ref => data_field}
         end
-        data_field.values.each do |value|
-          DataTypeValidator.validate "#{self.class}.data[]", [String], value
+        data_field.each do |key, value|
+          if key == :num_fmt
+            DataTypeValidator.validate "#{self.class}.data[]", [Integer], value
+          else
+            DataTypeValidator.validate "#{self.class}.data[]", [String], value
+          end
         end
         @data << data_field
       end
@@ -169,7 +173,9 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << ('<pivotTableDefinition xmlns="' << XML_NS << '" name="' << name << '" cacheId="' << cache_definition.cache_id.to_s << '"  dataOnRows="1" applyNumberFormats="0" applyBorderFormats="0" applyFontFormats="0" applyPatternFormats="0" applyAlignmentFormats="0" applyWidthHeightFormats="1" dataCaption="Data" showMultipleLabel="0" showMemberPropertyTips="0" useAutoFormatting="1" indent="0" compact="0" compactData="0" gridDropZones="1" multipleFieldFilters="0">')
+
+      str << ('<pivotTableDefinition xmlns="' << XML_NS << '" name="' << name << '" cacheId="' << cache_definition.cache_id.to_s << '"' << (data.size <= 1 ? ' dataOnRows="1"' : '') << ' applyNumberFormats="0" applyBorderFormats="0" applyFontFormats="0" applyPatternFormats="0" applyAlignmentFormats="0" applyWidthHeightFormats="1" dataCaption="Data" showMultipleLabel="0" showMemberPropertyTips="0" useAutoFormatting="1" indent="0" compact="0" compactData="0" gridDropZones="1" multipleFieldFilters="0">')
+
       str << ('<location firstDataCol="1" firstDataRow="1" firstHeaderRow="1" ref="' << ref << '"/>')
       str << ('<pivotFields count="' << header_cells_count.to_s << '">')
       header_cell_values.each do |cell_value|
@@ -191,7 +197,7 @@ module Axlsx
         end
         str << '</rowItems>'
       end
-      if columns.empty?
+      if columns.empty? && data.size <= 1
         str << '<colItems count="1"><i/></colItems>'
       else
         str << ('<colFields count="' << columns.size.to_s << '">')
@@ -212,6 +218,7 @@ module Axlsx
         data.each do |datum_value|
           # The correct name prefix in ["Sum","Average", etc...]
           str << "<dataField name='#{(datum_value[:subtotal]||'')} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
+          str << " numFmtId='#{datum_value[:num_fmt]}'" if datum_value[:num_fmt]
           str << " subtotal='#{datum_value[:subtotal]}' " if datum_value[:subtotal]
           str << "/>"
         end

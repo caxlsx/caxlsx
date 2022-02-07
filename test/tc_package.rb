@@ -228,7 +228,7 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def test_serialization_creates_files_with_excel_mime_type
-    assert_equal(MimeMagic.by_magic(@package.to_stream).type,
+    assert_equal(Marcel::MimeType.for(@package.to_stream),
                  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
   end
 
@@ -303,6 +303,9 @@ class TestPackage < Test::Unit::TestCase
     # this is just a roundabout guess for a package as it is build now
     # in testing.
     assert(stream.size > 80000)
+    # Stream (of zipped contents) should have appropriate default encoding
+    assert stream.string.valid_encoding?
+    assert_equal(stream.external_encoding, Encoding::ASCII_8BIT)
     # Cached ids should be cleared
     assert(Axlsx::Relationship.ids_cache.empty?)
   end

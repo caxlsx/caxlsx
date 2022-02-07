@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'htmlentities'
 require 'axlsx/version.rb'
-require 'mimemagic'
+require 'marcel'
 
 require 'axlsx/util/simple_typed_list.rb'
 require 'axlsx/util/constants.rb'
@@ -79,11 +79,25 @@ module Axlsx
   # returns the x, y position of a cell
   def self.name_to_indices(name)
     raise ArgumentError, 'invalid cell name' unless name.size > 1
+
+    letters_str = name[/[A-Z]+/]
+
     # capitalization?!?
-    v = name[/[A-Z]+/].reverse.chars.reduce({:base=>1, :i=>0}) do  |val, c|
-      val[:i] += ((c.bytes.first - 64) * val[:base]); val[:base] *= 26; val
+    v = letters_str.reverse.chars.reduce({:base=>1, :i=>0}) do  |val, c|
+      val[:i] += ((c.bytes.first - 64) * val[:base])
+
+      val[:base] *= 26
+
+      next val
     end
-    [v[:i]-1, ((name[/[1-9][0-9]*/]).to_i)-1]
+
+    col_index = (v[:i] - 1)
+
+    numbers_str = name[/[1-9][0-9]*/]
+
+    row_index = (numbers_str.to_i - 1)
+
+    return [col_index, row_index]
   end
 
   # converts the column index into alphabetical values.

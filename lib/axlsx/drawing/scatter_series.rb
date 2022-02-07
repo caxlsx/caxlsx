@@ -28,6 +28,14 @@ module Axlsx
     # @return [Boolean]
     attr_reader :smooth
 
+    # Line markers presence
+    # @return [Boolean]
+    attr_reader :show_marker
+
+    # custom marker symbol
+    # @return [String]
+    attr_reader :marker_symbol
+
     # Creates a new ScatterSeries
     def initialize(chart, options={})
       @xData, @yData = nil
@@ -40,6 +48,9 @@ module Axlsx
         @smooth = options[:smooth]
       end
       @ln_width = options[:ln_width] unless options[:ln_width].nil?
+      @show_marker = [:lineMarker, :marker, :smoothMarker].include?(chart.scatter_style)
+      @marker_symbol = :default
+
       super(chart, options)
 
       @xData = NumDataSource.new(:tag_name => :xVal, :data => options[:xData]) unless options[:xData].nil?
@@ -62,6 +73,12 @@ module Axlsx
       @ln_width = v
     end
 
+    # @see marker_symbol
+    def marker_symbol=(v)
+      Axlsx::validate_marker_symbol(v)
+      @marker_symbol = v
+    end
+
     # Serializes the object
     # @param [String] str
     # @return [String]
@@ -82,8 +99,12 @@ module Axlsx
           str << '<a:ln><a:solidFill>'
           str << ('<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
           str << '</c:spPr>'
+          str << marker_symbol_xml
           str << '</c:marker>'
+        else
+          str << "<c:marker>#{marker_symbol_xml}</c:marker>"
         end
+
         if ln_width
           str << '<c:spPr>'
           str << '<a:ln w="' << ln_width.to_s << '"/>'
@@ -94,6 +115,16 @@ module Axlsx
         str << ('<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>')
       end
       str
+    end
+
+    private
+
+    def marker_symbol_xml
+      if !@show_marker
+        '<c:symbol val="none"/>'
+      elsif @marker_symbol != :default
+        '<c:symbol val="' + @marker_symbol.to_s + '"/>'
+      end.to_s
     end
   end
 end
