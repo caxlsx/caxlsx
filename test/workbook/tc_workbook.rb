@@ -46,6 +46,11 @@ class TestWorkbook < Test::Unit::TestCase
     assert_equal('foo', @wb.sheet_by_name('foo').name)
 
   end
+
+  def test_worksheet_empty_name
+    assert_raise(ArgumentError) {@wb.add_worksheet(:name=>'')}
+  end
+
   def test_date1904
     assert_equal(Axlsx::Workbook.date1904, @wb.date1904)
     @wb.date1904 = :false
