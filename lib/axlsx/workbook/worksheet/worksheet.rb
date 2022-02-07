@@ -393,6 +393,9 @@ module Axlsx
     # @example - specify whether a certain cells in a row should escape formulas or not
     #     ws.add_row ['=IF(2+2=4,4,5)', '=IF(13+13=4,4,5)'], :escape_formulas=>[true, false]
     #
+    # @example - add a column offset when adding a row (inserts 'n' blank, unstyled columns before data)
+    #     ws.add_row ['I wish', 'for a fish', 'on my fish wish dish'], offset: 3
+    #
     # @see Worksheet#column_widths
     # @return [Row]
     # @option options [Array] values
@@ -400,6 +403,7 @@ module Axlsx
     # @option options [Array, Integer] style
     # @option options [Array] widths each member of the widths array will affect how auto_fit behavies.
     # @option options [Float] height the row's height (in points)
+    # @option options [Integer] offset - add empty columns before values
     # @option options [Array, Boolean] escape_formulas - Whether to treat a value starting with an equal
     #    sign as formula (default) or as simple string.
     #    Allowing user generated data to be interpreted as formulas can be dangerous
@@ -595,10 +599,20 @@ module Axlsx
     # @return [Cell, Array]
     def [](cell_def)
       return rows[cell_def] if cell_def.is_a?(Integer)
+
       parts = cell_def.split(':').map{ |part| name_to_cell part }
+
       if parts.size == 1
         parts.first
       else
+        if parts.size > 2
+          raise ArgumentError, (ERR_CELL_REFERENCE_INVALID % cell_def)
+        elsif parts.first.nil?
+          raise ArgumentError, (ERR_CELL_REFERENCE_MISSING_CELL % [cell_def.split(":").first, cell_def])
+        elsif parts.last.nil?
+          raise ArgumentError, (ERR_CELL_REFERENCE_MISSING_CELL % [cell_def.split(":").last, cell_def])
+        end
+
         range(*parts)
       end
     end
@@ -608,8 +622,12 @@ module Axlsx
     # @return [Cell]
     def name_to_cell(name)
       col_index, row_index = *Axlsx::name_to_indices(name)
+
       r = rows[row_index]
-      r[col_index] if r
+
+      if r
+        return r[col_index] 
+      end
     end
 
     # shortcut method to access styles direclty from the worksheet
@@ -684,11 +702,13 @@ module Axlsx
     def range(*cell_def)
       first, last = cell_def
       cells = []
+
       rows[(first.row.row_index..last.row.row_index)].each do |r|
         r[(first.index..last.index)].each do |c|
           cells << c
         end
       end
+
       cells
     end
 
@@ -742,11 +762,12 @@ module Axlsx
 
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
 
-    def update_column_info(cells, widths=nil)
+    def update_column_info(cells, widths = nil)
       cells.each_with_index do |cell, index|
         width = widths ? widths[index] : nil
         col = find_or_create_column_info(index)
         next if width == :ignore
+
         col.update_width(cell, width, workbook.use_autowidth)
       end
     end

@@ -32,18 +32,19 @@ class TestBarChart < Test::Unit::TestCase
    assert(@chart.grouping == :standard)
  end
 
+  def test_gap_width
+    assert_raise(ArgumentError, "require valid gap width") { @chart.gap_width = -1 }
+    assert_raise(ArgumentError, "require valid gap width") { @chart.gap_width = 501 }
+    assert_nothing_raised("allow valid gap width") { @chart.gap_width = 200 }
+    assert_equal(@chart.gap_width, 200, 'gap width is incorrect')
+  end
 
- def test_gapWidth
-   assert_raise(ArgumentError, "require valid gap width") { @chart.gap_width = 200 }
-   assert_nothing_raised("allow valid gapWidth") { @chart.gap_width = "200%" }
-   assert(@chart.gap_width == "200%")
- end
-
- def test_gapDepth
-   assert_raise(ArgumentError, "require valid gap_depth") { @chart.gap_depth = 200 }
-   assert_nothing_raised("allow valid gap_depth") { @chart.gap_depth = "200%" }
-   assert(@chart.gap_depth == "200%")
- end
+  def test_overlap
+    assert_raise(ArgumentError, "require valid overlap") { @chart.overlap = -101 }
+    assert_raise(ArgumentError, "require valid overlap") { @chart.overlap = 101 }
+    assert_nothing_raised("allow valid overlap") { @chart.overlap = 100 }
+    assert_equal(@chart.overlap, 100, 'overlap is incorrect')
+  end
 
   def test_shape
     assert_raise(ArgumentError, "require valid shape") { @chart.shape = :star }
@@ -67,5 +68,19 @@ class TestBarChart < Test::Unit::TestCase
     cat_axis_position = str.index(@chart.axes[:cat_axis].id.to_s)
     val_axis_position = str.index(@chart.axes[:val_axis].id.to_s)
     assert(cat_axis_position < val_axis_position, "cat_axis must occur earlier than val_axis in the XML")
+  end
+
+  def test_to_xml_string_has_gap_width
+    gap_width_value = rand(0..500)
+    @chart.gap_width = gap_width_value
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    assert_equal(doc.xpath("//c:barChart/c:gapWidth").first.attribute('val').value, gap_width_value.to_s)
+  end
+
+  def test_to_xml_string_has_overlap
+    overlap_value = rand(-100..100)
+    @chart.overlap = overlap_value
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    assert_equal(doc.xpath("//c:barChart/c:overlap").first.attribute('val').value, overlap_value.to_s)
   end
 end

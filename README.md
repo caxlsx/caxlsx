@@ -3,7 +3,7 @@
 [![Gem
 Version](https://badge.fury.io/rb/caxlsx.svg)](http://badge.fury.io/rb/caxlsx)
 ![Total downloads](http://ruby-gem-downloads-badge.herokuapp.com/caxlsx?type=total)
-![Downloads for 3.0.4 (latest)](http://ruby-gem-downloads-badge.herokuapp.com/caxlsx/3.0.4?label=downloads%203.0.4)
+![Downloads for 3.1.1 (latest)](http://ruby-gem-downloads-badge.herokuapp.com/caxlsx/3.1.1?label=downloads%203.1.1)
 
 ## Notice: Community Axlsx Organization
 
@@ -154,10 +154,6 @@ end
 p.use_shared_strings = true
 p.serialize('simple.xlsx')
 ```
-
-## Known Bugs
-
-There’s a [list of known bugs](https://github.com/caxlsx/caxlsx/issues?q=label%3A%22known+bug%22). (If you want to contribute to caxlsx, this is a good place to start!)
 
 ## Contributing
 

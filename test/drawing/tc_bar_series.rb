@@ -6,13 +6,21 @@ class TestBarSeries < Test::Unit::TestCase
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet :name=>"hmmm"
     @chart = @ws.add_chart Axlsx::Bar3DChart, :title => "fishery"
-    @series = @chart.add_series :data=>[0,1,2], :labels=>["zero", "one", "two"], :title=>"bob", :colors => ['FF0000', '00FF00', '0000FF'], :shape => :cone
+    @series = @chart.add_series(
+      data: [0, 1, 2],
+      labels: ['zero', 'one', 'two'],
+      title: 'bob',
+      colors: ['FF0000', '00FF00', '0000FF'],
+      shape: :cone,
+      series_color: '5A5A5A'
+    )
   end
 
   def test_initialize
     assert_equal(@series.title.text, "bob", "series title has been applied")
     assert_equal(@series.data.class, Axlsx::NumDataSource, "data option applied")
     assert_equal(@series.shape, :cone, "series shape has been applied")
+    assert_equal(@series.series_color, '5A5A5A', 'series color has been applied')
     assert(@series.data.is_a?(Axlsx::NumDataSource))
     assert(@series.labels.is_a?(Axlsx::AxDataSource))
   end
@@ -33,5 +41,6 @@ class TestBarSeries < Test::Unit::TestCase
       assert_equal(doc.xpath("//c:dPt/c:idx[@val='#{index}']").size,1)
       assert_equal(doc.xpath("//c:dPt/c:spPr/a:solidFill/a:srgbClr[@val='#{@series.colors[index]}']").size,1)
     end
+    assert_equal(doc.xpath('//c:spPr[not(ancestor::c:dPt)]/a:solidFill/a:srgbClr').first.get_attribute('val'), '5A5A5A', 'series color has been applied')
   end
 end
