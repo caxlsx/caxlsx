@@ -2,6 +2,7 @@ CHANGELOG
 ---------
 
 - **Unreleased**
+  - [PR #75](https://github.com/caxlsx/caxlsx/pull/85) - Added manageable markers for scatter series
 
 - **January.5.21**: 3.0.4
   - [PR #72](https://github.com/caxlsx/caxlsx/pull/72) - Relax Ruby dependency to allow for Ruby 3. This required Travis to be upgraded from Ubuntu Trusty to Ubuntu Bionic. rbx-3 was dropped.
