@@ -2,6 +2,8 @@ CHANGELOG
 ---------
 
 - **Unreleased**
+
+- **February.23.22**: 3.2.0
   - [PR #75](https://github.com/caxlsx/caxlsx/pull/85) - Added manageable markers for scatter series
   - [PR #116](https://github.com/caxlsx/caxlsx/pull/116) - Validate name option to be non-empty string when passed.
   - [PR #117](https://github.com/caxlsx/caxlsx/pull/117) - Allow passing an Array of border hashes to the `border` style. Change previous behaviour where `border_top`, `border_*` styles would not be applied unless `border` style was also defined.
@@ -13,6 +15,7 @@ CHANGELOG
   - [PR #107](https://github.com/caxlsx/caxlsx/pull/107) - Add overlap to bar charts
   - [PR #108](https://github.com/caxlsx/caxlsx/pull/108) - Fix gap depth and gap depth validators for bar charts and 3D bar charts
   - [PR #94](https://github.com/caxlsx/caxlsx/pull/94) - Major performance improvement for charts with large amounts of data
+
 - **March.27.21**: 3.1.0
   - [PR #95](https://github.com/caxlsx/caxlsx/pull/95) - Replace mimemagic with marcel  
   - [PR #87](https://github.com/caxlsx/caxlsx/pull/87) - Implement :offset option for worksheet#add_row
