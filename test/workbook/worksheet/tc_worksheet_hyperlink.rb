@@ -22,7 +22,8 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
   end
 
   def test_target
-    assert_equal(@options[:target], @a.instance_values['target'])
+    
+    assert_equal(@options[:target], Axlsx.instance_values(@a)['target'])
   end
 
   def test_display

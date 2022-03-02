@@ -168,7 +168,7 @@ module Axlsx
     # @return Boolean
     # @see #page_setup
     def fit_to_page?
-      return false unless self.instance_values.keys.include?('page_setup')
+      return false unless Axlsx.instance_values(self).keys.include?('page_setup')
       page_setup.fit_to_page?
     end
 

@@ -8,7 +8,7 @@ class TestPictureLocking < Test::Unit::TestCase
   end
 
   def test_initialiation
-    assert_equal(@item.instance_values.size, 1)
+    assert_equal(Axlsx.instance_values(@item).size, 1)
     assert_equal(@item.noChangeAspect, true)
   end
 

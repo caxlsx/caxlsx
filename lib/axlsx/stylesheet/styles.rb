@@ -279,7 +279,7 @@ module Axlsx
     # @return [Font|Integer]
     def parse_font_options(options={})
       return if (options.keys & [:fg_color, :sz, :b, :i, :u, :strike, :outline, :shadow, :charset, :family, :font_name]).empty?
-      fonts.first.instance_values.each do |key, value|
+      Axlsx.instance_values(fonts.first).each do |key, value|
         # Thanks for that 1.8.7 - cant do a simple merge...
         options[key.to_sym] = value unless options.keys.include?(key.to_sym)
       end
@@ -438,8 +438,9 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << ('<styleSheet xmlns="' << XML_NS << '">')
+      instance_vals = Axlsx.instance_values(self)
       [:numFmts, :fonts, :fills, :borders, :cellStyleXfs, :cellXfs, :cellStyles, :dxfs, :tableStyles].each do |key|
-        self.instance_values[key.to_s].to_xml_string(str) unless self.instance_values[key.to_s].nil?
+        instance_vals[key.to_s].to_xml_string(str) unless instance_vals[key.to_s].nil?
       end
       str << '</styleSheet>'
     end
