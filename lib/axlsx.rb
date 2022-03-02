@@ -30,16 +30,6 @@ require 'zip'
 require 'bigdecimal'
 require 'time'
 
-#if object does not have this already, I am borrowing it from active_support.
-# I am a very big fan of activesupports instance_values method, but do not want to require nor include the entire
-# library just for this one method.
-if !Object.respond_to?(:instance_values)
-  Object.send :public  # patch for 1.8.7 as it uses private scope
-  Object.send :define_method, :instance_values do
-    Hash[instance_variables.map { |name| [name.to_s[1..-1], instance_variable_get(name)] }]
-  end
-end
-
 # xlsx generation with charts, images, automated column width, customizable styles
 # and full schema validation. Axlsx excels at helping you generate beautiful
 # Office Open XML Spreadsheet documents without having to understand the entire
@@ -47,6 +37,13 @@ end
 # Best of all, you can validate your xlsx file before serialization so you know
 # for sure that anything generated is going to load on your client's machine.
 module Axlsx
+  # I am a very big fan of activesupports instance_values method, but do not want to require nor include the entire
+  # library just for this one method.
+  #
+  # Defining as a class method on Axlsx to refrain from monkeypatching Object for all users of this gem.
+  def self.instance_values(object)
+    Hash[object.instance_variables.map { |name| [name.to_s[1..-1], object.instance_variable_get(name)] }]
+  end
 
   # determines the cell range for the items provided
   def self.cell_range(cells, absolute=true)
