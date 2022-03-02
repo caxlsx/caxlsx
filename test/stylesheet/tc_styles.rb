@@ -136,11 +136,11 @@ class TestStyles < Test::Unit::TestCase
     original = @styles.fonts.first
     @styles.add_style :b => 1, :sz => 99
     created = @styles.fonts.last
-    original_attributes = Axlsx.instance_values(original)
+    original_attributes = Axlsx.instance_values_for(original)
     assert_equal(1, created.b)
     assert_equal(99, created.sz)
     copied = original_attributes.reject{ |key, value| %w(b sz).include? key }
-    instance_vals = Axlsx.instance_values(created)
+    instance_vals = Axlsx.instance_values_for(created)
     copied.each do |key, value|
       assert_equal(instance_vals[key], value)
     end

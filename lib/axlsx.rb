@@ -41,7 +41,7 @@ module Axlsx
   # library just for this one method.
   #
   # Defining as a class method on Axlsx to refrain from monkeypatching Object for all users of this gem.
-  def self.instance_values(object)
+  def self.instance_values_for(object)
     Hash[object.instance_variables.map { |name| [name.to_s[1..-1], object.instance_variable_get(name)] }]
   end
 

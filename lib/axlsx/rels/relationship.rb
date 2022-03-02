@@ -103,7 +103,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      h = Axlsx.instance_values(self).reject{|k, _| k == "source_obj"}
+      h = Axlsx.instance_values_for(self).reject{|k, _| k == "source_obj"}
       str << '<Relationship '
       str << (h.map { |key, value| '' << key.to_s << '="' << Axlsx::coder.encode(value.to_s) << '"'}.join(' '))
       str << '/>'

@@ -104,7 +104,7 @@ class TestChart < Test::Unit::TestCase
 
   def test_d_lbls
     
-    assert_equal(nil, Axlsx.instance_values(@chart)[:d_lbls])
+    assert_equal(nil, Axlsx.instance_values_for(@chart)[:d_lbls])
     @chart.d_lbls.d_lbl_pos = :t
     assert(@chart.d_lbls.is_a?(Axlsx::DLbls), 'DLbls instantiated on access')
   end
