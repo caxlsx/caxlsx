@@ -106,4 +106,30 @@ class TestAxlsx < Test::Unit::TestCase
     assert_equal(sanitized_str,           legit_str,            'should preserve value')
     assert_equal(sanitized_str.object_id, legit_str.object_id,  'should preserve object')
   end
+  
+  class InstanceValuesSubject
+    def initialize(args={})
+      args.each do |key, v|
+        instance_variable_set("@#{key}".to_sym, v)
+      end
+    end
+  end
+
+  def test_instance_values_for
+    empty = InstanceValuesSubject.new
+    assert_equal({}, Axlsx.instance_values_for(empty), 'should generate with no ivars')
+
+    single = InstanceValuesSubject.new(a: 2)
+    assert_equal({"a" => 2}, Axlsx.instance_values_for(single), 'should generate for a single ivar')
+
+    double = InstanceValuesSubject.new(a: 2, b: "c")
+    assert_equal({"a" => 2, "b" => "c"}, Axlsx.instance_values_for(double), 'should generate for multiple ivars')
+
+    inner_obj = Object.new
+    complex = InstanceValuesSubject.new(obj: inner_obj)
+    assert_equal({"obj" => inner_obj}, Axlsx.instance_values_for(complex), 'should pass value of ivar directly')
+
+    nil_subject = InstanceValuesSubject.new(nil_obj: nil)
+    assert_equal({"nil_obj" =>  nil}, Axlsx.instance_values_for(nil_subject), 'should return nil ivars')    
+  end
 end
