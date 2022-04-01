@@ -97,12 +97,12 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def test_core_accessor
-    assert_equal(@package.core, @package.instance_values["core"])
+    assert_equal(@package.core, Axlsx.instance_values_for(@package)["core"])
     assert_raise(NoMethodError) {@package.core = nil }
   end
 
   def test_app_accessor
-    assert_equal(@package.app, @package.instance_values["app"])
+    assert_equal(@package.app, Axlsx.instance_values_for(@package)["app"])
     assert_raise(NoMethodError) {@package.app = nil }
   end
 
@@ -114,8 +114,8 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def test_default_objects_are_created
-    assert(@package.instance_values["app"].is_a?(Axlsx::App), 'App object not created')
-    assert(@package.instance_values["core"].is_a?(Axlsx::Core), 'Core object not created')
+    assert(Axlsx.instance_values_for(@package)["app"].is_a?(Axlsx::App), 'App object not created')
+    assert(Axlsx.instance_values_for(@package)["core"].is_a?(Axlsx::Core), 'Core object not created')
     assert(@package.workbook.is_a?(Axlsx::Workbook), 'Workbook object not created')
     assert(Axlsx::Package.new.workbook.worksheets.size == 0, 'Workbook should not have sheets by default')
   end

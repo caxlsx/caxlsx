@@ -107,7 +107,7 @@ module Axlsx
     private
     # Note: move this to Axlsx module if we find the smae pattern elsewhere.
     def element_for_attribute(name, namespace='')
-      val = instance_values[name]
+      val = Axlsx.instance_values_for(self)[name]
       return "" if val == nil
       "<%s:%s val='%s'/>" % [namespace, Axlsx::camel(name, false), val]
     end

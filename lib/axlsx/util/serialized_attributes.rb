@@ -61,7 +61,7 @@ module Axlsx
     # seraialized_attributes and are not nil.
     # This requires ruby 1.9.3 or higher
     def declared_attributes
-      instance_values.select do |key, value|
+      Axlsx.instance_values_for(self).select do |key, value|
         value != nil && self.class.xml_attributes.include?(key.to_sym)
       end
     end
@@ -75,7 +75,7 @@ module Axlsx
     # @return [String] The serialized output.
     def serialized_element_attributes(str='', additional_attributes=[], &block)
       attrs = self.class.xml_element_attributes + additional_attributes
-      values = instance_values
+      values = Axlsx.instance_values_for(self)
       attrs.each do |attribute_name|
         value = values[attribute_name.to_s]
         next if value.nil?
