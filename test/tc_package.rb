@@ -262,6 +262,10 @@ class TestPackage < Test::Unit::TestCase
     #no mystery parts
     assert_equal(25, p.size)
 
+    #sorted for correct MIME detection
+    assert_equal("[Content_Types].xml", p[0][:entry], "first entry should be `[Content_Types].xml`")
+    assert_equal("_rels/.rels", p[1][:entry], "second entry should be `_rels/.rels`")
+    assert_match(/\Axl\//, p[2][:entry], "third entry should begin with `xl/`")
   end
 
   def test_shared_strings_requires_part
