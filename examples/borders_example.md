@@ -14,7 +14,7 @@ s = wb.styles
 red_border = s.add_style border: { style: :thick, color: 'FFFF0000', edges: [:left, :right] }
 blue_border = s.add_style border: { style: :thick, color: 'FF0000FF' }
 
-complex_border = workbook.styles.add_style(
+complex_border = wb.styles.add_style(
   border: [
     { style: :thin, color: '000' },
     { style: :double, edges: [:top, :bottom] },
