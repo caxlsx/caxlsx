@@ -206,12 +206,10 @@ module Axlsx
     # @private
     def parts
       parts = [
-       {:entry => RELS_PN, :doc => relationships, :schema => RELS_XSD},
        {:entry => "xl/#{STYLES_PN}", :doc => workbook.styles, :schema => SML_XSD},
        {:entry => CORE_PN, :doc => @core, :schema => CORE_XSD},
        {:entry => APP_PN, :doc => @app, :schema => APP_XSD},
        {:entry => WORKBOOK_RELS_PN, :doc => workbook.relationships, :schema => RELS_XSD},
-       {:entry => CONTENT_TYPES_PN, :doc => content_types, :schema => CONTENT_TYPES_XSD},
        {:entry => WORKBOOK_PN, :doc => workbook, :schema => SML_XSD}
       ]
 
@@ -256,7 +254,11 @@ module Axlsx
       end
 
       # Sort parts for correct MIME detection
-      parts.sort_by { |part| part[:entry] }
+      [
+        {:entry => CONTENT_TYPES_PN, :doc => content_types, :schema => CONTENT_TYPES_XSD},
+        {:entry => RELS_PN, :doc => relationships, :schema => RELS_XSD},
+        *(parts.sort_by { |part| part[:entry] }.reverse)
+      ]
     end
 
     # Performs xsd validation for a signle document
