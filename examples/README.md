@@ -90,6 +90,7 @@ Customizations:
 
 * [Custom Row Styles](row_styles_example.md)
 * [Outlines](row_outlines_example.md)
+* [Outline options](row_outlines_options_example.md)
 * [Row heights](row_heights_example.md)
 
 ### Sheet
