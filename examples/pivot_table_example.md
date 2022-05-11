@@ -24,7 +24,7 @@ wb.add_worksheet(name: 'Basic Worksheet') do |sheet|
     ]
   end
 
-  sheet.add_pivot_table 'G4:L17', 'A1:E31' do |pivot_table|
+  sheet.add_pivot_table 'G4:L17', 'A1:E31', { sort_on_headers: ['Month'] } do |pivot_table|
     pivot_table.rows = ['Month', 'Year']
     pivot_table.columns = ['Type']
     pivot_table.data = [ref: 'Sales', num_fmt: 4]

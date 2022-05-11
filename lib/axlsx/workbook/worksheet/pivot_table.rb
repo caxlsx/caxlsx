@@ -26,17 +26,24 @@ module Axlsx
       @pages = []
       @subtotal = nil
       @no_subtotals_on_headers = []
+      @sort_on_headers = {}
       @style_info = {}
       parse_options options
       yield self if block_given?
     end
 
-    # Defines the headers in which subtotals are not to be included
-    # @return[Array]
+    # Defines the headers in which subtotals are not to be included.
+    # @return [Array]
     attr_accessor :no_subtotals_on_headers
 
+    # Defines the headers in which sort is applied.
+    # Set to array of headers to sort ascending by default.
+    # Set to hash for specific control; with headers as keys, :ascending or :descending as values.
+    # @return [Hash]
+    attr_accessor :sort_on_headers
+
     # Style info for the pivot table
-    # @return[Hash]
+    # @return [Hash]
     attr_accessor :style_info
 
     # The reference to the table data
@@ -178,9 +185,14 @@ module Axlsx
 
       str << ('<location firstDataCol="1" firstDataRow="1" firstHeaderRow="1" ref="' << ref << '"/>')
       str << ('<pivotFields count="' << header_cells_count.to_s << '">')
+
+      sort_on_headers = Hash[sort_on_headers.map { |h| [h, :ascending] }.flatten] if sort_on_headers.is_a?(Array)
       header_cell_values.each do |cell_value|
-        str << pivot_field_for(cell_value, !no_subtotals_on_headers.include?(cell_value))
+        subtotal = !no_subtotals_on_headers.include?(cell_value)
+        sorttype = sort_on_headers[cell_value]
+        str << pivot_field_for(cell_value, subtotal, sorttype)
       end
+
       str << '</pivotFields>'
       if rows.empty?
         str << '<rowFields count="1"><field x="-2"/></rowFields>'
@@ -267,22 +279,31 @@ module Axlsx
 
     private
 
-    def pivot_field_for(cell_ref, subtotal=true)
+    def pivot_field_for(cell_ref, subtotal, sorttype)
+      attributes = %w[compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1"]
+      items_tag = '<items count="1"><item t="default"/></items>'
+      include_items_tag = false
+
       if rows.include? cell_ref
+        attributes << 'axis="axisRow"'
+        attributes << "sortType=\"#{sorttype == :descending ? 'descending' : 'ascending'}\"" if sorttype
         if subtotal
-          '<pivotField axis="axisRow" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1"><items count="1"><item t="default"/></items></pivotField>'
+          include_items_tag = true
         else
-          '<pivotField axis="axisRow" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1" defaultSubtotal="0"></pivotField>'
+          attributes << 'defaultSubtotal="0"'
         end
       elsif columns.include? cell_ref
-        '<pivotField axis="axisCol" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1"><items count="1"><item t="default"/></items></pivotField>'
+        attributes << 'axis="axisCol"'
+        attributes << "sortType=\"#{sorttype == :descending ? 'descending' : 'ascending'}\"" if sorttype
+        include_items_tag = true
       elsif pages.include? cell_ref
-        '<pivotField axis="axisPage" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1"><items count="1"><item t="default"/></items></pivotField>'
+        attributes << 'axis="axisPage"'
+        include_items_tag = true
       elsif data_refs.include? cell_ref
-        '<pivotField dataField="1" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1"></pivotField>'
-      else
-        '<pivotField compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1"></pivotField>'
+        attributes << 'dataField="1"'
       end
+
+      "<pivotField #{attributes.join(' ')}>#{include_items_tag ? items_tag : nil}</pivotField>"
     end
 
     def data_refs
