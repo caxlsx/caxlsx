@@ -80,12 +80,19 @@ class TestPivotTable < Test::Unit::TestCase
   end
 
   def test_add_pivot_table_with_row_without_subtotals
-    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5', {:no_subtotals_on_headers=>['Year'], :sort_on_headers=>['Month']}) do |pt|
+    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5', {:no_subtotals_on_headers=>['Year']}) do |pt|
       pt.data = ['Sales']
       pt.rows = ['Year','Month']
     end
     assert_equal(['Year'], pivot_table.no_subtotals_on_headers)
-    assert_equal(['Month'], pivot_table.sort_on_headers)
+  end
+
+  def test_add_pivot_table_with_months_sorted
+    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5', {:sort_on_headers=>['Month']}) do |pt|
+      pt.data = ['Sales']
+      pt.rows = ['Year','Month']
+    end
+    assert_equal({'Month' => :ascending}, pivot_table.sort_on_headers)
   end
 
   def test_header_indices

@@ -40,7 +40,14 @@ module Axlsx
     # Set to array of headers to sort ascending by default.
     # Set to hash for specific control; with headers as keys, :ascending or :descending as values.
     # @return [Hash]
-    attr_accessor :sort_on_headers
+    attr_reader :sort_on_headers
+
+    # (see #sort_on_headers)
+    def sort_on_headers=(headers)
+      headers ||= {}
+      headers = Hash[*headers.map { |h| [h, :ascending] }.flatten] if headers.is_a?(Array)
+      @sort_on_headers = headers
+    end
 
     # Style info for the pivot table
     # @return [Hash]
@@ -186,7 +193,6 @@ module Axlsx
       str << ('<location firstDataCol="1" firstDataRow="1" firstHeaderRow="1" ref="' << ref << '"/>')
       str << ('<pivotFields count="' << header_cells_count.to_s << '">')
 
-      sort_on_headers = Hash[sort_on_headers.map { |h| [h, :ascending] }.flatten] if sort_on_headers.is_a?(Array)
       header_cell_values.each do |cell_value|
         subtotal = !no_subtotals_on_headers.include?(cell_value)
         sorttype = sort_on_headers[cell_value]
