@@ -51,6 +51,16 @@ module Axlsx
       v
     end
 
+    # Check if the title is empty.
+    #
+    # A title is considered empty if it is an empty string. If the title references a cell it is *not* empty,
+    # even if the referenced cell is blank (because the cell’s value could still change later).
+    #
+    # @return [Boolean]
+    def empty?
+      @text.empty? && @cell.nil?
+    end
+
     # Not implemented at this time.
     #def layout=(v) DataTypeValidator.validate 'Title.layout', Layout, v; @layout = v; end
     #def overlay=(v) Axlsx::validate_boolean v; @overlay=v; end
@@ -61,7 +71,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<c:title>'
-      unless @text.empty? && @cell.nil?
+      unless empty?
         clean_value = Axlsx::trust_input ? @text.to_s : ::CGI.escapeHTML(Axlsx::sanitize(@text.to_s))
         str << '<c:tx>'
         if @cell.is_a?(Cell)
