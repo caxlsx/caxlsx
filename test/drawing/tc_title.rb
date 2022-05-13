@@ -47,8 +47,18 @@ class TestTitle < Test::Unit::TestCase
   def test_to_xml_string_cell
     @chart.title.cell = @row.cells.first
     doc = Nokogiri::XML(@chart.to_xml_string)
+    assert_equal("'Sheet1'!$A$1:$A$1", doc.xpath('//c:strRef/c:f').text)
     assert_equal(1, doc.xpath('//c:strCache').size)
-    assert_equal(1, doc.xpath('//c:v[text()="one"]').size)
+    assert_equal('one', doc.xpath('//c:strCache/c:pt//c:v').text)
+  end
+
+  def test_to_xml_string_empty_cell
+    @row.cells.first.value = ""
+    @chart.title.cell = @row.cells.first
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    assert_equal("'Sheet1'!$A$1:$A$1", doc.xpath('//c:strRef/c:f').text)
+    assert_equal(1, doc.xpath('//c:strCache').size)
+    assert_equal('', doc.xpath('//c:strCache/c:pt//c:v').text)
   end
 
   def test_to_xml_string_for_special_characters

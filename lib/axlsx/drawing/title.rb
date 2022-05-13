@@ -61,7 +61,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<c:title>'
-      unless @text.empty?
+      unless @text.empty? && @cell.nil?
         clean_value = Axlsx::trust_input ? @text.to_s : ::CGI.escapeHTML(Axlsx::sanitize(@text.to_s))
         str << '<c:tx>'
         if @cell.is_a?(Cell)
