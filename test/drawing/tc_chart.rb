@@ -1,3 +1,5 @@
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../"
+
 require 'tc_helper.rb'
 
 class TestChart < Test::Unit::TestCase
@@ -25,6 +27,8 @@ class TestChart < Test::Unit::TestCase
     @chart.title = @row.cells.first
     assert_equal(@chart.title.text, "one", "the title text was set via cell reference")
     assert_equal(@chart.title.cell, @row.cells.first)
+    @chart.title = ""
+    assert(@chart.title.empty?)
   end
 
   def test_style
@@ -120,5 +124,15 @@ class TestChart < Test::Unit::TestCase
     @chart.display_blanks_as = :span
     doc = Nokogiri::XML(@chart.to_xml_string)
     assert_equal("span", doc.xpath("//c:dispBlanksAs").attr("val").value, "did not use the display_blanks_as configuration")
+  end
+
+  def test_to_xml_string_for_title
+    @chart.title = "foobar"
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    assert_equal("foobar", doc.xpath("//c:title//c:tx//a:t").text)
+
+    @chart.title = ""
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    assert_equal(0, doc.xpath("//c:title").size)
   end
 end

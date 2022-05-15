@@ -189,7 +189,7 @@ module Axlsx
       str << ('<c:date1904 val="' << Axlsx::Workbook.date1904.to_s << '"/>')
       str << ('<c:style val="' << style.to_s << '"/>')
       str << '<c:chart>'
-      @title.to_xml_string str
+      @title.to_xml_string(str) unless @title.empty?
       str << ('<c:autoTitleDeleted val="' << (@title == nil).to_s << '"/>')
       @view_3D.to_xml_string(str) if @view_3D
       str << '<c:floor><c:thickness val="0"/></c:floor>'
