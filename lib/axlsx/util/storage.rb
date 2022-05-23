@@ -122,15 +122,15 @@ module Axlsx
 
     # Creates a new storage object. 
     # @param [String] name the name of the storage
-    # @option options [Integer] color @default black
-    # @option options [Integer] type @default storage
-    # @option options [String] data 
-    # @option options [Integer] left @default -1
-    # @option options [Integer] right @default -1
-    # @option options [Integer] child @default -1
-    # @option options [Integer] created @default 0
-    # @option options [Integer] modified @default 0
-    # @option options [Integer] sector @default 0
+    # @option options [Integer] color (black)
+    # @option options [Integer] type (storage)
+    # @option options [String] data
+    # @option options [Integer] left (-1)
+    # @option options [Integer] right (-1)
+    # @option options [Integer] child (-1)
+    # @option options [Integer] created (0)
+    # @option options [Integer] modified (0)
+    # @option options [Integer] sector (0)
     def initialize(name, options= {})
       @left = @right = @child = -1
       @sector = @size = @created = @modified = 0
