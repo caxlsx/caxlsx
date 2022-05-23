@@ -107,10 +107,17 @@ class TestChart < Test::Unit::TestCase
   end
 
   def test_d_lbls
-    
+
     assert_equal(nil, Axlsx.instance_values_for(@chart)[:d_lbls])
     @chart.d_lbls.d_lbl_pos = :t
     assert(@chart.d_lbls.is_a?(Axlsx::DLbls), 'DLbls instantiated on access')
+  end
+
+  def test_plot_visible_only
+    assert(@chart.plot_visible_only, "default should be true")
+    @chart.plot_visible_only = false
+    assert_false(@chart.plot_visible_only)
+    assert_raise(ArgumentError) { @chart.plot_visible_only = "" }
   end
 
   def test_to_xml_string
@@ -134,5 +141,11 @@ class TestChart < Test::Unit::TestCase
     @chart.title = ""
     doc = Nokogiri::XML(@chart.to_xml_string)
     assert_equal(0, doc.xpath("//c:title").size)
+  end
+
+  def test_to_xml_string_for_plot_visible_only
+    assert_equal("true", Nokogiri::XML(@chart.to_xml_string).xpath("//c:plotVisOnly").attr("val").value)
+    @chart.plot_visible_only = false
+    assert_equal("false", Nokogiri::XML(@chart.to_xml_string).xpath("//c:plotVisOnly").attr("val").value)
   end
 end
