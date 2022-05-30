@@ -95,6 +95,14 @@ class TestPivotTable < Test::Unit::TestCase
     assert_equal({'Month' => :ascending}, pivot_table.sort_on_headers)
   end
 
+  def test_no_grand_totals
+    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5', {:no_grand_totals=>:row}) do |pt|
+      pt.data = ['Sales']
+      pt.rows = ['Year','Month']
+    end
+    assert_equal(:row, pivot_table.no_grand_totals)
+  end
+
   def test_header_indices
     pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5')
     assert_equal(0,   pivot_table.header_index_of('Year'   ))

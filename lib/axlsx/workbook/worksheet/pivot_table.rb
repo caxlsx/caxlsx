@@ -49,6 +49,9 @@ module Axlsx
       @sort_on_headers = headers
     end
 
+    # Set to :row, :col, or :both to remove Grand Totals on pivot table
+    attr_accessor :no_grand_totals
+
     # Style info for the pivot table
     # @return [Hash]
     attr_accessor :style_info
@@ -113,7 +116,8 @@ module Axlsx
       @columns = v
     end
 
-    # The data
+    # The data as an array of either headers (String) or hashes or mix of the two.
+    # Hash in format of { ref: header, num_fmt: numFmts, subtotal: subtotal }, where header is String, numFmts is Integer, and subtotal one of %w[count average max min product countNums stdDev stdDevp var varp]
     # @return [Array]
     attr_reader :data
 
@@ -188,7 +192,11 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
 
-      str << ('<pivotTableDefinition xmlns="' << XML_NS << '" name="' << name << '" cacheId="' << cache_definition.cache_id.to_s << '"' << (data.size <= 1 ? ' dataOnRows="1"' : '') << ' applyNumberFormats="0" applyBorderFormats="0" applyFontFormats="0" applyPatternFormats="0" applyAlignmentFormats="0" applyWidthHeightFormats="1" dataCaption="Data" showMultipleLabel="0" showMemberPropertyTips="0" useAutoFormatting="1" indent="0" compact="0" compactData="0" gridDropZones="1" multipleFieldFilters="0">')
+      str << ('<pivotTableDefinition xmlns="' << XML_NS << '" name="' << name << '" cacheId="' << cache_definition.cache_id.to_s << '"')
+      str << ' dataOnRows="1"' if data.size <= 1
+      str << ' rowGrandTotals="0"' if no_grand_totals == :row || no_grand_totals == :both
+      str << ' colGrandTotals="0"' if no_grand_totals == :col || no_grand_totals == :both
+      str << ' applyNumberFormats="0" applyBorderFormats="0" applyFontFormats="0" applyPatternFormats="0" applyAlignmentFormats="0" applyWidthHeightFormats="1" dataCaption="Data" showMultipleLabel="0" showMemberPropertyTips="0" useAutoFormatting="1" indent="0" compact="0" compactData="0" gridDropZones="1" multipleFieldFilters="0">'
 
       str << ('<location firstDataCol="1" firstDataRow="1" firstHeaderRow="1" ref="' << ref << '"/>')
       str << ('<pivotFields count="' << header_cells_count.to_s << '">')
@@ -234,8 +242,7 @@ module Axlsx
       unless data.empty?
         str << "<dataFields count=\"#{data.size}\">"
         data.each do |datum_value|
-          # The correct name prefix in ["Sum","Average", etc...]
-          str << "<dataField name='#{(datum_value[:subtotal]||'')} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
+          str << "<dataField name='#{(datum_value[:subtotal]||'').capitalize} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
           str << " numFmtId='#{datum_value[:num_fmt]}'" if datum_value[:num_fmt]
           str << " subtotal='#{datum_value[:subtotal]}' " if datum_value[:subtotal]
           str << "/>"
@@ -301,7 +308,11 @@ module Axlsx
       elsif columns.include? cell_ref
         attributes << 'axis="axisCol"'
         attributes << "sortType=\"#{sorttype == :descending ? 'descending' : 'ascending'}\"" if sorttype
-        include_items_tag = true
+        if subtotal
+          include_items_tag = true
+        else
+          attributes << 'defaultSubtotal="0"'
+        end
       elsif pages.include? cell_ref
         attributes << 'axis="axisPage"'
         include_items_tag = true
