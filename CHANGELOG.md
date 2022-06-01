@@ -2,7 +2,8 @@ CHANGELOG
 ---------
 
 - **Unreleased**
-  - [PR #144](https://github.com/caxlsx/caxlsx/pull/144) - Completely hide chart titles if blank; Fix missing cell reference for chart title when cell empty,.
+  - [PR #145](https://github.com/caxlsx/caxlsx/pull/145) - Implement “plot visible only” setting for charts.
+  - [PR #144](https://github.com/caxlsx/caxlsx/pull/144) - Completely hide chart titles if blank; Fix missing cell reference for chart title when cell empty.
 
 - **February.23.22**: 3.2.0
   - [PR #75](https://github.com/caxlsx/caxlsx/pull/85) - Added manageable markers for scatter series
