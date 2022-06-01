@@ -15,6 +15,7 @@ module Axlsx
     # @option options [Array|String|Cell] start_at The X, Y coordinates defining the top left corner of the chart.
     # @option options [Array|String|Cell] end_at The X, Y coordinates defining the bottom right corner of the chart.
     # @option options [Boolean] plot_visible_only (true) Whether only data from visible cells should be plotted.
+    # @option options [Boolean] rounded_corners (true) Whether the chart area shall have rounded corners.
     def initialize(frame, options={})
       @style = 18
       @view_3D = nil
@@ -28,6 +29,7 @@ module Axlsx
       @title = Title.new
       @bg_color = nil
       @plot_visible_only = true
+      @rounded_corners = true
       parse_options options
       start_at(*options[:start_at]) if options[:start_at]
       end_at(*options[:end_at]) if options[:end_at]
@@ -103,6 +105,10 @@ module Axlsx
     # Whether only data from visible cells should be plotted.
     # @return [Boolean]
     attr_reader :plot_visible_only
+
+    # Whether the chart area shall have rounded corners.
+    # @return [Boolean]
+    attr_reader :rounded_corners
 
     # The relationship object for this chart.
     # @return [Relationship]
@@ -191,6 +197,11 @@ module Axlsx
     # @return [Boolean]
     def plot_visible_only=(v) Axlsx::validate_boolean(v); @plot_visible_only = v; end
 
+    # Whether the chart area shall have rounded corners.
+    # @param [Boolean] v
+    # @return [Boolean]
+    def rounded_corners=(v) Axlsx::validate_boolean(v); @rounded_corners = v; end
+
     # Serializes the object
     # @param [String] str
     # @return [String]
@@ -198,6 +209,7 @@ module Axlsx
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << ('<c:chartSpace xmlns:c="' << XML_NS_C << '" xmlns:a="' << XML_NS_A << '" xmlns:r="' << XML_NS_R << '">')
       str << ('<c:date1904 val="' << Axlsx::Workbook.date1904.to_s << '"/>')
+      str << ('<c:roundedCorners val="' << rounded_corners.to_s << '"/>')
       str << ('<c:style val="' << style.to_s << '"/>')
       str << '<c:chart>'
       @title.to_xml_string(str) unless @title.empty?

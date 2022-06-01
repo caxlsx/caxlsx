@@ -120,6 +120,13 @@ class TestChart < Test::Unit::TestCase
     assert_raise(ArgumentError) { @chart.plot_visible_only = "" }
   end
 
+  def test_rounded_corners
+    assert(@chart.rounded_corners, "default should be true")
+    @chart.rounded_corners = false
+    assert_false(@chart.rounded_corners)
+    assert_raise(ArgumentError) { @chart.rounded_corners = "" }
+  end
+
   def test_to_xml_string
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
     doc = Nokogiri::XML(@chart.to_xml_string)
@@ -147,5 +154,11 @@ class TestChart < Test::Unit::TestCase
     assert_equal("true", Nokogiri::XML(@chart.to_xml_string).xpath("//c:plotVisOnly").attr("val").value)
     @chart.plot_visible_only = false
     assert_equal("false", Nokogiri::XML(@chart.to_xml_string).xpath("//c:plotVisOnly").attr("val").value)
+  end
+
+  def test_to_xml_string_for_rounded_corners
+    assert_equal("true", Nokogiri::XML(@chart.to_xml_string).xpath("//c:roundedCorners").attr("val").value)
+    @chart.rounded_corners = false
+    assert_equal("false", Nokogiri::XML(@chart.to_xml_string).xpath("//c:roundedCorners").attr("val").value)
   end
 end
