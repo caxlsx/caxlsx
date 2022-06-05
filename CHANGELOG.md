@@ -2,6 +2,7 @@ CHANGELOG
 ---------
 
 - **Unreleased**
+  - [PR #147](https://github.com/caxlsx/caxlsx/pull/147) - Implement “rounded corners” setting for charts.
   - [PR #145](https://github.com/caxlsx/caxlsx/pull/145) - Implement “plot visible only” setting for charts.
   - [PR #144](https://github.com/caxlsx/caxlsx/pull/144) - Completely hide chart titles if blank; Fix missing cell reference for chart title when cell empty.
 
@@ -19,7 +20,7 @@ CHANGELOG
   - [PR #94](https://github.com/caxlsx/caxlsx/pull/94) - Major performance improvement for charts with large amounts of data
 
 - **March.27.21**: 3.1.0
-  - [PR #95](https://github.com/caxlsx/caxlsx/pull/95) - Replace mimemagic with marcel  
+  - [PR #95](https://github.com/caxlsx/caxlsx/pull/95) - Replace mimemagic with marcel
   - [PR #87](https://github.com/caxlsx/caxlsx/pull/87) - Implement :offset option for worksheet#add_row
   - [PR #79](https://github.com/caxlsx/caxlsx/pull/79) - Add support for format in pivot tables
   - [PR #77](https://github.com/caxlsx/caxlsx/pull/77) - Fix special characters in table header
