@@ -37,8 +37,10 @@ module Axlsx
     attr_accessor :no_subtotals_on_headers
 
     # Defines the headers in which sort is applied.
-    # Set to array of headers to sort ascending by default.
-    # Set to hash for specific control; with headers as keys, :ascending or :descending as values.
+    # Can be an array of headers to sort ascending by default, or a hash for specific control
+    # (with headers as keys, `:ascending` or `:descending` as values).
+    #
+    # Examples: `["year", "month"]` or `{"year" => :descending, "month" => :descending}`
     # @return [Hash]
     attr_reader :sort_on_headers
 
