@@ -2,6 +2,7 @@ CHANGELOG
 ---------
 
 - **Unreleased**
+  - [PR #143](https://github.com/caxlsx/caxlsx/pull/143) - Add setting `sort_on_headers` for pivot tables
   - [PR #132](https://github.com/caxlsx/caxlsx/pull/132) - Remove monkey patch from Object#instance_values
   - [PR #139](https://github.com/caxlsx/caxlsx/pull/139) - Sort archive entries for correct MIME detection with `file` command
   - [PR #140](https://github.com/caxlsx/caxlsx/pull/140) - Update gemspec to recent styles - it reduced the size of the gem
