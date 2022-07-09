@@ -11,31 +11,42 @@ p = Axlsx::Package.new
 wb = p.workbook
 
 wb.add_worksheet(name: 'Basic Worksheet') do |sheet|
-  sheet.add_row ['First', 'Second', 'Third']
-  sheet.add_row [1, 6, 11]
-
-  sheet.add_data_validation('A2:A2',
+  sheet.add_row ['Fixed list', 'small']
+  sheet.add_row ['Dynamic list', 'red']
+  sheet.add_row ['No dropdown', 'north']
+  sheet.add_row
+  sheet.add_row ['Allowed values in B2 (dynamic list):', 'red', 'orange', 'navy blue']
+  sheet.add_data_validation('B1:B1',
     type: :list,
-    formula1: 'A1:C1',
-    showDropDown: false,
+    formula1: '"small, medium, large"',
     showErrorMessage: true,
     errorTitle: '',
-    error: 'Only values from A1:C1',
+    error: 'Allowed values: small, medium, large',
     errorStyle: :stop,
     showInputMessage: true,
     promptTitle: '',
-    prompt: 'Only values from A1:C1')
+    prompt: 'Choose a size:')
 
   sheet.add_data_validation('B2:B2',
     type: :list,
-    formula1: '"Red, Orange, NavyBlue"',
-    showDropDown: false,
+    formula1: 'B5:D5',
     showErrorMessage: true,
     errorTitle: '',
-    error: 'Please use the dropdown selector to choose the value',
+    error: 'Only values from B5:D5 allowed!',
     errorStyle: :stop,
     showInputMessage: true,
-    prompt: 'Choose the value from the dropdown')
+    prompt: 'Choose a color (from list in B5:D5):')
+
+  sheet.add_data_validation('B3:B3',
+    type: :list,
+    formula1: '"north, east, south, west"',
+    showDropDown: true, # Note that this does in fact *hide* the dropdown.
+    showErrorMessage: true,
+    errorTitle: '',
+    error: 'Allowed values: north, east, south, west',
+    errorStyle: :stop,
+    showInputMessage: true,
+    prompt: 'Enter a direction:')
 end
 
 p.serialize 'list_validation_example.xlsx'
@@ -43,10 +54,10 @@ p.serialize 'list_validation_example.xlsx'
 
 ## Output
 
-Validating by cells:
+Validating with dropdown:
 
 ![Output](images/list_validation_example_1.png "Output")
 
-Validating by list:
+Validating without dropdown:
 
 ![Output](images/list_validation_example_2.png "Output")
