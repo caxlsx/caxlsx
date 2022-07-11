@@ -1,7 +1,10 @@
 # encoding: UTF-8
 require 'tc_helper.rb'
+require 'support/capture_warnings'
 
 class TestPackage < Test::Unit::TestCase
+  include CaptureWarnings
+
   def setup
     @package = Axlsx::Package.new
     ws = @package.workbook.add_worksheet
@@ -192,18 +195,6 @@ class TestPackage < Test::Unit::TestCase
     assert_equal 2, warnings.size
     assert_includes warnings.first, "with 3 arguments is deprecated"
     File.delete(@fname)
-  end
-
-  def capture_warnings(&block)
-    original_warn = Kernel.instance_method(:warn)
-    warnings = []
-    Kernel.send(:define_method, :warn) { |string| warnings << string }
-    block.call
-    original_verbose = $VERBOSE
-    $VERBOSE = nil
-    Kernel.send(:define_method, :warn, original_warn)
-    $VERBOSE = original_verbose
-    warnings
   end
 
   # See comment for Package#zip_entry_for_part
