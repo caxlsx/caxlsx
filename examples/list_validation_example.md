@@ -40,7 +40,7 @@ wb.add_worksheet(name: 'Basic Worksheet') do |sheet|
   sheet.add_data_validation('B3:B3',
     type: :list,
     formula1: '"north, east, south, west"',
-    showDropDown: true, # Note that this does in fact *hide* the dropdown.
+    hideDropDown: true,
     showErrorMessage: true,
     errorTitle: '',
     error: 'Allowed values: north, east, south, west',

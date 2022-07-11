@@ -13,11 +13,12 @@ module Axlsx
     # @option options [Boolean] allowBlank - A boolean value indicating whether the data validation allows the use of empty or blank entries.
     # @option options [String] error - Message text of error alert.
     # @option options [Symbol] errorStyle - The style of error alert used for this data validation.
-    # @option options [String] errorTitle - itle bar text of error alert.
+    # @option options [String] errorTitle - Title bar text of error alert.
     # @option options [Symbol] operator - The relational operator used with this data validation.
     # @option options [String] prompt - Message text of input prompt.
     # @option options [String] promptTitle - Title bar text of input prompt.
-    # @option options [Boolean] showDropDown - A boolean value indicating whether to display a dropdown combo box for a list type data validation
+    # @option options [Boolean] showDropDown - A boolean value indicating whether to display a dropdown combo box for a list type data validation. Be careful: It has an inverted logic, false shows the dropdown list! You should use hideDropDown instead.
+    # @option options [Boolean] hideDropDown - A boolean value indicating whether to hide the dropdown combo box for a list type data validation. Defaults to `false` (meaning the dropdown is visible by default).
     # @option options [Boolean] showErrorMessage - A boolean value indicating whether to display the error alert message when an invalid value has been entered, according to the criteria specified.
     # @option options [Boolean] showInputMessage - A boolean value indicating whether to display the input prompt message.
     # @option options [String] sqref - Range over which data validation is applied, in "A1:B2" format.
@@ -121,12 +122,21 @@ module Axlsx
 
     # Show drop down
     # A boolean value indicating whether to display a dropdown combo box for a list type data
-    # validation. Be careful: false shows the dropdown list!
+    # validation. Be careful: It has an inverted logic, false shows the dropdown list!
     # Available for type list
     # @see type
     # @return [Boolean]
     # default false
     attr_reader :showDropDown
+
+    # Hide drop down
+    # A boolean value indicating whether to hide a dropdown combo box for a list type data
+    # validation. Defaults to `false` (meaning the dropdown is visible by default).
+    # Available for type list
+    # @see type
+    # @return [Boolean]
+    # default false
+    alias :hideDropDown :showDropDown
 
     # Show error message
     # A boolean value indicating whether to display the error alert message when an invalid
@@ -195,7 +205,18 @@ module Axlsx
     def promptTitle=(v); Axlsx::validate_string(v); @promptTitle = v end
 
     # @see showDropDown
-    def showDropDown=(v); Axlsx::validate_boolean(v); @showDropDown = v end
+    def showDropDown=(v)
+      warn 'The `showDropDown` has an inverted logic, false shows the dropdown list! You should use `hideDropDown` instead.'
+      Axlsx::validate_boolean(v)
+      @showDropDown = v
+    end
+
+    # @see hideDropDown
+    def hideDropDown=(v)
+      Axlsx::validate_boolean(v)
+      # It's just an alias for the showDropDown attribute, hideDropDown should set the value of the original showDropDown.
+      @showDropDown = v
+    end
 
     # @see showErrorMessage
     def showErrorMessage=(v); Axlsx::validate_boolean(v); @showErrorMessage = v end

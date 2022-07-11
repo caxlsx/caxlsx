@@ -1,11 +1,13 @@
 # encoding: UTF-8
 require 'tc_helper.rb'
-
+require 'support/capture_warnings'
 
 class TestDataValidation < Test::Unit::TestCase
+  include CaptureWarnings
+
   def setup
     #inverse defaults
-    @boolean_options = { :allowBlank => false, :showDropDown => true, :showErrorMessage => false, :showInputMessage => true }
+    @boolean_options = { :allowBlank => false, :hideDropDown => true, :showErrorMessage => false, :showInputMessage => true }
     @nil_options = { :formula1 => 'foo',  :formula2 => 'foo', :errorTitle => 'foo', :operator => :lessThan, :prompt => 'foo', :promptTitle => 'foo', :sqref => 'foo' }
     @type_option = { :type => :whole }
     @error_style_option = { :errorStyle => :warning }
@@ -118,8 +120,21 @@ class TestDataValidation < Test::Unit::TestCase
   end
   
   def test_showDropDown
-    assert_raise(ArgumentError) { @dv.showDropDown = "foo´" }
-    assert_nothing_raised { @dv.showDropDown = false }
+    warnings = capture_warnings do
+      assert_raise(ArgumentError) { @dv.showDropDown = "foo´" }
+      assert_nothing_raised { @dv.showDropDown = false }
+      assert_equal(@dv.showDropDown, false)
+    end
+
+    assert_equal 2, warnings.size
+    assert_includes warnings.first, 'The `showDropDown` has an inverted logic, false shows the dropdown list! You should use `hideDropDown` instead.'
+  end
+
+  def test_hideDropDown
+    assert_raise(ArgumentError) { @dv.hideDropDown = "foo´" }
+    assert_nothing_raised { @dv.hideDropDown = false }
+    assert_equal(@dv.hideDropDown, false)
+    # As hideDropdown is just an alias for showDropDown, we should test the original value too
     assert_equal(@dv.showDropDown, false)
   end
   
@@ -182,7 +197,7 @@ class TestDataValidation < Test::Unit::TestCase
     @ws.add_data_validation("A1", { :type => :list, :formula1 => 'A1:A5',
         :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values from list', 
         :errorStyle => :stop, :showInputMessage => true, :promptTitle => 'Be carful!', 
-        :prompt => 'Only values from list', :showDropDown => true})
+        :prompt => 'Only values from list', :hideDropDown => true})
     
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
     
@@ -233,7 +248,7 @@ class TestDataValidation < Test::Unit::TestCase
     @ws.add_data_validation("B1", { :type => :list, :formula1 => 'A1:A5',
         :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values from list', 
         :errorStyle => :stop, :showInputMessage => true, :promptTitle => 'Be carful!', 
-        :prompt => 'Only values from list', :showDropDown => true})
+        :prompt => 'Only values from list', :hideDropDown => true})
     
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
     
