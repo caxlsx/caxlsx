@@ -217,8 +217,18 @@ module Axlsx
         end
         str << '</rowItems>'
       end
-      if columns.empty? && data.size <= 1
-        str << '<colItems count="1"><i/></colItems>'
+      if columns.empty?
+        if data.size > 1
+          str << '<colFields count="1"><field x="-2"/></colFields>'
+          str << "<colItems count=\"#{data.size}\">"
+          str << '<i><x/></i>'
+          data[1..-1].each_with_index do |datum_value,i|
+            str << "<i i=\"#{i + 1}\"><x v=\"#{i + 1}\"/></i>"
+          end
+          str << '</colItems>'
+        else
+          str << '<colItems count="1"><i/></colItems>'
+        end
       else
         str << ('<colFields count="' << columns.size.to_s << '">')
         columns.each do |column_value|
