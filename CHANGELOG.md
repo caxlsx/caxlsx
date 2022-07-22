@@ -2,6 +2,7 @@ CHANGELOG
 ---------
 
 - **Unreleased**
+  - [PR #156](https://github.com/caxlsx/caxlsx/pull/156) - Prevent Excel from crashing when multiple data columns added to PivotTable
   - [PR #155](https://github.com/caxlsx/caxlsx/pull/155) - Add `hideDropDown` alias for `showDropDown` setting, as the latter is confusing to use (because its logic seems inverted).
   - [PR #143](https://github.com/caxlsx/caxlsx/pull/143) - Add setting `sort_on_headers` for pivot tables
   - [PR #132](https://github.com/caxlsx/caxlsx/pull/132) - Remove monkey patch from Object#instance_values
