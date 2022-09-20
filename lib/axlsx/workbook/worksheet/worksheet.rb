@@ -303,7 +303,8 @@ module Axlsx
     end
 
     # The name of the worksheet
-    # The name of a worksheet must be unique in the workbook, and must not exceed 31 characters
+    # The name of a worksheet must be unique in the workbook, and must not exceed the number
+    # of characters defined in Axlsx::WORKSHEET_MAX_NAME_LENGTH
     # @param [String] name
     def name=(name)
       validate_sheet_name name
@@ -684,7 +685,7 @@ module Axlsx
       # ignore first character (BOM) after encoding to utf16 because Excel does so, too.
       raise ArgumentError, (ERR_SHEET_NAME_EMPTY) if name.empty?
       character_length = name.encode("utf-16")[1..-1].encode("utf-16").bytesize / 2
-      raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % name) if character_length > 31
+      raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % name) if character_length > WORKSHEET_MAX_NAME_LENGTH
       raise ArgumentError, (ERR_SHEET_NAME_CHARACTER_FORBIDDEN % name) if '[]*/\?:'.chars.any? { |char| name.include? char }
       name = Axlsx::coder.encode(name)
       sheet_names = @workbook.worksheets.reject { |s| s == self }.map { |s| s.name }

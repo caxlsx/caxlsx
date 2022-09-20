@@ -274,6 +274,9 @@ module Axlsx
   # cellXfs id for default date styling
   STYLE_DATE = 2
 
+  # worksheet maximum name length
+  WORKSHEET_MAX_NAME_LENGTH = 31
+
   # error messages RestrictionValidor
   ERR_RESTRICTION = "Invalid Data: %s. %s must be one of %s.".freeze
 
@@ -290,7 +293,7 @@ module Axlsx
   ERR_SHEET_NAME_EMPTY = "Your worksheet name is empty. Worksheet name can't be empty. Please assign name of your sheet or don't use name option at all.".freeze
 
   # error message for sheets that use a name which is longer than 31 bytes
-  ERR_SHEET_NAME_TOO_LONG = "Your worksheet name '%s' is too long. Worksheet names must be 31 characters (bytes) or less".freeze
+  ERR_SHEET_NAME_TOO_LONG = "Your worksheet name '%s' is too long. Worksheet names must be #{WORKSHEET_MAX_NAME_LENGTH} characters (bytes) or less".freeze
 
   # error message for sheets that use a name which include invalid characters
   ERR_SHEET_NAME_CHARACTER_FORBIDDEN = "Your worksheet name '%s' contains a character which is not allowed by MS Excel and will cause repair warnings. Please change the name of your sheet.".freeze
