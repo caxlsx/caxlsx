@@ -278,7 +278,7 @@ module Axlsx
   WORKSHEET_MAX_NAME_LENGTH = 31
 
   # worksheet name forbidden characters
-  WORKSHEET_NAME_FORBIDDEN_CHARS = '[]*/\?:'.freeze
+  WORKSHEET_NAME_FORBIDDEN_CHARS = '[]*/\?:'.chars.freeze
 
   # error messages RestrictionValidor
   ERR_RESTRICTION = "Invalid Data: %s. %s must be one of %s.".freeze
