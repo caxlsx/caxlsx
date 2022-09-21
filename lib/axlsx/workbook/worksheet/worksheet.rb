@@ -686,7 +686,7 @@ module Axlsx
       raise ArgumentError, (ERR_SHEET_NAME_EMPTY) if name.empty?
       character_length = name.encode("utf-16")[1..-1].encode("utf-16").bytesize / 2
       raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % name) if character_length > WORKSHEET_MAX_NAME_LENGTH
-      raise ArgumentError, (ERR_SHEET_NAME_CHARACTER_FORBIDDEN % name) if WORKSHEET_NAME_FORBIDDEN_CHARS.chars.any? { |char| name.include? char }
+      raise ArgumentError, (ERR_SHEET_NAME_CHARACTER_FORBIDDEN % name) if WORKSHEET_NAME_FORBIDDEN_CHARS.any? { |char| name.include? char }
       name = Axlsx::coder.encode(name)
       sheet_names = @workbook.worksheets.reject { |s| s == self }.map { |s| s.name }
       raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % name) if sheet_names.include?(name)
