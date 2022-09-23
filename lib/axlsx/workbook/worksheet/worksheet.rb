@@ -627,11 +627,12 @@ module Axlsx
       r = rows[row_index]
 
       if r
-        return r[col_index] 
+        return r[col_index]
       end
     end
 
-    # shortcut method to access styles direclty from the worksheet
+    # Shortcut method to access workbook styles
+    #
     # This lets us do stuff like:
     # @example
     #     p = Axlsx::Package.new
@@ -640,6 +641,9 @@ module Axlsx
     #       sheet.add_row ['Oh No!'], :styles => my_style
     #     end
     #     p.serialize 'foo.xlsx'
+    #
+    # @note The XLSX format does not support worksheet-specific styles. Even when using this method
+    #     you're still working with the single global {Axlsx::Styles} object in the workbook.
     def styles
       @styles ||= self.workbook.styles
     end
