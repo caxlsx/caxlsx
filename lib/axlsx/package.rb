@@ -99,7 +99,7 @@ module Axlsx
     #
     #   # Serialize to a stream
     #   s = p.to_stream()
-    #   File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
+    #   File.open('example_streamed.xlsx', 'wb') { |f| f.write(s.read) }
     def serialize(output, options = {}, secondary_options = nil)
       confirm_valid, zip_command = parse_serialize_options(options, secondary_options)
       return false unless !confirm_valid || self.validate.empty?

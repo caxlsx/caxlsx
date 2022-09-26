@@ -156,7 +156,7 @@ module Axlsx
     #   ws.add_row ["Least Popular Pets"]
     #   ws.add_row ["", "Dry Skinned Reptiles", "Bald Cats", "Violent Parrots"], :style=>title
     #   ws.add_row ["Votes", 6, 4, 1], :style=>Axlsx::STYLE_THIN_BORDER
-    #   f = File.open('example_you_got_style.xlsx', 'w')
+    #   f = File.open('example_you_got_style.xlsx', 'wb')
     #   p.serialize(f)
     #
     # @example Styling specifically
@@ -190,7 +190,7 @@ module Axlsx
     #   ws.add_row ["Q2", 3000, 30], :style=>[title, currency, percent]
     #   ws.add_row ["Q3", 1000, 10], :style=>[title, currency, percent]
     #   ws.add_row ["Q4", 2000, 20], :style=>[title, currency, percent]
-    #   f = File.open('example_you_got_style.xlsx', 'w')
+    #   f = File.open('example_you_got_style.xlsx', 'wb')
     #   p.serialize(f)
     #
     # @example Differential styling
@@ -216,7 +216,7 @@ module Axlsx
     #   ws.add_row ["Q4", 2000, 20], :style=>[title, currency, percent]
     #
     #   ws.add_conditional_formatting("A1:A7", { :type => :cellIs, :operator => :greaterThan, :formula => "2000", :dxfId => profitable, :priority => 1 })
-    #   f = File.open('example_differential_styling', 'w')
+    #   f = File.open('example_differential_styling', 'wb')
     #   p.serialize(f)
     #
     def add_style(options={})

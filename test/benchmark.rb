@@ -58,7 +58,7 @@ Benchmark.bmbm(30) do |x|
       end
     end
     s = p.to_stream()
-    File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
+    File.open('example_streamed.xlsx', 'wb') { |f| f.write(s.read) }
   }
 
   x.report('csv') {

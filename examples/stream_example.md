@@ -16,7 +16,7 @@ wb.add_worksheet(name: 'Basic Worksheet') do |sheet|
 end
 
 stream = p.to_stream
-File.open('stream_example.xlsx', 'w') { |f| f.write(stream.read) }
+File.open('stream_example.xlsx', 'wb') { |f| f.write(stream.read) }
 ```
 
 ## Output
