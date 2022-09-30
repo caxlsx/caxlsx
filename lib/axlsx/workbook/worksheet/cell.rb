@@ -82,6 +82,37 @@ module Axlsx
       defined?(@style) ? @style : 0
     end
 
+    attr_accessor :raw_style
+
+    require 'active_support/core_ext/hash/deep_merge' ### TODO: can/should we remove this dependency
+    # The index of the cellXfs item to be applied to this cell.
+    # @param [Hash] styles
+    # @see Axlsx::Styles
+    require 'set' ### TODO: move to appropriate place
+    def add_style(style)
+      self.raw_style ||= {}
+
+      # using deep_merge from active_support:
+      # with regular Hash#merge adding borders fails miserably
+      new_style = raw_style.deep_merge(style)
+
+      all_edges = [:top, :right, :bottom, :left]
+
+      if !raw_style[:border].nil? && !style[:border].nil?
+        border_at = (raw_style[:border][:edges] || all_edges) + (style[:border][:edges] || all_edges)
+        new_style[:border][:edges] = border_at.uniq.sort
+      elsif !style[:border].nil?
+        new_style[:border] = style[:border]
+      end
+
+      self.raw_style = new_style
+
+      wb = row.worksheet.workbook
+      
+      wb.styled_cells ||= Set.new
+      wb.styled_cells << self
+    end
+
     # The row this cell belongs to.
     # @return [Row]
     attr_reader :row

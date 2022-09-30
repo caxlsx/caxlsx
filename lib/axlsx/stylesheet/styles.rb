@@ -120,6 +120,10 @@ module Axlsx
       load_default_styles
     end
 
+    def style_index
+      @style_index ||= {}
+    end
+
     # Drastically simplifies style creation and management.
     # @return [Integer]
     # @option options [String] fg_color The text color
@@ -219,7 +223,40 @@ module Axlsx
     #   f = File.open('example_differential_styling', 'wb')
     #   p.serialize(f)
     #
+    #
+    #
+    #
+    # An index for cell styles where keys are styles codes as per Axlsx::Style and values are Cell#raw_style
+    # The reason for the backward key/value ordering is that style lookup must be most efficient, while `add_style` can be less efficient
     def add_style(options={})
+      ### TODO: Refractor this
+
+      if options[:type] == :dxf
+        style_id = original_add_style(options)
+      else
+        # Add styles to style_index cache for re-use
+        
+        font_defaults = {name: @fonts.first.name, sz: @fonts.first.sz, family: @fonts.first.family} 
+
+        raw_style = {type: :xf}.merge(font_defaults).merge(options)
+
+        if raw_style[:format_code]
+          raw_style.delete(:num_fmt)
+        end
+
+        style_id = style_index.key(raw_style)
+
+        if !style_id
+          style_id = original_add_style(options)
+
+          style_index[style_id] = raw_style
+        end
+      end
+
+      return style_id
+    end
+    
+    def original_add_style(options={})
       # Default to :xf
       options[:type] ||= :xf
       raise ArgumentError, "Type must be one of [:xf, :dxf]" unless [:xf, :dxf].include?(options[:type] )
