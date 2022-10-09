@@ -84,7 +84,6 @@ module Axlsx
 
     attr_accessor :raw_style
 
-    require 'active_support/core_ext/hash/deep_merge' ### TODO: can/should we remove this dependency
     # The index of the cellXfs item to be applied to this cell.
     # @param [Hash] styles
     # @see Axlsx::Styles
@@ -92,9 +91,7 @@ module Axlsx
     def add_style(style)
       self.raw_style ||= {}
 
-      # using deep_merge from active_support:
-      # with regular Hash#merge adding borders fails miserably
-      new_style = raw_style.deep_merge(style)
+      new_style = Axlsx.hash_deep_merge(raw_style, style)
 
       all_edges = [:top, :right, :bottom, :left]
 

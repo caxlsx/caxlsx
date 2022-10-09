@@ -166,6 +166,19 @@ module Axlsx
     end
   end
 
+  # utility method for performing a deep merge on a Hash
+  # @param [Hash] Hash to merge into
+  # @param [Hash] Hash to be added
+  def self.hash_deep_merge(first_hash, second_hash)
+    first_hash.merge(second_hash) do |key, this_val, other_val|
+      if this_val.is_a?(Hash) && other_val.is_a?(Hash)
+        Axlsx.hash_deep_merge(this_val, other_val)
+      else
+        other_val
+      end
+    end
+  end
+
   # Instructs the serializer to not try to escape cell value input.
   # This will give you a huge speed bonus, but if you content has <, > or other xml character data
   # the workbook will be invalid and excel will complain.

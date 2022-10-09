@@ -196,7 +196,6 @@ require 'axlsx/workbook/worksheet/selection.rb'
 
     # A helper to apply styles that were added using `worksheet.add_style`
     # @return [Boolean]
-    require 'active_support/core_ext/hash/deep_merge' ### TODO: keep or replace with local solution
     def apply_styles
       return false if !styled_cells
 
@@ -204,7 +203,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
         current_style = styles.style_index[cell.style]
 
         if current_style
-          new_style = current_style.deep_merge(cell.raw_style)
+          new_style = Axlsx.hash_deep_merge(current_style, cell.raw_style)
         else
           new_style = cell.raw_style
         end
@@ -417,6 +416,19 @@ require 'axlsx/workbook/worksheet/selection.rb'
         str << '</pivotCaches>'
       end
       str << '</workbook>'
+    end
+
+    private
+
+    # Utility method for performing a deep merge on a Hash
+    def hash_deep_merge(first_hash, second_hash)
+      first_hash.merge(second_hash) do |key, this_val, other_val|
+        if this_val.is_a?(Hash) && other_val.is_a?(Hash)
+          this_val.deep_merge(other_val, &block)
+        else
+          other_val
+        end
+      end
     end
 
   end
