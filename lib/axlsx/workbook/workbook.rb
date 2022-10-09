@@ -188,7 +188,9 @@ require 'axlsx/workbook/worksheet/selection.rb'
     end
 
     # An array that holds all cells with styles
-    attr_accessor :styled_cells
+    def styled_cells
+      @styled_cells ||= Set.new
+    end
 
     # Checks if styles are indexed to make it work for pre 0.1.5 version
     # users that still explicitly call @workbook.apply_styles
@@ -416,19 +418,6 @@ require 'axlsx/workbook/worksheet/selection.rb'
         str << '</pivotCaches>'
       end
       str << '</workbook>'
-    end
-
-    private
-
-    # Utility method for performing a deep merge on a Hash
-    def hash_deep_merge(first_hash, second_hash)
-      first_hash.merge(second_hash) do |key, this_val, other_val|
-        if this_val.is_a?(Hash) && other_val.is_a?(Hash)
-          this_val.deep_merge(other_val, &block)
-        else
-          other_val
-        end
-      end
     end
 
   end

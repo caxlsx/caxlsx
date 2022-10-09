@@ -28,7 +28,18 @@ require 'zip'
 
 #core dependencies
 require 'bigdecimal'
+require 'set'
 require 'time'
+
+begin
+  require "axlsx_styler"
+
+  if defined?(AxlsxStyler)
+    raise StandardError.new("Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly.")
+  end
+rescue LoadError
+  # Do nothing, all good
+end
 
 # xlsx generation with charts, images, automated column width, customizable styles
 # and full schema validation. Axlsx excels at helping you generate beautiful

@@ -87,7 +87,6 @@ module Axlsx
     # The index of the cellXfs item to be applied to this cell.
     # @param [Hash] styles
     # @see Axlsx::Styles
-    require 'set' ### TODO: move to appropriate place
     def add_style(style)
       self.raw_style ||= {}
 
@@ -106,7 +105,6 @@ module Axlsx
 
       wb = row.worksheet.workbook
       
-      wb.styled_cells ||= Set.new
       wb.styled_cells << self
     end
 
