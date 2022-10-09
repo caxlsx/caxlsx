@@ -223,18 +223,16 @@ module Axlsx
     #   f = File.open('example_differential_styling', 'wb')
     #   p.serialize(f)
     #
-    #
-    #
-    #
     # An index for cell styles where keys are styles codes as per Axlsx::Style and values are Cell#raw_style
     # The reason for the backward key/value ordering is that style lookup must be most efficient, while `add_style` can be less efficient
     def add_style(options={})
-      ### TODO: Refractor this
+      # Default to :xf
+      options[:type] ||= :xf
 
-      if options[:type] == :dxf
-        style_id = original_add_style(options)
-      else
-        # Add styles to style_index cache for re-use
+      raise ArgumentError, "Type must be one of [:xf, :dxf]" unless [:xf, :dxf].include?(options[:type] )
+
+      if options[:type] == :xf
+        # Check to see if style in cache already
         
         font_defaults = {name: @fonts.first.name, sz: @fonts.first.sz, family: @fonts.first.family} 
 
@@ -244,22 +242,12 @@ module Axlsx
           raw_style.delete(:num_fmt)
         end
 
-        style_id = style_index.key(raw_style)
+        xf_index = style_index.key(raw_style)
 
-        if !style_id
-          style_id = original_add_style(options)
-
-          style_index[style_id] = raw_style
+        if xf_index
+          return xf_index
         end
       end
-
-      return style_id
-    end
-    
-    def original_add_style(options={})
-      # Default to :xf
-      options[:type] ||= :xf
-      raise ArgumentError, "Type must be one of [:xf, :dxf]" unless [:xf, :dxf].include?(options[:type] )
 
       fill = parse_fill_options options
       font = parse_font_options options
@@ -275,7 +263,18 @@ module Axlsx
         style = Xf.new :fillId=>fill || 0, :fontId=>font || 0, :numFmtId=>numFmt || 0, :borderId=>border || 0, :alignment => alignment, :protection => protection, :applyFill=>!fill.nil?, :applyFont=>!font.nil?, :applyNumberFormat =>!numFmt.nil?, :applyBorder=>!border.nil?, :applyAlignment => !alignment.nil?, :applyProtection => !protection.nil?
       end
 
-      options[:type] == :xf ? cellXfs << style : dxfs << style
+      if options[:type] == :xf
+        xf_index = (cellXfs << style)
+
+        # Add styles to style_index cache for re-use
+        style_index[xf_index] = raw_style
+
+        return xf_index
+      else
+        dxf_index = (dxfs << style)
+
+        return dxf_index
+      end
     end
 
     # parses add_style options for protection styles
