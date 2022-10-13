@@ -25,4 +25,4 @@ p.serialize "add_border.xlsx"
 
 ## Output
 
-![Output](images/add_border.png "Output")
+![Output](images/add_border_example.png "Output")

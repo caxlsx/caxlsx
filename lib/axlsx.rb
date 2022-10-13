@@ -32,13 +32,11 @@ require 'set'
 require 'time'
 
 begin
-  require "axlsx_styler"
-
-  if defined?(AxlsxStyler)
+  if Gem.loaded_specs.has_key?("axlsx_styler")
     raise StandardError.new("Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly.")
   end
-rescue LoadError
-  # Do nothing, all good
+rescue
+  # Do nothing
 end
 
 # xlsx generation with charts, images, automated column width, customizable styles

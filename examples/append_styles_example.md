@@ -21,11 +21,11 @@ wb.add_worksheet do |sheet|
   sheet.add_style "B3:D5", bg_color: "E2F89C"
   sheet.add_style "D3:D5", alignment: { horizontal: :left }
   sheet.add_style ["C3:C4", "D3:D4"], fg_color: "00FF00"
-nd
+end
 
 p.serialize "append_styles.xlsx"
 ```
 
 ## Output
 
-![Output](images/append_styles.png "Output")
+![Output](images/append_styles_example.png "Output")
