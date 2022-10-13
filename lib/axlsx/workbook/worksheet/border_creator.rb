@@ -8,49 +8,43 @@ module Axlsx
       @worksheet = worksheet
       @cells     = cells
       if args.is_a?(Hash)
-        @edges = args[:edges] || :all
+        @edges = args[:edges] || Axlsx::Border::EDGES
         @width = args[:style] || :thin
         @color = args[:color] || '000000'
       else
-        @edges = args || :all
+        @edges = args || Axlsx::Border::Edges
         @width = :thin
         @color = '000000'
+      end
+
+      if @edges == :all
+        @edges = Axlsx::Border::EDGES
+      elsif @edges.is_a?(Array)
+        @edges = (@edges.map(&:to_sym).uniq & Axlsx::Border::EDGES)
+      else
+        @edges = []
       end
     end
 
     def draw
-      selected_edges(edges).each { |edge| add_border(edge, width, color) }
+      @edges.each do |edge| 
+        worksheet.add_style(
+          border_cells[edge], 
+          {
+            border: {style: @width, color: @color, edges: [edge]}
+          }
+        )
+      end
     end
 
     private
 
-    def selected_edges(edges)
-      all_edges = [:top, :right, :bottom, :left]
-      if edges == :all
-        all_edges
-      elsif edges.is_a?(Array) && edges - all_edges == []
-        edges.uniq
-      else
-        []
-      end
-    end
-
-    def add_border(position, width, color)
-      style = {
-        border: {
-          style: width, color: color, edges: [position.to_sym]
-        }
-      }
-      worksheet.add_style border_cells[position.to_sym], style
-    end
-
     def border_cells
-      # example range "B2:D5"
       {
-        top:     "#{first_cell}:#{last_col}#{first_row}", # "B2:D2"
-        right:   "#{last_col}#{first_row}:#{last_cell}",  # "D2:D5"
-        bottom:  "#{first_col}#{last_row}:#{last_cell}",  # "B5:D5"
-        left:    "#{first_cell}:#{first_col}#{last_row}"  # "B2:B5"
+        top:     "#{first_cell}:#{last_col}#{first_row}",
+        right:   "#{last_col}#{first_row}:#{last_cell}",
+        bottom:  "#{first_col}#{last_row}:#{last_cell}",
+        left:    "#{first_cell}:#{first_col}#{last_row}",
       }
     end
 

@@ -188,12 +188,13 @@ require 'axlsx/workbook/worksheet/selection.rb'
     end
 
     # An array that holds all cells with styles
+    # @return Set
     def styled_cells
       @styled_cells ||= Set.new
     end
 
-    # Checks if styles are indexed to make it work for pre 0.1.5 version
-    # users that still explicitly call @workbook.apply_styles
+    # Are the styles added with workbook.add_styles applied yet
+    # @return Boolean
     attr_accessor :styles_applied
 
     # A helper to apply styles that were added using `worksheet.add_style`
