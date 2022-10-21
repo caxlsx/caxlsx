@@ -187,6 +187,36 @@ require 'axlsx/workbook/worksheet/selection.rb'
       @styles
     end
 
+    # An array that holds all cells with styles
+    # @return Set
+    def styled_cells
+      @styled_cells ||= Set.new
+    end
+
+    # Are the styles added with workbook.add_styles applied yet
+    # @return Boolean
+    attr_accessor :styles_applied
+
+    # A helper to apply styles that were added using `worksheet.add_style`
+    # @return [Boolean]
+    def apply_styles
+      return false if !styled_cells
+
+      styled_cells.each do |cell|
+        current_style = styles.style_index[cell.style]
+
+        if current_style
+          new_style = Axlsx.hash_deep_merge(current_style, cell.raw_style)
+        else
+          new_style = cell.raw_style
+        end
+
+        cell.style = styles.add_style(new_style)
+      end
+
+      self.styles_applied = true
+    end
+
 
     # Indicates if the epoc date for serialization should be 1904. If false, 1900 is used.
     @@date1904 = false

@@ -28,7 +28,16 @@ require 'zip'
 
 #core dependencies
 require 'bigdecimal'
+require 'set'
 require 'time'
+
+begin
+  if Gem.loaded_specs.has_key?("axlsx_styler")
+    raise StandardError.new("Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly.")
+  end
+rescue
+  # Do nothing
+end
 
 # xlsx generation with charts, images, automated column width, customizable styles
 # and full schema validation. Axlsx excels at helping you generate beautiful
@@ -163,6 +172,19 @@ module Axlsx
       value ? 1 : 0
     else
       value
+    end
+  end
+
+  # utility method for performing a deep merge on a Hash
+  # @param [Hash] Hash to merge into
+  # @param [Hash] Hash to be added
+  def self.hash_deep_merge(first_hash, second_hash)
+    first_hash.merge(second_hash) do |key, this_val, other_val|
+      if this_val.is_a?(Hash) && other_val.is_a?(Hash)
+        Axlsx.hash_deep_merge(this_val, other_val)
+      else
+        other_val
+      end
     end
   end
 

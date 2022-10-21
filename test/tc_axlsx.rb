@@ -132,4 +132,12 @@ class TestAxlsx < Test::Unit::TestCase
     nil_subject = InstanceValuesSubject.new(nil_obj: nil)
     assert_equal({"nil_obj" =>  nil}, Axlsx.instance_values_for(nil_subject), 'should return nil ivars')    
   end
+
+  def test_hash_deep_merge
+    h1 = {foo: {bar: true}}
+    h2 = {foo: {baz: true}}
+    assert_equal({foo: {baz: true}}, h1.merge(h2))
+    assert_equal({foo: {bar: true, baz: true}}, Axlsx.hash_deep_merge(h1, h2))
+  end
+
 end

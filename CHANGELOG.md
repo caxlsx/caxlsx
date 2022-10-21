@@ -1,6 +1,19 @@
 CHANGELOG
 ---------
 
+- **Unreleased - Axlsx Styler**
+  - [PR #xx](https://github.com/caxlsx/caxlsx/pull/xx)Merge in the gem [`axlsx_styler`](https://github.com/axlsx-styler-gem/axlsx_styler)
+    - Add ability to both apply or append to existing styles after rows have been created using `worksheet.add_style`
+      - `worksheet.add_style "A1", {b: true}`
+      - `worksheet.add_style "A1:B2", {b: true}`
+      - `worksheet.add_style ["A1", "B2:C7", "D8:E9"], {b: true}`
+    - Add ability to create borders upon specific areas of the page using `worksheet.add_border`
+      - `worksheet.add_border "A1", {style: :thin}`
+      - `worksheet.add_border "A1:B2", {style: :thin}`
+      - `worksheet.add_border ["A1", "B2:C7", "D8:E9"], {style: :thin}`
+    - Add `Axlsx::BorderCreator` the class used under the hood for `worksheet.add_border`
+    - Allow specifying `:all` in `border: {edges: :all}` which is a shortcut for `border: {edges: [:left, :right, :top, :bottom]}`
+
 - **Unreleased**
   - [PR #155](https://github.com/caxlsx/caxlsx/pull/155) - Add `hideDropDown` alias for `showDropDown` setting, as the latter is confusing to use (because its logic seems inverted).
   - [PR #143](https://github.com/caxlsx/caxlsx/pull/143) - Add setting `sort_on_headers` for pivot tables

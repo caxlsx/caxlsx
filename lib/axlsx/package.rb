@@ -101,6 +101,10 @@ module Axlsx
     #   s = p.to_stream()
     #   File.open('example_streamed.xlsx', 'wb') { |f| f.write(s.read) }
     def serialize(output, options = {}, secondary_options = nil)
+      if !workbook.styles_applied
+        workbook.apply_styles 
+      end
+
       confirm_valid, zip_command = parse_serialize_options(options, secondary_options)
       return false unless !confirm_valid || self.validate.empty?
       zip_provider = if zip_command
@@ -122,6 +126,10 @@ module Axlsx
     # @param [Boolean] confirm_valid Validate the package prior to serialization.
     # @return [StringIO|Boolean] False if confirm_valid and validation errors exist. rewound string IO if not.
     def to_stream(confirm_valid=false)
+      if !workbook.styles_applied
+        workbook.apply_styles 
+      end
+
       return false unless !confirm_valid || self.validate.empty?
       Relationship.initialize_ids_cache
       zip = write_parts(Zip::OutputStream.new(StringIO.new.binmode, true))

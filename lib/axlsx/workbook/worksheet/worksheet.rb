@@ -1,4 +1,7 @@
 # encoding: UTF-8
+
+require_relative "border_creator"
+
 module Axlsx
 
   # The Worksheet class represents a worksheet in the workbook.
@@ -558,6 +561,41 @@ module Axlsx
       offset = options.delete(:col_offset) || 0
       cells = cols[(offset..-1)].map { |column| column[index] }.flatten.compact
       cells.each { |cell| cell.style = style }
+    end
+
+    # Set the style for cells in a specific column
+    # @param [String|Array] cell references
+    # @param [Hash] styles
+    def add_style(cell_refs, *styles)
+      if !cell_refs.is_a?(Array)
+        cell_refs = [cell_refs]
+      end
+
+      cell_refs.each do |cell_ref|
+        item = self[cell_ref]
+
+        cells = item.is_a?(Array) ? item : [item]
+
+        cells.each do |cell|
+          styles.each do |style|
+            cell.add_style(style)
+          end
+        end
+      end
+    end
+
+    # Set the style for cells in a specific column
+    # @param [String|Array] cell references
+    # @param [Hash|Array|Symbol] border options
+    def add_border(cell_refs, options = Axlsx::Border::EDGES)
+      if !cell_refs.is_a?(Array)
+        cell_refs = [cell_refs]
+      end
+
+      cell_refs.each do |cell_ref|
+        cells = self[cell_ref]
+        Axlsx::BorderCreator.new(self, cells, options).draw
+      end
     end
 
     # Returns a sheet node serialization for this sheet in the workbook.

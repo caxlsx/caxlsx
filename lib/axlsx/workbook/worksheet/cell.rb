@@ -82,6 +82,32 @@ module Axlsx
       defined?(@style) ? @style : 0
     end
 
+    attr_accessor :raw_style
+
+    # The index of the cellXfs item to be applied to this cell.
+    # @param [Hash] styles
+    # @see Axlsx::Styles
+    def add_style(style)
+      self.raw_style ||= {}
+
+      new_style = Axlsx.hash_deep_merge(raw_style, style)
+
+      all_edges = [:top, :right, :bottom, :left]
+
+      if !raw_style[:border].nil? && !style[:border].nil?
+        border_at = (raw_style[:border][:edges] || all_edges) + (style[:border][:edges] || all_edges)
+        new_style[:border][:edges] = border_at.uniq.sort
+      elsif !style[:border].nil?
+        new_style[:border] = style[:border]
+      end
+
+      self.raw_style = new_style
+
+      wb = row.worksheet.workbook
+      
+      wb.styled_cells << self
+    end
+
     # The row this cell belongs to.
     # @return [Row]
     attr_reader :row

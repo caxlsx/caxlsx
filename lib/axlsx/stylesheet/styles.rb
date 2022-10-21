@@ -120,6 +120,10 @@ module Axlsx
       load_default_styles
     end
 
+    def style_index
+      @style_index ||= {}
+    end
+
     # Drastically simplifies style creation and management.
     # @return [Integer]
     # @option options [String] fg_color The text color
@@ -219,10 +223,35 @@ module Axlsx
     #   f = File.open('example_differential_styling', 'wb')
     #   p.serialize(f)
     #
+    # An index for cell styles where keys are styles codes as per Axlsx::Style and values are Cell#raw_style
+    # The reason for the backward key/value ordering is that style lookup must be most efficient, while `add_style` can be less efficient
     def add_style(options={})
       # Default to :xf
       options[:type] ||= :xf
+
       raise ArgumentError, "Type must be one of [:xf, :dxf]" unless [:xf, :dxf].include?(options[:type] )
+
+      if options[:border].is_a?(Hash) && options[:border][:edges] == :all
+        options[:border][:edges] = Axlsx::Border::EDGES
+      end
+
+      if options[:type] == :xf
+        # Check to see if style in cache already
+        
+        font_defaults = {name: @fonts.first.name, sz: @fonts.first.sz, family: @fonts.first.family} 
+
+        raw_style = {type: :xf}.merge(font_defaults).merge(options)
+
+        if raw_style[:format_code]
+          raw_style.delete(:num_fmt)
+        end
+
+        xf_index = style_index.key(raw_style)
+
+        if xf_index
+          return xf_index
+        end
+      end
 
       fill = parse_fill_options options
       font = parse_font_options options
@@ -238,7 +267,18 @@ module Axlsx
         style = Xf.new :fillId=>fill || 0, :fontId=>font || 0, :numFmtId=>numFmt || 0, :borderId=>border || 0, :alignment => alignment, :protection => protection, :applyFill=>!fill.nil?, :applyFont=>!font.nil?, :applyNumberFormat =>!numFmt.nil?, :applyBorder=>!border.nil?, :applyAlignment => !alignment.nil?, :applyProtection => !protection.nil?
       end
 
-      options[:type] == :xf ? cellXfs << style : dxfs << style
+      if options[:type] == :xf
+        xf_index = (cellXfs << style)
+
+        # Add styles to style_index cache for re-use
+        style_index[xf_index] = raw_style
+
+        return xf_index
+      else
+        dxf_index = (dxfs << style)
+
+        return dxf_index
+      end
     end
 
     # parses add_style options for protection styles

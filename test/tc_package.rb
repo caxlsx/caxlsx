@@ -157,6 +157,26 @@ class TestPackage < Test::Unit::TestCase
     end
   end
 
+  def test_serialize_automatically_performs_apply_styles
+    p = Axlsx::Package.new
+    wb = p.workbook
+
+    assert_nil wb.styles_applied
+    wb.add_worksheet do |sheet|
+      sheet.add_row ['A1', 'B1']
+      sheet.add_style 'A1:B1', b: true
+    end
+
+    @fname = 'axlsx_test_serialization.xlsx'
+
+    p.serialize(@fname)
+
+    assert_equal true, wb.styles_applied
+    assert_equal 1, wb.styles.style_index.count
+
+    File.delete(@fname)
+  end
+
   def assert_zip_file_matches_package(fname, package)
     zf = Zip::File.open(fname)
     package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
@@ -303,6 +323,21 @@ class TestPackage < Test::Unit::TestCase
     assert_equal(stream.external_encoding, Encoding::ASCII_8BIT)
     # Cached ids should be cleared
     assert(Axlsx::Relationship.ids_cache.empty?)
+  end
+
+  def test_to_stream_automatically_performs_apply_styles
+    p = Axlsx::Package.new
+    wb = p.workbook
+
+    assert_nil wb.styles_applied
+    wb.add_worksheet do |sheet|
+      sheet.add_row ['A1', 'B1']
+      sheet.add_style 'A1:B1', b: true
+    end
+
+    p.to_stream
+
+    assert_equal 1, wb.styles.style_index.count
   end
 
   def test_encrypt
