@@ -162,15 +162,27 @@ class TestPivotTable < Test::Unit::TestCase
       pt.data = [
         {ref: "Gross amount", num_fmt: 2},
         {ref: "Net amount", num_fmt: 2},
+        {ref: "Margin", num_fmt: 2},
       ]
     end
 
     xml = pivot_table.to_xml_string
 
-    assert(xml.include?('colFields'))
-
     assert(!xml.include?('dataOnRows'))
-    assert(!xml.include?('colItems'))
+    assert(xml.include?('colFields'))
+    assert(xml.include?('colItems'))
+
+    doc = Nokogiri::XML(pivot_table.to_xml_string)
+
+    assert_equal('1', doc.at_css('colFields')['count'])
+    assert_equal('-2', doc.at_css('colFields field')['x'])
+
+    assert_equal('3', doc.at_css('colItems')['count'])
+    assert_equal( 3, doc.at_css('colItems').children.size)
+    assert_nil( doc.at_css('colItems i')['x'])
+    assert_equal('1', doc.at_css('colItems i[i=1] x')['v'])
+    assert_equal('2', doc.at_css('colItems i[i=2] x')['v'])
+
   end
 
   def test_pivot_table_with_only_one_data_row
