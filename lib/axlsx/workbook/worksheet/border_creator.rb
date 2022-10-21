@@ -4,7 +4,7 @@ module Axlsx
   class BorderCreator
     attr_reader :worksheet, :cells, :edges, :width, :color
 
-    def initialize(worksheet, cells, args)
+    def initialize(worksheet, cells, args=nil)
       @worksheet = worksheet
       @cells     = cells
       if args.is_a?(Hash)
@@ -12,7 +12,7 @@ module Axlsx
         @width = args[:style] || :thin
         @color = args[:color] || '000000'
       else
-        @edges = args || Axlsx::Border::Edges
+        @edges = args || Axlsx::Border::EDGES
         @width = :thin
         @color = '000000'
       end

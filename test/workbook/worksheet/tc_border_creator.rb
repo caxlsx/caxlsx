@@ -36,6 +36,16 @@ class TestBorderCreator < Test::Unit::TestCase
     assert_equal bc.instance_variable_get(:@edges), [:top]
     assert_equal bc.instance_variable_get(:@width), :thick
     assert_equal bc.instance_variable_get(:@color), "ffffff"
+
+    bc = Axlsx::BorderCreator.new(@ws, @ws["A1:B2"], nil)
+    assert_equal bc.instance_variable_get(:@edges), Axlsx::Border::EDGES
+    assert_equal bc.instance_variable_get(:@width), :thin
+    assert_equal bc.instance_variable_get(:@color), "000000"
+
+    bc = Axlsx::BorderCreator.new(@ws, @ws["A1:B2"])
+    assert_equal bc.instance_variable_get(:@edges), Axlsx::Border::EDGES
+    assert_equal bc.instance_variable_get(:@width), :thin
+    assert_equal bc.instance_variable_get(:@color), "000000"
   end
 
   def test_draw
