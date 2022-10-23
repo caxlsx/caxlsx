@@ -716,6 +716,30 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal 12 + 2, wb.styles.style_index.keys.max
   end
 
+  def test_add_border_arguments
+    p = Axlsx::Package.new
+    wb = p.workbook
+
+    wb.add_worksheet do |sheet|
+      20.times.each do
+        sheet.add_row [1,2,3,4,5]
+      end
+
+      sheet.add_border "B2:D5"
+      sheet.add_border ["C3:C4", "D3:D4", "A2"], {color: "FF00000"}
+      sheet.add_border "B10:E10", [:top, :bottom, :left, :right]
+      sheet.add_border "B12:E12", :all
+      sheet.add_border "B14:E14", Axlsx::Border::EDGES
+      sheet.add_border "B16:E16", {edges: :all, style: :thick}
+      sheet.add_border "B18:E18", {edges: [:top], style: :thick, color: "FFFFF00"}
+    end
+
+    wb.apply_styles
+
+    assert_equal true, wb.styles_applied
+    assert_equal 17, wb.styles.style_index.count
+  end
+
   def test_duplicate_borders
     p = Axlsx::Package.new
     wb = p.workbook

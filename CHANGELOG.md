@@ -1,6 +1,9 @@
 CHANGELOG
 ---------
 - **Unreleased**
+  - Fix bug when calling `worksheet.add_border("A1:B2", nil)`
+  - Change `BorderCreator#initialize` arguments handling
+  - Fix `add_border` to work with singluar cell refs
 
 - **October.21.22**: 3.3.0
   - [PR #168](https://github.com/caxlsx/caxlsx/pull/168) - Merge in the gem [`axlsx_styler`](https://github.com/axlsx-styler-gem/axlsx_styler)

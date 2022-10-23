@@ -7,45 +7,43 @@ class TestBorderCreator < Test::Unit::TestCase
     @ws = @wb.add_worksheet
   end
 
-  def test_defaults
-    3.times do
-      @ws.add_row [1,2,3]
+  def test_initialize
+    @ws.add_row [1,2,3]
+
+    bc = Axlsx::BorderCreator.new(worksheet: @ws, cells: @ws["A1:B1"])
+    assert_equal bc.instance_variable_get(:@edges), Axlsx::Border::EDGES
+    assert_equal bc.instance_variable_get(:@style), :thin
+    assert_equal bc.instance_variable_get(:@color), "000000"
+
+    bc = Axlsx::BorderCreator.new(worksheet: @ws, cells: @ws["A1:B1"], edges: [:top], style: :thick, color: "ffffff")
+    assert_equal bc.instance_variable_get(:@edges), [:top]
+    assert_equal bc.instance_variable_get(:@style), :thick
+    assert_equal bc.instance_variable_get(:@color), "ffffff"
+  end
+
+  def test_initialize_edges
+    @ws.add_row [1,2,3]
+
+    bc = Axlsx::BorderCreator.new(worksheet: @ws, cells: @ws["A1:B1"], edges: nil)
+    assert_equal bc.instance_variable_get(:@edges), Axlsx::Border::EDGES
+
+    bc = Axlsx::BorderCreator.new(worksheet: @ws, cells: @ws["A1:B1"], edges: :all)
+    assert_equal bc.instance_variable_get(:@edges), Axlsx::Border::EDGES
+
+    bc = Axlsx::BorderCreator.new(worksheet: @ws, cells: @ws["A1:B1"], edges: [])
+    assert_equal bc.instance_variable_get(:@edges), []
+
+    assert_raises(ArgumentError) do
+      bc = Axlsx::BorderCreator.new(worksheet: @ws, cells: @ws["A1:B1"], edges: [:foo])
     end
 
-    bc = Axlsx::BorderCreator.new(@ws, @ws["A1:B2"], {})
-    assert_equal bc.instance_variable_get(:@edges), Axlsx::Border::EDGES
-    assert_equal bc.instance_variable_get(:@width), :thin
-    assert_equal bc.instance_variable_get(:@color), "000000"
+    assert_raises(ArgumentError) do
+      bc = Axlsx::BorderCreator.new(worksheet: @ws, cells: @ws["A1:B1"], edges: :foo)
+    end
 
-    bc = Axlsx::BorderCreator.new(@ws, @ws["A1:B2"], ["top"])
-    assert_equal bc.instance_variable_get(:@edges), [:top]
-    assert_equal bc.instance_variable_get(:@width), :thin
-    assert_equal bc.instance_variable_get(:@color), "000000"
-
-    bc = Axlsx::BorderCreator.new(@ws, @ws["A1:B2"], :all)
-    assert_equal bc.instance_variable_get(:@edges), Axlsx::Border::EDGES
-    assert_equal bc.instance_variable_get(:@width), :thin
-    assert_equal bc.instance_variable_get(:@color), "000000"
-
-    bc = Axlsx::BorderCreator.new(@ws, @ws["A1:B2"], [:foo])
-    assert_equal bc.instance_variable_get(:@edges), []
-    assert_equal bc.instance_variable_get(:@width), :thin
-    assert_equal bc.instance_variable_get(:@color), "000000"
-
-    bc = Axlsx::BorderCreator.new(@ws, @ws["A1:B2"], {edges: ["top"], style: :thick, color: "ffffff"})
-    assert_equal bc.instance_variable_get(:@edges), [:top]
-    assert_equal bc.instance_variable_get(:@width), :thick
-    assert_equal bc.instance_variable_get(:@color), "ffffff"
-
-    bc = Axlsx::BorderCreator.new(@ws, @ws["A1:B2"], nil)
-    assert_equal bc.instance_variable_get(:@edges), Axlsx::Border::EDGES
-    assert_equal bc.instance_variable_get(:@width), :thin
-    assert_equal bc.instance_variable_get(:@color), "000000"
-
-    bc = Axlsx::BorderCreator.new(@ws, @ws["A1:B2"])
-    assert_equal bc.instance_variable_get(:@edges), Axlsx::Border::EDGES
-    assert_equal bc.instance_variable_get(:@width), :thin
-    assert_equal bc.instance_variable_get(:@color), "000000"
+    assert_raises(ArgumentError) do
+      bc = Axlsx::BorderCreator.new(worksheet: @ws, cells: @ws["A1:B1"], edges: [nil])
+    end
   end
 
   def test_draw
@@ -53,7 +51,7 @@ class TestBorderCreator < Test::Unit::TestCase
       @ws.add_row [1,2,3,4,5]
     end
 
-    bc = Axlsx::BorderCreator.new(@ws, @ws["A1:C3"], {edges: ["top", :left], style: :thick, color: "ffffff"})
+    bc = Axlsx::BorderCreator.new(worksheet: @ws, cells: @ws["A1:C3"], edges: ["top", :left], style: :thick, color: "ffffff")
 
     bc.draw
 

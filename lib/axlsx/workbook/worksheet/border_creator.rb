@@ -2,38 +2,44 @@
 
 module Axlsx
   class BorderCreator
-    attr_reader :worksheet, :cells, :edges, :width, :color
-
-    def initialize(worksheet, cells, args=nil)
+    def initialize(worksheet:, cells:, edges: nil, style: nil, color: nil)
       @worksheet = worksheet
-      @cells     = cells
-      if args.is_a?(Hash)
-        @edges = args[:edges] || Axlsx::Border::EDGES
-        @width = args[:style] || :thin
-        @color = args[:color] || '000000'
-      else
-        @edges = args || Axlsx::Border::EDGES
-        @width = :thin
-        @color = '000000'
-      end
+      @cells = cells
+
+      @edges = edges || :all
+      @style = style || :thin
+      @color = color || "000000"
 
       if @edges == :all
         @edges = Axlsx::Border::EDGES
-      elsif @edges.is_a?(Array)
-        @edges = (@edges.map(&:to_sym).uniq & Axlsx::Border::EDGES)
+      elsif !@edges.is_a?(Array)
+        raise ArgumentError.new("Invalid edges provided, #{@edges}") 
       else
-        @edges = []
+        @edges = @edges.map{|x| x&.to_sym}.uniq
+
+        if !(@edges - Axlsx::Border::EDGES).empty?
+          raise ArgumentError.new("Invalid edges provided, #{edges}")
+        end
       end
     end
 
     def draw
-      @edges.each do |edge| 
-        worksheet.add_style(
-          border_cells[edge], 
+      if @cells.size == 1
+        @worksheet.add_style(
+          first_cell, 
           {
-            border: {style: @width, color: @color, edges: [edge]}
+            border: {style: @style, color: @color, edges: @edges}
           }
         )
+      else
+        @edges.each do |edge| 
+          @worksheet.add_style(
+            border_cells[edge], 
+            {
+              border: {style: @style, color: @color, edges: [edge]}
+            }
+          )
+        end
       end
     end
 
@@ -49,11 +55,11 @@ module Axlsx
     end
 
     def first_cell
-      @first_cell ||= cells.first.r
+      @first_cell ||= @cells.first.r
     end
 
     def last_cell
-      @last_cell ||= cells.last.r
+      @last_cell ||= @cells.last.r
     end
 
     def first_row
