@@ -231,8 +231,12 @@ module Axlsx
 
       raise ArgumentError, "Type must be one of [:xf, :dxf]" unless [:xf, :dxf].include?(options[:type] )
 
-      if options[:border].is_a?(Hash) && options[:border][:edges] == :all
-        options[:border][:edges] = Axlsx::Border::EDGES
+      if options[:border].is_a?(Hash)
+        if options[:border][:edges] == :all
+          options[:border][:edges] = Axlsx::Border::EDGES
+        elsif options[:border][:edges]
+          options[:border][:edges] = options[:border][:edges].map(&:to_sym) ### normalize for style caching
+        end
       end
 
       if options[:type] == :xf

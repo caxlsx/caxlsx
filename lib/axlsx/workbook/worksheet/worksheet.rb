@@ -587,14 +587,25 @@ module Axlsx
     # Set the style for cells in a specific column
     # @param [String|Array] cell references
     # @param [Hash|Array|Symbol] border options
-    def add_border(cell_refs, options = Axlsx::Border::EDGES)
+    def add_border(cell_refs, options=nil)
+      if options.is_a?(Hash)
+        border_edges = options[:edges]
+        border_style = options[:style]
+        border_color = options[:color]
+      else
+        border_edges = options
+      end
+
       if !cell_refs.is_a?(Array)
         cell_refs = [cell_refs]
       end
 
       cell_refs.each do |cell_ref|
-        cells = self[cell_ref]
-        Axlsx::BorderCreator.new(self, cells, options).draw
+        item = self[cell_ref]
+
+        cells = item.is_a?(Array) ? item : [item]
+
+        Axlsx::BorderCreator.new(worksheet: self, cells: cells, edges: border_edges, style: border_style, color: border_color).draw
       end
     end
 
