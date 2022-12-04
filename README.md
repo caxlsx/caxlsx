@@ -1,6 +1,6 @@
 # Caxlsx (Community Continued Version)
 [![Build Status](https://github.com/caxlsx/caxlsx/workflows/Test/badge.svg)](https://github.com/caxlsx/caxlsx/actions)
-[![Gem Version](https://badge.fury.io/rb/caxlsx.svg)](http://badge.fury.io/rb/caxlsx)
+[![Gem Version](https://badge.fury.io/rb/caxlsx.svg)](https://badge.fury.io/rb/caxlsx)
 ![Total downloads](http://ruby-gem-downloads-badge.herokuapp.com/caxlsx?type=total)
 ![Downloads for 3.3.0 (latest)](http://ruby-gem-downloads-badge.herokuapp.com/caxlsx/3.3.0?label=downloads%203.3.0)
 
@@ -8,7 +8,7 @@
 
 To better maintain the Axlsx ecosystem, all related gems have been forked or moved to the following community organization:
 
-http://github.com/caxlsx
+https://github.com/caxlsx
 
 [Join the Caxlsx Slack channel](https://join.slack.com/t/caxlsx/shared_invite/enQtOTI5OTM0MzI1Njk5LTBlMDQzNDk2YzkwODMxMmVkODMyYzJiZGU5NTQ3YTg5NTBlN2IwZTlmNTRjNzhiY2E0MDY2OTEyYmFlODI5NjA)
 
@@ -160,6 +160,6 @@ See [CONTRIBUTING.md](https://github.com/caxlsx/caxlsx/blob/master/CONTRIBUTING.
 
 Originally created by Randy Morgan - @randym
 
-Forked in 2019, to enable the community to maintain the Axlsx ecosystem - http://github.com/caxlsx
+Forked in 2019, to enable the community to maintain the Axlsx ecosystem - https://github.com/caxlsx
 
 Open source software is a community effort. None of this could have been done without the help of [our Contributors](https://github.com/caxlsx/caxlsx/graphs/contributors).
