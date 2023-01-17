@@ -9,7 +9,7 @@ module Axlsx
 
     # Creates a new Pic(ture) object
     # @param [Anchor] anchor the anchor that holds this image
-    # @@option options [Boolean] :remote indicates if image_src is a remote URI
+    # @option options [Boolean] :remote indicates if image_src is a remote URI
     # @option options [String] :name
     # @option options [String] :descr
     # @option options [String] :image_src
@@ -17,7 +17,6 @@ module Axlsx
     # @option options [Integer] :width
     # @option options [Integer] :height
     # @option options [Float] :opacity - set the picture opacity, accepts a value between 0.0 and 1.0
-    # @option options [Boolean]
     def initialize(anchor, options={})
       @anchor = anchor
       @hyperlink = nil
