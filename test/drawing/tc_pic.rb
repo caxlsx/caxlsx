@@ -25,6 +25,7 @@ class TestPic < Test::Unit::TestCase
     assert_equal(@p.workbook.images[1], @image_remote)
     assert_equal(@image_remote.file_name, nil)
     assert_equal(@image_remote.image_src, @test_img_remote_png)
+    assert_equal(@image_remote.remote?, true)
   end
 
 
