@@ -7,7 +7,7 @@ module Axlsx
 
     # Creates a new Pic(ture) object
     # @param [Anchor] anchor the anchor that holds this image
-    # @@option options [Boolean] :remote indicates if image_src is a remote URI
+    # @option options [Boolean] :remote indicates if image_src is a remote URI
     # @option options [String] :name
     # @option options [String] :descr
     # @option options [String] :image_src
