@@ -249,7 +249,7 @@ module Axlsx
       end
 
       workbook.images.each do |image|
-        parts << {:entry => "xl/#{image.pn}", :path => image.image_src}
+        parts << {:entry => "xl/#{image.pn}", :path => image.image_src} unless image.remote?
       end
 
       if use_shared_strings
