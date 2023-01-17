@@ -9,7 +9,10 @@ class TestPic < Test::Unit::TestCase
     @test_img_png =  File.dirname(__FILE__) + "/../fixtures/image1.png"
     @test_img_gif =  File.dirname(__FILE__) + "/../fixtures/image1.gif"
     @test_img_fake =  File.dirname(__FILE__) + "/../fixtures/image1_fake.jpg"
+    @test_img_remote_png =  "https://via.placeholder.com/150.png"
+    @test_img_remote_fake =  "invalid_URI"
     @image = ws.add_image :image_src => @test_img, :hyperlink => 'https://github.com/randym', :tooltip => "What's up doc?", :opacity => 5
+    @image_remote = ws.add_image :image_src => @test_img_remote_png, remote: true, :hyperlink => 'https://github.com/randym', :tooltip => "What's up doc?", :opacity => 5
   end
 
   def test_initialization
@@ -17,6 +20,13 @@ class TestPic < Test::Unit::TestCase
     assert_equal(@image.file_name, 'image1.jpeg')
     assert_equal(@image.image_src, @test_img)
   end
+
+  def test_remote_img_initialization
+    assert_equal(@p.workbook.images[1], @image_remote)
+    assert_equal(@image_remote.file_name, nil)
+    assert_equal(@image_remote.image_src, @test_img_remote_png)
+  end
+
 
   def test_anchor_swapping
     #swap from one cell to two cell when end_at is specified
@@ -77,6 +87,14 @@ class TestPic < Test::Unit::TestCase
     assert_nothing_raised { @image.image_src = @test_img_jpg }
     assert_equal(@image.image_src, @test_img_jpg)
   end
+
+  def test_remote_image_src
+    assert_raise(ArgumentError) { @image_remote.image_src = @test_img_fake }
+    assert_raise(ArgumentError) { @image_remote.image_src = @test_img_remote_fake }
+    assert_nothing_raised { @image_remote.image_src = @test_img_remote_png }
+    assert_equal(@image_remote.image_src, @test_img_remote_png)
+  end
+
 
   def test_descr
     assert_raise(ArgumentError) { @image.descr = 49 }

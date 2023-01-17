@@ -17,7 +17,7 @@ module Axlsx
     # @option options [Integer] :width
     # @option options [Integer] :height
     # @option options [Float] :opacity - set the picture opacity, accepts a value between 0.0 and 1.0
-    # @option options [Boolean] 
+    # @option options [Boolean]
     def initialize(anchor, options={})
       @anchor = anchor
       @hyperlink = nil
@@ -80,7 +80,10 @@ module Axlsx
 
     def image_src=(v)
       Axlsx::validate_string(v)
-      unless remote?
+      if remote?
+        RegexValidator.validate('Pic.image_src', /\A#{URI::DEFAULT_PARSER.make_regexp}\z/, v)
+        RestrictionValidator.validate 'Pic.image_src', ALLOWED_MIME_TYPES, MimeTypeUtils.get_mime_type_from_uri(v)
+      else
         RestrictionValidator.validate 'Pic.image_src', ALLOWED_MIME_TYPES, MimeTypeUtils.get_mime_type(v)
         raise ArgumentError, "File does not exist" unless File.exist?(v)
       end
@@ -195,7 +198,7 @@ module Axlsx
       str << '</xdr:cNvPicPr></xdr:nvPicPr>'
       str << '<xdr:blipFill>'
       if remote?
-        str << ('<a:blip xmlns:r ="' << XML_NS_R << '" r:link="' << relationship.Id << '" >')
+        str << ('<a:blip xmlns:r ="' << XML_NS_R << '" r:link="' << relationship.Id << '">')
       else
         str << ('<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
       end
