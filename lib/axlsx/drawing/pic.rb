@@ -95,10 +95,14 @@ module Axlsx
     def descr=(v) Axlsx::validate_string(v); @descr = v; end
 
     # @see remote
-    def remote=(v) @remote = v; end
+    def remote=(v) Axlsx::validate_boolean(v); @remote = v; end
 
     def remote?
-      remote == true;
+      if remote == 1 || remote.to_s == 'true'
+        true
+      else
+        false
+      end
     end
 
     # The file name of image_src without any path information
@@ -196,11 +200,7 @@ module Axlsx
       picture_locking.to_xml_string(str)
       str << '</xdr:cNvPicPr></xdr:nvPicPr>'
       str << '<xdr:blipFill>'
-      if remote?
-        str << ('<a:blip xmlns:r ="' << XML_NS_R << '" r:link="' << relationship.Id << '">')
-      else
-        str << ('<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
-      end
+      str << relationship_xml_portion
       if opacity
         str << "<a:alphaModFix amt=\"#{opacity}\"/>"
       end
@@ -211,6 +211,15 @@ module Axlsx
     end
 
     private
+
+    # Return correct xml relationship string portion
+    def relationship_xml_portion
+      if remote?
+        ('<a:blip xmlns:r ="' << XML_NS_R << '" r:link="' << relationship.Id << '">')
+      else
+        ('<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
+      end
+    end
 
     # Changes the anchor to a one cell anchor.
     def use_one_cell_anchor
