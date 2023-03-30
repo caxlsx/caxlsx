@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   # The Dxf class defines an incremental formatting record for use in Styles. The recommended way to manage styles for your workbook is with Styles#add_style
   # @see Styles#add_style

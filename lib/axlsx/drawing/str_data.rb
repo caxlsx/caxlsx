@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 module Axlsx
 
   #This specifies the last string data used for a chart. (e.g. strLit and strCache)

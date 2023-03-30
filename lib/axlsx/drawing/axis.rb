@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # the access class defines common properties and values for a chart axis.
@@ -83,14 +82,14 @@ module Axlsx
     # the title for the axis. This can be a cell or a fixed string.
     attr_reader :title
 
-    # The color for this axis. This value is used when rendering the axis line in the chart. 
+    # The color for this axis. This value is used when rendering the axis line in the chart.
     # colors should be in 6 character rbg format
     # @return [String] the rbg color assinged.
     # @see color
     def color=(color_rgb)
       @color = color_rgb
     end
-    
+
     # The crossing axis for this axis
     # @param [Axis] axis
     def cross_axis=(axis)

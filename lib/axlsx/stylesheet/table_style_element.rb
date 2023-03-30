@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   # an element of style that belongs to a table style.
   # @note tables and table styles are not supported in this version. This class exists in preparation for that support.

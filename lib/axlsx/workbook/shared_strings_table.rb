@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # The Shared String Table class is responsible for managing and serializing common strings in a workbook.

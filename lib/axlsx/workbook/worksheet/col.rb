@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # The Col class defines column attributes for columns in sheets.

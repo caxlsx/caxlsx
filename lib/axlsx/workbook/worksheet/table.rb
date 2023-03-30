@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   # Table
   # @note Worksheet#add_table is the recommended way to create tables for your worksheets.
@@ -64,7 +63,7 @@ module Axlsx
       end
     end
 
-    # TableStyleInfo for the table. 
+    # TableStyleInfo for the table.
     # initialization can be fed via the :style_info option
     def table_style_info
       @table_style_info ||= TableStyleInfo.new

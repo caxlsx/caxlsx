@@ -1,11 +1,10 @@
-# encoding: UTF-8
 module Axlsx
 
   # The core object for the package.
   # @note Packages manage their own core object.
   # @see Package#core
   class Core
- 
+
     # Creates a new Core object.
     # @option options [String] creator
     # @option options [Time] created

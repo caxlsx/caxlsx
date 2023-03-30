@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'open3'
 require 'shellwords'
 

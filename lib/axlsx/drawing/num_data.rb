@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 module Axlsx
 
   #This class specifies data for a particular data point. It is used for both numCache and numLit object

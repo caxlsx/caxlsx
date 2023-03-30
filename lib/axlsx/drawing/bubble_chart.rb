@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # The BubbleChart allows you to insert a bubble chart into your worksheet

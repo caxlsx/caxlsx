@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   # CellStyle defines named styles that reference defined formatting records and can be used in your worksheet.
   # @note Using Styles#add_style is the recommended way to manage cell styling.

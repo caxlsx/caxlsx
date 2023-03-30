@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 require 'tc_helper.rb'
 
 class TestDateTimeConverter < Test::Unit::TestCase

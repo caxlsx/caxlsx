@@ -1,16 +1,15 @@
-# encoding: UTF-8
 module Axlsx
-  
- 
+
+
   # CellAlignment stores information about the cell alignment of a style Xf Object.
   # @note Using Styles#add_style is the recommended way to manage cell alignment.
   # @see Styles#add_style
   class CellAlignment
-    
+
 
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
-    
+
     serializable_attributes :horizontal, :vertical, :text_rotation, :wrap_text, :indent, :relative_indent, :justify_last_line, :shrink_to_fit, :reading_order
     # Create a new cell_alignment object
     # @option options [Symbol] horizontal

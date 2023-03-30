@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # The LineChart is a two dimentional line chart (who would have guessed?) that you can add to your worksheet.

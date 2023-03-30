@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'cgi'
 module Axlsx
   # A cell in a worksheet.
@@ -104,7 +103,7 @@ module Axlsx
       self.raw_style = new_style
 
       wb = row.worksheet.workbook
-      
+
       wb.styled_cells << self
     end
 

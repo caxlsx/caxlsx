@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   # The color class represents a color used for borders, fills an fonts
   class Color

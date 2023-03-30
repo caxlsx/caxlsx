@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # The ScatterChart allows you to insert a scatter chart into your worksheet

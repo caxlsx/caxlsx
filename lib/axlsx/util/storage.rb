@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # The Storage class represents a storage object or stream in a compound file.
@@ -16,46 +15,46 @@ module Axlsx
     }.freeze
 
     # Creates a byte string for this storage
-    # @return [String] 
+    # @return [String]
     def to_s
-     data = [@name.concat(Array.new(32-@name.size, 0)), 
-             @name_size, 
-             @type, 
-             @color, 
-             @left, 
-             @right, 
-             @child, 
+     data = [@name.concat(Array.new(32-@name.size, 0)),
+             @name_size,
+             @type,
+             @color,
+             @left,
+             @right,
+             @child,
              @created,
-             @modified, 
-             @sector, 
+             @modified,
+             @sector,
              @size].flatten
       data.pack(PACKING)
     end
 
     # storage colors
     COLORS = {
-      :red=>0, 
+      :red=>0,
       :black=>1
     }
 
     # The color of this node in the directory tree. Defaults to black if not specified
     # @return [Integer] color
     attr_reader :color
-    
+
     # Sets the color for this storage
     # @param [Integer] v Must be one of the COLORS constant hash values
     def color=(v)
-      RestrictionValidator.validate :storage_color, COLORS.values, v      
+      RestrictionValidator.validate :storage_color, COLORS.values, v
       @color = v
     end
 
     # The size of the name for this node.
-    # interesting to see that office actually uses 'R' for the root directory and lists the size as 2 bytes - thus is it *NOT* null 
+    # interesting to see that office actually uses 'R' for the root directory and lists the size as 2 bytes - thus is it *NOT* null
     # terminated. I am making this r/w so that I can override the size
     # @return [Integer] color
     attr_reader :name_size
 
-    # the name of the stream    
+    # the name of the stream
     attr_reader :name
 
     # sets the name of the stream.
@@ -87,16 +86,16 @@ module Axlsx
     # @return [Integer] sector
     attr_accessor :sector
 
-    # The 0 based index in the directoies chain for this the left sibling of this storage. 
-    
+    # The 0 based index in the directoies chain for this the left sibling of this storage.
+
     # @return [Integer] left
-    attr_accessor :left 
+    attr_accessor :left
 
-    # The 0 based index in the directoies chain for this the right sibling of this storage. 
+    # The 0 based index in the directoies chain for this the right sibling of this storage.
     # @return [Integer] right
-    attr_accessor :right 
+    attr_accessor :right
 
-    # The 0 based index in the directoies chain for the child of this storage. 
+    # The 0 based index in the directoies chain for the child of this storage.
     # @return [Integer] child
     attr_accessor :child
 
@@ -113,14 +112,14 @@ module Axlsx
     # @return [Integer] type
     attr_reader :type
 
-    # Sets the type for this storage. 
-    # @param [Integer] v the type to specify must be one of the TYPES constant hash values. 
+    # Sets the type for this storage.
+    # @param [Integer] v the type to specify must be one of the TYPES constant hash values.
     def type=(v)
-      RestrictionValidator.validate :storage_type, TYPES.values, v      
+      RestrictionValidator.validate :storage_type, TYPES.values, v
       @type = v
     end
 
-    # Creates a new storage object. 
+    # Creates a new storage object.
     # @param [String] name the name of the storage
     # @option options [Integer] color (black)
     # @option options [Integer] type (storage)
@@ -141,6 +140,6 @@ module Axlsx
       @type ||= (data.nil? ? TYPES[:storage] : TYPES[:stream])
       self.name = name
     end
- 
+
   end
 end

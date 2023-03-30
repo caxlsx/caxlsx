@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   # A Row is a single row in a worksheet.
   # @note The recommended way to manage rows and cells is to use Worksheet#add_row
@@ -6,7 +5,7 @@ module Axlsx
   class Row < SimpleTypedList
     include SerializedAttributes
     include Accessors
-    
+
     # No support is provided for the following attributes
     # spans
     # thickTop
@@ -64,7 +63,7 @@ module Axlsx
     # @see Row#s
     def s=(v)
       Axlsx.validate_unsigned_numeric(v)
-      @custom_format = true 
+      @custom_format = true
       @s = v
     end
 
@@ -73,7 +72,7 @@ module Axlsx
       Axlsx.validate_unsigned_numeric(v)
       @outline_level = v
     end
-    
+
     alias :outlineLevel= :outline_level=
 
     # The index of this row in the worksheet
@@ -126,7 +125,7 @@ module Axlsx
         @ht = v
       end
     end
-    
+
     # return cells
     def cells
       self

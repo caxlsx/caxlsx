@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # The BarChart is a two dimentional barchart that you can add to your worksheet.
