@@ -1,6 +1,6 @@
 module Axlsx
 
-  #Sheet formatting properties
+  # Sheet formatting properties
   # <xsd:complexType name="CT_SheetFormatPr">
   #   <xsd:attribute name="baseColWidth" type="xsd:unsignedInt" use="optional" default="8"/>
   #   <xsd:attribute name="defaultColWidth" type="xsd:double" use="optional"/>
@@ -11,7 +11,7 @@ module Axlsx
   #   <xsd:attribute name="thickBottom" type="xsd:boolean" use="optional" default="false"/>
   #   <xsd:attribute name="outlineLevelRow" type="xsd:unsignedByte" use="optional" default="0"/>
   #   <xsd:attribute name="outlineLevelCol" type="xsd:unsignedByte" use="optional" default="0"/>
-  #</xsd:complexType>
+  # </xsd:complexType>
 
   class SheetFormatPr
     include Axlsx::SerializedAttributes
@@ -42,7 +42,7 @@ module Axlsx
 
     boolean_attr_accessor :custom_height, :zero_height, :thick_top, :thick_bottom
 
-    unsigned_int_attr_accessor :base_col_width, :outline_level_row, :outline_level_col 
+    unsigned_int_attr_accessor :base_col_width, :outline_level_row, :outline_level_col
 
     # serializes this object to an xml string
     # @param [String] str The string this objects serialization will be appended to
