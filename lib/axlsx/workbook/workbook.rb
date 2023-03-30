@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-module Axlsx
 require 'axlsx/workbook/worksheet/sheet_calc_pr.rb'
 require 'axlsx/workbook/worksheet/auto_filter/auto_filter.rb'
 require 'axlsx/workbook/worksheet/date_time_converter.rb'
@@ -42,8 +40,6 @@ require 'axlsx/workbook/worksheet/row_breaks'
 require 'axlsx/workbook/worksheet/col_breaks'
 require 'axlsx/workbook/workbook_view'
 require 'axlsx/workbook/workbook_views'
-
-
 require 'axlsx/workbook/worksheet/worksheet.rb'
 require 'axlsx/workbook/shared_strings_table.rb'
 require 'axlsx/workbook/defined_name.rb'
@@ -60,6 +56,9 @@ require 'axlsx/workbook/worksheet/sheet_view.rb'
 require 'axlsx/workbook/worksheet/sheet_format_pr.rb'
 require 'axlsx/workbook/worksheet/pane.rb'
 require 'axlsx/workbook/worksheet/selection.rb'
+
+module Axlsx
+
   # The Workbook class is an xlsx workbook that manages worksheets, charts, drawings and styles.
   # The following parts of the Office Open XML spreadsheet specification are not implimented in this version.
   #
@@ -109,29 +108,28 @@ require 'axlsx/workbook/worksheet/selection.rb'
       @is_reversed = v
     end
 
-
-   # A collection of worksheets associated with this workbook.
+    # A collection of worksheets associated with this workbook.
     # @note The recommended way to manage worksheets is add_worksheet
     # @see Workbook#add_worksheet
     # @see Worksheet
     # @return [SimpleTypedList]
     attr_reader :worksheets
 
-    # A colllection of charts associated with this workbook
+    # A collection of charts associated with this workbook
     # @note The recommended way to manage charts is Worksheet#add_chart
     # @see Worksheet#add_chart
     # @see Chart
     # @return [SimpleTypedList]
     attr_reader :charts
 
-    # A colllection of images associated with this workbook
+    # A collection of images associated with this workbook
     # @note The recommended way to manage images is Worksheet#add_image
     # @see Worksheet#add_image
     # @see Pic
     # @return [SimpleTypedList]
     attr_reader :images
 
-    # A colllection of drawings associated with this workbook
+    # A collection of drawings associated with this workbook
     # @note The recommended way to manage drawings is Worksheet#add_chart
     # @see Worksheet#add_chart
     # @see Drawing
@@ -140,15 +138,14 @@ require 'axlsx/workbook/worksheet/selection.rb'
 
     # pretty sure this two are always empty and can be removed.
 
-
-    # A colllection of tables associated with this workbook
+    # A collection of tables associated with this workbook
     # @note The recommended way to manage drawings is Worksheet#add_table
     # @see Worksheet#add_table
     # @see Table
     # @return [SimpleTypedList]
     attr_reader :tables
 
-    # A colllection of pivot tables associated with this workbook
+    # A collection of pivot tables associated with this workbook
     # @note The recommended way to manage drawings is Worksheet#add_table
     # @see Worksheet#add_table
     # @see Table
@@ -217,10 +214,8 @@ require 'axlsx/workbook/worksheet/selection.rb'
       self.styles_applied = true
     end
 
-
     # Indicates if the epoc date for serialization should be 1904. If false, 1900 is used.
     @@date1904 = false
-
 
     # A quick helper to retrive a worksheet by name
     # @param [String] name The name of the sheet you are looking for
@@ -231,7 +226,8 @@ require 'axlsx/workbook/worksheet/selection.rb'
     end
 
     # Creates a new Workbook
-    # The recomended way to work with workbooks is via Package#workbook
+    # The recommended way to work with workbooks is via Package#workbook
+    # @option options [Boolean] date1904. If this is not specified, date1904 is set to false. Office 2011 for Mac defaults to false.
     # @option options [Boolean] date1904. If this is not specified, date1904 is set to false. Office 2011 for Mac defaults to false.
     def initialize(options={})
       @styles = Styles.new
@@ -243,13 +239,12 @@ require 'axlsx/workbook/worksheet/selection.rb'
       @tables = SimpleTypedList.new Table
       @pivot_tables = SimpleTypedList.new PivotTable
       @comments = SimpleTypedList.new Comments
-
-
       @use_autowidth = true
       @bold_font_multiplier = BOLD_FONT_MULTIPLIER
       @font_scale_divisor = FONT_SCALE_DIVISOR
 
-      self.date1904= !options[:date1904].nil? && options[:date1904]
+      self.escape_formulas = options[:escape_formulas].nil? ? Axlsx.escape_formulas : options[:escape_formulas]
+      self.date1904 = !options[:date1904].nil? && options[:date1904]
       yield self if block_given?
     end
 
@@ -267,6 +262,19 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # retrieves the date1904 attribute
     # @return [Boolean]
     def self.date1904() @@date1904; end
+
+    # Whether to treat values starting with an equals sign as formulas or as literal strings.
+    # Allowing user-generated data to be interpreted as formulas is a security risk.
+    # See https://www.owasp.org/index.php/CSV_Injection for details.
+    # @return [Boolean]
+    attr_reader :escape_formulas
+
+    # Sets whether to treat values starting with an equals sign as formulas or as literal strings.
+    # @param [Boolean] value The value to set.
+    def escape_formulas=(value)
+      Axlsx.validate_boolean(value)
+      @escape_formulas = value
+    end
 
     # Indicates if the workbook should use autowidths or not.
     # @note This gem no longer depends on RMagick for autowidth
@@ -380,7 +388,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # @param [Symbol] space must be one of :preserve or :default
     def xml_space=(space)
       Axlsx::RestrictionValidator.validate(:xml_space, [:preserve, :default], space)
-      @xml_space = space;
+      @xml_space = space
     end
 
     # returns a range of cells in a worksheet
@@ -420,6 +428,5 @@ require 'axlsx/workbook/worksheet/selection.rb'
       end
       str << '</workbook>'
     end
-
   end
 end

@@ -201,4 +201,19 @@ module Axlsx
   def self.trust_input=(trust_me)
     @trust_input = trust_me
   end
+
+  # Whether to treat values starting with an equals sign as formulas or as literal strings.
+  # Allowing user-generated data to be interpreted as formulas is a security risk.
+  # See https://www.owasp.org/index.php/CSV_Injection for details.
+  # @return [Boolean]
+  def self.escape_formulas
+    @escape_formulas || false
+  end
+
+  # Sets whether to treat values starting with an equals sign as formulas or as literal strings.
+  # @param [Boolean] value The value to set.
+  def self.escape_formulas=(value)
+    Axlsx.validate_boolean(value)
+    @escape_formulas = value
+  end
 end

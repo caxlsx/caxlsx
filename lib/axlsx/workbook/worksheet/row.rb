@@ -24,6 +24,7 @@ module Axlsx
     # @option options [Array] values
     # @option options [Array, Symbol] types
     # @option options [Array, Integer] style
+    # @option options [Array, Boolean] escape_formulas
     # @option options [Float] height the row's height (in points)
     # @option options [Integer] offset - add empty columns before values
     # @see Row#array_to_cells
@@ -104,17 +105,26 @@ module Axlsx
       c
     end
 
-    # sets the color for every cell in this row
+    # Sets the color for every cell in this row.
     def color=(color)
       each_with_index do | cell, index |
         cell.color = color.is_a?(Array) ? color[index] : color
       end
     end
 
-    # sets the style for every cell in this row
+    # Sets the style for every cell in this row.
     def style=(style)
       each_with_index do | cell, index |
         cell.style = style.is_a?(Array) ? style[index] : style
+      end
+    end
+
+    # Sets escape_formulas for every cell in this row. This determines whether to treat
+    # values starting with an equals sign as formulas or as literal strings.
+    # @param [Array, Boolean] value The value to set.
+    def escape_formulas=(value)
+      each_with_index do | cell, index |
+        cell.escape_formulas = value.is_a?(Array) ? value[index] : value
       end
     end
 
@@ -146,6 +156,7 @@ module Axlsx
     # @option options [Array] values
     # @option options [Array, Symbol] types
     # @option options [Array, Integer] style
+    # @option options [Array, Boolean] escape_formulas
     def array_to_cells(values, options={})
       DataTypeValidator.validate :array_to_cells, Array, values
       types, style, formula_values, escape_formulas, offset = options.delete(:types), options.delete(:style), options.delete(:formula_values), options.delete(:escape_formulas), options.delete(:offset)
@@ -153,12 +164,11 @@ module Axlsx
       values.each_with_index do |value, index|
         options[:style] = style.is_a?(Array) ? style[index] : style if style
         options[:type] = types.is_a?(Array) ? types[index] : types if types
-        options[:escape_formulas] = escape_formulas.is_a?(Array) ? escape_formulas[index] : escape_formulas if escape_formulas
+        options[:escape_formulas] = escape_formulas.is_a?(Array) ? escape_formulas[index] : escape_formulas unless escape_formulas.nil?
         options[:formula_value] = formula_values[index] if formula_values.is_a?(Array)
 
         self[index + offset.to_i] = Cell.new(self, value, options)
       end
     end
   end
-
 end
