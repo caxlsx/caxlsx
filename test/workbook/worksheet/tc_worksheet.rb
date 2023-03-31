@@ -7,7 +7,6 @@ class TestWorksheet < Test::Unit::TestCase
     @ws = @wb.add_worksheet
   end
 
-
   def test_pn
     assert_equal(@ws.pn, "worksheets/sheet1.xml")
     ws = @ws.workbook.add_worksheet
@@ -131,9 +130,7 @@ class TestWorksheet < Test::Unit::TestCase
       assert_equal(header_footer[key], optioned.header_footer.send(key))
     end
     assert_equal(optioned.name, 'bob')
-
   end
-
 
   # def test_use_gridlines
   #  assert_raise(ArgumentError) { @ws.show_gridlines = -1.1 }
@@ -210,14 +207,12 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1, 2, 3, 4]
     @ws.add_row [1, 2, 3, 4]
 
-
     assert(@ws.row_breaks.empty?)
     assert(@ws.col_breaks.empty?)
     @ws.add_page_break(@ws.rows.last.cells[1])
     assert_equal(1, @ws.row_breaks.size)
     assert_equal(1, @ws.col_breaks.size)
   end
-
 
   def test_drawing
     assert @ws.drawing == nil
@@ -442,6 +437,7 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal("foo\n\r\nbar", @ws.rows.last.cells.last.value)
     assert_not_nil(@ws.to_xml_string.index("foo\n\r\nbar"))
   end
+
   # Make sure the XML for all optional elements (like pageMargins, autoFilter, ...)
   # is generated in correct order.
   def test_valid_with_optional_elements
@@ -588,7 +584,6 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.index, filter_database[0].local_sheet_id)
     assert_equal(other_ws.index, filter_database[1].local_sheet_id)
   end
-
 
   def test_sheet_pr_for_auto_filter
     @ws.auto_filter.range = 'A1:D9'
@@ -838,7 +833,7 @@ class TestWorksheet < Test::Unit::TestCase
       sheet.add_border 'B2:D4', style: :medium
       sheet.add_style 'D2:D4', border: { style: :thin, color: '000000' }
     end
-    
+
     wb.apply_styles
 
     assert_equal 8, wb.styled_cells.count
@@ -884,17 +879,16 @@ class TestWorksheet < Test::Unit::TestCase
     wb.apply_styles
 
     assert_equal 1, wb.styles.style_index.size
-    
+
     assert_equal(
       {
-        type: :xf, 
-        name: "Times New Roman", 
-        sz: 12, 
-        family: 1, 
+        type: :xf,
+        name: "Times New Roman",
+        sz: 12,
+        family: 1,
         color: "FFFFFF",
-      }, 
+      },
       wb.styles.style_index.values.first
     )
   end
-
 end
