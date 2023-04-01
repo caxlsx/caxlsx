@@ -193,7 +193,7 @@ class TestWorkbook < Test::Unit::TestCase
     assert @wb.add_worksheet.escape_formulas
     assert_false @wb.add_worksheet(escape_formulas: false).escape_formulas
     assert @wb.add_worksheet(escape_formulas: true).escape_formulas
-
+  ensure
     Axlsx.instance_variable_set(:@escape_formulas, nil)
   end
 end

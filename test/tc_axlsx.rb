@@ -148,7 +148,7 @@ class TestAxlsx < Test::Unit::TestCase
 
     Axlsx::escape_formulas = false
     assert_equal false, Axlsx::escape_formulas
-
+  ensure
     Axlsx.instance_variable_set(:@escape_formulas, nil)
   end
 end
