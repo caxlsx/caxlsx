@@ -72,6 +72,10 @@ module Axlsx
     CELL_TYPES = [:date, :time, :float, :integer, :richtext,
                   :string, :boolean, :iso_8601, :text].freeze
 
+    # Leading characters that indicate a formula.
+    # See: https://owasp.org/www-community/attacks/CSV_Injection
+    FORMULA_PREFIXES = ['-', '=', '+', '@', '%', '|', "\r", "\t"].freeze
+
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer]
     # @see Axlsx::Styles
@@ -170,7 +174,7 @@ module Axlsx
         !is_text_run? &&          # No inline styles
         !@value.nil? &&           # Not nil
         !@value.empty? &&         # Not empty
-        !@value.start_with?(?=)  # Not a formula
+        !@value.start_with?(*FORMULA_PREFIXES) # Not a formula
     end
 
     # The inline font_name property for the cell
@@ -368,7 +372,7 @@ module Axlsx
     def is_formula?
       return false if escape_formulas
 
-      type == :string && @value.to_s.start_with?(?=)
+      type == :string && @value.to_s.start_with?(*FORMULA_PREFIXES)
     end
 
     def is_array_formula?
