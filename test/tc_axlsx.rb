@@ -22,7 +22,6 @@ class TestAxlsx < Test::Unit::TestCase
     assert_equal false, Axlsx.trust_input
   end
 
-
   def test_trust_input_can_be_set_to_true
     # Class variables like this are not reset between test runs, so we have
     # to save and restore the original value manually.
@@ -140,4 +139,16 @@ class TestAxlsx < Test::Unit::TestCase
     assert_equal({foo: {bar: true, baz: true}}, Axlsx.hash_deep_merge(h1, h2))
   end
 
+  def test_escape_formulas
+    Axlsx.instance_variable_set(:@escape_formulas, nil)
+    assert_equal false, Axlsx::escape_formulas
+
+    Axlsx::escape_formulas = true
+    assert_equal true, Axlsx::escape_formulas
+
+    Axlsx::escape_formulas = false
+    assert_equal false, Axlsx::escape_formulas
+
+    Axlsx.instance_variable_set(:@escape_formulas, nil)
+  end
 end

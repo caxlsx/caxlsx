@@ -1,6 +1,7 @@
 CHANGELOG
 ---------
 - **Unreleased**
+  - [PR #186](https://github.com/caxlsx/caxlsx/pull/186) - Add `escape_formulas` to global, workbook, worksheet, row and cell levels, and standardize behavior.
   - Fix bug when calling `worksheet.add_border("A1:B2", nil)`
   - Change `BorderCreator#initialize` arguments handling
   - Fix `add_border` to work with singluar cell refs
