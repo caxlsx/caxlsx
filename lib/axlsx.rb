@@ -207,7 +207,7 @@ module Axlsx
   # See https://www.owasp.org/index.php/CSV_Injection for details.
   # @return [Boolean]
   def self.escape_formulas
-    @escape_formulas || false
+    @escape_formulas.nil? ? false : @escape_formulas
   end
 
   # Sets whether to treat values starting with an equals sign as formulas or as literal strings.
