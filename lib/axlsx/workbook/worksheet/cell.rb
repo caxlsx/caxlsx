@@ -174,7 +174,8 @@ module Axlsx
         !is_text_run? &&          # No inline styles
         !@value.nil? &&           # Not nil
         !@value.empty? &&         # Not empty
-        !@value.start_with?(*FORMULA_PREFIXES) # Not a formula
+        !is_formula? &&           # Not a formula
+        !is_array_formula?        # Not an array formula
     end
 
     # The inline font_name property for the cell
@@ -376,6 +377,8 @@ module Axlsx
     end
 
     def is_array_formula?
+      return false if escape_formulas
+
       type == :string && @value.to_s.start_with?('{=') && @value.to_s.end_with?('}')
     end
 

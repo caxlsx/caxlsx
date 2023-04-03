@@ -318,6 +318,8 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_plain_string
+    @c.escape_formulas = false
+
     @c.type = :integer
     assert_equal(@c.plain_string?, false)
 
@@ -333,6 +335,17 @@ class TestCell < Test::Unit::TestCase
 
     @c.value = '=sum'
     assert_equal(@c.plain_string?, false)
+
+    @c.value = '{=sum}'
+    assert_equal(@c.plain_string?, false)
+
+    @c.escape_formulas = true
+
+    @c.value = '=sum'
+    assert_equal(@c.plain_string?, true)
+
+    @c.value = '{=sum}'
+    assert_equal(@c.plain_string?, true)
 
     @c.value = 'plain string'
     @c.font_name = 'Arial'
