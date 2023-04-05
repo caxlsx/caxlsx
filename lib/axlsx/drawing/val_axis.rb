@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   # the ValAxis class defines a chart value axis.
   class ValAxis < Axis

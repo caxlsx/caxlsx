@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'tc_helper.rb'
 
 class TestSelection < Test::Unit::TestCase

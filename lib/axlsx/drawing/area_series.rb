@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   # A AreaSeries defines the title, data and labels for line charts
   # @note The recommended way to manage series is to use Chart#add_series

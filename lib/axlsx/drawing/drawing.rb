@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   require 'axlsx/drawing/d_lbls.rb'
   require 'axlsx/drawing/title.rb'

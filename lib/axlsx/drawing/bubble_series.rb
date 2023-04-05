@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # A BubbleSeries defines the x/y position and bubble size of data in the chart

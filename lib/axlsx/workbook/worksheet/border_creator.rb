@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Axlsx
   class BorderCreator
     def initialize(worksheet:, cells:, edges: nil, style: nil, color: nil)

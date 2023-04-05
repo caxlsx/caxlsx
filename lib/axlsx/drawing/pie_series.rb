@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # A PieSeries defines the data and labels and explosion for pie charts series.

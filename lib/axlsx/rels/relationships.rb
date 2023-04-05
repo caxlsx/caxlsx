@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 require 'axlsx/rels/relationship.rb'
 

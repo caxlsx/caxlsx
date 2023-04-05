@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   # This class details a border used in Office Open XML spreadsheet styles.
   class Border

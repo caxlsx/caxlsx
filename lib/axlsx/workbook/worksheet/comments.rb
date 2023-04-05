@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 module Axlsx
 
   # Comments is a collection of Comment objects for a worksheet

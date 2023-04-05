@@ -1,4 +1,3 @@
-# encoding: utf-8
 module Axlsx
   # Package is responsible for managing all the bits and peices that Open Office XML requires to make a valid
   # xlsx document including validation and serialization.

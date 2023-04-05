@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 module Axlsx
   # Conditional formatting rules specify formulas whose evaluations
   # format cells

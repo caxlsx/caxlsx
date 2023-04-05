@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # The SheetProtection object manages worksheet protection options per sheet.

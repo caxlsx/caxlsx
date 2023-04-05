@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 module Axlsx
 require 'axlsx/workbook/worksheet/sheet_calc_pr.rb'
 require 'axlsx/workbook/worksheet/auto_filter/auto_filter.rb'

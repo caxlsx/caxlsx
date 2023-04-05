@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # App represents the app.xml document. The attributes for this object are primarily managed by the application the end user uses to edit the document. None of the attributes are required to serialize a valid xlsx object.

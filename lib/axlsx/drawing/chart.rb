@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # A Chart is the superclass for specific charts

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # the access class defines common properties and values for a chart axis.

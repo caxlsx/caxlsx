@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'tc_helper.rb'
 require 'support/capture_warnings'
 
