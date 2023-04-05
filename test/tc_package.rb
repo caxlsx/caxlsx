@@ -268,7 +268,6 @@ class TestPackage < Test::Unit::TestCase
     assert_equal(p.select{ |part| part[:entry] =~ /xl\/pivotTables\/_rels\/pivotTable\d\.xml.rels/ }.size, @package.workbook.worksheets.first.pivot_tables.size, "one or more pivot tables rels missing")
     assert_equal(p.select{ |part| part[:entry] =~ /xl\/pivotCache\/pivotCacheDefinition\d\.xml/ }.size, @package.workbook.worksheets.first.pivot_tables.size, "one or more pivot tables missing")
 
-
     #no mystery parts
     assert_equal(25, p.size)
 

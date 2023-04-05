@@ -22,7 +22,6 @@ class TestScaling < Test::Unit::TestCase
     assert_nothing_raised {@scaling.orientation = :maxMin}
   end
 
-
   def test_max
     assert_raise(ArgumentError) { @scaling.max = 1}
     assert_nothing_raised {@scaling.max = 10.5}

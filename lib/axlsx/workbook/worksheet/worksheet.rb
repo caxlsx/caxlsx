@@ -173,7 +173,6 @@ module Axlsx
       page_setup.fit_to_page?
     end
 
-
     # Column info for the sheet
     # @return [SimpleTypedList]
     def column_info
@@ -791,7 +790,6 @@ module Axlsx
     def merged_cells
       @merged_cells ||= MergedCells.new self
     end
-
 
     # Helper method for parsingout the root node for worksheet
     # @return [String]

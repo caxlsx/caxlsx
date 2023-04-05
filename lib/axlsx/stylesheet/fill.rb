@@ -29,6 +29,5 @@ module Axlsx
     # @see fill_type
     def fill_type=(v) DataTypeValidator.validate "Fill.fill_type", [PatternFill, GradientFill], v; @fill_type = v; end
 
-
   end
 end

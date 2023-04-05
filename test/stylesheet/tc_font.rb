@@ -9,7 +9,6 @@ class TestFont < Test::Unit::TestCase
   def teardown
   end
 
-
   def test_initialiation
     assert_equal(@item.name, nil)
     assert_equal(@item.charset, nil)
@@ -25,8 +24,6 @@ class TestFont < Test::Unit::TestCase
     assert_equal(@item.color, nil)
     assert_equal(@item.sz, nil)
   end
-
-
 
     # def name=(v) Axlsx::validate_string v; @name = v end
   def test_name

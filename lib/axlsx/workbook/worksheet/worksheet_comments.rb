@@ -33,7 +33,6 @@ module Axlsx
       comments.relationships
     end
 
-
     # Helper method to tell us if there are comments in the comments collection
     # @return [Boolean]
     def has_comments?

@@ -59,7 +59,6 @@ class TestConditionalFormatting < Test::Unit::TestCase
 
   end
 
-
   def test_add_as_hash
 
     color_scale = Axlsx::ColorScale.new do |cs|

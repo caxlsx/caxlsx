@@ -88,7 +88,6 @@ class TestRow < Test::Unit::TestCase
     assert_equal(15, @row.height)
   end
 
-
   def test_ph
     assert_raise(ArgumentError) { @row.ph = -3 }
     assert_nothing_raised { @row.ph = true }

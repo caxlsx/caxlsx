@@ -138,6 +138,5 @@ class TestPageSetup < Test::Unit::TestCase
     assert_equal(fits, [2, 7])
     assert_raise(ArgumentError) { puts @ps.fit_to(:width => true)}
 
-
   end
 end

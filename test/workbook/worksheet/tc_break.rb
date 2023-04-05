@@ -27,7 +27,6 @@ class TestBreak < Test::Unit::TestCase
     end
   end
 
-
   def test_man
     assert_equal(true, @break.man)
     assert_raises ArgumentError do

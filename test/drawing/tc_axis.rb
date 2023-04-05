@@ -5,7 +5,6 @@ class TestAxis < Test::Unit::TestCase
     @axis = Axlsx::Axis.new :gridlines => false, :title => 'Foo'
   end
 
-
   def test_initialization
     assert_equal(@axis.ax_pos, :b, "axis position default incorrect")
     assert_equal(@axis.tick_lbl_pos, :nextTo, "tick label position default incorrect")

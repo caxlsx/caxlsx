@@ -162,7 +162,6 @@ module Axlsx
   #drawing content type
   DRAWING_CT = "application/vnd.openxmlformats-officedocument.drawing+xml".freeze
 
-
   # xml content type extensions
   XML_EX = "xml".freeze
 

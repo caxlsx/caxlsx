@@ -1,11 +1,9 @@
 module Axlsx
 
-
   # CellAlignment stores information about the cell alignment of a style Xf Object.
   # @note Using Styles#add_style is the recommended way to manage cell alignment.
   # @see Styles#add_style
   class CellAlignment
-
 
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
@@ -24,8 +22,6 @@ module Axlsx
     def initialize(options={})
       parse_options options
     end
-
-
 
     # The horizontal alignment of the cell.
     # @note

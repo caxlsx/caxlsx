@@ -47,7 +47,6 @@ module Axlsx
       axes.add_axis :ser_axis, SerAxis
     end
 
-
     # @see gapDepth
     def gap_depth=(v)
       RegexValidator.validate "Line3DChart.gapWidth", GAP_AMOUNT_PERCENT, v

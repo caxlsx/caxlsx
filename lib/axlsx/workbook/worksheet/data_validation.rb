@@ -175,7 +175,6 @@ module Axlsx
     # default none
     attr_reader :type
 
-
     # @see formula1
     def formula1=(v); Axlsx::validate_string(v); @formula1 = v end
 

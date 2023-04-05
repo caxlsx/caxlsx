@@ -65,7 +65,6 @@ module Axlsx
       @d_lbl_pos = label_position
     end
 
-
     # serializes the data labels
     # @return [String]
     def to_xml_string(str = '')
@@ -85,7 +84,6 @@ module Axlsx
       @d_lbl_pos = nil
       @show_leader_lines = nil
     end
-
 
   end
 end

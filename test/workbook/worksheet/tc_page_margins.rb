@@ -27,7 +27,6 @@ class TestPageMargins < Test::Unit::TestCase
     assert_equal(0.1, optioned.footer)
   end
 
-
   def test_set_all_values
     @pm.set(:left => 1.1, :right => 1.2, :top => 1.3, :bottom => 1.4, :header => 0.8, :footer => 0.9)
     assert_equal(1.1, @pm.left)

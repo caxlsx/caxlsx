@@ -22,7 +22,6 @@ class TestAxlsx < Test::Unit::TestCase
     assert_equal false, Axlsx.trust_input
   end
 
-
   def test_trust_input_can_be_set_to_true
     # Class variables like this are not reset between test runs, so we have
     # to save and restore the original value manually.

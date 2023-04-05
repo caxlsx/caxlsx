@@ -10,7 +10,6 @@ class TestPane < Test::Unit::TestCase
     @pane = Axlsx::Pane.new(@options)
   end
 
-
   def test_active_pane
     assert_raise(ArgumentError) { @pane.active_pane = "10" }
     assert_nothing_raised { @pane.active_pane = :top_left }

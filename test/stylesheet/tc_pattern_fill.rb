@@ -9,7 +9,6 @@ class TestPatternFill < Test::Unit::TestCase
   def teardown
   end
 
-
   def test_initialiation
     assert_equal(@item.patternType, :none)
     assert_equal(@item.bgColor, nil)

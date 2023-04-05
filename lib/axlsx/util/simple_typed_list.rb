@@ -99,7 +99,6 @@ module Axlsx
 
     alias :push :<<
 
-
     # delete the item from the list
     # @param [Any] v The item to be deleted.
     # @raise [ArgumentError] if the item's index is protected by locking
@@ -173,6 +172,5 @@ module Axlsx
     end
 
   end
-
 
 end

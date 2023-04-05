@@ -48,7 +48,6 @@ module Axlsx
       :zoom_scale_sheet_layout_view, :zoom_scale_page_layout_view, :zoom_scale_normal, :workbook_view_id,
       :view, :top_left_cell, :color_id, :zoom_scale
 
-
     # instance values that must be serialized as their own elements - e.g. not attributes.
     CHILD_ELEMENTS = [ :pane, :selections ]
 
@@ -85,7 +84,6 @@ module Axlsx
     # default nil
     attr_reader :top_left_cell
 
-
     # View Type
     # Indicates the view type.
     # Options are
@@ -117,7 +115,6 @@ module Axlsx
     # default 100
     attr_reader :zoom_scale
 
-
     # Zoom Scale Normal View
     # Zoom magnification to use when in normal view,
     # representing percent values. This attribute is
@@ -130,7 +127,6 @@ module Axlsx
     # default 0
     attr_reader :zoom_scale_normal
 
-
     # Zoom Scale Page Layout View
     # Zoom magnification to use when in page layout
     # view, representing percent values. This attribute
@@ -142,7 +138,6 @@ module Axlsx
     # @return [Integer]
     # default 0
     attr_reader :zoom_scale_page_layout_view
-
 
     # Zoom Scale Page Break Preview
     # Zoom magnification to use when in page break

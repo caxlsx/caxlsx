@@ -17,7 +17,6 @@ class TestDataBar < Test::Unit::TestCase
     assert_equal("0", data_bar.value_objects.last.val)
   end
 
-
   def test_minLength
     assert_raise(ArgumentError) { @data_bar.minLength = :invalid_type }
     assert_nothing_raised { @data_bar.minLength =  0}

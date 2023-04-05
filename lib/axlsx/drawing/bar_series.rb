@@ -5,7 +5,6 @@ module Axlsx
   # @see Chart#add_series
   class BarSeries < Series
 
-
     # The data for this series.
     # @return [NumDataSource]
     attr_reader :data

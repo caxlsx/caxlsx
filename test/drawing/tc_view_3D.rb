@@ -38,7 +38,6 @@ class TestView3D < Test::Unit::TestCase
     assert_nothing_raised {@view.depth_percent = "20%"}
   end
 
-
   def test_rAngAx
     assert_raise(ArgumentError) {@view.rAngAx = "bob"}
     assert_nothing_raised {@view.rAngAx = true}
@@ -48,7 +47,5 @@ class TestView3D < Test::Unit::TestCase
     assert_raise(ArgumentError) {@view.perspective = "bob"}
     assert_nothing_raised {@view.perspective = 30}
   end
-
-
 
 end

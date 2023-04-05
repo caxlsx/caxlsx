@@ -7,7 +7,6 @@ class TestWorksheet < Test::Unit::TestCase
     @ws = @wb.add_worksheet
   end
 
-
   def test_pn
     assert_equal(@ws.pn, "worksheets/sheet1.xml")
     ws = @ws.workbook.add_worksheet
@@ -134,7 +133,6 @@ class TestWorksheet < Test::Unit::TestCase
 
   end
 
-
   # def test_use_gridlines
   #  assert_raise(ArgumentError) { @ws.show_gridlines = -1.1 }
   #  assert_nothing_raised { @ws.show_gridlines = false }
@@ -210,14 +208,12 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1, 2, 3, 4]
     @ws.add_row [1, 2, 3, 4]
 
-
     assert(@ws.row_breaks.empty?)
     assert(@ws.col_breaks.empty?)
     @ws.add_page_break(@ws.rows.last.cells[1])
     assert_equal(1, @ws.row_breaks.size)
     assert_equal(1, @ws.col_breaks.size)
   end
-
 
   def test_drawing
     assert @ws.drawing == nil
@@ -588,7 +584,6 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.index, filter_database[0].local_sheet_id)
     assert_equal(other_ws.index, filter_database[1].local_sheet_id)
   end
-
 
   def test_sheet_pr_for_auto_filter
     @ws.auto_filter.range = 'A1:D9'

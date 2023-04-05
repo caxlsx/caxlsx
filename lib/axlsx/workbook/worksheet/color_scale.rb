@@ -73,7 +73,6 @@ module Axlsx
       {:cfvo => value_objects.last, :color => colors.last}
     end
 
-
     # removes the cfvo and color pair at the index specified.
     # @param [Integer] index The index of the cfvo and color object to delete
     # @note you cannot remove the first two cfvo and color pairs

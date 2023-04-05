@@ -212,7 +212,6 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(xf.protection.locked, true, "cell locking set")
     assert_raise(ArgumentError, "should reject invalid borderId") { @styles.add_style :border => 2 }
 
-
     assert_equal(xf.applyProtection, true, "protection applied")
     assert_equal(xf.applyBorder, true, "border applied")
     assert_equal(xf.applyNumberFormat,true, "number format applied")

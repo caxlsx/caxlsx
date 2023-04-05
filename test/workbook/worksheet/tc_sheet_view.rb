@@ -15,7 +15,6 @@ class TestSheetView < Test::Unit::TestCase
     @integer_options = { :color_id => 2, :workbook_view_id => 2 }.merge(@int_0).merge(@int_100)
     @string_options = { :top_left_cell => 'A2' }
 
-
     @options = @boolean_options.merge(@boolean_options).merge(@symbol_options).merge(@nil_options).merge(@int_0).merge(@int_100)
 
     @sv = Axlsx::SheetView.new(@options)

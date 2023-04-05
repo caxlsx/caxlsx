@@ -9,7 +9,6 @@ class TestGradientFill < Test::Unit::TestCase
   def teardown
   end
 
-
   def test_initialiation
     assert_equal(@item.type, :linear)
     assert_equal(@item.degree, nil)

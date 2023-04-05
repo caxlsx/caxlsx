@@ -31,7 +31,6 @@ module Axlsx
     include Axlsx::OptionsParser
     include Axlsx::Accessors
 
-
     # Creates a new BookView object
     # @param [Hash] options  A hash of key/value pairs that will be mapped to this instances attributes.
     # @option [Symbol] visibility Specifies visible state of the workbook window. The default value for this attribute is :visible.
@@ -52,7 +51,6 @@ module Axlsx
       yield self if block_given?
     end
 
-
     unsigned_int_attr_accessor :x_window, :y_window, :window_width, :window_height,
                                :tab_ratio, :first_sheet, :active_tab
 
@@ -66,7 +64,6 @@ module Axlsx
 
     boolean_attr_accessor :minimized, :show_horizontal_scroll, :show_vertical_scroll,
                           :show_sheet_tabs, :auto_filter_date_grouping
-
 
     # Serialize the WorkbookView
     # @param [String] str

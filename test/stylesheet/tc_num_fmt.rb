@@ -9,7 +9,6 @@ class TestNumFmt < Test::Unit::TestCase
   def teardown
   end
 
-
   def test_initialiation
     assert_equal(@item.numFmtId, 0)
     assert_equal(@item.formatCode, "")

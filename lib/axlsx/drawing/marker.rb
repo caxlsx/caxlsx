@@ -77,7 +77,6 @@ module Axlsx
       [x, y]
     end
 
-
   end
 
 end

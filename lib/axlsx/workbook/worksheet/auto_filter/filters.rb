@@ -113,7 +113,6 @@ module Axlsx
         @val = value
       end
 
-
       #Filter value used in the criteria.
       attr_accessor :val
 
@@ -123,7 +122,6 @@ module Axlsx
         str << "<filter val='#{@val.to_s}' />"
       end
     end
-
 
     # This collection is used to express a group of dates or times which are
     # used in an AutoFilter criteria. Values are always written in the calendar

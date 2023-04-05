@@ -22,7 +22,6 @@ module Axlsx
       parse_options options
     end
 
-
     # The tag name to use when serializing this data source.
     # Only items defined in allowed_tag_names are allowed
     # @return [Symbol]

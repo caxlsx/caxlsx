@@ -1,6 +1,5 @@
 require 'tc_helper.rb'
 
-
 def shared_test_pivot_table_xml_validity(pivot_table)
   schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
   doc = Nokogiri::XML(pivot_table.to_xml_string)

@@ -141,6 +141,5 @@ module Axlsx
       str << '</xf>'
     end
 
-
   end
 end

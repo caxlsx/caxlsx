@@ -13,7 +13,6 @@ class TestHyperlink < Test::Unit::TestCase
   def teardown
   end
 
-
   def test_href
     assert_nothing_raised { @hyperlink.href = "http://axlsx.blogspot.com" }
     assert_equal(@hyperlink.href, "http://axlsx.blogspot.com")

@@ -132,7 +132,6 @@ module Axlsx
     # thisMonth, lastMonth, nextMonth, thisWeek, lastWeek, nextWeek
     attr_reader :timePeriod
 
-
     # colorScale (Color Scale)
     # The color scale to apply to this conditional formatting
     # @return [ColorScale]
@@ -200,7 +199,6 @@ module Axlsx
       Axlsx::DataTypeValidator.validate 'conditional_formatting_rule.icon_set', IconSet, v
       @icon_set = v
     end
-
 
     # Serializes the conditional formatting rule
     # @param [String] str

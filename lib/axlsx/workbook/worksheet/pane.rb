@@ -49,7 +49,6 @@ module Axlsx
     # default nil
     attr_reader :active_pane
 
-
     # Split State
     # Indicates whether the pane has horizontal / vertical
     # splits, and whether those splits are frozen.

@@ -91,7 +91,6 @@ module Axlsx
     # @return [Array]
     attr_reader :rows
 
-
     # (see #rows)
     def rows=(v)
       DataTypeValidator.validate "#{self.class}.rows", [Array], v

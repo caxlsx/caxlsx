@@ -62,7 +62,6 @@ module Axlsx
     end
   end
 
-
   # Requires that the value can be converted to an integer
   # @para, [Any] v the value to validate
   # @raise [ArgumentError] raised if the value cannot be converted to an integer

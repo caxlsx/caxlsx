@@ -42,7 +42,6 @@ require 'axlsx/workbook/worksheet/col_breaks'
 require 'axlsx/workbook/workbook_view'
 require 'axlsx/workbook/workbook_views'
 
-
 require 'axlsx/workbook/worksheet/worksheet.rb'
 require 'axlsx/workbook/shared_strings_table.rb'
 require 'axlsx/workbook/defined_name.rb'
@@ -108,7 +107,6 @@ require 'axlsx/workbook/worksheet/selection.rb'
       @is_reversed = v
     end
 
-
    # A collection of worksheets associated with this workbook.
     # @note The recommended way to manage worksheets is add_worksheet
     # @see Workbook#add_worksheet
@@ -138,7 +136,6 @@ require 'axlsx/workbook/worksheet/selection.rb'
     attr_reader :drawings
 
     # pretty sure this two are always empty and can be removed.
-
 
     # A colllection of tables associated with this workbook
     # @note The recommended way to manage drawings is Worksheet#add_table
@@ -216,10 +213,8 @@ require 'axlsx/workbook/worksheet/selection.rb'
       self.styles_applied = true
     end
 
-
     # Indicates if the epoc date for serialization should be 1904. If false, 1900 is used.
     @@date1904 = false
-
 
     # A quick helper to retrive a worksheet by name
     # @param [String] name The name of the sheet you are looking for
@@ -242,7 +237,6 @@ require 'axlsx/workbook/worksheet/selection.rb'
       @tables = SimpleTypedList.new Table
       @pivot_tables = SimpleTypedList.new PivotTable
       @comments = SimpleTypedList.new Comments
-
 
       @use_autowidth = true
       @bold_font_multiplier = BOLD_FONT_MULTIPLIER

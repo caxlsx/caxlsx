@@ -182,7 +182,6 @@ module Axlsx
     # @return [Integer]
     attr_reader :paper_size
 
-
     # Sets the paper size for printing.
     # @see PageSetup#paper_size
     # @return integer
@@ -220,7 +219,6 @@ module Axlsx
       self.fit_to_height = options[:height] || 999
       [@fit_to_width, @fit_to_height]
     end
-
 
     # helper method for worksheet to determine if the page setup is configured for fit to page printing
     # We treat any page set up that has a value set for fit_to_width or fit_to_height value as fit_to_page.

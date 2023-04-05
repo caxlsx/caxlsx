@@ -9,7 +9,6 @@ class TestGradientStop < Test::Unit::TestCase
   def teardown
   end
 
-
   def test_initialiation
     assert_equal(@item.color.rgb, "FFFF0000")
     assert_equal(@item.position, 1.0)

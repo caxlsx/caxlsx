@@ -35,8 +35,6 @@ module Axlsx
       workbook.use_autowidth = v
     end
 
-
-
     # Shortcut to determine if the workbook is configured to use shared strings
     # @see Workbook#use_shared_strings
     def use_shared_strings
@@ -119,7 +117,6 @@ module Axlsx
     ensure
       Relationship.clear_ids_cache
     end
-
 
     # Serialize your workbook to a StringIO instance
     # @param [Boolean] confirm_valid Validate the package prior to serialization.
@@ -224,7 +221,6 @@ module Axlsx
         parts << {:entry => "xl/#{drawing.rels_pn}", :doc => drawing.relationships, :schema => RELS_XSD}
         parts << {:entry => "xl/#{drawing.pn}", :doc => drawing, :schema => DRAWING_XSD}
       end
-
 
       workbook.tables.each do |table|
         parts << {:entry => "xl/#{table.pn}", :doc => table, :schema => SML_XSD}

@@ -14,7 +14,6 @@ class TestTableStyleInfo < Test::Unit::TestCase
                 :show_column_stripes => 1,
                 :name => "TableStyleDark4" }
 
-
   end
 
   def test_initialize

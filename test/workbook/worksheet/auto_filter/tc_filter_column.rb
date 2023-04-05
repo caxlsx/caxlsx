@@ -6,7 +6,6 @@ class TestFilterColumn < Test::Unit::TestCase
     @filter_column = Axlsx::FilterColumn.new(0, :filters, :filter_items => [200])
   end
 
-
   def test_initialize_col_id
     assert_raise ArgumentError do
       Axlsx::FilterColumn.new(0, :bobs_house_of_filter)
@@ -68,8 +67,6 @@ class TestFilterColumn < Test::Unit::TestCase
     assert doc.xpath("//filterColumn[@colId=#{@filter_column.col_id}]")
     assert doc.xpath("//filterColumn[@hiddenButton=#{@filter_column.hidden_button}]")
     assert doc.xpath("//filterColumn[@showButton=#{@filter_column.show_button}]")
-
-
 
     assert doc.xpath("//filterColumn/filters")
   end

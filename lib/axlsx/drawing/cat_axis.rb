@@ -80,5 +80,4 @@ module Axlsx
 
   end
 
-
 end

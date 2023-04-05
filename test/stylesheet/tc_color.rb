@@ -39,5 +39,4 @@ class TestColor < Test::Unit::TestCase
     assert_equal(@item.tint, -1.0 )
   end
 
-
 end
