@@ -50,9 +50,9 @@ module Axlsx
     # default nil
     attr_reader :password
 
-    # This block is intended to implement the salt_value, hash_value and spin count as per the ECMA-376 standard. 
-    # However, it does not seem to actually work in EXCEL - instead they are using their old retro algorithm shown below 
-    # defined in the transitional portion of the speck. I am leaving this code in in the hope that someday Ill be able to 
+    # This block is intended to implement the salt_value, hash_value and spin count as per the ECMA-376 standard.
+    # However, it does not seem to actually work in EXCEL - instead they are using their old retro algorithm shown below
+    # defined in the transitional portion of the speck. I am leaving this code in in the hope that someday Ill be able to
     # figure out why it does not work, and if Excel even supports it.
     #     def propper_password=(v)
     #       @algorithm_name = v == nil ? nil : 'SHA-1'

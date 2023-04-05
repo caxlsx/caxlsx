@@ -1,6 +1,6 @@
 module Axlsx
 
-  # When multiple values are chosen to filter by, or when a group of date values are chosen to filter by, 
+  # When multiple values are chosen to filter by, or when a group of date values are chosen to filter by,
   # this object groups those criteria together.
   class Filters
     include Axlsx::OptionsParser
@@ -29,7 +29,7 @@ module Axlsx
     # @return [Boolean]
     attr_reader :blank
 
-    # Calendar type for date grouped items. 
+    # Calendar type for date grouped items.
     # Used to interpret the values in dateGroupItem.
     # This is the calendar type used to evaluate all dates in the filter column,
     # even when those dates are not using the same calendar system / date formatting.
@@ -81,7 +81,7 @@ module Axlsx
       str << '</filters>'
     end
 
-    # not entirely happy with this. 
+    # not entirely happy with this.
     # filter_items should be a simple typed list that overrides << etc
     # to create Filter objects from the inserted values. However this
     # is most likely so rarely used...(really? do you know that?)
@@ -200,7 +200,7 @@ include Axlsx::SerializedAttributes
       end
 
       # The day value for the date group item
-      # This must be between 1 and 31 
+      # This must be between 1 and 31
       # @note no attempt is made to ensure the date value is valid for any given month
       def day=(value)
         RangeValidator.validate "DateGroupItem.day", 0, 31, value

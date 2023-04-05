@@ -42,7 +42,7 @@ module Axlsx
 
     boolean_attr_accessor :custom_height, :zero_height, :thick_top, :thick_bottom
 
-    unsigned_int_attr_accessor :base_col_width, :outline_level_row, :outline_level_col 
+    unsigned_int_attr_accessor :base_col_width, :outline_level_row, :outline_level_col
 
     # serializes this object to an xml string
     # @param [String] str The string this objects serialization will be appended to

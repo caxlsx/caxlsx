@@ -24,7 +24,7 @@ module Axlsx
     # @see Comments#add_comment
     def add_comment(options={})
       comments.add_comment(options)
-    end 
+    end
 
     # The relationships defined by this objects comments collection
     # @return [Relationships]

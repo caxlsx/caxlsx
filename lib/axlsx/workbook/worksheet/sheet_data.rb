@@ -9,7 +9,7 @@ module Axlsx
       raise ArgumentError, "you must provide a worksheet" unless worksheet.is_a?(Worksheet)
       @worksheet = worksheet
     end
-    
+
     attr_reader :worksheet
 
     # Serialize the sheet data
@@ -17,11 +17,11 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<sheetData>'
-      worksheet.rows.each_with_index do |row, index| 
-        row.to_xml_string(index, str) 
+      worksheet.rows.each_with_index do |row, index|
+        row.to_xml_string(index, str)
       end
       str << '</sheetData>'
     end
-    
+
   end
 end

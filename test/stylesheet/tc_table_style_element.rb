@@ -36,7 +36,7 @@ class TestTableStyleElement < Test::Unit::TestCase
     assert_nothing_raised { @item.dxfId = 7 }
     assert_equal(@item.dxfId, 7)
   end
-  
+
   def test_to_xml_string
     doc = Nokogiri::XML(@item.to_xml_string)
    @item.type = :headerRow

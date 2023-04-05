@@ -13,7 +13,7 @@ module Axlsx
       if @edges == :all
         @edges = Axlsx::Border::EDGES
       elsif !@edges.is_a?(Array)
-        raise ArgumentError.new("Invalid edges provided, #{@edges}") 
+        raise ArgumentError.new("Invalid edges provided, #{@edges}")
       else
         @edges = @edges.map{|x| x&.to_sym}.uniq
 
@@ -26,15 +26,15 @@ module Axlsx
     def draw
       if @cells.size == 1
         @worksheet.add_style(
-          first_cell, 
+          first_cell,
           {
             border: {style: @style, color: @color, edges: @edges}
           }
         )
       else
-        @edges.each do |edge| 
+        @edges.each do |edge|
           @worksheet.add_style(
-            border_cells[edge], 
+            border_cells[edge],
             {
               border: {style: @style, color: @color, edges: [edge]}
             }

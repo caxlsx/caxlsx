@@ -64,7 +64,7 @@ module Axlsx
       end
     end
 
-    # TableStyleInfo for the table. 
+    # TableStyleInfo for the table.
     # initialization can be fed via the :style_info option
     def table_style_info
       @table_style_info ||= TableStyleInfo.new

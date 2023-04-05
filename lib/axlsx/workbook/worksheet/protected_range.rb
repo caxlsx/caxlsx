@@ -42,6 +42,6 @@ module Axlsx
     # objects created during serialization
     def to_xml_string(str="")
       serialized_tag 'protectedRange', str
-    end 
+    end
   end
 end

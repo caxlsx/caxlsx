@@ -3,7 +3,7 @@ module Axlsx
   # A relationship defines a reference between package parts.
   # @note Packages automatically manage relationships.
   class Relationship
-    
+
     class << self
       # Keeps track of relationship ids in use.
       # @return [Array]
@@ -12,27 +12,27 @@ module Axlsx
       end
 
       # Initialize cached ids.
-      # 
+      #
       # This should be called before serializing a package (see {Package#serialize} and
-      # {Package#to_stream}) to make sure that serialization is idempotent (i.e. 
+      # {Package#to_stream}) to make sure that serialization is idempotent (i.e.
       # Relationship instances are generated with the same IDs everytime the package
       # is serialized).
       def initialize_ids_cache
         Thread.current[:axlsx_relationship_ids_cache] = {}
       end
-      
+
       # Clear cached ids.
-      # 
+      #
       # This should be called after serializing a package (see {Package#serialize} and
       # {Package#to_stream}) to free the memory allocated for cache.
-      # 
-      # Also, calling this avoids memory leaks (cached ids lingering around 
-      # forever). 
+      #
+      # Also, calling this avoids memory leaks (cached ids lingering around
+      # forever).
       def clear_ids_cache
         Thread.current[:axlsx_relationship_ids_cache] = nil
       end
-      
-      # Generate and return a unique id (eg. `rId123`) Used for setting {#Id}. 
+
+      # Generate and return a unique id (eg. `rId123`) Used for setting {#Id}.
       #
       # The generated id depends on the number of previously cached ids, so using
       # {clear_ids_cache} will automatically reset the generated ids, too.
@@ -42,12 +42,12 @@ module Axlsx
       end
     end
 
-    # The id of the relationship (eg. "rId123"). Most instances get their own unique id. 
+    # The id of the relationship (eg. "rId123"). Most instances get their own unique id.
     # However, some instances need to share the same id – see {#should_use_same_id_as?}
     # for details.
     # @return [String]
     attr_reader :Id
-    
+
     # The location of the relationship target
     # @return [String]
     attr_reader :Target
@@ -77,8 +77,8 @@ module Axlsx
     # The source object the relations belongs to (e.g. a hyperlink, drawing, ...). Needed when
     # looking up the relationship for a specific object (see {Relationships#for}).
     attr_reader :source_obj
-    
-    # Initializes a new relationship. 
+
+    # Initializes a new relationship.
     # @param [Object] source_obj see {#source_obj}
     # @param [String] type The type of the relationship
     # @param [String] target The target for the relationship
@@ -108,12 +108,12 @@ module Axlsx
       str << (h.map { |key, value| '' << key.to_s << '="' << Axlsx::coder.encode(value.to_s) << '"'}.join(' '))
       str << '/>'
     end
-    
+
     # A key that determines whether this relationship should use already generated id.
     #
     # Instances designating the same relationship need to use the same id. We can not simply
-    # compare the {#Target} attribute, though: `foo/bar.xml`, `../foo/bar.xml`, 
-    # `../../foo/bar.xml` etc. are all different but probably mean the same file (this 
+    # compare the {#Target} attribute, though: `foo/bar.xml`, `../foo/bar.xml`,
+    # `../../foo/bar.xml` etc. are all different but probably mean the same file (this
     # is especially an issue for relationships in the context of pivot tables). So lets
     # just ignore this attribute for now (except when {#TargetMode} is set to `:External` –
     # then {#Target} will be an absolute URL and thus can safely be compared).
@@ -125,6 +125,6 @@ module Axlsx
       key << self.Target if self.TargetMode == :External
       key
     end
-    
+
   end
 end

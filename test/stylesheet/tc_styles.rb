@@ -44,7 +44,7 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(@styles.borders.size, (prev_border_count+1))
 
     current_border = @styles.borders.last
-  
+
     borders_array.each do |b_opts|
       if b_opts[:edges]
         border_pr = current_border.prs.detect{|x| x.name == b_opts[:edges].first }
@@ -289,7 +289,7 @@ class TestStyles < Test::Unit::TestCase
 
   def test_border_top_without_border_regression
     ### https://github.com/axlsx-styler-gem/axlsx_styler/issues/31
-    
+
     borders = {
       top: { style: :double, color: '0000FF' },
       right: { style: :thick, color: 'FF0000' },
@@ -305,6 +305,6 @@ class TestStyles < Test::Unit::TestCase
       border_pr = current_border.prs.detect{|x| x.name == edge }
       assert_equal(border_pr.color.rgb, "FF#{b_opts[:color]}")
     end
-  
+
   end
 end

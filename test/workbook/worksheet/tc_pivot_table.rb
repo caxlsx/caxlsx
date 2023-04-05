@@ -156,7 +156,7 @@ class TestPivotTable < Test::Unit::TestCase
 
   def test_pivot_table_with_more_than_one_data_row
     ### https://github.com/caxlsx/caxlsx/issues/110
-    
+
     pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5') do |pt|
       pt.rows = ["Date", "Name"]
       pt.data = [
@@ -187,7 +187,7 @@ class TestPivotTable < Test::Unit::TestCase
 
   def test_pivot_table_with_only_one_data_row
     ### https://github.com/caxlsx/caxlsx/issues/110
-    
+
     pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5') do |pt|
       pt.rows = ["Date", "Name"]
       pt.data = [

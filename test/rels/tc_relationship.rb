@@ -1,13 +1,13 @@
 require 'tc_helper.rb'
 
 class TestRelationships < Test::Unit::TestCase
-  
+
   def test_instances_with_different_attributes_have_unique_ids
     rel_1 = Axlsx::Relationship.new(Object.new, Axlsx::WORKSHEET_R, 'target')
     rel_2 = Axlsx::Relationship.new(Object.new, Axlsx::COMMENT_R, 'foobar')
     assert_not_equal rel_1.Id, rel_2.Id
   end
-  
+
   def test_instances_with_same_attributes_share_id
     source_obj = Object.new
     instance = Axlsx::Relationship.new(source_obj, Axlsx::WORKSHEET_R, 'target')
@@ -21,18 +21,18 @@ class TestRelationships < Test::Unit::TestCase
     [t1, t2].each(&:join)
     assert_not_same(cache1, cache2)
   end
-  
+
   def test_target_is_only_considered_for_same_attributes_check_if_target_mode_is_external
     source_obj = Object.new
     rel_1 = Axlsx::Relationship.new(source_obj, Axlsx::WORKSHEET_R, 'target')
     rel_2 = Axlsx::Relationship.new(source_obj, Axlsx::WORKSHEET_R, '../target')
     assert_equal rel_1.Id, rel_2.Id
-    
+
     rel_3 = Axlsx::Relationship.new(source_obj, Axlsx::HYPERLINK_R, 'target', :target_mode => :External)
     rel_4 = Axlsx::Relationship.new(source_obj, Axlsx::HYPERLINK_R, '../target', :target_mode => :External)
     assert_not_equal rel_3.Id, rel_4.Id
   end
-  
+
   def test_type
     assert_raise(ArgumentError) { Axlsx::Relationship.new nil, 'type', 'target' }
     assert_nothing_raised { Axlsx::Relationship.new nil, Axlsx::WORKSHEET_R, 'target' }

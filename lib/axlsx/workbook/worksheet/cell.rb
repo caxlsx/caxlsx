@@ -104,7 +104,7 @@ module Axlsx
       self.raw_style = new_style
 
       wb = row.worksheet.workbook
-      
+
       wb.styled_cells << self
     end
 

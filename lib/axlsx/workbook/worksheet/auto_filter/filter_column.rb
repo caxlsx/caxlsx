@@ -52,7 +52,7 @@ module Axlsx
     end
 
     # Sets the col_id attribute for this filter column.
-    # @param [Integer | Cell] column_index The zero based index of the column to which this filter applies. 
+    # @param [Integer | Cell] column_index The zero based index of the column to which this filter applies.
     #                         When you specify a cell, the column index will be read off the cell
     # @return [Integer]
     def col_id=(column_index)

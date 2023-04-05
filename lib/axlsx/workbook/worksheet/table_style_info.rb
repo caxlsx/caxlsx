@@ -15,7 +15,7 @@ module Axlsx
     # @option [Boolean] show_column_stripes indicates if column stripes should
     #                   be shown
     # @option [Boolean] show_row_stripes indicates if row stripes should be shown
-    # @option [String] name The name of the style to apply to your table. 
+    # @option [String] name The name of the style to apply to your table.
     #                  Only predefined styles are currently supported.
     #                  @see Annex G. (normative) Predefined SpreadsheetML Style Definitions in part 1 of the specification.
     def initialize(options = {})

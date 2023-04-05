@@ -28,7 +28,7 @@ class TestComments < Test::Unit::TestCase
     @ws.add_comment(:text => 'Yes We Can!', :author => 'bob', :ref => 'F1')
     assert_equal(@ws.comments.authors.size, 3)
     @ws.add_comment(:text => 'Yes We Can!', :author => 'bob', :ref => 'F1')
-    assert_equal(@ws.comments.authors.size, 3, 'only unique authors are returned') 
+    assert_equal(@ws.comments.authors.size, 3, 'only unique authors are returned')
   end
   def test_pn
     assert_equal(@ws.comments.pn, Axlsx::COMMENT_PN % (@ws.index+1).to_s)

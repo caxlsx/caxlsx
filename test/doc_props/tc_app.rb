@@ -22,7 +22,7 @@ class TestApp < Test::Unit::TestCase
       :'CharactersWithSpaces' => 9,
       :'SharedDoc' => false,
       :'HyperlinkBase' => 'foo',
-      :'HyperlInksChanged' => false, 
+      :'HyperlInksChanged' => false,
       :'Application' => 'axlsx',
       :'AppVersion' => '1.1.5',
       :'DocSecurity' => 0

@@ -28,7 +28,7 @@ module Axlsx
       # A builder for three tone color gradient
       # @example
       #   #this creates a three tone color scale
-      #   color_scale = Axlsx::ColorScale.three_tone 
+      #   color_scale = Axlsx::ColorScale.three_tone
       # @see examples/example.rb conditional formatting examples.
       def three_tone
         self.new({:type => :min, :val => 0, :color => 'FFF8696B'},

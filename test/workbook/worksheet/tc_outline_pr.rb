@@ -12,7 +12,7 @@ class TestOutlinePr < Test::Unit::TestCase
  def test_summary_right
    assert_equal true, @outline_pr.summary_right
  end
- 
+
  def test_apply_styles
    assert_equal false, @outline_pr.apply_styles
  end

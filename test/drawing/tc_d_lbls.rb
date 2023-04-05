@@ -4,12 +4,12 @@ class TestDLbls < Test::Unit::TestCase
 
   def setup
     @d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart)
-    @boolean_attributes =[:show_legend_key, 
-                          :show_val, 
-                          :show_cat_name, 
-                          :show_ser_name, 
-                          :show_percent, 
-                          :show_bubble_size, 
+    @boolean_attributes =[:show_legend_key,
+                          :show_val,
+                          :show_cat_name,
+                          :show_ser_name,
+                          :show_percent,
+                          :show_bubble_size,
                           :show_leader_lines]
   end
 
@@ -21,11 +21,11 @@ class TestDLbls < Test::Unit::TestCase
   end
 
   def test_initialization_with_optoins
-    
+
     options_hash = Hash[*[@boolean_attributes.map { |name| [name, true] }] ]
 
     d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart, options_hash.merge( { :d_lbl_pos => :t }))
-   
+
     @boolean_attributes.each do |attr|
       assert_equal(true, d_lbls.send(attr), "boolean attributes set by options")
     end
@@ -47,7 +47,7 @@ class TestDLbls < Test::Unit::TestCase
   def test_to_xml_string
       str = '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '" xmlns:r="' << Axlsx::XML_NS_R << '">'
-      @d_lbls.to_xml_string(str) 
+      @d_lbls.to_xml_string(str)
       str << '</c:chartSpace>'
       doc = Nokogiri::XML(str)
       Axlsx.instance_values_for(@d_lbls).each do |name, value|

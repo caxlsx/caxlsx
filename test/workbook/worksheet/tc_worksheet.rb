@@ -838,7 +838,7 @@ class TestWorksheet < Test::Unit::TestCase
       sheet.add_border 'B2:D4', style: :medium
       sheet.add_style 'D2:D4', border: { style: :thin, color: '000000' }
     end
-    
+
     wb.apply_styles
 
     assert_equal 8, wb.styled_cells.count
@@ -884,15 +884,15 @@ class TestWorksheet < Test::Unit::TestCase
     wb.apply_styles
 
     assert_equal 1, wb.styles.style_index.size
-    
+
     assert_equal(
       {
-        type: :xf, 
-        name: "Times New Roman", 
-        sz: 12, 
-        family: 1, 
+        type: :xf,
+        name: "Times New Roman",
+        sz: 12,
+        family: 1,
         color: "FFFFFF",
-      }, 
+      },
       wb.styles.style_index.values.first
     )
   end

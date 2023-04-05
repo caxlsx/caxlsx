@@ -24,7 +24,7 @@ class RichText < Test::Unit::TestCase
     row = @ws.add_row [rt_direct, rt_indirect]
     assert_equal(row[0].to_xml_string(0,0), row[1].to_xml_string(0,0))
   end
-  
+
   def test_textruns
     runs = @rt.runs
     assert_equal(runs.length, 27)
@@ -33,7 +33,7 @@ class RichText < Test::Unit::TestCase
     assert_equal(runs[1].b, true)
     assert_equal(runs[1].i, false)
   end
-  
+
   def test_implicit_richtext
     rt = Axlsx::RichText.new('a', :b => true)
     row_rt = @ws.add_row [rt]

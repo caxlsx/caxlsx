@@ -62,7 +62,7 @@ module Axlsx
     def page_setup_pr
       @page_setup_pr ||= PageSetUpPr.new
     end
-    
+
     # The OutlinePr for this sheet pr object
     # @return [OutlinePr]
     def outline_pr

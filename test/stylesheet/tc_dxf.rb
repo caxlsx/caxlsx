@@ -4,7 +4,7 @@ class TestDxf < Test::Unit::TestCase
 
   def setup
     @item = Axlsx::Dxf.new
-    @styles = Axlsx::Styles.new    
+    @styles = Axlsx::Styles.new
   end
 
   def teardown
@@ -46,7 +46,7 @@ class TestDxf < Test::Unit::TestCase
   def test_font
     assert_raise(ArgumentError) { @item.font = 1 }
     assert_nothing_raised { @item.font = Axlsx::Font.new }
-    assert @item.font.is_a? Axlsx::Font 
+    assert @item.font.is_a? Axlsx::Font
   end
 
   def test_border
@@ -59,7 +59,7 @@ class TestDxf < Test::Unit::TestCase
     @item.border = Axlsx::Border.new
     doc = Nokogiri::XML.parse(@item.to_xml_string)
     assert_equal(1, doc.xpath(".//dxf//border").size)
-    assert_equal(0, doc.xpath(".//dxf//font").size)    
+    assert_equal(0, doc.xpath(".//dxf//font").size)
   end
 
   def test_many_options_xml
@@ -69,13 +69,13 @@ class TestDxf < Test::Unit::TestCase
     @item.font = Axlsx::Font.new
     @item.protection = Axlsx::CellProtection.new
     @item.numFmt = Axlsx::NumFmt.new
-    
+
     doc = Nokogiri::XML.parse(@item.to_xml_string)
     assert_equal(1, doc.xpath(".//dxf//fill//patternFill[@patternType='solid']//fgColor[@rgb='FF000000']").size)
     assert_equal(1, doc.xpath(".//dxf//font").size)
     assert_equal(1, doc.xpath(".//dxf//protection").size)
     assert_equal(1, doc.xpath(".//dxf//numFmt[@numFmtId='0'][@formatCode='']").size)
     assert_equal(1, doc.xpath(".//dxf//alignment").size)
-    assert_equal(1, doc.xpath(".//dxf//border").size)    
+    assert_equal(1, doc.xpath(".//dxf//border").size)
   end
 end

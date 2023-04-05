@@ -106,7 +106,7 @@ class TestAxlsx < Test::Unit::TestCase
     assert_equal(sanitized_str,           legit_str,            'should preserve value')
     assert_equal(sanitized_str.object_id, legit_str.object_id,  'should preserve object')
   end
-  
+
   class InstanceValuesSubject
     def initialize(args={})
       args.each do |key, v|
@@ -130,7 +130,7 @@ class TestAxlsx < Test::Unit::TestCase
     assert_equal({"obj" => inner_obj}, Axlsx.instance_values_for(complex), 'should pass value of ivar directly')
 
     nil_subject = InstanceValuesSubject.new(nil_obj: nil)
-    assert_equal({"nil_obj" =>  nil}, Axlsx.instance_values_for(nil_subject), 'should return nil ivars')    
+    assert_equal({"nil_obj" =>  nil}, Axlsx.instance_values_for(nil_subject), 'should return nil ivars')
   end
 
   def test_hash_deep_merge

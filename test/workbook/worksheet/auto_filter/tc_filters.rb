@@ -2,8 +2,8 @@ require 'tc_helper.rb'
 
 class TestFilters < Test::Unit::TestCase
   def setup
-    @filters = Axlsx::Filters.new(:filter_items => [1, 'a'], 
-                                  :date_group_items =>[ { :date_time_grouping => :year, :year => 2011, :month => 11, :day => 11, :hour => 0, :minute => 0, :second => 0 } ] , 
+    @filters = Axlsx::Filters.new(:filter_items => [1, 'a'],
+                                  :date_group_items =>[ { :date_time_grouping => :year, :year => 2011, :month => 11, :day => 11, :hour => 0, :minute => 0, :second => 0 } ] ,
                                   :blank => true)
   end
 
@@ -29,15 +29,15 @@ class TestFilters < Test::Unit::TestCase
     assert @filters.date_group_items.is_a?(Array)
     assert_equal 1, @filters.date_group_items.size
   end
- 
+
   def test_apply_is_false_for_matching_values
     keeper = Object.new
-    def keeper.value; 'a'; end 
+    def keeper.value; 'a'; end
     assert_equal false, @filters.apply(keeper)
   end
 
   def test_apply_is_true_for_non_matching_values
-    hidden = Object.new 
+    hidden = Object.new
     def hidden.value; 'b'; end
     assert_equal true, @filters.apply(hidden)
   end

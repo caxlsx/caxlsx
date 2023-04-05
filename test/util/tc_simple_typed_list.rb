@@ -61,7 +61,7 @@ class TestSimpleTypedList < Test::Unit::TestCase
     assert_nothing_raised { @list.delete 0 }
     assert_nothing_raised { @list.delete 9 }
   end
-  
+
   def test_delete
     @list.push 1
     assert(@list.size == 1)

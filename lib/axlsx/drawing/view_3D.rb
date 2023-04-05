@@ -71,7 +71,7 @@ module Axlsx
     alias :hPercent= :h_percent=
 
       # @see rot_y
-      def rot_y=(v) 
+      def rot_y=(v)
         RangeValidator.validate "View3D.rot_y", 0, 360, v
         @rot_y = v
       end

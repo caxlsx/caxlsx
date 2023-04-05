@@ -140,7 +140,7 @@ class TestRow < Test::Unit::TestCase
     offset = 3
     values = [1,2,3,4,5]
     r = @ws.add_row(values, offset: offset, style: 1)
-    r.cells.each_with_index do |c, index| 
+    r.cells.each_with_index do |c, index|
       assert_equal(c.style, index < offset ? 0 : 1)
       assert_equal(c.value, index < offset ? nil : values[index - offset])
     end
@@ -151,7 +151,7 @@ class TestRow < Test::Unit::TestCase
     values = [1,2,3,4,5]
     styles = (1..5).map{ @ws.workbook.styles.add_style }
     r = @ws.add_row(values, offset: offset, style: styles)
-    r.cells.each_with_index do |c, index| 
+    r.cells.each_with_index do |c, index|
       assert_equal(c.style, index < offset ? 0 : styles[index-offset])
       assert_equal(c.value, index < offset ? nil : values[index - offset])
     end

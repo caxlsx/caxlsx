@@ -20,7 +20,7 @@ class TestAxis < Test::Unit::TestCase
     @axis.cross_axis = Axlsx::CatAxis.new
     str  = '<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
-    doc = Nokogiri::XML(@axis.to_xml_string(str)) 
+    doc = Nokogiri::XML(@axis.to_xml_string(str))
     assert(doc.xpath("//a:srgbClr[@val='00FF00']"))
   end
 
@@ -97,12 +97,12 @@ class TestAxis < Test::Unit::TestCase
     assert_raise(ArgumentError, "requires valid gridlines") { @axis.gridlines = 'alice' }
     assert_nothing_raised("accepts valid crosses") { @axis.gridlines = false }
   end
-  
+
   def test_to_xml_string
     @axis.cross_axis = Axlsx::CatAxis.new
     str  = '<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
-    doc = Nokogiri::XML(@axis.to_xml_string(str)) 
+    doc = Nokogiri::XML(@axis.to_xml_string(str))
     assert(doc.xpath('//a:noFill'))
     assert(doc.xpath("//c:crosses[@val='#{@axis.crosses.to_s}']"))
     assert(doc.xpath("//c:crossAx[@val='#{@axis.cross_axis.to_s}']"))

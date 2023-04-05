@@ -7,7 +7,7 @@ module Axlsx
   class ConditionalFormatting
 
    include Axlsx::OptionsParser
-   
+
     # Creates a new {ConditionalFormatting} object
     # @option options [Array] rules The rules to apply
     # @option options [String] sqref The range to apply the rules to

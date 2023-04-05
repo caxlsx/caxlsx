@@ -51,7 +51,7 @@ module Axlsx
       # @param [Array] symbols The names of the attributes to create
       # @param [String] validator The axlsx validation method to use when
       # validating assignation.
-      # @see lib/axlsx/util/validators.rb 
+      # @see lib/axlsx/util/validators.rb
       def validated_attr_accessor(symbols, validator)
         symbols.each do |symbol|
           attr_reader symbol

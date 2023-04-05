@@ -4,7 +4,7 @@ class TestTableStyleInfo < Test::Unit::TestCase
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet
-    40.times do 
+    40.times do
       @ws.add_row %w(aa bb cc dd ee ff gg hh ii jj kk)
     end
     @table = @ws.add_table(Axlsx::cell_range([@ws.rows.first.cells.first,@ws.rows.last.cells.last], false), :name => 'foo')
