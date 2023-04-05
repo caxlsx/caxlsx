@@ -54,6 +54,7 @@ module Axlsx
       def validated_attr_accessor(symbols, validator)
         symbols.each do |symbol|
           attr_reader symbol
+
           module_eval(SETTER % [symbol, validator, symbol], __FILE__, __LINE__)
         end
       end
