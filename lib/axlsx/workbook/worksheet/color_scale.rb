@@ -92,6 +92,7 @@ module Axlsx
     end
 
     private
+
     # There has got to be cleaner way of merging these arrays.
     def initialize_default_cfvos(user_cfvos)
       defaults = self.class.default_cfvos

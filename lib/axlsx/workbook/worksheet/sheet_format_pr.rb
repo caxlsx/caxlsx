@@ -52,6 +52,7 @@ module Axlsx
     end
 
     private
+
     def set_defaults
       @base_col_width = 8
       @default_row_height = 18

@@ -60,6 +60,7 @@ module Axlsx
         str << ('<xdr:' << k.to_s << '>' << self.send(k).to_s << '</xdr:' << k.to_s << '>')
       end
     end
+
     private
 
     # handles multiple inputs for setting the position of a marker

@@ -79,6 +79,7 @@ module Axlsx
     end
 
     private
+
     # Creates a password hash for a given password
     # @return [String]
     def create_password_hash(password)

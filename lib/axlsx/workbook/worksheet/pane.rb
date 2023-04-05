@@ -125,6 +125,7 @@ module Axlsx
       finalize
       serialized_tag 'pane', str
     end
+
     private
 
     def finalize

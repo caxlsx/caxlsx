@@ -244,7 +244,8 @@ module Axlsx
       str << '</dataValidation>'
     end
 
-  private
+    private
+
     def get_valid_attributes
       attributes = [:allowBlank, :error, :errorStyle, :errorTitle, :prompt, :promptTitle, :showErrorMessage, :showInputMessage, :sqref, :type ]
 

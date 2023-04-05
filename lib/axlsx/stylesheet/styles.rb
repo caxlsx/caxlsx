@@ -489,6 +489,7 @@ module Axlsx
     end
 
     private
+
     # Creates the default set of styles the exel requires to be valid as well as setting up the
     # Axlsx::STYLE_THIN_BORDER
     def load_default_styles
