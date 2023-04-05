@@ -148,4 +148,3 @@ class TestHeaderFooter < Test::Unit::TestCase
     assert_equal(0, doc.xpath(".//headerFooter/firstFooter").size)
   end
 end
-

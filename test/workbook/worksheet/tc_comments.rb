@@ -53,5 +53,3 @@ class TestComments < Test::Unit::TestCase
     # assert_equal(doc.xpath("//comment").size, @ws.comments.size)
   end
 end
-
-

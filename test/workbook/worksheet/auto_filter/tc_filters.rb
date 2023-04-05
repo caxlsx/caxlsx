@@ -47,4 +47,3 @@ class TestFilters < Test::Unit::TestCase
     assert_equal(1, doc.xpath('//filters[@blank=1]').size)
   end
 end
-

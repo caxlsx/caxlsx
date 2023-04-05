@@ -69,4 +69,3 @@ class TestComment < Test::Unit::TestCase
     assert_equal("some text", doc.xpath("//comment/text").text)
   end
 end
-

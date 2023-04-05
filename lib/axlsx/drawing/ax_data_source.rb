@@ -23,4 +23,3 @@ module Axlsx
   end
 
 end
-

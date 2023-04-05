@@ -52,5 +52,3 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
     assert_equal(doc.xpath("//xmlns:hyperlink[@r:id='#{@a.relationship.Id}']").size, 1)
   end
 end
-
-
