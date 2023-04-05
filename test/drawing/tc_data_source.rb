@@ -1,4 +1,4 @@
- require 'tc_helper.rb'
+require 'tc_helper.rb'
 
  class TestNumDataSource < Test::Unit::TestCase
 
