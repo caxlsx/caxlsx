@@ -34,7 +34,7 @@ module Axlsx
     end
     alias :valAxis :val_axis
 
-     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
+    # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     # @return [Symbol]
     attr_reader :grouping
 

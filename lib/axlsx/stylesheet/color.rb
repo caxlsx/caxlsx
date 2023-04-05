@@ -45,7 +45,7 @@ module Axlsx
     # @return [Float]
     attr_reader :tint
 
-     # @see auto
+    # @see auto
     def auto=(v) Axlsx::validate_boolean v; @auto = v end
 
     # @see color

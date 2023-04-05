@@ -11,7 +11,7 @@ module Axlsx
     # thickTop
     # thickBottom
 
-   # Creates a new row. New Cell objects are created based on the values, types and style options.
+    # Creates a new row. New Cell objects are created based on the values, types and style options.
     # A new cell is created for each item in the values array. style and types options are applied as follows:
     #   If the types option is defined and is a symbol it is applied to all the cells created.
     #   If the types option is an array, cell types are applied by index for each cell

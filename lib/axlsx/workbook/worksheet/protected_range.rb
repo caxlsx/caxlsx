@@ -7,7 +7,7 @@ module Axlsx
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
-   # Initializes a new protected range object
+    # Initializes a new protected range object
     # @option [String] sqref The cell range reference to protect. This can be an absolute or a relateve range however, it only applies to the current sheet.
     # @option [String] name An optional name for the protected name.
     def initialize(options={})

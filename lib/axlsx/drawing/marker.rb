@@ -32,7 +32,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :rowOff
 
-     # @see col
+    # @see col
     def col=(v) Axlsx::validate_unsigned_int v; @col = v end
     # @see colOff
     def colOff=(v) Axlsx::validate_int v; @colOff = v end

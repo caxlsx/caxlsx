@@ -105,7 +105,7 @@ module Axlsx
       @style = v
     end
 
-   # @see Col#width
+    # @see Col#width
     def width=(v)
       # Removing this validation make a 10% difference in performance
       # as it is called EVERY TIME A CELL IS ADDED - the proper solution

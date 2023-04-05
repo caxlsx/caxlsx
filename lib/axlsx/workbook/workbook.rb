@@ -107,7 +107,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
       @is_reversed = v
     end
 
-   # A collection of worksheets associated with this workbook.
+    # A collection of worksheets associated with this workbook.
     # @note The recommended way to manage worksheets is add_worksheet
     # @see Workbook#add_worksheet
     # @see Worksheet

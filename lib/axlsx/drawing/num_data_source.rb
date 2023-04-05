@@ -35,7 +35,7 @@ module Axlsx
       [:yVal, :val, :bubbleSize]
     end
 
-     # sets the tag name for this data source
+    # sets the tag name for this data source
     # @param [Symbol] v One of the allowed_tag_names
     def tag_name=(v)
       Axlsx::RestrictionValidator.validate "#{self.class.name}.tag_name", self.class.allowed_tag_names, v

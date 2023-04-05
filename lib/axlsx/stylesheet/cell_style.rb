@@ -46,7 +46,7 @@ module Axlsx
     # @return [Boolean]
     attr_reader :customBuiltin
 
-     # @see name
+    # @see name
     def name=(v)  Axlsx::validate_string v; @name = v end
     # @see xfId
     def xfId=(v) Axlsx::validate_unsigned_int v; @xfId = v end

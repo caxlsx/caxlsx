@@ -109,7 +109,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :sz
 
-     # @see name
+    # @see name
     def name=(v) Axlsx::validate_string v; @name = v end
     # @see charset
     def charset=(v) Axlsx::validate_unsigned_int v; @charset = v end

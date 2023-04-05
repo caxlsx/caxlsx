@@ -92,7 +92,7 @@ module Axlsx
     # @return [Boolean]
     attr_reader :applyProtection
 
-      # @see Xf#alignment
+    # @see Xf#alignment
     def alignment=(v) DataTypeValidator.validate "Xf.alignment", CellAlignment, v; @alignment = v end
 
     # @see protection

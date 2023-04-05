@@ -28,7 +28,7 @@ module Axlsx
     # @return [Array]
     attr_reader :rules
 
-     # Add Conditional Formatting Rules to this object. Rules can either
+    # Add Conditional Formatting Rules to this object. Rules can either
     # be already created {ConditionalFormattingRule} elements or
     # hashes of options for automatic creation.  If rules is a hash
     # instead of an array, assume only one rule being added.

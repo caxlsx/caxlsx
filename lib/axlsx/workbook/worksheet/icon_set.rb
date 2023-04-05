@@ -47,7 +47,7 @@ module Axlsx
     # @return [Boolean]
     attr_reader :showValue
 
-      # @see iconSet
+    # @see iconSet
     def iconSet=(v); Axlsx::validate_icon_set(v); @iconSet = v end
 
     # @see showValue

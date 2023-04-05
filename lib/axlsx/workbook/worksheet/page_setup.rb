@@ -190,7 +190,7 @@ module Axlsx
       @paper_size = size
     end
 
-     # Set some or all page settings at once.
+    # Set some or all page settings at once.
     # @param [Hash] options The page settings to set (possible keys are :fit_to_height, :fit_to_width, :orientation, :paper_height, :paper_width, and :scale).
     def set(options)
       parse_options options
