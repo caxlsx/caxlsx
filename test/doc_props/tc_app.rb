@@ -31,6 +31,7 @@ class TestApp < Test::Unit::TestCase
     @app = Axlsx::App.new options
 
   end
+
   def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::APP_XSD))
     doc = Nokogiri::XML(@app.to_xml_string)

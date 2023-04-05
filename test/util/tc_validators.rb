@@ -2,6 +2,7 @@ require 'tc_helper.rb'
 class TestValidators < Test::Unit::TestCase
   def setup
   end
+
   def teardown
   end
 
@@ -187,6 +188,7 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_integerish Axlsx }
     [1, 1.4, "a"].each { |test_value| assert_nothing_raised { Axlsx.validate_integerish test_value } }
   end
+
   def test_validate_family
     assert_raise(ArgumentError) { Axlsx.validate_family 0 }
     (1..5).each do |item|

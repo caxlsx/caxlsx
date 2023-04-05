@@ -31,6 +31,7 @@ module Axlsx
       raise ArgumentError, (ERR_RANGE % [value.inspect, min.to_s, max.to_s, inclusive]) unless passes
     end
   end
+
   # Validates the value against the regular expression provided.
   class RegexValidator
     # @param [String] name The name of what is being validated. This is included in the output when the value is invalid
@@ -142,6 +143,7 @@ module Axlsx
   def self.validate_page_orientation(v)
     RestrictionValidator.validate "page_orientation", [:default, :landscape, :portrait], v
   end
+
   # Requires that the value is one of :none, :single, :double, :singleAccounting, :doubleAccounting
   def self.validate_cell_u(v)
     RestrictionValidator.validate "cell run style u", [:none, :single, :double, :singleAccounting, :doubleAccounting], v
@@ -151,6 +153,7 @@ module Axlsx
   def self.validate_family(v)
     RestrictionValidator.validate "cell run style family", 1..5, v
   end
+
   # Requires that the value is valid pattern type.
   # valid pattern types must be one of :none, :solid, :mediumGray, :darkGray, :lightGray, :darkHorizontal, :darkVertical, :darkDown,
   # :darkUp, :darkGrid, :darkTrellis, :lightHorizontal, :lightVertical, :lightDown, :lightUp, :lightGrid, :lightTrellis, :gray125, or :gray0625.
@@ -213,6 +216,7 @@ module Axlsx
   def self.validate_scatter_style(v)
     Axlsx::RestrictionValidator.validate "ScatterChart.scatterStyle", [:none, :line, :lineMarker, :marker, :smooth, :smoothMarker], v.to_sym
   end
+
   # Requires that the value is a valid horizontal_alignment
   # :general, :left, :center, :right, :fill, :justify, :centerContinuous, :distributed are allowed
   # @param [Any] v The value validated

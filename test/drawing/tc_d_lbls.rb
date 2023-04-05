@@ -31,6 +31,7 @@ class TestDLbls < Test::Unit::TestCase
     end
     assert_equal(:t, d_lbls.d_lbl_pos, "d_lbl_pos set by options")
   end
+
   def test_d_lbl_pos
     assert_raise(ArgumentError, 'invlaid label positions are rejected') { @d_lbls.d_lbl_pos = :upside_down }
     assert_nothing_raised('accepts valid label position') { @d_lbls.d_lbl_pos = :ctr }

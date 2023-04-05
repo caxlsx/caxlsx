@@ -119,6 +119,7 @@ module Axlsx
     def b=(v) Axlsx::validate_boolean v; @b = v end
     # @see i
     def i=(v) Axlsx::validate_boolean v; @i = v end
+
     # @see u
     def u=(v)
       v = :single if (v == true || v == 1 || v == :true || v == 'true')
@@ -126,6 +127,7 @@ module Axlsx
       Axlsx::validate_cell_u v
       @u = v
     end
+
     # @see strike
     def strike=(v) Axlsx::validate_boolean v; @strike = v end
     # @see outline

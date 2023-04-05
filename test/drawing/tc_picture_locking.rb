@@ -4,6 +4,7 @@ class TestPictureLocking < Test::Unit::TestCase
   def setup
     @item = Axlsx::PictureLocking.new
   end
+
   def teardown
   end
 

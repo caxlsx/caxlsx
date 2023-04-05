@@ -44,6 +44,7 @@ class TestPane < Test::Unit::TestCase
     doc = Nokogiri::XML.parse(@pane.to_xml_string)
     assert_equal(1, doc.xpath("//pane[@ySplit=2][@xSplit='2'][@topLeftCell='A2'][@state='frozen'][@activePane='bottomLeft']").size)
   end
+
   def test_to_xml_frozen
     pane = Axlsx::Pane.new :state => :frozen, :y_split => 2
     doc = Nokogiri::XML(pane.to_xml_string)

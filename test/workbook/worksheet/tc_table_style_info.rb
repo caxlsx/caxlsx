@@ -30,6 +30,7 @@ class TestTableStyleInfo < Test::Unit::TestCase
      assert_raises(ArgumentError) { table_style.send(key.to_sym, 'foo') }
     end
   end
+
   def doc
     @doc ||= Nokogiri::XML(Axlsx::TableStyleInfo.new(@options).to_xml_string)
   end

@@ -4,8 +4,10 @@ class TestBorderPr < Test::Unit::TestCase
   def setup
     @bpr = Axlsx::BorderPr.new
   end
+
   def teardown
   end
+
   def test_initialiation
     assert_equal(@bpr.color, nil)
     assert_equal(@bpr.style, nil)

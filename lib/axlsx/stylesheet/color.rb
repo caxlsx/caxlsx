@@ -47,6 +47,7 @@ module Axlsx
 
      # @see auto
     def auto=(v) Axlsx::validate_boolean v; @auto = v end
+
     # @see color
     def rgb=(v)
       Axlsx::validate_string(v)
@@ -56,6 +57,7 @@ module Axlsx
       raise ArgumentError, "Invalid color rgb value: #{v}." unless v.match(/[0-9A-F]{8}/)
       @rgb = v
     end
+
     # @see tint
     def tint=(v) Axlsx::validate_float v; @tint = v end
 

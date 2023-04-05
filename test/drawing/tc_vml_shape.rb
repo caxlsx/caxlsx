@@ -84,12 +84,14 @@ class TestVmlShape < Test::Unit::TestCase
     assert(shape.top_row == 3)
     assert_raise(ArgumentError) { shape.top_row = [] }
   end
+
   def test_visible
     shape = @comments.first.vml_shape
     shape.visible = false
     assert(shape.visible == false)
     assert_raise(ArgumentError) { shape.visible = 'foo' }
   end
+
   def test_to_xml_string
     str = @comments.vml_drawing.to_xml_string()
     doc = Nokogiri::XML(str)

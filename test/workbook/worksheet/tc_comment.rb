@@ -32,6 +32,7 @@ class TestComment < Test::Unit::TestCase
     assert_equal(false, @c1.visible)
     assert_equal(true, @c2.visible)
   end
+
   def test_ref
     assert(@c1.ref == 'A1')
     assert(@c2.ref == 'C3')

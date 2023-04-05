@@ -438,6 +438,7 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal("foo\n\r\nbar", @ws.rows.last.cells.last.value)
     assert_not_nil(@ws.to_xml_string.index("foo\n\r\nbar"))
   end
+
   # Make sure the XML for all optional elements (like pageMargins, autoFilter, ...)
   # is generated in correct order.
   def test_valid_with_optional_elements

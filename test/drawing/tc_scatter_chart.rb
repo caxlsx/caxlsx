@@ -27,6 +27,7 @@ class TestScatterChart < Test::Unit::TestCase
     assert(@chart.scatterStyle == :marker)
     assert_raise(ArgumentError) { @chart.scatterStyle = :buckshot }
   end
+
   def test_initialization
     assert_equal(@chart.scatterStyle, :lineMarker, "scatterStyle defualt incorrect")
     assert_equal(@chart.series_type, Axlsx::ScatterSeries, "series type incorrect")

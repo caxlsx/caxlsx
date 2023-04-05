@@ -15,6 +15,7 @@ class TestConditionalFormatting < Test::Unit::TestCase
     assert_equal("AA1:AB100", optioned.sqref)
     assert_equal([1, 2], optioned.rules)
   end
+
   def test_add_as_rule
 
     color_scale = Axlsx::ColorScale.new do |cs|

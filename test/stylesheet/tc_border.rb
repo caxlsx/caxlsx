@@ -4,8 +4,10 @@ class TestBorder < Test::Unit::TestCase
   def setup
     @b = Axlsx::Border.new
   end
+
   def teardown
   end
+
   def test_initialiation
     assert_equal(@b.diagonalUp, nil)
     assert_equal(@b.diagonalDown, nil)

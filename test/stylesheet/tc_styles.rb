@@ -4,6 +4,7 @@ class TestStyles < Test::Unit::TestCase
   def setup
     @styles = Axlsx::Styles.new
   end
+
   def teardown
   end
 

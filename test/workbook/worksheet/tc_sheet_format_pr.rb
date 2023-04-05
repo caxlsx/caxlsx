@@ -63,10 +63,12 @@ class TestSheetFormatPr < Test::Unit::TestCase
    assert_raise(ArgumentError) { @sheet_format_pr.zero_height= :foo }
    assert_nothing_raised { @sheet_format_pr.zero_height = true }
   end
+
   def test_thick_top
    assert_raise(ArgumentError) { @sheet_format_pr.thick_top= :foo }
    assert_nothing_raised { @sheet_format_pr.thick_top = true }
   end
+
   def test_thick_bottom
    assert_raise(ArgumentError) { @sheet_format_pr.thick_bottom= :foo }
    assert_nothing_raised { @sheet_format_pr.thick_bottom = true }

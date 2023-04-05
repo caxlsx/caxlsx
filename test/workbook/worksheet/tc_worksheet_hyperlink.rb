@@ -29,6 +29,7 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
   def test_display
     assert_equal(@options[:display], @a.display)
   end
+
   def test_ref
     assert_equal(@options[:ref], @a.ref)
   end

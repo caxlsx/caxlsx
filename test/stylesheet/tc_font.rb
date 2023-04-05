@@ -31,6 +31,7 @@ class TestFont < Test::Unit::TestCase
     assert_nothing_raised { @item.name = "bob" }
     assert_equal(@item.name, "bob")
   end
+
     # def charset=(v) Axlsx::validate_unsigned_int v; @charset = v end
   def test_charset
     assert_raise(ArgumentError) { @item.charset = -7 }

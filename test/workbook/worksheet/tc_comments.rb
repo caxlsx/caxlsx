@@ -23,6 +23,7 @@ class TestComments < Test::Unit::TestCase
     assert_nothing_raised { @ws.comments.add_comment(:author => 'bob', :text => 'Yes We Can', :ref => 'A1') }
     assert_equal(@ws.comments.size, 3)
   end
+
   def test_authors
     assert_equal(@ws.comments.authors.size, @ws.comments.size)
     @ws.add_comment(:text => 'Yes We Can!', :author => 'bob', :ref => 'F1')
@@ -30,6 +31,7 @@ class TestComments < Test::Unit::TestCase
     @ws.add_comment(:text => 'Yes We Can!', :author => 'bob', :ref => 'F1')
     assert_equal(@ws.comments.authors.size, 3, 'only unique authors are returned')
   end
+
   def test_pn
     assert_equal(@ws.comments.pn, Axlsx::COMMENT_PN % (@ws.index+1).to_s)
   end

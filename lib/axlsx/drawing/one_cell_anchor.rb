@@ -56,6 +56,7 @@ module Axlsx
     def start_at(x, y=0)
       from.coord x, y
     end
+
     #
     # @see height
     def height=(v) Axlsx::validate_unsigned_int(v); @height = v; end

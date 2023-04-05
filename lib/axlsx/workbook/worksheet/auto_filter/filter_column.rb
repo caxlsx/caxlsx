@@ -67,6 +67,7 @@ module Axlsx
     def apply(row, offset)
       row.hidden = @filter.apply(row.cells[offset+col_id.to_i])
     end
+
     # @param [Boolean] hidden Flag indicating whether the AutoFilter button for this column is hidden.
     # @return [Boolean]
     def hidden_button=(hidden)

@@ -63,6 +63,7 @@ module Axlsx
         end
       end
     end
+
     # serialize the object
     # @return [String]
     def to_xml_string(str='')

@@ -47,6 +47,7 @@ module Axlsx
       Axlsx::validate_boolean(v);
       workbook.use_shared_strings = v
     end
+
     # The workbook this package will serialize or validate.
     # @return [Workbook] If no workbook instance has been assigned with this package a new Workbook instance is returned.
     # @raise ArgumentError if workbook parameter is not a Workbook instance.

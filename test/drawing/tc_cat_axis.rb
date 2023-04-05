@@ -4,6 +4,7 @@ class TestCatAxis < Test::Unit::TestCase
   def setup
     @axis = Axlsx::CatAxis.new
   end
+
   def teardown
   end
 

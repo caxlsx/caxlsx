@@ -4,6 +4,7 @@ class TestValAxis < Test::Unit::TestCase
   def setup
     @axis = Axlsx::ValAxis.new
   end
+
   def teardown
   end
 

@@ -16,6 +16,7 @@ class TestColorScale < Test::Unit::TestCase
     assert_equal 2, color_scale.value_objects.size
     assert_equal 2, color_scale.colors.size
   end
+
   def test_default_cfvo
     first = Axlsx::ColorScale.default_cfvos.first
     second = Axlsx::ColorScale.default_cfvos.last

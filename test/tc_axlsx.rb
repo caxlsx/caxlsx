@@ -32,6 +32,7 @@ class TestAxlsx < Test::Unit::TestCase
 
     Axlsx.trust_input = old
   end
+
   def test_cell_range_relative
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet
