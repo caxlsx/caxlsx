@@ -26,7 +26,7 @@ class TestApp < Test::Unit::TestCase
       :'Application' => 'axlsx',
       :'AppVersion' => '1.1.5',
       :'DocSecurity' => 0
-      }
+    }
 
     @app = Axlsx::App.new options
 
