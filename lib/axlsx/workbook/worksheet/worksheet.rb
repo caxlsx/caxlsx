@@ -507,10 +507,10 @@ module Axlsx
     def add_page_break(cell)
       DataTypeValidator.validate :worksheet_page_break, [String, Cell], cell
       column_index, row_index = if cell.is_a?(String)
-          Axlsx.name_to_indices(cell)
-        else
-          cell.pos
-        end
+                                  Axlsx.name_to_indices(cell)
+                                else
+                                  cell.pos
+                                end
       if column_index > 0
         col_breaks.add_break(:id => column_index)
       end

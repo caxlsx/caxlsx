@@ -42,14 +42,6 @@ Layout/ClosingParenthesisIndentation:
   Exclude:
     - 'lib/axlsx/stylesheet/styles.rb'
 
-# Offense count: 5
-# This cop supports safe autocorrection (--autocorrect).
-Layout/ElseAlignment:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/merged_cells.rb'
-    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-    - 'test/workbook/worksheet/tc_date_time_converter.rb'
-
 # Offense count: 90
 # This cop supports safe autocorrection (--autocorrect).
 Layout/EmptyLineAfterGuardClause:
@@ -82,16 +74,6 @@ Layout/EmptyLinesAroundMethodBody:
 # SupportedStyles: empty_lines, empty_lines_except_namespace, empty_lines_special, no_empty_lines
 Layout/EmptyLinesAroundModuleBody:
   Enabled: false
-
-# Offense count: 4
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyleAlignWith, Severity.
-# SupportedStylesAlignWith: keyword, variable, start_of_line
-Layout/EndAlignment:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/merged_cells.rb'
-    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-    - 'test/workbook/worksheet/tc_date_time_converter.rb'
 
 # Offense count: 58
 # This cop supports safe autocorrection (--autocorrect).

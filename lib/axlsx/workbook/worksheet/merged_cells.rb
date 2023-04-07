@@ -16,12 +16,12 @@ module Axlsx
     # range like 'A1:C1'
     def add(cells)
       self << if cells.is_a?(String)
-                 cells
-               elsif cells.is_a?(Array)
-                 Axlsx::cell_range(cells, false)
-               elsif cells.is_a?(Row)
-                 Axlsx::cell_range(cells, false)
-               end
+                cells
+              elsif cells.is_a?(Array)
+                Axlsx::cell_range(cells, false)
+              elsif cells.is_a?(Row)
+                Axlsx::cell_range(cells, false)
+              end
     end
 
     # serialize the object
