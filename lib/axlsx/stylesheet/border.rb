@@ -1,7 +1,6 @@
 module Axlsx
   # This class details a border used in Office Open XML spreadsheet styles.
   class Border
-
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
 
@@ -67,6 +66,5 @@ module Axlsx
       end
       str << '</border>'
     end
-
   end
 end

@@ -1,8 +1,6 @@
 module Axlsx
-
   # A worksheet hyperlink object. Note that this is not the same as a drawing hyperlink object.
   class WorksheetHyperlink
-
     include Axlsx::OptionsParser
     include Axlsx::Accessors
     include Axlsx::SerializedAttributes

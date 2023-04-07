@@ -1,7 +1,6 @@
 module Axlsx
   # The picture locking class defines the locking properties for pictures in your workbook.
   class PictureLocking
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
     include Axlsx::Accessors
@@ -36,6 +35,5 @@ module Axlsx
     def to_xml_string(str = '')
       serialized_tag('a:picLocks', str)
     end
-
   end
 end

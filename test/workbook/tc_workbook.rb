@@ -44,7 +44,6 @@ class TestWorkbook < Test::Unit::TestCase
     @wb.add_worksheet(:name=>'foo')
     @wb.add_worksheet(:name=>'bar')
     assert_equal('foo', @wb.sheet_by_name('foo').name)
-
   end
 
   def test_worksheet_empty_name

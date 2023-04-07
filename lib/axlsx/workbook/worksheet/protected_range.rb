@@ -3,7 +3,6 @@ module Axlsx
   # @note the recommended way to manage protected ranges with via Worksheet#protect_range
   # @see Worksheet#protect_range
   class ProtectedRange
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 

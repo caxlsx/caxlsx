@@ -1,8 +1,6 @@
 module Axlsx
-
   # A simple, self serializing class for storing tables
   class Tables < SimpleTypedList
-
     # creates a new Tables object
     def initialize(worksheet)
       raise ArgumentError, "you must provide a worksheet" unless worksheet.is_a?(Worksheet)
@@ -30,5 +28,4 @@ module Axlsx
       str << '</tableParts>'
     end
   end
-
 end

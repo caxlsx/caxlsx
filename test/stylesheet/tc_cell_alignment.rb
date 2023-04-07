@@ -77,5 +77,4 @@ class TestCellAlignment < Test::Unit::TestCase
     assert_nothing_raised { @item.readingOrder = 2 }
     assert_equal(@item.readingOrder, 2 )
   end
-
 end

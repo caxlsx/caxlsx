@@ -1,8 +1,6 @@
 module Axlsx
-
   # a vml drawing used for comments in excel.
   class VmlDrawing
-
     # creates a new Vml Drawing object.
     # @param [Comments] comments the comments object this drawing is associated with
     def initialize(comments)
@@ -35,8 +33,6 @@ module Axlsx
 BAD_PROGRAMMER
       @comments.each { |comment| comment.vml_shape.to_xml_string str }
       str << "</xml>"
-
     end
-
   end
 end

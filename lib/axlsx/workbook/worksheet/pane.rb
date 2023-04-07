@@ -4,7 +4,6 @@ module Axlsx
   # @note The recommended way to manage the pane options is via SheetView#pane
   # @see SheetView#pane
   class Pane
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
     # Creates a new {Pane} object

@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestColor < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::Color.new
   end
@@ -38,5 +37,4 @@ class TestColor < Test::Unit::TestCase
     assert_nothing_raised { @item.tint = -1.0 }
     assert_equal(@item.tint, -1.0 )
   end
-
 end

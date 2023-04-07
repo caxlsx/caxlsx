@@ -40,5 +40,4 @@ class TestMarker < Test::Unit::TestCase
     assert_equal(@marker.col, 5)
     assert_equal(@marker.row, 10)
   end
-
 end

@@ -41,5 +41,4 @@ class TestIconSet < Test::Unit::TestCase
     assert_equal(doc.xpath(".//iconSet[@iconSet='3TrafficLights1'][@percent=1][@reverse=0][@showValue=1]").size, 1)
     assert_equal(doc.xpath(".//iconSet//cfvo").size, 3)
   end
-
 end

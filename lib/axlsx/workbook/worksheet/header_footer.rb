@@ -9,7 +9,6 @@ module Axlsx
   # @note The recommended way of managing header/footers is via Worksheet#header_footer
   # @see Worksheet#initialize
   class HeaderFooter
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
     include Axlsx::Accessors

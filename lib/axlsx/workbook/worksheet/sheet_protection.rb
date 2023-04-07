@@ -1,8 +1,6 @@
 module Axlsx
-
   # The SheetProtection object manages worksheet protection options per sheet.
   class SheetProtection
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
     include Axlsx::Accessors

@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestVmlShape < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
     wb = p.workbook
@@ -104,5 +103,4 @@ class TestVmlShape < Test::Unit::TestCase
       assert(doc.xpath("//v:shape/x:ClientData/x:Anchor[text()='#{shape.left_column}, #{shape.left_offset}, #{shape.top_row}, #{shape.top_offset}, #{shape.right_column}, #{shape.right_offset}, #{shape.bottom_row}, #{shape.bottom_offset}']").size == 1)
     end
   end
-
 end

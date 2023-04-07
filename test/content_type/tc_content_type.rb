@@ -12,7 +12,6 @@ class TestContentType < Test::Unit::TestCase
   end
 
   def test_pre_built_types
-
     o_path = "//xmlns:Override[@ContentType='%s']"
     d_path = "//xmlns:Default[@ContentType='%s']"
 
@@ -53,7 +52,6 @@ class TestContentType < Test::Unit::TestCase
     doc = Nokogiri::XML(@package.send(:content_types).to_xml_string)
     assert_equal(doc.xpath("//xmlns:Override").size, 6, "adding workship should add another type")
     assert_equal(doc.xpath(o_path % Axlsx::WORKSHEET_CT).last["PartName"], "/xl/#{ws.pn}", "Worksheet part invalid")
-
   end
 
   def test_drawings_and_charts_need_content_types
@@ -71,5 +69,4 @@ class TestContentType < Test::Unit::TestCase
     assert_equal(doc.xpath("//xmlns:Override").size, 8, "expected 7 types got #{doc.css("Types Override").size}")
     assert_equal(doc.xpath(o_path % Axlsx::CHART_CT).last["PartName"], "/xl/#{c.pn}", "Chart part name invlid")
   end
-
 end

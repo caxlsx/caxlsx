@@ -7,7 +7,6 @@ module Axlsx
   # @see ConditionalFormattingRule#initialize
   #
   class Cfvo
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 

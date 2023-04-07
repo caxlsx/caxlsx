@@ -1,9 +1,7 @@
 module Axlsx
-
   # The Axes class creates and manages axis information and
   # serialization for charts.
   class Axes
-
     # @param [Hash] options options used to generate axis each key
     # should be an axis name like :val_axis and its value should be the
     # class of the axis type to construct. The :cat_axis, if there is one,

@@ -45,5 +45,4 @@ class TestScatterChart < Test::Unit::TestCase
     end
     assert(errors.empty?, "error free validation")
   end
-
 end

@@ -2,7 +2,6 @@ module Axlsx
   # A relationship defines a reference between package parts.
   # @note Packages automatically manage relationships.
   class Relationship
-
     class << self
       # Keeps track of relationship ids in use.
       # @return [Array]
@@ -124,6 +123,5 @@ module Axlsx
       key << self.Target if self.TargetMode == :External
       key
     end
-
   end
 end

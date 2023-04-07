@@ -2,7 +2,6 @@ module Axlsx
   # A NumFmt object defines an identifier and formatting code for data in cells.
   # @note The recommended way to manage styles is Styles#add_style
   class NumFmt
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -80,6 +79,5 @@ module Axlsx
       end
       str
     end
-
   end
 end

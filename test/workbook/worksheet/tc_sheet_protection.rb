@@ -58,5 +58,4 @@ class TestSheetProtection < Test::Unit::TestCase
       assert(doc.xpath("//sheetProtection[@#{key.to_s.gsub(/_(.)/){ $1.upcase }}='#{value}']"))
     end
   end
-
 end

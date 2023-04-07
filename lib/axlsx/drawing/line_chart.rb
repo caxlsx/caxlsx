@@ -1,5 +1,4 @@
 module Axlsx
-
   # The LineChart is a two dimentional line chart (who would have guessed?) that you can add to your worksheet.
   # @example Creating a chart
   #   # This example creates a line in a single sheet.
@@ -19,7 +18,6 @@ module Axlsx
   # @see Series
   # @see Package#serialize
   class LineChart < Chart
-
     # the category axis
     # @return [CatAxis]
     def cat_axis

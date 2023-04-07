@@ -305,6 +305,5 @@ class TestStyles < Test::Unit::TestCase
       border_pr = current_border.prs.detect{|x| x.name == edge }
       assert_equal(border_pr.color.rgb, "FF#{b_opts[:color]}")
     end
-
   end
 end

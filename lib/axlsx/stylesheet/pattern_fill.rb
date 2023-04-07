@@ -3,7 +3,6 @@ module Axlsx
   # @note The recommended way to manage styles is with Styles#add_style
   # @see Style#add_style
   class PatternFill
-
     include Axlsx::OptionsParser
     # Creates a new PatternFill Object
     # @option options [Symbol] patternType

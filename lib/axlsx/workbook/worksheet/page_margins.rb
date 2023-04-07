@@ -9,7 +9,6 @@ module Axlsx
   # @see Worksheet#page_margins
   # @see Worksheet#initialize
   class PageMargins
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 

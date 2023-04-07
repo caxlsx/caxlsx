@@ -5,7 +5,6 @@ module Axlsx
   #The DLbls class manages serialization of data labels
   # showLeaderLines and leaderLines are not currently implemented
   class DLbls
-
     include Axlsx::Accessors
     include Axlsx::OptionsParser
     # creates a new DLbls object
@@ -84,6 +83,5 @@ module Axlsx
       @d_lbl_pos = nil
       @show_leader_lines = nil
     end
-
   end
 end

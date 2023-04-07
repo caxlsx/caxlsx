@@ -4,7 +4,6 @@ class TestDrawing < Test::Unit::TestCase
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet
-
   end
 
   def test_initialization
@@ -78,5 +77,4 @@ class TestDrawing < Test::Unit::TestCase
     end
     assert(errors.empty?, "error free validation")
   end
-
 end

@@ -76,5 +76,4 @@ class TestBorderCreator < Test::Unit::TestCase
     assert_equal [:thick], @ws.styles.borders[4].prs.map(&:style).uniq
     assert_equal [:left], @ws.styles.borders[4].prs.map(&:name)
   end
-
 end

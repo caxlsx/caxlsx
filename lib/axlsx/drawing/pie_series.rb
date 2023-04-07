@@ -1,11 +1,9 @@
 module Axlsx
-
   # A PieSeries defines the data and labels and explosion for pie charts series.
   # @note The recommended way to manage series is to use Chart#add_series
   # @see Worksheet#add_chart
   # @see Chart#add_series
   class PieSeries < Series
-
     # The data for this series.
     # @return [SimpleTypedList]
     attr_reader :data
@@ -67,7 +65,5 @@ module Axlsx
 
     # assigns the labels for this series
     def labels=(v) DataTypeValidator.validate "Series.labels", [AxDataSource], v; @labels = v; end
-
   end
-
 end

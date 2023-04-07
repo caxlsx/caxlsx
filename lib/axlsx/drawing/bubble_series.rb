@@ -1,12 +1,10 @@
 module Axlsx
-
   # A BubbleSeries defines the x/y position and bubble size of data in the chart
   # @note The recommended way to manage series is to use Chart#add_series
   # @see Worksheet#add_chart
   # @see Chart#add_series
   # @see examples/example.rb
   class BubbleSeries < Series
-
     # The x data for this series.
     # @return [AxDataSource]
     attr_reader :xData

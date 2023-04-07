@@ -1,8 +1,6 @@
 module Axlsx
-
   # the access class defines common properties and values for a chart axis.
   class Axis
-
     include Axlsx::OptionsParser
 
     # Creates an Axis object
@@ -183,7 +181,5 @@ module Axlsx
       str << ('<c:crossAx val="' << @cross_axis.id.to_s << '"/>')
       str << ('<c:crosses val="' << @crosses.to_s << '"/>')
     end
-
   end
-
 end

@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestSheetFormatPr < Test::Unit::TestCase
-
   def setup
     @options = {
       :base_col_width => 5,
@@ -86,5 +85,4 @@ class TestSheetFormatPr < Test::Unit::TestCase
     assert doc.xpath("sheetFormatPr[@outline_level_row=0]")
     assert doc.xpath("sheetFormatPr[@outline_level_col=0]")
   end
-
 end

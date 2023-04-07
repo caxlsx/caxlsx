@@ -208,5 +208,4 @@ class TestSheetView < Test::Unit::TestCase
      @sv.add_selection(:top_left, :active_cell => "A1")
      assert_equal('A1', @sv.selections[:top_left].active_cell)
   end
-
 end

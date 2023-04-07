@@ -2,7 +2,6 @@ module Axlsx
   # This module allows us to define a list of symbols defining which
   # attributes will be serialized for a class.
   module SerializedAttributes
-
     # Extend with class methods
     def self.included(base)
       base.send :extend, ClassMethods
@@ -10,7 +9,6 @@ module Axlsx
 
     # class methods applied to all includers
     module ClassMethods
-
       # This is the method to be used in inheriting classes to specify
       # which of the instance values are serializable
       def serializable_attributes(*symbols)

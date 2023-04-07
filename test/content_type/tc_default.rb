@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestDefault < Test::Unit::TestCase
-
   def test_content_type_restriction
     assert_raise(ArgumentError, "raises argument error if invlalid ContentType is") { Axlsx::Default.new :ContentType=>"asdf" }
   end

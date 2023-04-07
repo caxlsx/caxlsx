@@ -1,10 +1,8 @@
 module Axlsx
-
   # This class manages the dimensions for a worksheet.
   # While this node is optional in the specification some readers like
   # LibraOffice require this node to render the sheet
   class Dimension
-
     # the default value for the first cell in the dimension
     # @return [String]
     def self.default_first

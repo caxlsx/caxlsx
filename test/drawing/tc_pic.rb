@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestPic < Test::Unit::TestCase
-
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
@@ -35,7 +34,6 @@ class TestPic < Test::Unit::TestCase
     assert_equal(start_at.col, @image.anchor.from.col)
     assert_equal(start_at.row, @image.anchor.from.row)
     assert_equal(200, @image.width)
-
   end
 
   def test_hyperlink

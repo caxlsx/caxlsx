@@ -1,5 +1,4 @@
 module Axlsx
-
   # The Cell Serializer class contains the logic for serializing cells based on their type.
   class CellSerializer
     class << self

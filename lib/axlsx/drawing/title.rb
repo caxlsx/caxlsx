@@ -1,7 +1,6 @@
 module Axlsx
   # A Title stores information about the title of a chart
   class Title
-
     # The text to be shown. Setting this property directly with a string will remove the cell reference.
     # @return [String]
     attr_reader :text
@@ -101,6 +100,5 @@ module Axlsx
       str << '<c:overlay val="0"/>'
       str << '</c:title>'
     end
-
   end
 end

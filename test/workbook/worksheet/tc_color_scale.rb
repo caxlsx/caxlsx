@@ -55,5 +55,4 @@ class TestColorScale < Test::Unit::TestCase
     assert_equal(doc.xpath(".//colorScale//cfvo").size, 2)
     assert_equal(doc.xpath(".//colorScale//color").size, 2)
   end
-
 end

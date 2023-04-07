@@ -1,8 +1,6 @@
 module Axlsx
-
   # The Storage class represents a storage object or stream in a compound file.
   class Storage
-
     # Packing for the Storage when pushing an array of items into a byte stream
     # Name, name length, type, color, left sibling, right sibling, child, classid, state, created, modified, sector, size
     PACKING = "s32 s1 c2 l3 x16 x4 q2 l q".freeze
@@ -140,6 +138,5 @@ module Axlsx
       @type ||= (data.nil? ? TYPES[:storage] : TYPES[:stream])
       self.name = name
     end
-
   end
 end

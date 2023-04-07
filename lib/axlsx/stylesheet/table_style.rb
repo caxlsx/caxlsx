@@ -2,7 +2,6 @@ module Axlsx
   # A single table style definition and is a collection for tableStyleElements
   # @note Table are not supported in this version and only the defaults required for a valid workbook are created.
   class TableStyle < SimpleTypedList
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -48,6 +47,5 @@ module Axlsx
       each { |table_style_el| table_style_el.to_xml_string(str) }
       str << '</tableStyle>'
     end
-
   end
 end

@@ -31,5 +31,4 @@ class TestScaling < Test::Unit::TestCase
     assert_raise(ArgumentError) { @scaling.min = 1}
     assert_nothing_raised {@scaling.min = 10.5}
   end
-
 end

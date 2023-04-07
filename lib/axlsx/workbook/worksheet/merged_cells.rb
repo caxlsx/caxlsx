@@ -1,8 +1,6 @@
 module Axlsx
-
   # A simple list of merged cells
   class MergedCells < SimpleTypedList
-
     # creates a new MergedCells object
     # @param [Worksheet] worksheet
     def initialize(worksheet)

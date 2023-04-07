@@ -2,7 +2,6 @@ module Axlsx
   # TableStyles represents a collection of style definitions for table styles and pivot table styles.
   # @note Support for custom table styles does not exist in this version. Many of the classes required are defined in preparation for future release. Please do not attempt to add custom table styles.
   class TableStyles < SimpleTypedList
-
     include Axlsx::SerializedAttributes
 
     # Creates a new TableStyles object that is a container for TableStyle objects
@@ -39,7 +38,5 @@ module Axlsx
       each { |table_style| table_style.to_xml_string(str) }
       str << '</tableStyles>'
     end
-
   end
-
 end

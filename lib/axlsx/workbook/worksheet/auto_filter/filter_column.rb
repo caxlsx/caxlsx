@@ -4,7 +4,6 @@ module Axlsx
   # If a column in the AutoFilter range has no criteria specified,
   # then there is no corresponding filterColumn collection expressed for that column.
   class FilterColumn
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 

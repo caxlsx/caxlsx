@@ -14,7 +14,6 @@ module Axlsx
 
     # Defines the class level xxx_attr_accessor methods
     module ClassMethods
-
       # Creates one or more string validated attr_accessors
       # @param [Array] symbols An array of symbols representing the
       # names of the attributes you will add to your class.

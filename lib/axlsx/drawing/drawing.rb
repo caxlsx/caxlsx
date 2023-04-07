@@ -57,7 +57,6 @@ module Axlsx
   # @see Chart
   # see examples/example.rb for an example of how to create a chart.
   class Drawing
-
     # The worksheet that owns the drawing
     # @return [Worksheet]
     attr_reader :worksheet
@@ -160,6 +159,5 @@ module Axlsx
       anchors.each { |anchor| anchor.to_xml_string(str) }
       str << '</xdr:wsDr>'
     end
-
   end
 end

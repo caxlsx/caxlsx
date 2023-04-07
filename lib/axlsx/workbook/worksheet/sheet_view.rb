@@ -4,7 +4,6 @@ module Axlsx
   # @note The recommended way to manage the sheet view is via Worksheet#sheet_view
   # @see Worksheet#sheet_view
   class SheetView
-
     include Axlsx::OptionsParser
     include Axlsx::Accessors
     include Axlsx::SerializedAttributes

@@ -1,5 +1,4 @@
 module Axlsx
-
   # The Shared String Table class is responsible for managing and serializing common strings in a workbook.
   # While the ECMA-376 spec allows for both inline and shared strings it seems that at least some applications like iWorks Numbers
   # and Google Docs require that the shared string table is populated in order to interoperate properly.
@@ -8,7 +7,6 @@ module Axlsx
   # @note Serialization performance is affected by using this serialization method so if you do not need interoperability
   # it is recomended that you use the default inline string method of serialization.
   class SharedStringsTable
-
     # The total number of strings in the workbook including duplicates
     # Empty cells are treated as blank strings
     # @return [Integer]

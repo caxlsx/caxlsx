@@ -28,5 +28,4 @@ class TestCatAxis < Test::Unit::TestCase
     assert_raise(ArgumentError, "requires valid label offset") { @axis.lbl_offset = 'foo' }
     assert_nothing_raised("accepts valid label offset") { @axis.lbl_offset = "20" }
   end
-
 end

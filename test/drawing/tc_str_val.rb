@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestStrVal < Test::Unit::TestCase
-
   def setup
     @str_val = Axlsx::StrVal.new :v => "1"
     @str_val_with_special_characters = Axlsx::StrVal.new :v => "a & b <c>"
@@ -26,5 +25,4 @@ class TestStrVal < Test::Unit::TestCase
     doc = Nokogiri::XML(str)
     assert_equal(doc.xpath("//c:pt/c:v[text()='a & b <c>']").size, 1)
   end
-
 end

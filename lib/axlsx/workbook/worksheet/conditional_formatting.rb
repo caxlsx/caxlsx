@@ -5,7 +5,6 @@ module Axlsx
   # @see Worksheet#add_conditional_formatting
   # @see ConditionalFormattingRule
   class ConditionalFormatting
-
    include Axlsx::OptionsParser
 
     # Creates a new {ConditionalFormatting} object

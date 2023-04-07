@@ -1,5 +1,4 @@
 module Axlsx
-
   # A SimpleTypedList is a type restrictive collection that allows some of the methods from Array and supports basic xml serialization.
   # @private
   class SimpleTypedList
@@ -170,7 +169,5 @@ module Axlsx
       each { |item| item.to_xml_string(str) }
       str << ('</' << el_name << '>')
     end
-
   end
-
 end

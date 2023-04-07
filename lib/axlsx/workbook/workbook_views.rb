@@ -1,7 +1,6 @@
 module Axlsx
   # a simple types list of BookView objects
   class WorkbookViews < SimpleTypedList
-
     # creates the book views object
     def initialize
       super WorkbookView

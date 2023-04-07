@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestFont < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::Font.new
   end
@@ -127,5 +126,4 @@ class TestFont < Test::Unit::TestCase
     assert_nothing_raised { @item.sz = 5 }
     assert_equal(@item.sz, 5)
   end
-
 end

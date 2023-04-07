@@ -3,7 +3,6 @@ module Axlsx
   # @note The recommended way to manage drawings and charts is Worksheet#add_chart. Anchors are specified by the :start_at and :end_at options to that method.
   # @see Worksheet#add_chart
   class TwoCellAnchor
-
     include Axlsx::OptionsParser
 
     # A marker that defines the from cell anchor. The default from column and row are 0 and 0 respectively

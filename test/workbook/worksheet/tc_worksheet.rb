@@ -130,7 +130,6 @@ class TestWorksheet < Test::Unit::TestCase
       assert_equal(header_footer[key], optioned.header_footer.send(key))
     end
     assert_equal(optioned.name, 'bob')
-
   end
 
   # def test_use_gridlines
@@ -892,5 +891,4 @@ class TestWorksheet < Test::Unit::TestCase
       wb.styles.style_index.values.first
     )
   end
-
 end

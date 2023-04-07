@@ -6,7 +6,6 @@ module Axlsx
   # @see Worksheet#add_conditional_formatting
   # @see ConditionalFormattingRule#initialize
   class DataBar
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -124,6 +123,5 @@ module Axlsx
         end
       end
     end
-
   end
 end

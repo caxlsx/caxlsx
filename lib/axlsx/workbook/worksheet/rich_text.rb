@@ -1,8 +1,6 @@
 module Axlsx
-
   # A simple, self serializing class for storing TextRuns
   class RichText < SimpleTypedList
-
     # creates a new RichText collection
     # @param [String] text -optional The text to use in creating the first RichTextRun
     # @param [Object] options -optional The options to use in creating the first RichTextRun

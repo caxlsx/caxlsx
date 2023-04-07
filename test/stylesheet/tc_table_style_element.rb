@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestTableStyleElement < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::TableStyleElement.new
   end

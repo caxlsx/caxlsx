@@ -82,7 +82,6 @@ require 'axlsx/workbook/worksheet/selection.rb'
   #
   #   *workbookPr is only supported to the extend of date1904
   class Workbook
-
     BOLD_FONT_MULTIPLIER = 1.5
     FONT_SCALE_DIVISOR = 10.0
 
@@ -413,6 +412,5 @@ require 'axlsx/workbook/worksheet/selection.rb'
       end
       str << '</workbook>'
     end
-
   end
 end

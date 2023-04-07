@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestPatternFill < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::PatternFill.new
   end

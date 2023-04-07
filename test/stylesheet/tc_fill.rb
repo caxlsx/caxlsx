@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestFill < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::Fill.new Axlsx::PatternFill.new
   end
@@ -14,5 +13,4 @@ class TestFill < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx::Fill.new }
     assert_nothing_raised { Axlsx::Fill.new(Axlsx::GradientFill.new) }
   end
-
 end

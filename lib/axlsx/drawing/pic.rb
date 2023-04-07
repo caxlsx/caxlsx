@@ -3,7 +3,6 @@ module Axlsx
   # Worksheet#add_image is the recommended way to manage images in your sheets
   # @see Worksheet#add_image
   class Pic
-
     include Axlsx::OptionsParser
 
     # Creates a new Pic(ture) object

@@ -1,8 +1,6 @@
 module Axlsx
-
   # A VmlShape is used to position and render a comment.
   class VmlShape
-
     include Axlsx::OptionsParser
     include Axlsx::Accessors
 
@@ -60,7 +58,6 @@ str << <<SHAME_ON_YOU
   </x:ClientData>
  </v:shape>
 SHAME_ON_YOU
-
     end
   end
 end

@@ -181,7 +181,6 @@ class TestPivotTable < Test::Unit::TestCase
     assert_nil( doc.at_css('colItems i')['x'])
     assert_equal('1', doc.at_css('colItems i[i=1] x')['v'])
     assert_equal('2', doc.at_css('colItems i[i=2] x')['v'])
-
   end
 
   def test_pivot_table_with_only_one_data_row

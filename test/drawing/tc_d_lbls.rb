@@ -1,7 +1,6 @@
 require 'tc_helper'
 
 class TestDLbls < Test::Unit::TestCase
-
   def setup
     @d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart)
     @boolean_attributes =[:show_legend_key,
@@ -21,7 +20,6 @@ class TestDLbls < Test::Unit::TestCase
   end
 
   def test_initialization_with_optoins
-
     options_hash = Hash[*[@boolean_attributes.map { |name| [name, true] }]]
 
     d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart, options_hash.merge( { :d_lbl_pos => :t }))

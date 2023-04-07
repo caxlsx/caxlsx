@@ -1,7 +1,6 @@
 module Axlsx
   # a simple types list of DefinedName objects
   class DefinedNames < SimpleTypedList
-
     # creates the DefinedNames object
     def initialize
       super DefinedName

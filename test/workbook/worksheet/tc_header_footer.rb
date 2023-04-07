@@ -1,7 +1,6 @@
 require 'tc_helper'
 
 class TestHeaderFooter < Test::Unit::TestCase
-
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet :name => 'test'

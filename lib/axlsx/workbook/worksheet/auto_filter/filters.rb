@@ -1,5 +1,4 @@
 module Axlsx
-
   # When multiple values are chosen to filter by, or when a group of date values are chosen to filter by,
   # this object groups those criteria together.
   class Filters
@@ -104,7 +103,6 @@ module Axlsx
 
     # This class expresses a filter criteria value.
     class Filter
-
       # Creates a new filter value object
       # @param [Any] value   The value of the filter. This is not restricted, but
       #                       will be serialized via to_s so if you are passing an object

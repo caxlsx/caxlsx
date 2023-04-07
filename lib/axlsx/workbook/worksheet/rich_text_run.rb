@@ -1,8 +1,6 @@
 module Axlsx
-
   # The RichTextRun class creates and self serializing text run.
   class RichTextRun
-
     include Axlsx::OptionsParser
 
     attr_reader :value

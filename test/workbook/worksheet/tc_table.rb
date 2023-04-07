@@ -12,7 +12,6 @@ class TestTable < Test::Unit::TestCase
   def test_initialization
     assert(@ws.workbook.tables.empty?)
     assert(@ws.tables.empty?)
-
   end
 
   def test_table_style_info

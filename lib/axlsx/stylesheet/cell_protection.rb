@@ -3,7 +3,6 @@ module Axlsx
   # @note Using Styles#add_style is the recommended way to manage cell protection.
   # @see Styles#add_style
   class CellProtection
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -35,6 +34,5 @@ module Axlsx
     def to_xml_string(str = '')
       serialized_tag('protection', str)
     end
-
   end
 end

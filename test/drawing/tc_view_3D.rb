@@ -47,5 +47,4 @@ class TestView3D < Test::Unit::TestCase
     assert_raise(ArgumentError) {@view.perspective = "bob"}
     assert_nothing_raised {@view.perspective = 30}
   end
-
 end

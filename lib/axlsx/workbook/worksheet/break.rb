@@ -1,9 +1,7 @@
 module Axlsx
-
   # The Break class stores the details for row and column page breaks.
   # @see RowBreaks, ColBreaks
   class Break
-
     include Axlsx::OptionsParser
     include Axlsx::Accessors
     include Axlsx::SerializedAttributes

@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestCell < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
     p.use_shared_strings = true

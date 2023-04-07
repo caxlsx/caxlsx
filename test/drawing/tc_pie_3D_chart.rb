@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestPie3DChart < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet
@@ -24,5 +23,4 @@ class TestPie3DChart < Test::Unit::TestCase
     errors = schema.validate(doc).map {|error| puts error.message; error }
     assert(errors.empty?, "error free validation")
   end
-
 end

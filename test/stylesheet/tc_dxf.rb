@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestDxf < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::Dxf.new
     @styles = Axlsx::Styles.new

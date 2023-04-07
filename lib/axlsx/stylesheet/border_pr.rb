@@ -65,6 +65,5 @@ module Axlsx
       @color.to_xml_string(str) if @color.is_a?(Color)
       str << ('</' << @name.to_s << '>')
     end
-
   end
 end

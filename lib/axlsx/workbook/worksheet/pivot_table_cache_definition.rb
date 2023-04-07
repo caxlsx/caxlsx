@@ -3,7 +3,6 @@ module Axlsx
   # @note Worksheet#add_pivot_table is the recommended way to create tables for your worksheets.
   # @see README for examples
   class PivotTableCacheDefinition
-
     include Axlsx::OptionsParser
 
     # Creates a new PivotTable object
@@ -60,6 +59,5 @@ module Axlsx
       str <<   '</cacheFields>'
       str << '</pivotCacheDefinition>'
     end
-
   end
 end

@@ -3,7 +3,6 @@ module Axlsx
   # @note Worksheet#add_table is the recommended way to create tables for your worksheets.
   # @see README for examples
   class Table
-
     include Axlsx::OptionsParser
 
     # Creates a new Table object

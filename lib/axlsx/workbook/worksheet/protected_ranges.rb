@@ -1,9 +1,7 @@
 module Axlsx
-
   # A self serializing collection of ranges that should be protected in
   # the worksheet
   class ProtectedRanges < SimpleTypedList
-
     attr_reader :worksheet
 
     def initialize(worksheet)

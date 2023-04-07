@@ -1,5 +1,4 @@
 module Axlsx
-
   # The Line3DChart is a three dimentional line chart (who would have guessed?) that you can add to your worksheet.
   # @example Creating a chart
   #   # This example creates a line in a single sheet.
@@ -19,7 +18,6 @@ module Axlsx
   # @see Series
   # @see Package#serialize
   class Line3DChart < Axlsx::LineChart
-
     # space between bar or column clusters, as a percentage of the bar or column width.
     # @return [String]
     attr_reader :gap_depth

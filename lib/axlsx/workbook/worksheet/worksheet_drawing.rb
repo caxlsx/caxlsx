@@ -1,11 +1,9 @@
 module Axlsx
-
   # This is a utility class for serialing the drawing node in a
   # worksheet. Drawing objects have their own serialization that exports
   # a drawing document. This is only for the single node in the
   # worksheet
   class WorksheetDrawing
-
     # Creates a new WorksheetDrawing
     # @param [Worksheet] worksheet
     def initialize(worksheet)

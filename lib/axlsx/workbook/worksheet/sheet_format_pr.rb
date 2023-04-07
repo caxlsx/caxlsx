@@ -1,5 +1,4 @@
 module Axlsx
-
   # Sheet formatting properties
   # <xsd:complexType name="CT_SheetFormatPr">
   #   <xsd:attribute name="baseColWidth" type="xsd:unsignedInt" use="optional" default="8"/>

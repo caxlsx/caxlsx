@@ -6,7 +6,6 @@ module Axlsx
   # @see Worksheet#add_conditional_formatting
   # @see ConditionalFormattingRule#initialize
   class IconSet
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 

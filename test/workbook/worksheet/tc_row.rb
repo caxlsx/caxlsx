@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestRow < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet :name=>"hmmm"
@@ -57,7 +56,6 @@ class TestRow < Test::Unit::TestCase
     r = @ws.add_row [1,2,3], :style=>[1]
     assert_equal(r.cells.first.style, 1, "only apply style to cells with at the same index of of the style array")
     assert_equal(r.cells.last.style, 0, "only apply style to cells with at the same index of of the style array")
-
   end
 
   def test_array_to_cells_with_escape_formulas
@@ -155,5 +153,4 @@ class TestRow < Test::Unit::TestCase
       assert_equal(c.value, index < offset ? nil : values[index - offset])
     end
   end
-
 end

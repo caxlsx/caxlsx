@@ -4,7 +4,6 @@ module Axlsx
   # @see Worksheet#add_chart
   # @see Worksheet#add_image
   class OneCellAnchor
-
     include Axlsx::OptionsParser
 
     # Creates a new OneCellAnchor object and an Pic associated with it.
@@ -94,6 +93,5 @@ module Axlsx
       cx = @width * 914400 / 96
       {:cy=>cy, :cx=>cx}
     end
-
   end
 end

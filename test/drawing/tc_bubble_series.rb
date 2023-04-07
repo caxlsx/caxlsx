@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestBubbleSeries < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet :name=>"hmmm"
@@ -17,5 +16,4 @@ class TestBubbleSeries < Test::Unit::TestCase
     doc = Nokogiri::XML(@chart.to_xml_string)
     assert_equal(doc.xpath("//a:srgbClr[@val='#{@series.color}']").size,2)
   end
-
 end

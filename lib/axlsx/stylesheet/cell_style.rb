@@ -3,7 +3,6 @@ module Axlsx
   # @note Using Styles#add_style is the recommended way to manage cell styling.
   # @see Styles#add_style
   class CellStyle
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -65,7 +64,5 @@ module Axlsx
     def to_xml_string(str = '')
       serialized_tag('cellStyle', str)
     end
-
   end
-
 end

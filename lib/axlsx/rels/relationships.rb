@@ -4,7 +4,6 @@ require 'axlsx/rels/relationship.rb'
   # Relationships are a collection of Relations that define how package parts are related.
   # @note The package automatically manages releationships.
   class Relationships < SimpleTypedList
-
     # Creates a new Relationships collection based on SimpleTypedList
     def initialize
       super Relationship
@@ -26,6 +25,5 @@ require 'axlsx/rels/relationship.rb'
       each{ |rel| rel.to_xml_string(str) }
       str << '</Relationships>'
     end
-
   end
 end

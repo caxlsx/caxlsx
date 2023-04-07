@@ -29,7 +29,6 @@ class TestApp < Test::Unit::TestCase
     }
 
     @app = Axlsx::App.new options
-
   end
 
   def test_valid_document

@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestRelationships < Test::Unit::TestCase
-
   def test_for
     source_obj_1, source_obj_2 = Object.new, Object.new
     rel_1 = Axlsx::Relationship.new(source_obj_1, Axlsx::WORKSHEET_R, "bar")
@@ -33,5 +32,4 @@ class TestRelationships < Test::Unit::TestCase
 
     assert(errors.size == 0)
   end
-
 end

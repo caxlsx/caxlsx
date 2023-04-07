@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestCol < Test::Unit::TestCase
-
   def setup
     @col = Axlsx::Col.new 1, 1
   end
@@ -89,5 +88,4 @@ class TestCol < Test::Unit::TestCase
     assert_equal(@col.style, 1)
     #TODO check that the style specified is actually in the styles xfs collection
   end
-
 end

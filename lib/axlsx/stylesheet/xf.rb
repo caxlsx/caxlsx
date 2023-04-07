@@ -140,6 +140,5 @@ module Axlsx
       protection.to_xml_string(str) if self.protection
       str << '</xf>'
     end
-
   end
 end

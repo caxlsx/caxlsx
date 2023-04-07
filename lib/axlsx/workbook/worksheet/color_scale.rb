@@ -6,9 +6,7 @@ module Axlsx
   # @see Worksheet#add_conditional_formatting
   # @see ConditionalFormattingRule#initialize
   class ColorScale
-
     class << self
-
       # These are the default conditional formatting value objects
       # that define a two tone color gradient.
       def default_cfvos

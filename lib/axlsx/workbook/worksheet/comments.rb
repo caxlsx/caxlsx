@@ -1,8 +1,6 @@
 module Axlsx
-
   # Comments is a collection of Comment objects for a worksheet
   class Comments < SimpleTypedList
-
     # the vml_drawing that holds the shapes for comments
     # @return [VmlDrawing]
     attr_reader :vml_drawing
@@ -73,9 +71,6 @@ module Axlsx
         comment.to_xml_string str
       end
       str << '</commentList></comments>'
-
     end
-
   end
-
 end

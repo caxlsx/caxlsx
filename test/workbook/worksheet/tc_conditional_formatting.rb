@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestConditionalFormatting < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet :name=>"hmmm"
@@ -17,7 +16,6 @@ class TestConditionalFormatting < Test::Unit::TestCase
   end
 
   def test_add_as_rule
-
     color_scale = Axlsx::ColorScale.new do |cs|
       cs.colors.first.rgb = "FFDFDFDF"
       cs.colors.last.rgb = "FF00FF00"
@@ -57,11 +55,9 @@ class TestConditionalFormatting < Test::Unit::TestCase
     doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
     assert_equal(doc.xpath(".//conditionalFormatting//cfRule//iconSet//cfvo").size, 3)
     assert_equal(doc.xpath(".//conditionalFormatting//cfRule//iconSet[@iconSet='5Rating']").size, 1)
-
   end
 
   def test_add_as_hash
-
     color_scale = Axlsx::ColorScale.new do |cs|
       cs.colors.first.rgb = "FFDFDFDF"
       cs.colors.last.rgb = "FF00FF00"
@@ -97,7 +93,6 @@ class TestConditionalFormatting < Test::Unit::TestCase
     doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
     assert_equal(doc.xpath(".//conditionalFormatting//cfRule//iconSet//cfvo").size, 3)
     assert_equal(doc.xpath(".//conditionalFormatting//cfRule//iconSet[@iconSet='5Rating']").size, 1)
-
   end
 
   def test_single_rule
@@ -220,5 +215,4 @@ class TestConditionalFormatting < Test::Unit::TestCase
     assert_nothing_raised { @cfr.timePeriod = :today }
     assert_equal(@cfr.timePeriod, :today)
   end
-
 end

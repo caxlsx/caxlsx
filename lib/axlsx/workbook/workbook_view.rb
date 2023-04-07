@@ -19,14 +19,12 @@
 # </xsd:complexType>
 
 module Axlsx
-
   # A BookView defines the display properties for a workbook.
   # Units for window widths and other dimensions are expressed in twips.
   # Twip measurements are portable between different display resolutions.
   # The formula is (screen pixels) * (20 * 72) / (logical device dpi),
   # where the logical device dpi can be different for x and y coordinates.
   class WorkbookView
-
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
     include Axlsx::Accessors

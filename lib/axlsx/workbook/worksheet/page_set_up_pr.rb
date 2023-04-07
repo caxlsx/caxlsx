@@ -1,9 +1,7 @@
 module Axlsx
-
   # Page setup properties of the worksheet
   # This class name is not a typo, its spec.
   class PageSetUpPr
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 

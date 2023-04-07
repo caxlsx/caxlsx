@@ -274,6 +274,5 @@ class TestDataValidation < Test::Unit::TestCase
   def test_empty_attributes
      v = Axlsx::DataValidation.new
      assert_equal(nil, v.send(:get_valid_attributes))
-
   end
 end

@@ -3,7 +3,6 @@ require "date"
 module Axlsx
   # The DateTimeConverter class converts both data and time types to their apprpriate excel serializations
   class DateTimeConverter
-
     # The date_to_serial method converts Date objects to the equivelant excel serialized forms
     # @param [Date] date the date to be serialized
     # @return [Numeric]

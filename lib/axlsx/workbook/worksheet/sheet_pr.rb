@@ -1,5 +1,4 @@
 module Axlsx
-
   # The SheetPr class manages serialization of a worksheet's sheetPr element.
   class SheetPr
     include Axlsx::OptionsParser

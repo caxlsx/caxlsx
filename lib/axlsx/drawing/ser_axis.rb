@@ -1,7 +1,6 @@
 module Axlsx
   #A SerAxis object defines a series axis
   class SerAxis < Axis
-
     # The number of tick lables to skip between labels
     # @return [Integer]
     attr_reader :tick_lbl_skip
@@ -39,5 +38,4 @@ module Axlsx
       str << '</c:serAx>'
     end
   end
-
 end

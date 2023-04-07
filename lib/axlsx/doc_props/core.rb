@@ -1,10 +1,8 @@
 module Axlsx
-
   # The core object for the package.
   # @note Packages manage their own core object.
   # @see Package#core
   class Core
-
     # Creates a new Core object.
     # @option options [String] creator
     # @option options [Time] created
@@ -32,7 +30,5 @@ module Axlsx
       str << '<cp:revision>0</cp:revision>'
       str << '</cp:coreProperties>'
     end
-
   end
-
 end

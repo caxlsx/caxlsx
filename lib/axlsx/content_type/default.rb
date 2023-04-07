@@ -1,8 +1,6 @@
 module Axlsx
-
   # An default content part. These parts are automatically created by for you based on the content of your package.
   class Default < AbstractContentType
-
     # The serialization node name for this class
     NODE_NAME = 'Default'
 
@@ -20,5 +18,4 @@ module Axlsx
       super(NODE_NAME, str)
     end
   end
-
 end

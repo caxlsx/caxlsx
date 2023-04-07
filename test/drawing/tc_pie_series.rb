@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestPieSeries < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet :name=>"hmmm"
@@ -29,5 +28,4 @@ class TestPieSeries < Test::Unit::TestCase
     assert(doc.xpath("//srgbClr[@val='#{@series.colors[0]}']"))
   end
   #TODO test unique serialization parts
-
 end

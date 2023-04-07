@@ -3,7 +3,6 @@ module Axlsx
   # @note The recommended way to manage markers is Worksheet#add_chart Markers are created for a two cell anchor based on the :start and :end options.
   # @see Worksheet#add_chart
   class Marker
-
     include Axlsx::OptionsParser
 
     # Creates a new Marker object
@@ -77,7 +76,5 @@ module Axlsx
       end
       [x, y]
     end
-
   end
-
 end

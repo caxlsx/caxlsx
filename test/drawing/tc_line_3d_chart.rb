@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestLine3DChart < Test::Unit::TestCase
-
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
@@ -42,5 +41,4 @@ class TestLine3DChart < Test::Unit::TestCase
     end
     assert(errors.empty?, "error free validation")
   end
-
 end

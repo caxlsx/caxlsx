@@ -41,5 +41,4 @@ class TestDataBar < Test::Unit::TestCase
     assert_equal(doc.xpath(".//dataBar//cfvo").size, 2)
     assert_equal(doc.xpath(".//dataBar//color").size, 1)
   end
-
 end

@@ -1,7 +1,6 @@
 require_relative "border_creator"
 
 module Axlsx
-
   # The Worksheet class represents a worksheet in the workbook.
   class Worksheet
     include Axlsx::OptionsParser
@@ -831,6 +830,5 @@ module Axlsx
       return if !auto_filter.range
       workbook.add_defined_name auto_filter.defined_name, name: '_xlnm._FilterDatabase', local_sheet_id: index, hidden: 1
     end
-
   end
 end

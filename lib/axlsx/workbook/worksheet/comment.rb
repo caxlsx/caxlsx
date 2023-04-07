@@ -1,8 +1,6 @@
 module Axlsx
-
   # A comment is the text data for a comment
   class Comment
-
     include Axlsx::OptionsParser
     include Axlsx::Accessors
 

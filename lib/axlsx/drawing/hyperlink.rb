@@ -3,7 +3,6 @@ module Axlsx
   # @note using the hyperlink option when calling add_image on a drawing object is the recommended way to manage hyperlinks
   # @see {file:README} README
   class Hyperlink
-
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
 
@@ -94,6 +93,5 @@ module Axlsx
     def to_xml_string(str = '')
       serialized_tag 'a:hlinkClick', str, {:'r:id' => relationship.Id, :'xmlns:r' => XML_NS_R }
     end
-
   end
 end

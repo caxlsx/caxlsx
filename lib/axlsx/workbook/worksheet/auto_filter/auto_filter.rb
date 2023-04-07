@@ -2,10 +2,8 @@ require 'axlsx/workbook/worksheet/auto_filter/filter_column.rb'
 require 'axlsx/workbook/worksheet/auto_filter/filters.rb'
 
 module Axlsx
-
   #This class represents an auto filter range in a worksheet
   class AutoFilter
-
     # creates a new Autofilter object
     # @param [Worksheet] worksheet
     def initialize(worksheet)
@@ -72,6 +70,5 @@ module Axlsx
       columns.each { |filter_column| filter_column.to_xml_string(str) }
       str << "</autoFilter>"
     end
-
   end
 end

@@ -1,8 +1,6 @@
 module Axlsx
-
   # The Col class defines column attributes for columns in sheets.
   class Col
-
     # Maximum column width limit in MS Excel is 255 characters
     # https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3
     MAX_WIDTH = 255
@@ -139,6 +137,5 @@ module Axlsx
     def to_xml_string(str = '')
       serialized_tag('col', str)
     end
-
   end
 end

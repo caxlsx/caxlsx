@@ -1,8 +1,6 @@
 module Axlsx
-
   # A numeric data source for use by charts.
   class NumDataSource
-
     include Axlsx::OptionsParser
 
     # creates a new NumDataSource object

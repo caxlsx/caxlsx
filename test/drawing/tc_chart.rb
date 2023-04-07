@@ -3,7 +3,6 @@ $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../"
 require 'tc_helper.rb'
 
 class TestChart < Test::Unit::TestCase
-
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
@@ -46,7 +45,6 @@ class TestChart < Test::Unit::TestCase
     assert_raise(ArgumentError) { @chart.bg_color = 2 }
     assert_nothing_raised { @chart.bg_color = "FFFFFF" }
     assert_equal(@chart.bg_color, "FFFFFF")
-
   end
 
   def test_title_size
@@ -80,7 +78,6 @@ class TestChart < Test::Unit::TestCase
     @chart.start_at [5,6]
     assert_equal(@chart.graphic_frame.anchor.from.col, 5)
     assert_equal(@chart.graphic_frame.anchor.from.row, 6)
-
   end
 
   def test_end_at
@@ -93,7 +90,6 @@ class TestChart < Test::Unit::TestCase
     @chart.end_at [10,11]
     assert_equal(@chart.graphic_frame.anchor.to.col, 10)
     assert_equal(@chart.graphic_frame.anchor.to.row, 11)
-
   end
 
   def test_add_series
@@ -107,7 +103,6 @@ class TestChart < Test::Unit::TestCase
   end
 
   def test_d_lbls
-
     assert_equal(nil, Axlsx.instance_values_for(@chart)[:d_lbls])
     @chart.d_lbls.d_lbl_pos = :t
     assert(@chart.d_lbls.is_a?(Axlsx::DLbls), 'DLbls instantiated on access')

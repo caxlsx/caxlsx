@@ -6,7 +6,6 @@ module Axlsx
   #
   # @see Worksheet#add_row
   class Cell
-
     include Axlsx::OptionsParser
 
     # @param [Row] row The row this cell belongs to.
@@ -541,6 +540,5 @@ module Axlsx
         v.to_s
       end
     end
-
   end
 end

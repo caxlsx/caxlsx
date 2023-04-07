@@ -1,9 +1,7 @@
 module Axlsx
-
   # A collection of break objects that define row breaks (page breaks) for printing and preview
 
   class RowBreaks < SimpleTypedList
-
     def initialize
       super Break
     end

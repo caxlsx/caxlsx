@@ -66,5 +66,4 @@ class TestPictureLocking < Test::Unit::TestCase
     assert_nothing_raised { @item.noChangeShapeType = false }
     assert_equal(@item.noChangeShapeType, false )
   end
-
 end

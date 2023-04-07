@@ -1,12 +1,10 @@
 module Axlsx
-
   # The BarChart is a two dimentional barchart that you can add to your worksheet.
   # @see Worksheet#add_chart
   # @see Chart#add_series
   # @see Package#serialize
   # @see README for an example
   class BarChart < Chart
-
     # the category axis
     # @return [CatAxis]
     def cat_axis

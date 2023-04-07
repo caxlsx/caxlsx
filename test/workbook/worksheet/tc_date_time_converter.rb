@@ -110,7 +110,6 @@ class TestDateTimeConverter < Test::Unit::TestCase
   end
 
   def test_timezone
-
     utc = Time.utc 2012 # January 1st, 2012 at 0:00 UTC
     local = Time.parse "2012-01-01 09:00:00 +0900"
 
@@ -119,5 +118,4 @@ class TestDateTimeConverter < Test::Unit::TestCase
     Axlsx::Workbook.date1904 = true
     assert_equal Axlsx::DateTimeConverter::time_to_serial(local) - local.utc_offset.to_f/86400, Axlsx::DateTimeConverter::time_to_serial(utc)
   end
-
 end

@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestCore < Test::Unit::TestCase
-
   def setup
     @core = Axlsx::Core.new
     # could still see some false positives if the second changes between the next two calls

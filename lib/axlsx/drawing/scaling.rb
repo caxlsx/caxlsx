@@ -1,7 +1,6 @@
 module Axlsx
   # The Scaling class defines axis scaling
   class Scaling
-
     include Axlsx::OptionsParser
 
     # creates a new Scaling object
@@ -54,6 +53,5 @@ module Axlsx
       str << ('<c:max val="' << @max.to_s << '"/>') unless @max.nil?
       str << '</c:scaling>'
     end
-
   end
 end

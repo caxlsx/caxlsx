@@ -3,7 +3,6 @@ module Axlsx
   # @note The recommended way to manage charts is Worksheet#add_chart
   # @see Worksheet#add_chart
   class GraphicFrame
-
     # A reference to the chart object associated with this frame
     # @return [Chart]
     attr_reader :chart
@@ -48,6 +47,5 @@ module Axlsx
       str << '</a:graphic>'
       str << '</xdr:graphicFrame>'
     end
-
   end
 end

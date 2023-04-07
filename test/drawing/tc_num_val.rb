@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestNumVal < Test::Unit::TestCase
-
   def setup
     @num_val = Axlsx::NumVal.new :v => 1
   end
@@ -23,7 +22,5 @@ class TestNumVal < Test::Unit::TestCase
     doc = Nokogiri::XML(str)
     # lets see if this works?
     assert_equal(doc.xpath("//c:pt/c:v[text()='1']").size, 1)
-
   end
-
 end

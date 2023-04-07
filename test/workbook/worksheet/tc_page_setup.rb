@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestPageSetup < Test::Unit::TestCase
-
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet :name => "hmmm"
@@ -137,6 +136,5 @@ class TestPageSetup < Test::Unit::TestCase
     fits = @ps.fit_to :height => 7, :width => 2
     assert_equal(fits, [2, 7])
     assert_raise(ArgumentError) { puts @ps.fit_to(:width => true)}
-
   end
 end

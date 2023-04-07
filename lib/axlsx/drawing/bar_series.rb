@@ -4,7 +4,6 @@ module Axlsx
   # @see Worksheet#add_chart
   # @see Chart#add_series
   class BarSeries < Series
-
     # The data for this series.
     # @return [NumDataSource]
     attr_reader :data
@@ -88,7 +87,5 @@ module Axlsx
 
     # assigns the labels for this series
     def labels=(v) DataTypeValidator.validate "Series.labels", [AxDataSource], v; @labels = v; end
-
   end
-
 end

@@ -1,10 +1,8 @@
 module Axlsx
-
   # A collection of Brake objects.
   # Please do not use this class directly. Instead use
   # Worksheet#add_break
   class ColBreaks < SimpleTypedList
-
     # Instantiates a new list restricted to Break types
     def initialize
       super Break

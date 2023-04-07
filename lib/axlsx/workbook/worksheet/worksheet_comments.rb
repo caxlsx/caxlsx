@@ -1,9 +1,7 @@
 module Axlsx
-
   # A wraper class for comments that defines its on worksheet
   # serailization
   class WorksheetComments
-
     # Creates a new WorksheetComments object
     # param [Worksheet] worksheet The worksheet comments in thes object belong to
     def initialize(worksheet)

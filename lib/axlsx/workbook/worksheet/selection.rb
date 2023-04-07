@@ -4,7 +4,6 @@ module Axlsx
   # @note The recommended way to manage the selection pane options is via SheetView#add_selection
   # @see SheetView#add_selection
   class Selection
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 

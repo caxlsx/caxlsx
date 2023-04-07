@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestGradientStop < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::GradientStop.new(Axlsx::Color.new(:rgb=>"FFFF0000"), 1.0)
   end
@@ -26,5 +25,4 @@ class TestGradientStop < Test::Unit::TestCase
     @item.color = color
     assert_equal(@item.color.rgb, "FF0000FF")
   end
-
 end

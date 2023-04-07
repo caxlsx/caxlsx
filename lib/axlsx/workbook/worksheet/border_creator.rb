@@ -75,6 +75,5 @@ module Axlsx
     def last_col
       @last_col ||= last_cell.scan(/\D+/).first
     end
-
   end
 end

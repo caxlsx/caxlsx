@@ -4,7 +4,6 @@ module Axlsx
   # @see Worksheet#add_chart
   # @see Chart#add_series
   class Series
-
     include Axlsx::OptionsParser
 
     # The chart that owns this series

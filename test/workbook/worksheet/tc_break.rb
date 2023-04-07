@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestBreak < Test::Unit::TestCase
-
   def setup
     @break = Axlsx::Break.new(:id => 1, :min => 1, :max => 10, :man => true, :pt => false)
   end

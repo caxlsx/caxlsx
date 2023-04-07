@@ -1,7 +1,6 @@
 module Axlsx
   # The color class represents a color used for borders, fills an fonts
   class Color
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 

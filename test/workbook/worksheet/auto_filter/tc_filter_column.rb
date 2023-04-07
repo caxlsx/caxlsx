@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestFilterColumn < Test::Unit::TestCase
-
   def setup
     @filter_column = Axlsx::FilterColumn.new(0, :filters, :filter_items => [200])
   end

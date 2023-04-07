@@ -1,8 +1,6 @@
 module Axlsx
-
   #This class specifies data for a particular data point.
   class StrVal
-
     include Axlsx::OptionsParser
 
     # creates a new StrVal object

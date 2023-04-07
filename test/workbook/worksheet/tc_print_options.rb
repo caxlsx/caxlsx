@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestPrintOptions < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet :name => "hmmm"
@@ -68,5 +67,4 @@ class TestPrintOptions < Test::Unit::TestCase
     assert_nothing_raised { @po.vertical_centered = true }
     assert_equal(@po.vertical_centered, true)
   end
-
 end

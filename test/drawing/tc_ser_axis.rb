@@ -25,5 +25,4 @@ class TestSerAxis < Test::Unit::TestCase
     assert_nothing_raised("accepts valid tick_mark_skip") { @axis.tick_mark_skip = 2 }
     assert_equal(@axis.tick_mark_skip, 2)
   end
-
 end

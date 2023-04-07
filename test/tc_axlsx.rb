@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestAxlsx < Test::Unit::TestCase
-
   def setup_wide
     @wide_test_points = {
       "A3"    =>                       0,
@@ -140,5 +139,4 @@ class TestAxlsx < Test::Unit::TestCase
     assert_equal({foo: {baz: true}}, h1.merge(h2))
     assert_equal({foo: {bar: true, baz: true}}, Axlsx.hash_deep_merge(h1, h2))
   end
-
 end

@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestCellProtection < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::CellProtection.new
   end
@@ -25,5 +24,4 @@ class TestCellProtection < Test::Unit::TestCase
     assert_nothing_raised { @item.locked = false }
     assert_equal(@item.locked, false )
   end
-
 end

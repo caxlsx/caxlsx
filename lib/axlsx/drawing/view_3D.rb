@@ -1,7 +1,6 @@
 module Axlsx
   # 3D attributes for a chart.
   class View3D
-
     include Axlsx::OptionsParser
 
     # Creates a new View3D for charts

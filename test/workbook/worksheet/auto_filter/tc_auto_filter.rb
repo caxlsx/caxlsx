@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestAutoFilter < Test::Unit::TestCase
-
   def setup
     ws = Axlsx::Package.new.workbook.add_worksheet
     3.times { |index| ws.add_row [1*index,2*index,3*index] }

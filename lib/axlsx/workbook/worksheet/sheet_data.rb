@@ -1,8 +1,6 @@
 module Axlsx
-
   # This class manages the serialization of rows for worksheets
   class SheetData
-
     # Creates a new SheetData object
     # @param [Worksheet] worksheet The worksheet that owns this sheet data.
     def initialize(worksheet)
@@ -22,6 +20,5 @@ module Axlsx
       end
       str << '</sheetData>'
     end
-
   end
 end

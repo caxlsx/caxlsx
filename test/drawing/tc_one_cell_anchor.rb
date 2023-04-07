@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestOneCellAnchor < Test::Unit::TestCase
-
   def setup
     @p = Axlsx::Package.new
     @ws = @p.workbook.add_worksheet
@@ -62,5 +61,4 @@ class TestOneCellAnchor < Test::Unit::TestCase
     assert_equal(2, i.anchor.from.row)
     assert_equal(@test_img, i.image_src)
   end
-
 end

@@ -1,11 +1,9 @@
 module Axlsx
-
   # The Pie3DChart is a three dimentional piechart (who would have guessed?) that you can add to your worksheet.
   # @see Worksheet#add_chart
   # @see Chart#add_series
   # @see README for an example
   class Pie3DChart < Chart
-
     # Creates a new pie chart object
     # @param [GraphicFrame] frame The workbook that owns this chart.
     # @option options [Cell, String] title
@@ -40,6 +38,5 @@ module Axlsx
         str << '</c:pie3DChart>'
       end
     end
-
   end
 end

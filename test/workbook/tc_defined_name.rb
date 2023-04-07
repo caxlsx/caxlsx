@@ -44,5 +44,4 @@ class TestDefinedNames < Test::Unit::TestCase
     assert_equal(doc.xpath("//definedName[@hidden='1']").size, 1)
     assert_equal('Sheet1!A1:A1', doc.xpath('//definedName').text)
   end
-
 end

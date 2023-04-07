@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestCellStyle < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::CellStyle.new
   end
@@ -53,5 +52,4 @@ class TestCellStyle < Test::Unit::TestCase
     assert_nothing_raised { @item.customBuiltin = true }
     assert_equal(@item.customBuiltin, true )
   end
-
 end

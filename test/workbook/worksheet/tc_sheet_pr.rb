@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestSheetPr < Test::Unit::TestCase
-
   def setup
     worksheet = Axlsx::Package.new.workbook.add_worksheet
     @options = {

@@ -1,9 +1,7 @@
 module Axlsx
-
   #This specifies the last string data used for a chart. (e.g. strLit and strCache)
   # This class is extended for NumData to include the formatCode attribute required for numLit and numCache
   class StrData
-
     include Axlsx::OptionsParser
 
     # creates a new StrVal object
@@ -35,7 +33,5 @@ module Axlsx
       end
       str << ('</c:' << @tag_name.to_s << '>')
     end
-
   end
-
 end

@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestGradientFill < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::GradientFill.new
   end

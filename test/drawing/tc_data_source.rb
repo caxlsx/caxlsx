@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
  class TestNumDataSource < Test::Unit::TestCase
-
   def setup
     @data_source = Axlsx::NumDataSource.new :data => ["1", "2", "3"]
   end
@@ -19,5 +18,4 @@ require 'tc_helper.rb'
     doc = Nokogiri::XML(str)
     assert_equal(doc.xpath("//c:val").size, 1)
   end
-
  end

@@ -1,11 +1,9 @@
 module Axlsx
-
   # The ScatterChart allows you to insert a scatter chart into your worksheet
   # @see Worksheet#add_chart
   # @see Chart#add_series
   # @see README for an example
   class ScatterChart < Chart
-
     include Axlsx::OptionsParser
 
     # The Style for the scatter chart

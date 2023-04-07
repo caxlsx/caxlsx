@@ -1,12 +1,10 @@
 module Axlsx
-
   # The Bar3DChart is a three dimentional barchart (who would have guessed?) that you can add to your worksheet.
   # @see Worksheet#add_chart
   # @see Chart#add_series
   # @see Package#serialize
   # @see README for an example
   class Bar3DChart < Chart
-
     # the category axis
     # @return [CatAxis]
     def cat_axis

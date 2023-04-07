@@ -1,7 +1,6 @@
 module Axlsx
   #A CatAxis object defines a chart category axis
   class CatAxis < Axis
-
     # Creates a new CatAxis object
     # @option options [Integer] tick_lbl_skip
     # @option options [Integer] tick_mark_skip
@@ -77,7 +76,5 @@ module Axlsx
       str << ('<c:tickMarkSkip val="' << @tick_mark_skip.to_s << '"/>')
       str << '</c:catAx>'
     end
-
   end
-
 end

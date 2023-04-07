@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestNumData < Test::Unit::TestCase
-
   def setup
     @num_data = Axlsx::NumData.new :data => [1, 2, 3]
   end
@@ -11,7 +10,6 @@ class TestNumData < Test::Unit::TestCase
   end
 
   def test_formula_based_cell
-
   end
 
   def test_format_code
@@ -27,5 +25,4 @@ class TestNumData < Test::Unit::TestCase
     assert_equal(doc.xpath("//c:numLit/c:ptCount[@val=3]").size, 1)
     assert_equal(doc.xpath("//c:numLit/c:pt/c:v[text()='1']").size, 1)
   end
-
 end

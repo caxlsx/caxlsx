@@ -1,5 +1,4 @@
 module Axlsx
-
   # XML Encoding
   ENCODING = "UTF-8".freeze
 

@@ -1,5 +1,4 @@
 module Axlsx
-
   # the SheetCalcPr object for the worksheet
   # This object contains calculation properties for the worksheet.
   class SheetCalcPr

@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestRelationships < Test::Unit::TestCase
-
   def test_instances_with_different_attributes_have_unique_ids
     rel_1 = Axlsx::Relationship.new(Object.new, Axlsx::WORKSHEET_R, 'target')
     rel_2 = Axlsx::Relationship.new(Object.new, Axlsx::COMMENT_R, 'foobar')
