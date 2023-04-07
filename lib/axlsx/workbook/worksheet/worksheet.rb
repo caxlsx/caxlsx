@@ -721,7 +721,7 @@ module Axlsx
     end
 
     def outline(collection, range, level = 1, collapsed = true)
-       range.each do |index|
+      range.each do |index|
         unless (item = collection[index]).nil?
           item.outline_level = level
           item.hidden = collapsed

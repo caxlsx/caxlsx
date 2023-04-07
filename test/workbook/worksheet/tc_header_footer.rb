@@ -59,7 +59,7 @@ class TestHeaderFooter < Test::Unit::TestCase
   end
 
   def test_boolean_attributes
-   %w(different_first different_odd_even).each do |attr|
+    %w(different_first different_odd_even).each do |attr|
       assert_raise(ArgumentError, 'only booleanish allowed in string attributes') { @hf.send("#{attr}=", 'foo') }
       assert_nothing_raised { @hf.send("#{attr}=", 1) }
     end

@@ -43,7 +43,7 @@ module Axlsx
       result = Array.new(max_column_count) { Array.new(row_count) }
       # yes, I know it is silly, but that warning is really annoying
       row_count.times do |row_index|
-         max_column_count.times do |column_index|
+        max_column_count.times do |column_index|
           datum = if @list[row_index].cells.size >= max_column_count
                     @list[row_index].cells[column_index]
                   elsif block_given?
