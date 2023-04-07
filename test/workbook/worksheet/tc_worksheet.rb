@@ -233,7 +233,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1,2,3,4]
     @ws.add_row [1,2,3,4]
     @ws.col_style( (1..2), 1, :row_offset=>1)
-    @ws.rows[(1..-1)].each do | r |
+    @ws.rows[(1..-1)].each do |r|
       assert_equal(r.cells[1].style, 1)
       assert_equal(r.cells[2].style, 1)
     end
@@ -271,7 +271,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1,2,3,4]
     @ws.add_row [1,2,3,4]
     @ws.row_style 1, 1, :col_offset=>1
-    @ws.rows[1].cells[(1..-1)].each do | c |
+    @ws.rows[1].cells[(1..-1)].each do |c|
       assert_equal(c.style, 1)
     end
     assert_equal(@ws.rows[1].cells[0].style, 0)

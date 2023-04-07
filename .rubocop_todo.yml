@@ -155,15 +155,6 @@ Layout/MultilineOperationIndentation:
 Layout/SpaceAfterComma:
   Enabled: false
 
-# Offense count: 8
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyleInsidePipes.
-# SupportedStylesInsidePipes: space, no_space
-Layout/SpaceAroundBlockParameters:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/row.rb'
-    - 'test/workbook/worksheet/tc_worksheet.rb'
-
 # Offense count: 184
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
