@@ -119,14 +119,6 @@ Layout/IndentationWidth:
 Layout/LeadingCommentSpace:
   Enabled: false
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: aligned, indented
-Layout/MultilineOperationIndentation:
-  Exclude:
-    - 'lib/axlsx/package.rb'
-
 # Offense count: 264
 # This cop supports safe autocorrection (--autocorrect).
 Layout/SpaceAfterComma:
