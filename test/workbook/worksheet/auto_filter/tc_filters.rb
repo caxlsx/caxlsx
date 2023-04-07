@@ -3,7 +3,7 @@ require 'tc_helper.rb'
 class TestFilters < Test::Unit::TestCase
   def setup
     @filters = Axlsx::Filters.new(:filter_items => [1, 'a'],
-                                  :date_group_items =>[ { :date_time_grouping => :year, :year => 2011, :month => 11, :day => 11, :hour => 0, :minute => 0, :second => 0 } ] ,
+                                  :date_group_items =>[ { :date_time_grouping => :year, :year => 2011, :month => 11, :day => 11, :hour => 0, :minute => 0, :second => 0 } ],
                                   :blank => true)
   end
 

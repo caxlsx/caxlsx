@@ -46,7 +46,7 @@ class TestComment < Test::Unit::TestCase
     assert(@c1.vml_shape.row == pos[1])
     assert_equal(pos[0], @c1.vml_shape.left_column)
     assert(@c1.vml_shape.top_row == pos[1])
-    assert_equal(pos[0] + 2 , @c1.vml_shape.right_column)
+    assert_equal(pos[0] + 2, @c1.vml_shape.right_column)
     assert(@c1.vml_shape.bottom_row == pos[1]+4)
   end
 

@@ -179,14 +179,6 @@ Layout/SpaceBeforeBlockBraces:
 
 # Offense count: 3
 # This cop supports safe autocorrection (--autocorrect).
-Layout/SpaceBeforeComma:
-  Exclude:
-    - 'test/workbook/worksheet/auto_filter/tc_filters.rb'
-    - 'test/workbook/worksheet/tc_comment.rb'
-    - 'test/workbook/worksheet/tc_page_setup.rb'
-
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowForAlignment.
 Layout/SpaceBeforeFirstArg:
   Exclude:
