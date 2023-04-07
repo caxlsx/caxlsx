@@ -233,7 +233,7 @@ module Axlsx
         parts << {:entry => "xl/#{cache_definition.pn}", :doc => cache_definition} #, :schema => SML_XSD}
       end
 
-      workbook.comments.each do|comment|
+      workbook.comments.each do |comment|
         if comment.size > 0
           parts << { :entry => "xl/#{comment.pn}", :doc => comment, :schema => SML_XSD }
           parts << { :entry => "xl/#{comment.vml_drawing.pn}", :doc => comment.vml_drawing, :schema => nil }

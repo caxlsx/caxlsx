@@ -366,7 +366,7 @@ module Axlsx
     def merge(target)
       start, stop = if target.is_a?(String)
                       [self.r, target]
-                    elsif(target.is_a?(Cell))
+                    elsif target.is_a?(Cell)
                       Axlsx.sort_cells([self, target]).map { |c| c.r }
                     end
       self.row.worksheet.merge_cells "#{start}:#{stop}" unless stop.nil?

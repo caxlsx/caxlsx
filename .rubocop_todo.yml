@@ -162,13 +162,6 @@ Layout/SpaceAfterComma:
 Layout/SpaceAroundEqualsInParameterDefault:
   Enabled: false
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Layout/SpaceAroundKeyword:
-  Exclude:
-    - 'lib/axlsx/package.rb'
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
-
 # Offense count: 343
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowForAlignment, EnforcedStyleForExponentOperator.
