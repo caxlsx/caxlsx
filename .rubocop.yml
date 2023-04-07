@@ -10,6 +10,9 @@ AllCops:
     - 'examples/**/*'
     - 'vendor/bundle/**/*'
 
+Gemspec:
+  Enabled: true
+
 Layout:
   Enabled: true
 
@@ -18,6 +21,12 @@ Layout/CommentIndentation:
 
 Layout/ExtraSpacing:
   AllowBeforeTrailingComments: true
+
+Lint:
+  Enabled: true
+
+Naming:
+  Enabled: true
 
 Style:
   Enabled: true
