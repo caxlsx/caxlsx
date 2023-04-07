@@ -3,7 +3,8 @@ require 'tc_helper.rb'
 class TestAxlsx < Test::Unit::TestCase
 
   def setup_wide
-    @wide_test_points = { "A3" =>      0,
+    @wide_test_points = {
+      "A3"    =>                       0,
       "Z3"    =>                      25,
       "B3"    =>                       1,
       "AA3"   =>             1 * 26 +  0,

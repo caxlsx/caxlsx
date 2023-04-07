@@ -445,8 +445,8 @@ module Axlsx
           border.prs << BorderPr.new({
             :name => edge,
             :style => edge_b_opts[:style],
-            :color => Color.new(:rgb => edge_b_opts[:color]) },
-          )
+            :color => Color.new(:rgb => edge_b_opts[:color])
+          })
         end
       end
 
