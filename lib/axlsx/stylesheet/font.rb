@@ -99,7 +99,7 @@ module Axlsx
 
     # The font's extend property
     # @return [Boolean]
-    attr_reader  :extend
+    attr_reader :extend
 
     # The color of the font
     # @return [Color]

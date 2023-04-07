@@ -449,7 +449,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.merge_cells "A4:A5"
     @ws.add_chart Axlsx::Pie3DChart
     @ws.add_table "E1:F3"
-    @ws.add_pivot_table  'G5:G6', 'A1:D10'
+    @ws.add_pivot_table 'G5:G6', 'A1:D10'
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert(schema.validate(doc).map { |e| puts e.message; e }.empty?, schema.validate(doc).map { |e| e.message }.join('\n'))
