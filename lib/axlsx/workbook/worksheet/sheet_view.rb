@@ -49,7 +49,7 @@ module Axlsx
       :view, :top_left_cell, :color_id, :zoom_scale
 
     # instance values that must be serialized as their own elements - e.g. not attributes.
-    CHILD_ELEMENTS = [ :pane, :selections ]
+    CHILD_ELEMENTS = [:pane, :selections]
 
     # The pane object for the sheet view
     # @return [Pane]

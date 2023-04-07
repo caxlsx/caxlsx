@@ -247,7 +247,7 @@ module Axlsx
     private
 
     def get_valid_attributes
-      attributes = [:allowBlank, :error, :errorStyle, :errorTitle, :prompt, :promptTitle, :showErrorMessage, :showInputMessage, :sqref, :type ]
+      attributes = [:allowBlank, :error, :errorStyle, :errorTitle, :prompt, :promptTitle, :showErrorMessage, :showInputMessage, :sqref, :type]
 
       if [:whole, :decimal, :data, :time, :date, :textLength].include?(@type)
         attributes << [:operator, :formula1]
