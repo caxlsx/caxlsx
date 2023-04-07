@@ -47,15 +47,6 @@ Layout/ClosingParenthesisIndentation:
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: empty_lines, no_empty_lines
-Layout/EmptyLinesAroundBlockBody:
-  Exclude:
-    - 'lib/axlsx/drawing/bar_series.rb'
-    - 'test/benchmark.rb'
-
 # Offense count: 285
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.

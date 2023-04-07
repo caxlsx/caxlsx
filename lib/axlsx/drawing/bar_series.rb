@@ -59,7 +59,6 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       super(str) do
-
         colors.each_with_index do |c, index|
           str << '<c:dPt>'
           str << ('<c:idx val="' << index.to_s << '"/>')
