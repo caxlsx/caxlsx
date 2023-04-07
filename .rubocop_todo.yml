@@ -65,11 +65,6 @@ Style/CaseLikeIf:
     - 'lib/axlsx/workbook/worksheet/merged_cells.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Style/CharacterLiteral:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: is_a?, kind_of?
 Style/ClassCheck:
@@ -608,14 +603,6 @@ Style/SingleLineMethods:
 Style/SoleNestedConditional:
   Exclude:
     - 'lib/axlsx/util/validators.rb'
-
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: RequireEnglish, EnforcedStyle.
-# SupportedStyles: use_perl_names, use_english_names, use_builtin_english_names
-Style/SpecialGlobalVars:
-  Exclude:
-    - 'test/benchmark.rb'
-    - 'test/profile.rb'
 
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/StringChars:

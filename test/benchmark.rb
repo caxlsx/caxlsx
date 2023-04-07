@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby -s
-$:.unshift "#{File.dirname(__FILE__)}/../lib"
+
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 require 'csv'
 require 'benchmark'
