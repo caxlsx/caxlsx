@@ -253,7 +253,7 @@ module Axlsx
 
     # Converts the value to the correct XML representation (fixes issues with
     # Numbers)
-    def xml_value value
+    def xml_value(value)
       if value == true
         1
       elsif value == false

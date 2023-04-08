@@ -637,7 +637,7 @@ module Axlsx
     # Serializes the worksheet object to an xml string
     # This intentionally does not use nokogiri for performance reasons
     # @return [String]
-    def to_xml_string str = ''
+    def to_xml_string(str = '')
       add_autofilter_defined_name_to_workbook
       auto_filter.apply if auto_filter.range
       str << '<?xml version="1.0" encoding="UTF-8"?>'

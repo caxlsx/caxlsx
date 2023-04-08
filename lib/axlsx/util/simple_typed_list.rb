@@ -6,7 +6,7 @@ module Axlsx
     # @param [Array, Class] type An array of Class objects or a single Class object
     # @param [String] serialize_as The tag name to use in serialization
     # @raise [ArgumentError] if all members of type are not Class objects
-    def initialize type, serialize_as = nil, start_size = 0
+    def initialize(type, serialize_as = nil, start_size = 0)
       if type.is_a? Array
         type.each { |item| raise ArgumentError, "All members of type must be Class objects" unless item.is_a? Class }
         @allowed_types = type
@@ -149,7 +149,7 @@ module Axlsx
 
     # determines if the index is protected
     # @param [Integer] index
-    def protected? index
+    def protected?(index)
       return false unless locked_at.is_a? Integer
 
       index < locked_at
