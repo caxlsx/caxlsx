@@ -351,6 +351,7 @@ module Axlsx
       Axlsx::validate_unsigned_int(v)
       count = styles.cellXfs.size
       raise ArgumentError, "Invalid cellXfs id" unless v < count
+
       @style = v
     end
 
@@ -465,6 +466,7 @@ module Axlsx
     # Utility method for setting inline style attributes
     def set_run_style(validator, attr, value)
       return unless INLINE_STYLES.include?(attr.to_sym)
+
       Axlsx.send(validator, value) unless validator.nil?
       self.instance_variable_set :"@#{attr.to_s}", value
       @is_text_run = true
@@ -512,6 +514,7 @@ module Axlsx
     # @see Axlsx#date1904
     def cast_value(v)
       return v if v.is_a?(RichText) || v.nil?
+
       case type
       when :date
         self.style = STYLE_DATE if self.style == 0

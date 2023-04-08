@@ -25,6 +25,7 @@ module Axlsx
     # </colBreaks>
     def to_xml_string(str = '')
       return if empty?
+
       str << ('<colBreaks count="' << size.to_s << '" manualBreakCount="' << size.to_s << '">')
       each { |brk| brk.to_xml_string(str) }
       str << '</colBreaks>'

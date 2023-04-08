@@ -73,6 +73,7 @@ module Axlsx
       Axlsx::validate_string(v)
       RestrictionValidator.validate 'Pic.image_src', ALLOWED_MIME_TYPES, MimeTypeUtils.get_mime_type(v)
       raise ArgumentError, "File does not exist" unless File.exist?(v)
+
       @image_src = v
     end
 
@@ -116,6 +117,7 @@ module Axlsx
     # @see OneCellAnchor.width
     def width
       return unless @anchor.is_a?(OneCellAnchor)
+
       @anchor.width
     end
 
@@ -187,6 +189,7 @@ module Axlsx
     # Changes the anchor to a one cell anchor.
     def use_one_cell_anchor
       return if @anchor.is_a?(OneCellAnchor)
+
       new_anchor = OneCellAnchor.new(@anchor.drawing, :start_at => [@anchor.from.col, @anchor.from.row])
       swap_anchor(new_anchor)
     end
@@ -194,6 +197,7 @@ module Axlsx
     #changes the anchor type to a two cell anchor
     def use_two_cell_anchor
       return if @anchor.is_a?(TwoCellAnchor)
+
       new_anchor = TwoCellAnchor.new(@anchor.drawing, :start_at => [@anchor.from.col, @anchor.from.row])
       swap_anchor(new_anchor)
     end

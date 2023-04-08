@@ -13,6 +13,7 @@ module Axlsx
     # @option [Boolean] visible This controls the visiblity of the associated vml_shape.
     def initialize(comments, options = {})
       raise ArgumentError, "A comment needs a parent comments object" unless comments.is_a?(Comments)
+
       @visible = true
       @comments = comments
       parse_options options

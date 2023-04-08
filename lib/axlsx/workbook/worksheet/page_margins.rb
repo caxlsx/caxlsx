@@ -67,6 +67,7 @@ module Axlsx
     def set(margins)
       margins.select do |k, v|
         next unless [:left, :right, :top, :bottom, :header, :footer].include? k
+
         send("#{k}=", v)
       end
     end

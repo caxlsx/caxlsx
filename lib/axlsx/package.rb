@@ -105,6 +105,7 @@ module Axlsx
 
       confirm_valid, zip_command = parse_serialize_options(options, secondary_options)
       return false unless !confirm_valid || self.validate.empty?
+
       zip_provider = if zip_command
                        ZipCommand.new(zip_command)
                      else
@@ -128,6 +129,7 @@ module Axlsx
       end
 
       return false unless !confirm_valid || self.validate.empty?
+
       Relationship.initialize_ids_cache
       zip = write_parts(Zip::OutputStream.new(StringIO.new.binmode, true))
       stream = zip.close_buffer
@@ -383,6 +385,7 @@ module Axlsx
         if invalid_keys.any?
           raise ArgumentError.new("Invalid keyword arguments: #{invalid_keys}")
         end
+
         [options.fetch(:confirm_valid, false), options.fetch(:zip_command, nil)]
       else
         warn "[DEPRECATION] Axlsx::Package#serialize with confirm_valid as a boolean is deprecated. " +

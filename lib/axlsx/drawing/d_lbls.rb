@@ -10,6 +10,7 @@ module Axlsx
     # creates a new DLbls object
     def initialize(chart_type, options = {})
       raise ArgumentError, 'chart_type must inherit from Chart' unless [Chart, LineChart].include?(chart_type.superclass)
+
       @chart_type = chart_type
       initialize_defaults
       parse_options options
@@ -49,6 +50,7 @@ module Axlsx
     # @return [Symbol]
     def d_lbl_pos
       return unless [Pie3DChart, LineChart].include? @chart_type
+
       @d_lbl_pos ||= :bestFit
     end
 
@@ -60,6 +62,7 @@ module Axlsx
     # @param [Symbol] label_position the postion you want to use.
     def d_lbl_pos=(label_position)
       return unless [Pie3DChart, LineChart].include? @chart_type
+
       Axlsx::RestrictionValidator.validate 'DLbls#d_lbl_pos',  [:bestFit, :b, :ctr, :inBase, :inEnd, :l, :outEnd, :r, :t], label_position
       @d_lbl_pos = label_position
     end
@@ -72,6 +75,7 @@ module Axlsx
       instance_vals = Axlsx.instance_values_for(self)
       %w(d_lbl_pos show_legend_key show_val show_cat_name show_ser_name show_percent show_bubble_size show_leader_lines).each do |key|
         next unless instance_vals.keys.include?(key) && instance_vals[key] != nil
+
         str << "<c:#{Axlsx::camel(key, false)} val='#{instance_vals[key]}' />"
       end
       str << '</c:dLbls>'
@@ -80,6 +84,7 @@ module Axlsx
     # nills out d_lbl_pos and show_leader_lines as these attributes, while valid in the spec actually chrash excel for any chart type other than pie charts.
     def validate_attributes_for_chart_type
       return if [Pie3DChart, LineChart].include? @chart_type
+
       @d_lbl_pos = nil
       @show_leader_lines = nil
     end

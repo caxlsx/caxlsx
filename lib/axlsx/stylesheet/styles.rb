@@ -292,6 +292,7 @@ module Axlsx
     # @return [CellProtection]
     def parse_protection_options(options = {})
       return if (options.keys & [:hidden, :locked]).empty?
+
       CellProtection.new(options)
     end
 
@@ -302,6 +303,7 @@ module Axlsx
     # @see CellAlignment
     def parse_alignment_options(options = {})
       return unless options[:alignment]
+
       CellAlignment.new options[:alignment]
     end
 
@@ -322,6 +324,7 @@ module Axlsx
     # @return [Font|Integer]
     def parse_font_options(options = {})
       return if (options.keys & [:fg_color, :sz, :b, :i, :u, :strike, :outline, :shadow, :charset, :family, :font_name]).empty?
+
       Axlsx.instance_values_for(fonts.first).each do |key, value|
         # Thanks for that 1.8.7 - cant do a simple merge...
         options[key.to_sym] = value unless options.keys.include?(key.to_sym)
@@ -338,6 +341,7 @@ module Axlsx
     # @return [Fill|Integer]
     def parse_fill_options(options = {})
       return unless options[:bg_color]
+
       color = Color.new(:rgb => options[:bg_color])
       dxf = options[:type] == :dxf
       color_key = dxf ? :bgColor : :fgColor

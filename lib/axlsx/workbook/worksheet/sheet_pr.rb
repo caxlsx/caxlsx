@@ -31,6 +31,7 @@ module Axlsx
     # @param [Worksheet] worksheet The worksheet that owns this SheetPr object
     def initialize(worksheet, options = {})
       raise ArgumentError, "you must provide a worksheet" unless worksheet.is_a?(Worksheet)
+
       @worksheet = worksheet
       @outline_pr = nil
       parse_options options

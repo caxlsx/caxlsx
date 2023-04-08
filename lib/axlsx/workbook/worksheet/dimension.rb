@@ -20,6 +20,7 @@ module Axlsx
     # to.
     def initialize(worksheet)
       raise ArgumentError, "you must provide a worksheet" unless worksheet.is_a?(Worksheet)
+
       @worksheet = worksheet
     end
 
@@ -35,6 +36,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       return if worksheet.rows.empty?
+
       str << "<dimension ref=\"%s\"></dimension>" % sqref
     end
 
@@ -56,6 +58,7 @@ module Axlsx
     # @return [String]
     def dimension_reference(cell, default)
       return default unless cell.respond_to?(:r)
+
       cell.r
     end
   end

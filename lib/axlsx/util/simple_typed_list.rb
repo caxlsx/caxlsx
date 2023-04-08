@@ -12,6 +12,7 @@ module Axlsx
         @allowed_types = type
       else
         raise ArgumentError, "Type must be a Class object or array of Class objects" unless type.is_a? Class
+
         @allowed_types = [type]
       end
       @serialize_as = serialize_as unless serialize_as.nil?
@@ -37,6 +38,7 @@ module Axlsx
     # any non populated cell in the matrix will be a nil value
     def transpose
       return @list.clone if @list.size == 0
+
       row_count = @list.size
       max_column_count = @list.map { |row| row.cells.size }.max
       result = Array.new(max_column_count) { Array.new(row_count) }
@@ -105,6 +107,7 @@ module Axlsx
     def delete(v)
       return unless include? v
       raise ArgumentError, "Item is protected and cannot be deleted" if protected? index(v)
+
       @list.delete v
     end
 
@@ -114,6 +117,7 @@ module Axlsx
     def delete_at(index)
       @list[index]
       raise ArgumentError, "Item is protected and cannot be deleted" if protected? index
+
       @list.delete_at index
     end
 
@@ -125,6 +129,7 @@ module Axlsx
     def []=(index, v)
       DataTypeValidator.validate :SimpleTypedList_insert, @allowed_types, v
       raise ArgumentError, "Item is protected and cannot be changed" if protected? index
+
       @list[index] = v
       v
     end
@@ -137,6 +142,7 @@ module Axlsx
     def insert(index, v)
       DataTypeValidator.validate :SimpleTypedList_insert, @allowed_types, v
       raise ArgumentError, "Item is protected and cannot be changed" if protected? index
+
       @list.insert(index, v)
       v
     end
@@ -145,6 +151,7 @@ module Axlsx
     # @param [Integer] index
     def protected? index
       return false unless locked_at.is_a? Integer
+
       index < locked_at
     end
 

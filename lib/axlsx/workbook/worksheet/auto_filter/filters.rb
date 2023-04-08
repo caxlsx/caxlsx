@@ -41,6 +41,7 @@ module Axlsx
     # TODO implement this for date filters as well!
     def apply(cell)
       return false unless cell
+
       filter_items.each do |filter|
         return false if cell.value == filter.val
       end
@@ -97,6 +98,7 @@ module Axlsx
     def date_group_items=(options)
       options.each do |date_group|
         raise ArgumentError, "date_group_items should be an array of hashes specifying the options for each date_group_item" unless date_group.is_a?(Hash)
+
         date_group_items << DateGroupItem.new(date_group)
       end
     end
@@ -144,6 +146,7 @@ include Axlsx::SerializedAttributes
       def initialize(options = {})
         raise ArgumentError,  "You must specify a year for date time grouping" unless options[:year]
         raise ArgumentError, "You must specify a date_time_grouping when creating a DateGroupItem for auto filter" unless options[:date_time_grouping]
+
         parse_options options
       end
 

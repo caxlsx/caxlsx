@@ -49,6 +49,7 @@ module Axlsx
     # @return [Relationship]
     def relationship
       return unless @target == :external
+
       Relationship.new(self, HYPERLINK_R, location, :target_mode => :External)
     end
 

@@ -8,6 +8,7 @@ module Axlsx
     # @param [Worksheet] worksheet
     def initialize(worksheet)
       raise ArgumentError, 'you must provide a worksheet' unless worksheet.is_a?(Worksheet)
+
       @worksheet = worksheet
       @drawing = nil
     end
@@ -43,6 +44,7 @@ module Axlsx
     # @return [Relationship]
     def relationship
       return unless has_drawing?
+
       Relationship.new(self, DRAWING_R, "../#{drawing.pn}")
     end
 
@@ -50,6 +52,7 @@ module Axlsx
     # @param [String] str
     def to_xml_string(str = '')
       return unless has_drawing?
+
       str << "<drawing r:id='#{relationship.Id}'/>"
     end
   end

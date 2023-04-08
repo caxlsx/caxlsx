@@ -169,6 +169,7 @@ module Axlsx
     # @see #page_setup
     def fit_to_page?
       return false unless Axlsx.instance_values_for(self).keys.include?('page_setup')
+
       page_setup.fit_to_page?
     end
 
@@ -526,6 +527,7 @@ module Axlsx
     def column_widths(*widths)
       widths.each_with_index do |value, index|
         next if value == nil
+
         Axlsx::validate_unsigned_numeric(value) unless value == nil
         find_or_create_column_info(index).width = value
       end
@@ -733,9 +735,11 @@ module Axlsx
       DataTypeValidator.validate :worksheet_name, String, name
       # ignore first character (BOM) after encoding to utf16 because Excel does so, too.
       raise ArgumentError, (ERR_SHEET_NAME_EMPTY) if name.empty?
+
       character_length = name.encode("utf-16")[1..-1].encode("utf-16").bytesize / 2
       raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % name) if character_length > WORKSHEET_MAX_NAME_LENGTH
       raise ArgumentError, (ERR_SHEET_NAME_CHARACTER_FORBIDDEN % name) if WORKSHEET_NAME_FORBIDDEN_CHARS.any? { |char| name.include? char }
+
       name = Axlsx::coder.encode(name)
       sheet_names = @workbook.worksheets.reject { |s| s == self }.map { |s| s.name }
       raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % name) if sheet_names.include?(name)
@@ -828,6 +832,7 @@ module Axlsx
 
     def add_autofilter_defined_name_to_workbook
       return if !auto_filter.range
+
       workbook.add_defined_name auto_filter.defined_name, name: '_xlnm._FilterDatabase', local_sheet_id: index, hidden: 1
     end
   end

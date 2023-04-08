@@ -6,6 +6,7 @@ module Axlsx
 
     def initialize(worksheet)
       raise ArgumentError, 'You must provide a worksheet' unless worksheet.is_a?(Worksheet)
+
       super ProtectedRange
       @worksheet = worksheet
     end
@@ -27,6 +28,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       return if empty?
+
       str << '<protectedRanges>'
       each { |range| range.to_xml_string(str) }
       str << '</protectedRanges>'

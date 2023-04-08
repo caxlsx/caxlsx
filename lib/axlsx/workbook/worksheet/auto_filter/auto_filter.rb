@@ -8,6 +8,7 @@ module Axlsx
     # @param [Worksheet] worksheet
     def initialize(worksheet)
       raise ArgumentError, 'you must provide a worksheet' unless worksheet.is_a?(Worksheet)
+
       @worksheet = worksheet
     end
 
@@ -24,6 +25,7 @@ module Axlsx
     # @return [String]
     def defined_name
       return unless range
+
       Axlsx.cell_range(range.split(':').collect { |name| worksheet.name_to_cell(name) })
     end
 
@@ -57,6 +59,7 @@ module Axlsx
       columns.each do |column|
         rows.each do |row|
           next if row.hidden
+
           column.apply(row, column_offset)
         end
       end
@@ -66,6 +69,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       return unless range
+
       str << "<autoFilter ref='#{range}'>"
       columns.each { |filter_column| filter_column.to_xml_string(str) }
       str << "</autoFilter>"

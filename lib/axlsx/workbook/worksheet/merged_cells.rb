@@ -5,6 +5,7 @@ module Axlsx
     # @param [Worksheet] worksheet
     def initialize(worksheet)
       raise ArgumentError, 'you must provide a worksheet' unless worksheet.is_a?(Worksheet)
+
       super String
     end
 
@@ -27,6 +28,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       return if empty?
+
       str << "<mergeCells count='#{size}'>"
       each { |merged_cell| str << "<mergeCell ref='#{merged_cell}'></mergeCell>" }
       str << '</mergeCells>'

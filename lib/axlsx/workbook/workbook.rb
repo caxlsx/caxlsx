@@ -383,6 +383,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
       sheet_name = cell_def.split('!')[0] if cell_def.match('!')
       worksheet =  self.worksheets.select { |s| s.name == sheet_name }.first
       raise ArgumentError, 'Unknown Sheet' unless sheet_name && worksheet.is_a?(Worksheet)
+
       worksheet[cell_def.gsub(/.+!/, "")]
     end
 

@@ -108,6 +108,7 @@ module Axlsx
     def element_for_attribute(name, namespace = '')
       val = Axlsx.instance_values_for(self)[name]
       return "" if val == nil
+
       "<%s:%s val='%s'/>" % [namespace, Axlsx::camel(name, false), val]
     end
   end

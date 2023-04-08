@@ -9,6 +9,7 @@ module Axlsx
     # @return [Boolean] true if validation succeeds.
     def self.validate(name, choices, v)
       raise ArgumentError, (ERR_RESTRICTION % [v.to_s, name, choices.inspect]) unless choices.include?(v)
+
       true
     end
   end

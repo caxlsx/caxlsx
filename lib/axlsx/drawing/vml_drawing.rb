@@ -5,6 +5,7 @@ module Axlsx
     # @param [Comments] comments the comments object this drawing is associated with
     def initialize(comments)
       raise ArgumentError, "you must provide a comments object" unless comments.is_a?(Comments)
+
       @comments = comments
     end
 

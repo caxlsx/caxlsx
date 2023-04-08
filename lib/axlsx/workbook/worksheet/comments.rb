@@ -25,6 +25,7 @@ module Axlsx
     # @param [Worksheet] worksheet The sheet that these comments belong to.
     def initialize(worksheet)
       raise ArgumentError, "you must provide a worksheet" unless worksheet.is_a?(Worksheet)
+
       super(Comment)
       @worksheet = worksheet
       @vml_drawing = VmlDrawing.new(self)
@@ -39,6 +40,7 @@ module Axlsx
       raise ArgumentError, "Comment require an author" unless options[:author]
       raise ArgumentError, "Comment requires text" unless options[:text]
       raise ArgumentError, "Comment requires ref" unless options[:ref]
+
       self << Comment.new(self, options)
       yield last if block_given?
       last

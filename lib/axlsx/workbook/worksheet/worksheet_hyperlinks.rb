@@ -21,6 +21,7 @@ module Axlsx
     # @return Array
     def relationships
       return [] if empty?
+
       map { |hyperlink| hyperlink.relationship }
     end
 
@@ -28,6 +29,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       return if empty?
+
       str << '<hyperlinks>'
       each { |hyperlink| hyperlink.to_xml_string(str) }
       str << '</hyperlinks>'

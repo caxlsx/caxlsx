@@ -10,6 +10,7 @@ module Axlsx
       def to_xml_string(row_index, column_index, cell, str = '')
         str << ('<c r="' << Axlsx::cell_r(column_index, row_index) << '" s="' << cell.style.to_s << '" ')
         return str << '/>' if cell.value.nil?
+
         method = cell.type
         self.send(method, cell, str)
         str << '</c>'

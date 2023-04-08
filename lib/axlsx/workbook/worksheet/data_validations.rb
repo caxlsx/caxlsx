@@ -4,6 +4,7 @@ module Axlsx
     # creates a new Tables object
     def initialize(worksheet)
       raise ArgumentError, "you must provide a worksheet" unless worksheet.is_a?(Worksheet)
+
       super DataValidation
       @worksheet = worksheet
     end
@@ -15,6 +16,7 @@ module Axlsx
     # serialize the conditional formattings
     def to_xml_string(str = "")
       return if empty?
+
       str << "<dataValidations count='#{size}'>"
       each { |item| item.to_xml_string(str) }
       str << '</dataValidations>'

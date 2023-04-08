@@ -4,6 +4,7 @@ module Axlsx
   class Cols < SimpleTypedList
     def initialize(worksheet)
       raise ArgumentError, "you must provide a worksheet" unless worksheet.is_a?(Worksheet)
+
       super Col
       @worksheet = worksheet
     end
@@ -13,6 +14,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
      return if empty?
+
      str << '<cols>'
      each { |item| item.to_xml_string(str) }
      str << '</cols>'

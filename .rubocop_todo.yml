@@ -36,11 +36,6 @@ Layout/ArgumentAlignment:
     - 'lib/axlsx/workbook/worksheet/sheet_view.rb'
     - 'lib/axlsx/workbook/worksheet/table_style_info.rb'
 
-# Offense count: 90
-# This cop supports safe autocorrection (--autocorrect).
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
-
 # Offense count: 58
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowForAlignment, AllowBeforeTrailingComments, ForceEqualSignAlignment.

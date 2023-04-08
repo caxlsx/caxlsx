@@ -46,6 +46,7 @@ module Axlsx
     # @see val
     def val=(v)
       raise ArgumentError, "#{v.inspect} must respond to to_s" unless v.respond_to?(:to_s)
+
       @val = v.to_s
     end
 

@@ -6,6 +6,7 @@ module Axlsx
     # param [Worksheet] worksheet The worksheet comments in thes object belong to
     def initialize(worksheet)
       raise ArugumentError, 'You must provide a worksheet' unless worksheet.is_a?(Worksheet)
+
       @worksheet = worksheet
     end
 
@@ -28,6 +29,7 @@ module Axlsx
     # @return [Relationships]
     def relationships
       return [] unless has_comments?
+
       comments.relationships
     end
 
@@ -49,6 +51,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       return unless has_comments?
+
       str << "<legacyDrawing r:id='#{drawing_rId}' />"
     end
   end

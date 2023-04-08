@@ -175,6 +175,7 @@ module Axlsx
     # @return [Array]
     def autowidth(widtharray)
       return if value.nil?
+
       if styles.cellXfs[style].alignment && styles.cellXfs[style].alignment.wrap_text
         first = true
         value.to_s.split(/\r?\n/, -1).each do |line|
@@ -194,6 +195,7 @@ module Axlsx
     # Utility method for setting inline style attributes
     def set_run_style(validator, attr, value)
       return unless INLINE_STYLES.include?(attr.to_sym)
+
       Axlsx.send(validator, value) unless validator.nil?
       self.instance_variable_set :"@#{attr.to_s}", value
     end
@@ -236,6 +238,7 @@ module Axlsx
     # imagemagick and loading metrics for every character.
     def font_size
       return sz if sz
+
       font = styles.fonts[styles.cellXfs[style].fontId] || styles.fonts[0]
       (font.b || (defined?(@b) && @b)) ? (font.sz * 1.5) : font.sz
     end
