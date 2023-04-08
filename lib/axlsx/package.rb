@@ -376,7 +376,7 @@ module Axlsx
     # @private
     def parse_serialize_options(options, secondary_options)
       if secondary_options
-        warn "[DEPRECATION] Axlsx::Package#serialize with 3 arguments is deprecated. " +
+        warn "[DEPRECATION] Axlsx::Package#serialize with 3 arguments is deprecated. " \
              "Use keyword args instead e.g., package.serialize(output, confirm_valid: false, zip_command: 'zip')"
       end
       if options.is_a?(Hash)
@@ -388,7 +388,7 @@ module Axlsx
 
         [options.fetch(:confirm_valid, false), options.fetch(:zip_command, nil)]
       else
-        warn "[DEPRECATION] Axlsx::Package#serialize with confirm_valid as a boolean is deprecated. " +
+        warn "[DEPRECATION] Axlsx::Package#serialize with confirm_valid as a boolean is deprecated. " \
              "Use keyword args instead e.g., package.serialize(output, confirm_valid: false)"
         parse_serialize_options((secondary_options || {}).merge(confirm_valid: options), nil)
       end

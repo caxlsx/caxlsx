@@ -473,11 +473,6 @@ Style/Lambda:
     - 'lib/axlsx/stylesheet/styles.rb'
     - 'lib/axlsx/util/validators.rb'
 
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Style/LineEndConcatenation:
-  Exclude:
-    - 'lib/axlsx/package.rb'
-
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowedMethods, AllowedPatterns.
 Style/MethodCallWithoutArgsParentheses:
