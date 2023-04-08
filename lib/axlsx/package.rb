@@ -347,7 +347,7 @@ module Axlsx
     # @return [ContentType]
     # @private
     def base_content_types
-      c_types = ContentType.new()
+      c_types = ContentType.new
       c_types << Default.new(:ContentType => RELS_CT, :Extension => RELS_EX)
       c_types << Default.new(:Extension => XML_EX, :ContentType => XML_CT)
       c_types << Override.new(:PartName => "/#{APP_PN}", :ContentType => APP_CT)

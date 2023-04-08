@@ -15,7 +15,7 @@ class TestVmlDrawing < Test::Unit::TestCase
   end
 
   def test_to_xml_string
-    str = @vml_drawing.to_xml_string()
+    str = @vml_drawing.to_xml_string
     doc = Nokogiri::XML(str)
     assert_equal(doc.xpath("//v:shape").size, 2)
     assert(doc.xpath("//o:idmap[@o:data='#{@ws.index + 1}']"))

@@ -16,7 +16,7 @@ class TestComments < Test::Unit::TestCase
 
   def test_add_comment
     assert_equal(@ws.comments.size, 2)
-    assert_raise(ArgumentError) { @ws.comments.add_comment() }
+    assert_raise(ArgumentError) { @ws.comments.add_comment }
     assert_raise(ArgumentError) { @ws.comments.add_comment(:text => 'Yes We Can', :ref => 'A1') }
     assert_raise(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :ref => 'A1') }
     assert_raise(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :text => 'Yes We Can') }
