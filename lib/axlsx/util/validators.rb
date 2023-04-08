@@ -51,7 +51,7 @@ module Axlsx
     # @raise [ArugumentError] Raised if the class of the value provided is not in the specified array of types or the block passed returns false
     # @return [Boolean] true if validation succeeds.
     # @see validate_boolean
-    def self.validate(name, types, v, other=false)
+    def self.validate(name, types, v, other = false)
       if other.is_a?(Proc)
          raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect]) unless other.call(v)
       end

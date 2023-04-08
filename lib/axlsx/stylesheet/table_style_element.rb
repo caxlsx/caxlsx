@@ -9,7 +9,7 @@ module Axlsx
     # @option options [Symbol] type
     # @option options [Integer] size
     # @option options [Integer] dxfId
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
     end
 

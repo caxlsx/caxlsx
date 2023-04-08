@@ -97,7 +97,7 @@ module Axlsx
     #                                       version of the workbook that is published to or rendered on a Web or application server.
     # @option [Boolean] workbook_parameter - Specifies a boolean value that indicates that the name is used as a workbook parameter on a
     #                                        version of the workbook that is published to or rendered on a Web or application server.
-    def initialize(formula, options={})
+    def initialize(formula, options = {})
       @formula = formula
       parse_options options
     end
@@ -118,7 +118,7 @@ module Axlsx
     serializable_attributes :short_cut_key, :status_bar, :help, :description, :custom_menu, :comment,
       :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden, :local_sheet_id
 
-    def to_xml_string(str='')
+    def to_xml_string(str = '')
       raise ArgumentError, 'you must specify the name for this defined name. Please read the documentation for Axlsx::DefinedName for more details' unless name
       str << ('<definedName ' << 'name="' << name << '" ')
       serialized_attributes str

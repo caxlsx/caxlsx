@@ -18,11 +18,11 @@ module Axlsx
     # @option options [Integer] perspective
     # @see Chart
     # @see View3D
-    def initialize(frame, options={})
+    def initialize(frame, options = {})
       @vary_colors = true
       super(frame, options)
       @series_type = PieSeries
-      @view_3D = View3D.new({:rot_x =>30, :perspective=>30}.merge(options))
+      @view_3D = View3D.new({ :rot_x => 30, :perspective => 30 }.merge(options))
       @d_lbls = nil
     end
 

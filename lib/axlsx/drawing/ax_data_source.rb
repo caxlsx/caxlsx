@@ -5,7 +5,7 @@ module Axlsx
     # creates a new NumDataSource object
     # @option options [Array] data An array of Cells or Numeric objects
     # @option options [Symbol] tag_name see tag_name
-    def initialize(options={})
+    def initialize(options = {})
       @tag_name = :cat
       @data_type = StrData
       @ref_tag_name = :strRef

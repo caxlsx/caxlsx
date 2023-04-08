@@ -7,7 +7,7 @@ module Axlsx
     # @option options [String] formatCode
     # @option options [Array] :data
     # @see StrData
-    def initialize(options={})
+    def initialize(options = {})
       @format_code = "General"
       @pt = SimpleTypedList.new NumVal
       parse_options options
@@ -19,7 +19,7 @@ module Axlsx
 
     # Creates the val objects for this data set. I am not overly confident this is going to play nicely with time and data types.
     # @param [Array] values An array of cells or values.
-    def data=(values=[])
+    def data=(values = [])
       @tag_name = values.first.is_a?(Cell) ? :numCache : :numLit
       values.each do |value|
         value = value.is_formula? ? 0 : value.value if value.is_a?(Cell)
@@ -28,7 +28,7 @@ module Axlsx
     end
 
     # @see format_code
-    def format_code=(v='General')
+    def format_code=(v = 'General')
       Axlsx::validate_string(v)
       @format_code = v
     end

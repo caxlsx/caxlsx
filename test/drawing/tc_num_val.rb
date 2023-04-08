@@ -11,8 +11,8 @@ class TestNumVal < Test::Unit::TestCase
   end
 
   def test_format_code
-    assert_raise(ArgumentError) {@num_val.format_code = 7}
-    assert_nothing_raised {@num_val.format_code = 'foo_bar'}
+    assert_raise(ArgumentError) { @num_val.format_code = 7 }
+    assert_nothing_raised { @num_val.format_code = 'foo_bar' }
   end
 
   def test_to_xml_string

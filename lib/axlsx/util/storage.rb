@@ -7,15 +7,15 @@ module Axlsx
 
     # storage types
     TYPES = {
-      :root=>5,
-      :stream=>2,
-      :storage=>1
+      :root => 5,
+      :stream => 2,
+      :storage => 1
     }.freeze
 
     # Creates a byte string for this storage
     # @return [String]
     def to_s
-     data = [@name.concat(Array.new(32-@name.size, 0)),
+     data = [@name.concat(Array.new(32 - @name.size, 0)),
              @name_size,
              @type,
              @color,
@@ -31,8 +31,8 @@ module Axlsx
 
     # storage colors
     COLORS = {
-      :red=>0,
-      :black=>1
+      :red => 0,
+      :black => 1
     }
 
     # The color of this node in the directory tree. Defaults to black if not specified
@@ -128,7 +128,7 @@ module Axlsx
     # @option options [Integer] created (0)
     # @option options [Integer] modified (0)
     # @option options [Integer] sector (0)
-    def initialize(name, options= {})
+    def initialize(name, options = {})
       @left = @right = @child = -1
       @sector = @size = @created = @modified = 0
       options.each do |o|

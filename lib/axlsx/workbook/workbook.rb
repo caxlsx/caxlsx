@@ -226,7 +226,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # Creates a new Workbook
     # The recomended way to work with workbooks is via Package#workbook
     # @option options [Boolean] date1904. If this is not specified, date1904 is set to false. Office 2011 for Mac defaults to false.
-    def initialize(options={})
+    def initialize(options = {})
       @styles = Styles.new
       @worksheets = SimpleTypedList.new Worksheet
       @drawings = SimpleTypedList.new Drawing
@@ -241,7 +241,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
       @bold_font_multiplier = BOLD_FONT_MULTIPLIER
       @font_scale_divisor = FONT_SCALE_DIVISOR
 
-      self.date1904= !options[:date1904].nil? && options[:date1904]
+      self.date1904 = !options[:date1904].nil? && options[:date1904]
       yield self if block_given?
     end
 
@@ -268,7 +268,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
     def use_autowidth() @use_autowidth; end
 
     # see @use_autowidth
-    def use_autowidth=(v=true) Axlsx::validate_boolean v; @use_autowidth = v; end
+    def use_autowidth=(v = true) Axlsx::validate_boolean v; @use_autowidth = v; end
 
     # Font size of bold fonts is multiplied with this
     # Used for automatic calculation of cell widths with bold text
@@ -298,7 +298,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # @param [Hash] options Options to pass into the worksheed during initialization.
     # @option options [String] name The name of the worksheet
     # @option options [Hash] page_margins The page margins for the worksheet
-    def insert_worksheet(index=0, options={})
+    def insert_worksheet(index = 0, options = {})
       worksheet = Worksheet.new(self, options)
       @worksheets.delete_at(@worksheets.size - 1)
       @worksheets.insert(index, worksheet)
@@ -312,7 +312,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # @option options [String] name The name of the worksheet.
     # @option options [Hash] page_margins The page margins for the worksheet.
     # @see Worksheet#initialize
-    def add_worksheet(options={})
+    def add_worksheet(options = {})
       worksheet = Worksheet.new(self, options)
       yield worksheet if block_given?
       worksheet
@@ -322,7 +322,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # @return WorkbookViews
     # @option options [Hash] options passed into the added WorkbookView
     # @see WorkbookView#initialize
-    def add_view(options={})
+    def add_view(options = {})
       views << WorkbookView.new(options)
     end
 
@@ -339,10 +339,10 @@ require 'axlsx/workbook/worksheet/selection.rb'
     def relationships
       r = Relationships.new
       @worksheets.each do |sheet|
-        r << Relationship.new(sheet, WORKSHEET_R, WORKSHEET_PN % (r.size+1))
+        r << Relationship.new(sheet, WORKSHEET_R, WORKSHEET_PN % (r.size + 1))
       end
       pivot_tables.each_with_index do |pivot_table, index|
-        r << Relationship.new(pivot_table.cache_definition, PIVOT_TABLE_CACHE_DEFINITION_R, PIVOT_TABLE_CACHE_DEFINITION_PN % (index+1))
+        r << Relationship.new(pivot_table.cache_definition, PIVOT_TABLE_CACHE_DEFINITION_R, PIVOT_TABLE_CACHE_DEFINITION_PN % (index + 1))
       end
       r << Relationship.new(self, STYLES_R,  STYLES_PN)
       if use_shared_strings
@@ -383,13 +383,13 @@ require 'axlsx/workbook/worksheet/selection.rb'
       sheet_name = cell_def.split('!')[0] if cell_def.match('!')
       worksheet =  self.worksheets.select { |s| s.name == sheet_name }.first
       raise ArgumentError, 'Unknown Sheet' unless sheet_name && worksheet.is_a?(Worksheet)
-      worksheet[cell_def.gsub(/.+!/,"")]
+      worksheet[cell_def.gsub(/.+!/, "")]
     end
 
     # Serialize the workbook
     # @param [String] str
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = '')
       add_worksheet(name: 'Sheet1') unless worksheets.size > 0
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << ('<workbook xmlns="' << XML_NS << '" xmlns:r="' << XML_NS_R << '">')

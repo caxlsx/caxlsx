@@ -5,7 +5,7 @@ module Axlsx
 
     # creates a new StrVal object
     # @option options [String] v
-    def initialize(options={})
+    def initialize(options = {})
       @v = ""
       @idx = 0
       parse_options options

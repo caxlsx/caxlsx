@@ -24,7 +24,7 @@ module Axlsx
     # @option options [Boolean] stopIfTrue Stop evaluating rules after this rule matches
     # @option options [Symbol]  timePeriod The time period in a date occuring... rule
     # @option options [String] formula The formula to match against in i.e. an equal rule. Use a [minimum, maximum] array for cellIs between/notBetween conditionals.
-    def initialize(options={})
+    def initialize(options = {})
       @color_scale = @data_bar = @icon_set = @formula = nil
       parse_options options
     end
@@ -179,7 +179,7 @@ module Axlsx
     # @see timePeriod
     def timePeriod=(v); Axlsx::validate_time_period_type(v); @timePeriod = v end
     # @see formula
-    def formula=(v); [*v].each {|x| Axlsx::validate_string(x) }; @formula = [*v].map { |form| ::CGI.escapeHTML(form) } end
+    def formula=(v); [*v].each { |x| Axlsx::validate_string(x) }; @formula = [*v].map { |form| ::CGI.escapeHTML(form) } end
 
     # @see color_scale
     def color_scale=(v)

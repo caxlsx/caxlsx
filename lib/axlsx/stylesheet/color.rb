@@ -8,7 +8,7 @@ module Axlsx
     # @option options [Boolean] auto
     # @option options [String] rgb
     # @option options [Float] tint
-    def initialize(options={})
+    def initialize(options = {})
       @rgb = "FF000000"
       parse_options options
     end

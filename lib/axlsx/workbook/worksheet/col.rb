@@ -16,7 +16,7 @@ module Axlsx
     # @option options [Boolean] phonetic see Col#phonetic
     # @option options [Integer] style see Col#style
     # @option options [Numeric] width see Col#width
-    def initialize(min, max, options={})
+    def initialize(min, max, options = {})
       Axlsx.validate_unsigned_int(max)
       Axlsx.validate_unsigned_int(min)
       @min = min

@@ -15,7 +15,7 @@ module Axlsx
 
     # Creates a new Title object
     # @param [String, Cell] title The cell or string to be used for the chart's title
-    def initialize(title="", title_size="")
+    def initialize(title = "", title_size = "")
       self.cell = title if title.is_a?(Cell)
       self.text = title.to_s unless title.is_a?(Cell)
       if title_size.to_s.empty?

@@ -9,7 +9,7 @@ module Axlsx
     # @param [Hash] options Options for the number format object
     # @option [Integer] numFmtId The predefined format id or new format id for this format
     # @option [String] formatCode The format code for this number format
-    def initialize(options={})
+    def initialize(options = {})
       @numFmtId = 0
       @formatCode = ""
       parse_options options

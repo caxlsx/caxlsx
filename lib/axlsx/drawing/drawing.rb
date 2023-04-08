@@ -79,7 +79,7 @@ module Axlsx
     # @note The recommended way to manage images is to use Worksheet.add_image. Please refer to that method for documentation.
     # @see Worksheet#add_image
     # @return [Pic]
-    def add_image(options={})
+    def add_image(options = {})
       if options[:end_at]
         TwoCellAnchor.new(self, options).add_pic(options)
       else
@@ -91,7 +91,7 @@ module Axlsx
     # Adds a chart to the drawing.
     # @note The recommended way to manage charts is to use Worksheet.add_chart. Please refer to that method for documentation.
     # @see Worksheet#add_chart
-    def add_chart(chart_type, options={})
+    def add_chart(chart_type, options = {})
       TwoCellAnchor.new(self, options)
       @anchors.last.add_chart(chart_type, options)
     end
@@ -126,14 +126,14 @@ module Axlsx
     # The part name for this drawing
     # @return [String]
     def pn
-      "#{DRAWING_PN % (index+1)}"
+      "#{DRAWING_PN % (index + 1)}"
     end
 
     # The relational part name for this drawing
     # #NOTE This should be rewritten to return an Axlsx::Relationship object.
     # @return [String]
     def rels_pn
-      "#{DRAWING_RELS_PN % (index+1)}"
+      "#{DRAWING_RELS_PN % (index + 1)}"
     end
 
     # A list of objects this drawing holds.

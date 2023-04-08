@@ -23,7 +23,7 @@ module Axlsx
     # @option options [Boolean] pivot_tables @see SheetProtection#pivot_tables
     # @option options [Boolean] select_unlocked_cells @see SheetProtection#select_unlocked_cells
     # @option options [String] password. The password required for unlocking. @see SheetProtection#password=
-    def initialize(options={})
+    def initialize(options = {})
       @objects = @scenarios = @select_locked_cells = @select_unlocked_cells = false
       @sheet = @format_cells = @format_rows = @format_columns = @insert_columns = @insert_rows = @insert_hyperlinks = @delete_columns = @delete_rows = @sort = @auto_filter = @pivot_tables = true
       @password = nil
@@ -107,7 +107,7 @@ module Axlsx
         char     = low_15 | high_15
       end
 
-      encoded_password  = 0x0000
+      encoded_password = 0x0000
       chars.each { |c| encoded_password ^= c }
       encoded_password ^= count
       encoded_password ^= 0xCE4B

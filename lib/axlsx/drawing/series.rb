@@ -18,7 +18,7 @@ module Axlsx
     # @param [Chart] chart
     # @option options [Integer] order
     # @option options [String] title
-    def initialize(chart, options={})
+    def initialize(chart, options = {})
       @order = nil
       self.chart = chart
       @chart.series << self

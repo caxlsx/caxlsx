@@ -10,7 +10,7 @@ module Axlsx
     # @option options [Integer] colOff
     # @option options [Integer] row
     # @option options [Integer] rowOff
-    def initialize(options={})
+    def initialize(options = {})
       @col, @colOff, @row, @rowOff = 0, 0, 0, 0
       parse_options options
     end
@@ -45,7 +45,7 @@ module Axlsx
     # or an Array.
     # @param row the row of the marker. This is ignored if the col parameter is a Cell or
     # String or Array.
-    def coord(col, row=0)
+    def coord(col, row = 0)
       coordinates = parse_coord_args(col, row)
       self.col = coordinates[0]
       self.row = coordinates[1]
@@ -64,7 +64,7 @@ module Axlsx
 
     # handles multiple inputs for setting the position of a marker
     # @see Chart#start_at
-    def parse_coord_args(x, y=0)
+    def parse_coord_args(x, y = 0)
       if x.is_a?(String)
         x, y = *Axlsx::name_to_indices(x)
       end

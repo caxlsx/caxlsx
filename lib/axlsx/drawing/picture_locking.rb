@@ -24,7 +24,7 @@ module Axlsx
     # @option options [Boolean] noAdjustHandles
     # @option options [Boolean] noChangeArrowheads
     # @option options [Boolean] noChangeShapeType
-    def initialize(options={})
+    def initialize(options = {})
       @noChangeAspect = true
       parse_options options
     end

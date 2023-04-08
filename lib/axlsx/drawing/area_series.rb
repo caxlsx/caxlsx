@@ -33,7 +33,7 @@ module Axlsx
     # @option options [Array, SimpleTypedList] data
     # @option options [Array, SimpleTypedList] labels
     # @param [Chart] chart
-    def initialize(chart, options={})
+    def initialize(chart, options = {})
       @show_marker = false
       @marker_symbol = options[:marker_symbol] ? options[:marker_symbol] : :default
       @smooth = false

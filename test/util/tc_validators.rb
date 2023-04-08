@@ -10,17 +10,17 @@ class TestValidators < Test::Unit::TestCase
     #unsigned_int
     assert_nothing_raised { Axlsx.validate_unsigned_int 1 }
     assert_nothing_raised { Axlsx.validate_unsigned_int(+1) }
-    assert_raise(ArgumentError) { Axlsx.validate_unsigned_int(-1)}
+    assert_raise(ArgumentError) { Axlsx.validate_unsigned_int(-1) }
     assert_raise(ArgumentError) { Axlsx.validate_unsigned_int('1') }
 
     #int
     assert_nothing_raised { Axlsx.validate_int(1) }
     assert_nothing_raised { Axlsx.validate_int(-1) }
-    assert_raise(ArgumentError) { Axlsx.validate_int('a')}
+    assert_raise(ArgumentError) { Axlsx.validate_int('a') }
     assert_raise(ArgumentError) { Axlsx.validate_int(Array) }
 
     #boolean (as 0 or 1, :true, :false, true, false, or "true," "false")
-    [0,1,:true, :false, true, false, "true", "false"].each do |v|
+    [0, 1, :true, :false, true, false, "true", "false"].each do |v|
       assert_nothing_raised { Axlsx.validate_boolean 0 }
     end
     assert_raise(ArgumentError) { Axlsx.validate_boolean 2 }

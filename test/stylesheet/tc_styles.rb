@@ -21,10 +21,10 @@ class TestStyles < Test::Unit::TestCase
 
   def test_add_style_border_hash
     border_count = @styles.borders.size
-    @styles.add_style :border => {:style => :thin, :color => "FFFF0000"}
+    @styles.add_style :border => { :style => :thin, :color => "FFFF0000" }
     assert_equal(@styles.borders.size, border_count + 1)
     assert_equal(@styles.borders.last.prs.last.color.rgb, "FFFF0000")
-    assert_raise(ArgumentError) { @styles.add_style :border => {:color => "FFFF0000"} }
+    assert_raise(ArgumentError) { @styles.add_style :border => { :color => "FFFF0000" } }
     assert_equal @styles.borders.last.prs.size, 4
   end
 
@@ -32,23 +32,23 @@ class TestStyles < Test::Unit::TestCase
     prev_border_count = @styles.borders.size
 
     borders_array = [
-      {:style => :thin, :color => "DDDDDD"},
-      {:edges => [:top], :style => :thin, :color => "000000"},
-      {:edges => [:bottom], :style => :thick, :color => "FF0000"},
-      {:edges => [:left], :style => :dotted, :color => "FFFF00"},
-      {:edges => [:right], :style => :dashed, :color => "FFFFFF"},
-      {:style => :thick, :color => "CCCCCC"}
+      { :style => :thin, :color => "DDDDDD" },
+      { :edges => [:top], :style => :thin, :color => "000000" },
+      { :edges => [:bottom], :style => :thick, :color => "FF0000" },
+      { :edges => [:left], :style => :dotted, :color => "FFFF00" },
+      { :edges => [:right], :style => :dashed, :color => "FFFFFF" },
+      { :style => :thick, :color => "CCCCCC" }
     ]
 
     @styles.add_style(border: borders_array)
 
-    assert_equal(@styles.borders.size, (prev_border_count+1))
+    assert_equal(@styles.borders.size, (prev_border_count + 1))
 
     current_border = @styles.borders.last
 
     borders_array.each do |b_opts|
       if b_opts[:edges]
-        border_pr = current_border.prs.detect{|x| x.name == b_opts[:edges].first }
+        border_pr = current_border.prs.detect { |x| x.name == b_opts[:edges].first }
         assert_equal(border_pr.color.rgb, "FF#{b_opts[:color]}")
       end
     end
@@ -63,39 +63,39 @@ class TestStyles < Test::Unit::TestCase
 
   def test_do_not_alter_options_in_add_style
     #This should test all options, but for now - just the bits that we know caused some pain
-    options = { :border => { :style => :thin, :color =>"FF000000" } }
+    options = { :border => { :style => :thin, :color => "FF000000" } }
     @styles.add_style options
     assert_equal options[:border][:style], :thin, 'thin style is stil in option'
     assert_equal options[:border][:color], "FF000000", 'color is stil in option'
   end
 
   def test_parse_num_fmt
-    f_code = {:format_code => "YYYY/MM"}
-    num_fmt = {:num_fmt => 5}
+    f_code = { :format_code => "YYYY/MM" }
+    num_fmt = { :num_fmt => 5 }
     assert_equal(@styles.parse_num_fmt_options, nil, 'noop if neither :format_code or :num_fmt exist')
-    max = @styles.numFmts.map{ |nf| nf.numFmtId }.max
+    max = @styles.numFmts.map { |nf| nf.numFmtId }.max
     @styles.parse_num_fmt_options(f_code)
     assert_equal(@styles.numFmts.last.numFmtId, max + 1, "new numfmts gets next available id")
     assert(@styles.parse_num_fmt_options(num_fmt).is_a?(Integer), "Should return the provided num_fmt if not dxf")
-    assert(@styles.parse_num_fmt_options(num_fmt.merge({:type => :dxf})).is_a?(Axlsx::NumFmt), "Makes a new NumFmt if dxf")
+    assert(@styles.parse_num_fmt_options(num_fmt.merge({ :type => :dxf })).is_a?(Axlsx::NumFmt), "Makes a new NumFmt if dxf")
   end
 
   def test_parse_border_options_hash_required_keys
     assert_raise(ArgumentError, "Require color key") { @styles.parse_border_options(:border => { :style => :thin }) }
     assert_raise(ArgumentError, "Require style key") { @styles.parse_border_options(:border => { :color => "FF0d0d0d" }) }
-    assert_nothing_raised { @styles.parse_border_options(:border => { :style => :thin, :color => "FF000000"} ) }
+    assert_nothing_raised { @styles.parse_border_options(:border => { :style => :thin, :color => "FF000000" }) }
   end
 
   def test_parse_border_basic_options
-    b_opts = {:border => { :diagonalUp => 1, :edges => [:left, :right], :color => "FFDADADA", :style => :thick } }
+    b_opts = { :border => { :diagonalUp => 1, :edges => [:left, :right], :color => "FFDADADA", :style => :thick } }
     b = @styles.parse_border_options b_opts
     assert(b.is_a? Integer)
-    assert_equal(@styles.parse_border_options(b_opts.merge({:type => :dxf})).class,Axlsx::Border)
+    assert_equal(@styles.parse_border_options(b_opts.merge({ :type => :dxf })).class, Axlsx::Border)
     assert(@styles.borders.last.diagonalUp == 1, "border options are passed in to the initializer")
   end
 
   def test_parse_border_options_edges
-    b_opts = {:border => { :diagonalUp => 1, :edges => [:left, :right], :color => "FFDADADA", :style => :thick } }
+    b_opts = { :border => { :diagonalUp => 1, :edges => [:left, :right], :color => "FFDADADA", :style => :thick } }
     @styles.parse_border_options b_opts
     b = @styles.borders.last
     left = b.prs.select { |bpr| bpr.name == :left }[0]
@@ -106,10 +106,10 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(bottom, nil, "unspecified bottom edge should not be created")
     assert(left.is_a?(Axlsx::BorderPr), "specified left edge is set")
     assert(right.is_a?(Axlsx::BorderPr), "specified right edge is set")
-    assert_equal(left.style,right.style, "edge parts have the same style")
+    assert_equal(left.style, right.style, "edge parts have the same style")
     assert_equal(left.style, :thick, "the style is THICK")
-    assert_equal(right.color.rgb,left.color.rgb, "edge parts are colors are the same")
-    assert_equal(right.color.rgb,"FFDADADA", "edge color rgb is correct")
+    assert_equal(right.color.rgb, left.color.rgb, "edge parts are colors are the same")
+    assert_equal(right.color.rgb, "FFDADADA", "edge color rgb is correct")
   end
 
   def test_parse_border_options_noop
@@ -118,11 +118,11 @@ class TestStyles < Test::Unit::TestCase
 
   def test_parse_border_options_integer_xf
     assert_equal(@styles.parse_border_options(:border => 1), 1)
-    assert_raise(ArgumentError, "unknown border index") {@styles.parse_border_options(:border => 100) }
+    assert_raise(ArgumentError, "unknown border index") { @styles.parse_border_options(:border => 100) }
   end
 
   def test_parse_border_options_integer_dxf
-    b_opts = { :border => { :edges => [:left, :right], :color => "FFFFFFFF", :style=> :thick } }
+    b_opts = { :border => { :edges => [:left, :right], :color => "FFFFFFFF", :style => :thick } }
     b = @styles.parse_border_options(b_opts)
     b2 = @styles.parse_border_options(:border => b, :type => :dxf)
     assert(b2.is_a?(Axlsx::Border), "Cloned existing border object")
@@ -140,7 +140,7 @@ class TestStyles < Test::Unit::TestCase
     original_attributes = Axlsx.instance_values_for(original)
     assert_equal(1, created.b)
     assert_equal(99, created.sz)
-    copied = original_attributes.reject{ |key, value| %w(b sz).include? key }
+    copied = original_attributes.reject { |key, value| %w(b sz).include? key }
     instance_vals = Axlsx.instance_values_for(created)
     copied.each do |key, value|
       assert_equal(instance_vals[key], value)
@@ -162,8 +162,8 @@ class TestStyles < Test::Unit::TestCase
       :font_name => "woot font"
     }
     assert_equal(@styles.parse_font_options {}, nil, "noop if no font keys are set")
-    assert(@styles.parse_font_options(:b=>1).is_a?(Integer), "return index of font if not :dxf type")
-    assert_equal(@styles.parse_font_options(:b=>1, :type => :dxf).class, Axlsx::Font, "return font object if :dxf type")
+    assert(@styles.parse_font_options(:b => 1).is_a?(Integer), "return index of font if not :dxf type")
+    assert_equal(@styles.parse_font_options(:b => 1, :type => :dxf).class, Axlsx::Font, "return font object if :dxf type")
 
     f = @styles.parse_font_options(options.merge(:type => :dxf))
     color = options.delete(:fg_color)
@@ -192,15 +192,15 @@ class TestStyles < Test::Unit::TestCase
     font_count = @styles.fonts.size
     xf_count = @styles.cellXfs.size
 
-    @styles.add_style :bg_color=>"FF000000", :fg_color=>"FFFFFFFF", :sz=>13, :num_fmt=>Axlsx::NUM_FMT_PERCENT, :alignment=>{:horizontal=>:left}, :border=>Axlsx::STYLE_THIN_BORDER, :hidden=>true, :locked=>true
-    assert_equal(@styles.fills.size, fill_count+1)
-    assert_equal(@styles.fonts.size, font_count+1)
-    assert_equal(@styles.cellXfs.size, xf_count+1)
+    @styles.add_style :bg_color => "FF000000", :fg_color => "FFFFFFFF", :sz => 13, :num_fmt => Axlsx::NUM_FMT_PERCENT, :alignment => { :horizontal => :left }, :border => Axlsx::STYLE_THIN_BORDER, :hidden => true, :locked => true
+    assert_equal(@styles.fills.size, fill_count + 1)
+    assert_equal(@styles.fonts.size, font_count + 1)
+    assert_equal(@styles.cellXfs.size, xf_count + 1)
     xf = @styles.cellXfs.last
-    assert_equal(xf.fillId, (@styles.fills.size-1), "points to the last created fill")
+    assert_equal(xf.fillId, (@styles.fills.size - 1), "points to the last created fill")
     assert_equal(@styles.fills.last.fill_type.fgColor.rgb, "FF000000", "fill created with color")
 
-    assert_equal(xf.fontId, (@styles.fonts.size-1), "points to the last created font")
+    assert_equal(xf.fontId, (@styles.fonts.size - 1), "points to the last created font")
     assert_equal(@styles.fonts.last.sz, 13, "font sz applied")
     assert_equal(@styles.fonts.last.color.rgb, "FFFFFFFF", "font color applied")
 
@@ -215,16 +215,16 @@ class TestStyles < Test::Unit::TestCase
 
     assert_equal(xf.applyProtection, true, "protection applied")
     assert_equal(xf.applyBorder, true, "border applied")
-    assert_equal(xf.applyNumberFormat,true, "number format applied")
+    assert_equal(xf.applyNumberFormat, true, "number format applied")
     assert_equal(xf.applyAlignment, true, "alignment applied")
   end
 
   def test_basic_add_style_dxf
     border_count = @styles.borders.size
-    @styles.add_style :border => {:style => :thin, :color => "FFFF0000"}, :type => :dxf
+    @styles.add_style :border => { :style => :thin, :color => "FFFF0000" }, :type => :dxf
     assert_equal(@styles.borders.size, border_count, "styles borders not affected")
     assert_equal(@styles.dxfs.last.border.prs.last.color.rgb, "FFFF0000")
-    assert_raise(ArgumentError) { @styles.add_style :border => {:color => "FFFF0000"}, :type => :dxf }
+    assert_raise(ArgumentError) { @styles.add_style :border => { :color => "FFFF0000" }, :type => :dxf }
     assert_equal @styles.borders.last.prs.size, 4
   end
 
@@ -233,8 +233,8 @@ class TestStyles < Test::Unit::TestCase
     font_count = @styles.fonts.size
     dxf_count = @styles.dxfs.size
 
-    style = @styles.add_style :bg_color=>"FF000000", :fg_color=>"FFFFFFFF", :sz=>13, :alignment=>{:horizontal=>:left}, :border=>{:style => :thin, :color => "FFFF0000"}, :hidden=>true, :locked=>true, :type => :dxf
-    assert_equal(@styles.dxfs.size, dxf_count+1)
+    style = @styles.add_style :bg_color => "FF000000", :fg_color => "FFFFFFFF", :sz => 13, :alignment => { :horizontal => :left }, :border => { :style => :thin, :color => "FFFF0000" }, :hidden => true, :locked => true, :type => :dxf
+    assert_equal(@styles.dxfs.size, dxf_count + 1)
     assert_equal(0, style, "returns the zero-based dxfId")
 
     dxf = @styles.dxfs.last
@@ -255,9 +255,9 @@ class TestStyles < Test::Unit::TestCase
 
   def test_multiple_dxf
     # add a second style
-    style = @styles.add_style :bg_color=>"00000000", :fg_color=>"FFFFFFFF", :sz=>13, :alignment=>{:horizontal=>:left}, :border=>{:style => :thin, :color => "FFFF0000"}, :hidden=>true, :locked=>true, :type => :dxf
+    style = @styles.add_style :bg_color => "00000000", :fg_color => "FFFFFFFF", :sz => 13, :alignment => { :horizontal => :left }, :border => { :style => :thin, :color => "FFFF0000" }, :hidden => true, :locked => true, :type => :dxf
     assert_equal(0, style, "returns the first dxfId")
-    style = @styles.add_style :bg_color=>"FF000000", :fg_color=>"FFFFFFFF", :sz=>13, :alignment=>{:horizontal=>:left}, :border=>{:style => :thin, :color => "FFFF0000"}, :hidden=>true, :locked=>true, :type => :dxf
+    style = @styles.add_style :bg_color => "FF000000", :fg_color => "FFFFFFFF", :sz => 13, :alignment => { :horizontal => :left }, :border => { :style => :thin, :color => "FFFF0000" }, :hidden => true, :locked => true, :type => :dxf
     assert_equal(1, style, "returns the second dxfId")
   end
 
@@ -302,7 +302,7 @@ class TestStyles < Test::Unit::TestCase
 
       current_border = @styles.borders.last
 
-      border_pr = current_border.prs.detect{|x| x.name == edge }
+      border_pr = current_border.prs.detect { |x| x.name == edge }
       assert_equal(border_pr.color.rgb, "FF#{b_opts[:color]}")
     end
   end

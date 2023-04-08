@@ -17,7 +17,7 @@ module Axlsx
     # @option options [Boolean] endSnd terminate any sound events when processing this link
     # @option options [Boolean] history include this link in the list of visited links for the applications history.
     # @option options [Boolean] highlightClick indicate that the link has already been visited.
-    def initialize(parent, options={})
+    def initialize(parent, options = {})
       DataTypeValidator.validate "Hyperlink.parent", [Pic], parent
       @parent = parent
       parse_options options
@@ -91,7 +91,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      serialized_tag 'a:hlinkClick', str, {:'r:id' => relationship.Id, :'xmlns:r' => XML_NS_R }
+      serialized_tag 'a:hlinkClick', str, { :'r:id' => relationship.Id, :'xmlns:r' => XML_NS_R }
     end
   end
 end

@@ -10,7 +10,7 @@ module Axlsx
     # Creates a new {ConditionalFormatting} object
     # @option options [Array] rules The rules to apply
     # @option options [String] sqref The range to apply the rules to
-    def initialize(options={})
+    def initialize(options = {})
       @rules = []
       parse_options options
     end
@@ -74,7 +74,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << ('<conditionalFormatting sqref="' << sqref << '">')
-      str << rules.collect{ |rule| rule.to_xml_string }.join(' ')
+      str << rules.collect { |rule| rule.to_xml_string }.join(' ')
       str << '</conditionalFormatting>'
     end
   end

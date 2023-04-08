@@ -27,7 +27,7 @@ module Axlsx
     alias :yValAxis :y_val_axis
 
     # Creates a new scatter chart
-    def initialize(frame, options={})
+    def initialize(frame, options = {})
       @vary_colors = 0
       @scatter_style = :lineMarker
 

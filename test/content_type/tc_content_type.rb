@@ -8,7 +8,7 @@ class TestContentType < Test::Unit::TestCase
 
   def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::CONTENT_TYPES_XSD))
-    assert(schema.validate(@doc).map{ |e| puts e.message; e.message }.empty?)
+    assert(schema.validate(@doc).map { |e| puts e.message; e.message }.empty?)
   end
 
   def test_pre_built_types
@@ -22,7 +22,7 @@ class TestContentType < Test::Unit::TestCase
     assert_equal(node["Extension"], "#{Axlsx::XML_EX}", "xml content type invalid")
 
     node = @doc.xpath(d_path % Axlsx::RELS_CT).first
-    assert_equal(node["Extension"],"#{Axlsx::RELS_EX}", "relationships content type invalid")
+    assert_equal(node["Extension"], "#{Axlsx::RELS_EX}", "relationships content type invalid")
 
     #overrride
     assert_equal(@doc.xpath("//xmlns:Override").size, 4, "There should be 4 Override types")

@@ -14,7 +14,7 @@ module Axlsx
     # Creates a new SerAxis object
     # @option options [Integer] tick_lbl_skip
     # @option options [Integer] tick_mark_skip
-    def initialize(options={})
+    def initialize(options = {})
       @tick_lbl_skip, @tick_mark_skip = 1, 1
       super(options)
     end

@@ -28,7 +28,7 @@ module Axlsx
     # @option [Boolean] thick_bottom 'True' if rows have a thick bottom border by default.
     # @option [Integer] outline_level_row Highest number of outline level for rows in this sheet. These values shall be in synch with the actual sheet outline levels.
     # @option [Integer] outline_level_col Highest number of outline levels for columns in this sheet. These values shall be in synch with the actual sheet outline levels.
-    def initialize(options={})
+    def initialize(options = {})
       set_defaults
       parse_options options
     end
@@ -46,7 +46,7 @@ module Axlsx
     # serializes this object to an xml string
     # @param [String] str The string this objects serialization will be appended to
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = '')
       str << "<sheetFormatPr #{serialized_attributes}/>"
     end
 

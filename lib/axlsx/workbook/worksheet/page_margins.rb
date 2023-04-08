@@ -19,7 +19,7 @@ module Axlsx
     # @option options [Numeric] top The top margin in inches
     # @option options [Numeric] header The header margin in inches
     # @option options [Numeric] footer The footer margin in inches
-    def initialize(options={})
+    def initialize(options = {})
       # Default values taken from MS Excel for Mac 2011
       @left = @right = DEFAULT_LEFT_RIGHT
       @top = @bottom = DEFAULT_TOP_BOTTOM

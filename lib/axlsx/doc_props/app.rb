@@ -33,7 +33,7 @@ module Axlsx
     # @option options [String] application
     # @option options [String] app_version
     # @option options [Integer] doc_security
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
     end
 

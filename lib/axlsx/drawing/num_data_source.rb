@@ -6,7 +6,7 @@ module Axlsx
     # creates a new NumDataSource object
     # @option options [Array] data An array of Cells or Numeric objects
     # @option options [Symbol] tag_name see tag_name
-    def initialize(options={})
+    def initialize(options = {})
       # override these three in child classes
       @data_type ||= NumData
       @tag_name ||= :val
@@ -42,7 +42,7 @@ module Axlsx
 
     # serialize the object
     # @param [String] str
-    def to_xml_string(str="")
+    def to_xml_string(str = "")
       str << ('<c:' << tag_name.to_s << '>')
       if @f
         str << ('<c:' << @ref_tag_name.to_s << '>')

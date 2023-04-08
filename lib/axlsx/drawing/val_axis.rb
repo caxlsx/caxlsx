@@ -9,7 +9,7 @@ module Axlsx
 
     # Creates a new ValAxis object
     # @option options [Symbol] crosses_between
-    def initialize(options={})
+    def initialize(options = {})
       self.cross_between = :between
       super(options)
     end

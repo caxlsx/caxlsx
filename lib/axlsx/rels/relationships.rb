@@ -13,7 +13,7 @@ require 'axlsx/rels/relationship.rb'
     # @see Relationship#source_obj
     # @return [Relationship]
     def for(source_obj)
-      find{ |rel| rel.source_obj == source_obj }
+      find { |rel| rel.source_obj == source_obj }
     end
 
     # serialize relationships
@@ -22,7 +22,7 @@ require 'axlsx/rels/relationship.rb'
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << ('<Relationships xmlns="' << RELS_R << '">')
-      each{ |rel| rel.to_xml_string(str) }
+      each { |rel| rel.to_xml_string(str) }
       str << '</Relationships>'
     end
   end

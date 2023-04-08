@@ -14,7 +14,7 @@ module Axlsx
     # @option options [Integer] :width
     # @option options [Integer] :height
     # @option options [Float] :opacity - set the picture opacity, accepts a value between 0.0 and 1.0
-    def initialize(anchor, options={})
+    def initialize(anchor, options = {})
       @anchor = anchor
       @hyperlink = nil
       @anchor.drawing.worksheet.workbook.images << self
@@ -57,7 +57,7 @@ module Axlsx
     # sets or updates a hyperlink for this image.
     # @param [String] v The href value for the hyper link
     # @option options @see Hyperlink#initialize All options available to the Hyperlink class apply - however href will be overridden with the v parameter value.
-    def hyperlink=(v, options={})
+    def hyperlink=(v, options = {})
       options[:href] = v
       if hyperlink.is_a?(Hyperlink)
         options.each do |o|
@@ -103,7 +103,7 @@ module Axlsx
     # The part name for this image used in serialization and relationship building
     # @return [String]
     def pn
-      "#{IMAGE_PN % [(index+1), extname]}"
+      "#{IMAGE_PN % [(index + 1), extname]}"
     end
 
     # The relationship object for this pic.
@@ -145,7 +145,7 @@ module Axlsx
     # @param [Integer] x The column
     # @param [Integer] y The row
     # @return [Marker]
-    def start_at(x, y=nil)
+    def start_at(x, y = nil)
       @anchor.start_at x, y
       @anchor.from
     end
@@ -154,7 +154,7 @@ module Axlsx
     # @param [Integer] x The column
     # @param [Integer] y The row
     # @return [Marker]
-    def end_at(x, y=nil)
+    def end_at(x, y = nil)
       use_two_cell_anchor unless @anchor.is_a?(TwoCellAnchor)
       @anchor.end_at x, y
       @anchor.to

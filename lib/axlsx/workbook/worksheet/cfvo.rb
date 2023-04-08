@@ -14,7 +14,7 @@ module Axlsx
     # @option options [Symbol] type The type of conditional formatting value object
     # @option options [Boolean]  gte threshold value usage indicator
     # @option options [String] val The value of the conditional formatting object
-    def initialize(options={})
+    def initialize(options = {})
       @gte = true
       parse_options options
     end

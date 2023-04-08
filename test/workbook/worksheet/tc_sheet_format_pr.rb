@@ -45,31 +45,31 @@ class TestSheetFormatPr < Test::Unit::TestCase
 
   def test_default_row_height
    assert_raise(ArgumentError) { @sheet_format_pr.default_row_height = :foo }
-   assert_nothing_raised { @sheet_format_pr.default_row_height= 1.0 }
+   assert_nothing_raised { @sheet_format_pr.default_row_height = 1.0 }
   end
 
   def test_default_col_width
-   assert_raise(ArgumentError) { @sheet_format_pr.default_col_width= :foo }
+   assert_raise(ArgumentError) { @sheet_format_pr.default_col_width = :foo }
    assert_nothing_raised { @sheet_format_pr.default_col_width = 1.0 }
   end
 
   def test_custom_height
-   assert_raise(ArgumentError) { @sheet_format_pr.custom_height= :foo }
+   assert_raise(ArgumentError) { @sheet_format_pr.custom_height = :foo }
    assert_nothing_raised { @sheet_format_pr.custom_height = true }
   end
 
   def test_zero_height
-   assert_raise(ArgumentError) { @sheet_format_pr.zero_height= :foo }
+   assert_raise(ArgumentError) { @sheet_format_pr.zero_height = :foo }
    assert_nothing_raised { @sheet_format_pr.zero_height = true }
   end
 
   def test_thick_top
-   assert_raise(ArgumentError) { @sheet_format_pr.thick_top= :foo }
+   assert_raise(ArgumentError) { @sheet_format_pr.thick_top = :foo }
    assert_nothing_raised { @sheet_format_pr.thick_top = true }
   end
 
   def test_thick_bottom
-   assert_raise(ArgumentError) { @sheet_format_pr.thick_bottom= :foo }
+   assert_raise(ArgumentError) { @sheet_format_pr.thick_bottom = :foo }
    assert_nothing_raised { @sheet_format_pr.thick_bottom = true }
   end
 

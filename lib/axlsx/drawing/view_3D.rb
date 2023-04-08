@@ -10,7 +10,7 @@ module Axlsx
     # @option options [String] depth_percent
     # @option options [Boolean] r_ang_ax
     # @option options [Integer] perspective
-    def initialize(options={})
+    def initialize(options = {})
       @rot_x, @h_percent, @rot_y, @depth_percent, @r_ang_ax, @perspective  = nil, nil, nil, nil, nil, nil
       parse_options options
     end
@@ -105,7 +105,7 @@ module Axlsx
     private
 
     # Note: move this to Axlsx module if we find the smae pattern elsewhere.
-    def element_for_attribute(name, namespace='')
+    def element_for_attribute(name, namespace = '')
       val = Axlsx.instance_values_for(self)[name]
       return "" if val == nil
       "<%s:%s val='%s'/>" % [namespace, Axlsx::camel(name, false), val]

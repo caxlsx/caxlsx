@@ -11,7 +11,7 @@ module Axlsx
                      :shadow, :condense, :extend, :u,
                      :vertAlign, :sz, :color, :scheme].freeze
 
-    def initialize(value, options={})
+    def initialize(value, options = {})
       self.value = value
       parse_options(options)
     end
@@ -138,7 +138,7 @@ module Axlsx
 
     # @param [String] v The 8 character representation for an rgb color #FFFFFFFF"
     def color=(v)
-      @color = v.is_a?(Color) ? v : Color.new(:rgb=>v)
+      @color = v.is_a?(Color) ? v : Color.new(:rgb => v)
     end
 
     # The inline sz property for the cell
@@ -203,7 +203,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       valid = RichTextRun::INLINE_STYLES
-      data = Hash[Axlsx.instance_values_for(self).map{ |k, v| [k.to_sym, v] }]
+      data = Hash[Axlsx.instance_values_for(self).map { |k, v| [k.to_sym, v] }]
       data = data.select { |key, value| valid.include?(key) && !value.nil? }
 
       str << '<r><rPr>'

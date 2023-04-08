@@ -26,7 +26,7 @@ module Axlsx
 
     # seralize the collection of hyperlinks
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = '')
       return if empty?
       str << '<hyperlinks>'
       each { |hyperlink| hyperlink.to_xml_string(str) }

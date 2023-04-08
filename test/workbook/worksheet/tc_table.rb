@@ -5,7 +5,7 @@ class TestTable < Test::Unit::TestCase
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet
     40.times do
-      @ws << ["aa","aa","aa","aa","aa","aa"]
+      @ws << ["aa", "aa", "aa", "aa", "aa", "aa"]
     end
   end
 

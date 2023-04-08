@@ -19,7 +19,7 @@ module Axlsx
     # @option options [Time] :created_at Timestamp in the document properties (defaults to current time).
     # @option options [Boolean] :use_shared_strings This is passed to the workbook to specify that shared strings should be used when serializing the package.
     # @example Package.new :author => 'you!', :workbook => Workbook.new
-    def initialize(options={})
+    def initialize(options = {})
       @workbook = nil
       @core, @app = Core.new, App.new
       @core.creator = options[:author] || @core.creator
@@ -122,7 +122,7 @@ module Axlsx
     # Serialize your workbook to a StringIO instance
     # @param [Boolean] confirm_valid Validate the package prior to serialization.
     # @return [StringIO|Boolean] False if confirm_valid and validation errors exist. rewound string IO if not.
-    def to_stream(confirm_valid=false)
+    def to_stream(confirm_valid = false)
       if !workbook.styles_applied
         workbook.apply_styles
       end
@@ -211,26 +211,26 @@ module Axlsx
     # @private
     def parts
       parts = [
-        {:entry => "xl/#{STYLES_PN}", :doc => workbook.styles, :schema => SML_XSD},
-        {:entry => CORE_PN, :doc => @core, :schema => CORE_XSD},
-        {:entry => APP_PN, :doc => @app, :schema => APP_XSD},
-        {:entry => WORKBOOK_RELS_PN, :doc => workbook.relationships, :schema => RELS_XSD},
-        {:entry => WORKBOOK_PN, :doc => workbook, :schema => SML_XSD}
+        { :entry => "xl/#{STYLES_PN}", :doc => workbook.styles, :schema => SML_XSD },
+        { :entry => CORE_PN, :doc => @core, :schema => CORE_XSD },
+        { :entry => APP_PN, :doc => @app, :schema => APP_XSD },
+        { :entry => WORKBOOK_RELS_PN, :doc => workbook.relationships, :schema => RELS_XSD },
+        { :entry => WORKBOOK_PN, :doc => workbook, :schema => SML_XSD }
       ]
 
       workbook.drawings.each do |drawing|
-        parts << {:entry => "xl/#{drawing.rels_pn}", :doc => drawing.relationships, :schema => RELS_XSD}
-        parts << {:entry => "xl/#{drawing.pn}", :doc => drawing, :schema => DRAWING_XSD}
+        parts << { :entry => "xl/#{drawing.rels_pn}", :doc => drawing.relationships, :schema => RELS_XSD }
+        parts << { :entry => "xl/#{drawing.pn}", :doc => drawing, :schema => DRAWING_XSD }
       end
 
       workbook.tables.each do |table|
-        parts << {:entry => "xl/#{table.pn}", :doc => table, :schema => SML_XSD}
+        parts << { :entry => "xl/#{table.pn}", :doc => table, :schema => SML_XSD }
       end
       workbook.pivot_tables.each do |pivot_table|
         cache_definition = pivot_table.cache_definition
-        parts << {:entry => "xl/#{pivot_table.rels_pn}", :doc => pivot_table.relationships, :schema => RELS_XSD}
-        parts << {:entry => "xl/#{pivot_table.pn}", :doc => pivot_table} #, :schema => SML_XSD}
-        parts << {:entry => "xl/#{cache_definition.pn}", :doc => cache_definition} #, :schema => SML_XSD}
+        parts << { :entry => "xl/#{pivot_table.rels_pn}", :doc => pivot_table.relationships, :schema => RELS_XSD }
+        parts << { :entry => "xl/#{pivot_table.pn}", :doc => pivot_table } #, :schema => SML_XSD}
+        parts << { :entry => "xl/#{cache_definition.pn}", :doc => cache_definition } #, :schema => SML_XSD}
       end
 
       workbook.comments.each do |comment|
@@ -241,26 +241,26 @@ module Axlsx
       end
 
       workbook.charts.each do |chart|
-        parts << {:entry => "xl/#{chart.pn}", :doc => chart, :schema => DRAWING_XSD}
+        parts << { :entry => "xl/#{chart.pn}", :doc => chart, :schema => DRAWING_XSD }
       end
 
       workbook.images.each do |image|
-        parts << {:entry => "xl/#{image.pn}", :path => image.image_src}
+        parts << { :entry => "xl/#{image.pn}", :path => image.image_src }
       end
 
       if use_shared_strings
-        parts << {:entry => "xl/#{SHARED_STRINGS_PN}", :doc => workbook.shared_strings, :schema => SML_XSD}
+        parts << { :entry => "xl/#{SHARED_STRINGS_PN}", :doc => workbook.shared_strings, :schema => SML_XSD }
       end
 
       workbook.worksheets.each do |sheet|
-        parts << {:entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships, :schema => RELS_XSD}
-        parts << {:entry => "xl/#{sheet.pn}", :doc => sheet, :schema => SML_XSD}
+        parts << { :entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships, :schema => RELS_XSD }
+        parts << { :entry => "xl/#{sheet.pn}", :doc => sheet, :schema => SML_XSD }
       end
 
       # Sort parts for correct MIME detection
       [
-        {:entry => CONTENT_TYPES_PN, :doc => content_types, :schema => CONTENT_TYPES_XSD},
-        {:entry => RELS_PN, :doc => relationships, :schema => RELS_XSD},
+        { :entry => CONTENT_TYPES_PN, :doc => content_types, :schema => CONTENT_TYPES_XSD },
+        { :entry => RELS_PN, :doc => relationships, :schema => RELS_XSD },
         *(parts.sort_by { |part| part[:entry] }.reverse)
       ]
     end
@@ -332,7 +332,7 @@ module Axlsx
              elsif ext == 'png'
                PNG_CT
              end
-        c_types << Axlsx::Default.new(:ContentType => ct, :Extension => ext )
+        c_types << Axlsx::Default.new(:ContentType => ct, :Extension => ext)
       end
       if use_shared_strings
         c_types << Axlsx::Override.new(:PartName => "/xl/#{SHARED_STRINGS_PN}",

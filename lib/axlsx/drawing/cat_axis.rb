@@ -4,7 +4,7 @@ module Axlsx
     # Creates a new CatAxis object
     # @option options [Integer] tick_lbl_skip
     # @option options [Integer] tick_mark_skip
-    def initialize(options={})
+    def initialize(options = {})
       @tick_lbl_skip = 1
       @tick_mark_skip = 1
       self.auto = 1

@@ -20,7 +20,7 @@ module Axlsx
     # @option options [Boolean] extend
     # @option options [Color] color
     # @option options [Integer] sz
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
     end
 
@@ -139,9 +139,9 @@ module Axlsx
     # @see extend
     def extend=(v) Axlsx::validate_boolean v; @extend = v end
     # @see color
-    def color=(v) DataTypeValidator.validate "Font.color", Color, v; @color=v end
+    def color=(v) DataTypeValidator.validate "Font.color", Color, v; @color = v end
     # @see sz
-    def sz=(v) Axlsx::validate_unsigned_int v; @sz=v end
+    def sz=(v) Axlsx::validate_unsigned_int v; @sz = v end
 
     # Serializes the object
     # @param [String] str

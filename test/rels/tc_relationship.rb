@@ -40,7 +40,7 @@ class TestRelationships < Test::Unit::TestCase
 
   def test_target_mode
     assert_raise(ArgumentError) { Axlsx::Relationship.new nil, 'type', 'target', :target_mode => "FISH" }
-    assert_nothing_raised { Axlsx::Relationship.new( nil, Axlsx::WORKSHEET_R, 'target', :target_mode => :External) }
+    assert_nothing_raised { Axlsx::Relationship.new(nil, Axlsx::WORKSHEET_R, 'target', :target_mode => :External) }
   end
 
   def test_ampersand_escaping_in_target

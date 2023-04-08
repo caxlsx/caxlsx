@@ -20,7 +20,7 @@ class TestPie3DChart < Test::Unit::TestCase
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
     doc = Nokogiri::XML(@chart.to_xml_string)
-    errors = schema.validate(doc).map {|error| puts error.message; error }
+    errors = schema.validate(doc).map { |error| puts error.message; error }
     assert(errors.empty?, "error free validation")
   end
 end

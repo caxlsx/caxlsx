@@ -19,7 +19,7 @@ module Axlsx
     #
     # @note The recommended way to manage borders is with Style#add_style
     # @see Style#add_style
-    def initialize(options={})
+    def initialize(options = {})
       @prs = SimpleTypedList.new BorderPr
       parse_options options
     end

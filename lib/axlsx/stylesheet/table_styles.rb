@@ -7,7 +7,7 @@ module Axlsx
     # Creates a new TableStyles object that is a container for TableStyle objects
     # @option options [String] defaultTableStyle
     # @option options [String] defaultPivotStyle
-    def initialize(options={})
+    def initialize(options = {})
       @defaultTableStyle = options[:defaultTableStyle] || "TableStyleMedium9"
       @defaultPivotStyle = options[:defaultPivotStyle] || "PivotStyleLight16"
       super TableStyle
@@ -33,7 +33,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<tableStyles '
-      serialized_attributes str, {:count => self.size }
+      serialized_attributes str, { :count => self.size }
       str << '>'
       each { |table_style| table_style.to_xml_string(str) }
       str << '</tableStyles>'

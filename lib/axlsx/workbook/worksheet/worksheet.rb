@@ -14,7 +14,7 @@ module Axlsx
     # @option options [Hash] print_options A hash containing print options for this worksheet. @see PrintOptions
     # @option options [Hash] header_footer A hash containing header/footer options for this worksheet. @see HeaderFooter
     # @option options [Boolean] show_gridlines indicates if gridlines should be shown for this sheet.
-    def initialize(wb, options={})
+    def initialize(wb, options = {})
       self.workbook = wb
       @sheet_protection = nil
       initialize_page_options(options)
@@ -40,7 +40,7 @@ module Axlsx
     # The name of the worksheet
     # @return [String]
     def name
-      @name ||= "Sheet" + (index+1).to_s
+      @name ||= "Sheet" + (index + 1).to_s
     end
 
     # Specifies the visible state of this sheet. Allowed states are
@@ -99,13 +99,13 @@ module Axlsx
     # The tables in this worksheet
     # @return [Array] of Table
     def tables
-      @tables ||=  Tables.new self
+      @tables ||= Tables.new self
     end
 
     # The pivot tables in this worksheet
     # @return [Array] of Table
     def pivot_tables
-      @pivot_tables ||=  PivotTables.new self
+      @pivot_tables ||= PivotTables.new self
     end
 
     # A collection of column breaks added to this worksheet
@@ -307,7 +307,7 @@ module Axlsx
     # @param [String] name
     def name=(name)
       validate_sheet_name name
-      @name=Axlsx::coder.encode(name)
+      @name = Axlsx::coder.encode(name)
     end
 
     # The auto filter range for the worksheet
@@ -325,13 +325,13 @@ module Axlsx
     # The part name of this worksheet
     # @return [String]
     def pn
-      "#{WORKSHEET_PN % (index+1)}"
+      "#{WORKSHEET_PN % (index + 1)}"
     end
 
     # The relationship part name of this worksheet
     # @return [String]
     def rels_pn
-      "#{WORKSHEET_RELS_PN % (index+1)}"
+      "#{WORKSHEET_RELS_PN % (index + 1)}"
     end
 
     # The relationship id of this worksheet.
@@ -408,7 +408,7 @@ module Axlsx
     #    sign as formula (default) or as simple string.
     #    Allowing user generated data to be interpreted as formulas can be dangerous
     #   (see https://www.owasp.org/index.php/CSV_Injection for details).
-    def add_row(values=[], options={})
+    def add_row(values = [], options = {})
       row = Row.new(self, values, options)
       update_column_info row, options.delete(:widths)
       yield row if block_given?
@@ -428,7 +428,7 @@ module Axlsx
     # @see ConditionalFormattingRule#initialize
     # @see file:examples/example_conditional_formatting.rb
     def add_conditional_formatting(cells, rules)
-      cf = ConditionalFormatting.new( :sqref => cells )
+      cf = ConditionalFormatting.new(:sqref => cells)
       cf.add_rules rules
       conditional_formattings << cf
       conditional_formattings
@@ -449,7 +449,7 @@ module Axlsx
     # @param [Hash] options for the hyperlink
     # @see WorksheetHyperlink for a list of options
     # @return [WorksheetHyperlink]
-    def add_hyperlink(options={})
+    def add_hyperlink(options = {})
       hyperlinks.add(options)
     end
 
@@ -466,33 +466,33 @@ module Axlsx
     # @see Bar3DChart
     # @see Line3DChart
     # @see README for examples
-    def add_chart(chart_type, options={})
+    def add_chart(chart_type, options = {})
       chart = worksheet_drawing.add_chart(chart_type, options)
       yield chart if block_given?
       chart
     end
 
     # needs documentation
-    def add_table(ref, options={})
+    def add_table(ref, options = {})
       tables << Table.new(ref, self, options)
       yield tables.last if block_given?
       tables.last
     end
 
-    def add_pivot_table(ref, range, options={})
+    def add_pivot_table(ref, range, options = {})
       pivot_tables << PivotTable.new(ref, range, self, options)
       yield pivot_tables.last if block_given?
       pivot_tables.last
     end
 
     # Shortcut to worsksheet_comments#add_comment
-    def add_comment(options={})
+    def add_comment(options = {})
       worksheet_comments.add_comment(options)
     end
 
     # Adds a media item to the worksheets drawing
     # @option [Hash] options options passed to drawing.add_image
-    def add_image(options={})
+    def add_image(options = {})
       image = worksheet_drawing.add_image(options)
       yield image if block_given?
       image
@@ -539,7 +539,7 @@ module Axlsx
     # @note You can also specify the style for specific columns in the call to add_row by using an array for the :styles option
     # @see Worksheet#add_row
     # @see README.md for an example
-    def col_style(index, style, options={})
+    def col_style(index, style, options = {})
       offset = options.delete(:row_offset) || 0
       cells = @rows[(offset..-1)].map { |row| row[index] }.flatten.compact
       cells.each { |cell| cell.style = style }
@@ -553,7 +553,7 @@ module Axlsx
     # @note You can also specify the style in the add_row call
     # @see Worksheet#add_row
     # @see README.md for an example
-    def row_style(index, style, options={})
+    def row_style(index, style, options = {})
       offset = options.delete(:col_offset) || 0
       cells = cols[(offset..-1)].map { |column| column[index] }.flatten.compact
       cells.each { |cell| cell.style = style }
@@ -583,7 +583,7 @@ module Axlsx
     # Set the style for cells in a specific column
     # @param [String|Array] cell references
     # @param [Hash|Array|Symbol] border options
-    def add_border(cell_refs, options=nil)
+    def add_border(cell_refs, options = nil)
       if options.is_a?(Hash)
         border_edges = options[:edges]
         border_style = options[:style]
@@ -606,7 +606,7 @@ module Axlsx
     end
 
     # Returns a sheet node serialization for this sheet in the workbook.
-    def to_sheet_node_xml_string(str='')
+    def to_sheet_node_xml_string(str = '')
       add_autofilter_defined_name_to_workbook
       str << '<sheet '
       serialized_attributes str
@@ -617,7 +617,7 @@ module Axlsx
     # Serializes the worksheet object to an xml string
     # This intentionally does not use nokogiri for performance reasons
     # @return [String]
-    def to_xml_string str=''
+    def to_xml_string str = ''
       add_autofilter_defined_name_to_workbook
       auto_filter.apply if auto_filter.range
       str << '<?xml version="1.0" encoding="UTF-8"?>'
@@ -646,7 +646,7 @@ module Axlsx
     def [](cell_def)
       return rows[cell_def] if cell_def.is_a?(Integer)
 
-      parts = cell_def.split(':').map{ |part| name_to_cell part }
+      parts = cell_def.split(':').map { |part| name_to_cell part }
 
       if parts.size == 1
         parts.first

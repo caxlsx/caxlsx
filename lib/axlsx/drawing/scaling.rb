@@ -8,7 +8,7 @@ module Axlsx
     # @option options [Symbol] orientation
     # @option options [Float] max
     # @option options [Float] min
-    def initialize(options={})
+    def initialize(options = {})
       @orientation = :minMax
       @logBase, @min, @max = nil, nil, nil
       parse_options options
@@ -33,7 +33,7 @@ module Axlsx
     attr_reader :min
 
     # @see logBase
-    def logBase=(v) DataTypeValidator.validate "Scaling.logBase", [Integer], v, lambda { |arg| arg >= 2 && arg <= 1000}; @logBase = v; end
+    def logBase=(v) DataTypeValidator.validate "Scaling.logBase", [Integer], v, lambda { |arg| arg >= 2 && arg <= 1000 }; @logBase = v; end
     # @see orientation
     def orientation=(v) RestrictionValidator.validate "Scaling.orientation", [:minMax, :maxMin], v; @orientation = v; end
     # @see max

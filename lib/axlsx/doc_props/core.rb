@@ -6,7 +6,7 @@ module Axlsx
     # Creates a new Core object.
     # @option options [String] creator
     # @option options [Time] created
-    def initialize(options={})
+    def initialize(options = {})
       @creator = options[:creator] || 'axlsx'
       @created = options[:created]
     end

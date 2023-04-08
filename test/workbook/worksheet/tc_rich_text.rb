@@ -8,7 +8,7 @@ class RichText < Test::Unit::TestCase
     @rt = Axlsx::RichText.new
     b = true
     (0..26).each do |r|
-      @rt.add_run "run #{r}, ", :b => (b=!b), :i => !b
+      @rt.add_run "run #{r}, ", :b => (b = !b), :i => !b
     end
     @row = @ws.add_row [@rt]
     @c = @row.first
@@ -22,7 +22,7 @@ class RichText < Test::Unit::TestCase
     assert_equal(rt_direct.runs.length, 1)
     assert_equal(rt_indirect.runs.length, 1)
     row = @ws.add_row [rt_direct, rt_indirect]
-    assert_equal(row[0].to_xml_string(0,0), row[1].to_xml_string(0,0))
+    assert_equal(row[0].to_xml_string(0, 0), row[1].to_xml_string(0, 0))
   end
 
   def test_textruns
@@ -39,6 +39,6 @@ class RichText < Test::Unit::TestCase
     row_rt = @ws.add_row [rt]
     row_imp = @ws.add_row ['a']
     row_imp[0].b = true
-    assert_equal(row_rt[0].to_xml_string(0,0), row_imp[0].to_xml_string(0,0))
+    assert_equal(row_rt[0].to_xml_string(0, 0), row_imp[0].to_xml_string(0, 0))
   end
 end

@@ -9,11 +9,11 @@ module Axlsx
     # @option options [Symbol] crosses
     # @option options [Symbol] tick_lbl_pos
     # @raise [ArgumentError] If axi_id or cross_ax are not unsigned integers
-    def initialize(options={})
-      @id = rand(8 ** 8)
+    def initialize(options = {})
+      @id = rand(8**8)
       @format_code = "General"
       @delete = @label_rotation = 0
-      @scaling = Scaling.new(:orientation=>:minMax)
+      @scaling = Scaling.new(:orientation => :minMax)
       @title = @color = nil
       self.ax_pos = :b
       self.tick_lbl_pos = :nextTo

@@ -22,7 +22,7 @@ module Axlsx
     # @option options [Boolean] showInputMessage - A boolean value indicating whether to display the input prompt message.
     # @option options [String] sqref - Range over which data validation is applied, in "A1:B2" format.
     # @option options [Symbol] type - The type of data validation.
-    def initialize(options={})
+    def initialize(options = {})
       # defaults
       @formula1 = @formula2 = @error = @errorTitle = @operator = @prompt = @promptTitle = @sqref = nil
       @allowBlank = @showErrorMessage = true

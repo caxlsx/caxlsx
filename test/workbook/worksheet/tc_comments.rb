@@ -19,7 +19,7 @@ class TestComments < Test::Unit::TestCase
     assert_raise(ArgumentError) { @ws.comments.add_comment() }
     assert_raise(ArgumentError) { @ws.comments.add_comment(:text => 'Yes We Can', :ref => 'A1') }
     assert_raise(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :ref => 'A1') }
-    assert_raise(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :text => 'Yes We Can')}
+    assert_raise(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :text => 'Yes We Can') }
     assert_nothing_raised { @ws.comments.add_comment(:author => 'bob', :text => 'Yes We Can', :ref => 'A1') }
     assert_equal(@ws.comments.size, 3)
   end
@@ -33,7 +33,7 @@ class TestComments < Test::Unit::TestCase
   end
 
   def test_pn
-    assert_equal(@ws.comments.pn, Axlsx::COMMENT_PN % (@ws.index+1).to_s)
+    assert_equal(@ws.comments.pn, Axlsx::COMMENT_PN % (@ws.index + 1).to_s)
   end
 
   def test_index

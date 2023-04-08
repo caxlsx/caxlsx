@@ -24,7 +24,7 @@ module Axlsx
     # @return [String]
     def defined_name
       return unless range
-      Axlsx.cell_range(range.split(':').collect { |name| worksheet.name_to_cell(name)})
+      Axlsx.cell_range(range.split(':').collect { |name| worksheet.name_to_cell(name) })
     end
 
     # A collection of filterColumns for this auto_filter
@@ -51,7 +51,7 @@ module Axlsx
       start_point = Axlsx::name_to_indices(first_cell)
       end_point = Axlsx::name_to_indices(last_cell)
       # The +1 is so we skip the header row with the filter drop downs
-      rows = worksheet.rows[(start_point.last+1)..end_point.last] || []
+      rows = worksheet.rows[(start_point.last + 1)..end_point.last] || []
 
       column_offset = start_point.first
       columns.each do |column|
@@ -64,7 +64,7 @@ module Axlsx
 
     # serialize the object
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = '')
       return unless range
       str << "<autoFilter ref='#{range}'>"
       columns.each { |filter_column| filter_column.to_xml_string(str) }

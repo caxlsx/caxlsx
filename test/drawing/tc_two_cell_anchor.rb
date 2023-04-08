@@ -21,8 +21,8 @@ class TestTwoCellAnchor < Test::Unit::TestCase
   end
 
   def test_options
-    assert_raise(ArgumentError, 'invalid start_at') { @ws.add_chart Axlsx::Chart, :start_at=>"1" }
-    assert_raise(ArgumentError, 'invalid end_at') { @ws.add_chart Axlsx::Chart, :start_at=>[1,2], :end_at => ["a", 4] }
+    assert_raise(ArgumentError, 'invalid start_at') { @ws.add_chart Axlsx::Chart, :start_at => "1" }
+    assert_raise(ArgumentError, 'invalid end_at') { @ws.add_chart Axlsx::Chart, :start_at => [1, 2], :end_at => ["a", 4] }
     # this is actually raised in the graphic frame
     assert_raise(ArgumentError, 'invalid Chart') { @ws.add_chart Axlsx::TwoCellAnchor }
     a = @ws.add_chart Axlsx::Chart, :start_at => [15, 35], :end_at => [90, 45]

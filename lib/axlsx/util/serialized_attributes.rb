@@ -71,7 +71,7 @@ module Axlsx
     # @param [String] str The string instance to which serialized data is appended
     # @param [Array] additional_attributes An array of additional attribute names.
     # @return [String] The serialized output.
-    def serialized_element_attributes(str='', additional_attributes=[], &block)
+    def serialized_element_attributes(str = '', additional_attributes = [], &block)
       attrs = self.class.xml_element_attributes + additional_attributes
       values = Axlsx.instance_values_for(self)
       attrs.each do |attribute_name|

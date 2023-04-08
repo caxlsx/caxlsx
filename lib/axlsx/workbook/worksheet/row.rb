@@ -27,7 +27,7 @@ module Axlsx
     # @option options [Integer] offset - add empty columns before values
     # @see Row#array_to_cells
     # @see Cell
-    def initialize(worksheet, values=[], options={})
+    def initialize(worksheet, values = [], options = {})
       self.worksheet = worksheet
       super(Cell, nil, values.size + options[:offset].to_i)
       self.height = options.delete(:height)
@@ -134,7 +134,7 @@ module Axlsx
     private
 
     # assigns the owning worksheet for this row
-    def worksheet=(v) DataTypeValidator.validate :row_worksheet, Worksheet, v; @worksheet=v; end
+    def worksheet=(v) DataTypeValidator.validate :row_worksheet, Worksheet, v; @worksheet = v; end
 
     # Converts values, types, and style options into cells and associates them with this row.
     # A new cell is created for each item in the values array.
@@ -145,7 +145,7 @@ module Axlsx
     # @option options [Array] values
     # @option options [Array, Symbol] types
     # @option options [Array, Integer] style
-    def array_to_cells(values, options={})
+    def array_to_cells(values, options = {})
       DataTypeValidator.validate :array_to_cells, Array, values
       types, style, formula_values, escape_formulas, offset = options.delete(:types), options.delete(:style), options.delete(:formula_values), options.delete(:escape_formulas), options.delete(:offset)
       offset.to_i.times { |index| self[index] = Cell.new(self) } if offset

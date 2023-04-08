@@ -14,7 +14,7 @@ module Axlsx
     alias :Extension= :extension=
 
     # Serializes this object to xml
-    def to_xml_string(str ='')
+    def to_xml_string(str = '')
       super(NODE_NAME, str)
     end
   end

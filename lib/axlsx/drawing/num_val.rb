@@ -9,7 +9,7 @@ module Axlsx
     # creates a new NumVal object
     # @option options [String] formatCode
     # @option options [Integer] v
-    def initialize(options={})
+    def initialize(options = {})
       @format_code = "General"
       super(options)
     end

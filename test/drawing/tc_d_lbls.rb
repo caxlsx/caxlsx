@@ -3,13 +3,13 @@ require 'tc_helper'
 class TestDLbls < Test::Unit::TestCase
   def setup
     @d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart)
-    @boolean_attributes =[:show_legend_key,
-                          :show_val,
-                          :show_cat_name,
-                          :show_ser_name,
-                          :show_percent,
-                          :show_bubble_size,
-                          :show_leader_lines]
+    @boolean_attributes = [:show_legend_key,
+                           :show_val,
+                           :show_cat_name,
+                           :show_ser_name,
+                           :show_percent,
+                           :show_bubble_size,
+                           :show_leader_lines]
   end
 
   def test_initialization
@@ -22,7 +22,7 @@ class TestDLbls < Test::Unit::TestCase
   def test_initialization_with_optoins
     options_hash = Hash[*[@boolean_attributes.map { |name| [name, true] }]]
 
-    d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart, options_hash.merge( { :d_lbl_pos => :t }))
+    d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart, options_hash.merge({ :d_lbl_pos => :t }))
 
     @boolean_attributes.each do |attr|
       assert_equal(true, d_lbls.send(attr), "boolean attributes set by options")

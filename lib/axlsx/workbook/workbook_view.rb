@@ -44,7 +44,7 @@ module Axlsx
     # @option [Integer] window_width Specifies the width of the workbook window. The unit of measurement for this value is twips.
     # @option [Integer] window_height Specifies the height of the workbook window. The unit of measurement for this value is twips.
     # @option [Boolean] auto_filter_date_grouping Specifies a boolean value that indicates whether to group dates when presenting the user with filtering options in the user interface.
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
       yield self if block_given?
     end

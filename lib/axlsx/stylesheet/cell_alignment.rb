@@ -17,7 +17,7 @@ module Axlsx
     # @option options [Boolean] justify_last_line
     # @option options [Boolean] shrink_to_fit
     # @option options [Integer] reading_order
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
     end
 

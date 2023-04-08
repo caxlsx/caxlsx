@@ -237,7 +237,7 @@ module Axlsx
   COMMENT_PN = "comments%d.xml".freeze
 
   # location of schema files for validation
-  SCHEMA_BASE = (File.dirname(__FILE__)+'/../../schema/').freeze
+  SCHEMA_BASE = (File.dirname(__FILE__) + '/../../schema/').freeze
 
   # App validation schema
   APP_XSD = (SCHEMA_BASE + "shared-documentPropertiesExtended.xsd").freeze

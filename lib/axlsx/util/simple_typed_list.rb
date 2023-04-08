@@ -6,7 +6,7 @@ module Axlsx
     # @param [Array, Class] type An array of Class objects or a single Class object
     # @param [String] serialize_as The tag name to use in serialization
     # @raise [ArgumentError] if all members of type are not Class objects
-    def initialize type, serialize_as=nil, start_size = 0
+    def initialize type, serialize_as = nil, start_size = 0
       if type.is_a? Array
         type.each { |item| raise ArgumentError, "All members of type must be Class objects" unless item.is_a? Class }
         @allowed_types = type
@@ -38,7 +38,7 @@ module Axlsx
     def transpose
       return @list.clone if @list.size == 0
       row_count = @list.size
-      max_column_count = @list.map{|row| row.cells.size}.max
+      max_column_count = @list.map { |row| row.cells.size }.max
       result = Array.new(max_column_count) { Array.new(row_count) }
       # yes, I know it is silly, but that warning is really annoying
       row_count.times do |row_index|
@@ -164,7 +164,7 @@ module Axlsx
 
     def to_xml_string(str = '')
       classname = @allowed_types[0].name.split('::').last
-      el_name = serialize_as.to_s || (classname[0,1].downcase + classname[1..-1])
+      el_name = serialize_as.to_s || (classname[0, 1].downcase + classname[1..-1])
       str << ('<' << el_name << ' count="' << size.to_s << '">')
       each { |item| item.to_xml_string(str) }
       str << ('</' << el_name << '>')

@@ -8,7 +8,7 @@ class TestBreak < Test::Unit::TestCase
   def test_id
     assert_equal(1, @break.id)
     assert_raises ArgumentError do
-      Axlsx::Break.new(:hoge, {:id => -1})
+      Axlsx::Break.new(:hoge, { :id => -1 })
     end
   end
 

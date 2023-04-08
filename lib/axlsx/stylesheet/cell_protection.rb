@@ -19,7 +19,7 @@ module Axlsx
     # Creates a new CellProtection
     # @option options [Boolean] hidden value for hidden protection
     # @option options [Boolean] locked value for locked protection
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
     end
 

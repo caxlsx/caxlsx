@@ -12,7 +12,7 @@ module Axlsx
     # @option options [Cell, String] top_left_cell Top Left Visible Cell
     # @option options [Integer] x_split Horizontal Split Position
     # @option options [Integer] y_split Vertical Split Position
-    def initialize(options={})
+    def initialize(options = {})
       #defaults
       @active_pane = @state = @top_left_cell = nil
       @x_split = @y_split = 0
@@ -131,7 +131,7 @@ module Axlsx
       if @state == 'frozen' && @top_left_cell.nil?
         row = @y_split || 0
         column = @x_split || 0
-        @top_left_cell = "#{('A'..'ZZ').to_a[column]}#{row+1}"
+        @top_left_cell = "#{('A'..'ZZ').to_a[column]}#{row + 1}"
       end
     end
   end

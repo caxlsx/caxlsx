@@ -8,7 +8,7 @@ module Axlsx
     # @option options [Symbol] patternType
     # @option options [Color] fgColor
     # @option options [Color] bgColor
-    def initialize(options={})
+    def initialize(options = {})
       @patternType = :none
       parse_options options
     end
@@ -47,9 +47,9 @@ module Axlsx
     attr_reader :patternType
 
     # @see fgColor
-    def fgColor=(v) DataTypeValidator.validate "PatternFill.fgColor", Color, v; @fgColor=v end
+    def fgColor=(v) DataTypeValidator.validate "PatternFill.fgColor", Color, v; @fgColor = v end
     # @see bgColor
-    def bgColor=(v) DataTypeValidator.validate "PatternFill.bgColor", Color, v; @bgColor=v end
+    def bgColor=(v) DataTypeValidator.validate "PatternFill.bgColor", Color, v; @bgColor = v end
     # @see patternType
     def patternType=(v) Axlsx::validate_pattern_type v; @patternType = v end
 

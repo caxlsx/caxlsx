@@ -81,10 +81,10 @@ module Axlsx
     # @param [String] type The type of the relationship
     # @param [String] target The target for the relationship
     # @option [Symbol] :target_mode only accepts :external.
-    def initialize(source_obj, type, target, options={})
+    def initialize(source_obj, type, target, options = {})
       @source_obj = source_obj
-      self.Target=target
-      self.Type=type
+      self.Target = target
+      self.Type = type
       self.TargetMode = options[:target_mode] if options[:target_mode]
       @Id = (self.class.ids_cache[ids_cache_key] ||= self.class.next_free_id)
     end
@@ -101,9 +101,9 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      h = Axlsx.instance_values_for(self).reject{|k, _| k == "source_obj"}
+      h = Axlsx.instance_values_for(self).reject { |k, _| k == "source_obj" }
       str << '<Relationship '
-      str << (h.map { |key, value| '' << key.to_s << '="' << Axlsx::coder.encode(value.to_s) << '"'}.join(' '))
+      str << (h.map { |key, value| '' << key.to_s << '="' << Axlsx::coder.encode(value.to_s) << '"' }.join(' '))
       str << '/>'
     end
 

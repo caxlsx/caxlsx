@@ -32,11 +32,11 @@ module Axlsx
     # @option options [String] colors an array of colors to use when rendering each data point
     # @option options [String] series_color a color to use when rendering series
     # @param [Chart] chart
-    def initialize(chart, options={})
+    def initialize(chart, options = {})
       @shape = :box
       @colors = []
       super(chart, options)
-      self.labels = AxDataSource.new({:data => options[:labels]}) unless options[:labels].nil?
+      self.labels = AxDataSource.new({ :data => options[:labels] }) unless options[:labels].nil?
       self.data = NumDataSource.new(options) unless options[:data].nil?
     end
 

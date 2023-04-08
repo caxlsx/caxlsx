@@ -42,7 +42,7 @@ module Axlsx
     # @option options [Font] font
     # @option options [CellAlignment] alignment
     # @option options [CellProtection] protection
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
     end
 

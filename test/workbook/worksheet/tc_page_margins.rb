@@ -3,7 +3,7 @@ require 'tc_helper.rb'
 class TestPageMargins < Test::Unit::TestCase
   def setup
     p = Axlsx::Package.new
-    ws = p.workbook.add_worksheet :name=>"hmmm"
+    ws = p.workbook.add_worksheet :name => "hmmm"
     @pm = ws.page_margins
   end
 

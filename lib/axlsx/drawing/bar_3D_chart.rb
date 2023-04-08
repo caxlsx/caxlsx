@@ -70,12 +70,12 @@ module Axlsx
     # @option options [Integer] perspective
     # @see Chart
     # @see View3D
-    def initialize(frame, options={})
+    def initialize(frame, options = {})
       @vary_colors = true
       @gap_width, @gap_depth, @shape = nil, nil, nil
       super(frame, options)
       @series_type = BarSeries
-      @view_3D = View3D.new({:r_ang_ax=>1}.merge(options))
+      @view_3D = View3D.new({ :r_ang_ax => 1 }.merge(options))
       @d_lbls = nil
     end
 
@@ -97,14 +97,14 @@ module Axlsx
     # space between bar or column clusters, as a percentage of the bar or column width.
     def gap_width=(v)
       RangeValidator.validate "Bar3DChart.gap_width", 0, 500, v
-      @gap_width=(v)
+      @gap_width = (v)
     end
     alias :gapWidth= :gap_width=
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     def gap_depth=(v)
       RangeValidator.validate "Bar3DChart.gap_depth", 0, 500, v
-      @gap_depth=(v)
+      @gap_depth = (v)
     end
     alias :gapDepth= :gap_depth=
 

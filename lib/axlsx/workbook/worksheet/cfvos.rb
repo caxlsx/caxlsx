@@ -9,7 +9,7 @@ module Axlsx
     # Serialize the Cfvo object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = '')
       each { |cfvo| cfvo.to_xml_string(str) }
     end
   end

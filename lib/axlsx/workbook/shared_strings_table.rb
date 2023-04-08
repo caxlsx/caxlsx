@@ -30,12 +30,12 @@ module Axlsx
     # Creates a new Shared Strings Table agains an array of cells
     # @param [Array] cells This is an array of all of the cells in the workbook
     # @param [Symbol] xml_space The xml:space behavior for the shared string table.
-    def initialize(cells, xml_space=:preserve)
+    def initialize(cells, xml_space = :preserve)
       @index = 0
       @xml_space = xml_space
       @unique_cells = {}
       @shared_xml_string = ""
-      shareable_cells = cells.flatten.select{ |cell| cell.plain_string? || cell.contains_rich_text? }
+      shareable_cells = cells.flatten.select { |cell| cell.plain_string? || cell.contains_rich_text? }
       @count = shareable_cells.size
       resolve(shareable_cells)
     end
@@ -43,7 +43,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = '')
       Axlsx::sanitize(@shared_xml_string)
       str << ('<?xml version="1.0" encoding="UTF-8"?><sst xmlns="' << XML_NS << '"')
       str << (' count="' << @count.to_s << '" uniqueCount="' << unique_count.to_s << '"')

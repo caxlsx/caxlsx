@@ -38,9 +38,9 @@ module Axlsx
     # @see Chart
     # @see lineChart
     # @see View3D
-    def initialize(frame, options={})
+    def initialize(frame, options = {})
       @gap_depth = nil
-      @view_3D = View3D.new({:r_ang_ax=>1}.merge(options))
+      @view_3D = View3D.new({ :r_ang_ax => 1 }.merge(options))
       super(frame, options)
       axes.add_axis :ser_axis, SerAxis
     end
@@ -48,7 +48,7 @@ module Axlsx
     # @see gapDepth
     def gap_depth=(v)
       RegexValidator.validate "Line3DChart.gapWidth", GAP_AMOUNT_PERCENT, v
-      @gap_depth=(v)
+      @gap_depth = (v)
     end
     alias :gapDepth= :gap_depth=
 

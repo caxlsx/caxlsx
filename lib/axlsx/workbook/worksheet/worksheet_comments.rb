@@ -20,7 +20,7 @@ module Axlsx
     # Adds a comment
     # @param [Hash] options
     # @see Comments#add_comment
-    def add_comment(options={})
+    def add_comment(options = {})
       comments.add_comment(options)
     end
 
@@ -41,7 +41,7 @@ module Axlsx
     # @see Relationship#Id
     # @return [String]
     def drawing_rId
-      comments.relationships.find{ |r| r.Type == VML_DRAWING_R }.Id
+      comments.relationships.find { |r| r.Type == VML_DRAWING_R }.Id
     end
 
     # Seraalize the object

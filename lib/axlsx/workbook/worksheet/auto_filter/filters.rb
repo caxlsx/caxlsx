@@ -15,7 +15,7 @@ module Axlsx
     # @note The recommended way to interact with filter objects is via AutoFilter#add_column
     # @example
     #   ws.auto_filter.add_column(0, :filters, :blank => true, :calendar_type => 'japan', :filter_items => [100, 'a'])
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
     end
 
@@ -141,7 +141,7 @@ include Axlsx::SerializedAttributes
       # @option [Integer] hour @see hour
       # @option [Integer] minute @see minute
       # @option [Integer] second @see second
-      def initialize(options={})
+      def initialize(options = {})
         raise ArgumentError,  "You must specify a year for date time grouping" unless options[:year]
         raise ArgumentError, "You must specify a date_time_grouping when creating a DateGroupItem for auto filter" unless options[:date_time_grouping]
         parse_options options

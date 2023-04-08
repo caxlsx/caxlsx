@@ -4,7 +4,7 @@ class TestHyperlink < Test::Unit::TestCase
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
-    @test_img =  File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
+    @test_img = File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
     @image = ws.add_image :image_src => @test_img, :hyperlink => "http://axlsx.blogspot.com"
     @hyperlink = @image.hyperlink
   end
@@ -39,20 +39,20 @@ class TestHyperlink < Test::Unit::TestCase
 
   def test_endSnd
     assert_nothing_raised { @hyperlink.endSnd = "true" }
-    assert_raise(ArgumentError) {@hyperlink.endSnd = "bob"}
+    assert_raise(ArgumentError) { @hyperlink.endSnd = "bob" }
     assert_equal(@hyperlink.endSnd, "true")
   end
 
   def test_highlightClick
     assert_nothing_raised { @hyperlink.highlightClick = false }
-    assert_raise(ArgumentError) {@hyperlink.highlightClick = "bob"}
-    assert_equal(@hyperlink.highlightClick, false )
+    assert_raise(ArgumentError) { @hyperlink.highlightClick = "bob" }
+    assert_equal(@hyperlink.highlightClick, false)
   end
 
   def test_history
     assert_nothing_raised { @hyperlink.history = false }
-    assert_raise(ArgumentError) {@hyperlink.history = "bob"}
-    assert_equal(@hyperlink.history, false )
+    assert_raise(ArgumentError) { @hyperlink.history = "bob" }
+    assert_equal(@hyperlink.history, false)
   end
 
   def test_to_xml_string

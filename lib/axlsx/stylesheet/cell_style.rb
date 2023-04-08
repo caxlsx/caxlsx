@@ -13,7 +13,7 @@ module Axlsx
     # @option options [Integer] iLevel
     # @option options [Boolean] hidden
     # @option options [Boolean] customBuiltIn
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
     end
 

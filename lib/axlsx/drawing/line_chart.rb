@@ -42,7 +42,7 @@ module Axlsx
     # @option options [Boolean] show_legend
     # @option options [Symbol] grouping
     # @see Chart
-    def initialize(frame, options={})
+    def initialize(frame, options = {})
       @vary_colors = false
       @grouping = :standard
       super(frame, options)
@@ -63,7 +63,7 @@ module Axlsx
     def node_name
       path = self.class.to_s
       if i = path.rindex('::')
-        path = path[(i+2)..-1]
+        path = path[(i + 2)..-1]
       end
       path[0] = path[0].chr.downcase
       path

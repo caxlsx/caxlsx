@@ -12,7 +12,7 @@ module Axlsx
     # @option options [Integer] active_cell_id Active Cell Index
     # @option options [Symbol] pane Pane
     # @option options [String] sqref Sequence of References
-    def initialize(options={})
+    def initialize(options = {})
       @active_cell = @active_cell_id = @pane = @sqref = nil
       parse_options options
     end

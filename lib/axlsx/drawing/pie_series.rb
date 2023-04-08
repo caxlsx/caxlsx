@@ -25,7 +25,7 @@ module Axlsx
     # @option options [String] title
     # @option options [Integer] explosion
     # @param [Chart] chart
-    def initialize(chart, options={})
+    def initialize(chart, options = {})
       @explosion = nil
       @colors = []
       super(chart, options)

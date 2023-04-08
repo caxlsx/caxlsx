@@ -55,7 +55,7 @@ class TestSheetProtection < Test::Unit::TestCase
     @sp.password = 'fish' # -> CA3F
     doc = Nokogiri::XML(@sp.to_xml_string)
     @options.each do |key, value|
-      assert(doc.xpath("//sheetProtection[@#{key.to_s.gsub(/_(.)/){ $1.upcase }}='#{value}']"))
+      assert(doc.xpath("//sheetProtection[@#{key.to_s.gsub(/_(.)/) { $1.upcase }}='#{value}']"))
     end
   end
 end

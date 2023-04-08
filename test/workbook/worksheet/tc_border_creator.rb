@@ -8,7 +8,7 @@ class TestBorderCreator < Test::Unit::TestCase
   end
 
   def test_initialize
-    @ws.add_row [1,2,3]
+    @ws.add_row [1, 2, 3]
 
     bc = Axlsx::BorderCreator.new(worksheet: @ws, cells: @ws["A1:B1"])
     assert_equal bc.instance_variable_get(:@edges), Axlsx::Border::EDGES
@@ -22,7 +22,7 @@ class TestBorderCreator < Test::Unit::TestCase
   end
 
   def test_initialize_edges
-    @ws.add_row [1,2,3]
+    @ws.add_row [1, 2, 3]
 
     bc = Axlsx::BorderCreator.new(worksheet: @ws, cells: @ws["A1:B1"], edges: nil)
     assert_equal bc.instance_variable_get(:@edges), Axlsx::Border::EDGES
@@ -48,7 +48,7 @@ class TestBorderCreator < Test::Unit::TestCase
 
   def test_draw
     5.times do
-      @ws.add_row [1,2,3,4,5]
+      @ws.add_row [1, 2, 3, 4, 5]
     end
 
     bc = Axlsx::BorderCreator.new(worksheet: @ws, cells: @ws["A1:C3"], edges: ["top", :left], style: :thick, color: "ffffff")

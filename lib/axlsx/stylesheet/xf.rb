@@ -22,7 +22,7 @@ module Axlsx
     # @option options [Boolean] applyProtection
     # @option options [CellAlignment] alignment
     # @option options [CellProtection] protection
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
     end
 

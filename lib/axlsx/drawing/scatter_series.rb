@@ -34,7 +34,7 @@ module Axlsx
     attr_reader :marker_symbol
 
     # Creates a new ScatterSeries
-    def initialize(chart, options={})
+    def initialize(chart, options = {})
       @xData, @yData = nil
       if options[:smooth].nil?
         # If caller hasn't specified smoothing or not, turn smoothing on or off based on scatter style
@@ -50,7 +50,7 @@ module Axlsx
 
       super(chart, options)
       @xData = AxDataSource.new(:tag_name => :xVal, :data => options[:xData]) unless options[:xData].nil?
-      @yData = NumDataSource.new({:tag_name => :yVal, :data => options[:yData]}) unless options[:yData].nil?
+      @yData = NumDataSource.new({ :tag_name => :yVal, :data => options[:yData] }) unless options[:yData].nil?
     end
 
     # @see color

@@ -7,7 +7,7 @@ module Axlsx
     # creates a new StrVal object
     # @option options [Array] :data
     # @option options [String] :tag_name
-    def initialize(options={})
+    def initialize(options = {})
       @tag_prefix = :str
       @type = StrVal
       @pt = SimpleTypedList.new(@type)
@@ -16,7 +16,7 @@ module Axlsx
 
     # Creates the val objects for this data set. I am not overly confident this is going to play nicely with time and data types.
     # @param [Array] values An array of cells or values.
-    def data=(values=[])
+    def data=(values = [])
       @tag_name = values.first.is_a?(Cell) ? :strCache : :strLit
       values.each do |value|
         v = value.is_a?(Cell) ? value.value : value

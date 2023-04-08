@@ -3,9 +3,9 @@ require 'tc_helper.rb'
 class TestPieSeries < Test::Unit::TestCase
   def setup
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name=>"hmmm"
+    @ws = p.workbook.add_worksheet :name => "hmmm"
     chart = @ws.add_chart Axlsx::Pie3DChart, :title => "fishery"
-    @series = chart.add_series :data=>[0,1,2], :labels=>["zero", "one", "two"], :title=>"bob", :colors => ["FF0000", "00FF00", "0000FF"]
+    @series = chart.add_series :data => [0, 1, 2], :labels => ["zero", "one", "two"], :title => "bob", :colors => ["FF0000", "00FF00", "0000FF"]
   end
 
   def test_initialize

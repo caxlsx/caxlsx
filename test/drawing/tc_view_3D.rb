@@ -19,32 +19,32 @@ class TestView3D < Test::Unit::TestCase
   end
 
   def test_rot_x
-    assert_raise(ArgumentError) {@view.rot_x = "bob"}
-    assert_nothing_raised {@view.rot_x = -90}
+    assert_raise(ArgumentError) { @view.rot_x = "bob" }
+    assert_nothing_raised { @view.rot_x = -90 }
   end
 
   def test_rot_y
-    assert_raise(ArgumentError) {@view.rot_y = "bob"}
-    assert_nothing_raised {@view.rot_y = 90}
+    assert_raise(ArgumentError) { @view.rot_y = "bob" }
+    assert_nothing_raised { @view.rot_y = 90 }
   end
 
   def test_h_percent
-    assert_raise(ArgumentError) {@view.h_percent = "bob"}
-    assert_nothing_raised {@view.h_percent = "500%"}
+    assert_raise(ArgumentError) { @view.h_percent = "bob" }
+    assert_nothing_raised { @view.h_percent = "500%" }
   end
 
   def test_depth_percent
-    assert_raise(ArgumentError) {@view.depth_percent = "bob"}
-    assert_nothing_raised {@view.depth_percent = "20%"}
+    assert_raise(ArgumentError) { @view.depth_percent = "bob" }
+    assert_nothing_raised { @view.depth_percent = "20%" }
   end
 
   def test_rAngAx
-    assert_raise(ArgumentError) {@view.rAngAx = "bob"}
-    assert_nothing_raised {@view.rAngAx = true}
+    assert_raise(ArgumentError) { @view.rAngAx = "bob" }
+    assert_nothing_raised { @view.rAngAx = true }
   end
 
   def test_perspective
-    assert_raise(ArgumentError) {@view.perspective = "bob"}
-    assert_nothing_raised {@view.perspective = 30}
+    assert_raise(ArgumentError) { @view.perspective = "bob" }
+    assert_nothing_raised { @view.perspective = 30 }
   end
 end

@@ -8,7 +8,7 @@ module Axlsx
     # creates a new SheetCalcPr
     # @param [Hash] options Options for this object
     # @option [Boolean] full_calc_on_load @see full_calc_on_load
-    def initialize(options={})
+    def initialize(options = {})
       @full_calc_on_load = true
       parse_options options
     end
@@ -21,7 +21,7 @@ module Axlsx
     # @param [String] str the string to append this objects serialized
     # content to.
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = '')
       str << "<sheetCalcPr #{serialized_attributes}/>"
     end
   end

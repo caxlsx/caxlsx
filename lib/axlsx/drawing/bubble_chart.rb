@@ -21,7 +21,7 @@ module Axlsx
     alias :yValAxis :y_val_axis
 
     # Creates a new bubble chart
-    def initialize(frame, options={})
+    def initialize(frame, options = {})
       @vary_colors = 0
 
            super(frame, options)

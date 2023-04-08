@@ -63,7 +63,7 @@ module Axlsx
     # @option options [String] gap_width
     # @option options [Symbol] shape
     # @see Chart
-    def initialize(frame, options={})
+    def initialize(frame, options = {})
       @vary_colors = true
       @gap_width, @overlap, @shape = nil, nil, nil
       super(frame, options)
@@ -89,13 +89,13 @@ module Axlsx
     # space between bar or column clusters, as a percentage of the bar or column width.
     def gap_width=(v)
       RangeValidator.validate "BarChart.gap_width", 0, 500, v
-      @gap_width=(v)
+      @gap_width = (v)
     end
     alias :gapWidth= :gap_width=
 
     def overlap=(v)
       RangeValidator.validate "BarChart.overlap", -100, 100, v
-      @overlap=(v)
+      @overlap = (v)
     end
 
     # The shape of the bars or columns

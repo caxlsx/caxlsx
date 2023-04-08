@@ -26,7 +26,7 @@ module Axlsx
     serializable_attributes :col_id, :hidden_button, :show_button
 
     # Allowed filters
-    FILTERS =  [:filters] #, :top10, :custom_filters, :dynamic_filters, :color_filters, :icon_filters]
+    FILTERS = [:filters] #, :top10, :custom_filters, :dynamic_filters, :color_filters, :icon_filters]
 
     # Zero-based index indicating the AutoFilter column to which this filter information applies.
     # @return [Integer]
@@ -64,7 +64,7 @@ module Axlsx
     # @param [Array] row A row from a worksheet that needs to be
     # filtered.
     def apply(row, offset)
-      row.hidden = @filter.apply(row.cells[offset+col_id.to_i])
+      row.hidden = @filter.apply(row.cells[offset + col_id.to_i])
     end
 
     # @param [Boolean] hidden Flag indicating whether the AutoFilter button for this column is hidden.
@@ -85,7 +85,7 @@ module Axlsx
     end
 
     # Serialize the object to xml
-    def to_xml_string(str='')
+    def to_xml_string(str = '')
       str << "<filterColumn #{serialized_attributes}>"
       @filter.to_xml_string(str)
       str << "</filterColumn>"

@@ -8,7 +8,7 @@ module Axlsx
     include Axlsx::Accessors
     include Axlsx::OptionsParser
     # creates a new DLbls object
-    def initialize(chart_type, options={})
+    def initialize(chart_type, options = {})
       raise ArgumentError, 'chart_type must inherit from Chart' unless [Chart, LineChart].include?(chart_type.superclass)
       @chart_type = chart_type
       initialize_defaults
@@ -72,7 +72,7 @@ module Axlsx
       instance_vals = Axlsx.instance_values_for(self)
       %w(d_lbl_pos show_legend_key show_val show_cat_name show_ser_name show_percent show_bubble_size show_leader_lines).each do |key|
         next unless instance_vals.keys.include?(key) && instance_vals[key] != nil
-        str <<  "<c:#{Axlsx::camel(key, false)} val='#{instance_vals[key]}' />"
+        str << "<c:#{Axlsx::camel(key, false)} val='#{instance_vals[key]}' />"
       end
       str << '</c:dLbls>'
     end

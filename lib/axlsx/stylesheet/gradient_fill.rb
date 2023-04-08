@@ -12,7 +12,7 @@ module Axlsx
     # @option options [Float] right
     # @option options [Float] top
     # @option options [Float] bottom
-    def initialize(options={})
+    def initialize(options = {})
       options[:type] ||= :linear
       parse_options options
       @stop = SimpleTypedList.new GradientStop
@@ -84,7 +84,7 @@ module Axlsx
 
     # validates that the value provided is between 0.0 and 1.0
     def validate_format_percentage(name, value)
-      DataTypeValidator.validate name, Float, value, lambda { |arg| arg >= 0.0 && arg <= 1.0}
+      DataTypeValidator.validate name, Float, value, lambda { |arg| arg >= 0.0 && arg <= 1.0 }
     end
 
     # Serializes the object

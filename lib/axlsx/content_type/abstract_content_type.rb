@@ -5,7 +5,7 @@ module Axlsx
 
     # Initializes an abstract content type
     # @see Default, Override
-    def initialize(options={})
+    def initialize(options = {})
        parse_options options
     end
 
