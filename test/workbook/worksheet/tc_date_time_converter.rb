@@ -27,7 +27,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
                 "1970-01-01" => 25569.0, # Unix epoch
                 "1970-01-02" => 25570.0,
                 "2006-02-01" => 38749.0,
-                "2038-01-19" => 50424.0, # max date using signed timestamp in 32bit
+                "2038-01-19" => 50424.0 # max date using signed timestamp in 32bit
               }
             end
     tests.each do |date_string, expected|
@@ -51,7 +51,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
                 "1970-01-01" => 24107.0, # Unix epoch
                 "1970-01-02" => 24108.0,
                 "2006-02-01" => 37287.0,
-                "2038-01-19" => 48962.0, # max date using signed timestamp in 32bit
+                "2038-01-19" => 48962.0 # max date using signed timestamp in 32bit
               }
             end
     tests.each do |date_string, expected|
@@ -75,7 +75,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
                 "1970-01-01T00:00:00Z" => 25569.0, # Unix epoch
                 "1970-01-01T12:00:00Z" => 25569.5,
                 "2000-01-01T00:00:00Z" => 36526.0,
-                "2038-01-19T03:14:07Z" => 50424.134803, # max signed timestamp in 32bit
+                "2038-01-19T03:14:07Z" => 50424.134803 # max signed timestamp in 32bit
               }
             end
     tests.each do |time_string, expected|
@@ -100,7 +100,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
                 "1970-01-01T00:00:00Z" => 24107.0, # Unix epoch
                 "1970-01-01T12:00:00Z" => 24107.5,
                 "2000-01-01T00:00:00Z" => 35064.0,
-                "2038-01-19T03:14:07Z" => 48962.134803, # max signed timestamp in 32bit
+                "2038-01-19T03:14:07Z" => 48962.134803 # max signed timestamp in 32bit
               }
             end
     tests.each do |time_string, expected|

@@ -48,7 +48,7 @@ module Axlsx
         top:     "#{first_cell}:#{last_col}#{first_row}",
         right:   "#{last_col}#{first_row}:#{last_cell}",
         bottom:  "#{first_col}#{last_row}:#{last_cell}",
-        left:    "#{first_cell}:#{first_col}#{last_row}",
+        left:    "#{first_cell}:#{first_col}#{last_row}"
       }
     end
 

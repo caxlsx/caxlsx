@@ -886,7 +886,7 @@ class TestWorksheet < Test::Unit::TestCase
         name: "Times New Roman",
         sz: 12,
         family: 1,
-        color: "FFFFFF",
+        color: "FFFFFF"
       },
       wb.styles.style_index.values.first
     )

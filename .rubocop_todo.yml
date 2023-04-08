@@ -1163,25 +1163,6 @@ Style/TernaryParentheses:
     - 'lib/axlsx/drawing/scatter_series.rb'
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
 
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInArrayLiteral:
-  Exclude:
-    - 'test/stylesheet/tc_styles.rb'
-    - 'test/workbook/worksheet/tc_pivot_table.rb'
-
-# Offense count: 6
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInHashLiteral:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/border_creator.rb'
-    - 'test/workbook/worksheet/tc_date_time_converter.rb'
-    - 'test/workbook/worksheet/tc_worksheet.rb'
-
 # Offense count: 11
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: ExactNameMatch, AllowPredicates, AllowDSLWriters, IgnoreClassMethods, AllowedMethods.

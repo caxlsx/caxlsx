@@ -37,7 +37,7 @@ class TestStyles < Test::Unit::TestCase
       {:edges => [:bottom], :style => :thick, :color => "FF0000"},
       {:edges => [:left], :style => :dotted, :color => "FFFF00"},
       {:edges => [:right], :style => :dashed, :color => "FFFFFF"},
-      {:style => :thick, :color => "CCCCCC"},
+      {:style => :thick, :color => "CCCCCC"}
     ]
 
     @styles.add_style(border: borders_array)

@@ -161,7 +161,7 @@ class TestPivotTable < Test::Unit::TestCase
       pt.data = [
         {ref: "Gross amount", num_fmt: 2},
         {ref: "Net amount", num_fmt: 2},
-        {ref: "Margin", num_fmt: 2},
+        {ref: "Margin", num_fmt: 2}
       ]
     end
 
@@ -189,7 +189,7 @@ class TestPivotTable < Test::Unit::TestCase
     pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5') do |pt|
       pt.rows = ["Date", "Name"]
       pt.data = [
-        {ref: "Gross amount", num_fmt: 2},
+        {ref: "Gross amount", num_fmt: 2}
       ]
     end
 
