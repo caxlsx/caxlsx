@@ -633,11 +633,6 @@ Style/StringLiteralsInInterpolation:
 Style/SymbolArray:
   EnforcedStyle: brackets
 
-# This cop supports safe autocorrection (--autocorrect).
-Style/SymbolLiteral:
-  Exclude:
-    - 'test/doc_props/tc_app.rb'
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowMethodsWithArguments, AllowedMethods, AllowedPatterns, AllowComments.
 # AllowedMethods: define_method
