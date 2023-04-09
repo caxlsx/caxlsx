@@ -72,7 +72,7 @@ module Axlsx
 
     # @see active_cell
     def active_cell=(v)
-      cell = (v.class == Axlsx::Cell ? v.r_abs : v)
+      cell = (v.instance_of?(Axlsx::Cell) ? v.r_abs : v)
       Axlsx::validate_string(cell)
       @active_cell = cell
     end

@@ -235,15 +235,6 @@ Style/CharacterLiteral:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/cell.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowedMethods, AllowedPatterns.
-# AllowedMethods: ==, equal?, eql?
-Style/ClassEqualityComparison:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/pane.rb'
-    - 'lib/axlsx/workbook/worksheet/selection.rb'
-    - 'lib/axlsx/workbook/worksheet/sheet_view.rb'
-
 Style/ClassVars:
   Exclude:
     - 'lib/axlsx.rb'
