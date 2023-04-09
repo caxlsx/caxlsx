@@ -31,12 +31,12 @@ module Axlsx
     end
 
     boolean_attr_accessor :sheet, :objects, :scenarios, :format_cells, :format_columns, :format_rows,
-      :insert_columns, :insert_rows, :insert_hyperlinks, :delete_columns, :delete_rows,
-      :select_locked_cells, :sort, :auto_filter, :pivot_tables, :select_unlocked_cells
+                          :insert_columns, :insert_rows, :insert_hyperlinks, :delete_columns, :delete_rows,
+                          :select_locked_cells, :sort, :auto_filter, :pivot_tables, :select_unlocked_cells
 
     serializable_attributes :sheet, :objects, :scenarios, :format_cells, :format_columns, :format_rows,
-      :insert_columns, :insert_rows, :insert_hyperlinks, :delete_columns, :delete_rows,
-      :select_locked_cells, :sort, :auto_filter, :pivot_tables, :select_unlocked_cells, :salt, :password
+                            :insert_columns, :insert_rows, :insert_hyperlinks, :delete_columns, :delete_rows,
+                            :select_locked_cells, :sort, :auto_filter, :pivot_tables, :select_unlocked_cells, :salt, :password
 
     # Specifies the salt which was prepended to the user-supplied password before it was hashed using the hashing algorithm
     # @return [String]

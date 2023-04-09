@@ -34,8 +34,8 @@ module Axlsx
     end
 
     serializable_attributes :base_col_width, :default_col_width, :default_row_height,
-      :custom_height, :zero_height, :thick_top, :thick_bottom,
-      :outline_level_row, :outline_level_col
+                            :custom_height, :zero_height, :thick_top, :thick_bottom,
+                            :outline_level_row, :outline_level_col
 
     float_attr_accessor :default_col_width, :default_row_height
 

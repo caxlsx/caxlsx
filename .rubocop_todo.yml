@@ -22,20 +22,6 @@ Gemspec/RequireMFA:
   Exclude:
     - 'axlsx.gemspec'
 
-# Offense count: 15
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: with_first_argument, with_fixed_indentation
-Layout/ArgumentAlignment:
-  Exclude:
-    - 'lib/axlsx/drawing/picture_locking.rb'
-    - 'lib/axlsx/package.rb'
-    - 'lib/axlsx/workbook/defined_name.rb'
-    - 'lib/axlsx/workbook/worksheet/sheet_format_pr.rb'
-    - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
-    - 'lib/axlsx/workbook/worksheet/sheet_view.rb'
-    - 'lib/axlsx/workbook/worksheet/table_style_info.rb'
-
 # Offense count: 58
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowForAlignment, AllowBeforeTrailingComments, ForceEqualSignAlignment.

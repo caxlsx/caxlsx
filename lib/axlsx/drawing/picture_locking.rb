@@ -6,8 +6,8 @@ module Axlsx
     include Axlsx::Accessors
 
     boolean_attr_accessor :noGrp, :noSelect, :noRot, :noChangeAspect,
-                            :noMove, :noResize, :noEditPoints, :noAdjustHandles,
-                            :noChangeArrowheads, :noChangeShapeType
+                          :noMove, :noResize, :noEditPoints, :noAdjustHandles,
+                          :noChangeArrowheads, :noChangeShapeType
 
     serializable_attributes :noGrp, :noSelect, :noRot, :noChangeAspect,
                             :noMove, :noResize, :noEditPoints, :noAdjustHandles,

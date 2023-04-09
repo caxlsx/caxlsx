@@ -40,12 +40,12 @@ module Axlsx
     end
 
     boolean_attr_accessor :default_grid_color, :right_to_left, :show_formulas, :show_grid_lines,
-      :show_row_col_headers, :show_ruler, :show_white_space, :show_zeros, :tab_selected, :window_protection, :show_outline_symbols
+                          :show_row_col_headers, :show_ruler, :show_white_space, :show_zeros, :tab_selected, :window_protection, :show_outline_symbols
 
     serializable_attributes :default_grid_color, :right_to_left, :show_formulas, :show_grid_lines,
-      :show_row_col_headers, :show_ruler, :show_white_space, :show_zeros, :tab_selected, :window_protection, :show_outline_symbols,
-      :zoom_scale_sheet_layout_view, :zoom_scale_page_layout_view, :zoom_scale_normal, :workbook_view_id,
-      :view, :top_left_cell, :color_id, :zoom_scale
+                            :show_row_col_headers, :show_ruler, :show_white_space, :show_zeros, :tab_selected, :window_protection, :show_outline_symbols,
+                            :zoom_scale_sheet_layout_view, :zoom_scale_page_layout_view, :zoom_scale_normal, :workbook_view_id,
+                            :view, :top_left_cell, :color_id, :zoom_scale
 
     # instance values that must be serialized as their own elements - e.g. not attributes.
     CHILD_ELEMENTS = [:pane, :selections]

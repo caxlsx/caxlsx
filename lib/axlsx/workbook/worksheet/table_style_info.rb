@@ -26,7 +26,7 @@ module Axlsx
     # boolean attributes for this object
     boolean_attr_accessor :show_first_column, :show_last_column, :show_row_stripes, :show_column_stripes
     serializable_attributes :show_first_column, :show_last_column, :show_row_stripes, :show_column_stripes,
-      :name
+                            :name
 
     # Initialize all the values to false as Excel requires them to
     # explicitly be disabled or all will show.

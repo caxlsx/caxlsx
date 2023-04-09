@@ -323,7 +323,7 @@ module Axlsx
 
       workbook.worksheets.each do |sheet|
         c_types << Axlsx::Override.new(:PartName => "/xl/#{sheet.pn}",
-                                         :ContentType => WORKSHEET_CT)
+                                       :ContentType => WORKSHEET_CT)
       end
       exts = workbook.images.map { |image| image.extname.downcase }
       exts.uniq.each do |ext|
