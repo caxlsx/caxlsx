@@ -163,19 +163,6 @@ Naming/FileName:
     - 'test/drawing/tc_pie_3D_chart.rb'
     - 'test/drawing/tc_view_3D.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: lowercase, uppercase
-Naming/HeredocDelimiterCase:
-  Exclude:
-    - 'axlsx.gemspec'
-
-# Configuration parameters: ForbiddenDelimiters.
-# ForbiddenDelimiters: (?i-mx:(^|\s)(EO[A-Z]{1}|END)(\s|$))
-Naming/HeredocDelimiterNaming:
-  Exclude:
-    - 'axlsx.gemspec'
-
 # Configuration parameters: EnforcedStyle, AllowedPatterns.
 # SupportedStyles: snake_case, camelCase
 Naming/MethodName:
