@@ -236,13 +236,6 @@ Style/CharacterLiteral:
     - 'lib/axlsx/workbook/worksheet/cell.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: is_a?, kind_of?
-Style/ClassCheck:
-  Exclude:
-    - 'lib/axlsx/drawing/axes.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowedMethods, AllowedPatterns.
 # AllowedMethods: ==, equal?, eql?
 Style/ClassEqualityComparison:
