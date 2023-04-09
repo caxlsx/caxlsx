@@ -103,13 +103,6 @@ Lint/RedundantStringCoercion:
     - 'test/workbook/worksheet/tc_comment.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: strict, consistent
-Lint/SymbolConversion:
-  Exclude:
-    - 'test/doc_props/tc_app.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: IgnoreEmptyBlocks, AllowUnusedKeywordArguments.
 Lint/UnusedBlockArgument:
   Exclude:
@@ -811,11 +804,6 @@ Style/StringLiteralsInInterpolation:
 # SupportedStyles: percent, brackets
 Style/SymbolArray:
   EnforcedStyle: brackets
-
-# This cop supports safe autocorrection (--autocorrect).
-Style/SymbolLiteral:
-  Exclude:
-    - 'test/doc_props/tc_app.rb'
 
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowMethodsWithArguments, AllowedMethods, AllowedPatterns, AllowComments.
