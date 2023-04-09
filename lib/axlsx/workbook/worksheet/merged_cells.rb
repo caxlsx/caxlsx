@@ -14,11 +14,12 @@ module Axlsx
     # collection. This can be an array of actual cells or a string style
     # range like 'A1:C1'
     def add(cells)
-      self << if cells.is_a?(String)
+      self << case cells
+              when String
                 cells
-              elsif cells.is_a?(Array)
+              when Array
                 Axlsx::cell_range(cells, false)
-              elsif cells.is_a?(Row)
+              when Row
                 Axlsx::cell_range(cells, false)
               end
     end

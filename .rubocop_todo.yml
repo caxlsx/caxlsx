@@ -230,12 +230,6 @@ Style/BlockDelimiters:
   Exclude:
     - 'test/benchmark.rb'
 
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: MinBranchesCount.
-Style/CaseLikeIf:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/merged_cells.rb'
-
 # This cop supports safe autocorrection (--autocorrect).
 Style/CharacterLiteral:
   Exclude:
