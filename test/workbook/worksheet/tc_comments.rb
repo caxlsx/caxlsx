@@ -49,7 +49,7 @@ class TestComments < Test::Unit::TestCase
     end
     assert_equal(0, errors.length)
 
-    # TODO figure out why these xpath expressions dont work!
+    # TODO: figure out why these xpath expressions dont work!
     # assert(doc.xpath("//comments"))
     # assert_equal(doc.xpath("//xmlns:author").size, @ws.comments.authors.size)
     # assert_equal(doc.xpath("//comment").size, @ws.comments.size)

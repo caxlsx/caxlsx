@@ -104,7 +104,7 @@ module Axlsx
 
     private
 
-    # Note: move this to Axlsx module if we find the smae pattern elsewhere.
+    # NOTE: move this to Axlsx module if we find the smae pattern elsewhere.
     def element_for_attribute(name, namespace = '')
       val = Axlsx.instance_values_for(self)[name]
       return "" if val == nil

@@ -112,7 +112,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_col_ref
-    # TODO move to axlsx spec
+    # TODO: move to axlsx spec
     assert_equal(Axlsx.col_ref(0), "A")
   end
 
@@ -492,7 +492,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_to_xml
-    # TODO This could use some much more stringent testing related to the xml content generated!
+    # TODO: This could use some much more stringent testing related to the xml content generated!
     @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)", "2013-01-13T13:31:25.123"]
     @ws.rows.last.cells[5].u = true
 

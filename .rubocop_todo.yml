@@ -245,19 +245,6 @@ Style/ClassVars:
 Style/ColonMethodCall:
   Enabled: false
 
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: Keywords, RequireColon.
-# Keywords: TODO, FIXME, OPTIMIZE, HACK, REVIEW, NOTE
-Style/CommentAnnotation:
-  Exclude:
-    - 'lib/axlsx/drawing/axis.rb'
-    - 'lib/axlsx/drawing/chart.rb'
-    - 'lib/axlsx/drawing/view_3D.rb'
-    - 'test/drawing/tc_pie_series.rb'
-    - 'test/workbook/worksheet/tc_cell.rb'
-    - 'test/workbook/worksheet/tc_col.rb'
-    - 'test/workbook/worksheet/tc_comments.rb'
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/ConcatArrayLiterals:
   Exclude:

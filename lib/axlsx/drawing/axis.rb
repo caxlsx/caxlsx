@@ -152,7 +152,7 @@ module Axlsx
       str << ('<c:delete val="' << @delete.to_s << '"/>')
       str << ('<c:axPos val="' << @ax_pos.to_s << '"/>')
       str << '<c:majorGridlines>'
-      # TODO shape properties need to be extracted into a class
+      # TODO: shape properties need to be extracted into a class
       if gridlines == false
         str << '<c:spPr>'
         str << '<a:ln>'
@@ -169,7 +169,7 @@ module Axlsx
       str << '<c:majorTickMark val="none"/>'
       str << '<c:minorTickMark val="none"/>'
       str << ('<c:tickLblPos val="' << @tick_lbl_pos.to_s << '"/>')
-      # TODO - this is also being used for series colors
+      # TODO: - this is also being used for series colors
       # time to extract this into a class spPr - Shape Properties
       if @color
         str << '<c:spPr><a:ln><a:solidFill>'
