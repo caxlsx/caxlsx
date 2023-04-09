@@ -31,7 +31,7 @@ module Axlsx
       @vary_colors = 0
       @scatter_style = :lineMarker
 
-           super(frame, options)
+      super(frame, options)
       @series_type = ScatterSeries
       @d_lbls = nil
       parse_options options

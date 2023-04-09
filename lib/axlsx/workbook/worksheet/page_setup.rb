@@ -17,7 +17,7 @@ module Axlsx
     # @option options [Integer] scale Print scaling (percent value, integer ranging from 10 to 400)
     # @option options [Integer] paper_size - the size of paper to use
     def initialize(options = {})
-       parse_options options
+      parse_options options
     end
 
     serializable_attributes :fit_to_height, :fit_to_width, :orientation, :paper_height, :paper_width, :scale, :paper_size

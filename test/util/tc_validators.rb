@@ -204,9 +204,9 @@ class TestValidators < Test::Unit::TestCase
   end
 
   def test_range_validation
-     # exclusive
-     assert_raise(ArgumentError) { Axlsx::RangeValidator.validate('foo', 1, 10, 10, false) }
-     # inclusive by default
-     assert_nothing_raised { Axlsx::RangeValidator.validate('foo', 1, 10, 10) }
+    # exclusive
+    assert_raise(ArgumentError) { Axlsx::RangeValidator.validate('foo', 1, 10, 10, false) }
+    # inclusive by default
+    assert_nothing_raised { Axlsx::RangeValidator.validate('foo', 1, 10, 10) }
   end
 end

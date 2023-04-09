@@ -52,13 +52,13 @@ module Axlsx
     end
     alias :gapDepth= :gap_depth=
 
-      # Serializes the object
-      # @param [String] str
-      # @return [String]
-      def to_xml_string(str = '')
-        super(str) do
-          str << ('<c:gapDepth val="' << @gap_depth.to_s << '"/>') unless @gap_depth.nil?
-        end
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
+    def to_xml_string(str = '')
+      super(str) do
+        str << ('<c:gapDepth val="' << @gap_depth.to_s << '"/>') unless @gap_depth.nil?
       end
+    end
   end
 end

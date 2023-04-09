@@ -312,8 +312,8 @@ module Axlsx
 
       workbook.comments.each do |comment|
         if comment.size > 0
-        c_types << Axlsx::Override.new(:PartName => "/xl/#{comment.pn}",
-                                       :ContentType => COMMENT_CT)
+          c_types << Axlsx::Override.new(:PartName => "/xl/#{comment.pn}",
+                                         :ContentType => COMMENT_CT)
         end
       end
 

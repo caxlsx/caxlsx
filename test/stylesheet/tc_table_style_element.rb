@@ -38,7 +38,7 @@ class TestTableStyleElement < Test::Unit::TestCase
 
   def test_to_xml_string
     doc = Nokogiri::XML(@item.to_xml_string)
-   @item.type = :headerRow
+    @item.type = :headerRow
     assert(doc.xpath("//tableStyleElement[@type='#{@item.type.to_s}']"))
   end
 end

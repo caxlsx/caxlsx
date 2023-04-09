@@ -129,7 +129,7 @@ module Axlsx
     # category axes specified via axes[:val_axes] and axes[:cat_axis]
     # @return [Axes]
     def axes
-     @axes ||= Axes.new(:cat_axis => CatAxis, :val_axis => ValAxis)
+      @axes ||= Axes.new(:cat_axis => CatAxis, :val_axis => ValAxis)
     end
   end
 end

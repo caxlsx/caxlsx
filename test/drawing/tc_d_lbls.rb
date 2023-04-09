@@ -44,13 +44,13 @@ class TestDLbls < Test::Unit::TestCase
   end
 
   def test_to_xml_string
-      str = '<?xml version="1.0" encoding="UTF-8"?>'
-      str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '" xmlns:r="' << Axlsx::XML_NS_R << '">'
-      @d_lbls.to_xml_string(str)
-      str << '</c:chartSpace>'
-      doc = Nokogiri::XML(str)
-      Axlsx.instance_values_for(@d_lbls).each do |name, value|
-        assert(doc.xpath("//c:#{Axlsx::camel(name, false)}[@val='#{value}']"), "#{name} is properly serialized")
-      end
+    str = '<?xml version="1.0" encoding="UTF-8"?>'
+    str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '" xmlns:r="' << Axlsx::XML_NS_R << '">'
+    @d_lbls.to_xml_string(str)
+    str << '</c:chartSpace>'
+    doc = Nokogiri::XML(str)
+    Axlsx.instance_values_for(@d_lbls).each do |name, value|
+      assert(doc.xpath("//c:#{Axlsx::camel(name, false)}[@val='#{value}']"), "#{name} is properly serialized")
+    end
   end
 end

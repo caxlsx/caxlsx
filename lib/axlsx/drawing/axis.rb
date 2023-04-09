@@ -91,8 +91,8 @@ module Axlsx
     # The crossing axis for this axis
     # @param [Axis] axis
     def cross_axis=(axis)
-       DataTypeValidator.validate "#{self.class}.cross_axis", [Axis], axis
-       @cross_axis = axis
+      DataTypeValidator.validate "#{self.class}.cross_axis", [Axis], axis
+      @cross_axis = axis
     end
 
     # The position of the axis

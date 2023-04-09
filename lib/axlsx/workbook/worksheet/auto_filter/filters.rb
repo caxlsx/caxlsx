@@ -130,7 +130,7 @@ module Axlsx
     # types, can be correctly compared for the purposes of filtering.
     class DateGroupItem
       include Axlsx::OptionsParser
-include Axlsx::SerializedAttributes
+      include Axlsx::SerializedAttributes
 
       # Creates a new DateGroupItem
       # @param [Hash] options A hash of options to use when

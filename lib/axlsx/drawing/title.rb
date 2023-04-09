@@ -84,14 +84,14 @@ module Axlsx
           str << '</c:strRef>'
         else
           str << '<c:rich>'
-            str << '<a:bodyPr/>'
-            str << '<a:lstStyle/>'
-            str << '<a:p>'
-              str << '<a:r>'
-                str << ('<a:rPr sz="' << @text_size.to_s << '"/>')
-                str << ('<a:t>' << clean_value << '</a:t>')
-              str << '</a:r>'
-            str << '</a:p>'
+          str << '<a:bodyPr/>'
+          str << '<a:lstStyle/>'
+          str << '<a:p>'
+          str << '<a:r>'
+          str << ('<a:rPr sz="' << @text_size.to_s << '"/>')
+          str << ('<a:t>' << clean_value << '</a:t>')
+          str << '</a:r>'
+          str << '</a:p>'
           str << '</c:rich>'
         end
         str << '</c:tx>'

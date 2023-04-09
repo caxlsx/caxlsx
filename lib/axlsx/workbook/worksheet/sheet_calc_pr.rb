@@ -2,9 +2,9 @@ module Axlsx
   # the SheetCalcPr object for the worksheet
   # This object contains calculation properties for the worksheet.
   class SheetCalcPr
-   include Axlsx::OptionsParser
-   include Axlsx::SerializedAttributes
-   include Axlsx::Accessors
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+    include Axlsx::Accessors
     # creates a new SheetCalcPr
     # @param [Hash] options Options for this object
     # @option [Boolean] full_calc_on_load @see full_calc_on_load

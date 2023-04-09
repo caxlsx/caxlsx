@@ -54,7 +54,7 @@ module Axlsx
     # @see validate_boolean
     def self.validate(name, types, v, other = false)
       if other.is_a?(Proc)
-         raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect]) unless other.call(v)
+        raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect]) unless other.call(v)
       end
       v_class = v.is_a?(Class) ? v : v.class
       Array(types).each do |t|

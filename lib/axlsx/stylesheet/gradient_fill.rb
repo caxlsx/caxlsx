@@ -66,8 +66,8 @@ module Axlsx
 
     # @see right
     def right=(v)
-     validate_format_percentage "GradientFill.right", v
-     @right = v
+      validate_format_percentage "GradientFill.right", v
+      @right = v
     end
 
     # @see top

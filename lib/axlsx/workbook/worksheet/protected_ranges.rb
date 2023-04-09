@@ -14,13 +14,13 @@ module Axlsx
     # Adds a protected range
     # @param [Array|String] cells A string range reference or array of cells that will be protected
     def add_range(cells)
-     sqref = if cells.is_a?(String)
-               cells
-             elsif cells.is_a?(SimpleTypedList) || cells.is_a?(Array)
-               Axlsx::cell_range(cells, false)
-             end
-     self << ProtectedRange.new(:sqref => sqref, :name => "Range#{size}")
-     last
+      sqref = if cells.is_a?(String)
+                cells
+              elsif cells.is_a?(SimpleTypedList) || cells.is_a?(Array)
+                Axlsx::cell_range(cells, false)
+              end
+      self << ProtectedRange.new(:sqref => sqref, :name => "Range#{size}")
+      last
     end
 
     # Serializes the protected ranges

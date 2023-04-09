@@ -62,19 +62,6 @@ Layout/HeredocIndentation:
     - 'lib/axlsx/drawing/vml_drawing.rb'
     - 'lib/axlsx/drawing/vml_shape.rb'
 
-# Offense count: 48
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: normal, indented_internal_methods
-Layout/IndentationConsistency:
-  Enabled: false
-
-# Offense count: 118
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: Width, AllowedPatterns.
-Layout/IndentationWidth:
-  Enabled: false
-
 # Offense count: 218
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowDoxygenCommentStyle, AllowGemfileRubyComment.

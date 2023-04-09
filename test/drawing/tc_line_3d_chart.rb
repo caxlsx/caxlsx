@@ -19,17 +19,17 @@ class TestLine3DChart < Test::Unit::TestCase
     assert(@chart.serAxis.is_a?(Axlsx::SerAxis), "value access not created")
   end
 
- def test_grouping
-   assert_raise(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
-   assert_nothing_raised("allow valid grouping") { @chart.grouping = :stacked }
-   assert(@chart.grouping == :stacked)
- end
+  def test_grouping
+    assert_raise(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
+    assert_nothing_raised("allow valid grouping") { @chart.grouping = :stacked }
+    assert(@chart.grouping == :stacked)
+  end
 
- def test_gapDepth
-   assert_raise(ArgumentError, "require valid gapDepth") { @chart.gapDepth = 200 }
-   assert_nothing_raised("allow valid gapDepth") { @chart.gapDepth = "200%" }
-   assert(@chart.gapDepth == "200%")
- end
+  def test_gapDepth
+    assert_raise(ArgumentError, "require valid gapDepth") { @chart.gapDepth = 200 }
+    assert_nothing_raised("allow valid gapDepth") { @chart.gapDepth = "200%" }
+    assert(@chart.gapDepth == "200%")
+  end
 
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))

@@ -13,11 +13,11 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-     return if empty?
+      return if empty?
 
-     str << '<cols>'
-     each { |item| item.to_xml_string(str) }
-     str << '</cols>'
+      str << '<cols>'
+      each { |item| item.to_xml_string(str) }
+      str << '</cols>'
     end
   end
 end

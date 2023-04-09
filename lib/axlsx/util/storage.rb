@@ -15,17 +15,17 @@ module Axlsx
     # Creates a byte string for this storage
     # @return [String]
     def to_s
-     data = [@name.concat(Array.new(32 - @name.size, 0)),
-             @name_size,
-             @type,
-             @color,
-             @left,
-             @right,
-             @child,
-             @created,
-             @modified,
-             @sector,
-             @size].flatten
+      data = [@name.concat(Array.new(32 - @name.size, 0)),
+              @name_size,
+              @type,
+              @color,
+              @left,
+              @right,
+              @child,
+              @created,
+              @modified,
+              @sector,
+              @size].flatten
       data.pack(PACKING)
     end
 

@@ -67,9 +67,9 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-       str << '<workbookView '
-       serialized_attributes str
-       str << '></workbookView>'
+      str << '<workbookView '
+      serialized_attributes str
+      str << '></workbookView>'
     end
   end
 end

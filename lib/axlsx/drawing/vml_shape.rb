@@ -36,7 +36,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-str << <<SHAME_ON_YOU
+      str << <<SHAME_ON_YOU
 
 <v:shape id="#{@id}" type="#_x0000_t202" fillcolor="#ffffa1 [80]" o:insetmode="auto"
   style="visibility:#{@visible ? 'visible' : 'hidden'}">

@@ -56,9 +56,9 @@ class TestFilterColumn < Test::Unit::TestCase
 
   def test_col_id=
     assert_raise ArgumentError do
-    @filter_column.col_id = :bar
+      @filter_column.col_id = :bar
     end
-  assert_nothing_raised { @filter_column.col_id = 7 }
+    assert_nothing_raised { @filter_column.col_id = 7 }
   end
 
   def test_to_xml_string

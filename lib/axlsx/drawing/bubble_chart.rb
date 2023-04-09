@@ -24,7 +24,7 @@ module Axlsx
     def initialize(frame, options = {})
       @vary_colors = 0
 
-           super(frame, options)
+      super(frame, options)
       @series_type = BubbleSeries
       @d_lbls = nil
       parse_options options
