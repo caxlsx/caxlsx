@@ -19,19 +19,19 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << <<BAD_PROGRAMMER
-<xml xmlns:v="urn:schemas-microsoft-com:vml"
- xmlns:o="urn:schemas-microsoft-com:office:office"
- xmlns:x="urn:schemas-microsoft-com:office:excel">
- <o:shapelayout v:ext="edit">
-  <o:idmap v:ext="edit" data="#{@comments.worksheet.index + 1}"/>
- </o:shapelayout>
- <v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202"
-  path="m0,0l0,21600,21600,21600,21600,0xe">
-  <v:stroke joinstyle="miter"/>
-  <v:path gradientshapeok="t" o:connecttype="rect"/>
- </v:shapetype>
-BAD_PROGRAMMER
+      str << <<~XML
+        <xml xmlns:v="urn:schemas-microsoft-com:vml"
+         xmlns:o="urn:schemas-microsoft-com:office:office"
+         xmlns:x="urn:schemas-microsoft-com:office:excel">
+          <o:shapelayout v:ext="edit">
+            <o:idmap v:ext="edit" data="#{@comments.worksheet.index + 1}"/>
+          </o:shapelayout>
+          <v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202"
+           path="m0,0l0,21600,21600,21600,21600,0xe">
+            <v:stroke joinstyle="miter"/>
+            <v:path gradientshapeok="t" o:connecttype="rect"/>
+          </v:shapetype>
+      XML
       @comments.each { |comment| comment.vml_shape.to_xml_string str }
       str << "</xml>"
     end

@@ -29,12 +29,6 @@ Layout/HashAlignment:
     - 'lib/axlsx/workbook/worksheet/border_creator.rb'
     - 'test/tc_axlsx.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-Layout/HeredocIndentation:
-  Exclude:
-    - 'lib/axlsx/drawing/vml_drawing.rb'
-    - 'lib/axlsx/drawing/vml_shape.rb'
-
 # Configuration parameters: AllowedMethods, AllowedPatterns.
 Lint/AmbiguousBlockAssociation:
   Exclude:
