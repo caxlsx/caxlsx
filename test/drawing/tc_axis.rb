@@ -57,7 +57,7 @@ class TestAxis < Test::Unit::TestCase
 
   def test_format_code
     assert_raise(ArgumentError, "requires valid format code") { @axis.format_code = :high }
-    assert_nothing_raised("accepts valid format code") { @axis.format_code = "00.##"  }
+    assert_nothing_raised("accepts valid format code") { @axis.format_code = "00.##" }
   end
 
   def create_chart_with_formatting(format_string = nil)

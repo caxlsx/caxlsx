@@ -327,7 +327,7 @@ module Axlsx
       end
       exts = workbook.images.map { |image| image.extname.downcase }
       exts.uniq.each do |ext|
-        ct = if  ['jpeg', 'jpg'].include?(ext)
+        ct = if ['jpeg', 'jpg'].include?(ext)
                JPEG_CT
              elsif ext == 'gif'
                GIF_CT

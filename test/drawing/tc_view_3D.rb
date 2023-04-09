@@ -2,7 +2,7 @@ require 'tc_helper.rb'
 
 class TestView3D < Test::Unit::TestCase
   def setup
-    @view  = Axlsx::View3D.new
+    @view = Axlsx::View3D.new
   end
 
   def teardown

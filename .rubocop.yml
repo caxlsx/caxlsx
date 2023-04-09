@@ -11,3 +11,6 @@ AllCops:
 
 Layout/CommentIndentation:
   AllowForAlignment: true
+
+Layout/ExtraSpacing:
+  AllowBeforeTrailingComments: true

@@ -65,7 +65,7 @@ module Axlsx
     def to_xml_string(str = "")
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << ('<comments xmlns="' << XML_NS << '"><authors>')
-      authors.each do  |author|
+      authors.each do |author|
         str << ('<author>' << author.to_s << '</author>')
       end
       str << '</authors><commentList>'

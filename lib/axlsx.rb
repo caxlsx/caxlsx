@@ -88,7 +88,7 @@ module Axlsx
     letters_str = name[/[A-Z]+/]
 
     # capitalization?!?
-    v = letters_str.reverse.chars.reduce({ :base => 1, :i => 0 }) do  |val, c|
+    v = letters_str.reverse.chars.reduce({ :base => 1, :i => 0 }) do |val, c|
       val[:i] += ((c.bytes.first - 64) * val[:base])
 
       val[:base] *= 26

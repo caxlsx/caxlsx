@@ -17,7 +17,7 @@ class TestPivotTable < Test::Unit::TestCase
     @ws = p.workbook.add_worksheet
 
     @ws << ["Year", "Month", "Region", "Type", "Sales"]
-    @ws << [2012,  "Nov",  "East",   "Soda", "12345"]
+    @ws << [2012, "Nov", "East", "Soda", "12345"]
   end
 
   def test_initialization

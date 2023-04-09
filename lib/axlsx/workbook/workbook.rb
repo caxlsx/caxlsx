@@ -344,7 +344,7 @@ module Axlsx
       pivot_tables.each_with_index do |pivot_table, index|
         r << Relationship.new(pivot_table.cache_definition, PIVOT_TABLE_CACHE_DEFINITION_R, PIVOT_TABLE_CACHE_DEFINITION_PN % (index + 1))
       end
-      r << Relationship.new(self, STYLES_R,  STYLES_PN)
+      r << Relationship.new(self, STYLES_R, STYLES_PN)
       if use_shared_strings
         r << Relationship.new(self, SHARED_STRINGS_R, SHARED_STRINGS_PN)
       end

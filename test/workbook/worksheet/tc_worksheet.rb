@@ -690,7 +690,7 @@ class TestWorksheet < Test::Unit::TestCase
       sheet.add_row ['', 'Butter', 'Dairy',      4.99]
       sheet.add_row ['', 'Bread', 'Baked Goods', 3.45]
       sheet.add_row ['', 'Broccoli', 'Produce',  2.99]
-      sheet.add_row ['', 'Pizza', 'Frozen Foods',  4.99]
+      sheet.add_row ['', 'Pizza', 'Frozen Foods', 4.99]
       sheet.column_widths 5, 20, 20, 20
 
       sheet.add_style 'B2:D2', b: true

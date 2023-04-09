@@ -76,7 +76,7 @@ module Axlsx
     # Serialize the object to xml
     def to_xml_string(str = '')
       str << "<filters #{serialized_attributes}>"
-      filter_items.each {  |filter| filter.to_xml_string(str) }
+      filter_items.each { |filter| filter.to_xml_string(str) }
       date_group_items.each { |date_group_item| date_group_item.to_xml_string(str) }
       str << '</filters>'
     end
@@ -144,7 +144,7 @@ module Axlsx
       # @option [Integer] minute @see minute
       # @option [Integer] second @see second
       def initialize(options = {})
-        raise ArgumentError,  "You must specify a year for date time grouping" unless options[:year]
+        raise ArgumentError, "You must specify a year for date time grouping" unless options[:year]
         raise ArgumentError, "You must specify a date_time_grouping when creating a DateGroupItem for auto filter" unless options[:date_time_grouping]
 
         parse_options options

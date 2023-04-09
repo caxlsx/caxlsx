@@ -7,7 +7,7 @@ class TestDataValidation < Test::Unit::TestCase
   def setup
     #inverse defaults
     @boolean_options = { :allowBlank => false, :hideDropDown => true, :showErrorMessage => false, :showInputMessage => true }
-    @nil_options = { :formula1 => 'foo',  :formula2 => 'foo', :errorTitle => 'foo', :operator => :lessThan, :prompt => 'foo', :promptTitle => 'foo', :sqref => 'foo' }
+    @nil_options = { :formula1 => 'foo', :formula2 => 'foo', :errorTitle => 'foo', :operator => :lessThan, :prompt => 'foo', :promptTitle => 'foo', :sqref => 'foo' }
     @type_option = { :type => :whole }
     @error_style_option = { :errorStyle => :warning }
 

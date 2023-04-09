@@ -63,7 +63,7 @@ module Axlsx
     def d_lbl_pos=(label_position)
       return unless [Pie3DChart, LineChart].include? @chart_type
 
-      Axlsx::RestrictionValidator.validate 'DLbls#d_lbl_pos',  [:bestFit, :b, :ctr, :inBase, :inEnd, :l, :outEnd, :r, :t], label_position
+      Axlsx::RestrictionValidator.validate 'DLbls#d_lbl_pos', [:bestFit, :b, :ctr, :inBase, :inEnd, :l, :outEnd, :r, :t], label_position
       @d_lbl_pos = label_position
     end
 
