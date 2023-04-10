@@ -22,7 +22,7 @@ module Axlsx
       @right_offset = 50
       @bottom_offset = 5
       @visible = true
-      @id = (0...8).map { 65.+(rand(25)).chr }.join
+      @id = (0...8).map { rand(65..89).chr }.join
       parse_options options
       yield self if block_given?
     end
