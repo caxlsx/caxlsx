@@ -28,7 +28,7 @@ class TestSimpleTypedList < Test::Unit::TestCase
   end
 
   def test_concat_should_return_index
-    assert(@list.size == 0)
+    assert(@list.empty?)
     assert(@list << 1 == 0)
     assert(@list << 2 == 1)
     @list.delete_at 0

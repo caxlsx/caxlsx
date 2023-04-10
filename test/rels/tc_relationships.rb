@@ -30,6 +30,6 @@ class TestRelationships < Test::Unit::TestCase
       errors << error
     end
 
-    assert(errors.size == 0)
+    assert(errors.empty?)
   end
 end
