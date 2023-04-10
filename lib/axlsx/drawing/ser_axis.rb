@@ -15,7 +15,8 @@ module Axlsx
     # @option options [Integer] tick_lbl_skip
     # @option options [Integer] tick_mark_skip
     def initialize(options = {})
-      @tick_lbl_skip, @tick_mark_skip = 1, 1
+      @tick_lbl_skip = 1
+      @tick_mark_skip = 1
       super(options)
     end
 

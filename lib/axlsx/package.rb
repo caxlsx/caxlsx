@@ -21,7 +21,8 @@ module Axlsx
     # @example Package.new :author => 'you!', :workbook => Workbook.new
     def initialize(options = {})
       @workbook = nil
-      @core, @app = Core.new, App.new
+      @core = Core.new
+      @app = App.new
       @core.creator = options[:author] || @core.creator
       @core.created = options[:created_at]
       parse_options options

@@ -11,7 +11,10 @@ module Axlsx
     # @option options [Integer] row
     # @option options [Integer] rowOff
     def initialize(options = {})
-      @col, @colOff, @row, @rowOff = 0, 0, 0, 0
+      @col = 0
+      @colOff = 0
+      @row = 0
+      @rowOff = 0
       parse_options options
     end
 

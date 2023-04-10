@@ -11,7 +11,12 @@ module Axlsx
     # @option options [Boolean] r_ang_ax
     # @option options [Integer] perspective
     def initialize(options = {})
-      @rot_x, @h_percent, @rot_y, @depth_percent, @r_ang_ax, @perspective = nil, nil, nil, nil, nil, nil
+      @rot_x = nil
+      @h_percent = nil
+      @rot_y = nil
+      @depth_percent = nil
+      @r_ang_ax = nil
+      @perspective = nil
       parse_options options
     end
 

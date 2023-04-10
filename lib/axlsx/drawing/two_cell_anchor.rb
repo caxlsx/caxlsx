@@ -33,7 +33,8 @@ module Axlsx
     def initialize(drawing, options = {})
       @drawing = drawing
       drawing.anchors << self
-      @from, @to =  Marker.new, Marker.new(:col => 5, :row => 10)
+      @from = Marker.new
+      @to = Marker.new(:col => 5, :row => 10)
       parse_options options
 
       # bit of a hack to work around the fact that the coords for start at and end at

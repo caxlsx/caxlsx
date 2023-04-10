@@ -65,7 +65,9 @@ module Axlsx
     # @see Chart
     def initialize(frame, options = {})
       @vary_colors = true
-      @gap_width, @overlap, @shape = nil, nil, nil
+      @gap_width = nil
+      @overlap = nil
+      @shape = nil
       super(frame, options)
       @series_type = BarSeries
       @d_lbls = nil

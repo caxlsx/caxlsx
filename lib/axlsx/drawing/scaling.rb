@@ -10,7 +10,9 @@ module Axlsx
     # @option options [Float] min
     def initialize(options = {})
       @orientation = :minMax
-      @logBase, @min, @max = nil, nil, nil
+      @logBase = nil
+      @min = nil
+      @max = nil
       parse_options options
     end
 

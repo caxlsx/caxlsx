@@ -37,7 +37,8 @@ module Axlsx
       @show_marker = false
       @marker_symbol = options[:marker_symbol] || :default
       @smooth = false
-      @labels, @data = nil, nil
+      @labels = nil
+      @data = nil
       super(chart, options)
       @labels = AxDataSource.new(:data => options[:labels]) unless options[:labels].nil?
       @data = NumDataSource.new(options) unless options[:data].nil?

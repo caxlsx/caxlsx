@@ -72,7 +72,9 @@ module Axlsx
     # @see View3D
     def initialize(frame, options = {})
       @vary_colors = true
-      @gap_width, @gap_depth, @shape = nil, nil, nil
+      @gap_width = nil
+      @gap_depth = nil
+      @shape = nil
       super(frame, options)
       @series_type = BarSeries
       @view_3D = View3D.new({ :r_ang_ax => 1 }.merge(options))

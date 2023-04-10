@@ -2,7 +2,8 @@ require 'tc_helper'
 
 class TestRelationships < Test::Unit::TestCase
   def test_for
-    source_obj_1, source_obj_2 = Object.new, Object.new
+    source_obj_1 = Object.new
+    source_obj_2 = Object.new
     rel_1 = Axlsx::Relationship.new(source_obj_1, Axlsx::WORKSHEET_R, "bar")
     rel_2 = Axlsx::Relationship.new(source_obj_2, Axlsx::WORKSHEET_R, "bar")
     rels = Axlsx::Relationships.new
