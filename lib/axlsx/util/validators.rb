@@ -80,7 +80,7 @@ module Axlsx
   end
 
   # Validates an unsigned intger
-  UINT_VALIDATOR = lambda { |arg| arg.respond_to?(:>=) && arg >= 0 }
+  UINT_VALIDATOR = ->(arg) { arg.respond_to?(:>=) && arg >= 0 }
 
   # Requires that the value is a Integer and is greater or equal to 0
   # @param [Any] v The value validated
@@ -109,7 +109,7 @@ module Axlsx
   # it must be one of 0, 1, "true", "false", :true, :false, true, false, "0", or "1"
   # @param [Any] v The value validated
   def self.validate_boolean(v)
-    DataTypeValidator.validate(:boolean, [String, Integer, Symbol, TrueClass, FalseClass], v, lambda { |arg| [0, 1, "true", "false", :true, :false, true, false, "0", "1"].include?(arg) })
+    DataTypeValidator.validate(:boolean, [String, Integer, Symbol, TrueClass, FalseClass], v, ->(arg) { [0, 1, "true", "false", :true, :false, true, false, "0", "1"].include?(arg) })
   end
 
   # Requires that the value is a String
@@ -132,12 +132,12 @@ module Axlsx
 
   # Requires that the value is an integer ranging from 10 to 400.
   def self.validate_scale_10_400(v)
-    DataTypeValidator.validate "page_scale", Integer, v, lambda { |arg| arg >= 10 && arg <= 400 }
+    DataTypeValidator.validate "page_scale", Integer, v, ->(arg) { arg >= 10 && arg <= 400 }
   end
 
   # Requires that the value is an integer ranging from 10 to 400 or 0.
   def self.validate_scale_0_10_400(v)
-    DataTypeValidator.validate "page_scale", Integer, v, lambda { |arg| arg == 0 || (arg >= 10 && arg <= 400) }
+    DataTypeValidator.validate "page_scale", Integer, v, ->(arg) { arg == 0 || (arg >= 10 && arg <= 400) }
   end
 
   # Requires that the value is one of :default, :landscape, or :portrait.

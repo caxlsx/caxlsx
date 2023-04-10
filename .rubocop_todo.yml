@@ -291,18 +291,6 @@ Style/IfUnlessModifier:
   Enabled: false
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: line_count_dependent, lambda, literal
-Style/Lambda:
-  Exclude:
-    - 'lib/axlsx/drawing/chart.rb'
-    - 'lib/axlsx/drawing/scaling.rb'
-    - 'lib/axlsx/stylesheet/gradient_fill.rb'
-    - 'lib/axlsx/stylesheet/gradient_stop.rb'
-    - 'lib/axlsx/stylesheet/styles.rb'
-    - 'lib/axlsx/util/validators.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowMethodComparison.
 Style/MultipleComparison:
   Exclude:
