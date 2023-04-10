@@ -240,7 +240,7 @@ module Axlsx
       return sz if sz
 
       font = styles.fonts[styles.cellXfs[style].fontId] || styles.fonts[0]
-      (font.b || (defined?(@b) && @b)) ? (font.sz * 1.5) : font.sz
+      font.b || (defined?(@b) && @b) ? (font.sz * 1.5) : font.sz
     end
 
     def style
