@@ -1,10 +1,8 @@
 require 'tc_helper.rb'
 class TestValidators < Test::Unit::TestCase
-  def setup
-  end
+  def setup; end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_validators
     # unsigned_int

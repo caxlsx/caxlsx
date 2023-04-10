@@ -5,8 +5,7 @@ class TestGradientFill < Test::Unit::TestCase
     @item = Axlsx::GradientFill.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(@item.type, :linear)

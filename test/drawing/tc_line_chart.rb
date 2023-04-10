@@ -8,8 +8,7 @@ class TestLineChart < Test::Unit::TestCase
     @chart = ws.add_chart Axlsx::LineChart, :title => "fishery"
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert_equal(@chart.grouping, :standard, "grouping defualt incorrect")

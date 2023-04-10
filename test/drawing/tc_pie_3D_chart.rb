@@ -8,8 +8,7 @@ class TestPie3DChart < Test::Unit::TestCase
     @chart = ws.add_chart Axlsx::Pie3DChart, :title => "fishery"
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert_equal(@chart.view_3D.rot_x, 30, "view 3d default rot_x incorrect")

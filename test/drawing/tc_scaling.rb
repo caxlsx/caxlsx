@@ -5,8 +5,7 @@ class TestScaling < Test::Unit::TestCase
     @scaling = Axlsx::Scaling.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert(@scaling.orientation == :minMax)

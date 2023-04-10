@@ -5,8 +5,7 @@ class TestXf < Test::Unit::TestCase
     @item = Axlsx::Xf.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(@item.alignment, nil)

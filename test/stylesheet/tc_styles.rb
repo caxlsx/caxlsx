@@ -5,8 +5,7 @@ class TestStyles < Test::Unit::TestCase
     @styles = Axlsx::Styles.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))

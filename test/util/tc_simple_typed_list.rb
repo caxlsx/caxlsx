@@ -4,8 +4,7 @@ class TestSimpleTypedList < Test::Unit::TestCase
     @list = Axlsx::SimpleTypedList.new Integer
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_type_is_a_class_or_array_of_class
     assert_nothing_raised { Axlsx::SimpleTypedList.new Integer }

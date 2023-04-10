@@ -5,8 +5,7 @@ class TestTableStyleElement < Test::Unit::TestCase
     @item = Axlsx::TableStyleElement.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(@item.type, nil)

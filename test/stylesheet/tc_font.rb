@@ -5,8 +5,7 @@ class TestFont < Test::Unit::TestCase
     @item = Axlsx::Font.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(@item.name, nil)

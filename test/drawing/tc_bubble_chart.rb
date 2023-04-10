@@ -21,8 +21,7 @@ class TestBubbleChart < Test::Unit::TestCase
     end
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert_equal(@chart.series_type, Axlsx::BubbleSeries, "series type incorrect")
