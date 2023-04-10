@@ -14,7 +14,7 @@ module Axlsx
     # Break will be passed to the created break object.
     # @see Break
     def add_break(options)
-      self << Break.new(options.merge(:max => 1048575, :man => true))
+      self << Break.new(options.merge(:max => 1_048_575, :man => true))
       last
     end
 

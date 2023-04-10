@@ -89,8 +89,8 @@ module Axlsx
     # !{:cx=>[Integer], :cy=>[Integer]
     # @return [Hash]
     def ext
-      cy = @height * 914400 / 96
-      cx = @width * 914400 / 96
+      cy = @height * 914_400 / 96
+      cx = @width * 914_400 / 96
       { :cy => cy, :cx => cx }
     end
   end

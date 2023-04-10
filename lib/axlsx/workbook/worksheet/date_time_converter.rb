@@ -18,9 +18,9 @@ module Axlsx
     def self.time_to_serial(time)
       # Using hardcoded offsets here as some operating systems will not except
       # a 'negative' offset from the ruby epoch.
-      epoch1900 = -2209161600.0 # Time.utc(1899, 12, 30).to_i
-      epoch1904 = -2082844800.0 # Time.utc(1904, 1, 1).to_i
-      seconds_per_day = 86400.0 # 60*60*24
+      epoch1900 = -2_209_161_600.0 # Time.utc(1899, 12, 30).to_i
+      epoch1904 = -2_082_844_800.0 # Time.utc(1904, 1, 1).to_i
+      seconds_per_day = 86_400.0 # 60*60*24
       epoch = Axlsx::Workbook::date1904 ? epoch1904 : epoch1900
       (time.utc_offset + time.to_f - epoch) / seconds_per_day
     end

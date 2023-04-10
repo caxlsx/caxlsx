@@ -125,7 +125,7 @@ module Axlsx
     # default true
     def label_rotation=(v)
       Axlsx::validate_int(v)
-      adjusted = v.to_i * 60000
+      adjusted = v.to_i * 60_000
       Axlsx::validate_angle(adjusted)
       @label_rotation = adjusted
     end

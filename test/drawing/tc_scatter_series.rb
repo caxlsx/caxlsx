@@ -39,15 +39,15 @@ class TestScatterSeries < Test::Unit::TestCase
   def test_ln_width
     @chart = @ws.add_chart Axlsx::ScatterChart, :title => "ln width", :scatter_style => :line
     @series = @chart.add_series :xData => [1, 2, 4], :yData => [1, 3, 9], :title => "ln_width"
-    @series.ln_width = 12700
-    assert_equal(@series.ln_width, 12700, 'line width assigment is allowed')
+    @series.ln_width = 12_700
+    assert_equal(@series.ln_width, 12_700, 'line width assigment is allowed')
   end
 
   def test_to_xml_string
     @chart.scatter_style = :line
-    @series.ln_width = 12700
+    @series.ln_width = 12_700
     doc = Nokogiri::XML(@chart.to_xml_string)
-    assert_equal(12700, @series.ln_width)
+    assert_equal(12_700, @series.ln_width)
     assert_equal(doc.xpath("//a:srgbClr[@val='#{@series.color}']").size, 4)
     assert_equal(doc.xpath("//a:ln[@w='#{@series.ln_width}']").length, 1)
   end

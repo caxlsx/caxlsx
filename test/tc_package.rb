@@ -28,7 +28,7 @@ class TestPackage < Test::Unit::TestCase
       vs.pane do |p|
         p.active_pane = :top_right
         p.state = :split
-        p.x_split = 11080
+        p.x_split = 11_080
         p.y_split = 5000
         p.top_left_cell = 'C44'
       end
@@ -314,7 +314,7 @@ class TestPackage < Test::Unit::TestCase
     assert(stream.is_a?(StringIO))
     # this is just a roundabout guess for a package as it is build now
     # in testing.
-    assert(stream.size > 80000)
+    assert(stream.size > 80_000)
     # Stream (of zipped contents) should have appropriate default encoding
     assert stream.string.valid_encoding?
     assert_equal(stream.external_encoding, Encoding::ASCII_8BIT)

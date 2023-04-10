@@ -76,7 +76,7 @@ module Axlsx
   # @raise [ArgumentError] raised if the value cannot be converted to an integer between the allowed angle values for chart label rotation.
   # @return [Boolean] true if the data is valid
   def self.validate_angle(v)
-    raise ArgumentError, (ERR_ANGLE % v.inspect) unless (v.to_i >= -5400000 && v.to_i <= 5400000)
+    raise ArgumentError, (ERR_ANGLE % v.inspect) unless (v.to_i >= -5_400_000 && v.to_i <= 5_400_000)
   end
 
   # Validates an unsigned intger
