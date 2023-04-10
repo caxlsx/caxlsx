@@ -362,14 +362,6 @@ Style/RedundantInterpolation:
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
     - 'test/content_type/tc_content_type.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, AllowInnerSlashes.
-# SupportedStyles: slashes, percent_r, mixed
-Style/RegexpLiteral:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
-    - 'test/tc_package.rb'
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: ConvertCodeThatCanStartToReturnNil, AllowedMethods, MaxChainLength.
 # AllowedMethods: present?, blank?, presence, try, try!
