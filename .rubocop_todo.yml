@@ -451,11 +451,6 @@ Style/SafeNavigation:
   Enabled: false
 
 # This cop supports safe autocorrection (--autocorrect).
-Style/SelfAssignment:
-  Exclude:
-    - 'lib/axlsx/stylesheet/color.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowAsExpressionSeparator.
 Style/Semicolon:
   Enabled: false
