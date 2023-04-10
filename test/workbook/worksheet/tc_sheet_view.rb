@@ -3,7 +3,7 @@ require 'tc_helper.rb'
 
 class TestSheetView < Test::Unit::TestCase
   def setup
-    #inverse defaults for booleans
+    # inverse defaults for booleans
     @boolean_options = { :right_to_left => true, :show_formulas => true, :show_outline_symbols => true,
       :show_white_space => true, :tab_selected => true, :default_grid_color => false, :show_grid_lines => false,
       :show_row_col_headers => false, :show_ruler => false, :show_zeros => false, :window_protection => true }

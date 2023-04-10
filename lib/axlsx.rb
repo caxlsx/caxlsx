@@ -21,11 +21,11 @@ require 'axlsx/rels/relationships.rb'
 require 'axlsx/drawing/drawing.rb'
 require 'axlsx/workbook/workbook.rb'
 require 'axlsx/package.rb'
-#required gems
+# required gems
 require 'nokogiri'
 require 'zip'
 
-#core dependencies
+# core dependencies
 require 'bigdecimal'
 require 'set'
 require 'time'
@@ -75,7 +75,7 @@ module Axlsx
     cells.sort_by(&:pos)
   end
 
-  #global reference html entity encoding
+  # global reference html entity encoding
   # @return [HtmlEntities]
   def self.coder
     @@coder ||= ::HTMLEntities.new

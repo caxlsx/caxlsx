@@ -34,7 +34,7 @@ module Axlsx
     end
     alias :gapWidth :gap_width
 
-    #grouping for a column, line, or area chart.
+    # grouping for a column, line, or area chart.
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     # @return [Symbol]
     def grouping
@@ -79,7 +79,7 @@ module Axlsx
     end
     alias :barDir= :bar_dir=
 
-    #grouping for a column, line, or area chart.
+    # grouping for a column, line, or area chart.
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     def grouping=(v)
       RestrictionValidator.validate "BarChart.grouping", [:percentStacked, :clustered, :standard, :stacked], v

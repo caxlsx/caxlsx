@@ -29,7 +29,7 @@ module Axlsx
     # @option options [Integer] zoom_scale_page_layout_view Zoom Scale Page Layout View
     # @option options [Integer] zoom_scale_sheet_layout_view Zoom Scale Page Break Preview
     def initialize(options = {})
-      #defaults
+      # defaults
       @color_id = @top_left_cell = @pane = nil
       @right_to_left = @show_formulas = @show_outline_symbols = @show_white_space = @tab_selected = @window_protection = false
       @default_grid_color = @show_grid_lines = @show_row_col_headers = @show_ruler = @show_zeros = true

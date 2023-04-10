@@ -2,7 +2,7 @@ require 'axlsx/workbook/worksheet/auto_filter/filter_column.rb'
 require 'axlsx/workbook/worksheet/auto_filter/filters.rb'
 
 module Axlsx
-  #This class represents an auto filter range in a worksheet
+  # This class represents an auto filter range in a worksheet
   class AutoFilter
     # creates a new Autofilter object
     # @param [Worksheet] worksheet

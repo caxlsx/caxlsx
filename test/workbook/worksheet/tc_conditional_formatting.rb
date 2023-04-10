@@ -187,7 +187,7 @@ class TestConditionalFormatting < Test::Unit::TestCase
   end
 
   def test_percent
-    assert_raise(ArgumentError) { @cfr.percent = "10%" } #WRONG!
+    assert_raise(ArgumentError) { @cfr.percent = "10%" } # WRONG!
     assert_nothing_raised { @cfr.percent = true }
     assert_equal(@cfr.percent, true)
   end

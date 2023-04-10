@@ -1,6 +1,6 @@
 module Axlsx
-  #A collection of Cfvo objects that initializes with the required
-  #first two items
+  # A collection of Cfvo objects that initializes with the required
+  # first two items
   class Cfvos < SimpleTypedList
     def initialize
       super(Cfvo)

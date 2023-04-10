@@ -86,6 +86,6 @@ class TestCol < Test::Unit::TestCase
     assert_equal(@col.style, nil)
     @col.style = 1
     assert_equal(@col.style, 1)
-    #TODO check that the style specified is actually in the styles xfs collection
+    # TODO check that the style specified is actually in the styles xfs collection
   end
 end

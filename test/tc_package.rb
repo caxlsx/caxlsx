@@ -249,7 +249,7 @@ class TestPackage < Test::Unit::TestCase
 
   def test_parts
     p = @package.send(:parts)
-    #all parts have an entry
+    # all parts have an entry
     assert_equal(p.select { |part| part[:entry] =~ /_rels\/\.rels/ }.size, 1, "rels missing")
     assert_equal(p.select { |part| part[:entry] =~ /docProps\/core\.xml/ }.size, 1, "core missing")
     assert_equal(p.select { |part| part[:entry] =~ /docProps\/app\.xml/ }.size, 1, "app missing")
@@ -267,10 +267,10 @@ class TestPackage < Test::Unit::TestCase
     assert_equal(p.select { |part| part[:entry] =~ /xl\/pivotTables\/_rels\/pivotTable\d\.xml.rels/ }.size, @package.workbook.worksheets.first.pivot_tables.size, "one or more pivot tables rels missing")
     assert_equal(p.select { |part| part[:entry] =~ /xl\/pivotCache\/pivotCacheDefinition\d\.xml/ }.size, @package.workbook.worksheets.first.pivot_tables.size, "one or more pivot tables missing")
 
-    #no mystery parts
+    # no mystery parts
     assert_equal(25, p.size)
 
-    #sorted for correct MIME detection
+    # sorted for correct MIME detection
     assert_equal("[Content_Types].xml", p[0][:entry], "first entry should be `[Content_Types].xml`")
     assert_equal("_rels/.rels", p[1][:entry], "second entry should be `_rels/.rels`")
     assert_match(/\Axl\//, p[2][:entry], "third entry should begin with `xl/`")
@@ -278,7 +278,7 @@ class TestPackage < Test::Unit::TestCase
 
   def test_shared_strings_requires_part
     @package.use_shared_strings = true
-    @package.to_stream #ensure all cell_serializer paths are hit
+    @package.to_stream # ensure all cell_serializer paths are hit
     p = @package.send(:parts)
     assert_equal(p.select { |part| part[:entry] =~ /xl\/sharedStrings.xml/ }.size, 1, "shared strings table missing")
   end

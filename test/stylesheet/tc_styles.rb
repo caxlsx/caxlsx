@@ -62,7 +62,7 @@ class TestStyles < Test::Unit::TestCase
   end
 
   def test_do_not_alter_options_in_add_style
-    #This should test all options, but for now - just the bits that we know caused some pain
+    # This should test all options, but for now - just the bits that we know caused some pain
     options = { :border => { :style => :thin, :color => "FF000000" } }
     @styles.add_style options
     assert_equal options[:border][:style], :thin, 'thin style is stil in option'

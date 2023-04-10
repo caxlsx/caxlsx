@@ -13,7 +13,7 @@ module Axlsx
     # @option options [Integer] x_split Horizontal Split Position
     # @option options [Integer] y_split Vertical Split Position
     def initialize(options = {})
-      #defaults
+      # defaults
       @active_pane = @state = @top_left_cell = nil
       @x_split = @y_split = 0
       parse_options options

@@ -16,7 +16,7 @@ module Axlsx
     # @option [Boolean] show_button @see show_button
     def initialize(col_id, filter_type, options = {})
       RestrictionValidator.validate 'FilterColumn.filter', FILTERS, filter_type
-      #Axlsx::validate_unsigned_int(col_id)
+      # Axlsx::validate_unsigned_int(col_id)
       self.col_id = col_id
       parse_options options
       @filter = Axlsx.const_get(Axlsx.camel(filter_type)).new(options)
@@ -26,7 +26,7 @@ module Axlsx
     serializable_attributes :col_id, :hidden_button, :show_button
 
     # Allowed filters
-    FILTERS = [:filters] #, :top10, :custom_filters, :dynamic_filters, :color_filters, :icon_filters]
+    FILTERS = [:filters] # , :top10, :custom_filters, :dynamic_filters, :color_filters, :icon_filters]
 
     # Zero-based index indicating the AutoFilter column to which this filter information applies.
     # @return [Integer]

@@ -2,7 +2,7 @@ module Axlsx
   # There are more elements in the dLbls spec that allow for
   # customizations and formatting. For now, I am just implementing the
   # basics.
-  #The DLbls class manages serialization of data labels
+  # The DLbls class manages serialization of data labels
   # showLeaderLines and leaderLines are not currently implemented
   class DLbls
     include Axlsx::Accessors

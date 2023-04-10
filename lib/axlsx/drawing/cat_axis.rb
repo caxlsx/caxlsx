@@ -1,5 +1,5 @@
 module Axlsx
-  #A CatAxis object defines a chart category axis
+  # A CatAxis object defines a chart category axis
   class CatAxis < Axis
     # Creates a new CatAxis object
     # @option options [Integer] tick_lbl_skip

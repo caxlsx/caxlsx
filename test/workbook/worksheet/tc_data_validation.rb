@@ -5,7 +5,7 @@ class TestDataValidation < Test::Unit::TestCase
   include CaptureWarnings
 
   def setup
-    #inverse defaults
+    # inverse defaults
     @boolean_options = { :allowBlank => false, :hideDropDown => true, :showErrorMessage => false, :showInputMessage => true }
     @nil_options = { :formula1 => 'foo', :formula2 => 'foo', :errorTitle => 'foo', :operator => :lessThan, :prompt => 'foo', :promptTitle => 'foo', :sqref => 'foo' }
     @type_option = { :type => :whole }
@@ -171,7 +171,7 @@ class TestDataValidation < Test::Unit::TestCase
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
-    #test attributes
+    # test attributes
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='1']/xmlns:dataValidation[@sqref='A1']
       [@promptTitle='Be carful!'][@prompt='Only values between 5 and 10'][@operator='between'][@errorTitle='Wrong input']
       [@error='Only values between 5 and 10'][@showErrorMessage=1][@allowBlank=1][@showInputMessage=1][@type='whole']
@@ -181,11 +181,11 @@ class TestDataValidation < Test::Unit::TestCase
       [@error='Only values between 5 and 10'][@showErrorMessage=1][@allowBlank=1][@showInputMessage=1]
       [@type='whole'][@errorStyle='information']")
 
-    #test forumula1
+    # test forumula1
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations/xmlns:dataValidation/xmlns:formula1").size)
     assert doc.xpath("//xmlns:worksheet/xmlns:dataValidations/xmlns:dataValidation/xmlns:formula1='5'")
 
-    #test forumula2
+    # test forumula2
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations/xmlns:dataValidation/xmlns:formula2").size)
     assert doc.xpath("//xmlns:worksheet/xmlns:dataValidations/xmlns:dataValidation/xmlns:formula2='10'")
   end
@@ -200,7 +200,7 @@ class TestDataValidation < Test::Unit::TestCase
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
-    #test attributes
+    # test attributes
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='1']/xmlns:dataValidation[@sqref='A1']
       [@promptTitle='Be carful!'][@prompt='Only values from list'][@errorTitle='Wrong input'][@error='Only values from list']
       [@showErrorMessage=1][@allowBlank=1][@showInputMessage=1][@showDropDown=1][@type='list']
@@ -209,7 +209,7 @@ class TestDataValidation < Test::Unit::TestCase
       [@promptTitle='Be carful!'][@prompt='Only values from list'][@errorTitle='Wrong input'][@error='Only values from list']
       [@showErrorMessage=1][@allowBlank=1][@showInputMessage=1][@showDropDown=1][@type='list'][@errorStyle='stop']")
 
-    #test forumula1
+    # test forumula1
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations/xmlns:dataValidation/xmlns:formula1").size)
     assert doc.xpath("//xmlns:worksheet/xmlns:dataValidations/xmlns:dataValidation/xmlns:formula1='A1:A5'")
   end
@@ -224,7 +224,7 @@ class TestDataValidation < Test::Unit::TestCase
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
-    #test attributes
+    # test attributes
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='1']/xmlns:dataValidation[@sqref='A1'][@promptTitle='Be carful!']
       [@prompt='Only values corresponding formula'][@errorTitle='Wrong input'][@error='Only values corresponding formula'][@showErrorMessage=1]
       [@allowBlank=1][@showInputMessage=1][@type='custom'][@errorStyle='stop']").size)
@@ -232,7 +232,7 @@ class TestDataValidation < Test::Unit::TestCase
       [@prompt='Only values corresponding formula'][@errorTitle='Wrong input'][@error='Only values corresponding formula']
       [@showErrorMessage=1][@allowBlank=1][@showInputMessage=1][@type='custom'][@errorStyle='stop']")
 
-    #test forumula1
+    # test forumula1
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations/xmlns:dataValidation/xmlns:formula1").size)
     assert doc.xpath("//xmlns:worksheet/xmlns:dataValidations/xmlns:dataValidation/xmlns:formula1='=5/2'")
   end
@@ -251,7 +251,7 @@ class TestDataValidation < Test::Unit::TestCase
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
-    #test attributes
+    # test attributes
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='2']/xmlns:dataValidation[@sqref='A1']
       [@promptTitle='Be carful!'][@prompt='Only values between 5 and 10'][@operator='between'][@errorTitle='Wrong input']
       [@error='Only values between 5 and 10'][@showErrorMessage=1][@allowBlank=1][@showInputMessage=1][@type='whole']
@@ -261,7 +261,7 @@ class TestDataValidation < Test::Unit::TestCase
       [@error='Only values between 5 and 10'][@showErrorMessage=1][@allowBlank=1][@showInputMessage=1]
       [@type='whole'][@errorStyle='information']")
 
-    #test attributes
+    # test attributes
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='2']/xmlns:dataValidation[@sqref='B1']
       [@promptTitle='Be carful!'][@prompt='Only values from list'][@errorTitle='Wrong input'][@error='Only values from list']
       [@showErrorMessage=1][@allowBlank=1][@showInputMessage=1][@showDropDown=1][@type='list']

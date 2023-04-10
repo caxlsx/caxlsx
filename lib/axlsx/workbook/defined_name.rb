@@ -2,9 +2,9 @@
 #    <definedName name="_xlnm.Print_Titles" localSheetId="0">Sheet1!$1:$1</definedName>
 #  </definedNames>
 
-#￼￼￼<xsd:complexType name="CT_DefinedName">
+# ￼￼￼<xsd:complexType name="CT_DefinedName">
 # <xsd:simpleContent>
-#￼￼￼￼ <xsd:extension base="ST_Formula">
+# ￼￼￼￼ <xsd:extension base="ST_Formula">
 # <xsd:attribute name="name" type="s:ST_Xstring" use="required"/>
 # <xsd:attribute name="comment" type="s:ST_Xstring" use="optional"/>
 # <xsd:attribute name="customMenu" type="s:ST_Xstring" use="optional"/>

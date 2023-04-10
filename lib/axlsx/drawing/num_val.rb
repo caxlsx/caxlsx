@@ -1,5 +1,5 @@
 module Axlsx
-  #This class specifies data for a particular data point.
+  # This class specifies data for a particular data point.
   class NumVal < StrVal
     # A string representing the format code to apply.
     # For more information see see the SpreadsheetML numFmt element's (§18.8.30) formatCode attribute.

@@ -3,7 +3,7 @@ require 'tc_helper.rb'
 
 class TestPane < Test::Unit::TestCase
   def setup
-    #inverse defaults for booleans
+    # inverse defaults for booleans
     @nil_options = { :active_pane => :bottom_left, :state => :frozen, :top_left_cell => 'A2' }
     @int_0_options = { :x_split => 2, :y_split => 2 }
     @options = @nil_options.merge(@int_0_options)

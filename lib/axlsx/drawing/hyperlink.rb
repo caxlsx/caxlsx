@@ -6,7 +6,7 @@ module Axlsx
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
 
-    #Creates a hyperlink object
+    # Creates a hyperlink object
     # parent must be a Pic for now, although I expect that other object support this tag and its cNvPr parent
     # @param [Pic] parent
     # @option options [String] tooltip message shown when hyperlinked object is hovered over with mouse.
@@ -38,7 +38,7 @@ module Axlsx
     alias :invalidUrl :invalid_url
     alias :invalidUrl= :invalid_url=
 
-    #An action to take when the link is clicked. The specification says "This can be used to specify a slide to be navigated to or a script of code to be run." but in most cases you will not need to do anything with this. MS does reserve a few interesting strings. @see http://msdn.microsoft.com/en-us/library/ff532419%28v=office.12%29.aspx
+    # An action to take when the link is clicked. The specification says "This can be used to specify a slide to be navigated to or a script of code to be run." but in most cases you will not need to do anything with this. MS does reserve a few interesting strings. @see http://msdn.microsoft.com/en-us/library/ff532419%28v=office.12%29.aspx
     # @return [String]
     attr_accessor :action
 

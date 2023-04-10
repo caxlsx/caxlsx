@@ -194,7 +194,7 @@ module Axlsx
       swap_anchor(new_anchor)
     end
 
-    #changes the anchor type to a two cell anchor
+    # changes the anchor type to a two cell anchor
     def use_two_cell_anchor
       return if @anchor.is_a?(TwoCellAnchor)
 

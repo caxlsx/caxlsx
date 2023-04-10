@@ -2,7 +2,7 @@ module Axlsx
   # The Xf class defines a formatting record for use in Styles. The recommended way to manage styles for your workbook is with Styles#add_style
   # @see Styles#add_style
   class Xf
-    #does not support extList (ExtensionList)
+    # does not support extList (ExtensionList)
 
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser

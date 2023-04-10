@@ -113,7 +113,7 @@ module Axlsx
         @val = value
       end
 
-      #Filter value used in the criteria.
+      # Filter value used in the criteria.
       attr_accessor :val
 
       # Serializes the filter value object

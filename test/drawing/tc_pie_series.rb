@@ -27,5 +27,5 @@ class TestPieSeries < Test::Unit::TestCase
     doc = Nokogiri::XML(@series.to_xml_string)
     assert(doc.xpath("//srgbClr[@val='#{@series.colors[0]}']"))
   end
-  #TODO test unique serialization parts
+  # TODO test unique serialization parts
 end

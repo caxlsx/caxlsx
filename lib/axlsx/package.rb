@@ -231,8 +231,8 @@ module Axlsx
       workbook.pivot_tables.each do |pivot_table|
         cache_definition = pivot_table.cache_definition
         parts << { :entry => "xl/#{pivot_table.rels_pn}", :doc => pivot_table.relationships, :schema => RELS_XSD }
-        parts << { :entry => "xl/#{pivot_table.pn}", :doc => pivot_table } #, :schema => SML_XSD}
-        parts << { :entry => "xl/#{cache_definition.pn}", :doc => cache_definition } #, :schema => SML_XSD}
+        parts << { :entry => "xl/#{pivot_table.pn}", :doc => pivot_table } # , :schema => SML_XSD}
+        parts << { :entry => "xl/#{cache_definition.pn}", :doc => cache_definition } # , :schema => SML_XSD}
       end
 
       workbook.comments.each do |comment|

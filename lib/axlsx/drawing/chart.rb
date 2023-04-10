@@ -49,7 +49,7 @@ module Axlsx
     # @return [Series]
     attr_reader :series_type
 
-    #TODO data labels!
+    # TODO data labels!
     def d_lbls
       @d_lbls ||= DLbls.new(self.class)
     end

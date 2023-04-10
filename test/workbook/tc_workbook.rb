@@ -90,7 +90,7 @@ class TestWorkbook < Test::Unit::TestCase
   end
 
   def test_relationships
-    #current relationship size is 1 due to style relation
+    # current relationship size is 1 due to style relation
     assert(@wb.relationships.size == 1)
     @wb.add_worksheet
     assert(@wb.relationships.size == 2)

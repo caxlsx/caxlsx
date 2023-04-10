@@ -1,5 +1,5 @@
 module Axlsx
-  #A SerAxis object defines a series axis
+  # A SerAxis object defines a series axis
   class SerAxis < Axis
     # The number of tick lables to skip between labels
     # @return [Integer]

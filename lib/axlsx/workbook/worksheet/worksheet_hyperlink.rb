@@ -25,7 +25,7 @@ module Axlsx
 
     serializable_attributes :display, :tooltip, :ref
 
-    #Cell location of hyperlink on worksheet.
+    # Cell location of hyperlink on worksheet.
     # @return [String]
     attr_reader :ref
 

@@ -17,7 +17,7 @@ module Axlsx
   require 'axlsx/stylesheet/xf.rb'
   require 'axlsx/stylesheet/cell_protection.rb'
 
-  #The Styles class manages worksheet styles
+  # The Styles class manages worksheet styles
   # In addition to creating the require style objects for a valid xlsx package, this class provides the key mechanism for adding styles to your workbook, and safely applying them to the cells of your worksheet.
   # All portions of the stylesheet are implemented here exception colors, which specify legacy and modified pallete colors, and exLst, whic is used as a future feature data storage area.
   # @see  Office Open XML Part 1 18.8.11 for gory details on how this stuff gets put together
@@ -468,10 +468,10 @@ module Axlsx
     def parse_num_fmt_options(options = {})
       return if (options.keys & [:format_code, :num_fmt]).empty?
 
-      #When the user provides format_code - we always need to create a new numFmt object
-      #When the type is :dxf we always need to create a new numFmt object
+      # When the user provides format_code - we always need to create a new numFmt object
+      # When the type is :dxf we always need to create a new numFmt object
       if options[:format_code] || options[:type] == :dxf
-        #If this is a standard xf we pull from numFmts the highest current and increment for num_fmt
+        # If this is a standard xf we pull from numFmts the highest current and increment for num_fmt
         options[:num_fmt] ||= (@numFmts.map { |num_fmt| num_fmt.numFmtId }.max + 1) if options[:type] != :dxf
         numFmt = NumFmt.new(:numFmtId => options[:num_fmt] || 0, :formatCode => options[:format_code].to_s)
         options[:type] == :dxf ? numFmt : (numFmts << numFmt; numFmt.numFmtId)

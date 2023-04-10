@@ -112,7 +112,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_col_ref
-    #TODO move to axlsx spec
+    # TODO move to axlsx spec
     assert_equal(Axlsx.col_ref(0), "A")
   end
 

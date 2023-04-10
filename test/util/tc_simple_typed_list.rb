@@ -16,7 +16,7 @@ class TestSimpleTypedList < Test::Unit::TestCase
   end
 
   def test_indexed_based_assignment
-    #should not allow nil assignment
+    # should not allow nil assignment
     assert_raise(ArgumentError) { @list[0] = nil }
     assert_raise(ArgumentError) { @list[0] = "1" }
     assert_nothing_raised { @list[0] = 1 }
@@ -57,7 +57,7 @@ class TestSimpleTypedList < Test::Unit::TestCase
     @list.push 4
     assert_nothing_raised { @list.delete_at 3 }
     @list.unlock
-    #ignore garbage
+    # ignore garbage
     assert_nothing_raised { @list.delete 0 }
     assert_nothing_raised { @list.delete 9 }
   end

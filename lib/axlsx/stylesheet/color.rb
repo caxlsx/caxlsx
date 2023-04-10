@@ -37,7 +37,7 @@ module Axlsx
 
     # no support for theme just yet
     # @return [Integer]
-    #attr_reader :theme
+    # attr_reader :theme
 
     # The tint value.
     # @note valid values are between -1.0 and 1.0

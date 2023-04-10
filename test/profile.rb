@@ -3,7 +3,7 @@
 $:.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 require 'ruby-prof'
-#RubyProf.measure_mode = RubyProf::MEMORY
+# RubyProf.measure_mode = RubyProf::MEMORY
 #
 row = []
 # Taking worst case scenario of all string data

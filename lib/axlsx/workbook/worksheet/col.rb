@@ -111,7 +111,7 @@ module Axlsx
       # is to only set this if a calculated value is greated than the
       # current @width value.
       # TODO!!!
-      #Axlsx.validate_unsigned_numeric(v) unless v == nil
+      # Axlsx.validate_unsigned_numeric(v) unless v == nil
       @custom_width = @best_fit = v != nil
       @width = v.nil? ? v : [v, MAX_WIDTH].min
     end

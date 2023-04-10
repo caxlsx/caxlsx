@@ -150,7 +150,7 @@ module Axlsx
 
     # @see value
     def value=(v)
-      #TODO: consider doing value based type determination first?
+      # TODO: consider doing value based type determination first?
       @value = cast_value(v)
     end
 
@@ -537,7 +537,7 @@ module Axlsx
       when :boolean
         v ? 1 : 0
       when :iso_8601
-        #consumer is responsible for ensuring the iso_8601 format when specifying this type
+        # consumer is responsible for ensuring the iso_8601 format when specifying this type
         v
       else
         v.to_s

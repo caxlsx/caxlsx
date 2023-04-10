@@ -15,7 +15,7 @@ class TestContentType < Test::Unit::TestCase
     o_path = "//xmlns:Override[@ContentType='%s']"
     d_path = "//xmlns:Default[@ContentType='%s']"
 
-    #default
+    # default
     assert_equal(@doc.xpath("//xmlns:Default").size, 2, "There should be 2 default types")
 
     node = @doc.xpath(d_path % Axlsx::XML_CT).first
@@ -24,7 +24,7 @@ class TestContentType < Test::Unit::TestCase
     node = @doc.xpath(d_path % Axlsx::RELS_CT).first
     assert_equal(node["Extension"], "#{Axlsx::RELS_EX}", "relationships content type invalid")
 
-    #overrride
+    # overrride
     assert_equal(@doc.xpath("//xmlns:Override").size, 4, "There should be 4 Override types")
 
     node = @doc.xpath(o_path % Axlsx::APP_CT).first
