@@ -166,7 +166,7 @@ module Axlsx
         def #{method}(*args, &block)
           @list.send(:#{method}, *args, &block)
         end
-      }
+      }, __FILE__, __LINE__ - 4
     end
 
     def to_xml_string(str = '')
