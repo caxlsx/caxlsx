@@ -77,11 +77,6 @@ Lint/DuplicateBranch:
     - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'lib/axlsx/workbook/worksheet/merged_cells.rb'
 
-# Configuration parameters: AllowComments, AllowEmptyLambdas.
-Lint/EmptyBlock:
-  Exclude:
-    - 'test/stylesheet/tc_styles.rb'
-
 Lint/NonLocalExitFromIterator:
   Exclude:
     - 'lib/axlsx/util/validators.rb'
