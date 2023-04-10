@@ -63,7 +63,7 @@ module Axlsx
       escaped_dir = Shellwords.shellescape(@dir)
       command = "cd #{escaped_dir} && #{@zip_command} #{output} #{inputs}"
       stdout_and_stderr, status = Open3.capture2e(command)
-      if !status.success?
+      unless status.success?
         raise(ZipError.new(stdout_and_stderr))
       end
     end

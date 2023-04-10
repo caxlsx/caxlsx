@@ -379,7 +379,7 @@ module Axlsx
       end
 
       validate_border_hash = lambda { |val|
-        if !(val.keys.include?(:style) && val.keys.include?(:color))
+        unless val.keys.include?(:style) && val.keys.include?(:color)
           raise ArgumentError, (ERR_INVALID_BORDER_OPTIONS % options[:border])
         end
       }
@@ -439,7 +439,7 @@ module Axlsx
           next
         end
 
-        if !edge_b_opts.empty?
+        unless edge_b_opts.empty?
           if base_border_opts.empty?
             validate_border_hash.call(edge_b_opts)
           end

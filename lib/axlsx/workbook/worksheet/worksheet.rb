@@ -583,7 +583,7 @@ module Axlsx
     # @param [String|Array] cell references
     # @param [Hash] styles
     def add_style(cell_refs, *styles)
-      if !cell_refs.is_a?(Array)
+      unless cell_refs.is_a?(Array)
         cell_refs = [cell_refs]
       end
 
@@ -612,7 +612,7 @@ module Axlsx
         border_edges = options
       end
 
-      if !cell_refs.is_a?(Array)
+      unless cell_refs.is_a?(Array)
         cell_refs = [cell_refs]
       end
 
@@ -849,7 +849,7 @@ module Axlsx
     end
 
     def add_autofilter_defined_name_to_workbook
-      return if !auto_filter.range
+      return unless auto_filter.range
 
       workbook.add_defined_name auto_filter.defined_name, name: '_xlnm._FilterDatabase', local_sheet_id: index, hidden: 1
     end

@@ -15,7 +15,7 @@ module Axlsx
       else
         @edges = @edges.map { |x| x&.to_sym }.uniq
 
-        if !(@edges - Axlsx::Border::EDGES).empty?
+        unless (@edges - Axlsx::Border::EDGES).empty?
           raise ArgumentError.new("Invalid edges provided, #{edges}")
         end
       end

@@ -195,7 +195,7 @@ module Axlsx
     # A helper to apply styles that were added using `worksheet.add_style`
     # @return [Boolean]
     def apply_styles
-      return false if !styled_cells
+      return false unless styled_cells
 
       styled_cells.each do |cell|
         current_style = styles.style_index[cell.style]
