@@ -278,9 +278,7 @@ module Axlsx
 
         xf_index
       else
-        dxf_index = (dxfs << style)
-
-        dxf_index
+        dxfs << style
       end
     end
 
