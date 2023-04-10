@@ -692,7 +692,7 @@ module Axlsx
       r = rows[row_index]
 
       if r
-        return r[col_index]
+        r[col_index]
       end
     end
 

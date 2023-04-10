@@ -102,7 +102,7 @@ module Axlsx
 
     row_index = (numbers_str.to_i - 1)
 
-    return [col_index, row_index]
+    [col_index, row_index]
   end
 
   # converts the column index into alphabetical values.

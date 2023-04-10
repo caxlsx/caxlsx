@@ -276,11 +276,11 @@ module Axlsx
         # Add styles to style_index cache for re-use
         style_index[xf_index] = raw_style
 
-        return xf_index
+        xf_index
       else
         dxf_index = (dxfs << style)
 
-        return dxf_index
+        dxf_index
       end
     end
 
@@ -455,9 +455,9 @@ module Axlsx
       end
 
       if options[:type] == :dxf
-        return border
+        border
       else
-        return borders << border
+        borders << border
       end
     end
 
