@@ -23,7 +23,7 @@ module Axlsx
     # @param [Any] max The maximum allowed value
     # @param [Any] value The value to be validated
     # @param [Boolean] inclusive Flag indicating if the comparison should be inclusive.
-    def self.validate(name, min, max, value, inclusive = true)
+    def self.validate(_name, min, max, value, inclusive = true)
       passes = if inclusive
                  min <= value && value <= max
                else
@@ -38,7 +38,7 @@ module Axlsx
     # @param [String] name The name of what is being validated. This is included in the output when the value is invalid
     # @param [Regexp] regex The regular expression to evaluate
     # @param [Any] v The value to validate.
-    def self.validate(name, regex, v)
+    def self.validate(_name, regex, v)
       raise ArgumentError, (ERR_REGEX % [v.inspect, regex.to_s]) unless (v.respond_to?(:to_s) && v.to_s.match(regex))
     end
   end

@@ -141,7 +141,7 @@ module Axlsx
 
     # Encrypt the package into a CFB using the password provided
     # This is not ready yet
-    def encrypt(file_name, password)
+    def encrypt(_file_name, _password)
       false
       # moc = MsOffCrypto.new(file_name, password)
       # moc.save
