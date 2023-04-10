@@ -621,11 +621,6 @@ Style/RandomWithOffset:
     - 'lib/axlsx/drawing/vml_shape.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Style/RedundantAssignment:
-  Exclude:
-    - 'lib/axlsx/stylesheet/styles.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/RedundantCondition:
   Exclude:
     - 'lib/axlsx/drawing/area_series.rb'
@@ -655,10 +650,6 @@ Style/RedundantRegexpEscape:
     - 'lib/axlsx.rb'
     - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
     - 'lib/axlsx/workbook/worksheet/table.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantSelf:
-  Enabled: false
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, AllowInnerSlashes.

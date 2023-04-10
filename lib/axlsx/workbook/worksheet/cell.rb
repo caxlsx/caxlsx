@@ -368,11 +368,11 @@ module Axlsx
     # @param [Cell, String] target The last cell, or str ref for the cell in the merge range
     def merge(target)
       start, stop = if target.is_a?(String)
-                      [self.r, target]
+                      [r, target]
                     elsif target.is_a?(Cell)
                       Axlsx.sort_cells([self, target]).map { |c| c.r }
                     end
-      self.row.worksheet.merge_cells "#{start}:#{stop}" unless stop.nil?
+      row.worksheet.merge_cells "#{start}:#{stop}" unless stop.nil?
     end
 
     # Serializes the cell
@@ -473,7 +473,7 @@ module Axlsx
       return unless INLINE_STYLES.include?(attr.to_sym)
 
       Axlsx.send(validator, value) unless validator.nil?
-      self.instance_variable_set :"@#{attr.to_s}", value
+      instance_variable_set :"@#{attr.to_s}", value
       @is_text_run = true
     end
 
@@ -522,14 +522,14 @@ module Axlsx
 
       case type
       when :date
-        self.style = STYLE_DATE if self.style == 0
+        self.style = STYLE_DATE if style == 0
         if !v.is_a?(Date) && v.respond_to?(:to_date)
           v.to_date
         else
           v
         end
       when :time
-        self.style = STYLE_DATE if self.style == 0
+        self.style = STYLE_DATE if style == 0
         if !v.is_a?(Time) && v.respond_to?(:to_time)
           v.to_time
         else

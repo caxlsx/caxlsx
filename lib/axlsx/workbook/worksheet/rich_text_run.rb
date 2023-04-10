@@ -197,7 +197,7 @@ module Axlsx
       return unless INLINE_STYLES.include?(attr.to_sym)
 
       Axlsx.send(validator, value) unless validator.nil?
-      self.instance_variable_set :"@#{attr.to_s}", value
+      instance_variable_set :"@#{attr.to_s}", value
     end
 
     # Serializes the RichTextRun

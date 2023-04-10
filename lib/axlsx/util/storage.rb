@@ -132,7 +132,7 @@ module Axlsx
       @left = @right = @child = -1
       @sector = @size = @created = @modified = 0
       options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
+        send("#{o[0]}=", o[1]) if respond_to? "#{o[0]}="
       end
       @color ||= COLORS[:black]
       @type ||= (data.nil? ? TYPES[:storage] : TYPES[:stream])

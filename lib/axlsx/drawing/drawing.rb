@@ -106,7 +106,7 @@ module Axlsx
     # An array of hyperlink objects associated with this drawings images
     # @return [Array]
     def hyperlinks
-      links = self.images.select { |a| a.hyperlink.is_a?(Hyperlink) }
+      links = images.select { |a| a.hyperlink.is_a?(Hyperlink) }
       links.map { |a| a.hyperlink }
     end
 

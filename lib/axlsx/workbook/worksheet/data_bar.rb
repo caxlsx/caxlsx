@@ -98,7 +98,7 @@ module Axlsx
     # @param [Color|String] v The color object, or rgb string value to apply
     def color=(v)
       @color = v if v.is_a? Color
-      self.color.rgb = v if v.is_a? String
+      color.rgb = v if v.is_a? String
       @color
     end
 
@@ -108,7 +108,7 @@ module Axlsx
     def to_xml_string(str = "")
       serialized_tag('dataBar', str) do
         value_objects.to_xml_string(str)
-        self.color.to_xml_string(str)
+        color.to_xml_string(str)
       end
     end
 

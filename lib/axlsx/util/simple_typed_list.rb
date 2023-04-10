@@ -159,7 +159,7 @@ module Axlsx
                    'reverse!', 'shift', 'shuffle!', 'slice!', 'sort!', 'uniq!',
                    'unshift', 'zip', 'flatten!', 'fill', 'drop', 'drop_while',
                    'delete_if', 'clear']
-    DELEGATES = Array.instance_methods - self.instance_methods - DESTRUCTIVE
+    DELEGATES = Array.instance_methods - instance_methods - DESTRUCTIVE
 
     DELEGATES.each do |method|
       class_eval %{

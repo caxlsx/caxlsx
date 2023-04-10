@@ -710,7 +710,7 @@ module Axlsx
     # @note The XLSX format does not support worksheet-specific styles. Even when using this method
     #     you're still working with the single global {Axlsx::Styles} object in the workbook.
     def styles
-      @styles ||= self.workbook.styles
+      @styles ||= workbook.styles
     end
 
     # shortcut level to specify the outline level for a series of rows

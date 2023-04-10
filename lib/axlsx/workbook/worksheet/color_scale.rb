@@ -20,7 +20,7 @@ module Axlsx
       #   color_scale = Axlsx::ColorScale.two_tone
       # @see examples/example.rb conditional formatting examples.
       def two_tone
-        self.new
+        new
       end
 
       # A builder for three tone color gradient
@@ -29,9 +29,9 @@ module Axlsx
       #   color_scale = Axlsx::ColorScale.three_tone
       # @see examples/example.rb conditional formatting examples.
       def three_tone
-        self.new({ :type => :min, :val => 0, :color => 'FFF8696B' },
-                 { :type => :percent, :val => '50', :color => 'FFFFEB84' },
-                 { :type => :max, :val => 0, :color => 'FF63BE7B' })
+        new({ :type => :min, :val => 0, :color => 'FFF8696B' },
+            { :type => :percent, :val => '50', :color => 'FFFFEB84' },
+            { :type => :max, :val => 0, :color => 'FF63BE7B' })
       end
     end
     # A simple typed list of cfvos
