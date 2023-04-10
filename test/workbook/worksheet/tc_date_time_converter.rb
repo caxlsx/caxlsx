@@ -7,7 +7,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
       Time.parse "1893-08-05"
       Time.parse "9999-12-31T23:59:59Z"
       true
-    rescue
+    rescue StandardError
       false
     end
   end

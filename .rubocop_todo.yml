@@ -643,14 +643,6 @@ Style/RegexpLiteral:
     - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'test/tc_package.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: implicit, explicit
-Style/RescueStandardError:
-  Exclude:
-    - 'lib/axlsx.rb'
-    - 'test/workbook/worksheet/tc_date_time_converter.rb'
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: ConvertCodeThatCanStartToReturnNil, AllowedMethods, MaxChainLength.
 # AllowedMethods: present?, blank?, presence, try, try!
