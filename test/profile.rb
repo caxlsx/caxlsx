@@ -21,4 +21,4 @@ profile = RubyProf.profile do
 end
 
 printer = RubyProf::FlatPrinter.new(profile)
-printer.print(STDOUT, {})
+printer.print($stdout, {})
