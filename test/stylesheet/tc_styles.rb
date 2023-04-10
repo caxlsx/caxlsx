@@ -129,7 +129,7 @@ class TestStyles < Test::Unit::TestCase
   end
 
   def test_parse_alignment_options
-    assert_equal(@styles.parse_alignment_options {}, nil, "noop if :alignment is not set")
+    assert_equal(@styles.parse_alignment_options, nil, "noop if :alignment is not set")
     assert(@styles.parse_alignment_options(:alignment => {}).is_a?(Axlsx::CellAlignment))
   end
 
@@ -161,7 +161,7 @@ class TestStyles < Test::Unit::TestCase
       :family => 1,
       :font_name => "woot font"
     }
-    assert_equal(@styles.parse_font_options {}, nil, "noop if no font keys are set")
+    assert_equal(@styles.parse_font_options, nil, "noop if no font keys are set")
     assert(@styles.parse_font_options(:b => 1).is_a?(Integer), "return index of font if not :dxf type")
     assert_equal(@styles.parse_font_options(:b => 1, :type => :dxf).class, Axlsx::Font, "return font object if :dxf type")
 
@@ -175,7 +175,7 @@ class TestStyles < Test::Unit::TestCase
   end
 
   def test_parse_fill_options
-    assert_equal(@styles.parse_fill_options {}, nil, "noop if no fill keys are set")
+    assert_equal(@styles.parse_fill_options, nil, "noop if no fill keys are set")
     assert(@styles.parse_fill_options(:bg_color => "DE").is_a?(Integer), "return index of fill if not :dxf type")
     assert_equal(@styles.parse_fill_options(:bg_color => "DE", :type => :dxf).class, Axlsx::Fill, "return fill object if :dxf type")
     f = @styles.parse_fill_options(:bg_color => "DE", :type => :dxf)
@@ -183,7 +183,7 @@ class TestStyles < Test::Unit::TestCase
   end
 
   def test_parse_protection_options
-    assert_equal(@styles.parse_protection_options {}, nil, "noop if no protection keys are set")
+    assert_equal(@styles.parse_protection_options, nil, "noop if no protection keys are set")
     assert_equal(@styles.parse_protection_options(:hidden => 1).class, Axlsx::CellProtection, "creates a new cell protection object")
   end
 

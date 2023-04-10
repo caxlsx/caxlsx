@@ -224,7 +224,6 @@ Style/HashConversion:
     - 'lib/axlsx.rb'
     - 'lib/axlsx/workbook/worksheet/cell_serializer.rb'
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
-    - 'test/drawing/tc_d_lbls.rb'
 
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowedReceivers.
