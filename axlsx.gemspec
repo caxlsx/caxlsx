@@ -1,4 +1,4 @@
-require File.expand_path('../lib/axlsx/version', __FILE__)
+require File.expand_path('lib/axlsx/version', __dir__)
 
 Gem::Specification.new do |s|
   s.name        = 'caxlsx'
