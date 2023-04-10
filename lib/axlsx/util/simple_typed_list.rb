@@ -81,8 +81,8 @@ module Axlsx
     # @raise [ArgumentError] if any of the values being joined are not
     # one of the allowed types
     # @return [SimpleTypedList]
-    def +(v)
-      v.each do |item|
+    def +(other)
+      other.each do |item|
         DataTypeValidator.validate :SimpleTypedList_plus, @allowed_types, item
         @list << item
       end
