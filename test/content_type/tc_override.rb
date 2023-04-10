@@ -1,4 +1,5 @@
-require 'tc_helper.rb'
+require 'tc_helper'
+
 class TestOverride < Test::Unit::TestCase
   def test_content_type_restriction
     assert_raise(ArgumentError, "requires known content type") { Axlsx::Override.new :ContentType => "asdf" }

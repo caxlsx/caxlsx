@@ -1,1 +1,1 @@
-require 'axlsx.rb'
+require 'axlsx'

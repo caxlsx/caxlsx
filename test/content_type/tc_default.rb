@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestDefault < Test::Unit::TestCase
   def test_content_type_restriction

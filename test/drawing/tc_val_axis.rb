@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestValAxis < Test::Unit::TestCase
   def setup

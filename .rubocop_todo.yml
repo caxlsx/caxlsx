@@ -614,10 +614,6 @@ Style/RandomWithOffset:
   Exclude:
     - 'lib/axlsx/drawing/vml_shape.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantFileExtensionInRequire:
-  Enabled: false
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/RedundantInterpolation:
   Exclude:

@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 class TestValidators < Test::Unit::TestCase
   def setup
   end

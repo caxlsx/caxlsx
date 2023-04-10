@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 class TestProtectedRange < Test::Unit::TestCase
   def setup
     @p = Axlsx::Package.new

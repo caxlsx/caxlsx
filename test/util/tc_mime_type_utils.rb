@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 class TestMimeTypeUtils < Test::Unit::TestCase
   def setup
     @test_img = File.dirname(__FILE__) + "/../fixtures/image1.jpeg"

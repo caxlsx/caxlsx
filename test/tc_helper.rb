@@ -7,4 +7,4 @@ end
 
 require 'test/unit'
 require "timecop"
-require "axlsx.rb"
+require "axlsx"

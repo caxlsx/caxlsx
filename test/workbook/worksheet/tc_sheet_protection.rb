@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 # <xsd:complexType name="CT_SheetProtection">
 # <xsd:attribute name="sheet" type="xsd:boolean" use="optional" default=0/>
