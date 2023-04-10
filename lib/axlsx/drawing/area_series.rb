@@ -35,7 +35,7 @@ module Axlsx
     # @param [Chart] chart
     def initialize(chart, options = {})
       @show_marker = false
-      @marker_symbol = options[:marker_symbol] ? options[:marker_symbol] : :default
+      @marker_symbol = options[:marker_symbol] || :default
       @smooth = false
       @labels, @data = nil, nil
       super(chart, options)
