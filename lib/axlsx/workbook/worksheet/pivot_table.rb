@@ -326,7 +326,7 @@ module Axlsx
     end
 
     def header_range
-      range.gsub(/^(\w+?)(\d+)\:(\w+?)\d+$/, '\1\2:\3\2')
+      range.gsub(/^(\w+?)(\d+):(\w+?)\d+$/, '\1\2:\3\2')
     end
   end
 end

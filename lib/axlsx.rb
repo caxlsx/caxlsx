@@ -130,7 +130,7 @@ module Axlsx
   # @param [String] range A cell range, for example A1:D5
   # @return [Array]
   def self.range_to_a(range)
-    range.match(/^(\w+?\d+)\:(\w+?\d+)$/)
+    range.match(/^(\w+?\d+):(\w+?\d+)$/)
     start_col, start_row = name_to_indices($1)
     end_col,   end_row   = name_to_indices($2)
     (start_row..end_row).to_a.map do |row_num|
