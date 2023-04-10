@@ -88,7 +88,7 @@ class TestStyles < Test::Unit::TestCase
   def test_parse_border_basic_options
     b_opts = { :border => { :diagonalUp => 1, :edges => [:left, :right], :color => "FFDADADA", :style => :thick } }
     b = @styles.parse_border_options b_opts
-    assert(b.is_a? Integer)
+    assert(b.is_a?(Integer))
     assert_equal(@styles.parse_border_options(b_opts.merge({ :type => :dxf })).class, Axlsx::Border)
     assert(@styles.borders.last.diagonalUp == 1, "border options are passed in to the initializer")
   end
