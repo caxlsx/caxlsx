@@ -51,7 +51,7 @@ module Axlsx
     def write_file
       if @current_file
         @buffer.rewind
-        File.open(@current_file, "wb") { |f| f.write @buffer.read }
+        File.binwrite(@current_file, @buffer.read)
       end
       @current_file = nil
       @buffer = StringIO.new
