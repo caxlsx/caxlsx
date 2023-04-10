@@ -22,7 +22,7 @@ module Axlsx
       def run_xml_string(cell, str = '')
         if cell.is_text_run?
           valid = RichTextRun::INLINE_STYLES - [:value, :type]
-          data = Hash[Axlsx.instance_values_for(cell).map { |k, v| [k.to_sym, v] }]
+          data = Axlsx.instance_values_for(cell).map { |k, v| [k.to_sym, v] }.to_h
           data = data.select { |key, value| valid.include?(key) && !value.nil? }
           RichText.new(cell.value.to_s, data).to_xml_string(str)
         elsif cell.contains_rich_text?

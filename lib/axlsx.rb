@@ -50,7 +50,7 @@ module Axlsx
   #
   # Defining as a class method on Axlsx to refrain from monkeypatching Object for all users of this gem.
   def self.instance_values_for(object)
-    Hash[object.instance_variables.map { |name| [name.to_s[1..-1], object.instance_variable_get(name)] }]
+    object.instance_variables.map { |name| [name.to_s[1..-1], object.instance_variable_get(name)] }.to_h
   end
 
   # determines the cell range for the items provided
