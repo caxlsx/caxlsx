@@ -118,7 +118,7 @@ class TestPackage < Test::Unit::TestCase
     assert(Axlsx.instance_values_for(@package)["app"].is_a?(Axlsx::App), 'App object not created')
     assert(Axlsx.instance_values_for(@package)["core"].is_a?(Axlsx::Core), 'Core object not created')
     assert(@package.workbook.is_a?(Axlsx::Workbook), 'Workbook object not created')
-    assert(Axlsx::Package.new.workbook.worksheets.size == 0, 'Workbook should not have sheets by default')
+    assert(Axlsx::Package.new.workbook.worksheets.empty?, 'Workbook should not have sheets by default')
   end
 
   def test_created_at_is_propagated_to_core
@@ -244,7 +244,7 @@ class TestPackage < Test::Unit::TestCase
   def test_validation
     assert_equal(@package.validate.size, 0, @package.validate)
     Axlsx::Workbook.send(:class_variable_set, :@@date1904, 9900)
-    assert(@package.validate.size > 0)
+    assert(!@package.validate.empty?)
   end
 
   def test_parts

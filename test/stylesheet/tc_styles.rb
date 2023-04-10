@@ -15,7 +15,7 @@ class TestStyles < Test::Unit::TestCase
       errors.push error
       puts error.message
     end
-    assert(errors.size == 0)
+    assert(errors.empty?)
   end
 
   def test_add_style_border_hash
@@ -283,7 +283,7 @@ class TestStyles < Test::Unit::TestCase
       errors.push error
       puts error.message
     end
-    assert(errors.size == 0)
+    assert(errors.empty?)
   end
 
   def test_border_top_without_border_regression

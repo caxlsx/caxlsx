@@ -668,10 +668,6 @@ Style/ZeroLengthPredicate:
     - 'lib/axlsx/util/simple_typed_list.rb'
     - 'lib/axlsx/workbook/workbook.rb'
     - 'lib/axlsx/workbook/worksheet/sheet_pr.rb'
-    - 'test/rels/tc_relationships.rb'
-    - 'test/stylesheet/tc_styles.rb'
-    - 'test/tc_package.rb'
-    - 'test/util/tc_simple_typed_list.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns.
