@@ -13,14 +13,14 @@ class TestSeriesTitle < Test::Unit::TestCase
 
   def test_initialization
     assert(@title.text == "")
-    assert(@title.cell == nil)
+    assert(@title.cell.nil?)
   end
 
   def test_text
     assert_raise(ArgumentError, "text must be a string") { @title.text = 123 }
     @title.cell = @row.cells.first
     @title.text = "bob"
-    assert(@title.cell == nil, "setting title with text clears the cell")
+    assert(@title.cell.nil?, "setting title with text clears the cell")
   end
 
   def test_cell

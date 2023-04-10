@@ -161,7 +161,7 @@ module Axlsx
         str << '</c:spPr>'
       end
       str << '</c:majorGridlines>'
-      @title.to_xml_string(str) unless @title == nil
+      @title.to_xml_string(str) unless @title.nil?
       # Need to set sourceLinked to 0 if we're setting a format code on this row
       # otherwise it will never take, as it will always prefer the 'General' formatting
       # of the cells themselves

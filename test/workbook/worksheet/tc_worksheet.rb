@@ -215,7 +215,7 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_drawing
-    assert @ws.drawing == nil
+    assert @ws.drawing.nil?
     @ws.add_chart(Axlsx::Pie3DChart)
     assert @ws.drawing.is_a?(Axlsx::Drawing)
   end

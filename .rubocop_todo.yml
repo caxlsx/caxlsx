@@ -329,21 +329,6 @@ Style/Next:
     - 'lib/axlsx/stylesheet/styles.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: predicate, comparison
-Style/NilComparison:
-  Exclude:
-    - 'lib/axlsx/drawing/axis.rb'
-    - 'lib/axlsx/drawing/chart.rb'
-    - 'lib/axlsx/drawing/view_3D.rb'
-    - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
-    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-    - 'test/drawing/tc_series_title.rb'
-    - 'test/drawing/tc_title.rb'
-    - 'test/workbook/worksheet/tc_page_setup.rb'
-    - 'test/workbook/worksheet/tc_worksheet.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: IncludeSemanticChanges.
 Style/NonNilCheck:
   Exclude:

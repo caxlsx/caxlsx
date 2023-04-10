@@ -544,9 +544,9 @@ module Axlsx
     # @param [Integer|Float|nil] widths
     def column_widths(*widths)
       widths.each_with_index do |value, index|
-        next if value == nil
+        next if value.nil?
 
-        Axlsx::validate_unsigned_numeric(value) unless value == nil
+        Axlsx::validate_unsigned_numeric(value) unless value.nil?
         find_or_create_column_info(index).width = value
       end
     end
