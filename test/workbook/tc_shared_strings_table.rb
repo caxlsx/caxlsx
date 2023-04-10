@@ -39,7 +39,7 @@ class TestSharedStringsTable < Test::Unit::TestCase
       puts error.message
       errors << error
     end
-    assert_equal(errors.size, 0, "sharedStirngs.xml Invalid" + errors.map { |e| e.message }.to_s)
+    assert_equal(errors.size, 0, "sharedStirngs.xml Invalid" + errors.map(&:message).to_s)
   end
 
   def test_remove_control_characters_in_xml_serialization
