@@ -451,7 +451,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_pivot_table 'G5:G6', 'A1:D10'
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert(schema.validate(doc).map { |e| puts e.message; e }.empty?, schema.validate(doc).map { |e| e.message }.join('\n'))
+    assert(schema.validate(doc).map { |e| puts e.message; e }.empty?, schema.validate(doc).map(&:message).join('\n'))
   end
 
   def test_relationships

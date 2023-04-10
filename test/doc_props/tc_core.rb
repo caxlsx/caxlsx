@@ -15,7 +15,7 @@ class TestCore < Test::Unit::TestCase
       puts error.message
       errors << error
     end
-    assert_equal(errors.size, 0, "core.xml Invalid" + errors.map { |e| e.message }.to_s)
+    assert_equal(errors.size, 0, "core.xml Invalid" + errors.map(&:message).to_s)
   end
 
   def test_populates_created

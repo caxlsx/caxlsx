@@ -38,6 +38,6 @@ class TestApp < Test::Unit::TestCase
     schema.validate(doc).each do |error|
       errors << error
     end
-    assert_equal(errors.size, 0, "app.xml invalid" + errors.map { |e| e.message }.to_s)
+    assert_equal(errors.size, 0, "app.xml invalid" + errors.map(&:message).to_s)
   end
 end
