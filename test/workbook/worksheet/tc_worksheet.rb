@@ -786,7 +786,7 @@ class TestWorksheet < Test::Unit::TestCase
       sz: 11,
       family: 1
     }
-    assert_equal b2_cell_style, wb.styles.style_index.values.find { |x| x == b2_cell_style }
+    assert_equal b2_cell_style, (wb.styles.style_index.values.find { |x| x == b2_cell_style })
 
     d3_cell_style = {
       border: {
@@ -799,7 +799,7 @@ class TestWorksheet < Test::Unit::TestCase
       sz: 11,
       family: 1
     }
-    assert_equal d3_cell_style, wb.styles.style_index.values.find { |x| x == d3_cell_style }
+    assert_equal d3_cell_style, (wb.styles.style_index.values.find { |x| x == d3_cell_style })
   end
 
   def test_mixed_borders_1

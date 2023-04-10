@@ -29,11 +29,6 @@ Layout/HashAlignment:
     - 'lib/axlsx/workbook/worksheet/border_creator.rb'
     - 'test/tc_axlsx.rb'
 
-# Configuration parameters: AllowedMethods, AllowedPatterns.
-Lint/AmbiguousBlockAssociation:
-  Exclude:
-    - 'test/workbook/worksheet/tc_worksheet.rb'
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowSafeAssignment.
 Lint/AssignmentInCondition:
