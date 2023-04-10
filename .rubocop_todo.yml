@@ -225,11 +225,6 @@ Style/Documentation:
     - 'lib/axlsx/workbook/worksheet/sheet_format_pr.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Style/EachForSimpleLoop:
-  Exclude:
-    - 'test/workbook/worksheet/tc_rich_text.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: compact, expanded
 Style/EmptyMethod:

@@ -7,7 +7,7 @@ class RichText < Test::Unit::TestCase
     p.workbook.styles.add_style :sz => 20
     @rt = Axlsx::RichText.new
     b = true
-    (0..26).each do |r|
+    27.times do |r|
       @rt.add_run "run #{r}, ", :b => (b = !b), :i => !b
     end
     @row = @ws.add_row [@rt]
