@@ -31,9 +31,7 @@ module Axlsx
 
     # Sets the target for this hyperlink. Anything other than :external instructs the library to treat the location as an in-workbook reference.
     # @param [Symbol] target
-    def target=(target)
-      @target = target
-    end
+    attr_writer :target
 
     # Sets the cell location of this hyperlink in the worksheet
     # @param [String|Cell] cell_reference The string reference or cell that defines where this hyperlink shows in the worksheet.

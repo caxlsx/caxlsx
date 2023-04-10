@@ -25,7 +25,7 @@ module Axlsx
     # created ConditionalFormattingRules.
     # @see ConditionalFormattingRule#initialize
     # @return [Array]
-    attr_reader :rules
+    attr_accessor :rules
 
     # Add Conditional Formatting Rules to this object. Rules can either
     # be already created {ConditionalFormattingRule} elements or
@@ -58,8 +58,6 @@ module Axlsx
       end
     end
 
-    # @see rules
-    def rules=(v); @rules = v end
     # @see sqref
     def sqref=(v); Axlsx.validate_string(v); @sqref = v end
 

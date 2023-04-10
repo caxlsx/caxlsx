@@ -26,7 +26,7 @@ module Axlsx
     # the fill color to use in the axis shape properties. This should be a 6 character long hex string
     # e.g. FF0000 for red
     # @return [String]
-    attr_reader :color
+    attr_accessor :color
 
     # the id of the axis.
     # @return [Integer]
@@ -79,14 +79,6 @@ module Axlsx
 
     # the title for the axis. This can be a cell or a fixed string.
     attr_reader :title
-
-    # The color for this axis. This value is used when rendering the axis line in the chart.
-    # colors should be in 6 character rbg format
-    # @return [String] the rbg color assinged.
-    # @see color
-    def color=(color_rgb)
-      @color = color_rgb
-    end
 
     # The crossing axis for this axis
     # @param [Axis] axis

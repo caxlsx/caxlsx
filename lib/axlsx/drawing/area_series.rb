@@ -15,7 +15,7 @@ module Axlsx
     # The fill color for this series.
     # Red, green, and blue is expressed as sequence of hex digits, RRGGBB. A perceptual gamma of 2.2 is used.
     # @return [String]
-    attr_reader :color
+    attr_accessor :color
 
     # show markers on values
     # @return [Boolean]
@@ -42,11 +42,6 @@ module Axlsx
       super(chart, options)
       @labels = AxDataSource.new(:data => options[:labels]) unless options[:labels].nil?
       @data = NumDataSource.new(options) unless options[:data].nil?
-    end
-
-    # @see color
-    def color=(v)
-      @color = v
     end
 
     # @see show_marker

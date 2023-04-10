@@ -427,22 +427,6 @@ Style/SymbolProc:
     - 'lib/axlsx/workbook/worksheet/worksheet_hyperlinks.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: ExactNameMatch, AllowPredicates, AllowDSLWriters, IgnoreClassMethods, AllowedMethods.
-# AllowedMethods: to_ary, to_a, to_c, to_enum, to_h, to_hash, to_i, to_int, to_io, to_open, to_path, to_proc, to_r, to_regexp, to_str, to_s, to_sym
-Style/TrivialAccessors:
-  Exclude:
-    - 'lib/axlsx/drawing/area_series.rb'
-    - 'lib/axlsx/drawing/axis.rb'
-    - 'lib/axlsx/drawing/bar_series.rb'
-    - 'lib/axlsx/drawing/bubble_series.rb'
-    - 'lib/axlsx/drawing/line_series.rb'
-    - 'lib/axlsx/drawing/scatter_series.rb'
-    - 'lib/axlsx/workbook/workbook.rb'
-    - 'lib/axlsx/workbook/worksheet/conditional_formatting.rb'
-    - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
-    - 'lib/axlsx/workbook/worksheet/worksheet_hyperlink.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/WhileUntilModifier:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/color_scale.rb'

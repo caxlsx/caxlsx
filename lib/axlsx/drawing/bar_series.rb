@@ -22,7 +22,7 @@ module Axlsx
     # The fill color for this series.
     # Red, green, and blue is expressed as sequence of hex digits, RRGGBB.
     # @return [String]
-    attr_reader :series_color
+    attr_accessor :series_color
 
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
@@ -42,10 +42,6 @@ module Axlsx
 
     # @see colors
     def colors=(v) DataTypeValidator.validate "BarSeries.colors", [Array], v; @colors = v end
-
-    def series_color=(v)
-      @series_color = v
-    end
 
     # @see shape
     def shape=(v)

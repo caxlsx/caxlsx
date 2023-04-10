@@ -16,10 +16,10 @@ module Axlsx
     # The fill color for this series.
     # Red, green, and blue is expressed as sequence of hex digits, RRGGBB. A perceptual gamma of 2.2 is used.
     # @return [String]
-    attr_reader :color
+    attr_accessor :color
 
     # @return [String]
-    attr_reader :ln_width
+    attr_accessor :ln_width
 
     # Line smoothing between data points
     # @return [Boolean]
@@ -53,20 +53,10 @@ module Axlsx
       @yData = NumDataSource.new({ :tag_name => :yVal, :data => options[:yData] }) unless options[:yData].nil?
     end
 
-    # @see color
-    def color=(v)
-      @color = v
-    end
-
     # @see smooth
     def smooth=(v)
       Axlsx.validate_boolean(v)
       @smooth = v
-    end
-
-    # @see ln_width
-    def ln_width=(v)
-      @ln_width = v
     end
 
     # @see marker_symbol

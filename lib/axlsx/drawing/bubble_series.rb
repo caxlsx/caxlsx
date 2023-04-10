@@ -20,7 +20,7 @@ module Axlsx
     # The fill color for this series.
     # Red, green, and blue is expressed as sequence of hex digits, RRGGBB. A perceptual gamma of 2.2 is used.
     # @return [String]
-    attr_reader :color
+    attr_accessor :color
 
     # Creates a new BubbleSeries
     def initialize(chart, options = {})
@@ -29,11 +29,6 @@ module Axlsx
       @xData = AxDataSource.new(:tag_name => :xVal, :data => options[:xData]) unless options[:xData].nil?
       @yData = NumDataSource.new({ :tag_name => :yVal, :data => options[:yData] }) unless options[:yData].nil?
       @bubbleSize = NumDataSource.new({ :tag_name => :bubbleSize, :data => options[:bubbleSize] }) unless options[:bubbleSize].nil?
-    end
-
-    # @see color
-    def color=(v)
-      @color = v
     end
 
     # Serializes the object

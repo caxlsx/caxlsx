@@ -3,7 +3,7 @@ module Axlsx
   class RichTextRun
     include Axlsx::OptionsParser
 
-    attr_reader :value
+    attr_accessor :value
 
     # A list of allowed inline style attributes used for validation
     INLINE_STYLES = [:font_name, :charset,
@@ -14,10 +14,6 @@ module Axlsx
     def initialize(value, options = {})
       self.value = value
       parse_options(options)
-    end
-
-    def value=(value)
-      @value = value
     end
 
     attr_accessor :cell
