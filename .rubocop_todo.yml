@@ -267,7 +267,6 @@ Style/MutableConstant:
     - 'lib/axlsx/util/constants.rb'
     - 'lib/axlsx/util/simple_typed_list.rb'
     - 'lib/axlsx/util/storage.rb'
-    - 'lib/axlsx/version.rb'
     - 'lib/axlsx/workbook/worksheet/auto_filter/filter_column.rb'
     - 'lib/axlsx/workbook/worksheet/auto_filter/filters.rb'
     - 'lib/axlsx/workbook/worksheet/data_bar.rb'
