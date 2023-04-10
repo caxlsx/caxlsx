@@ -367,9 +367,6 @@ Style/NumericPredicate:
     - 'test/drawing/tc_marker.rb'
     - 'test/drawing/tc_one_cell_anchor.rb'
     - 'test/drawing/tc_two_cell_anchor.rb'
-    - 'test/rels/tc_relationships.rb'
-    - 'test/stylesheet/tc_styles.rb'
-    - 'test/tc_package.rb'
     - 'test/util/tc_simple_typed_list.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
