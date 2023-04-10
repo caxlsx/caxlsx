@@ -734,11 +734,6 @@ Style/TrivialAccessors:
     - 'lib/axlsx/workbook/worksheet/worksheet_hyperlink.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Style/WhileUntilDo:
-  Exclude:
-    - 'lib/axlsx.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/WhileUntilModifier:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/color_scale.rb'

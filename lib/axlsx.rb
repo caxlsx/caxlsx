@@ -110,7 +110,7 @@ module Axlsx
   # @return [String]
   def self.col_ref(index)
     chars = ''
-    while index >= 26 do
+    while index >= 26
       index, char = index.divmod(26)
       chars.prepend((char + 65).chr)
       index -= 1
