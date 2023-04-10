@@ -53,45 +53,45 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_page_margins
-    assert(@ws.page_margins.is_a? Axlsx::PageMargins)
+    assert(@ws.page_margins.is_a?(Axlsx::PageMargins))
   end
 
   def test_page_margins_yeild
     @ws.page_margins do |pm|
-      assert(pm.is_a? Axlsx::PageMargins)
+      assert(pm.is_a?(Axlsx::PageMargins))
       assert(@ws.page_margins == pm)
     end
   end
 
   def test_page_setup
-    assert(@ws.page_setup.is_a? Axlsx::PageSetup)
+    assert(@ws.page_setup.is_a?(Axlsx::PageSetup))
   end
 
   def test_page_setup_yield
     @ws.page_setup do |ps|
-      assert(ps.is_a? Axlsx::PageSetup)
+      assert(ps.is_a?(Axlsx::PageSetup))
       assert(@ws.page_setup == ps)
     end
   end
 
   def test_print_options
-    assert(@ws.print_options.is_a? Axlsx::PrintOptions)
+    assert(@ws.print_options.is_a?(Axlsx::PrintOptions))
   end
 
   def test_print_options_yield
     @ws.print_options do |po|
-      assert(po.is_a? Axlsx::PrintOptions)
+      assert(po.is_a?(Axlsx::PrintOptions))
       assert(@ws.print_options == po)
     end
   end
 
   def test_header_footer
-    assert(@ws.header_footer.is_a? Axlsx::HeaderFooter)
+    assert(@ws.header_footer.is_a?(Axlsx::HeaderFooter))
   end
 
   def test_header_footer_yield
     @ws.header_footer do |hf|
-      assert(hf.is_a? Axlsx::HeaderFooter)
+      assert(hf.is_a?(Axlsx::HeaderFooter))
       assert(@ws.header_footer == hf)
     end
   end
