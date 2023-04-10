@@ -645,20 +645,6 @@ Style/RedundantInterpolation:
     - 'test/content_type/tc_content_type.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Style/RedundantParentheses:
-  Exclude:
-    - 'lib/axlsx/drawing/area_series.rb'
-    - 'lib/axlsx/drawing/bar_3D_chart.rb'
-    - 'lib/axlsx/drawing/bar_chart.rb'
-    - 'lib/axlsx/drawing/line_3D_chart.rb'
-    - 'lib/axlsx/drawing/line_series.rb'
-    - 'lib/axlsx/drawing/scatter_series.rb'
-    - 'lib/axlsx/package.rb'
-    - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
-    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-    - 'test/stylesheet/tc_styles.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/RedundantRegexpEscape:
   Exclude:
     - 'lib/axlsx.rb'
@@ -773,9 +759,6 @@ Style/SymbolProc:
 # SupportedStyles: require_parentheses, require_no_parentheses, require_parentheses_when_complex
 Style/TernaryParentheses:
   Exclude:
-    - 'lib/axlsx/drawing/area_series.rb'
-    - 'lib/axlsx/drawing/line_series.rb'
-    - 'lib/axlsx/drawing/scatter_series.rb'
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
 
 # This cop supports safe autocorrection (--autocorrect).

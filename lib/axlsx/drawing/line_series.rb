@@ -92,7 +92,7 @@ module Axlsx
 
         @labels.to_xml_string(str) unless @labels.nil?
         @data.to_xml_string(str) unless @data.nil?
-        str << ('<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>')
+        str << ('<c:smooth val="' << (smooth ? '1' : '0') << '"/>')
       end
     end
 

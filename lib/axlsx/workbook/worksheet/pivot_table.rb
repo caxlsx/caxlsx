@@ -244,7 +244,7 @@ module Axlsx
         str << "<dataFields count=\"#{data.size}\">"
         data.each do |datum_value|
           # The correct name prefix in ["Sum","Average", etc...]
-          str << "<dataField name='#{(datum_value[:subtotal] || '')} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
+          str << "<dataField name='#{datum_value[:subtotal] || ''} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
           str << " numFmtId='#{datum_value[:num_fmt]}'" if datum_value[:num_fmt]
           str << " subtotal='#{datum_value[:subtotal]}' " if datum_value[:subtotal]
           str << "/>"

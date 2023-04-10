@@ -263,7 +263,7 @@ module Axlsx
       [
         { :entry => CONTENT_TYPES_PN, :doc => content_types, :schema => CONTENT_TYPES_XSD },
         { :entry => RELS_PN, :doc => relationships, :schema => RELS_XSD },
-        *(parts.sort_by { |part| part[:entry] }.reverse)
+        *parts.sort_by { |part| part[:entry] }.reverse
       ]
     end
 

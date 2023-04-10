@@ -48,7 +48,7 @@ module Axlsx
     # @see gapDepth
     def gap_depth=(v)
       RegexValidator.validate "Line3DChart.gapWidth", GAP_AMOUNT_PERCENT, v
-      @gap_depth = (v)
+      @gap_depth = v
     end
     alias :gapDepth= :gap_depth=
 

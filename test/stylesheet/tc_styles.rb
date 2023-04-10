@@ -240,8 +240,8 @@ class TestStyles < Test::Unit::TestCase
     dxf = @styles.dxfs.last
     assert_equal(@styles.dxfs.last.fill.fill_type.bgColor.rgb, "FF000000", "fill created with color")
 
-    assert_equal(font_count, (@styles.fonts.size), "font not created under styles")
-    assert_equal(fill_count, (@styles.fills.size), "fill not created under styles")
+    assert_equal(font_count, @styles.fonts.size, "font not created under styles")
+    assert_equal(fill_count, @styles.fills.size, "fill not created under styles")
 
     assert(dxf.border.is_a?(Axlsx::Border), "border is set")
     assert_equal(nil, dxf.numFmt, "number format is not set")
