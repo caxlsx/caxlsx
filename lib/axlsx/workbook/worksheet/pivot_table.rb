@@ -209,7 +209,7 @@ module Axlsx
         end
         str << '</rowFields>'
         str << ('<rowItems count="' << rows.size.to_s << '">')
-        rows.size.times do |i|
+        rows.size.times do |_i|
           str << '<i/>'
         end
         str << '</rowItems>'
@@ -219,7 +219,7 @@ module Axlsx
           str << '<colFields count="1"><field x="-2"/></colFields>'
           str << "<colItems count=\"#{data.size}\">"
           str << '<i><x/></i>'
-          data[1..-1].each_with_index do |datum_value, i|
+          data[1..-1].each_with_index do |_datum_value, i|
             str << "<i i=\"#{i + 1}\"><x v=\"#{i + 1}\"/></i>"
           end
           str << '</colItems>'

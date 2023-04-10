@@ -36,7 +36,7 @@ class TestBarSeries < Test::Unit::TestCase
 
   def test_to_xml_string
     doc = Nokogiri::XML(@chart.to_xml_string)
-    @series.colors.each_with_index do |color, index|
+    @series.colors.each_with_index do |_color, index|
       assert_equal(doc.xpath("//c:dPt/c:idx[@val='#{index}']").size, 1)
       assert_equal(doc.xpath("//c:dPt/c:spPr/a:solidFill/a:srgbClr[@val='#{@series.colors[index]}']").size, 1)
     end

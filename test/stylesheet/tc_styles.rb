@@ -140,7 +140,7 @@ class TestStyles < Test::Unit::TestCase
     original_attributes = Axlsx.instance_values_for(original)
     assert_equal(1, created.b)
     assert_equal(99, created.sz)
-    copied = original_attributes.reject { |key, value| %w(b sz).include? key }
+    copied = original_attributes.reject { |key, _value| %w(b sz).include? key }
     instance_vals = Axlsx.instance_values_for(created)
     copied.each do |key, value|
       assert_equal(instance_vals[key], value)

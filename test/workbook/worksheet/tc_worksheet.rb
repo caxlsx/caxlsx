@@ -260,7 +260,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_cols_with_block
     @ws.add_row [1, 2, 3]
     @ws.add_row [1]
-    cols = @ws.cols { |row, column| :foo }
+    cols = @ws.cols { |_row, _column| :foo }
     assert_equal(:foo, cols[1][1])
   end
 
