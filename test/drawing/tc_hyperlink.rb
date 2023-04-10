@@ -9,8 +9,7 @@ class TestHyperlink < Test::Unit::TestCase
     @hyperlink = @image.hyperlink
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_href
     assert_nothing_raised { @hyperlink.href = "http://axlsx.blogspot.com" }

@@ -5,8 +5,7 @@ class TestSerAxis < Test::Unit::TestCase
     @axis = Axlsx::SerAxis.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_options
     a = Axlsx::SerAxis.new(:tick_lbl_skip => 9, :tick_mark_skip => 7)

@@ -6,8 +6,7 @@ class TestDxf < Test::Unit::TestCase
     @styles = Axlsx::Styles.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(@item.alignment, nil)

@@ -10,8 +10,7 @@ class TestChart < Test::Unit::TestCase
     @chart = ws.add_chart Axlsx::Bar3DChart, :title => "fishery", :bg_color => "000000"
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert_equal(@p.workbook.charts.last, @chart, "the chart is in the workbook")

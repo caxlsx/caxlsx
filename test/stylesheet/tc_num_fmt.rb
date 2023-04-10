@@ -5,8 +5,7 @@ class TestNumFmt < Test::Unit::TestCase
     @item = Axlsx::NumFmt.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(@item.numFmtId, 0)

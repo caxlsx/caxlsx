@@ -6,8 +6,7 @@ class TestWorkbook < Test::Unit::TestCase
     @wb = p.workbook
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_worksheet_users_xml_space
     sheet = @wb.add_worksheet(:name => 'foo')

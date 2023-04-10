@@ -5,8 +5,7 @@ class TestValAxis < Test::Unit::TestCase
     @axis = Axlsx::ValAxis.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert_equal(@axis.cross_between, :between, "axis crossBetween default incorrect")

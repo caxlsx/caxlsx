@@ -5,8 +5,7 @@ class TestView3D < Test::Unit::TestCase
     @view = Axlsx::View3D.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_options
     v = Axlsx::View3D.new :rot_x => 10, :rot_y => 5, :h_percent => "30%", :depth_percent => "45%", :r_ang_ax => false, :perspective => 10

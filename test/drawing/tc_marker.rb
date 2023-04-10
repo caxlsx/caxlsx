@@ -5,8 +5,7 @@ class TestMarker < Test::Unit::TestCase
     @marker = Axlsx::Marker.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert(@marker.col == 0)

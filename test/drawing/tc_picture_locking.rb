@@ -5,8 +5,7 @@ class TestPictureLocking < Test::Unit::TestCase
     @item = Axlsx::PictureLocking.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(Axlsx.instance_values_for(@item).size, 1)

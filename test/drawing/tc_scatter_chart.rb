@@ -19,8 +19,7 @@ class TestScatterChart < Test::Unit::TestCase
     end
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_scatter_style
     @chart.scatterStyle = :marker

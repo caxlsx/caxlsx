@@ -5,8 +5,7 @@ class TestTableStyles < Test::Unit::TestCase
     @item = Axlsx::TableStyles.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(@item.defaultTableStyle, "TableStyleMedium9")

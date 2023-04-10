@@ -225,12 +225,6 @@ Style/Documentation:
     - 'lib/axlsx/workbook/worksheet/sheet_format_pr.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: compact, expanded
-Style/EmptyMethod:
-  Enabled: false
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/EvalWithLocation:
   Exclude:
     - 'lib/axlsx/util/simple_typed_list.rb'

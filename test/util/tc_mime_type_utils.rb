@@ -5,8 +5,7 @@ class TestMimeTypeUtils < Test::Unit::TestCase
     @test_img_url = "https://via.placeholder.com/150.png"
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_mime_type_utils
     assert_equal(Axlsx::MimeTypeUtils::get_mime_type(@test_img), 'image/jpeg')

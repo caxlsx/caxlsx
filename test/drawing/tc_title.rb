@@ -11,8 +11,7 @@ class TestTitle < Test::Unit::TestCase
     @chart = ws.add_chart Axlsx::Bar3DChart
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert(@title.text == "")

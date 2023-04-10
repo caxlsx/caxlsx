@@ -5,8 +5,7 @@ class TestTableStyle < Test::Unit::TestCase
     @item = Axlsx::TableStyle.new "fisher"
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(@item.name, "fisher")

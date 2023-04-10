@@ -5,8 +5,7 @@ class TestCellProtection < Test::Unit::TestCase
     @item = Axlsx::CellProtection.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(@item.hidden, nil)

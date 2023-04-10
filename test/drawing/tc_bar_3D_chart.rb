@@ -8,8 +8,7 @@ class TestBar3DChart < Test::Unit::TestCase
     @chart = ws.add_chart Axlsx::Bar3DChart, :title => "fishery"
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert_equal(@chart.grouping, :clustered, "grouping defualt incorrect")

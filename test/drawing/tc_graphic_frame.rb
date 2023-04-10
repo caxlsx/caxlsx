@@ -8,8 +8,7 @@ class TestGraphicFrame < Test::Unit::TestCase
     @frame = @chart.graphic_frame
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert(@frame.anchor.is_a?(Axlsx::TwoCellAnchor))

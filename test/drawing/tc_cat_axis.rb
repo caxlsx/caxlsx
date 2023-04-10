@@ -5,8 +5,7 @@ class TestCatAxis < Test::Unit::TestCase
     @axis = Axlsx::CatAxis.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert_equal(@axis.auto, 1, "axis auto default incorrect")
