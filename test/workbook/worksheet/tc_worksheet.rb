@@ -117,16 +117,16 @@ class TestWorksheet < Test::Unit::TestCase
     print_options = { :grid_lines => true, :headings => true, :horizontal_centered => true, :vertical_centered => true }
     header_footer = { :different_first => false, :different_odd_even => false, :odd_header => 'Header' }
     optioned = @ws.workbook.add_worksheet(:name => 'bob', :page_margins => page_margins, :page_setup => page_setup, :print_options => print_options, :header_footer => header_footer)
-    page_margins.keys.each do |key|
+    page_margins.each_key do |key|
       assert_equal(page_margins[key], optioned.page_margins.send(key))
     end
-    page_setup.keys.each do |key|
+    page_setup.each_key do |key|
       assert_equal(page_setup[key], optioned.page_setup.send(key))
     end
-    print_options.keys.each do |key|
+    print_options.each_key do |key|
       assert_equal(print_options[key], optioned.print_options.send(key))
     end
-    header_footer.keys.each do |key|
+    header_footer.each_key do |key|
       assert_equal(header_footer[key], optioned.header_footer.send(key))
     end
     assert_equal(optioned.name, 'bob')

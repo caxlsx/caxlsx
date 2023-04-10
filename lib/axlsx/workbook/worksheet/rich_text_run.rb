@@ -209,7 +209,7 @@ module Axlsx
       data = data.select { |key, value| valid.include?(key) && !value.nil? }
 
       str << '<r><rPr>'
-      data.keys.each do |key|
+      data.each_key do |key|
         case key
         when :font_name
           str << ('<rFont val="' << font_name << '"/>')
