@@ -87,12 +87,6 @@ Lint/NonLocalExitFromIterator:
     - 'lib/axlsx/util/validators.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowPercentLiteralArrayArgument.
-Lint/RedundantSplatExpansion:
-  Exclude:
-    - 'test/drawing/tc_d_lbls.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Lint/RedundantStringCoercion:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/auto_filter/filters.rb'
@@ -366,6 +360,7 @@ Style/HashConversion:
     - 'lib/axlsx.rb'
     - 'lib/axlsx/workbook/worksheet/cell_serializer.rb'
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
+    - 'test/drawing/tc_d_lbls.rb'
 
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowedReceivers.
