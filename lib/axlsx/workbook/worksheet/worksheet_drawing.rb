@@ -13,9 +13,7 @@ module Axlsx
       @drawing = nil
     end
 
-    attr_reader :worksheet
-
-    attr_reader :drawing
+    attr_reader :worksheet, :drawing
 
     # adds a chart to the drawing object
     # @param [Class] chart_type The type of chart to add
