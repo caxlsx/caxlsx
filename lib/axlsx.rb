@@ -32,7 +32,7 @@ require 'time'
 
 begin
   if Gem.loaded_specs.has_key?("axlsx_styler")
-    raise StandardError.new("Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly.")
+    raise StandardError, "Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly."
   end
 rescue StandardError
   # Do nothing

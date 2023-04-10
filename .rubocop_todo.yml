@@ -430,16 +430,6 @@ Style/QuotedSymbols:
     - 'lib/axlsx/workbook/worksheet/worksheet_hyperlink.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, AllowedCompactTypes.
-# SupportedStyles: compact, exploded
-Style/RaiseArgs:
-  Exclude:
-    - 'lib/axlsx.rb'
-    - 'lib/axlsx/package.rb'
-    - 'lib/axlsx/util/zip_command.rb'
-    - 'lib/axlsx/workbook/worksheet/border_creator.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/RandomWithOffset:
   Exclude:
     - 'lib/axlsx/drawing/vml_shape.rb'

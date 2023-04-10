@@ -383,7 +383,7 @@ module Axlsx
         options.merge!(secondary_options || {})
         invalid_keys = options.keys - [:confirm_valid, :zip_command]
         if invalid_keys.any?
-          raise ArgumentError.new("Invalid keyword arguments: #{invalid_keys}")
+          raise ArgumentError, "Invalid keyword arguments: #{invalid_keys}"
         end
 
         [options.fetch(:confirm_valid, false), options.fetch(:zip_command, nil)]

@@ -11,12 +11,12 @@ module Axlsx
       if @edges == :all
         @edges = Axlsx::Border::EDGES
       elsif !@edges.is_a?(Array)
-        raise ArgumentError.new("Invalid edges provided, #{@edges}")
+        raise ArgumentError, "Invalid edges provided, #{@edges}"
       else
         @edges = @edges.map { |x| x&.to_sym }.uniq
 
         unless (@edges - Axlsx::Border::EDGES).empty?
-          raise ArgumentError.new("Invalid edges provided, #{edges}")
+          raise ArgumentError, "Invalid edges provided, #{edges}"
         end
       end
     end

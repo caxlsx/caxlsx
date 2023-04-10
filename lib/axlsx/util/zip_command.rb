@@ -64,7 +64,7 @@ module Axlsx
       command = "cd #{escaped_dir} && #{@zip_command} #{output} #{inputs}"
       stdout_and_stderr, status = Open3.capture2e(command)
       unless status.success?
-        raise(ZipError.new(stdout_and_stderr))
+        raise ZipError, stdout_and_stderr
       end
     end
   end
