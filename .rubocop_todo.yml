@@ -204,11 +204,6 @@ Style/ConditionalAssignment:
     - 'lib/axlsx/workbook/worksheet/data_bar.rb'
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-Style/DefWithParentheses:
-  Exclude:
-    - 'lib/axlsx/stylesheet/styles.rb'
-
 Style/DocumentDynamicEvalDefinition:
   Exclude:
     - 'lib/axlsx/util/simple_typed_list.rb'

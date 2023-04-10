@@ -115,7 +115,7 @@ module Axlsx
     attr_reader :tableStyles
 
     # Creates a new Styles object and prepopulates it with the requires objects to generate a valid package style part.
-    def initialize()
+    def initialize
       load_default_styles
     end
 
