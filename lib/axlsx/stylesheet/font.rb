@@ -122,8 +122,8 @@ module Axlsx
 
     # @see u
     def u=(v)
-      v = :single if (v == true || v == 1 || v == :true || v == 'true')
-      v = :none if (v == false || v == 0 || v == :false || v == 'false')
+      v = :single if v == true || v == 1 || v == :true || v == 'true'
+      v = :none if v == false || v == 0 || v == :false || v == 'false'
       Axlsx::validate_cell_u v
       @u = v
     end

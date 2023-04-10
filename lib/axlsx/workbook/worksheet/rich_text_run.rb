@@ -128,7 +128,7 @@ module Axlsx
 
     # @see u
     def u=(v)
-      v = :single if (v == true || v == 1 || v == :true || v == 'true')
+      v = :single if v == true || v == 1 || v == :true || v == 'true'
       set_run_style :validate_cell_u, :u, v
     end
 

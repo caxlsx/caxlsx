@@ -236,7 +236,7 @@ module Axlsx
 
       str << '<dataValidation '
       str << Axlsx.instance_values_for(self).map do |key, value|
-        '' << key << '="' << Axlsx.booleanize(value).to_s << '"' if (valid_attributes.include?(key.to_sym) && !CHILD_ELEMENTS.include?(key.to_sym))
+        '' << key << '="' << Axlsx.booleanize(value).to_s << '"' if valid_attributes.include?(key.to_sym) && !CHILD_ELEMENTS.include?(key.to_sym)
       end.join(' ')
       str << '>'
       str << ('<formula1>' << formula1 << '</formula1>') if @formula1 && valid_attributes.include?(:formula1)
