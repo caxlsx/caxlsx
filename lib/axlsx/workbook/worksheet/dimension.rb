@@ -37,7 +37,7 @@ module Axlsx
     def to_xml_string(str = '')
       return if worksheet.rows.empty?
 
-      str << "<dimension ref=\"%s\"></dimension>" % sqref
+      str << ("<dimension ref=\"%s\"></dimension>" % sqref)
     end
 
     # The first cell in the dimension

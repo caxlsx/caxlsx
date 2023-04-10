@@ -34,20 +34,6 @@ Lint/AmbiguousBlockAssociation:
   Exclude:
     - 'test/workbook/worksheet/tc_worksheet.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-Lint/AmbiguousOperatorPrecedence:
-  Exclude:
-    - 'lib/axlsx/drawing/area_series.rb'
-    - 'lib/axlsx/drawing/line_series.rb'
-    - 'lib/axlsx/drawing/pie_series.rb'
-    - 'lib/axlsx/workbook/worksheet/dimension.rb'
-    - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
-    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-    - 'test/tc_axlsx.rb'
-    - 'test/workbook/worksheet/tc_cell.rb'
-    - 'test/workbook/worksheet/tc_date_time_converter.rb'
-    - 'test/workbook/worksheet/tc_worksheet.rb'
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowSafeAssignment.
 Lint/AssignmentInCondition:
@@ -343,9 +329,6 @@ Style/NumericPredicate:
     - 'test/drawing/tc_marker.rb'
     - 'test/drawing/tc_one_cell_anchor.rb'
     - 'test/drawing/tc_two_cell_anchor.rb'
-    - 'test/rels/tc_relationships.rb'
-    - 'test/stylesheet/tc_styles.rb'
-    - 'test/tc_package.rb'
     - 'test/util/tc_simple_typed_list.rb'
 
 # Configuration parameters: AllowedMethods.

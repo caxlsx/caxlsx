@@ -45,7 +45,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_exception_if_name_too_long_because_of_multibyte_characters
     four_characters_for_excel = "\u{1F1EB 1F1F7}" # french flag emoji
     assert_raises(ArgumentError, "name too long!") do
-      @ws.name = four_characters_for_excel + "x" * 28
+      @ws.name = four_characters_for_excel + ("x" * 28)
     end
     assert_nothing_raised { @ws.name = "#{four_characters_for_excel}123456789012345678901234567" }
     assert_nothing_raised { @ws.name = "123456789012345678901234567890…" }

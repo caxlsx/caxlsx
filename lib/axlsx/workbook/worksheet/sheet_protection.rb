@@ -103,7 +103,7 @@ module Axlsx
         i += 1
         char     = char.unpack('c')[0] << i # ord << i
         low_15   = char & 0x7fff
-        high_15  = char & 0x7fff << 15
+        high_15  = char & (0x7fff << 15)
         high_15  = high_15 >> 15
         char     = low_15 | high_15
       end

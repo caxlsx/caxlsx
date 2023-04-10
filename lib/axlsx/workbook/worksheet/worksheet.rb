@@ -652,11 +652,11 @@ module Axlsx
     # @return [Relationships]
     def relationships
       r = Relationships.new
-      r + [tables.relationships,
-           worksheet_comments.relationships,
-           hyperlinks.relationships,
-           worksheet_drawing.relationship,
-           pivot_tables.relationships].flatten.compact || []
+      (r + [tables.relationships,
+            worksheet_comments.relationships,
+            hyperlinks.relationships,
+            worksheet_drawing.relationship,
+            pivot_tables.relationships].flatten.compact) || []
       r
     end
 
