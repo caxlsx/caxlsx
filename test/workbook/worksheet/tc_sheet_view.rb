@@ -5,8 +5,8 @@ class TestSheetView < Test::Unit::TestCase
   def setup
     # inverse defaults for booleans
     @boolean_options = { :right_to_left => true, :show_formulas => true, :show_outline_symbols => true,
-      :show_white_space => true, :tab_selected => true, :default_grid_color => false, :show_grid_lines => false,
-      :show_row_col_headers => false, :show_ruler => false, :show_zeros => false, :window_protection => true }
+                         :show_white_space => true, :tab_selected => true, :default_grid_color => false, :show_grid_lines => false,
+                         :show_row_col_headers => false, :show_ruler => false, :show_zeros => false, :window_protection => true }
     @symbol_options = { :view => :page_break_preview }
     @nil_options = { :color_id => 2, :top_left_cell => 'A2' }
     @int_0 = { :zoom_scale_normal => 100, :zoom_scale_page_layout_view => 100, :zoom_scale_sheet_layout_view => 100, :workbook_view_id => 2 }

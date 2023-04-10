@@ -26,11 +26,11 @@ class TestConditionalFormatting < Test::Unit::TestCase
     data_bar = Axlsx::DataBar.new :color => "FFFF0000"
     icon_set = Axlsx::IconSet.new :iconSet => "5Rating"
     cfr = Axlsx::ConditionalFormattingRule.new({ :type => :containsText, :text => "TRUE",
-                                                      :dxfId => 0, :priority => 1,
-                                                      :formula => 'NOT(ISERROR(SEARCH("FALSE",AB1)))',
-                                                      :color_scale => color_scale,
-                                                      :data_bar => data_bar,
-                                                      :icon_set => icon_set })
+                                                 :dxfId => 0, :priority => 1,
+                                                 :formula => 'NOT(ISERROR(SEARCH("FALSE",AB1)))',
+                                                 :color_scale => color_scale,
+                                                 :data_bar => data_bar,
+                                                 :icon_set => icon_set })
 
     assert(cfr.data_bar.is_a?(Axlsx::DataBar))
     assert(cfr.icon_set.is_a?(Axlsx::IconSet))
@@ -69,11 +69,11 @@ class TestConditionalFormatting < Test::Unit::TestCase
     icon_set = Axlsx::IconSet.new :iconSet => "5Rating"
 
     cfs = @ws.add_conditional_formatting("B2:B2", [{ :type => :containsText, :text => "TRUE",
-                                                      :dxfId => 0, :priority => 1,
-                                                      :formula => 'NOT(ISERROR(SEARCH("FALSE",AB1)))',
-                                                      :color_scale => color_scale,
-                                                      :data_bar => data_bar,
-                                                      :icon_set => icon_set }])
+                                                     :dxfId => 0, :priority => 1,
+                                                     :formula => 'NOT(ISERROR(SEARCH("FALSE",AB1)))',
+                                                     :color_scale => color_scale,
+                                                     :data_bar => data_bar,
+                                                     :icon_set => icon_set }])
     doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
     assert_equal(1, doc.xpath(".//conditionalFormatting[@sqref='B2:B2']//cfRule[@type='containsText'][@dxfId=0][@priority=1]").size)
     assert doc.xpath(".//conditionalFormatting//cfRule[@type='containsText'][@dxfId=0][@priority=1]//formula='NOT(ISERROR(SEARCH(\"FALSE\",AB1)))'")
@@ -104,9 +104,9 @@ class TestConditionalFormatting < Test::Unit::TestCase
   def test_many_options
     cf = Axlsx::ConditionalFormatting.new(:sqref => "B3:B4")
     cf.add_rule({ :type => :cellIs, :aboveAverage => false, :bottom => false, :dxfId => 0,
-                 :equalAverage => false, :priority => 2, :operator => :lessThan, :text => "",
-                 :percent => false, :rank => 0, :stdDev => 1, :stopIfTrue => true, :timePeriod => :today,
-                 :formula => "0.0" })
+                  :equalAverage => false, :priority => 2, :operator => :lessThan, :text => "",
+                  :percent => false, :rank => 0, :stdDev => 1, :stopIfTrue => true, :timePeriod => :today,
+                  :formula => "0.0" })
     doc = Nokogiri::XML.parse(cf.to_xml_string)
     assert_equal(1, doc.xpath(".//conditionalFormatting//cfRule[@type='cellIs'][@aboveAverage=0][@bottom=0][@dxfId=0][@equalAverage=0][@priority=2][@operator='lessThan'][@text=''][@percent=0][@rank=0][@stdDev=1][@stopIfTrue=1][@timePeriod='today']").size)
     assert doc.xpath(".//conditionalFormatting//cfRule[@type='cellIs'][@aboveAverage=0][@bottom=0][@dxfId=0][@equalAverage=0][@priority=2][@operator='lessThan'][@text=''][@percent=0][@rank=0][@stdDev=1][@stopIfTrue=1][@timePeriod='today']//formula=0.0")

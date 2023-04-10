@@ -165,9 +165,9 @@ class TestDataValidation < Test::Unit::TestCase
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet :name => "data_validation"
     @ws.add_data_validation("A1", { :type => :whole, :operator => :between, :formula1 => '5', :formula2 => '10',
-        :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values between 5 and 10',
-        :errorStyle => :information, :showInputMessage => true, :promptTitle => 'Be carful!',
-        :prompt => 'Only values between 5 and 10' })
+                                    :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values between 5 and 10',
+                                    :errorStyle => :information, :showInputMessage => true, :promptTitle => 'Be carful!',
+                                    :prompt => 'Only values between 5 and 10' })
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
@@ -194,9 +194,9 @@ class TestDataValidation < Test::Unit::TestCase
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet :name => "data_validation"
     @ws.add_data_validation("A1", { :type => :list, :formula1 => 'A1:A5',
-        :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values from list',
-        :errorStyle => :stop, :showInputMessage => true, :promptTitle => 'Be carful!',
-        :prompt => 'Only values from list', :hideDropDown => true })
+                                    :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values from list',
+                                    :errorStyle => :stop, :showInputMessage => true, :promptTitle => 'Be carful!',
+                                    :prompt => 'Only values from list', :hideDropDown => true })
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
@@ -218,9 +218,9 @@ class TestDataValidation < Test::Unit::TestCase
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet :name => "data_validation"
     @ws.add_data_validation("A1", { :type => :custom, :formula1 => '=5/2',
-        :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values corresponding formula',
-        :errorStyle => :stop, :showInputMessage => true, :promptTitle => 'Be carful!',
-        :prompt => 'Only values corresponding formula' })
+                                    :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values corresponding formula',
+                                    :errorStyle => :stop, :showInputMessage => true, :promptTitle => 'Be carful!',
+                                    :prompt => 'Only values corresponding formula' })
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
@@ -241,13 +241,13 @@ class TestDataValidation < Test::Unit::TestCase
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet :name => "data_validation"
     @ws.add_data_validation("A1", { :type => :whole, :operator => :between, :formula1 => '5', :formula2 => '10',
-        :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values between 5 and 10',
-        :errorStyle => :information, :showInputMessage => true, :promptTitle => 'Be carful!',
-        :prompt => 'Only values between 5 and 10' })
+                                    :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values between 5 and 10',
+                                    :errorStyle => :information, :showInputMessage => true, :promptTitle => 'Be carful!',
+                                    :prompt => 'Only values between 5 and 10' })
     @ws.add_data_validation("B1", { :type => :list, :formula1 => 'A1:A5',
-        :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values from list',
-        :errorStyle => :stop, :showInputMessage => true, :promptTitle => 'Be carful!',
-        :prompt => 'Only values from list', :hideDropDown => true })
+                                    :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values from list',
+                                    :errorStyle => :stop, :showInputMessage => true, :promptTitle => 'Be carful!',
+                                    :prompt => 'Only values from list', :hideDropDown => true })
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
