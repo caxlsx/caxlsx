@@ -74,7 +74,7 @@ module Axlsx
       @list
     end
 
-    alias :to_a :to_ary
+    alias to_a to_ary
 
     # join operator
     # @param [Array] v the array to join
@@ -98,7 +98,7 @@ module Axlsx
       @list.size - 1
     end
 
-    alias :push :<<
+    alias push <<
 
     # delete the item from the list
     # @param [Any] v The item to be deleted.

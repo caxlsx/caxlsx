@@ -40,7 +40,7 @@ module Axlsx
     #  automatically resize to display the number. [Note: In best fit cases, column width must not be made smaller, only larger. end note]
     # @return [Boolean]
     attr_reader :best_fit
-    alias :bestFit :best_fit
+    alias bestFit best_fit
 
     # Flag indicating if the outlining of the affected column(s) is in the collapsed state.
     # @return [Boolean]
@@ -53,7 +53,7 @@ module Axlsx
     # Outline level of affected column(s). Range is 0 to 7.
     # @return [Integer]
     attr_reader :outline_level
-    alias :outlineLevel :outline_level
+    alias outlineLevel outline_level
 
     # Flag indicating if the phonetic information should be displayed by default for the affected column(s) of the worksheet.
     # @return [Boolean]
@@ -69,7 +69,7 @@ module Axlsx
 
     # @return [Boolean]
     attr_reader :custom_width
-    alias :customWidth :custom_width
+    alias customWidth custom_width
 
     # @see Col#collapsed
     def collapsed=(v)
@@ -90,7 +90,7 @@ module Axlsx
 
       @outline_level = v
     end
-    alias :outlineLevel= :outline_level=
+    alias outlineLevel= outline_level=
 
     # @see Col#phonetic
     def phonetic=(v)

@@ -7,11 +7,11 @@ module Axlsx
     # The name and location of the part.
     # @return [String]
     attr_reader :part_name
-    alias :PartName :part_name
+    alias PartName part_name
 
     # The name and location of the part.
     def part_name=(v) Axlsx::validate_string v; @part_name = v end
-    alias :PartName= :part_name=
+    alias PartName= part_name=
 
     # Serializes this object to xml
     def to_xml_string(str = '')

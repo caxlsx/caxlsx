@@ -35,8 +35,8 @@ module Axlsx
     # What exactly that means is beyond me so if you ever use this, let me know!
     # @return [String]
     attr_accessor :invalid_url
-    alias :invalidUrl :invalid_url
-    alias :invalidUrl= :invalid_url=
+    alias invalidUrl invalid_url
+    alias invalidUrl= invalid_url=
 
     # An action to take when the link is clicked. The specification says "This can be used to specify a slide to be navigated to or a script of code to be run." but in most cases you will not need to do anything with this. MS does reserve a few interesting strings. @see http://msdn.microsoft.com/en-us/library/ff532419%28v=office.12%29.aspx
     # @return [String]
@@ -45,23 +45,23 @@ module Axlsx
     # Specifies if all sound events should be terminated when this link is clicked.
     # @return [Boolean]
     attr_reader :end_snd
-    alias :endSnd :end_snd
+    alias endSnd end_snd
 
     # @see endSnd
     # @param [Boolean] v The boolean value indicating the termination of playing sounds on click
     # @return [Boolean]
     def end_snd=(v) Axlsx::validate_boolean(v); @end_snd = v end
-    alias :endSnd= :end_snd=
+    alias endSnd= end_snd=
 
     # indicates that the link has already been clicked.
     # @return [Boolean]
     attr_reader :highlight_click
-    alias :highlightClick :highlight_click
+    alias highlightClick highlight_click
 
     # @see highlightClick
     # @param [Boolean] v The value to assign
     def highlight_click=(v) Axlsx::validate_boolean(v); @highlight_click = v end
-    alias :highlightClick= :highlight_click=
+    alias highlightClick= highlight_click=
 
     # From the specs: Specifies whether to add this URI to the history when navigating to it. This allows for the viewing of this presentation without the storing of history information on the viewing machine. If this attribute is omitted, then a value of 1 or true is assumed.
     # @return [Boolean]
@@ -74,8 +74,8 @@ module Axlsx
     # From the specs: Specifies the target frame that is to be used when opening this hyperlink. When the hyperlink is activated this attribute is used to determine if a new window is launched for viewing or if an existing one can be used. If this attribute is omitted, than a new window is opened.
     # @return [String]
     attr_accessor :tgt_frame
-    alias :tgtFrame :tgt_frame
-    alias :tgtFrame= :tgt_frame=
+    alias tgtFrame tgt_frame
+    alias tgtFrame= tgt_frame=
 
     # Text to show when you mouse over the hyperlink. If you do not set this, the href property will be shown.
     # @return [String]

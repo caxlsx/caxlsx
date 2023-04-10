@@ -31,12 +31,12 @@ module Axlsx
     # the id of the axis.
     # @return [Integer]
     attr_reader :id
-    alias :axID :id
+    alias axID id
 
     # The perpendicular axis
     # @return [Integer]
     attr_reader :cross_axis
-    alias :crossAx :cross_axis
+    alias crossAx cross_axis
 
     # The scaling of the axis
     # @see Scaling
@@ -47,13 +47,13 @@ module Axlsx
     # must be one of [:l, :r, :t, :b]
     # @return [Symbol]
     attr_reader :ax_pos
-    alias :axPos :ax_pos
+    alias axPos ax_pos
 
     # the position of the tick labels
     # must be one of [:nextTo, :high, :low]
     # @return [Symbol]
     attr_reader :tick_lbl_pos
-    alias :tickLblPos :tick_lbl_pos
+    alias tickLblPos tick_lbl_pos
 
     # The number format format code for this axis
     # default :General
@@ -98,12 +98,12 @@ module Axlsx
     # The position of the axis
     # must be one of [:l, :r, :t, :b]
     def ax_pos=(v) RestrictionValidator.validate "#{self.class}.ax_pos", [:l, :r, :b, :t], v; @ax_pos = v; end
-    alias :axPos= :ax_pos=
+    alias axPos= ax_pos=
 
     # the position of the tick labels
     # must be one of [:nextTo, :high, :low1]
     def tick_lbl_pos=(v) RestrictionValidator.validate "#{self.class}.tick_lbl_pos", [:nextTo, :high, :low, :none], v; @tick_lbl_pos = v; end
-    alias :tickLblPos= :tick_lbl_pos=
+    alias tickLblPos= tick_lbl_pos=
 
     # The number format format code for this axis
     # default :General

@@ -21,7 +21,7 @@ module Axlsx
     # space between bar or column clusters, as a percentage of the bar or column width.
     # @return [String]
     attr_reader :gap_depth
-    alias :gapDepth :gap_depth
+    alias gapDepth gap_depth
 
     # validation regex for gap amount percent
     GAP_AMOUNT_PERCENT = /0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/
@@ -31,7 +31,7 @@ module Axlsx
     def ser_axis
       axes[:ser_axis]
     end
-    alias :serAxis :ser_axis
+    alias serAxis ser_axis
 
     # Creates a new line chart object
     # @option options [String] gap_depth
@@ -50,7 +50,7 @@ module Axlsx
       RegexValidator.validate "Line3DChart.gapWidth", GAP_AMOUNT_PERCENT, v
       @gap_depth = v
     end
-    alias :gapDepth= :gap_depth=
+    alias gapDepth= gap_depth=
 
     # Serializes the object
     # @param [String] str

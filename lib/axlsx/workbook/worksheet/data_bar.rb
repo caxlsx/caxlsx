@@ -43,21 +43,21 @@ module Axlsx
     # The default value is 10
     # @return [Integer]
     attr_reader :min_length
-    alias :minLength :min_length
+    alias minLength min_length
 
     # maxLength attribute
     # The maximum length of the data bar, as a percentage of the cell width.
     # The default value is 90
     # @return [Integer]
     attr_reader :max_length
-    alias :maxLength :max_length
+    alias maxLength max_length
 
     # maxLength attribute
     # Indicates whether to show the values of the cells on which this data bar is applied.
     # The default value is true
     # @return [Boolean]
     attr_reader :show_value
-    alias :showValue :show_value
+    alias showValue show_value
 
     # A simple typed list of cfvos
     # @return [SimpleTypedList]
@@ -78,21 +78,21 @@ module Axlsx
       Axlsx.validate_unsigned_int(v)
       @min_length = v
     end
-    alias :minLength= :min_length=
+    alias minLength= min_length=
 
     # @see maxLength
     def max_length=(v)
       Axlsx.validate_unsigned_int(v)
       @max_length = v
     end
-    alias :maxLength= :max_length=
+    alias maxLength= max_length=
 
     # @see showValue
     def show_value=(v)
       Axlsx.validate_boolean(v)
       @show_value = v
     end
-    alias :showValue= :show_value=
+    alias showValue= show_value=
 
     # Sets the color for the data bars.
     # @param [Color|String] v The color object, or rgb string value to apply

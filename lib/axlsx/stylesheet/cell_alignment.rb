@@ -49,12 +49,12 @@ module Axlsx
     # The textRotation of the cell.
     # @return [Integer]
     attr_reader :text_rotation
-    alias :textRotation :text_rotation
+    alias textRotation text_rotation
 
     # Indicate if the text of the cell should wrap
     # @return [Boolean]
     attr_reader :wrap_text
-    alias :wrapText :wrap_text
+    alias wrapText wrap_text
 
     # The amount of indent
     # @return [Integer]
@@ -63,17 +63,17 @@ module Axlsx
     # The amount of relativeIndent
     # @return [Integer]
     attr_reader :relative_indent
-    alias :relativeIndent :relative_indent
+    alias relativeIndent relative_indent
 
     # Indicate if the last line should be justified.
     # @return [Boolean]
     attr_reader :justify_last_line
-    alias :justifyLastLine :justify_last_line
+    alias justifyLastLine justify_last_line
 
     # Indicate if the text should be shrunk to the fit in the cell.
     # @return [Boolean]
     attr_reader :shrink_to_fit
-    alias :shrinkToFit :shrink_to_fit
+    alias shrinkToFit shrink_to_fit
 
     # The reading order of the text
     # 0 Context Dependent
@@ -81,7 +81,7 @@ module Axlsx
     # 2 Right-to-Left
     # @return [Integer]
     attr_reader :reading_order
-    alias :readingOrder :reading_order
+    alias readingOrder reading_order
 
     # @see horizontal
     def horizontal=(v) Axlsx::validate_horizontal_alignment v; @horizontal = v end
@@ -89,30 +89,30 @@ module Axlsx
     def vertical=(v) Axlsx::validate_vertical_alignment v; @vertical = v end
     # @see textRotation
     def text_rotation=(v) Axlsx::validate_unsigned_int v; @text_rotation = v end
-    alias :textRotation= :text_rotation=
+    alias textRotation= text_rotation=
 
     # @see wrapText
     def wrap_text=(v) Axlsx::validate_boolean v; @wrap_text = v end
-    alias :wrapText= :wrap_text=
+    alias wrapText= wrap_text=
 
     # @see indent
     def indent=(v) Axlsx::validate_unsigned_int v; @indent = v end
 
     # @see relativeIndent
     def relative_indent=(v) Axlsx::validate_int v; @relative_indent = v end
-    alias :relativeIndent= :relative_indent=
+    alias relativeIndent= relative_indent=
 
     # @see justifyLastLine
     def justify_last_line=(v) Axlsx::validate_boolean v; @justify_last_line = v end
-    alias :justifyLastLine= :justify_last_line=
+    alias justifyLastLine= justify_last_line=
 
     # @see shrinkToFit
     def shrink_to_fit=(v) Axlsx::validate_boolean v; @shrink_to_fit = v end
-    alias :shrinkToFit= :shrink_to_fit=
+    alias shrinkToFit= shrink_to_fit=
 
     # @see readingOrder
     def reading_order=(v) Axlsx::validate_unsigned_int v; @reading_order = v end
-    alias :readingOrder= :reading_order=
+    alias readingOrder= reading_order=
 
     # Serializes the object
     # @param [String] str

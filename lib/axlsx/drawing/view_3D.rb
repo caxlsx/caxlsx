@@ -25,30 +25,30 @@ module Axlsx
     # must be between -90 and 90
     # @return [Integer]
     attr_reader :rot_x
-    alias :rotX :rot_x
+    alias rotX rot_x
 
     # height of chart as % of chart width
     # must be between 5% and 500%
     # @return [String]
     attr_reader :h_percent
-    alias :hPercent :h_percent
+    alias hPercent h_percent
 
     # y rotation for the chart
     # must be between 0 and 360
     # @return [Integer]
     attr_reader :rot_y
-    alias :rotY :rot_y
+    alias rotY rot_y
 
     # depth or chart as % of chart width
     # must be between 20% and 2000%
     # @return [String]
     attr_reader :depth_percent
-    alias :depthPercent :depth_percent
+    alias depthPercent depth_percent
 
     # Chart axis are at right angles
     # @return [Boolean]
     attr_reader :r_ang_ax
-    alias :rAngAx :r_ang_ax
+    alias rAngAx r_ang_ax
 
     # field of view angle
     # @return [Integer]
@@ -59,29 +59,29 @@ module Axlsx
       RangeValidator.validate "View3D.rot_x", -90, 90, v
       @rot_x = v
     end
-    alias :rotX= :rot_x=
+    alias rotX= rot_x=
 
     # @see h_percent
     def h_percent=(v)
       RegexValidator.validate "#{self.class}.h_percent", H_PERCENT_REGEX, v
       @h_percent = v
     end
-    alias :hPercent= :h_percent=
+    alias hPercent= h_percent=
 
     # @see rot_y
     def rot_y=(v)
       RangeValidator.validate "View3D.rot_y", 0, 360, v
       @rot_y = v
     end
-    alias :rotY= :rot_y=
+    alias rotY= rot_y=
 
     # @see depth_percent
     def depth_percent=(v) RegexValidator.validate "#{self.class}.depth_percent", DEPTH_PERCENT_REGEX, v; @depth_percent = v; end
-    alias :depthPercent= :depth_percent=
+    alias depthPercent= depth_percent=
 
     # @see r_ang_ax
     def r_ang_ax=(v) Axlsx::validate_boolean(v); @r_ang_ax = v; end
-    alias :rAngAx= :r_ang_ax=
+    alias rAngAx= r_ang_ax=
 
     # @see perspective
     def perspective=(v)

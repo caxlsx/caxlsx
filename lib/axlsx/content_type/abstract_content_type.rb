@@ -12,12 +12,12 @@ module Axlsx
     # The type of content.
     # @return [String]
     attr_reader :content_type
-    alias :ContentType :content_type
+    alias ContentType content_type
 
     # The content type.
     # @see Axlsx#validate_content_type
     def content_type=(v) Axlsx::validate_content_type v; @content_type = v end
-    alias :ContentType= :content_type=
+    alias ContentType= content_type=
 
     # Serialize the contenty type to xml
     def to_xml_string(node_name = '', str = '')

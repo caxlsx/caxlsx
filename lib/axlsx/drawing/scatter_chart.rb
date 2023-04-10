@@ -10,21 +10,21 @@ module Axlsx
     # must be one of :none | :line | :lineMarker | :marker | :smooth | :smoothMarker
     # return [Symbol]
     attr_reader :scatter_style
-    alias :scatterStyle :scatter_style
+    alias scatterStyle scatter_style
 
     # the x value axis
     # @return [ValAxis]
     def x_val_axis
       axes[:x_val_axis]
     end
-    alias :xValAxis :x_val_axis
+    alias xValAxis x_val_axis
 
     # the y value axis
     # @return [ValAxis]
     def y_val_axis
       axes[:y_val_axis]
     end
-    alias :yValAxis :y_val_axis
+    alias yValAxis y_val_axis
 
     # Creates a new scatter chart
     def initialize(frame, options = {})
@@ -42,7 +42,7 @@ module Axlsx
       Axlsx.validate_scatter_style(v)
       @scatter_style = v
     end
-    alias :scatterStyle= :scatter_style=
+    alias scatterStyle= scatter_style=
 
     # Serializes the object
     # @param [String] str

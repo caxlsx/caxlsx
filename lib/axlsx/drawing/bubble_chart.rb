@@ -11,14 +11,14 @@ module Axlsx
     def x_val_axis
       axes[:x_val_axis]
     end
-    alias :xValAxis :x_val_axis
+    alias xValAxis x_val_axis
 
     # the y value axis
     # @return [ValAxis]
     def y_val_axis
       axes[:y_val_axis]
     end
-    alias :yValAxis :y_val_axis
+    alias yValAxis y_val_axis
 
     # Creates a new bubble chart
     def initialize(frame, options = {})

@@ -139,12 +139,6 @@ Naming/VariableNumber:
     - 'test/workbook/worksheet/tc_worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: prefer_alias, prefer_alias_method
-Style/Alias:
-  Enabled: false
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/CharacterLiteral:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/cell.rb'

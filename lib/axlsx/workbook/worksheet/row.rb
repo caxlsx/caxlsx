@@ -55,7 +55,7 @@ module Axlsx
     # Outlining level of the row, when outlining is on
     # @return [Integer]
     attr_reader :outline_level
-    alias :outlineLevel :outline_level
+    alias outlineLevel outline_level
 
     # The style applied to the row. This affects the entire row.
     # @return [Integer]
@@ -74,7 +74,7 @@ module Axlsx
       @outline_level = v
     end
 
-    alias :outlineLevel= :outline_level=
+    alias outlineLevel= outline_level=
 
     # The index of this row in the worksheet
     # @return [Integer]

@@ -35,7 +35,7 @@ module Axlsx
 
     # The 3D view properties for the chart
     attr_reader :view_3D
-    alias :view3D :view_3D
+    alias view3D view_3D
 
     # A reference to the graphic frame that owns this chart
     # @return [GraphicFrame]
@@ -289,6 +289,6 @@ module Axlsx
 
     # sets the view_3D object for the chart
     def view_3D=(v) DataTypeValidator.validate "#{self.class}.view_3D", View3D, v; @view_3D = v; end
-    alias :view3D= :view_3D=
+    alias view3D= view_3D=
   end
 end

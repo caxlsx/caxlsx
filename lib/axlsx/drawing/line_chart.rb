@@ -23,14 +23,14 @@ module Axlsx
     def cat_axis
       axes[:cat_axis]
     end
-    alias :catAxis :cat_axis
+    alias catAxis cat_axis
 
     # the category axis
     # @return [ValAxis]
     def val_axis
       axes[:val_axis]
     end
-    alias :valAxis :val_axis
+    alias valAxis val_axis
 
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     # @return [Symbol]

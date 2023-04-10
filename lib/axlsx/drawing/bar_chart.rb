@@ -10,14 +10,14 @@ module Axlsx
     def cat_axis
       axes[:cat_axis]
     end
-    alias :catAxis :cat_axis
+    alias catAxis cat_axis
 
     # the value axis
     # @return [ValAxis]
     def val_axis
       axes[:val_axis]
     end
-    alias :valAxis :val_axis
+    alias valAxis val_axis
 
     # The direction of the bars in the chart
     # must be one of [:bar, :col]
@@ -25,14 +25,14 @@ module Axlsx
     def bar_dir
       @bar_dir ||= :bar
     end
-    alias :barDir :bar_dir
+    alias barDir bar_dir
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     # @return [Integer]
     def gap_width
       @gap_width ||= 150
     end
-    alias :gapWidth :gap_width
+    alias gapWidth gap_width
 
     # grouping for a column, line, or area chart.
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
@@ -77,7 +77,7 @@ module Axlsx
       RestrictionValidator.validate "BarChart.bar_dir", [:bar, :col], v
       @bar_dir = v
     end
-    alias :barDir= :bar_dir=
+    alias barDir= bar_dir=
 
     # grouping for a column, line, or area chart.
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
@@ -91,7 +91,7 @@ module Axlsx
       RangeValidator.validate "BarChart.gap_width", 0, 500, v
       @gap_width = v
     end
-    alias :gapWidth= :gap_width=
+    alias gapWidth= gap_width=
 
     def overlap=(v)
       RangeValidator.validate "BarChart.overlap", -100, 100, v

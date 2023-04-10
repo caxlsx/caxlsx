@@ -434,7 +434,7 @@ module Axlsx
       row
     end
 
-    alias :<< :add_row
+    alias << add_row
 
     # Add conditional formatting to this worksheet.
     #

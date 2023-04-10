@@ -135,7 +135,7 @@ module Axlsx
     # @see type
     # @return [Boolean]
     # default false
-    alias :hideDropDown :showDropDown
+    alias hideDropDown showDropDown
 
     # Show error message
     # A boolean value indicating whether to display the error alert message when an invalid

@@ -5,7 +5,7 @@ module Axlsx
     # must be one of [:between, :midCat]
     # @return [Symbol]
     attr_reader :cross_between
-    alias :crossBetween :cross_between
+    alias crossBetween cross_between
 
     # Creates a new ValAxis object
     # @option options [Symbol] crosses_between
@@ -19,7 +19,7 @@ module Axlsx
       RestrictionValidator.validate "ValAxis.cross_between", [:between, :midCat], v
       @cross_between = v
     end
-    alias :crossBetween= :cross_between=
+    alias crossBetween= cross_between=
 
     # Serializes the object
     # @param [String] str
