@@ -62,16 +62,6 @@ Lint/NonLocalExitFromIterator:
   Exclude:
     - 'lib/axlsx/util/validators.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-Lint/RedundantStringCoercion:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/auto_filter/filters.rb'
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
-    - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
-    - 'test/drawing/tc_axis.rb'
-    - 'test/stylesheet/tc_table_style_element.rb'
-    - 'test/workbook/worksheet/tc_comment.rb'
-
 Lint/UselessAssignment:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/header_footer.rb'
