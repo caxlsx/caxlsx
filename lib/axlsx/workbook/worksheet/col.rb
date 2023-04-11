@@ -86,7 +86,7 @@ module Axlsx
     # @see Col#outline
     def outline_level=(v)
       Axlsx.validate_unsigned_numeric(v)
-      raise ArgumentError, 'outlineLevel must be between 0 and 7' unless 0 <= v && v <= 7
+      raise ArgumentError, 'outlineLevel must be between 0 and 7' unless v >= 0 && v <= 7
 
       @outline_level = v
     end

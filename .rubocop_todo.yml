@@ -438,13 +438,6 @@ Style/WordArray:
   Enabled: false
 
 # This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: forbid_for_all_comparison_operators, forbid_for_equality_operators_only, require_for_all_comparison_operators, require_for_equality_operators_only
-Style/YodaCondition:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/col.rb'
-
-# This cop supports unsafe autocorrection (--autocorrect-all).
 Style/ZeroLengthPredicate:
   Exclude:
     - 'lib/axlsx/package.rb'
