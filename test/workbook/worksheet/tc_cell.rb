@@ -411,7 +411,7 @@ class TestCell < Test::Unit::TestCase
 
   def test_to_xml_string_formula
     p = Axlsx::Package.new
-    ws = p.workbook.add_worksheet do |sheet|
+    ws = p.workbook.add_worksheet(escape_formulas: false) do |sheet|
       sheet.add_row ["=IF(2+2=4,4,5)"]
     end
     doc = Nokogiri::XML(ws.to_xml_string)
