@@ -1,6 +1,8 @@
 CHANGELOG
 ---------
 - **Unreleased**
+  - [PR #186](https://github.com/caxlsx/caxlsx/pull/186) - Add `escape_formulas` to global, workbook, worksheet, row and cell levels, and standardize behavior.
+  - [PR #186](https://github.com/caxlsx/caxlsx/pull/186) - `escape_formulas` should handle all [OWASP-designated formula prefixes](https://owasp.org/www-community/attacks/CSV_Injection).
   - Fix bug when calling `worksheet.add_border("A1:B2", nil)`
   - Change `BorderCreator#initialize` arguments handling
   - Fix `add_border` to work with singluar cell refs

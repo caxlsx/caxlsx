@@ -891,4 +891,42 @@ class TestWorksheet < Test::Unit::TestCase
       wb.styles.style_index.values.first
     )
   end
+
+  def test_escape_formulas
+    @wb.escape_formulas = false
+    @ws = @wb.add_worksheet
+    assert_false @ws.escape_formulas
+    assert_false @ws.add_row(['']).cells.first.escape_formulas
+    assert_false @ws.add_row([''], escape_formulas: false).cells.first.escape_formulas
+    assert @ws.add_row([''], escape_formulas: true).cells.first.escape_formulas
+    assert_equal [true, false], @ws.add_row(['', ''], escape_formulas: [true, false]).cells.map(&:escape_formulas)
+
+    @ws = Axlsx::Worksheet.new(@wb)
+    assert_false @ws.escape_formulas
+
+    @wb.escape_formulas = true
+    @ws = @wb.add_worksheet
+    assert @ws.escape_formulas
+    assert @ws.add_row(['']).cells.first.escape_formulas
+    assert_false @ws.add_row([''], escape_formulas: false).cells.first.escape_formulas
+    assert @ws.add_row([''], escape_formulas: true).cells.first.escape_formulas
+    assert_equal [true, false], @ws.add_row(['', ''], escape_formulas: [true, false]).cells.map(&:escape_formulas)
+
+    @ws = Axlsx::Worksheet.new(@wb)
+    assert @ws.escape_formulas
+
+    @ws.escape_formulas = false
+    assert_false @ws.escape_formulas
+    assert_false @ws.add_row(['']).cells.first.escape_formulas
+    assert_false @ws.add_row([''], escape_formulas: false).cells.first.escape_formulas
+    assert @ws.add_row([''], escape_formulas: true).cells.first.escape_formulas
+    assert_equal [true, false], @ws.add_row(['', ''], escape_formulas: [true, false]).cells.map(&:escape_formulas)
+
+    @ws.escape_formulas = true
+    assert @ws.escape_formulas
+    assert @ws.add_row(['']).cells.first.escape_formulas
+    assert_false @ws.add_row([''], escape_formulas: false).cells.first.escape_formulas
+    assert @ws.add_row([''], escape_formulas: true).cells.first.escape_formulas
+    assert_equal [true, false], @ws.add_row(['', ''], escape_formulas: [true, false]).cells.map(&:escape_formulas)
+  end
 end

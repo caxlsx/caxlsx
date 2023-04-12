@@ -161,4 +161,38 @@ class TestWorkbook < Test::Unit::TestCase
     wb_xml = Nokogiri::XML(@wb.to_xml_string)
     assert_equal sheet.name, wb_xml.xpath('//xmlns:workbook/xmlns:sheets/*[1]/@name').to_s
   end
+
+  def test_escape_formulas
+    Axlsx::escape_formulas = false
+    p = Axlsx::Package.new
+    @wb = p.workbook
+    assert_false @wb.escape_formulas
+    assert_false @wb.add_worksheet.escape_formulas
+    assert_false @wb.add_worksheet(escape_formulas: false).escape_formulas
+    assert @wb.add_worksheet(escape_formulas: true).escape_formulas
+
+    Axlsx::escape_formulas = true
+    p = Axlsx::Package.new
+    @wb = p.workbook
+    assert @wb.escape_formulas
+    assert @wb.add_worksheet.escape_formulas
+    assert_false @wb.add_worksheet(escape_formulas: false).escape_formulas
+    assert @wb.add_worksheet(escape_formulas: true).escape_formulas
+
+    @wb.escape_formulas = false
+    assert_false @wb.escape_formulas
+    assert_false @wb.add_worksheet.escape_formulas
+    assert_false @wb.add_worksheet(escape_formulas: false).escape_formulas
+    assert @wb.add_worksheet(escape_formulas: true).escape_formulas
+
+    @wb.escape_formulas = true
+    p = Axlsx::Package.new
+    @wb = p.workbook
+    assert @wb.escape_formulas
+    assert @wb.add_worksheet.escape_formulas
+    assert_false @wb.add_worksheet(escape_formulas: false).escape_formulas
+    assert @wb.add_worksheet(escape_formulas: true).escape_formulas
+  ensure
+    Axlsx.instance_variable_set(:@escape_formulas, nil)
+  end
 end

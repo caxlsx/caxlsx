@@ -14,11 +14,14 @@ module Axlsx
     # @option options [Hash] print_options A hash containing print options for this worksheet. @see PrintOptions
     # @option options [Hash] header_footer A hash containing header/footer options for this worksheet. @see HeaderFooter
     # @option options [Boolean] show_gridlines Whether gridlines should be shown for this sheet.
+    # @option options [Boolean] escape_formulas Whether formulas should be escaped by default. Can be overridden at a
+    #   row/cell level.
     def initialize(wb, options = {})
       self.workbook = wb
       @sheet_protection = nil
       initialize_page_options(options)
       parse_options options
+      self.escape_formulas = wb.escape_formulas if @escape_formulas.nil?
       @workbook.worksheets << self
       @sheet_id = index + 1
       yield self if block_given?
@@ -41,6 +44,20 @@ module Axlsx
     # @return [String]
     def name
       @name ||= "Sheet" + (index + 1).to_s
+    end
+
+    # Whether to treat values starting with an equals sign as formulas or as literal strings.
+    # Allowing user-generated data to be interpreted as formulas is a security risk.
+    # See https://www.owasp.org/index.php/CSV_Injection for details.
+    # @return [Boolean]
+    attr_reader :escape_formulas
+
+    # Sets whether to treat values starting with an equals sign as formulas or as literal strings.
+    # @param [Boolean] value The value to set.
+    # @return [Boolean]
+    def escape_formulas=(value)
+      Axlsx.validate_boolean(value)
+      @escape_formulas = value
     end
 
     # Specifies the visible state of this sheet. Allowed states are
@@ -410,6 +427,7 @@ module Axlsx
     #    Allowing user generated data to be interpreted as formulas can be dangerous
     #   (see https://www.owasp.org/index.php/CSV_Injection for details).
     def add_row(values = [], options = {})
+      options[:escape_formulas] = escape_formulas if options[:escape_formulas].nil?
       row = Row.new(self, values, options)
       update_column_info row, options.delete(:widths)
       yield row if block_given?

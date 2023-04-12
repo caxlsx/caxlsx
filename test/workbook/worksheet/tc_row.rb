@@ -153,4 +153,31 @@ class TestRow < Test::Unit::TestCase
       assert_equal(c.value, index < offset ? nil : values[index - offset])
     end
   end
+
+  def test_escape_formulas
+    @ws.escape_formulas = false
+    @row = @ws.add_row
+    assert_false @row.add_cell('').escape_formulas
+    assert_false @row.add_cell('', escape_formulas: false).escape_formulas
+    assert @row.add_cell('', escape_formulas: true).escape_formulas
+
+    @row = Axlsx::Row.new(@ws)
+    assert_false @row.add_cell('').escape_formulas
+
+    @ws.escape_formulas = true
+    @row = @ws.add_row
+
+    assert @row.add_cell('').escape_formulas
+    assert_false @row.add_cell('', escape_formulas: false).escape_formulas
+    assert @row.add_cell('', escape_formulas: true).escape_formulas
+
+    @row.escape_formulas = false
+    assert_equal [false, false, false], @row.cells.map(&:escape_formulas)
+
+    @row.escape_formulas = true
+    assert_equal [true, true, true], @row.cells.map(&:escape_formulas)
+
+    @row.escape_formulas = [false, true, false]
+    assert_equal [false, true, false], @row.cells.map(&:escape_formulas)
+  end
 end

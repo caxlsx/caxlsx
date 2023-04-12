@@ -119,6 +119,26 @@ Currently the following additional gems are available:
 - [activeadmin-caxlsx](https://github.com/caxlsx/activeadmin-caxlsx)
   * An Active Admin plugin that includes DSL to create downloadable reports.
 
+## Security
+
+To prevent [Formula Injection](https://www.owasp.org/index.php/CSV_Injection) vulnerabilities, set the following in an initializer:
+
+```ruby
+Axlsx.escape_formulas = true
+```
+
+Then, set the following on each cell you'd like to add a formula:
+
+```ruby
+cell.escape_formulas = true
+```
+
+Refer to examples/escape_formula.md for how to set `escape_formulas` on the workbook, worksheet, row and/or cell level.
+
+**Important:** The global setting `Axlsx.escape_formulas = true` will become the default in the next major release (Axlsx 4.0).
+If you do not wish to set `Axlsx.escape_formulas = true` now, at a minimum, please set `Axlsx.escape_formulas = false` to
+ensure continuity when upgrading.
+
 ## Known Software Interoperability Issues
 
 As axslx implements the Office Open XML (ECMA-376 spec) much of the

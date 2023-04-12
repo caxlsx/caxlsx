@@ -57,6 +57,7 @@ module Axlsx
   require 'axlsx/workbook/worksheet/sheet_format_pr.rb'
   require 'axlsx/workbook/worksheet/pane.rb'
   require 'axlsx/workbook/worksheet/selection.rb'
+
   # The Workbook class is an xlsx workbook that manages worksheets, charts, drawings and styles.
   # The following parts of the Office Open XML spreadsheet specification are not implimented in this version.
   #
@@ -239,6 +240,7 @@ module Axlsx
       @bold_font_multiplier = BOLD_FONT_MULTIPLIER
       @font_scale_divisor = FONT_SCALE_DIVISOR
 
+      self.escape_formulas = options[:escape_formulas].nil? ? Axlsx.escape_formulas : options[:escape_formulas]
       self.date1904 = !options[:date1904].nil? && options[:date1904]
       yield self if block_given?
     end
@@ -257,6 +259,19 @@ module Axlsx
     # retrieves the date1904 attribute
     # @return [Boolean]
     def self.date1904() @@date1904; end
+
+    # Whether to treat values starting with an equals sign as formulas or as literal strings.
+    # Allowing user-generated data to be interpreted as formulas is a security risk.
+    # See https://www.owasp.org/index.php/CSV_Injection for details.
+    # @return [Boolean]
+    attr_reader :escape_formulas
+
+    # Sets whether to treat values starting with an equals sign as formulas or as literal strings.
+    # @param [Boolean] value The value to set.
+    def escape_formulas=(value)
+      Axlsx.validate_boolean(value)
+      @escape_formulas = value
+    end
 
     # Indicates if the workbook should use autowidths or not.
     # @note This gem no longer depends on RMagick for autowidth

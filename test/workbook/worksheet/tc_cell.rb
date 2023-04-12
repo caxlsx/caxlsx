@@ -317,6 +317,8 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_plain_string
+    @c.escape_formulas = false
+
     @c.type = :integer
     assert_equal(@c.plain_string?, false)
 
@@ -332,6 +334,17 @@ class TestCell < Test::Unit::TestCase
 
     @c.value = '=sum'
     assert_equal(@c.plain_string?, false)
+
+    @c.value = '{=sum}'
+    assert_equal(@c.plain_string?, false)
+
+    @c.escape_formulas = true
+
+    @c.value = '=sum'
+    assert_equal(@c.plain_string?, true)
+
+    @c.value = '{=sum}'
+    assert_equal(@c.plain_string?, true)
 
     @c.value = 'plain string'
     @c.font_name = 'Arial'
@@ -381,6 +394,37 @@ class TestCell < Test::Unit::TestCase
     assert(doc.xpath("//t[text()='=IF(2+2=4,4,5)']").any?)
   end
 
+  def test_to_xml_string_numeric_escaped
+    p = Axlsx::Package.new
+    ws = p.workbook.add_worksheet do |sheet|
+      sheet.add_row ["-1", "+2"], escape_formulas: true, types: :text
+    end
+    doc = Nokogiri::XML(ws.to_xml_string)
+    doc.remove_namespaces!
+    assert(doc.xpath("//t[text()='-1']").any?)
+    assert(doc.xpath("//t[text()='+2']").any?)
+  end
+
+  def test_to_xml_string_other_owasp_escaped
+    p = Axlsx::Package.new
+    ws = p.workbook.add_worksheet do |sheet|
+      sheet.add_row [
+        "@1",
+        "%2",
+        "|3",
+        "\rfoo",
+        "\tbar"
+      ], escape_formulas: true
+    end
+    doc = Nokogiri::XML(ws.to_xml_string)
+    doc.remove_namespaces!
+    assert(doc.xpath("//t[text()='@1']").any?)
+    assert(doc.xpath("//t[text()='%2']").any?)
+    assert(doc.xpath("//t[text()='|3']").any?)
+    assert(doc.xpath("//t[text()='\nfoo']").any?)
+    assert(doc.xpath("//t[text()='\tbar']").any?)
+  end
+
   def test_to_xml_string_formula_escape_array_parameter
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet do |sheet|
@@ -413,7 +457,7 @@ class TestCell < Test::Unit::TestCase
   def test_to_xml_string_text_formula
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet do |sheet|
-      sheet.add_row ["=1+1", "-1+1"], type: :text
+      sheet.add_row ["=1+1", "-1+1"], types: :text
     end
     doc = Nokogiri::XML(ws.to_xml_string)
     doc.remove_namespaces!
