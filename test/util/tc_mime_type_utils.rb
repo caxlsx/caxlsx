@@ -1,8 +1,11 @@
 require 'tc_helper.rb'
 class TestMimeTypeUtils < Test::Unit::TestCase
   def setup
+    stub_request(:get, 'https://example.com/sample-image.png')
+      .to_return(body: File.new('examples/sample.png'), status: 200)
+
     @test_img = File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
-    @test_img_url = "https://via.placeholder.com/150.png"
+    @test_img_url = "https://example.com/sample-image.png"
   end
 
   def teardown
