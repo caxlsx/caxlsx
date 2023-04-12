@@ -103,14 +103,14 @@ module Axlsx
       c
     end
 
-    # sets the color for every cell in this row
+    # Sets the color for every cell in this row.
     def color=(color)
       each_with_index do |cell, index|
         cell.color = color.is_a?(Array) ? color[index] : color
       end
     end
 
-    # sets the style for every cell in this row
+    # Sets the style for every cell in this row.
     def style=(style)
       each_with_index do |cell, index|
         cell.style = style.is_a?(Array) ? style[index] : style

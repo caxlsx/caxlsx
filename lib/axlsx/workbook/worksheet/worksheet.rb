@@ -13,7 +13,7 @@ module Axlsx
     # @option options [Hash] page_margins A hash containing page margins for this worksheet. @see PageMargins
     # @option options [Hash] print_options A hash containing print options for this worksheet. @see PrintOptions
     # @option options [Hash] header_footer A hash containing header/footer options for this worksheet. @see HeaderFooter
-    # @option options [Boolean] show_gridlines indicates if gridlines should be shown for this sheet.
+    # @option options [Boolean] show_gridlines Whether gridlines should be shown for this sheet.
     def initialize(wb, options = {})
       self.workbook = wb
       @sheet_protection = nil

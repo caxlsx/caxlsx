@@ -41,7 +41,6 @@ module Axlsx
   require 'axlsx/workbook/worksheet/col_breaks'
   require 'axlsx/workbook/workbook_view'
   require 'axlsx/workbook/workbook_views'
-
   require 'axlsx/workbook/worksheet/worksheet.rb'
   require 'axlsx/workbook/shared_strings_table.rb'
   require 'axlsx/workbook/defined_name.rb'
@@ -113,21 +112,21 @@ module Axlsx
     # @return [SimpleTypedList]
     attr_reader :worksheets
 
-    # A colllection of charts associated with this workbook
+    # A collection of charts associated with this workbook
     # @note The recommended way to manage charts is Worksheet#add_chart
     # @see Worksheet#add_chart
     # @see Chart
     # @return [SimpleTypedList]
     attr_reader :charts
 
-    # A colllection of images associated with this workbook
+    # A collection of images associated with this workbook
     # @note The recommended way to manage images is Worksheet#add_image
     # @see Worksheet#add_image
     # @see Pic
     # @return [SimpleTypedList]
     attr_reader :images
 
-    # A colllection of drawings associated with this workbook
+    # A collection of drawings associated with this workbook
     # @note The recommended way to manage drawings is Worksheet#add_chart
     # @see Worksheet#add_chart
     # @see Drawing
@@ -136,14 +135,14 @@ module Axlsx
 
     # pretty sure this two are always empty and can be removed.
 
-    # A colllection of tables associated with this workbook
+    # A collection of tables associated with this workbook
     # @note The recommended way to manage drawings is Worksheet#add_table
     # @see Worksheet#add_table
     # @see Table
     # @return [SimpleTypedList]
     attr_reader :tables
 
-    # A colllection of pivot tables associated with this workbook
+    # A collection of pivot tables associated with this workbook
     # @note The recommended way to manage drawings is Worksheet#add_table
     # @see Worksheet#add_table
     # @see Table
@@ -223,9 +222,9 @@ module Axlsx
       @worksheets[index] if index
     end
 
-    # Creates a new Workbook
-    # The recomended way to work with workbooks is via Package#workbook
-    # @option options [Boolean] date1904. If this is not specified, date1904 is set to false. Office 2011 for Mac defaults to false.
+    # Creates a new Workbook.
+    # The recommended way to work with workbooks is via Package#workbook.
+    # @option options [Boolean] date1904 If this is not specified, date1904 is set to false. Office 2011 for Mac defaults to false.
     def initialize(options = {})
       @styles = Styles.new
       @worksheets = SimpleTypedList.new Worksheet
@@ -236,7 +235,6 @@ module Axlsx
       @tables = SimpleTypedList.new Table
       @pivot_tables = SimpleTypedList.new PivotTable
       @comments = SimpleTypedList.new Comments
-
       @use_autowidth = true
       @bold_font_multiplier = BOLD_FONT_MULTIPLIER
       @font_scale_divisor = FONT_SCALE_DIVISOR
@@ -372,7 +370,7 @@ module Axlsx
     # @param [Symbol] space must be one of :preserve or :default
     def xml_space=(space)
       Axlsx::RestrictionValidator.validate(:xml_space, [:preserve, :default], space)
-      @xml_space = space;
+      @xml_space = space
     end
 
     # returns a range of cells in a worksheet
