@@ -21,7 +21,7 @@ module Axlsx
       @sheet_protection = nil
       initialize_page_options(options)
       parse_options options
-      self.escape_formulas = wb.escape_formulas if @escape_formulas.nil?
+      self.escape_formulas = wb.escape_formulas unless defined? @escape_formulas
       @workbook.worksheets << self
       @sheet_id = index + 1
       yield self if block_given?
