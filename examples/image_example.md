@@ -15,6 +15,7 @@ image = File.expand_path('assets/image1.jpeg')
 wb.add_worksheet(name: 'Image') do |sheet|
   sheet.add_image(image_src: image, start_at: 'B2', width: 100, height: 100)
   sheet.add_image(image_src: image, start_at: 'E1', end_at: 'G3')
+  sheet.add_image(image_src: 'https://via.placeholder.com/150.png', remote: true, start_at: 'E4', end_at: 'G6')
 end
 
 p.serialize 'image_example.xlsx'
