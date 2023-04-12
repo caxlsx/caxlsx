@@ -121,23 +121,19 @@ Currently the following additional gems are available:
 
 ## Security
 
-To prevent [Formula Injection](https://www.owasp.org/index.php/CSV_Injection) vulnerabilities, set the following in an initializer:
+To prevent [Formula Injection](https://www.owasp.org/index.php/CSV_Injection) vulnerabilities, as of version 4.0, axlsx escapes all formulas by default. To permit formulas on a specific cell, please use:
 
 ```ruby
-Axlsx.escape_formulas = true
+cell.escape_formulas = false
 ```
 
-Then, set the following on each cell you'd like to add a formula:
+You may set `escape_formulas` on the workbook, worksheet, row and/or cell level. Refer to examples/escape_formula.md for details.
+
+To allow formulas globally by default (which was the behavior in axlsx 3.x and prior), you may set the following in an initializer:
 
 ```ruby
-cell.escape_formulas = true
+Axlsx.escape_formulas = false
 ```
-
-Refer to examples/escape_formula.md for how to set `escape_formulas` on the workbook, worksheet, row and/or cell level.
-
-**Important:** The global setting `Axlsx.escape_formulas = true` will become the default in the next major release (Axlsx 4.0).
-If you do not wish to set `Axlsx.escape_formulas = true` now, at a minimum, please set `Axlsx.escape_formulas = false` to
-ensure continuity when upgrading.
 
 ## Known Software Interoperability Issues
 

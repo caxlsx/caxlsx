@@ -142,7 +142,7 @@ class TestAxlsx < Test::Unit::TestCase
 
   def test_escape_formulas
     Axlsx.instance_variable_set(:@escape_formulas, nil)
-    assert_equal false, Axlsx::escape_formulas
+    assert_equal true, Axlsx::escape_formulas
 
     Axlsx::escape_formulas = true
     assert_equal true, Axlsx::escape_formulas
