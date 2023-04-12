@@ -27,7 +27,6 @@ class TestPic < Test::Unit::TestCase
     assert_equal(@image_remote.remote?, true)
   end
 
-
   def test_anchor_swapping
     # swap from one cell to two cell when end_at is specified
     assert(@image.anchor.is_a?(Axlsx::OneCellAnchor))
@@ -93,7 +92,6 @@ class TestPic < Test::Unit::TestCase
     assert_nothing_raised { @image_remote.image_src = @test_img_remote_png }
     assert_equal(@image_remote.image_src, @test_img_remote_png)
   end
-
 
   def test_descr
     assert_raise(ArgumentError) { @image.descr = 49 }

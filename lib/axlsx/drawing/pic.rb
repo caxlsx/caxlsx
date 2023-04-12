@@ -98,11 +98,7 @@ module Axlsx
     def remote=(v) Axlsx::validate_boolean(v); @remote = v; end
 
     def remote?
-      if remote == 1 || remote.to_s == 'true'
-        true
-      else
-        false
-      end
+      remote == 1 || remote.to_s == 'true'
     end
 
     # The file name of image_src without any path information
