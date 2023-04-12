@@ -305,8 +305,8 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def test_name_to_indices
-    assert(Axlsx::name_to_indices('A1') == [0, 0])
-    assert(Axlsx::name_to_indices('A100') == [0, 99], 'needs to axcept rows that contain 0')
+    assert(Axlsx.name_to_indices('A1') == [0, 0])
+    assert(Axlsx.name_to_indices('A100') == [0, 99], 'needs to axcept rows that contain 0')
   end
 
   def test_to_stream

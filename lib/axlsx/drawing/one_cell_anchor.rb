@@ -58,10 +58,10 @@ module Axlsx
 
     #
     # @see height
-    def height=(v) Axlsx::validate_unsigned_int(v); @height = v; end
+    def height=(v) Axlsx.validate_unsigned_int(v); @height = v; end
 
     # @see width
-    def width=(v) Axlsx::validate_unsigned_int(v); @width = v; end
+    def width=(v) Axlsx.validate_unsigned_int(v); @width = v; end
 
     # The index of this anchor in the drawing
     # @return [Integer]

@@ -80,7 +80,7 @@ module Axlsx
     alias depthPercent= depth_percent=
 
     # @see r_ang_ax
-    def r_ang_ax=(v) Axlsx::validate_boolean(v); @r_ang_ax = v; end
+    def r_ang_ax=(v) Axlsx.validate_boolean(v); @r_ang_ax = v; end
     alias rAngAx= r_ang_ax=
 
     # @see perspective
@@ -109,7 +109,7 @@ module Axlsx
       val = Axlsx.instance_values_for(self)[name]
       return "" if val.nil?
 
-      "<%s:%s val='%s'/>" % [namespace, Axlsx::camel(name, false), val]
+      "<%s:%s val='%s'/>" % [namespace, Axlsx.camel(name, false), val]
     end
   end
 end

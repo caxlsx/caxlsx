@@ -70,11 +70,11 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<c:title>'
       unless empty?
-        clean_value = Axlsx::trust_input ? @text.to_s : ::CGI.escapeHTML(Axlsx::sanitize(@text.to_s))
+        clean_value = Axlsx.trust_input ? @text.to_s : ::CGI.escapeHTML(Axlsx.sanitize(@text.to_s))
         str << '<c:tx>'
         if @cell.is_a?(Cell)
           str << '<c:strRef>'
-          str << ('<c:f>' << Axlsx::cell_range([@cell]) << '</c:f>')
+          str << ('<c:f>' << Axlsx.cell_range([@cell]) << '</c:f>')
           str << '<c:strCache>'
           str << '<c:ptCount val="1"/>'
           str << '<c:pt idx="0">'

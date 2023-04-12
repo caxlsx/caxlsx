@@ -10,7 +10,7 @@ module Axlsx
     alias Extension extension
 
     # Sets the file extension for this content type.
-    def extension=(v) Axlsx::validate_string v; @extension = v end
+    def extension=(v) Axlsx.validate_string v; @extension = v end
     alias Extension= extension=
 
     # Serializes this object to xml

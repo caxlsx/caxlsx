@@ -16,13 +16,13 @@ module Axlsx
 
     # The content type.
     # @see Axlsx#validate_content_type
-    def content_type=(v) Axlsx::validate_content_type v; @content_type = v end
+    def content_type=(v) Axlsx.validate_content_type v; @content_type = v end
     alias ContentType= content_type=
 
     # Serialize the contenty type to xml
     def to_xml_string(node_name = '', str = '')
       str << "<#{node_name} "
-      str << Axlsx.instance_values_for(self).map { |key, value| Axlsx::camel(key) << '="' << value.to_s << '"' }.join(' ')
+      str << Axlsx.instance_values_for(self).map { |key, value| Axlsx.camel(key) << '="' << value.to_s << '"' }.join(' ')
       str << '/>'
     end
   end

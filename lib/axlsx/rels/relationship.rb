@@ -90,9 +90,9 @@ module Axlsx
     end
 
     # @see Target
-    def Target=(v) Axlsx::validate_string v; @Target = v end
+    def Target=(v) Axlsx.validate_string v; @Target = v end
     # @see Type
-    def Type=(v) Axlsx::validate_relationship_type v; @Type = v end
+    def Type=(v) Axlsx.validate_relationship_type v; @Type = v end
 
     # @see TargetMode
     def TargetMode=(v) RestrictionValidator.validate 'Relationship.TargetMode', [:External, :Internal], v; @TargetMode = v; end
@@ -103,7 +103,7 @@ module Axlsx
     def to_xml_string(str = '')
       h = Axlsx.instance_values_for(self).reject { |k, _| k == "source_obj" }
       str << '<Relationship '
-      str << (h.map { |key, value| '' << key.to_s << '="' << Axlsx::coder.encode(value.to_s) << '"' }.join(' '))
+      str << (h.map { |key, value| '' << key.to_s << '="' << Axlsx.coder.encode(value.to_s) << '"' }.join(' '))
       str << '/>'
     end
 

@@ -41,7 +41,7 @@ module Axlsx
         @smooth = [:smooth, :smoothMarker].include?(chart.scatter_style)
       else
         # Set smoothing according to the option provided
-        Axlsx::validate_boolean(options[:smooth])
+        Axlsx.validate_boolean(options[:smooth])
         @smooth = options[:smooth]
       end
       @ln_width = options[:ln_width] unless options[:ln_width].nil?
@@ -60,7 +60,7 @@ module Axlsx
 
     # @see smooth
     def smooth=(v)
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       @smooth = v
     end
 
@@ -71,7 +71,7 @@ module Axlsx
 
     # @see marker_symbol
     def marker_symbol=(v)
-      Axlsx::validate_marker_symbol(v)
+      Axlsx.validate_marker_symbol(v)
       @marker_symbol = v
     end
 

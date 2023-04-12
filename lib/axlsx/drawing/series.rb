@@ -38,7 +38,7 @@ module Axlsx
     end
 
     # @see order
-    def order=(v) Axlsx::validate_unsigned_int(v); @order = v; end
+    def order=(v) Axlsx.validate_unsigned_int(v); @order = v; end
 
     # @see title
     def title=(v)

@@ -50,7 +50,7 @@ class TestDLbls < Test::Unit::TestCase
     str << '</c:chartSpace>'
     doc = Nokogiri::XML(str)
     Axlsx.instance_values_for(@d_lbls).each do |name, value|
-      assert(doc.xpath("//c:#{Axlsx::camel(name, false)}[@val='#{value}']"), "#{name} is properly serialized")
+      assert(doc.xpath("//c:#{Axlsx.camel(name, false)}[@val='#{value}']"), "#{name} is properly serialized")
     end
   end
 end

@@ -18,9 +18,9 @@ module Axlsx
               when String
                 cells
               when Array
-                Axlsx::cell_range(cells, false)
+                Axlsx.cell_range(cells, false)
               when Row
-                Axlsx::cell_range(cells, false)
+                Axlsx.cell_range(cells, false)
               end
     end
 

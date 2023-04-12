@@ -24,9 +24,9 @@ module Axlsx
     attr_reader :defaultPivotStyle
 
     # @see defaultTableStyle
-    def defaultTableStyle=(v) Axlsx::validate_string(v); @defaultTableStyle = v; end
+    def defaultTableStyle=(v) Axlsx.validate_string(v); @defaultTableStyle = v; end
     # @see defaultPivotStyle
-    def defaultPivotStyle=(v) Axlsx::validate_string(v); @defaultPivotStyle = v; end
+    def defaultPivotStyle=(v) Axlsx.validate_string(v); @defaultPivotStyle = v; end
 
     # Serializes the object
     # @param [String] str

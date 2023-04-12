@@ -130,7 +130,7 @@ module Axlsx
     # @see height
     def height=(v)
       unless v.nil?
-        Axlsx::validate_unsigned_numeric(v)
+        Axlsx.validate_unsigned_numeric(v)
         @custom_height = true
         @ht = v
       end

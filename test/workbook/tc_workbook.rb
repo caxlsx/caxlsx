@@ -162,7 +162,7 @@ class TestWorkbook < Test::Unit::TestCase
   end
 
   def test_escape_formulas
-    Axlsx::escape_formulas = false
+    Axlsx.escape_formulas = false
     p = Axlsx::Package.new
     @wb = p.workbook
     assert_false @wb.escape_formulas
@@ -170,7 +170,7 @@ class TestWorkbook < Test::Unit::TestCase
     assert_false @wb.add_worksheet(escape_formulas: false).escape_formulas
     assert @wb.add_worksheet(escape_formulas: true).escape_formulas
 
-    Axlsx::escape_formulas = true
+    Axlsx.escape_formulas = true
     p = Axlsx::Package.new
     @wb = p.workbook
     assert @wb.escape_formulas

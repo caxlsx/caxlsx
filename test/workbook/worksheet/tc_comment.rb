@@ -39,7 +39,7 @@ class TestComment < Test::Unit::TestCase
   end
 
   def test_vml_shape
-    pos = Axlsx::name_to_indices(@c1.ref)
+    pos = Axlsx.name_to_indices(@c1.ref)
     assert(@c1.vml_shape.is_a?(Axlsx::VmlShape))
     assert(@c1.vml_shape.column == pos[0])
     assert(@c1.vml_shape.row == pos[1])

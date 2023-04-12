@@ -31,7 +31,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
               }
             end
     tests.each do |date_string, expected|
-      serial = Axlsx::DateTimeConverter::date_to_serial Date.parse(date_string)
+      serial = Axlsx::DateTimeConverter.date_to_serial Date.parse(date_string)
       assert_equal expected, serial
     end
   end
@@ -55,7 +55,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
               }
             end
     tests.each do |date_string, expected|
-      serial = Axlsx::DateTimeConverter::date_to_serial Date.parse(date_string)
+      serial = Axlsx::DateTimeConverter.date_to_serial Date.parse(date_string)
       assert_equal expected, serial
     end
   end
@@ -79,7 +79,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
               }
             end
     tests.each do |time_string, expected|
-      serial = Axlsx::DateTimeConverter::time_to_serial Time.parse(time_string)
+      serial = Axlsx::DateTimeConverter.time_to_serial Time.parse(time_string)
       assert_in_delta expected, serial, @margin_of_error
     end
   end
@@ -104,7 +104,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
               }
             end
     tests.each do |time_string, expected|
-      serial = Axlsx::DateTimeConverter::time_to_serial Time.parse(time_string)
+      serial = Axlsx::DateTimeConverter.time_to_serial Time.parse(time_string)
       assert_in_delta expected, serial, @margin_of_error
     end
   end
@@ -114,8 +114,8 @@ class TestDateTimeConverter < Test::Unit::TestCase
     local = Time.parse "2012-01-01 09:00:00 +0900"
 
     assert_equal local, utc
-    assert_equal Axlsx::DateTimeConverter::time_to_serial(local) - (local.utc_offset.to_f / 86_400), Axlsx::DateTimeConverter::time_to_serial(utc)
+    assert_equal Axlsx::DateTimeConverter.time_to_serial(local) - (local.utc_offset.to_f / 86_400), Axlsx::DateTimeConverter.time_to_serial(utc)
     Axlsx::Workbook.date1904 = true
-    assert_equal Axlsx::DateTimeConverter::time_to_serial(local) - (local.utc_offset.to_f / 86_400), Axlsx::DateTimeConverter::time_to_serial(utc)
+    assert_equal Axlsx::DateTimeConverter.time_to_serial(local) - (local.utc_offset.to_f / 86_400), Axlsx::DateTimeConverter.time_to_serial(utc)
   end
 end

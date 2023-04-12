@@ -93,7 +93,7 @@ module Axlsx
 
     # @see use_shared_strings
     def use_shared_strings=(v)
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       @use_shared_strings = v
     end
 
@@ -102,7 +102,7 @@ module Axlsx
     attr_reader :is_reversed
 
     def is_reversed=(v)
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       @is_reversed = v
     end
 
@@ -250,11 +250,11 @@ module Axlsx
     def date1904() @@date1904; end
 
     # see @date1904
-    def date1904=(v) Axlsx::validate_boolean v; @@date1904 = v; end
+    def date1904=(v) Axlsx.validate_boolean v; @@date1904 = v; end
 
     # Sets the date1904 attribute to the provided boolean
     # @return [Boolean]
-    def self.date1904=(v) Axlsx::validate_boolean v; @@date1904 = v; end
+    def self.date1904=(v) Axlsx.validate_boolean v; @@date1904 = v; end
 
     # retrieves the date1904 attribute
     # @return [Boolean]
@@ -281,7 +281,7 @@ module Axlsx
     def use_autowidth() @use_autowidth; end
 
     # see @use_autowidth
-    def use_autowidth=(v = true) Axlsx::validate_boolean v; @use_autowidth = v; end
+    def use_autowidth=(v = true) Axlsx.validate_boolean v; @use_autowidth = v; end
 
     # Font size of bold fonts is multiplied with this
     # Used for automatic calculation of cell widths with bold text
@@ -289,7 +289,7 @@ module Axlsx
     attr_reader :bold_font_multiplier
 
     def bold_font_multiplier=(v)
-      Axlsx::validate_float v
+      Axlsx.validate_float v
       @bold_font_multiplier = v
     end
 
@@ -299,7 +299,7 @@ module Axlsx
     attr_reader :font_scale_divisor
 
     def font_scale_divisor=(v)
-      Axlsx::validate_float v
+      Axlsx.validate_float v
       @font_scale_divisor = v
     end
 

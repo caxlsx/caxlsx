@@ -31,7 +31,7 @@ module Axlsx
     # Shortcut to specify that the workbook should use autowidth
     # @see Workbook#use_autowidth
     def use_autowidth=(v)
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       workbook.use_autowidth = v
     end
 
@@ -44,7 +44,7 @@ module Axlsx
     # Shortcut to specify that the workbook should use shared strings
     # @see Workbook#use_shared_strings
     def use_shared_strings=(v)
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       workbook.use_shared_strings = v
     end
 

@@ -15,7 +15,7 @@ module Axlsx
       @f = nil
       @data = @data_type.new(options)
       if options[:data] && options[:data].first.is_a?(Cell)
-        @f = Axlsx::cell_range(options[:data])
+        @f = Axlsx.cell_range(options[:data])
       end
       parse_options options
     end

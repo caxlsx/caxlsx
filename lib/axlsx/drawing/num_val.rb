@@ -16,13 +16,13 @@ module Axlsx
 
     # @see format_code
     def format_code=(v)
-      Axlsx::validate_string(v)
+      Axlsx.validate_string(v)
       @format_code = v
     end
 
     # serialize the object
     def to_xml_string(idx, str = "")
-      Axlsx::validate_unsigned_int(idx)
+      Axlsx.validate_unsigned_int(idx)
       unless v.to_s.empty?
         str << ('<c:pt idx="' << idx.to_s << '" formatCode="' << format_code << '"><c:v>' << v.to_s << '</c:v></c:pt>')
       end

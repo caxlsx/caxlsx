@@ -24,9 +24,9 @@ module Axlsx
     end
 
     # @see hidden
-    def hidden=(v) Axlsx::validate_boolean v; @hidden = v end
+    def hidden=(v) Axlsx.validate_boolean v; @hidden = v end
     # @see locked
-    def locked=(v) Axlsx::validate_boolean v; @locked = v end
+    def locked=(v) Axlsx.validate_boolean v; @locked = v end
 
     # Serializes the object
     # @param [String] str

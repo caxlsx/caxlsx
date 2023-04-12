@@ -53,10 +53,10 @@ module Axlsx
     attr_reader :stop
 
     # @see type
-    def type=(v) Axlsx::validate_gradient_type v; @type = v end
+    def type=(v) Axlsx.validate_gradient_type v; @type = v end
 
     # @see degree
-    def degree=(v) Axlsx::validate_float v; @degree = v end
+    def degree=(v) Axlsx.validate_float v; @degree = v end
 
     # @see left
     def left=(v)

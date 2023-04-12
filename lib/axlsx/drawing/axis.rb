@@ -107,15 +107,15 @@ module Axlsx
 
     # The number format format code for this axis
     # default :General
-    def format_code=(v) Axlsx::validate_string(v); @format_code = v; end
+    def format_code=(v) Axlsx.validate_string(v); @format_code = v; end
 
     # Specify if gridlines should be shown for this axis
     # default true
-    def gridlines=(v) Axlsx::validate_boolean(v); @gridlines = v; end
+    def gridlines=(v) Axlsx.validate_boolean(v); @gridlines = v; end
 
     # Specify if axis should be removed from the chart
     # default false
-    def delete=(v) Axlsx::validate_boolean(v); @delete = v; end
+    def delete=(v) Axlsx.validate_boolean(v); @delete = v; end
 
     # specifies how the perpendicular axis is crossed
     # must be one of [:autoZero, :min, :max]
@@ -124,9 +124,9 @@ module Axlsx
     # Specify the degree of label rotation to apply to labels
     # default true
     def label_rotation=(v)
-      Axlsx::validate_int(v)
+      Axlsx.validate_int(v)
       adjusted = v.to_i * 60_000
-      Axlsx::validate_angle(adjusted)
+      Axlsx.validate_angle(adjusted)
       @label_rotation = adjusted
     end
 

@@ -73,21 +73,21 @@ module Axlsx
     # @see active_cell
     def active_cell=(v)
       cell = (v.instance_of?(Axlsx::Cell) ? v.r_abs : v)
-      Axlsx::validate_string(cell)
+      Axlsx.validate_string(cell)
       @active_cell = cell
     end
 
     # @see active_cell_id
-    def active_cell_id=(v); Axlsx::validate_unsigned_int(v); @active_cell_id = v end
+    def active_cell_id=(v); Axlsx.validate_unsigned_int(v); @active_cell_id = v end
 
     # @see pane
     def pane=(v)
-      Axlsx::validate_pane_type(v)
-      @pane = Axlsx::camel(v, false)
+      Axlsx.validate_pane_type(v)
+      @pane = Axlsx.camel(v, false)
     end
 
     # @see sqref
-    def sqref=(v); Axlsx::validate_string(v); @sqref = v end
+    def sqref=(v); Axlsx.validate_string(v); @sqref = v end
 
     # Serializes the data validation
     # @param [String] str

@@ -37,7 +37,7 @@ module Axlsx
     def colors=(v) DataTypeValidator.validate "BarSeries.colors", [Array], v; @colors = v end
 
     # @see explosion
-    def explosion=(v) Axlsx::validate_unsigned_int(v); @explosion = v; end
+    def explosion=(v) Axlsx.validate_unsigned_int(v); @explosion = v; end
 
     # Serializes the object
     # @param [String] str

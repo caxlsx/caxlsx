@@ -7,7 +7,7 @@ module Axlsx
     # @param [Date] date the date to be serialized
     # @return [Numeric]
     def self.date_to_serial(date)
-      epoch = Axlsx::Workbook::date1904 ? Date.new(1904) : Date.new(1899, 12, 30)
+      epoch = Axlsx::Workbook.date1904 ? Date.new(1904) : Date.new(1899, 12, 30)
       offset_date = date.respond_to?(:utc_offset) ? date + date.utc_offset.seconds : date
       (offset_date - epoch).to_f
     end
@@ -21,7 +21,7 @@ module Axlsx
       epoch1900 = -2_209_161_600.0 # Time.utc(1899, 12, 30).to_i
       epoch1904 = -2_082_844_800.0 # Time.utc(1904, 1, 1).to_i
       seconds_per_day = 86_400.0 # 60*60*24
-      epoch = Axlsx::Workbook::date1904 ? epoch1904 : epoch1900
+      epoch = Axlsx::Workbook.date1904 ? epoch1904 : epoch1900
       (time.utc_offset + time.to_f - epoch) / seconds_per_day
     end
   end

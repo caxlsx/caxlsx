@@ -29,7 +29,7 @@ module Axlsx
 
     # @see format_code
     def format_code=(v = 'General')
-      Axlsx::validate_string(v)
+      Axlsx.validate_string(v)
       @format_code = v
     end
 

@@ -80,9 +80,9 @@ class TestAxlsx < Test::Unit::TestCase
   end
 
   def test_range_to_a
-    assert_equal([['A1', 'B1', 'C1']],                         Axlsx::range_to_a('A1:C1'))
-    assert_equal([['A1', 'B1', 'C1'], ['A2', 'B2', 'C2']],     Axlsx::range_to_a('A1:C2'))
-    assert_equal([['Z5', 'AA5', 'AB5'], ['Z6', 'AA6', 'AB6']], Axlsx::range_to_a('Z5:AB6'))
+    assert_equal([['A1', 'B1', 'C1']],                         Axlsx.range_to_a('A1:C1'))
+    assert_equal([['A1', 'B1', 'C1'], ['A2', 'B2', 'C2']],     Axlsx.range_to_a('A1:C2'))
+    assert_equal([['Z5', 'AA5', 'AB5'], ['Z6', 'AA6', 'AB6']], Axlsx.range_to_a('Z5:AB6'))
   end
 
   def test_sanitize_frozen_control_strippped
@@ -142,13 +142,13 @@ class TestAxlsx < Test::Unit::TestCase
 
   def test_escape_formulas
     Axlsx.instance_variable_set(:@escape_formulas, nil)
-    assert_equal false, Axlsx::escape_formulas
+    assert_equal false, Axlsx.escape_formulas
 
-    Axlsx::escape_formulas = true
-    assert_equal true, Axlsx::escape_formulas
+    Axlsx.escape_formulas = true
+    assert_equal true, Axlsx.escape_formulas
 
-    Axlsx::escape_formulas = false
-    assert_equal false, Axlsx::escape_formulas
+    Axlsx.escape_formulas = false
+    assert_equal false, Axlsx.escape_formulas
   ensure
     Axlsx.instance_variable_set(:@escape_formulas, nil)
   end

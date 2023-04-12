@@ -107,7 +107,7 @@ module Axlsx
     # The local sheet index (0-based)
     # @param [Integer] value the unsigned integer index of the sheet this defined_name applies to.
     def local_sheet_id=(value)
-      Axlsx::validate_unsigned_int(value)
+      Axlsx.validate_unsigned_int(value)
       @local_sheet_id = value
     end
 

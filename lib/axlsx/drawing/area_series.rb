@@ -50,19 +50,19 @@ module Axlsx
 
     # @see show_marker
     def show_marker=(v)
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       @show_marker = v
     end
 
     # @see marker_symbol
     def marker_symbol=(v)
-      Axlsx::validate_marker_symbol(v)
+      Axlsx.validate_marker_symbol(v)
       @marker_symbol = v
     end
 
     # @see smooth
     def smooth=(v)
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       @smooth = v
     end
 

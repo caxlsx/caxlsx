@@ -7,7 +7,7 @@ class TestTableStyleInfo < Test::Unit::TestCase
     40.times do
       @ws.add_row %w(aa bb cc dd ee ff gg hh ii jj kk)
     end
-    @table = @ws.add_table(Axlsx::cell_range([@ws.rows.first.cells.first, @ws.rows.last.cells.last], false), :name => 'foo')
+    @table = @ws.add_table(Axlsx.cell_range([@ws.rows.first.cells.first, @ws.rows.last.cells.last], false), :name => 'foo')
     @options =  { :show_first_column => 1,
                   :show_last_column => 1,
                   :show_row_stripes => 1,

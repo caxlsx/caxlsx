@@ -196,17 +196,17 @@ module Axlsx
     end
 
     # @see fit_to_height
-    def fit_to_height=(v); Axlsx::validate_unsigned_int(v); @fit_to_height = v; end
+    def fit_to_height=(v); Axlsx.validate_unsigned_int(v); @fit_to_height = v; end
     # @see fit_to_width
-    def fit_to_width=(v); Axlsx::validate_unsigned_int(v); @fit_to_width = v; end
+    def fit_to_width=(v); Axlsx.validate_unsigned_int(v); @fit_to_width = v; end
     # @see orientation
-    def orientation=(v); Axlsx::validate_page_orientation(v); @orientation = v; end
+    def orientation=(v); Axlsx.validate_page_orientation(v); @orientation = v; end
     # @see paper_height
-    def paper_height=(v); Axlsx::validate_number_with_unit(v); @paper_height = v; end
+    def paper_height=(v); Axlsx.validate_number_with_unit(v); @paper_height = v; end
     # @see paper_width
-    def paper_width=(v); Axlsx::validate_number_with_unit(v); @paper_width = v; end
+    def paper_width=(v); Axlsx.validate_number_with_unit(v); @paper_width = v; end
     # @see scale
-    def scale=(v); Axlsx::validate_scale_10_400(v); @scale = v; end
+    def scale=(v); Axlsx.validate_scale_10_400(v); @scale = v; end
 
     # convenience method to achieve sanity when setting fit_to_width and fit_to_height
     # as they both default to 1 if only their counterpart is specified.
