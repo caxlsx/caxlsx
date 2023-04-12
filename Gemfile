@@ -9,6 +9,7 @@ group :test do
   gem 'rake'
   gem 'simplecov', '>= 0.14.1'
   gem 'test-unit'
+  gem 'webmock'
 end
 
 group :profile do

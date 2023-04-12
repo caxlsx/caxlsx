@@ -2,13 +2,16 @@ require 'tc_helper.rb'
 
 class TestPic < Test::Unit::TestCase
   def setup
+    stub_request(:get, 'https://example.com/sample-image.png')
+      .to_return(body: File.new('examples/sample.png'), status: 200)
+
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
     @test_img = @test_img_jpg = File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
     @test_img_png =  File.dirname(__FILE__) + "/../fixtures/image1.png"
     @test_img_gif =  File.dirname(__FILE__) + "/../fixtures/image1.gif"
     @test_img_fake = File.dirname(__FILE__) + "/../fixtures/image1_fake.jpg"
-    @test_img_remote_png = "https://via.placeholder.com/150.png"
+    @test_img_remote_png = "https://example.com/sample-image.png"
     @test_img_remote_fake = "invalid_URI"
     @image = ws.add_image :image_src => @test_img, :hyperlink => 'https://github.com/randym', :tooltip => "What's up doc?", :opacity => 5
     @image_remote = ws.add_image :image_src => @test_img_remote_png, remote: true, :hyperlink => 'https://github.com/randym', :tooltip => "What's up doc?", :opacity => 5
