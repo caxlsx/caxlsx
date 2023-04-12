@@ -122,7 +122,7 @@ module Axlsx
     # values starting with an equals sign as formulas or as literal strings.
     # @param [Array, Boolean] value The value to set.
     def escape_formulas=(value)
-      each_with_index do | cell, index |
+      each_with_index do |cell, index|
         cell.escape_formulas = value.is_a?(Array) ? value[index] : value
       end
     end
