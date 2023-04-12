@@ -7,6 +7,7 @@ module Axlsx
 
     # Creates a new Pic(ture) object
     # @param [Anchor] anchor the anchor that holds this image
+    # @option options [Boolean] :remote indicates if image_src is a remote URI
     # @option options [String] :name
     # @option options [String] :descr
     # @option options [String] :image_src
@@ -18,6 +19,7 @@ module Axlsx
       @anchor = anchor
       @hyperlink = nil
       @anchor.drawing.worksheet.workbook.images << self
+      @remote = options[:remote]
       parse_options options
       start_at(*options[:start_at]) if options[:start_at]
       yield self if block_given?
@@ -54,6 +56,10 @@ module Axlsx
     # @return [Integer]
     attr_reader :opacity
 
+    # Flag for remote picture (from URI)
+    # @return [Boolean]
+    attr_reader :remote
+
     # sets or updates a hyperlink for this image.
     # @param [String] v The href value for the hyper link
     # @option options @see Hyperlink#initialize All options available to the Hyperlink class apply - however href will be overridden with the v parameter value.
@@ -71,8 +77,13 @@ module Axlsx
 
     def image_src=(v)
       Axlsx::validate_string(v)
-      RestrictionValidator.validate 'Pic.image_src', ALLOWED_MIME_TYPES, MimeTypeUtils.get_mime_type(v)
-      raise ArgumentError, "File does not exist" unless File.exist?(v)
+      if remote?
+        RegexValidator.validate('Pic.image_src', /\A#{URI::DEFAULT_PARSER.make_regexp}\z/, v)
+        RestrictionValidator.validate 'Pic.image_src', ALLOWED_MIME_TYPES, MimeTypeUtils.get_mime_type_from_uri(v)
+      else
+        RestrictionValidator.validate 'Pic.image_src', ALLOWED_MIME_TYPES, MimeTypeUtils.get_mime_type(v)
+        raise ArgumentError, "File does not exist" unless File.exist?(v)
+      end
 
       @image_src = v
     end
@@ -83,10 +94,17 @@ module Axlsx
     # @see descr
     def descr=(v) Axlsx::validate_string(v); @descr = v; end
 
+    # @see remote
+    def remote=(v) Axlsx::validate_boolean(v); @remote = v; end
+
+    def remote?
+      remote == 1 || remote.to_s == 'true'
+    end
+
     # The file name of image_src without any path information
     # @return [String]
     def file_name
-      File.basename(image_src) unless image_src.nil?
+      File.basename(image_src) unless remote? || image_src.nil?
     end
 
     # returns the extension of image_src without the preceeding '.'
@@ -110,7 +128,11 @@ module Axlsx
     # The relationship object for this pic.
     # @return [Relationship]
     def relationship
-      Relationship.new(self, IMAGE_R, "../#{pn}")
+      if remote?
+        Relationship.new(self, IMAGE_R, "#{image_src}", target_mode: :External)
+      else
+        Relationship.new(self, IMAGE_R, "../#{pn}")
+      end
     end
 
     # providing access to the anchor's width attribute
@@ -174,7 +196,7 @@ module Axlsx
       picture_locking.to_xml_string(str)
       str << '</xdr:cNvPicPr></xdr:nvPicPr>'
       str << '<xdr:blipFill>'
-      str << ('<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
+      str << relationship_xml_portion
       if opacity
         str << "<a:alphaModFix amt=\"#{opacity}\"/>"
       end
@@ -185,6 +207,15 @@ module Axlsx
     end
 
     private
+
+    # Return correct xml relationship string portion
+    def relationship_xml_portion
+      if remote?
+        ('<a:blip xmlns:r ="' << XML_NS_R << '" r:link="' << relationship.Id << '">')
+      else
+        ('<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
+      end
+    end
 
     # Changes the anchor to a one cell anchor.
     def use_one_cell_anchor
