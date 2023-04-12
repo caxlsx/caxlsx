@@ -1,9 +1,6 @@
-# encoding: UTF-8
 module Axlsx
-
   # The Col class defines column attributes for columns in sheets.
   class Col
-
     # Maximum column width limit in MS Excel is 255 characters
     # https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3
     MAX_WIDTH = 255
@@ -19,7 +16,7 @@ module Axlsx
     # @option options [Boolean] phonetic see Col#phonetic
     # @option options [Integer] style see Col#style
     # @option options [Numeric] width see Col#width
-    def initialize(min, max, options={})
+    def initialize(min, max, options = {})
       Axlsx.validate_unsigned_int(max)
       Axlsx.validate_unsigned_int(min)
       @min = min
@@ -90,6 +87,7 @@ module Axlsx
     def outline_level=(v)
       Axlsx.validate_unsigned_numeric(v)
       raise ArgumentError, 'outlineLevel must be between 0 and 7' unless 0 <= v && v <= 7
+
       @outline_level = v
     end
     alias :outlineLevel= :outline_level=
@@ -106,14 +104,14 @@ module Axlsx
       @style = v
     end
 
-   # @see Col#width
+    # @see Col#width
     def width=(v)
       # Removing this validation make a 10% difference in performance
       # as it is called EVERY TIME A CELL IS ADDED - the proper solution
       # is to only set this if a calculated value is greated than the
       # current @width value.
       # TODO!!!
-      #Axlsx.validate_unsigned_numeric(v) unless v == nil
+      # Axlsx.validate_unsigned_numeric(v) unless v == nil
       @custom_width = @best_fit = v != nil
       @width = v.nil? ? v : [v, MAX_WIDTH].min
     end
@@ -140,6 +138,5 @@ module Axlsx
     def to_xml_string(str = '')
       serialized_tag('col', str)
     end
-
   end
 end

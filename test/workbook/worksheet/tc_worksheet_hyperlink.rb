@@ -22,13 +22,13 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
   end
 
   def test_target
-    
     assert_equal(@options[:target], Axlsx.instance_values_for(@a)['target'])
   end
 
   def test_display
     assert_equal(@options[:display], @a.display)
   end
+
   def test_ref
     assert_equal(@options[:ref], @a.ref)
   end
@@ -52,5 +52,3 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
     assert_equal(doc.xpath("//xmlns:hyperlink[@r:id='#{@a.relationship.Id}']").size, 1)
   end
 end
-
-

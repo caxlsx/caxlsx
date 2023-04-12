@@ -1,10 +1,8 @@
-# encoding: UTF-8
 module Axlsx
   # This class details the anchor points for drawings.
   # @note The recommended way to manage drawings and charts is Worksheet#add_chart. Anchors are specified by the :start_at and :end_at options to that method.
   # @see Worksheet#add_chart
   class TwoCellAnchor
-
     include Axlsx::OptionsParser
 
     # A marker that defines the from cell anchor. The default from column and row are 0 and 0 respectively
@@ -32,10 +30,10 @@ module Axlsx
     # @param [Drawing] drawing
     # @option options [Array] :start_at the col, row to start at THIS IS DOCUMENTED BUT NOT IMPLEMENTED HERE!
     # @option options [Array] :end_at the col, row to end at
-    def initialize(drawing, options={})
+    def initialize(drawing, options = {})
       @drawing = drawing
       drawing.anchors << self
-      @from, @to =  Marker.new, Marker.new(:col => 5, :row=>10)
+      @from, @to =  Marker.new, Marker.new(:col => 5, :row => 10)
       parse_options options
 
       # bit of a hack to work around the fact that the coords for start at and end at
@@ -48,7 +46,7 @@ module Axlsx
     # @note The recommended way to set the start position for graphical
     # objects is directly thru the object.
     # @see Chart#start_at
-    def start_at(x, y=nil)
+    def start_at(x, y = nil)
       from.coord x, y
     end
 
@@ -56,7 +54,7 @@ module Axlsx
     # @note the recommended way to set the to position for graphical
     # objects is directly thru the object
     # @see Char#end_at
-    def end_at(x, y=nil)
+    def end_at(x, y = nil)
       to.coord x, y
     end
 
@@ -68,7 +66,7 @@ module Axlsx
     end
 
     # Creates an image associated with this anchor.
-    def add_pic(options={})
+    def add_pic(options = {})
       @object = Pic.new(self, options)
     end
 

@@ -1,0 +1,23 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  DisabledByDefault: true
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 2.3
+  Exclude:
+    - 'docs/**/*'
+    - 'examples/**/*'
+    - 'vendor/bundle/**/*'
+
+Layout:
+  Enabled: true
+
+Layout/CommentIndentation:
+  AllowForAlignment: true
+
+Layout/ExtraSpacing:
+  AllowBeforeTrailingComments: true
+
+Style:
+  Enabled: true

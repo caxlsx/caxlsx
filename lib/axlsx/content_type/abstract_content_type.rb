@@ -1,14 +1,12 @@
 module Axlsx
-
   # This class extracts the common parts from Default and Override
   class AbstractContentType
-
     include Axlsx::OptionsParser
 
     # Initializes an abstract content type
     # @see Default, Override
-    def initialize(options={})
-       parse_options options
+    def initialize(options = {})
+      parse_options options
     end
 
     # The type of content.
@@ -27,6 +25,5 @@ module Axlsx
       str << Axlsx.instance_values_for(self).map { |key, value| Axlsx::camel(key) << '="' << value.to_s << '"' }.join(' ')
       str << '/>'
     end
-
   end
 end

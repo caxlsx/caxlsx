@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestBarChart < Test::Unit::TestCase
-
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
@@ -26,11 +25,11 @@ class TestBarChart < Test::Unit::TestCase
     assert(@chart.bar_dir == :col)
   end
 
- def test_grouping
-   assert_raise(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
-   assert_nothing_raised("allow valid grouping") { @chart.grouping = :standard }
-   assert(@chart.grouping == :standard)
- end
+  def test_grouping
+    assert_raise(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
+    assert_nothing_raised("allow valid grouping") { @chart.grouping = :standard }
+    assert(@chart.grouping == :standard)
+  end
 
   def test_gap_width
     assert_raise(ArgumentError, "require valid gap width") { @chart.gap_width = -1 }

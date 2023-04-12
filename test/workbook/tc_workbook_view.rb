@@ -1,11 +1,10 @@
 require 'tc_helper'
 
 class TestWorkbookView < Test::Unit::TestCase
-
   def setup
     @options = { visibility: :hidden, minimized: true, show_horizontal_scroll: true, show_vertical_scroll: true,
-                show_sheet_tabs: true, tab_ratio: 750, first_sheet: 0, active_tab: 1, x_window: 500, y_window: 400,
-                window_width: 800, window_height: 600, auto_filter_date_grouping: true }
+                 show_sheet_tabs: true, tab_ratio: 750, first_sheet: 0, active_tab: 1, x_window: 500, y_window: 400,
+                 window_width: 800, window_height: 600, auto_filter_date_grouping: true }
     @book_view = Axlsx::WorkbookView.new @options
   end
 
@@ -18,14 +17,14 @@ class TestWorkbookView < Test::Unit::TestCase
   def test_boolean_attribute_validation
     %w(minimized show_horizontal_scroll show_vertical_scroll show_sheet_tabs auto_filter_date_grouping).each do |attr|
       assert_raise(ArgumentError, 'only booleanish allowed in boolean attributes') { @book_view.send("#{attr}=", "banana") }
-      assert_nothing_raised { @book_view.send("#{attr}=", false )}
+      assert_nothing_raised { @book_view.send("#{attr}=", false) }
     end
   end
 
   def test_integer_attribute_validation
     %w(tab_ratio first_sheet active_tab x_window y_window window_width window_height).each do |attr|
       assert_raise(ArgumentError, 'only integer allowed in integer attributes') { @book_view.send("#{attr}=", "b") }
-      assert_nothing_raised { @book_view.send("#{attr}=", 7 )}
+      assert_nothing_raised { @book_view.send("#{attr}=", 7) }
     end
   end
 

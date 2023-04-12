@@ -1,9 +1,8 @@
-# encoding: UTF-8
 require 'tc_helper.rb'
 
 class TestSelection < Test::Unit::TestCase
   def setup
-    @options = { :active_cell => 'A2', :active_cell_id => 1, :pane => :top_left, :sqref => 'A2'  }
+    @options = { :active_cell => 'A2', :active_cell_id => 1, :pane => :top_left, :sqref => 'A2' }
     @selection = Axlsx::Selection.new(@options)
   end
 

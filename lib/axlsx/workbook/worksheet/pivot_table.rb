@@ -1,10 +1,8 @@
-# encoding: UTF-8
 module Axlsx
   # Table
   # @note Worksheet#add_pivot_table is the recommended way to create tables for your worksheets.
   # @see README for examples
   class PivotTable
-
     include Axlsx::OptionsParser
 
     # Creates a new PivotTable object
@@ -13,12 +11,12 @@ module Axlsx
     # @param [Worksheet] sheet The sheet containing the table data.
     # @option options [Cell, String] name
     # @option options [TableStyle] style
-    def initialize(ref, range, sheet, options={})
+    def initialize(ref, range, sheet, options = {})
       @ref = ref
       self.range = range
       @sheet = sheet
       @sheet.workbook.pivot_tables << self
-      @name = "PivotTable#{index+1}"
+      @name = "PivotTable#{index + 1}"
       @data_sheet = nil
       @rows = []
       @columns = []
@@ -92,7 +90,6 @@ module Axlsx
     # @return [Array]
     attr_reader :rows
 
-
     # (see #rows)
     def rows=(v)
       DataTypeValidator.validate "#{self.class}.rows", [Array], v
@@ -125,7 +122,7 @@ module Axlsx
       @data = []
       v.each do |data_field|
         if data_field.is_a? String
-          data_field = {:ref => data_field}
+          data_field = { :ref => data_field }
         end
         data_field.each do |key, value|
           if key == :num_fmt
@@ -161,13 +158,13 @@ module Axlsx
     # The part name for this table
     # @return [String]
     def pn
-      "#{PIVOT_TABLE_PN % (index+1)}"
+      "#{PIVOT_TABLE_PN % (index + 1)}"
     end
 
     # The relationship part name of this pivot table
     # @return [String]
     def rels_pn
-      "#{PIVOT_TABLE_RELS_PN % (index+1)}"
+      "#{PIVOT_TABLE_RELS_PN % (index + 1)}"
     end
 
     # The cache_definition for this pivot table
@@ -222,7 +219,7 @@ module Axlsx
           str << '<colFields count="1"><field x="-2"/></colFields>'
           str << "<colItems count=\"#{data.size}\">"
           str << '<i><x/></i>'
-          data[1..-1].each_with_index do |datum_value,i|
+          data[1..-1].each_with_index do |datum_value, i|
             str << "<i i=\"#{i + 1}\"><x v=\"#{i + 1}\"/></i>"
           end
           str << '</colItems>'
@@ -247,7 +244,7 @@ module Axlsx
         str << "<dataFields count=\"#{data.size}\">"
         data.each do |datum_value|
           # The correct name prefix in ["Sum","Average", etc...]
-          str << "<dataField name='#{(datum_value[:subtotal]||'')} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
+          str << "<dataField name='#{(datum_value[:subtotal] || '')} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
           str << " numFmtId='#{datum_value[:num_fmt]}'" if datum_value[:num_fmt]
           str << " subtotal='#{datum_value[:subtotal]}' " if datum_value[:subtotal]
           str << "/>"
@@ -257,7 +254,7 @@ module Axlsx
       # custom pivot table style
       unless style_info.empty?
         str << '<pivotTableStyleInfo'
-        style_info.each do |k,v|
+        style_info.each do |k, v|
           str << ' ' << k.to_s << '="' << v.to_s << '"'
         end
         str << ' />'

@@ -3,7 +3,6 @@ $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../"
 require 'tc_helper.rb'
 
 class TestChart < Test::Unit::TestCase
-
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
@@ -15,7 +14,7 @@ class TestChart < Test::Unit::TestCase
   end
 
   def test_initialization
-    assert_equal(@p.workbook.charts.last,@chart, "the chart is in the workbook")
+    assert_equal(@p.workbook.charts.last, @chart, "the chart is in the workbook")
     assert_equal(@chart.title.text, "fishery", "the title option has been applied")
     assert((@chart.series.is_a?(Axlsx::SimpleTypedList) && @chart.series.empty?), "The series is initialized and empty")
   end
@@ -46,7 +45,6 @@ class TestChart < Test::Unit::TestCase
     assert_raise(ArgumentError) { @chart.bg_color = 2 }
     assert_nothing_raised { @chart.bg_color = "FFFFFF" }
     assert_equal(@chart.bg_color, "FFFFFF")
-
   end
 
   def test_title_size
@@ -77,10 +75,9 @@ class TestChart < Test::Unit::TestCase
     @chart.start_at @row.cells.first
     assert_equal(@chart.graphic_frame.anchor.from.col, 0)
     assert_equal(@chart.graphic_frame.anchor.from.row, 0)
-    @chart.start_at [5,6]
+    @chart.start_at [5, 6]
     assert_equal(@chart.graphic_frame.anchor.from.col, 5)
     assert_equal(@chart.graphic_frame.anchor.from.row, 6)
-
   end
 
   def test_end_at
@@ -90,14 +87,13 @@ class TestChart < Test::Unit::TestCase
     @chart.end_at @row.cells.last
     assert_equal(@chart.graphic_frame.anchor.to.col, 2)
     assert_equal(@chart.graphic_frame.anchor.to.row, 0)
-    @chart.end_at [10,11]
+    @chart.end_at [10, 11]
     assert_equal(@chart.graphic_frame.anchor.to.col, 10)
     assert_equal(@chart.graphic_frame.anchor.to.row, 11)
-
   end
 
   def test_add_series
-    s = @chart.add_series :data=>[0,1,2,3], :labels => ["one", 1, "anything"], :title=>"bob"
+    s = @chart.add_series :data => [0, 1, 2, 3], :labels => ["one", 1, "anything"], :title => "bob"
     assert_equal(@chart.series.last, s, "series has been added to chart series collection")
     assert_equal(s.title.text, "bob", "series title has been applied")
   end
@@ -107,7 +103,6 @@ class TestChart < Test::Unit::TestCase
   end
 
   def test_d_lbls
-
     assert_equal(nil, Axlsx.instance_values_for(@chart)[:d_lbls])
     @chart.d_lbls.d_lbl_pos = :t
     assert(@chart.d_lbls.is_a?(Axlsx::DLbls), 'DLbls instantiated on access')

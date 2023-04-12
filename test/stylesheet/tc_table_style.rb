@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestTableStyle < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::TableStyle.new "fisher"
   end

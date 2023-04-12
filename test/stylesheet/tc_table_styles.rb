@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestTableStyles < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::TableStyles.new
   end
@@ -25,5 +24,4 @@ class TestTableStyles < Test::Unit::TestCase
     assert_nothing_raised { @item.defaultPivotStyle = "anyones guess" }
     assert_equal(@item.defaultPivotStyle, "anyones guess")
   end
-
 end

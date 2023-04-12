@@ -5,14 +5,13 @@ class TestTable < Test::Unit::TestCase
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet
     40.times do
-      @ws << ["aa","aa","aa","aa","aa","aa"]
+      @ws << ["aa", "aa", "aa", "aa", "aa", "aa"]
     end
   end
 
   def test_initialization
     assert(@ws.workbook.tables.empty?)
     assert(@ws.tables.empty?)
-
   end
 
   def test_table_style_info

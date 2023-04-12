@@ -1,10 +1,8 @@
-# encoding: UTF-8
 module Axlsx
   # Table
   # @note Worksheet#add_table is the recommended way to create tables for your worksheets.
   # @see README for examples
   class Table
-
     include Axlsx::OptionsParser
 
     # Creates a new Table object
@@ -12,13 +10,13 @@ module Axlsx
     # @param [Worksheet] sheet The sheet containing the table data.
     # @option options [Cell, String] name
     # @option options [TableStyle] style
-    def initialize(ref, sheet, options={})
+    def initialize(ref, sheet, options = {})
       @ref = ref
       @sheet = sheet
       @style = nil
       @sheet.workbook.tables << self
       @table_style_info = TableStyleInfo.new(options[:style_info]) if options[:style_info]
-      @name = "Table#{index+1}"
+      @name = "Table#{index + 1}"
       parse_options options
       yield self if block_given?
     end
@@ -44,7 +42,7 @@ module Axlsx
     # The part name for this table
     # @return [String]
     def pn
-      "#{TABLE_PN % (index+1)}"
+      "#{TABLE_PN % (index + 1)}"
     end
 
     # The relationship id for this table.
@@ -64,7 +62,7 @@ module Axlsx
       end
     end
 
-    # TableStyleInfo for the table. 
+    # TableStyleInfo for the table.
     # initialization can be fed via the :style_info option
     def table_style_info
       @table_style_info ||= TableStyleInfo.new
@@ -75,12 +73,12 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << ('<table xmlns="' << XML_NS << '" id="' << (index+1).to_s << '" name="' << @name << '" displayName="' << @name.gsub(/\s/,'_') << '" ')
+      str << ('<table xmlns="' << XML_NS << '" id="' << (index + 1).to_s << '" name="' << @name << '" displayName="' << @name.gsub(/\s/, '_') << '" ')
       str << ('ref="' << @ref << '" totalsRowShown="0">')
       str << ('<autoFilter ref="' << @ref << '"/>')
       str << ('<tableColumns count="' << header_cells.length.to_s << '">')
-      header_cells.each_with_index do |cell,index|
-        str << ('<tableColumn id ="' << (index+1).to_s << '" name="' << cell.clean_value << '"/>')
+      header_cells.each_with_index do |cell, index|
+        str << ('<tableColumn id ="' << (index + 1).to_s << '" name="' << cell.clean_value << '"/>')
       end
       str << '</tableColumns>'
       table_style_info.to_xml_string(str)

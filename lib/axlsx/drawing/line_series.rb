@@ -1,11 +1,9 @@
-# encoding: UTF-8
 module Axlsx
   # A LineSeries defines the title, data and labels for line charts
   # @note The recommended way to manage series is to use Chart#add_series
   # @see Worksheet#add_chart
   # @see Chart#add_series
   class LineSeries < Series
-
     # The data for this series.
     # @return [ValAxisData]
     attr_reader :data
@@ -35,7 +33,7 @@ module Axlsx
     # @option options [Array, SimpleTypedList] data
     # @option options [Array, SimpleTypedList] labels
     # @param [Chart] chart
-    def initialize(chart, options={})
+    def initialize(chart, options = {})
       @show_marker = false
       @marker_symbol = options[:marker_symbol] ? options[:marker_symbol] : :default
       @smooth = false
@@ -105,6 +103,5 @@ module Axlsx
 
     # assigns the labels for this series
     def labels=(v) DataTypeValidator.validate "Series.labels", [AxDataSource], v; @labels = v; end
-
   end
 end

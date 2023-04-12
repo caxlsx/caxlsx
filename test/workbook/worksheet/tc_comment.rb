@@ -32,6 +32,7 @@ class TestComment < Test::Unit::TestCase
     assert_equal(false, @c1.visible)
     assert_equal(true, @c2.visible)
   end
+
   def test_ref
     assert(@c1.ref == 'A1')
     assert(@c2.ref == 'C3')
@@ -45,8 +46,8 @@ class TestComment < Test::Unit::TestCase
     assert(@c1.vml_shape.row == pos[1])
     assert_equal(pos[0], @c1.vml_shape.left_column)
     assert(@c1.vml_shape.top_row == pos[1])
-    assert_equal(pos[0] + 2 , @c1.vml_shape.right_column)
-    assert(@c1.vml_shape.bottom_row == pos[1]+4)
+    assert_equal(pos[0] + 2, @c1.vml_shape.right_column)
+    assert(@c1.vml_shape.bottom_row == pos[1] + 4)
   end
 
   def test_to_xml_string
@@ -69,4 +70,3 @@ class TestComment < Test::Unit::TestCase
     assert_equal("some text", doc.xpath("//comment/text").text)
   end
 end
-

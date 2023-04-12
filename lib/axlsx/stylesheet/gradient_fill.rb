@@ -1,9 +1,7 @@
-# encoding: UTF-8
 module Axlsx
   # A GradientFill defines the color and positioning for gradiant cell fill.
   # @see Open Office XML Part 1 §18.8.24
   class GradientFill
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -14,7 +12,7 @@ module Axlsx
     # @option options [Float] right
     # @option options [Float] top
     # @option options [Float] bottom
-    def initialize(options={})
+    def initialize(options = {})
       options[:type] ||= :linear
       parse_options options
       @stop = SimpleTypedList.new GradientStop
@@ -68,8 +66,8 @@ module Axlsx
 
     # @see right
     def right=(v)
-     validate_format_percentage "GradientFill.right", v
-     @right = v
+      validate_format_percentage "GradientFill.right", v
+      @right = v
     end
 
     # @see top
@@ -86,7 +84,7 @@ module Axlsx
 
     # validates that the value provided is between 0.0 and 1.0
     def validate_format_percentage(name, value)
-      DataTypeValidator.validate name, Float, value, lambda { |arg| arg >= 0.0 && arg <= 1.0}
+      DataTypeValidator.validate name, Float, value, lambda { |arg| arg >= 0.0 && arg <= 1.0 }
     end
 
     # Serializes the object

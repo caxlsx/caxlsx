@@ -1,13 +1,11 @@
 module Axlsx
-
   # A simple, self serializing class for storing TextRuns
   class RichText < SimpleTypedList
-
     # creates a new RichText collection
     # @param [String] text -optional The text to use in creating the first RichTextRun
     # @param [Object] options -optional The options to use in creating the first RichTextRun
     # @yield [RichText] self
-    def initialize(text = nil, options={})
+    def initialize(text = nil, options = {})
       super(RichTextRun)
       add_run(text, options) unless text.nil?
       yield self if block_given?
@@ -34,7 +32,7 @@ module Axlsx
     # Creates and adds a RichTextRun to this collectino
     # @param [String] text The text to use in creating a new RichTextRun
     # @param [Object] options The options to use in creating the new RichTextRun
-    def add_run(text, options={})
+    def add_run(text, options = {})
       self << RichTextRun.new(text, options)
     end
 
@@ -47,8 +45,8 @@ module Axlsx
     # renders the RichTextRuns in this collection
     # @param [String] str
     # @return [String]
-    def to_xml_string(str='')
-      each{ |run| run.to_xml_string(str) }
+    def to_xml_string(str = '')
+      each { |run| run.to_xml_string(str) }
       str
     end
   end

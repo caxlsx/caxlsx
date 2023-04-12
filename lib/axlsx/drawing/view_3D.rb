@@ -1,8 +1,6 @@
-# encoding: UTF-8
 module Axlsx
   # 3D attributes for a chart.
   class View3D
-
     include Axlsx::OptionsParser
 
     # Creates a new View3D for charts
@@ -12,8 +10,8 @@ module Axlsx
     # @option options [String] depth_percent
     # @option options [Boolean] r_ang_ax
     # @option options [Integer] perspective
-    def initialize(options={})
-      @rot_x, @h_percent, @rot_y, @depth_percent, @r_ang_ax, @perspective  = nil, nil, nil, nil, nil, nil
+    def initialize(options = {})
+      @rot_x, @h_percent, @rot_y, @depth_percent, @r_ang_ax, @perspective = nil, nil, nil, nil, nil, nil
       parse_options options
     end
 
@@ -63,33 +61,33 @@ module Axlsx
     end
     alias :rotX= :rot_x=
 
-      # @see h_percent
-      def h_percent=(v)
-        RegexValidator.validate "#{self.class}.h_percent", H_PERCENT_REGEX, v
-        @h_percent = v
-      end
+    # @see h_percent
+    def h_percent=(v)
+      RegexValidator.validate "#{self.class}.h_percent", H_PERCENT_REGEX, v
+      @h_percent = v
+    end
     alias :hPercent= :h_percent=
 
-      # @see rot_y
-      def rot_y=(v) 
-        RangeValidator.validate "View3D.rot_y", 0, 360, v
-        @rot_y = v
-      end
+    # @see rot_y
+    def rot_y=(v)
+      RangeValidator.validate "View3D.rot_y", 0, 360, v
+      @rot_y = v
+    end
     alias :rotY= :rot_y=
 
-      # @see depth_percent
-      def depth_percent=(v) RegexValidator.validate "#{self.class}.depth_percent", DEPTH_PERCENT_REGEX, v; @depth_percent = v; end
+    # @see depth_percent
+    def depth_percent=(v) RegexValidator.validate "#{self.class}.depth_percent", DEPTH_PERCENT_REGEX, v; @depth_percent = v; end
     alias :depthPercent= :depth_percent=
 
-      # @see r_ang_ax
-      def r_ang_ax=(v) Axlsx::validate_boolean(v); @r_ang_ax = v; end
+    # @see r_ang_ax
+    def r_ang_ax=(v) Axlsx::validate_boolean(v); @r_ang_ax = v; end
     alias :rAngAx= :r_ang_ax=
 
-      # @see perspective
-      def perspective=(v)
-        RangeValidator.validate "View3D.perspective", 0, 240, v
-        @perspective = v
-      end
+    # @see perspective
+    def perspective=(v)
+      RangeValidator.validate "View3D.perspective", 0, 240, v
+      @perspective = v
+    end
 
     # DataTypeValidator.validate "#{self.class}.perspective", [Integer], v, lambda {|arg| arg >= 0 && arg <= 240 }; @perspective = v; end
 
@@ -105,10 +103,12 @@ module Axlsx
     end
 
     private
+
     # Note: move this to Axlsx module if we find the smae pattern elsewhere.
-    def element_for_attribute(name, namespace='')
+    def element_for_attribute(name, namespace = '')
       val = Axlsx.instance_values_for(self)[name]
       return "" if val == nil
+
       "<%s:%s val='%s'/>" % [namespace, Axlsx::camel(name, false), val]
     end
   end

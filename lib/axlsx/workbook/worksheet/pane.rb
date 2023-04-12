@@ -4,7 +4,6 @@ module Axlsx
   # @note The recommended way to manage the pane options is via SheetView#pane
   # @see SheetView#pane
   class Pane
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
     # Creates a new {Pane} object
@@ -13,8 +12,8 @@ module Axlsx
     # @option options [Cell, String] top_left_cell Top Left Visible Cell
     # @option options [Integer] x_split Horizontal Split Position
     # @option options [Integer] y_split Vertical Split Position
-    def initialize(options={})
-      #defaults
+    def initialize(options = {})
+      # defaults
       @active_pane = @state = @top_left_cell = nil
       @x_split = @y_split = 0
       parse_options options
@@ -24,16 +23,16 @@ module Axlsx
 
     # Active Pane
     # The pane that is active.
-    # Options are 
+    # Options are
     #  * bottom_left:  Bottom left pane, when both vertical and horizontal
     #                  splits are applied. This value is also used when only
-    #                  a horizontal split has been applied, dividing the pane 
-    #                  into upper and lower regions. In that case, this value 
+    #                  a horizontal split has been applied, dividing the pane
+    #                  into upper and lower regions. In that case, this value
     #                  specifies the bottom pane.
     #  * bottom_right: Bottom right pane, when both vertical and horizontal
     #                  splits are applied.
     #  * top_left:     Top left pane, when both vertical and horizontal splits
-    #                  are applied. This value is also used when only a horizontal 
+    #                  are applied. This value is also used when only a horizontal
     #                  split has been applied, dividing the pane into upper and lower
     #                  regions. In that case, this value specifies the top pane.
     #                  This value is also used when only a vertical split has
@@ -41,22 +40,21 @@ module Axlsx
     #                  regions. In that case, this value specifies the left pane
     #  * top_right:    Top right pane, when both vertical and horizontal
     #                  splits are applied. This value is also used when only
-    #                  a vertical split has been applied, dividing the pane 
-    #                  into right and left regions. In that case, this value 
+    #                  a vertical split has been applied, dividing the pane
+    #                  into right and left regions. In that case, this value
     #                  specifies the right pane.
     # @see type
     # @return [Symbol]
     # default nil
     attr_reader :active_pane
 
-
     # Split State
-    # Indicates whether the pane has horizontal / vertical 
+    # Indicates whether the pane has horizontal / vertical
     # splits, and whether those splits are frozen.
-    # Options are 
+    # Options are
     #  * frozen:       Panes are frozen, but were not split being frozen. In
     #                  this state, when the panes are unfrozen again, a single
-    #                  pane results, with no split. In this state, the split 
+    #                  pane results, with no split. In this state, the split
     #                  bars are not adjustable.
     #  * frozen_split: Panes are frozen and were split before being frozen. In
     #                  this state, when the panes are unfrozen again, the split
@@ -69,7 +67,7 @@ module Axlsx
     attr_reader :state
 
     # Top Left Visible Cell
-    # Location of the top left visible cell in the bottom 
+    # Location of the top left visible cell in the bottom
     # right pane (when in Left-To-Right mode).
     # @see type
     # @return [String]
@@ -78,7 +76,7 @@ module Axlsx
 
     # Horizontal Split Position
     # Horizontal position of the split, in 1/20th of a point; 0 (zero)
-    # if none. If the pane is frozen, this value indicates the number 
+    # if none. If the pane is frozen, this value indicates the number
     # of columns visible in the top pane.
     # @see type
     # @return [Integer]
@@ -86,7 +84,7 @@ module Axlsx
     attr_reader :x_split
 
     # Vertical Split Position
-    # Vertical position of the split, in 1/20th of a point; 0 (zero) 
+    # Vertical position of the split, in 1/20th of a point; 0 (zero)
     # if none. If the pane is frozen, this value indicates the number
     # of rows visible in the left pane.
     # @see type
@@ -126,13 +124,14 @@ module Axlsx
       finalize
       serialized_tag 'pane', str
     end
+
     private
 
     def finalize
       if @state == 'frozen' && @top_left_cell.nil?
         row = @y_split || 0
         column = @x_split || 0
-        @top_left_cell = "#{('A'..'ZZ').to_a[column]}#{row+1}"
+        @top_left_cell = "#{('A'..'ZZ').to_a[column]}#{row + 1}"
       end
     end
   end

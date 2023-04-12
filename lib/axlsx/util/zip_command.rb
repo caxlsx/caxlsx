@@ -1,9 +1,7 @@
-# encoding: UTF-8
 require 'open3'
 require 'shellwords'
 
 module Axlsx
-
   # The ZipCommand class supports zipping the Excel file contents using
   # a binary zip program instead of RubyZip's `Zip::OutputStream`.
   #

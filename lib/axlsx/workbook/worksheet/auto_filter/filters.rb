@@ -1,6 +1,5 @@
 module Axlsx
-
-  # When multiple values are chosen to filter by, or when a group of date values are chosen to filter by, 
+  # When multiple values are chosen to filter by, or when a group of date values are chosen to filter by,
   # this object groups those criteria together.
   class Filters
     include Axlsx::OptionsParser
@@ -16,7 +15,7 @@ module Axlsx
     # @note The recommended way to interact with filter objects is via AutoFilter#add_column
     # @example
     #   ws.auto_filter.add_column(0, :filters, :blank => true, :calendar_type => 'japan', :filter_items => [100, 'a'])
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
     end
 
@@ -29,7 +28,7 @@ module Axlsx
     # @return [Boolean]
     attr_reader :blank
 
-    # Calendar type for date grouped items. 
+    # Calendar type for date grouped items.
     # Used to interpret the values in dateGroupItem.
     # This is the calendar type used to evaluate all dates in the filter column,
     # even when those dates are not using the same calendar system / date formatting.
@@ -42,6 +41,7 @@ module Axlsx
     # TODO implement this for date filters as well!
     def apply(cell)
       return false unless cell
+
       filter_items.each do |filter|
         return false if cell.value == filter.val
       end
@@ -76,12 +76,12 @@ module Axlsx
     # Serialize the object to xml
     def to_xml_string(str = '')
       str << "<filters #{serialized_attributes}>"
-      filter_items.each {  |filter| filter.to_xml_string(str) }
+      filter_items.each { |filter| filter.to_xml_string(str) }
       date_group_items.each { |date_group_item| date_group_item.to_xml_string(str) }
       str << '</filters>'
     end
 
-    # not entirely happy with this. 
+    # not entirely happy with this.
     # filter_items should be a simple typed list that overrides << etc
     # to create Filter objects from the inserted values. However this
     # is most likely so rarely used...(really? do you know that?)
@@ -98,13 +98,13 @@ module Axlsx
     def date_group_items=(options)
       options.each do |date_group|
         raise ArgumentError, "date_group_items should be an array of hashes specifying the options for each date_group_item" unless date_group.is_a?(Hash)
+
         date_group_items << DateGroupItem.new(date_group)
       end
     end
 
     # This class expresses a filter criteria value.
     class Filter
-
       # Creates a new filter value object
       # @param [Any] value   The value of the filter. This is not restricted, but
       #                       will be serialized via to_s so if you are passing an object
@@ -113,8 +113,7 @@ module Axlsx
         @val = value
       end
 
-
-      #Filter value used in the criteria.
+      # Filter value used in the criteria.
       attr_accessor :val
 
       # Serializes the filter value object
@@ -124,7 +123,6 @@ module Axlsx
       end
     end
 
-
     # This collection is used to express a group of dates or times which are
     # used in an AutoFilter criteria. Values are always written in the calendar
     # type of the first date encountered in the filter range, so that all
@@ -132,7 +130,7 @@ module Axlsx
     # types, can be correctly compared for the purposes of filtering.
     class DateGroupItem
       include Axlsx::OptionsParser
-include Axlsx::SerializedAttributes
+      include Axlsx::SerializedAttributes
 
       # Creates a new DateGroupItem
       # @param [Hash] options A hash of options to use when
@@ -145,9 +143,10 @@ include Axlsx::SerializedAttributes
       # @option [Integer] hour @see hour
       # @option [Integer] minute @see minute
       # @option [Integer] second @see second
-      def initialize(options={})
-        raise ArgumentError,  "You must specify a year for date time grouping" unless options[:year]
+      def initialize(options = {})
+        raise ArgumentError, "You must specify a year for date time grouping" unless options[:year]
         raise ArgumentError, "You must specify a date_time_grouping when creating a DateGroupItem for auto filter" unless options[:date_time_grouping]
+
         parse_options options
       end
 
@@ -200,7 +199,7 @@ include Axlsx::SerializedAttributes
       end
 
       # The day value for the date group item
-      # This must be between 1 and 31 
+      # This must be between 1 and 31
       # @note no attempt is made to ensure the date value is valid for any given month
       def day=(value)
         RangeValidator.validate "DateGroupItem.day", 0, 31, value

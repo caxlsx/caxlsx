@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestXf < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::Xf.new
   end
@@ -116,5 +115,4 @@ class TestXf < Test::Unit::TestCase
     assert_nothing_raised { @item.applyProtection = false }
     assert_equal(@item.applyProtection, false)
   end
-
 end

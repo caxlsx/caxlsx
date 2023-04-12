@@ -1,14 +1,13 @@
 require 'tc_helper.rb'
 
 class TestPic < Test::Unit::TestCase
-
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
-    @test_img = @test_img_jpg =  File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
+    @test_img = @test_img_jpg = File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
     @test_img_png =  File.dirname(__FILE__) + "/../fixtures/image1.png"
     @test_img_gif =  File.dirname(__FILE__) + "/../fixtures/image1.gif"
-    @test_img_fake =  File.dirname(__FILE__) + "/../fixtures/image1_fake.jpg"
+    @test_img_fake = File.dirname(__FILE__) + "/../fixtures/image1_fake.jpg"
     @image = ws.add_image :image_src => @test_img, :hyperlink => 'https://github.com/randym', :tooltip => "What's up doc?", :opacity => 5
   end
 
@@ -19,23 +18,22 @@ class TestPic < Test::Unit::TestCase
   end
 
   def test_anchor_swapping
-    #swap from one cell to two cell when end_at is specified
+    # swap from one cell to two cell when end_at is specified
     assert(@image.anchor.is_a?(Axlsx::OneCellAnchor))
     start_at = @image.anchor.from
-    @image.end_at 10,5
+    @image.end_at 10, 5
     assert(@image.anchor.is_a?(Axlsx::TwoCellAnchor))
     assert_equal(start_at.col, @image.anchor.from.col)
     assert_equal(start_at.row, @image.anchor.from.row)
-    assert_equal(10,@image.anchor.to.col)
+    assert_equal(10, @image.anchor.to.col)
     assert_equal(5, @image.anchor.to.row)
 
-    #swap from two cell to one cell when width or height are specified
+    # swap from two cell to one cell when width or height are specified
     @image.width = 200
     assert(@image.anchor.is_a?(Axlsx::OneCellAnchor))
     assert_equal(start_at.col, @image.anchor.from.col)
     assert_equal(start_at.row, @image.anchor.from.row)
     assert_equal(200, @image.width)
-
   end
 
   def test_hyperlink

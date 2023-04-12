@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'htmlentities'
 require 'axlsx/version.rb'
 require 'marcel'
@@ -22,11 +21,11 @@ require 'axlsx/rels/relationships.rb'
 require 'axlsx/drawing/drawing.rb'
 require 'axlsx/workbook/workbook.rb'
 require 'axlsx/package.rb'
-#required gems
+# required gems
 require 'nokogiri'
 require 'zip'
 
-#core dependencies
+# core dependencies
 require 'bigdecimal'
 require 'set'
 require 'time'
@@ -55,7 +54,7 @@ module Axlsx
   end
 
   # determines the cell range for the items provided
-  def self.cell_range(cells, absolute=true)
+  def self.cell_range(cells, absolute = true)
     return "" unless cells.first.is_a? Cell
 
     first_cell, last_cell = cells.minmax_by(&:pos)
@@ -76,7 +75,7 @@ module Axlsx
     cells.sort_by(&:pos)
   end
 
-  #global reference html entity encoding
+  # global reference html entity encoding
   # @return [HtmlEntities]
   def self.coder
     @@coder ||= ::HTMLEntities.new
@@ -89,7 +88,7 @@ module Axlsx
     letters_str = name[/[A-Z]+/]
 
     # capitalization?!?
-    v = letters_str.reverse.chars.reduce({:base=>1, :i=>0}) do  |val, c|
+    v = letters_str.reverse.chars.reduce({ :base => 1, :i => 0 }) do |val, c|
       val[:i] += ((c.bytes.first - 64) * val[:base])
 
       val[:base] *= 26
@@ -124,7 +123,7 @@ module Axlsx
   # @example Relative Cell Reference
   #   ws.rows.first.cells.first.r #=> "A1"
   def self.cell_r(c_index, r_index)
-    col_ref(c_index) << (r_index+1).to_s
+    col_ref(c_index) << (r_index + 1).to_s
   end
 
   # Creates an array of individual cell references based on an excel reference range.
@@ -144,10 +143,10 @@ module Axlsx
   # performs the increadible feat of changing snake_case to CamelCase
   # @param [String] s The snake case string to camelize
   # @return [String]
-  def self.camel(s="", all_caps = true)
+  def self.camel(s = "", all_caps = true)
     s = s.to_s
     s = s.capitalize if all_caps
-    s.gsub(/_(.)/){ $1.upcase }
+    s.gsub(/_(.)/) { $1.upcase }
   end
 
   # returns the provided string with all invalid control charaters

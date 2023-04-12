@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestCore < Test::Unit::TestCase
-
   def setup
     @core = Axlsx::Core.new
     # could still see some false positives if the second changes between the next two calls
@@ -16,7 +15,7 @@ class TestCore < Test::Unit::TestCase
       puts error.message
       errors << error
     end
-    assert_equal(errors.size, 0, "core.xml Invalid" + errors.map{ |e| e.message }.to_s)
+    assert_equal(errors.size, 0, "core.xml Invalid" + errors.map { |e| e.message }.to_s)
   end
 
   def test_populates_created

@@ -1,9 +1,7 @@
 module Axlsx
-
   # Page setup properties of the worksheet
   # This class name is not a typo, its spec.
   class PageSetUpPr
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -37,7 +35,7 @@ module Axlsx
     end
 
     # serialize to xml
-    def to_xml_string(str='')
+    def to_xml_string(str = '')
       str << ('<pageSetUpPr ' << serialized_attributes << '/>')
     end
   end

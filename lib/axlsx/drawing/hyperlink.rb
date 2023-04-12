@@ -1,14 +1,12 @@
-# encoding: UTF-8
 module Axlsx
   # a hyperlink object adds an action to an image when clicked so that when the image is clicked the link is fecthed.
   # @note using the hyperlink option when calling add_image on a drawing object is the recommended way to manage hyperlinks
   # @see {file:README} README
   class Hyperlink
-
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
 
-    #Creates a hyperlink object
+    # Creates a hyperlink object
     # parent must be a Pic for now, although I expect that other object support this tag and its cNvPr parent
     # @param [Pic] parent
     # @option options [String] tooltip message shown when hyperlinked object is hovered over with mouse.
@@ -19,7 +17,7 @@ module Axlsx
     # @option options [Boolean] endSnd terminate any sound events when processing this link
     # @option options [Boolean] history include this link in the list of visited links for the applications history.
     # @option options [Boolean] highlightClick indicate that the link has already been visited.
-    def initialize(parent, options={})
+    def initialize(parent, options = {})
       DataTypeValidator.validate "Hyperlink.parent", [Pic], parent
       @parent = parent
       parse_options options
@@ -40,7 +38,7 @@ module Axlsx
     alias :invalidUrl :invalid_url
     alias :invalidUrl= :invalid_url=
 
-    #An action to take when the link is clicked. The specification says "This can be used to specify a slide to be navigated to or a script of code to be run." but in most cases you will not need to do anything with this. MS does reserve a few interesting strings. @see http://msdn.microsoft.com/en-us/library/ff532419%28v=office.12%29.aspx
+    # An action to take when the link is clicked. The specification says "This can be used to specify a slide to be navigated to or a script of code to be run." but in most cases you will not need to do anything with this. MS does reserve a few interesting strings. @see http://msdn.microsoft.com/en-us/library/ff532419%28v=office.12%29.aspx
     # @return [String]
     attr_accessor :action
 
@@ -93,8 +91,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      serialized_tag 'a:hlinkClick', str, {:'r:id' => relationship.Id, :'xmlns:r' => XML_NS_R }
+      serialized_tag 'a:hlinkClick', str, { :'r:id' => relationship.Id, :'xmlns:r' => XML_NS_R }
     end
-
   end
 end

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 require 'tc_helper.rb'
 
 class TestDateTimeConverter < Test::Unit::TestCase
@@ -28,7 +27,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
                 "1970-01-01" => 25569.0, # Unix epoch
                 "1970-01-02" => 25570.0,
                 "2006-02-01" => 38749.0,
-                "2038-01-19" => 50424.0, # max date using signed timestamp in 32bit
+                "2038-01-19" => 50424.0 # max date using signed timestamp in 32bit
               }
             end
     tests.each do |date_string, expected|
@@ -52,7 +51,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
                 "1970-01-01" => 24107.0, # Unix epoch
                 "1970-01-02" => 24108.0,
                 "2006-02-01" => 37287.0,
-                "2038-01-19" => 48962.0, # max date using signed timestamp in 32bit
+                "2038-01-19" => 48962.0 # max date using signed timestamp in 32bit
               }
             end
     tests.each do |date_string, expected|
@@ -64,21 +63,21 @@ class TestDateTimeConverter < Test::Unit::TestCase
   def test_time_to_serial_1900
     Axlsx::Workbook.date1904 = false
     tests = if @extended_time_range
-             { # examples taken straight from the spec
-               "1893-08-05T00:00:01Z" => -2337.999989,
-               "1899-12-28T18:00:00Z" => -1.25,
-               "1910-02-03T10:05:54Z" => 3687.4207639,
-               "1900-01-01T12:00:00Z" => 2.5, # wrongly indicated as 1.5 in the spec!
-               "9999-12-31T23:59:59Z" => 2958465.9999884
-             }
-           else
-             { # examples taken inside the possible values
-               "1970-01-01T00:00:00Z" => 25569.0, # Unix epoch
-               "1970-01-01T12:00:00Z" => 25569.5,
-               "2000-01-01T00:00:00Z" => 36526.0,
-               "2038-01-19T03:14:07Z" => 50424.134803, # max signed timestamp in 32bit
-             }
-           end
+              { # examples taken straight from the spec
+                "1893-08-05T00:00:01Z" => -2337.999989,
+                "1899-12-28T18:00:00Z" => -1.25,
+                "1910-02-03T10:05:54Z" => 3687.4207639,
+                "1900-01-01T12:00:00Z" => 2.5, # wrongly indicated as 1.5 in the spec!
+                "9999-12-31T23:59:59Z" => 2958465.9999884
+              }
+            else
+              { # examples taken inside the possible values
+                "1970-01-01T00:00:00Z" => 25569.0, # Unix epoch
+                "1970-01-01T12:00:00Z" => 25569.5,
+                "2000-01-01T00:00:00Z" => 36526.0,
+                "2038-01-19T03:14:07Z" => 50424.134803 # max signed timestamp in 32bit
+              }
+            end
     tests.each do |time_string, expected|
       serial = Axlsx::DateTimeConverter::time_to_serial Time.parse(time_string)
       assert_in_delta expected, serial, @margin_of_error
@@ -87,23 +86,23 @@ class TestDateTimeConverter < Test::Unit::TestCase
 
   def test_time_to_serial_1904
     Axlsx::Workbook.date1904 = true
-      # ruby 1.8.7 cannot parse dates prior to epoch. see http://ruby-doc.org/core-1.8.7/Time.html
+    # ruby 1.8.7 cannot parse dates prior to epoch. see http://ruby-doc.org/core-1.8.7/Time.html
 
     tests = if @extended_time_range
-             { # examples taken straight from the spec
-               "1893-08-05T00:00:01Z" => -3799.999989,
-               "1910-02-03T10:05:54Z" => 2225.4207639,
-               "1904-01-01T12:00:00Z" => 0.5000000,
-               "9999-12-31T23:59:59Z" => 2957003.9999884
-             }
-           else
-             { # examples taken inside the possible values
-               "1970-01-01T00:00:00Z" => 24107.0, # Unix epoch
-               "1970-01-01T12:00:00Z" => 24107.5,
-               "2000-01-01T00:00:00Z" => 35064.0,
-               "2038-01-19T03:14:07Z" => 48962.134803, # max signed timestamp in 32bit
-             }
-           end
+              { # examples taken straight from the spec
+                "1893-08-05T00:00:01Z" => -3799.999989,
+                "1910-02-03T10:05:54Z" => 2225.4207639,
+                "1904-01-01T12:00:00Z" => 0.5000000,
+                "9999-12-31T23:59:59Z" => 2957003.9999884
+              }
+            else
+              { # examples taken inside the possible values
+                "1970-01-01T00:00:00Z" => 24107.0, # Unix epoch
+                "1970-01-01T12:00:00Z" => 24107.5,
+                "2000-01-01T00:00:00Z" => 35064.0,
+                "2038-01-19T03:14:07Z" => 48962.134803 # max signed timestamp in 32bit
+              }
+            end
     tests.each do |time_string, expected|
       serial = Axlsx::DateTimeConverter::time_to_serial Time.parse(time_string)
       assert_in_delta expected, serial, @margin_of_error
@@ -111,14 +110,12 @@ class TestDateTimeConverter < Test::Unit::TestCase
   end
 
   def test_timezone
-
     utc = Time.utc 2012 # January 1st, 2012 at 0:00 UTC
     local = Time.parse "2012-01-01 09:00:00 +0900"
 
     assert_equal local, utc
-    assert_equal Axlsx::DateTimeConverter::time_to_serial(local) - local.utc_offset.to_f/86400,  Axlsx::DateTimeConverter::time_to_serial(utc)
+    assert_equal Axlsx::DateTimeConverter::time_to_serial(local) - local.utc_offset.to_f / 86400, Axlsx::DateTimeConverter::time_to_serial(utc)
     Axlsx::Workbook.date1904 = true
-    assert_equal Axlsx::DateTimeConverter::time_to_serial(local) - local.utc_offset.to_f/86400, Axlsx::DateTimeConverter::time_to_serial(utc)
+    assert_equal Axlsx::DateTimeConverter::time_to_serial(local) - local.utc_offset.to_f / 86400, Axlsx::DateTimeConverter::time_to_serial(utc)
   end
-
 end

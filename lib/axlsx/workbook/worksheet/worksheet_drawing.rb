@@ -1,15 +1,14 @@
 module Axlsx
-
   # This is a utility class for serialing the drawing node in a
   # worksheet. Drawing objects have their own serialization that exports
   # a drawing document. This is only for the single node in the
   # worksheet
   class WorksheetDrawing
-
     # Creates a new WorksheetDrawing
     # @param [Worksheet] worksheet
     def initialize(worksheet)
       raise ArgumentError, 'you must provide a worksheet' unless worksheet.is_a?(Worksheet)
+
       @worksheet = worksheet
       @drawing = nil
     end
@@ -45,6 +44,7 @@ module Axlsx
     # @return [Relationship]
     def relationship
       return unless has_drawing?
+
       Relationship.new(self, DRAWING_R, "../#{drawing.pn}")
     end
 
@@ -52,6 +52,7 @@ module Axlsx
     # @param [String] str
     def to_xml_string(str = '')
       return unless has_drawing?
+
       str << "<drawing r:id='#{relationship.Id}'/>"
     end
   end

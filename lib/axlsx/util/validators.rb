@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   # Validate a value against a specific list of allowed values.
   class RestrictionValidator
@@ -10,6 +9,7 @@ module Axlsx
     # @return [Boolean] true if validation succeeds.
     def self.validate(name, choices, v)
       raise ArgumentError, (ERR_RESTRICTION % [v.to_s, name, choices.inspect]) unless choices.include?(v)
+
       true
     end
   end
@@ -32,6 +32,7 @@ module Axlsx
       raise ArgumentError, (ERR_RANGE % [value.inspect, min.to_s, max.to_s, inclusive]) unless passes
     end
   end
+
   # Validates the value against the regular expression provided.
   class RegexValidator
     # @param [String] name The name of what is being validated. This is included in the output when the value is invalid
@@ -51,9 +52,9 @@ module Axlsx
     # @raise [ArugumentError] Raised if the class of the value provided is not in the specified array of types or the block passed returns false
     # @return [Boolean] true if validation succeeds.
     # @see validate_boolean
-    def self.validate(name, types, v, other=false)
+    def self.validate(name, types, v, other = false)
       if other.is_a?(Proc)
-         raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect]) unless other.call(v)
+        raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect]) unless other.call(v)
       end
       v_class = v.is_a?(Class) ? v : v.class
       Array(types).each do |t|
@@ -62,7 +63,6 @@ module Axlsx
       raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect])
     end
   end
-
 
   # Requires that the value can be converted to an integer
   # @para, [Any] v the value to validate
@@ -144,6 +144,7 @@ module Axlsx
   def self.validate_page_orientation(v)
     RestrictionValidator.validate "page_orientation", [:default, :landscape, :portrait], v
   end
+
   # Requires that the value is one of :none, :single, :double, :singleAccounting, :doubleAccounting
   def self.validate_cell_u(v)
     RestrictionValidator.validate "cell run style u", [:none, :single, :double, :singleAccounting, :doubleAccounting], v
@@ -153,6 +154,7 @@ module Axlsx
   def self.validate_family(v)
     RestrictionValidator.validate "cell run style family", 1..5, v
   end
+
   # Requires that the value is valid pattern type.
   # valid pattern types must be one of :none, :solid, :mediumGray, :darkGray, :lightGray, :darkHorizontal, :darkVertical, :darkDown,
   # :darkUp, :darkGrid, :darkTrellis, :lightHorizontal, :lightVertical, :lightDown, :lightUp, :lightGrid, :lightTrellis, :gray125, or :gray0625.
@@ -215,6 +217,7 @@ module Axlsx
   def self.validate_scatter_style(v)
     Axlsx::RestrictionValidator.validate "ScatterChart.scatterStyle", [:none, :line, :lineMarker, :marker, :smooth, :smoothMarker], v.to_sym
   end
+
   # Requires that the value is a valid horizontal_alignment
   # :general, :left, :center, :right, :fill, :justify, :centerContinuous, :distributed are allowed
   # @param [Any] v The value validated

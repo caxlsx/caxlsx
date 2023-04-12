@@ -1,9 +1,9 @@
 require 'tc_helper.rb'
 
 class TestAxlsx < Test::Unit::TestCase
-
   def setup_wide
-    @wide_test_points = { "A3" =>      0,
+    @wide_test_points = {
+      "A3"    =>                       0,
       "Z3"    =>                      25,
       "B3"    =>                       1,
       "AA3"   =>             1 * 26 +  0,
@@ -32,6 +32,7 @@ class TestAxlsx < Test::Unit::TestCase
 
     Axlsx.trust_input = old
   end
+
   def test_cell_range_relative
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet
@@ -63,7 +64,7 @@ class TestAxlsx < Test::Unit::TestCase
   def test_name_to_indices
     setup_wide
     @wide_test_points.each do |key, value|
-      assert_equal(Axlsx.name_to_indices(key), [value,2])
+      assert_equal(Axlsx.name_to_indices(key), [value, 2])
     end
   end
 
@@ -105,9 +106,9 @@ class TestAxlsx < Test::Unit::TestCase
     assert_equal(sanitized_str,           legit_str,            'should preserve value')
     assert_equal(sanitized_str.object_id, legit_str.object_id,  'should preserve object')
   end
-  
+
   class InstanceValuesSubject
-    def initialize(args={})
+    def initialize(args = {})
       args.each do |key, v|
         instance_variable_set("@#{key}".to_sym, v)
       end
@@ -119,24 +120,24 @@ class TestAxlsx < Test::Unit::TestCase
     assert_equal({}, Axlsx.instance_values_for(empty), 'should generate with no ivars')
 
     single = InstanceValuesSubject.new(a: 2)
-    assert_equal({"a" => 2}, Axlsx.instance_values_for(single), 'should generate for a single ivar')
+    assert_equal({ "a" => 2 }, Axlsx.instance_values_for(single), 'should generate for a single ivar')
 
     double = InstanceValuesSubject.new(a: 2, b: "c")
-    assert_equal({"a" => 2, "b" => "c"}, Axlsx.instance_values_for(double), 'should generate for multiple ivars')
+    assert_equal({ "a" => 2, "b" => "c" }, Axlsx.instance_values_for(double), 'should generate for multiple ivars')
 
     inner_obj = Object.new
     complex = InstanceValuesSubject.new(obj: inner_obj)
-    assert_equal({"obj" => inner_obj}, Axlsx.instance_values_for(complex), 'should pass value of ivar directly')
+    assert_equal({ "obj" => inner_obj }, Axlsx.instance_values_for(complex), 'should pass value of ivar directly')
 
     nil_subject = InstanceValuesSubject.new(nil_obj: nil)
-    assert_equal({"nil_obj" =>  nil}, Axlsx.instance_values_for(nil_subject), 'should return nil ivars')    
+    assert_equal({ "nil_obj" => nil }, Axlsx.instance_values_for(nil_subject), 'should return nil ivars')
   end
 
   def test_hash_deep_merge
-    h1 = {foo: {bar: true}}
-    h2 = {foo: {baz: true}}
-    assert_equal({foo: {baz: true}}, h1.merge(h2))
-    assert_equal({foo: {bar: true, baz: true}}, Axlsx.hash_deep_merge(h1, h2))
+    h1 = { foo: { bar: true } }
+    h2 = { foo: { baz: true } }
+    assert_equal({ foo: { baz: true } }, h1.merge(h2))
+    assert_equal({ foo: { bar: true, baz: true } }, Axlsx.hash_deep_merge(h1, h2))
   end
 
   def test_escape_formulas
