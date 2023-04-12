@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Axlsx
   class BorderCreator
     def initialize(worksheet:, cells:, edges: nil, style: nil, color: nil)
@@ -13,9 +11,9 @@ module Axlsx
       if @edges == :all
         @edges = Axlsx::Border::EDGES
       elsif !@edges.is_a?(Array)
-        raise ArgumentError.new("Invalid edges provided, #{@edges}") 
+        raise ArgumentError.new("Invalid edges provided, #{@edges}")
       else
-        @edges = @edges.map{|x| x&.to_sym}.uniq
+        @edges = @edges.map { |x| x&.to_sym }.uniq
 
         if !(@edges - Axlsx::Border::EDGES).empty?
           raise ArgumentError.new("Invalid edges provided, #{edges}")
@@ -26,17 +24,17 @@ module Axlsx
     def draw
       if @cells.size == 1
         @worksheet.add_style(
-          first_cell, 
+          first_cell,
           {
-            border: {style: @style, color: @color, edges: @edges}
+            border: { style: @style, color: @color, edges: @edges }
           }
         )
       else
-        @edges.each do |edge| 
+        @edges.each do |edge|
           @worksheet.add_style(
-            border_cells[edge], 
+            border_cells[edge],
             {
-              border: {style: @style, color: @color, edges: [edge]}
+              border: { style: @style, color: @color, edges: [edge] }
             }
           )
         end
@@ -50,7 +48,7 @@ module Axlsx
         top:     "#{first_cell}:#{last_col}#{first_row}",
         right:   "#{last_col}#{first_row}:#{last_cell}",
         bottom:  "#{first_col}#{last_row}:#{last_cell}",
-        left:    "#{first_cell}:#{first_col}#{last_row}",
+        left:    "#{first_cell}:#{first_col}#{last_row}"
       }
     end
 
@@ -77,6 +75,5 @@ module Axlsx
     def last_col
       @last_col ||= last_cell.scan(/\D+/).first
     end
-
   end
 end

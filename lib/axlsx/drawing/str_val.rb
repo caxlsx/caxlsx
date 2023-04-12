@@ -1,14 +1,11 @@
-# -*- coding: utf-8 -*-
 module Axlsx
-
-  #This class specifies data for a particular data point.
+  # This class specifies data for a particular data point.
   class StrVal
-
     include Axlsx::OptionsParser
 
     # creates a new StrVal object
     # @option options [String] v
-    def initialize(options={})
+    def initialize(options = {})
       @v = ""
       @idx = 0
       parse_options options

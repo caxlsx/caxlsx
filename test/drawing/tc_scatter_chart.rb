@@ -5,9 +5,9 @@ class TestScatterChart < Test::Unit::TestCase
     @p = Axlsx::Package.new
     @chart = nil
     @p.workbook.add_worksheet do |sheet|
-      sheet.add_row ["First",  1,  5,  7,  9]
+      sheet.add_row ["First",  1,  5, 7, 9]
       sheet.add_row ["",       1, 25, 49, 81]
-      sheet.add_row ["Second", 5,  2, 14,  9]
+      sheet.add_row ["Second", 5, 2, 14, 9]
       sheet.add_row ["",       5, 10, 15, 20]
       sheet.add_chart(Axlsx::ScatterChart, :title => "example 7: Scatter Chart") do |chart|
         chart.start_at 0, 4
@@ -27,6 +27,7 @@ class TestScatterChart < Test::Unit::TestCase
     assert(@chart.scatterStyle == :marker)
     assert_raise(ArgumentError) { @chart.scatterStyle = :buckshot }
   end
+
   def test_initialization
     assert_equal(@chart.scatterStyle, :lineMarker, "scatterStyle defualt incorrect")
     assert_equal(@chart.series_type, Axlsx::ScatterSeries, "series type incorrect")
@@ -44,5 +45,4 @@ class TestScatterChart < Test::Unit::TestCase
     end
     assert(errors.empty?, "error free validation")
   end
-
 end

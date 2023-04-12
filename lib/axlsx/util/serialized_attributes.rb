@@ -2,7 +2,6 @@ module Axlsx
   # This module allows us to define a list of symbols defining which
   # attributes will be serialized for a class.
   module SerializedAttributes
-
     # Extend with class methods
     def self.included(base)
       base.send :extend, ClassMethods
@@ -10,8 +9,7 @@ module Axlsx
 
     # class methods applied to all includers
     module ClassMethods
-
-      # This is the method to be used in inheriting classes to specify 
+      # This is the method to be used in inheriting classes to specify
       # which of the instance values are serializable
       def serializable_attributes(*symbols)
         @xml_attributes = symbols
@@ -43,7 +41,7 @@ module Axlsx
       end
     end
 
-    # serializes the instance values of the defining object based on the 
+    # serializes the instance values of the defining object based on the
     # list of serializable attributes.
     # @param [String] str The string instance to append this
     # serialization to.
@@ -73,12 +71,13 @@ module Axlsx
     # @param [String] str The string instance to which serialized data is appended
     # @param [Array] additional_attributes An array of additional attribute names.
     # @return [String] The serialized output.
-    def serialized_element_attributes(str='', additional_attributes=[], &block)
+    def serialized_element_attributes(str = '', additional_attributes = [], &block)
       attrs = self.class.xml_element_attributes + additional_attributes
       values = Axlsx.instance_values_for(self)
       attrs.each do |attribute_name|
         value = values[attribute_name.to_s]
         next if value.nil?
+
         value = yield value if block_given?
         element_name = Axlsx.camel(attribute_name, false)
         str << "<#{element_name}>#{value}</#{element_name}>"

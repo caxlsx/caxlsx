@@ -1,14 +1,13 @@
 require 'tc_helper.rb'
 
 class TestCell < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
     p.use_shared_strings = true
-    @ws = p.workbook.add_worksheet :name=>"hmmm"
-    p.workbook.styles.add_style :sz=>20
+    @ws = p.workbook.add_worksheet :name => "hmmm"
+    p.workbook.styles.add_style :sz => 20
     @row = @ws.add_row
-    @c = @row.add_cell 1, :type=>:float, :style=>1, :escape_formulas=>true
+    @c = @row.add_cell 1, :type => :float, :style => 1, :escape_formulas => true
     data = (0..26).map { |index| index }
     @ws.add_row data
     @cAA = @ws["AA2"]
@@ -48,8 +47,8 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_r_abs
-    assert_equal(@c.r_abs,"$A$1", "calculate absolute cell reference")
-    assert_equal(@cAA.r_abs,"$AA$2", "needs to accept multi-digit columns")
+    assert_equal(@c.r_abs, "$A$1", "calculate absolute cell reference")
+    assert_equal(@cAA.r_abs, "$AA$2", "needs to accept multi-digit columns")
   end
 
   def test_name
@@ -59,7 +58,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_autowidth
-    style = @c.row.worksheet.workbook.styles.add_style({:alignment => {:horizontal => :center, :vertical => :center, :wrap_text => true}}  )
+    style = @c.row.worksheet.workbook.styles.add_style({ :alignment => { :horizontal => :center, :vertical => :center, :wrap_text => true } })
     @c.style = style
     assert_in_delta(6.6, @c.autowidth, 0.01)
   end
@@ -91,8 +90,8 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_style
-    assert_raise(ArgumentError, "must reject invalid style indexes") { @c.style=@c.row.worksheet.workbook.styles.cellXfs.size }
-    assert_nothing_raised("must allow valid style index changes") {@c.style=1}
+    assert_raise(ArgumentError, "must reject invalid style indexes") { @c.style = @c.row.worksheet.workbook.styles.cellXfs.size }
+    assert_nothing_raised("must allow valid style index changes") { @c.style = 1 }
     assert_equal(@c.style, 1)
   end
 
@@ -100,7 +99,7 @@ class TestCell < Test::Unit::TestCase
     assert_raise(ArgumentError, "type must be :string, :integer, :float, :date, :time, :boolean") { @c.type = :array }
     assert_nothing_raised("type can be changed") { @c.type = :string }
     assert_equal(@c.value, "1.0", "changing type casts the value")
-    assert_equal(:float, @row.add_cell(1.0/10**7).type, 'properly identify exponential floats as float type')
+    assert_equal(:float, @row.add_cell(1.0 / 10**7).type, 'properly identify exponential floats as float type')
     assert_equal(@row.add_cell(Time.now).type, :time, 'time should be time')
     assert_equal(@row.add_cell(Date.today).type, :date, 'date should be date')
     assert_equal(@row.add_cell(true).type, :boolean, 'boolean should be boolean')
@@ -113,7 +112,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_col_ref
-    #TODO move to axlsx spec
+    # TODO move to axlsx spec
     assert_equal(Axlsx.col_ref(0), "A")
   end
 
@@ -134,7 +133,7 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.send(:cell_type_from_value, -1), :integer)
     assert_equal(@c.send(:cell_type_from_value, true), :boolean)
     assert_equal(@c.send(:cell_type_from_value, false), :boolean)
-    assert_equal(@c.send(:cell_type_from_value, 1.0/10**6), :float)
+    assert_equal(@c.send(:cell_type_from_value, 1.0 / 10**6), :float)
     assert_equal(@c.send(:cell_type_from_value, Axlsx::RichText.new), :richtext)
     assert_equal(:iso_8601, @c.send(:cell_type_from_value, '2008-08-30T01:45:36.123+09:00'))
   end
@@ -256,7 +255,7 @@ class TestCell < Test::Unit::TestCase
     assert_raise(ArgumentError) { @c.u = -1.1 }
     assert_nothing_raised { @c.u = :single }
     assert_equal(@c.u, :single)
-    doc = Nokogiri::XML(@c.to_xml_string(1,1))
+    doc = Nokogiri::XML(@c.to_xml_string(1, 1))
     assert(doc.xpath('//u[@val="single"]'))
   end
 
@@ -340,13 +339,13 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_to_xml_string
-    c_xml = Nokogiri::XML(@c.to_xml_string(1,1))
+    c_xml = Nokogiri::XML(@c.to_xml_string(1, 1))
     assert_equal(c_xml.xpath("/c[@s=1]").size, 1)
   end
 
   def test_to_xml_string_nil
     @c.value = nil
-    c_xml = Nokogiri::XML(@c.to_xml_string(1,1))
+    c_xml = Nokogiri::XML(@c.to_xml_string(1, 1))
     assert_equal(c_xml.xpath("/c[@s=1]").size, 1)
   end
 
@@ -358,7 +357,7 @@ class TestCell < Test::Unit::TestCase
     @c.value = "a"
     @c.font_name = 'arial'
     @c.color = 'FF0000'
-    c_xml = Nokogiri::XML(@c.to_xml_string(1,1))
+    c_xml = Nokogiri::XML(@c.to_xml_string(1, 1))
     assert(c_xml.xpath("//b").any?)
   end
 

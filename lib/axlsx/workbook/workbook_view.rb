@@ -19,18 +19,15 @@
 # </xsd:complexType>
 
 module Axlsx
-
   # A BookView defines the display properties for a workbook.
   # Units for window widths and other dimensions are expressed in twips.
   # Twip measurements are portable between different display resolutions.
   # The formula is (screen pixels) * (20 * 72) / (logical device dpi),
   # where the logical device dpi can be different for x and y coordinates.
   class WorkbookView
-
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
     include Axlsx::Accessors
-
 
     # Creates a new BookView object
     # @param [Hash] options  A hash of key/value pairs that will be mapped to this instances attributes.
@@ -47,16 +44,15 @@ module Axlsx
     # @option [Integer] window_width Specifies the width of the workbook window. The unit of measurement for this value is twips.
     # @option [Integer] window_height Specifies the height of the workbook window. The unit of measurement for this value is twips.
     # @option [Boolean] auto_filter_date_grouping Specifies a boolean value that indicates whether to group dates when presenting the user with filtering options in the user interface.
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
       yield self if block_given?
     end
 
-
     unsigned_int_attr_accessor :x_window, :y_window, :window_width, :window_height,
                                :tab_ratio, :first_sheet, :active_tab
 
-    validated_attr_accessor  [:visibility], :validate_view_visibility
+    validated_attr_accessor [:visibility], :validate_view_visibility
 
     serializable_attributes :visibility, :minimized,
                             :show_horizontal_scroll, :show_vertical_scroll,
@@ -67,14 +63,13 @@ module Axlsx
     boolean_attr_accessor :minimized, :show_horizontal_scroll, :show_vertical_scroll,
                           :show_sheet_tabs, :auto_filter_date_grouping
 
-
     # Serialize the WorkbookView
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-       str << '<workbookView '
-       serialized_attributes str
-       str << '></workbookView>'
+      str << '<workbookView '
+      serialized_attributes str
+      str << '></workbookView>'
     end
   end
 end

@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestVmlDrawing < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
     wb = p.workbook
@@ -19,7 +18,6 @@ class TestVmlDrawing < Test::Unit::TestCase
     str = @vml_drawing.to_xml_string()
     doc = Nokogiri::XML(str)
     assert_equal(doc.xpath("//v:shape").size, 2)
-    assert(doc.xpath("//o:idmap[@o:data='#{@ws.index+1}']"))
+    assert(doc.xpath("//o:idmap[@o:data='#{@ws.index + 1}']"))
   end
-
 end

@@ -22,15 +22,15 @@ class TestApp < Test::Unit::TestCase
       :'CharactersWithSpaces' => 9,
       :'SharedDoc' => false,
       :'HyperlinkBase' => 'foo',
-      :'HyperlInksChanged' => false, 
+      :'HyperlInksChanged' => false,
       :'Application' => 'axlsx',
       :'AppVersion' => '1.1.5',
       :'DocSecurity' => 0
-      }
+    }
 
     @app = Axlsx::App.new options
-
   end
+
   def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::APP_XSD))
     doc = Nokogiri::XML(@app.to_xml_string)
@@ -38,6 +38,6 @@ class TestApp < Test::Unit::TestCase
     schema.validate(doc).each do |error|
       errors << error
     end
-    assert_equal(errors.size, 0, "app.xml invalid" + errors.map{ |e| e.message }.to_s)
+    assert_equal(errors.size, 0, "app.xml invalid" + errors.map { |e| e.message }.to_s)
   end
 end

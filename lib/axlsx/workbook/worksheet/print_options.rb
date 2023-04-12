@@ -5,7 +5,6 @@ module Axlsx
   # @see Worksheet#print_options
   # @see Worksheet#initialize
   class PrintOptions
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
     include Axlsx::Accessors

@@ -1,10 +1,8 @@
-# encoding: UTF-8
 module Axlsx
   # CellStyle defines named styles that reference defined formatting records and can be used in your worksheet.
   # @note Using Styles#add_style is the recommended way to manage cell styling.
   # @see Styles#add_style
   class CellStyle
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -15,7 +13,7 @@ module Axlsx
     # @option options [Integer] iLevel
     # @option options [Boolean] hidden
     # @option options [Boolean] customBuiltIn
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
     end
 
@@ -47,8 +45,8 @@ module Axlsx
     # @return [Boolean]
     attr_reader :customBuiltin
 
-     # @see name
-    def name=(v)  Axlsx::validate_string v; @name = v end
+    # @see name
+    def name=(v) Axlsx::validate_string v; @name = v end
     # @see xfId
     def xfId=(v) Axlsx::validate_unsigned_int v; @xfId = v end
     # @see builtinId
@@ -66,7 +64,5 @@ module Axlsx
     def to_xml_string(str = '')
       serialized_tag('cellStyle', str)
     end
-
   end
-
 end

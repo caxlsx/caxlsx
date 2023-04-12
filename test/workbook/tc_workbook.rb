@@ -28,27 +28,26 @@ class TestWorkbook < Test::Unit::TestCase
 
   def test_no_autowidth
     assert_equal(@wb.use_autowidth, true)
-    assert_raise(ArgumentError) {@wb.use_autowidth = 0.1}
-    assert_nothing_raised {@wb.use_autowidth = false}
+    assert_raise(ArgumentError) { @wb.use_autowidth = 0.1 }
+    assert_nothing_raised { @wb.use_autowidth = false }
     assert_equal(@wb.use_autowidth, false)
   end
 
   def test_is_reversed
     assert_equal(@wb.is_reversed, nil)
-    assert_raise(ArgumentError) {@wb.is_reversed = 0.1}
-    assert_nothing_raised {@wb.is_reversed = true }
+    assert_raise(ArgumentError) { @wb.is_reversed = 0.1 }
+    assert_nothing_raised { @wb.is_reversed = true }
     assert_equal(@wb.use_autowidth, true)
   end
 
   def test_sheet_by_name_retrieval
-    @wb.add_worksheet(:name=>'foo')
-    @wb.add_worksheet(:name=>'bar')
+    @wb.add_worksheet(:name => 'foo')
+    @wb.add_worksheet(:name => 'bar')
     assert_equal('foo', @wb.sheet_by_name('foo').name)
-
   end
 
   def test_worksheet_empty_name
-    assert_raise(ArgumentError) {@wb.add_worksheet(:name=>'')}
+    assert_raise(ArgumentError) { @wb.add_worksheet(:name => '') }
   end
 
   def test_date1904
@@ -71,13 +70,13 @@ class TestWorkbook < Test::Unit::TestCase
 
   def test_shared_strings
     assert_equal(@wb.use_shared_strings, nil)
-    assert_raise(ArgumentError) {@wb.use_shared_strings = 'bpb'}
-    assert_nothing_raised {@wb.use_shared_strings = :true}
+    assert_raise(ArgumentError) { @wb.use_shared_strings = 'bpb' }
+    assert_nothing_raised { @wb.use_shared_strings = :true }
   end
 
   def test_add_worksheet
     assert(@wb.worksheets.empty?, "worbook has no worksheets by default")
-    ws = @wb.add_worksheet(:name=>"bob")
+    ws = @wb.add_worksheet(:name => "bob")
     assert_equal(@wb.worksheets.size, 1, "add_worksheet adds a worksheet!")
     assert_equal(@wb.worksheets.first, ws, "the worksheet returned is the worksheet added")
     assert_equal(ws.name, "bob", "name option gets passed to worksheet")
@@ -91,7 +90,7 @@ class TestWorkbook < Test::Unit::TestCase
   end
 
   def test_relationships
-    #current relationship size is 1 due to style relation
+    # current relationship size is 1 due to style relation
     assert(@wb.relationships.size == 1)
     @wb.add_worksheet
     assert(@wb.relationships.size == 2)
@@ -119,10 +118,10 @@ class TestWorkbook < Test::Unit::TestCase
   end
 
   def test_range_requires_valid_sheet
-    ws = @wb.add_worksheet :name=>'fish'
-    ws.add_row [1,2,3]
-    ws.add_row [4,5,6]
-    assert_raise(ArgumentError, "no sheet name part") { @wb["A1:C2"]}
+    ws = @wb.add_worksheet :name => 'fish'
+    ws.add_row [1, 2, 3]
+    ws.add_row [4, 5, 6]
+    assert_raise(ArgumentError, "no sheet name part") { @wb["A1:C2"] }
     assert_equal @wb['fish!A1:C2'].size, 6
   end
 

@@ -1,8 +1,6 @@
 module Axlsx
-
   # A VmlShape is used to position and render a comment.
   class VmlShape
-
     include Axlsx::OptionsParser
     include Axlsx::Accessors
 
@@ -17,14 +15,14 @@ module Axlsx
     # @option options [Integer] right_offset
     # @option options [Integer] bottom_row
     # @option options [Integer] bottom_offset
-    def initialize(options={})
+    def initialize(options = {})
       @row = @column = @left_column = @top_row = @right_column = @bottom_row = 0
       @left_offset = 15
       @top_offset = 2
       @right_offset = 50
       @bottom_offset = 5
       @visible = true
-      @id = (0...8).map{65.+(rand(25)).chr}.join
+      @id = (0...8).map { 65.+(rand(25)).chr }.join
       parse_options options
       yield self if block_given?
     end
@@ -37,8 +35,8 @@ module Axlsx
     # serialize the shape to a string
     # @param [String] str
     # @return [String]
-    def to_xml_string(str ='')
-str << <<SHAME_ON_YOU
+    def to_xml_string(str = '')
+      str << <<SHAME_ON_YOU
 
 <v:shape id="#{@id}" type="#_x0000_t202" fillcolor="#ffffa1 [80]" o:insetmode="auto"
   style="visibility:#{@visible ? 'visible' : 'hidden'}">
@@ -60,7 +58,6 @@ str << <<SHAME_ON_YOU
   </x:ClientData>
  </v:shape>
 SHAME_ON_YOU
-
     end
   end
 end

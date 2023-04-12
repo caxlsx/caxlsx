@@ -1,10 +1,9 @@
 require 'tc_helper.rb'
 
 class TestRow < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name=>"hmmm"
+    @ws = p.workbook.add_worksheet :name => "hmmm"
     @row = @ws.add_row
   end
 
@@ -16,19 +15,19 @@ class TestRow < Test::Unit::TestCase
   end
 
   def test_initialize_with_fixed_height
-    row = @ws.add_row([1,2,3,4,5], :height=>40)
+    row = @ws.add_row([1, 2, 3, 4, 5], :height => 40)
     assert_equal(40, row.height)
     assert(row.custom_height)
   end
 
   def test_style
-    r = @ws.add_row([1,2,3,4,5])
-    r.style=1
-    r.cells.each { |c| assert_equal(c.style,1) }
+    r = @ws.add_row([1, 2, 3, 4, 5])
+    r.style = 1
+    r.cells.each { |c| assert_equal(c.style, 1) }
   end
 
   def test_color
-    r = @ws.add_row([1,2,3,4,5])
+    r = @ws.add_row([1, 2, 3, 4, 5])
     r.color = "FF00FF00"
     r.cells.each { |c| assert_equal(c.color.rgb, "FF00FF00") }
   end
@@ -49,15 +48,14 @@ class TestRow < Test::Unit::TestCase
   end
 
   def test_array_to_cells
-    r = @ws.add_row [1,2,3], :style=>1, :types=>[:integer, :string, :float]
+    r = @ws.add_row [1, 2, 3], :style => 1, :types => [:integer, :string, :float]
     assert_equal(r.cells.size, 3)
     r.cells.each do |c|
       assert_equal(c.style, 1)
     end
-    r = @ws.add_row [1,2,3], :style=>[1]
+    r = @ws.add_row [1, 2, 3], :style => [1]
     assert_equal(r.cells.first.style, 1, "only apply style to cells with at the same index of of the style array")
     assert_equal(r.cells.last.style, 0, "only apply style to cells with at the same index of of the style array")
-
   end
 
   def test_array_to_cells_with_escape_formulas
@@ -87,7 +85,6 @@ class TestRow < Test::Unit::TestCase
     assert_nothing_raised { @row.height = 15 }
     assert_equal(15, @row.height)
   end
-
 
   def test_ph
     assert_raise(ArgumentError) { @row.ph = -3 }
@@ -138,9 +135,9 @@ class TestRow < Test::Unit::TestCase
 
   def test_offsets
     offset = 3
-    values = [1,2,3,4,5]
+    values = [1, 2, 3, 4, 5]
     r = @ws.add_row(values, offset: offset, style: 1)
-    r.cells.each_with_index do |c, index| 
+    r.cells.each_with_index do |c, index|
       assert_equal(c.style, index < offset ? 0 : 1)
       assert_equal(c.value, index < offset ? nil : values[index - offset])
     end
@@ -148,13 +145,12 @@ class TestRow < Test::Unit::TestCase
 
   def test_offsets_with_styles
     offset = 3
-    values = [1,2,3,4,5]
-    styles = (1..5).map{ @ws.workbook.styles.add_style }
+    values = [1, 2, 3, 4, 5]
+    styles = (1..5).map { @ws.workbook.styles.add_style }
     r = @ws.add_row(values, offset: offset, style: styles)
-    r.cells.each_with_index do |c, index| 
-      assert_equal(c.style, index < offset ? 0 : styles[index-offset])
+    r.cells.each_with_index do |c, index|
+      assert_equal(c.style, index < offset ? 0 : styles[index - offset])
       assert_equal(c.value, index < offset ? nil : values[index - offset])
     end
   end
-
 end

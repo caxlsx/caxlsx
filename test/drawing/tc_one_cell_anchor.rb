@@ -1,11 +1,10 @@
 require 'tc_helper.rb'
 
 class TestOneCellAnchor < Test::Unit::TestCase
-
   def setup
     @p = Axlsx::Package.new
     @ws = @p.workbook.add_worksheet
-    @test_img =  File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
+    @test_img = File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
     @image = @ws.add_image :image_src => @test_img
     @anchor = @image.anchor
   end
@@ -51,8 +50,8 @@ class TestOneCellAnchor < Test::Unit::TestCase
   end
 
   def test_options
-    assert_raise(ArgumentError, 'invalid start_at') { @ws.add_image :image_src=>@test_img, :start_at=>[1] }
-    i = @ws.add_image :image_src=>@test_img, :start_at => [1,2], :width=>100, :height=>200, :name=>"someimage", :descr=>"a neat image"
+    assert_raise(ArgumentError, 'invalid start_at') { @ws.add_image :image_src => @test_img, :start_at => [1] }
+    i = @ws.add_image :image_src => @test_img, :start_at => [1, 2], :width => 100, :height => 200, :name => "someimage", :descr => "a neat image"
 
     assert_equal("a neat image", i.descr)
     assert_equal("someimage", i.name)
@@ -62,5 +61,4 @@ class TestOneCellAnchor < Test::Unit::TestCase
     assert_equal(2, i.anchor.from.row)
     assert_equal(@test_img, i.image_src)
   end
-
 end

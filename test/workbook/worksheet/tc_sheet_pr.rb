@@ -1,8 +1,6 @@
 require 'tc_helper.rb'
 
-
 class TestSheetPr < Test::Unit::TestCase
-
   def setup
     worksheet = Axlsx::Package.new.workbook.add_worksheet
     @options = {
@@ -22,7 +20,7 @@ class TestSheetPr < Test::Unit::TestCase
 
   def test_initialization
     @options.each do |key, value|
-      if key==:tab_color
+      if key == :tab_color
         stored_value = @sheet_pr.send(key)
         assert_equal Axlsx::Color, stored_value.class
         assert_equal value, stored_value.rgb

@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 module Axlsx
-
-  #This class specifies data for a particular data point.
+  # This class specifies data for a particular data point.
   class NumVal < StrVal
-
     # A string representing the format code to apply.
     # For more information see see the SpreadsheetML numFmt element's (§18.8.30) formatCode attribute.
     # @return [String]
@@ -12,7 +9,7 @@ module Axlsx
     # creates a new NumVal object
     # @option options [String] formatCode
     # @option options [Integer] v
-    def initialize(options={})
+    def initialize(options = {})
       @format_code = "General"
       super(options)
     end

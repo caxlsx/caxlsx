@@ -106,7 +106,7 @@ class RichTextRun < Test::Unit::TestCase
     assert_raise(ArgumentError) { @c.u = -1.1 }
     assert_nothing_raised { @c.u = :single }
     assert_equal(@c.u, :single)
-    doc = Nokogiri::XML(@c.to_xml_string(1,1))
+    doc = Nokogiri::XML(@c.to_xml_string(1, 1))
     assert(doc.xpath('//u[@val="single"]'))
   end
 
@@ -141,7 +141,7 @@ class RichTextRun < Test::Unit::TestCase
   end
 
   def test_multiline_autowidth
-    wrap = @p.workbook.styles.add_style({:alignment => {:wrap_text => true}})
+    wrap = @p.workbook.styles.add_style({ :alignment => { :wrap_text => true } })
     awtr = Axlsx::RichTextRun.new('I\'m bold' + "\n", :b => true)
     rt = Axlsx::RichText.new
     rt.runs << awtr

@@ -1,6 +1,4 @@
-# encoding: UTF-8
 module Axlsx
-
   # The AreaChart is a two dimentional line chart (who would have guessed?) that you can add to your worksheet.
   # @example Creating a chart
   #   # This example creates a line in a single sheet.
@@ -20,7 +18,6 @@ module Axlsx
   # @see Series
   # @see Package#serialize
   class AreaChart < Chart
-
     # the category axis
     # @return [CatAxis]
     def cat_axis
@@ -35,7 +32,7 @@ module Axlsx
     end
     alias :valAxis :val_axis
 
-     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
+    # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     # @return [Symbol]
     attr_reader :grouping
 
@@ -45,7 +42,7 @@ module Axlsx
     # @option options [Boolean] show_legend
     # @option options [Symbol] grouping
     # @see Chart
-    def initialize(frame, options={})
+    def initialize(frame, options = {})
       @vary_colors = false
       @grouping = :standard
       super(frame, options)
@@ -66,7 +63,7 @@ module Axlsx
     def node_name
       path = self.class.to_s
       if i = path.rindex('::')
-        path = path[(i+2)..-1]
+        path = path[(i + 2)..-1]
       end
       path[0] = path[0].chr.downcase
       path

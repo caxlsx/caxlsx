@@ -1,6 +1,4 @@
-# encoding: UTF-8
 module Axlsx
-
   # The Line3DChart is a three dimentional line chart (who would have guessed?) that you can add to your worksheet.
   # @example Creating a chart
   #   # This example creates a line in a single sheet.
@@ -20,7 +18,6 @@ module Axlsx
   # @see Series
   # @see Package#serialize
   class Line3DChart < Axlsx::LineChart
-
     # space between bar or column clusters, as a percentage of the bar or column width.
     # @return [String]
     attr_reader :gap_depth
@@ -41,28 +38,27 @@ module Axlsx
     # @see Chart
     # @see lineChart
     # @see View3D
-    def initialize(frame, options={})
+    def initialize(frame, options = {})
       @gap_depth = nil
-      @view_3D = View3D.new({:r_ang_ax=>1}.merge(options))
+      @view_3D = View3D.new({ :r_ang_ax => 1 }.merge(options))
       super(frame, options)
       axes.add_axis :ser_axis, SerAxis
     end
 
-
     # @see gapDepth
     def gap_depth=(v)
       RegexValidator.validate "Line3DChart.gapWidth", GAP_AMOUNT_PERCENT, v
-      @gap_depth=(v)
+      @gap_depth = (v)
     end
     alias :gapDepth= :gap_depth=
 
-      # Serializes the object
-      # @param [String] str
-      # @return [String]
-      def to_xml_string(str = '')
-        super(str) do
-          str << ('<c:gapDepth val="' << @gap_depth.to_s << '"/>') unless @gap_depth.nil?
-        end
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
+    def to_xml_string(str = '')
+      super(str) do
+        str << ('<c:gapDepth val="' << @gap_depth.to_s << '"/>') unless @gap_depth.nil?
       end
+    end
   end
 end

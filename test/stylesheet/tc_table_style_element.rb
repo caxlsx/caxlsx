@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestTableStyleElement < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::TableStyleElement.new
   end
@@ -36,10 +35,10 @@ class TestTableStyleElement < Test::Unit::TestCase
     assert_nothing_raised { @item.dxfId = 7 }
     assert_equal(@item.dxfId, 7)
   end
-  
+
   def test_to_xml_string
     doc = Nokogiri::XML(@item.to_xml_string)
-   @item.type = :headerRow
+    @item.type = :headerRow
     assert(doc.xpath("//tableStyleElement[@type='#{@item.type.to_s}']"))
   end
 end

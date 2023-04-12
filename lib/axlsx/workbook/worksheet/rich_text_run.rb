@@ -1,8 +1,6 @@
 module Axlsx
-
   # The RichTextRun class creates and self serializing text run.
   class RichTextRun
-
     include Axlsx::OptionsParser
 
     attr_reader :value
@@ -13,7 +11,7 @@ module Axlsx
                      :shadow, :condense, :extend, :u,
                      :vertAlign, :sz, :color, :scheme].freeze
 
-    def initialize(value, options={})
+    def initialize(value, options = {})
       self.value = value
       parse_options(options)
     end
@@ -27,6 +25,7 @@ module Axlsx
     # The inline font_name property for the cell
     # @return [String]
     attr_reader :font_name
+
     # @see font_name
     def font_name=(v) set_run_style :validate_string, :font_name, v; end
 
@@ -53,6 +52,7 @@ module Axlsx
     # 255 ￼ OEM_CHARSET
     # @return [String]
     attr_reader :charset
+
     # @see charset
     def charset=(v) set_run_style :validate_unsigned_int, :charset, v; end
 
@@ -64,6 +64,7 @@ module Axlsx
     # 4 Script
     # 5 Decorative
     attr_reader :family
+
     # @see family
     def family=(v)
       set_run_style :validate_family, :family, v.to_i
@@ -72,42 +73,49 @@ module Axlsx
     # The inline bold property for the cell
     # @return [Boolean]
     attr_reader :b
+
     # @see b
     def b=(v) set_run_style :validate_boolean, :b, v; end
 
     # The inline italic property for the cell
     # @return [Boolean]
     attr_reader :i
+
     # @see i
     def i=(v) set_run_style :validate_boolean, :i, v; end
 
     # The inline strike property for the cell
     # @return [Boolean]
     attr_reader :strike
+
     # @see strike
     def strike=(v) set_run_style :validate_boolean, :strike, v; end
 
     # The inline outline property for the cell
     # @return [Boolean]
     attr_reader :outline
+
     # @see outline
     def outline=(v) set_run_style :validate_boolean, :outline, v; end
 
     # The inline shadow property for the cell
     # @return [Boolean]
     attr_reader :shadow
+
     # @see shadow
     def shadow=(v) set_run_style :validate_boolean, :shadow, v; end
 
     # The inline condense property for the cell
     # @return [Boolean]
     attr_reader :condense
+
     # @see condense
     def condense=(v) set_run_style :validate_boolean, :condense, v; end
 
     # The inline extend property for the cell
     # @return [Boolean]
     attr_reader :extend
+
     # @see extend
     def extend=(v) set_run_style :validate_boolean, :extend, v; end
 
@@ -117,6 +125,7 @@ module Axlsx
     # @return [String]
     # @note true is for backwards compatability and is reassigned to :single
     attr_reader :u
+
     # @see u
     def u=(v)
       v = :single if (v == true || v == 1 || v == :true || v == 'true')
@@ -126,14 +135,16 @@ module Axlsx
     # The inline color property for the cell
     # @return [Color]
     attr_reader :color
+
     # @param [String] v The 8 character representation for an rgb color #FFFFFFFF"
     def color=(v)
-      @color = v.is_a?(Color) ? v : Color.new(:rgb=>v)
+      @color = v.is_a?(Color) ? v : Color.new(:rgb => v)
     end
 
     # The inline sz property for the cell
     # @return [Inteter]
     attr_reader :sz
+
     # @see sz
     def sz=(v) set_run_style :validate_unsigned_int, :sz, v; end
 
@@ -141,6 +152,7 @@ module Axlsx
     # this must be one of [:baseline, :subscript, :superscript]
     # @return [Symbol]
     attr_reader :vertAlign
+
     # @see vertAlign
     def vertAlign=(v)
       RestrictionValidator.validate :cell_vertAlign, [:baseline, :subscript, :superscript], v
@@ -151,6 +163,7 @@ module Axlsx
     # this must be one of [:none, major, minor]
     # @return [Symbol]
     attr_reader :scheme
+
     # @see scheme
     def scheme=(v)
       RestrictionValidator.validate :cell_scheme, [:none, :major, :minor], v
@@ -162,6 +175,7 @@ module Axlsx
     # @return [Array]
     def autowidth(widtharray)
       return if value.nil?
+
       if styles.cellXfs[style].alignment && styles.cellXfs[style].alignment.wrap_text
         first = true
         value.to_s.split(/\r?\n/, -1).each do |line|
@@ -181,6 +195,7 @@ module Axlsx
     # Utility method for setting inline style attributes
     def set_run_style(validator, attr, value)
       return unless INLINE_STYLES.include?(attr.to_sym)
+
       Axlsx.send(validator, value) unless validator.nil?
       self.instance_variable_set :"@#{attr.to_s}", value
     end
@@ -190,7 +205,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       valid = RichTextRun::INLINE_STYLES
-      data = Hash[Axlsx.instance_values_for(self).map{ |k, v| [k.to_sym, v] }]
+      data = Hash[Axlsx.instance_values_for(self).map { |k, v| [k.to_sym, v] }]
       data = data.select { |key, value| valid.include?(key) && !value.nil? }
 
       str << '<r><rPr>'
@@ -223,6 +238,7 @@ module Axlsx
     # imagemagick and loading metrics for every character.
     def font_size
       return sz if sz
+
       font = styles.fonts[styles.cellXfs[style].fontId] || styles.fonts[0]
       (font.b || (defined?(@b) && @b)) ? (font.sz * 1.5) : font.sz
     end

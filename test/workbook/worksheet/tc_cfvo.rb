@@ -27,5 +27,4 @@ class TestCfvo < Test::Unit::TestCase
     doc = Nokogiri::XML.parse(@cfvo.to_xml_string)
     assert doc.xpath(".//cfvo[@type='min'][@val=0][@gte=true]")
   end
-
 end

@@ -1,7 +1,6 @@
 require 'tc_helper.rb'
 
 class TestStrData < Test::Unit::TestCase
-
   def setup
     @str_data = Axlsx::StrData.new :data => ["1", "2", "3"]
   end
@@ -14,5 +13,4 @@ class TestStrData < Test::Unit::TestCase
     assert_equal(doc.xpath("//c:strLit/c:ptCount[@val=3]").size, 1)
     assert_equal(doc.xpath("//c:strLit/c:pt/c:v[text()='1']").size, 1)
   end
-
 end

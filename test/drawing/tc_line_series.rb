@@ -1,13 +1,12 @@
 require 'tc_helper.rb'
 
 class TestLineSeries < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name=>"hmmm"
+    @ws = p.workbook.add_worksheet :name => "hmmm"
     chart = @ws.add_chart Axlsx::Line3DChart, :title => "fishery"
     @series = chart.add_series(
-      :data => [0,1,2],
+      :data => [0, 1, 2],
       :labels => ["zero", "one", "two"],
       :title => "bob",
       :color => "#FF0000",

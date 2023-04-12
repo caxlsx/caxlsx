@@ -1,8 +1,6 @@
 module Axlsx
-
   # A worksheet hyperlink object. Note that this is not the same as a drawing hyperlink object.
   class WorksheetHyperlink
-
     include Axlsx::OptionsParser
     include Axlsx::Accessors
     include Axlsx::SerializedAttributes
@@ -15,7 +13,7 @@ module Axlsx
     # @option [String] tooltip The tip to display when the user positions the mouse cursor over this hyperlink
     # @option [Symbol] target This is :external by default. If you set it to anything else, the location is interpreted to be the current workbook.
     # @option [String|Cell] ref The location of this hyperlink in the worksheet
-    def initialize(worksheet, options={})
+    def initialize(worksheet, options = {})
       DataTypeValidator.validate "Hyperlink.worksheet", [Worksheet], worksheet
       @worksheet = worksheet
       @target = :external
@@ -27,7 +25,7 @@ module Axlsx
 
     serializable_attributes :display, :tooltip, :ref
 
-    #Cell location of hyperlink on worksheet.
+    # Cell location of hyperlink on worksheet.
     # @return [String]
     attr_reader :ref
 
@@ -51,13 +49,14 @@ module Axlsx
     # @return [Relationship]
     def relationship
       return unless @target == :external
+
       Relationship.new(self, HYPERLINK_R, location, :target_mode => :External)
     end
 
     # Seralize the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = '')
       str << '<hyperlink '
       serialized_attributes str, location_or_id
       str << '/>'
@@ -68,7 +67,7 @@ module Axlsx
     # r:id should only be specified for external targets.
     # @return [Hash]
     def location_or_id
-      @target == :external ?  { :"r:id" => relationship.Id } : { :location => Axlsx::coder.encode(location) }
+      @target == :external ? { :"r:id" => relationship.Id } : { :location => Axlsx::coder.encode(location) }
     end
   end
 end

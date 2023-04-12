@@ -1,9 +1,6 @@
-# encoding: UTF-8
 module Axlsx
-
   # The SheetProtection object manages worksheet protection options per sheet.
   class SheetProtection
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
     include Axlsx::Accessors
@@ -26,7 +23,7 @@ module Axlsx
     # @option options [Boolean] pivot_tables @see SheetProtection#pivot_tables
     # @option options [Boolean] select_unlocked_cells @see SheetProtection#select_unlocked_cells
     # @option options [String] password. The password required for unlocking. @see SheetProtection#password=
-    def initialize(options={})
+    def initialize(options = {})
       @objects = @scenarios = @select_locked_cells = @select_unlocked_cells = false
       @sheet = @format_cells = @format_rows = @format_columns = @insert_columns = @insert_rows = @insert_hyperlinks = @delete_columns = @delete_rows = @sort = @auto_filter = @pivot_tables = true
       @password = nil
@@ -34,12 +31,12 @@ module Axlsx
     end
 
     boolean_attr_accessor :sheet, :objects, :scenarios, :format_cells, :format_columns, :format_rows,
-      :insert_columns, :insert_rows, :insert_hyperlinks, :delete_columns, :delete_rows,
-      :select_locked_cells, :sort, :auto_filter, :pivot_tables, :select_unlocked_cells
+                          :insert_columns, :insert_rows, :insert_hyperlinks, :delete_columns, :delete_rows,
+                          :select_locked_cells, :sort, :auto_filter, :pivot_tables, :select_unlocked_cells
 
     serializable_attributes :sheet, :objects, :scenarios, :format_cells, :format_columns, :format_rows,
-      :insert_columns, :insert_rows, :insert_hyperlinks, :delete_columns, :delete_rows,
-      :select_locked_cells, :sort, :auto_filter, :pivot_tables, :select_unlocked_cells, :salt, :password
+                            :insert_columns, :insert_rows, :insert_hyperlinks, :delete_columns, :delete_rows,
+                            :select_locked_cells, :sort, :auto_filter, :pivot_tables, :select_unlocked_cells, :salt, :password
 
     # Specifies the salt which was prepended to the user-supplied password before it was hashed using the hashing algorithm
     # @return [String]
@@ -50,9 +47,9 @@ module Axlsx
     # default nil
     attr_reader :password
 
-    # This block is intended to implement the salt_value, hash_value and spin count as per the ECMA-376 standard. 
-    # However, it does not seem to actually work in EXCEL - instead they are using their old retro algorithm shown below 
-    # defined in the transitional portion of the speck. I am leaving this code in in the hope that someday Ill be able to 
+    # This block is intended to implement the salt_value, hash_value and spin count as per the ECMA-376 standard.
+    # However, it does not seem to actually work in EXCEL - instead they are using their old retro algorithm shown below
+    # defined in the transitional portion of the speck. I am leaving this code in in the hope that someday Ill be able to
     # figure out why it does not work, and if Excel even supports it.
     #     def propper_password=(v)
     #       @algorithm_name = v == nil ? nil : 'SHA-1'
@@ -69,6 +66,7 @@ module Axlsx
     # encodes password for protection locking
     def password=(v)
       return if v == nil
+
       @password = create_password_hash(v)
     end
 
@@ -80,6 +78,7 @@ module Axlsx
     end
 
     private
+
     # Creates a password hash for a given password
     # @return [String]
     def create_password_hash(password)
@@ -102,14 +101,14 @@ module Axlsx
 
       chars.collect! do |char|
         i += 1
-        char     = char.unpack('c')[0] << i #ord << i
+        char     = char.unpack('c')[0] << i # ord << i
         low_15   = char & 0x7fff
         high_15  = char & 0x7fff << 15
         high_15  = high_15 >> 15
         char     = low_15 | high_15
       end
 
-      encoded_password  = 0x0000
+      encoded_password = 0x0000
       chars.each { |c| encoded_password ^= c }
       encoded_password ^= count
       encoded_password ^= 0xCE4B

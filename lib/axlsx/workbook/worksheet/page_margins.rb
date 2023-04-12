@@ -9,7 +9,6 @@ module Axlsx
   # @see Worksheet#page_margins
   # @see Worksheet#initialize
   class PageMargins
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -20,7 +19,7 @@ module Axlsx
     # @option options [Numeric] top The top margin in inches
     # @option options [Numeric] header The header margin in inches
     # @option options [Numeric] footer The footer margin in inches
-    def initialize(options={})
+    def initialize(options = {})
       # Default values taken from MS Excel for Mac 2011
       @left = @right = DEFAULT_LEFT_RIGHT
       @top = @bottom = DEFAULT_TOP_BOTTOM
@@ -68,6 +67,7 @@ module Axlsx
     def set(margins)
       margins.select do |k, v|
         next unless [:left, :right, :top, :bottom, :header, :footer].include? k
+
         send("#{k}=", v)
       end
     end

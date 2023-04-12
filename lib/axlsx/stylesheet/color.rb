@@ -1,8 +1,6 @@
-# encoding: UTF-8
 module Axlsx
   # The color class represents a color used for borders, fills an fonts
   class Color
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -10,7 +8,7 @@ module Axlsx
     # @option options [Boolean] auto
     # @option options [String] rgb
     # @option options [Float] tint
-    def initialize(options={})
+    def initialize(options = {})
       @rgb = "FF000000"
       parse_options options
     end
@@ -39,15 +37,16 @@ module Axlsx
 
     # no support for theme just yet
     # @return [Integer]
-    #attr_reader :theme
+    # attr_reader :theme
 
     # The tint value.
     # @note valid values are between -1.0 and 1.0
     # @return [Float]
     attr_reader :tint
 
-     # @see auto
+    # @see auto
     def auto=(v) Axlsx::validate_boolean v; @auto = v end
+
     # @see color
     def rgb=(v)
       Axlsx::validate_string(v)
@@ -55,8 +54,10 @@ module Axlsx
       v = v * 3 if v.size == 2
       v = v.rjust(8, 'FF')
       raise ArgumentError, "Invalid color rgb value: #{v}." unless v.match(/[0-9A-F]{8}/)
+
       @rgb = v
     end
+
     # @see tint
     def tint=(v) Axlsx::validate_float v; @tint = v end
 

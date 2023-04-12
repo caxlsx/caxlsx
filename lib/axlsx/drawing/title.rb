@@ -1,8 +1,6 @@
-# encoding: UTF-8
 module Axlsx
   # A Title stores information about the title of a chart
   class Title
-
     # The text to be shown. Setting this property directly with a string will remove the cell reference.
     # @return [String]
     attr_reader :text
@@ -17,7 +15,7 @@ module Axlsx
 
     # Creates a new Title object
     # @param [String, Cell] title The cell or string to be used for the chart's title
-    def initialize(title="", title_size="")
+    def initialize(title = "", title_size = "")
       self.cell = title if title.is_a?(Cell)
       self.text = title.to_s unless title.is_a?(Cell)
       if title_size.to_s.empty?
@@ -62,9 +60,9 @@ module Axlsx
     end
 
     # Not implemented at this time.
-    #def layout=(v) DataTypeValidator.validate 'Title.layout', Layout, v; @layout = v; end
-    #def overlay=(v) Axlsx::validate_boolean v; @overlay=v; end
-    #def spPr=(v) DataTypeValidator.validate 'Title.spPr', SpPr, v; @spPr = v; end
+    # def layout=(v) DataTypeValidator.validate 'Title.layout', Layout, v; @layout = v; end
+    # def overlay=(v) Axlsx::validate_boolean v; @overlay=v; end
+    # def spPr=(v) DataTypeValidator.validate 'Title.spPr', SpPr, v; @spPr = v; end
 
     # Serializes the object
     # @param [String] str
@@ -86,14 +84,14 @@ module Axlsx
           str << '</c:strRef>'
         else
           str << '<c:rich>'
-            str << '<a:bodyPr/>'
-            str << '<a:lstStyle/>'
-            str << '<a:p>'
-              str << '<a:r>'
-                str << ('<a:rPr sz="' << @text_size.to_s << '"/>')
-                str << ('<a:t>' << clean_value << '</a:t>')
-              str << '</a:r>'
-            str << '</a:p>'
+          str << '<a:bodyPr/>'
+          str << '<a:lstStyle/>'
+          str << '<a:p>'
+          str << '<a:r>'
+          str << ('<a:rPr sz="' << @text_size.to_s << '"/>')
+          str << ('<a:t>' << clean_value << '</a:t>')
+          str << '</a:r>'
+          str << '</a:p>'
           str << '</c:rich>'
         end
         str << '</c:tx>'
@@ -102,6 +100,5 @@ module Axlsx
       str << '<c:overlay val="0"/>'
       str << '</c:title>'
     end
-
   end
 end

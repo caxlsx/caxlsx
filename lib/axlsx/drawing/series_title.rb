@@ -1,8 +1,6 @@
-# encoding: UTF-8
 module Axlsx
   # A series title is a Title with a slightly different serialization than chart titles.
   class SeriesTitle < Title
-
     # Serializes the object
     # @param [String] str
     # @return [String]

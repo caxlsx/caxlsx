@@ -6,7 +6,6 @@ module Axlsx
   # @see Worksheet#add_conditional_formatting
   # @see ConditionalFormattingRule#initialize
   class IconSet
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -47,7 +46,7 @@ module Axlsx
     # @return [Boolean]
     attr_reader :showValue
 
-      # @see iconSet
+    # @see iconSet
     def iconSet=(v); Axlsx::validate_icon_set(v); @iconSet = v end
 
     # @see showValue
@@ -62,7 +61,7 @@ module Axlsx
     # Serialize this object to an xml string
     # @param [String] str
     # @return [String]
-    def to_xml_string(str="")
+    def to_xml_string(str = "")
       serialized_tag('iconSet', str) do
         @value_objects.each { |cfvo| cfvo.to_xml_string(str) }
       end

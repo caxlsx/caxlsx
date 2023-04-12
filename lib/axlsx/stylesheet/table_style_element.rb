@@ -1,9 +1,7 @@
-# encoding: UTF-8
 module Axlsx
   # an element of style that belongs to a table style.
   # @note tables and table styles are not supported in this version. This class exists in preparation for that support.
   class TableStyleElement
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -11,7 +9,7 @@ module Axlsx
     # @option options [Symbol] type
     # @option options [Integer] size
     # @option options [Integer] dxfId
-    def initialize(options={})
+    def initialize(options = {})
       parse_options options
     end
 
@@ -72,6 +70,5 @@ module Axlsx
     def to_xml_string(str = '')
       serialized_tag('tableStyleElement', str)
     end
-
   end
 end

@@ -1,16 +1,15 @@
 require 'tc_helper.rb'
 
 class TestCol < Test::Unit::TestCase
-
   def setup
     @col = Axlsx::Col.new 1, 1
   end
 
   def test_initialize
-    options = { :width => 12, :collapsed => true, :hidden => true, :outline_level => 1, :phonetic => true, :style => 1}
+    options = { :width => 12, :collapsed => true, :hidden => true, :outline_level => 1, :phonetic => true, :style => 1 }
 
     col = Axlsx::Col.new 0, 0, options
-    options.each{ |key, value| assert_equal(col.send(key.to_sym), value) }
+    options.each { |key, value| assert_equal(col.send(key.to_sym), value) }
   end
 
   def test_min_max_required
@@ -87,7 +86,6 @@ class TestCol < Test::Unit::TestCase
     assert_equal(@col.style, nil)
     @col.style = 1
     assert_equal(@col.style, 1)
-    #TODO check that the style specified is actually in the styles xfs collection
+    # TODO check that the style specified is actually in the styles xfs collection
   end
-
 end

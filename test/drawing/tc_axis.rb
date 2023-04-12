@@ -5,7 +5,6 @@ class TestAxis < Test::Unit::TestCase
     @axis = Axlsx::Axis.new :gridlines => false, :title => 'Foo'
   end
 
-
   def test_initialization
     assert_equal(@axis.ax_pos, :b, "axis position default incorrect")
     assert_equal(@axis.tick_lbl_pos, :nextTo, "tick label position default incorrect")
@@ -18,15 +17,15 @@ class TestAxis < Test::Unit::TestCase
   def test_color
     @axis.color = "00FF00"
     @axis.cross_axis = Axlsx::CatAxis.new
-    str  = '<?xml version="1.0" encoding="UTF-8"?>'
+    str = '<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
-    doc = Nokogiri::XML(@axis.to_xml_string(str)) 
+    doc = Nokogiri::XML(@axis.to_xml_string(str))
     assert(doc.xpath("//a:srgbClr[@val='00FF00']"))
   end
 
   def test_cell_based_axis_title
     p = Axlsx::Package.new
-    p.workbook.add_worksheet(:name=>'foosheet') do |sheet|
+    p.workbook.add_worksheet(:name => 'foosheet') do |sheet|
       sheet.add_row ['battle victories']
       sheet.add_row ['bird', 1, 2, 1]
       sheet.add_row ['cat', 7, 9, 10]
@@ -58,14 +57,14 @@ class TestAxis < Test::Unit::TestCase
 
   def test_format_code
     assert_raise(ArgumentError, "requires valid format code") { @axis.format_code = :high }
-    assert_nothing_raised("accepts valid format code") { @axis.format_code = "00.##"  }
+    assert_nothing_raised("accepts valid format code") { @axis.format_code = "00.##" }
   end
 
-  def create_chart_with_formatting(format_string=nil)
+  def create_chart_with_formatting(format_string = nil)
     p = Axlsx::Package.new
     p.workbook.add_worksheet(:name => "Formatting Test") do |sheet|
       sheet.add_row(['test', 20])
-      sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0,5], :end_at => [10, 20], :title => "Test Formatting") do |chart|
+      sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0, 5], :end_at => [10, 20], :title => "Test Formatting") do |chart|
         chart.add_series :data => sheet["B1:B1"], :labels => sheet["A1:A1"]
         chart.val_axis.format_code = format_string if format_string
         doc = Nokogiri::XML(chart.to_xml_string)
@@ -97,12 +96,12 @@ class TestAxis < Test::Unit::TestCase
     assert_raise(ArgumentError, "requires valid gridlines") { @axis.gridlines = 'alice' }
     assert_nothing_raised("accepts valid crosses") { @axis.gridlines = false }
   end
-  
+
   def test_to_xml_string
     @axis.cross_axis = Axlsx::CatAxis.new
-    str  = '<?xml version="1.0" encoding="UTF-8"?>'
+    str = '<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
-    doc = Nokogiri::XML(@axis.to_xml_string(str)) 
+    doc = Nokogiri::XML(@axis.to_xml_string(str))
     assert(doc.xpath('//a:noFill'))
     assert(doc.xpath("//c:crosses[@val='#{@axis.crosses.to_s}']"))
     assert(doc.xpath("//c:crossAx[@val='#{@axis.cross_axis.to_s}']"))

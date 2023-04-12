@@ -13,7 +13,6 @@ task :gendoc do
   system "yard stats --list-undoc"
 end
 
-
 require 'rake/testtask'
 Rake::TestTask.new do |t|
   t.libs << 'test'
