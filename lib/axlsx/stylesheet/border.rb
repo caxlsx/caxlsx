@@ -1,8 +1,6 @@
-# encoding: UTF-8
 module Axlsx
   # This class details a border used in Office Open XML spreadsheet styles.
   class Border
-
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
 
@@ -21,7 +19,7 @@ module Axlsx
     #
     # @note The recommended way to manage borders is with Style#add_style
     # @see Style#add_style
-    def initialize(options={})
+    def initialize(options = {})
       @prs = SimpleTypedList.new BorderPr
       parse_options options
     end
@@ -68,6 +66,5 @@ module Axlsx
       end
       str << '</border>'
     end
-
   end
 end

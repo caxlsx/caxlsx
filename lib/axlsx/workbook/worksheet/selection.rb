@@ -1,11 +1,9 @@
-# encoding: UTF-8
 module Axlsx
   # Selection options for worksheet panes.
   #
   # @note The recommended way to manage the selection pane options is via SheetView#add_selection
   # @see SheetView#add_selection
   class Selection
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -14,7 +12,7 @@ module Axlsx
     # @option options [Integer] active_cell_id Active Cell Index
     # @option options [Symbol] pane Pane
     # @option options [String] sqref Sequence of References
-    def initialize(options={})
+    def initialize(options = {})
       @active_cell = @active_cell_id = @pane = @sqref = nil
       parse_options options
     end
@@ -40,16 +38,16 @@ module Axlsx
 
     # Pane
     # The pane to which this selection belongs.
-    # Options are 
+    # Options are
     #  * bottom_left:  Bottom left pane, when both vertical and horizontal
     #                  splits are applied. This value is also used when only
-    #                  a horizontal split has been applied, dividing the pane 
-    #                  into upper and lower regions. In that case, this value 
+    #                  a horizontal split has been applied, dividing the pane
+    #                  into upper and lower regions. In that case, this value
     #                  specifies the bottom pane.
     #  * bottom_right: Bottom right pane, when both vertical and horizontal
     #                  splits are applied.
     #  * top_left:     Top left pane, when both vertical and horizontal splits
-    #                  are applied. This value is also used when only a horizontal 
+    #                  are applied. This value is also used when only a horizontal
     #                  split has been applied, dividing the pane into upper and lower
     #                  regions. In that case, this value specifies the top pane.
     #                  This value is also used when only a vertical split has
@@ -57,8 +55,8 @@ module Axlsx
     #                  regions. In that case, this value specifies the left pane
     #  * top_right:    Top right pane, when both vertical and horizontal
     #                  splits are applied. This value is also used when only
-    #                  a vertical split has been applied, dividing the pane 
-    #                  into right and left regions. In that case, this value 
+    #                  a vertical split has been applied, dividing the pane
+    #                  into right and left regions. In that case, this value
     #                  specifies the right pane.
     # @see type
     # @return [Symbol]

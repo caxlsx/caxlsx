@@ -5,7 +5,7 @@ class TestPivotTableCacheDefinition < Test::Unit::TestCase
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet
     5.times do
-      @ws << ["aa","aa","aa","aa"]
+      @ws << ["aa", "aa", "aa", "aa"]
     end
     @pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5')
     @cache_definition = @pivot_table.cache_definition

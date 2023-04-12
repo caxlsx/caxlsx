@@ -2,9 +2,9 @@
 #    <definedName name="_xlnm.Print_Titles" localSheetId="0">Sheet1!$1:$1</definedName>
 #  </definedNames>
 
-#￼￼￼<xsd:complexType name="CT_DefinedName">
+# ￼￼￼<xsd:complexType name="CT_DefinedName">
 # <xsd:simpleContent>
-#￼￼￼￼ <xsd:extension base="ST_Formula">
+# ￼￼￼￼ <xsd:extension base="ST_Formula">
 # <xsd:attribute name="name" type="s:ST_Xstring" use="required"/>
 # <xsd:attribute name="comment" type="s:ST_Xstring" use="optional"/>
 # <xsd:attribute name="customMenu" type="s:ST_Xstring" use="optional"/>
@@ -97,7 +97,7 @@ module Axlsx
     #                                       version of the workbook that is published to or rendered on a Web or application server.
     # @option [Boolean] workbook_parameter - Specifies a boolean value that indicates that the name is used as a workbook parameter on a
     #                                        version of the workbook that is published to or rendered on a Web or application server.
-    def initialize(formula, options={})
+    def initialize(formula, options = {})
       @formula = formula
       parse_options options
     end
@@ -116,10 +116,11 @@ module Axlsx
     boolean_attr_accessor :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden
 
     serializable_attributes :short_cut_key, :status_bar, :help, :description, :custom_menu, :comment,
-      :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden, :local_sheet_id
+                            :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden, :local_sheet_id
 
-    def to_xml_string(str='')
+    def to_xml_string(str = '')
       raise ArgumentError, 'you must specify the name for this defined name. Please read the documentation for Axlsx::DefinedName for more details' unless name
+
       str << ('<definedName ' << 'name="' << name << '" ')
       serialized_attributes str
       str << ('>' << @formula << '</definedName>')

@@ -1,12 +1,11 @@
 require 'tc_helper.rb'
 
 class TestSeries < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name=>"hmmm"
+    @ws = p.workbook.add_worksheet :name => "hmmm"
     chart = @ws.add_chart Axlsx::Chart, :title => "fishery"
-    @series = chart.add_series :title=>"bob"
+    @series = chart.add_series :title => "bob"
   end
 
   def test_initialize
@@ -19,5 +18,4 @@ class TestSeries < Test::Unit::TestCase
     @series.order = 2
     assert_equal(@series.order, 2)
   end
-
 end

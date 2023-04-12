@@ -1,10 +1,9 @@
 require 'tc_helper.rb'
 
 class TestBarSeries < Test::Unit::TestCase
-
   def setup
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name=>"hmmm"
+    @ws = p.workbook.add_worksheet :name => "hmmm"
     @chart = @ws.add_chart Axlsx::Bar3DChart, :title => "fishery"
     @series = @chart.add_series(
       data: [0, 1, 2],
@@ -38,8 +37,8 @@ class TestBarSeries < Test::Unit::TestCase
   def test_to_xml_string
     doc = Nokogiri::XML(@chart.to_xml_string)
     @series.colors.each_with_index do |color, index|
-      assert_equal(doc.xpath("//c:dPt/c:idx[@val='#{index}']").size,1)
-      assert_equal(doc.xpath("//c:dPt/c:spPr/a:solidFill/a:srgbClr[@val='#{@series.colors[index]}']").size,1)
+      assert_equal(doc.xpath("//c:dPt/c:idx[@val='#{index}']").size, 1)
+      assert_equal(doc.xpath("//c:dPt/c:spPr/a:solidFill/a:srgbClr[@val='#{@series.colors[index]}']").size, 1)
     end
     assert_equal(doc.xpath('//c:spPr[not(ancestor::c:dPt)]/a:solidFill/a:srgbClr').first.get_attribute('val'), '5A5A5A', 'series color has been applied')
   end

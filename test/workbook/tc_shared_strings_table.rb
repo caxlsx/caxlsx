@@ -1,9 +1,8 @@
 require 'tc_helper.rb'
 
 class TestSharedStringsTable < Test::Unit::TestCase
-
   def setup
-    @p = Axlsx::Package.new :use_shared_strings=>true
+    @p = Axlsx::Package.new :use_shared_strings => true
 
     ws = @p.workbook.add_worksheet
     ws.add_row ['a', 1, 'b']
@@ -40,11 +39,11 @@ class TestSharedStringsTable < Test::Unit::TestCase
       puts error.message
       errors << error
     end
-    assert_equal(errors.size, 0, "sharedStirngs.xml Invalid" + errors.map{ |e| e.message }.to_s)
+    assert_equal(errors.size, 0, "sharedStirngs.xml Invalid" + errors.map { |e| e.message }.to_s)
   end
 
   def test_remove_control_characters_in_xml_serialization
-    nasties =  "hello\x10\x00\x1C\x1Eworld"
+    nasties = "hello\x10\x00\x1C\x1Eworld"
     @p.workbook.worksheets[0].add_row [nasties]
 
     # test that the nasty string was added to the shared strings

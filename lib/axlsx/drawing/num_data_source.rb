@@ -1,14 +1,12 @@
 module Axlsx
-
   # A numeric data source for use by charts.
   class NumDataSource
-
     include Axlsx::OptionsParser
 
     # creates a new NumDataSource object
     # @option options [Array] data An array of Cells or Numeric objects
     # @option options [Symbol] tag_name see tag_name
-    def initialize(options={})
+    def initialize(options = {})
       # override these three in child classes
       @data_type ||= NumData
       @tag_name ||= :val
@@ -21,7 +19,6 @@ module Axlsx
       end
       parse_options options
     end
-
 
     # The tag name to use when serializing this data source.
     # Only items defined in allowed_tag_names are allowed
@@ -36,7 +33,7 @@ module Axlsx
       [:yVal, :val, :bubbleSize]
     end
 
-     # sets the tag name for this data source
+    # sets the tag name for this data source
     # @param [Symbol] v One of the allowed_tag_names
     def tag_name=(v)
       Axlsx::RestrictionValidator.validate "#{self.class.name}.tag_name", self.class.allowed_tag_names, v
@@ -45,7 +42,7 @@ module Axlsx
 
     # serialize the object
     # @param [String] str
-    def to_xml_string(str="")
+    def to_xml_string(str = "")
       str << ('<c:' << tag_name.to_s << '>')
       if @f
         str << ('<c:' << @ref_tag_name.to_s << '>')
@@ -59,4 +56,3 @@ module Axlsx
     end
   end
 end
-

@@ -1,19 +1,17 @@
 require 'tc_helper.rb'
 
 class TestFilterColumn < Test::Unit::TestCase
-
   def setup
     @filter_column = Axlsx::FilterColumn.new(0, :filters, :filter_items => [200])
   end
 
-
   def test_initialize_col_id
     assert_raise ArgumentError do
       Axlsx::FilterColumn.new(0, :bobs_house_of_filter)
-    end 
-    assert_raise ArgumentError do 
+    end
+    assert_raise ArgumentError do
       Axlsx::FilterColumn.new(:penut, :filters)
-    end 
+    end
   end
 
   def test_initailize_filter_type
@@ -44,7 +42,7 @@ class TestFilterColumn < Test::Unit::TestCase
 
   def test_show_button
     assert_raise ArgumentError do
-      @filter_column.show_button = :foo 
+      @filter_column.show_button = :foo
     end
     assert_nothing_raised { @filter_column.show_button = false }
   end
@@ -52,15 +50,15 @@ class TestFilterColumn < Test::Unit::TestCase
   def test_hidden_button
     assert_raise ArgumentError do
       @filter_column.hidden_button = :hoge
-    end 
+    end
     assert_nothing_raised { @filter_column.hidden_button = true }
   end
 
   def test_col_id=
-    assert_raise ArgumentError do 
-    @filter_column.col_id = :bar
-    end 
-  assert_nothing_raised { @filter_column.col_id = 7 }
+    assert_raise ArgumentError do
+      @filter_column.col_id = :bar
+    end
+    assert_nothing_raised { @filter_column.col_id = 7 }
   end
 
   def test_to_xml_string
@@ -68,8 +66,6 @@ class TestFilterColumn < Test::Unit::TestCase
     assert doc.xpath("//filterColumn[@colId=#{@filter_column.col_id}]")
     assert doc.xpath("//filterColumn[@hiddenButton=#{@filter_column.hidden_button}]")
     assert doc.xpath("//filterColumn[@showButton=#{@filter_column.show_button}]")
-
-
 
     assert doc.xpath("//filterColumn/filters")
   end

@@ -1,9 +1,6 @@
-# encoding: UTF-8
 module Axlsx
-
   # the access class defines common properties and values for a chart axis.
   class Axis
-
     include Axlsx::OptionsParser
 
     # Creates an Axis object
@@ -12,11 +9,11 @@ module Axlsx
     # @option options [Symbol] crosses
     # @option options [Symbol] tick_lbl_pos
     # @raise [ArgumentError] If axi_id or cross_ax are not unsigned integers
-    def initialize(options={})
-      @id = rand(8 ** 8)
+    def initialize(options = {})
+      @id = rand(8**8)
       @format_code = "General"
       @delete = @label_rotation = 0
-      @scaling = Scaling.new(:orientation=>:minMax)
+      @scaling = Scaling.new(:orientation => :minMax)
       @title = @color = nil
       self.ax_pos = :b
       self.tick_lbl_pos = :nextTo
@@ -83,19 +80,19 @@ module Axlsx
     # the title for the axis. This can be a cell or a fixed string.
     attr_reader :title
 
-    # The color for this axis. This value is used when rendering the axis line in the chart. 
+    # The color for this axis. This value is used when rendering the axis line in the chart.
     # colors should be in 6 character rbg format
     # @return [String] the rbg color assinged.
     # @see color
     def color=(color_rgb)
       @color = color_rgb
     end
-    
+
     # The crossing axis for this axis
     # @param [Axis] axis
     def cross_axis=(axis)
-       DataTypeValidator.validate "#{self.class}.cross_axis", [Axis], axis
-       @cross_axis = axis
+      DataTypeValidator.validate "#{self.class}.cross_axis", [Axis], axis
+      @cross_axis = axis
     end
 
     # The position of the axis
@@ -184,7 +181,5 @@ module Axlsx
       str << ('<c:crossAx val="' << @cross_axis.id.to_s << '"/>')
       str << ('<c:crosses val="' << @crosses.to_s << '"/>')
     end
-
   end
-
 end

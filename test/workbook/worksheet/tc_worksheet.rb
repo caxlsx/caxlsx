@@ -7,7 +7,6 @@ class TestWorksheet < Test::Unit::TestCase
     @ws = @wb.add_worksheet
   end
 
-
   def test_pn
     assert_equal(@ws.pn, "worksheets/sheet1.xml")
     ws = @ws.workbook.add_worksheet
@@ -30,7 +29,7 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_name_unique
-    assert_raise(ArgumentError, "worksheet name must be unique") { n = @ws.name; @ws.workbook.add_worksheet(:name=> n) }
+    assert_raise(ArgumentError, "worksheet name must be unique") { n = @ws.name; @ws.workbook.add_worksheet(:name => n) }
   end
 
   def test_name_unique_only_checks_other_worksheet_names
@@ -108,15 +107,15 @@ class TestWorksheet < Test::Unit::TestCase
 
   def test_no_autowidth
     @ws.workbook.use_autowidth = false
-    @ws.add_row [1,2,3,4]
+    @ws.add_row [1, 2, 3, 4]
     assert_equal(@ws.column_info[0].width, nil)
   end
 
   def test_initialization_options
-    page_margins = {:left => 2, :right => 2, :bottom => 2, :top => 2, :header => 2, :footer => 2}
-    page_setup = {:fit_to_height => 1, :fit_to_width => 1, :orientation => :landscape, :paper_width => "210mm", :paper_height => "297mm", :scale => 80}
-    print_options = {:grid_lines => true, :headings => true, :horizontal_centered => true, :vertical_centered => true}
-    header_footer = {:different_first => false, :different_odd_even => false, :odd_header => 'Header'}
+    page_margins = { :left => 2, :right => 2, :bottom => 2, :top => 2, :header => 2, :footer => 2 }
+    page_setup = { :fit_to_height => 1, :fit_to_width => 1, :orientation => :landscape, :paper_width => "210mm", :paper_height => "297mm", :scale => 80 }
+    print_options = { :grid_lines => true, :headings => true, :horizontal_centered => true, :vertical_centered => true }
+    header_footer = { :different_first => false, :different_odd_even => false, :odd_header => 'Header' }
     optioned = @ws.workbook.add_worksheet(:name => 'bob', :page_margins => page_margins, :page_setup => page_setup, :print_options => print_options, :header_footer => header_footer)
     page_margins.keys.each do |key|
       assert_equal(page_margins[key], optioned.page_margins.send(key))
@@ -131,9 +130,7 @@ class TestWorksheet < Test::Unit::TestCase
       assert_equal(header_footer[key], optioned.header_footer.send(key))
     end
     assert_equal(optioned.name, 'bob')
-
   end
-
 
   # def test_use_gridlines
   #  assert_raise(ArgumentError) { @ws.show_gridlines = -1.1 }
@@ -178,8 +175,8 @@ class TestWorksheet < Test::Unit::TestCase
     range = @ws["A1:C2"]
     first_row = @ws[0]
     last_row = @ws[1]
-    assert_equal(@ws.rows[0],first_row)
-    assert_equal(@ws.rows[1],last_row)
+    assert_equal(@ws.rows[0], first_row)
+    assert_equal(@ws.rows[1], last_row)
     assert_equal(range.size, 6)
     assert_equal(range.first, @ws.rows.first.cells.first)
     assert_equal(range.last, @ws.rows.last.cells.last)
@@ -187,7 +184,7 @@ class TestWorksheet < Test::Unit::TestCase
 
   def test_add_row
     assert(@ws.rows.empty?, "sheet has no rows by default")
-    r = @ws.add_row([1,2,3])
+    r = @ws.add_row([1, 2, 3])
     assert_equal(@ws.rows.size, 1, "add_row adds a row")
     assert_equal(@ws.rows.first, r, "the row returned is the row added")
   end
@@ -210,14 +207,12 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1, 2, 3, 4]
     @ws.add_row [1, 2, 3, 4]
 
-
     assert(@ws.row_breaks.empty?)
     assert(@ws.col_breaks.empty?)
     @ws.add_page_break(@ws.rows.last.cells[1])
     assert_equal(1, @ws.row_breaks.size)
     assert_equal(1, @ws.col_breaks.size)
   end
-
 
   def test_drawing
     assert @ws.drawing == nil
@@ -232,12 +227,12 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_col_style
-    @ws.add_row [1,2,3,4]
-    @ws.add_row [1,2,3,4]
-    @ws.add_row [1,2,3,4]
-    @ws.add_row [1,2,3,4]
-    @ws.col_style( (1..2), 1, :row_offset=>1)
-    @ws.rows[(1..-1)].each do | r |
+    @ws.add_row [1, 2, 3, 4]
+    @ws.add_row [1, 2, 3, 4]
+    @ws.add_row [1, 2, 3, 4]
+    @ws.add_row [1, 2, 3, 4]
+    @ws.col_style((1..2), 1, :row_offset => 1)
+    @ws.rows[(1..-1)].each do |r|
       assert_equal(r.cells[1].style, 1)
       assert_equal(r.cells[2].style, 1)
     end
@@ -246,41 +241,41 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_col_style_with_empty_column
-    @ws.add_row [1,2,3,4]
+    @ws.add_row [1, 2, 3, 4]
     @ws.add_row [1]
-    @ws.add_row [1,2,3,4]
-    assert_nothing_raised {@ws.col_style(1, 1)}
+    @ws.add_row [1, 2, 3, 4]
+    assert_nothing_raised { @ws.col_style(1, 1) }
   end
 
   def test_cols
-    @ws.add_row [1,2,3,4]
-    @ws.add_row [1,2,3,4]
-    @ws.add_row [1,2,3]
-    @ws.add_row [1,2,3,4]
+    @ws.add_row [1, 2, 3, 4]
+    @ws.add_row [1, 2, 3, 4]
+    @ws.add_row [1, 2, 3]
+    @ws.add_row [1, 2, 3, 4]
     c = @ws.cols[1]
     assert_equal(c.size, 4)
     assert_equal(c[0].value, 2)
   end
 
   def test_cols_with_block
-    @ws.add_row [1,2,3]
+    @ws.add_row [1, 2, 3]
     @ws.add_row [1]
-    cols = @ws.cols {|row, column| :foo }
+    cols = @ws.cols { |row, column| :foo }
     assert_equal(:foo, cols[1][1])
   end
 
   def test_row_style
-    @ws.add_row [1,2,3,4]
-    @ws.add_row [1,2,3,4]
-    @ws.add_row [1,2,3,4]
-    @ws.add_row [1,2,3,4]
-    @ws.row_style 1, 1, :col_offset=>1
-    @ws.rows[1].cells[(1..-1)].each do | c |
+    @ws.add_row [1, 2, 3, 4]
+    @ws.add_row [1, 2, 3, 4]
+    @ws.add_row [1, 2, 3, 4]
+    @ws.add_row [1, 2, 3, 4]
+    @ws.row_style 1, 1, :col_offset => 1
+    @ws.rows[1].cells[(1..-1)].each do |c|
       assert_equal(c.style, 1)
     end
     assert_equal(@ws.rows[1].cells[0].style, 0)
     assert_equal(@ws.rows[2].cells[1].style, 0)
-    @ws.row_style( 1..2, 1, :col_offset => 2)
+    @ws.row_style(1..2, 1, :col_offset => 2)
     @ws.rows[(1..2)].each do |r|
       r.cells[(2..-1)].each do |c|
         assert_equal(c.style, 1)
@@ -295,7 +290,7 @@ class TestWorksheet < Test::Unit::TestCase
   # end
 
   def test_to_xml_string_dimensions
-    @ws.add_row [1,2,3]
+    @ws.add_row [1, 2, 3]
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:dimension[@ref="A1:C1"]').size, 1)
   end
@@ -353,7 +348,7 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_to_xml_string_row_breaks
-  @ws.add_page_break("A1")
+    @ws.add_page_break("A1")
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:rowBreaks/xmlns:brk[@id="0"]').size, 1)
   end
@@ -419,7 +414,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_to_xml_string
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert(schema.validate(doc).map{ |e| puts e.message; e }.empty?, "error free validation")
+    assert(schema.validate(doc).map { |e| puts e.message; e }.empty?, "error free validation")
   end
 
   def test_styles
@@ -429,7 +424,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_to_xml_string_with_illegal_chars
     old = Axlsx::trust_input
     Axlsx::trust_input = false
-    nasties =  "\v\u2028\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u001f"
+    nasties = "\v\u2028\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u001f"
     @ws.add_row [nasties]
     assert_equal(0, @ws.rows.last.cells.last.value.index("\v"))
     assert_equal(nil, @ws.to_xml_string.index("\v"))
@@ -442,6 +437,7 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal("foo\n\r\nbar", @ws.rows.last.cells.last.value)
     assert_not_nil(@ws.to_xml_string.index("foo\n\r\nbar"))
   end
+
   # Make sure the XML for all optional elements (like pageMargins, autoFilter, ...)
   # is generated in correct order.
   def test_valid_with_optional_elements
@@ -452,14 +448,14 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.merge_cells "A4:A5"
     @ws.add_chart Axlsx::Pie3DChart
     @ws.add_table "E1:F3"
-    @ws.add_pivot_table  'G5:G6', 'A1:D10'
+    @ws.add_pivot_table 'G5:G6', 'A1:D10'
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert(schema.validate(doc).map { |e| puts e.message; e }.empty?, schema.validate(doc).map { |e| e.message }.join('\n'))
   end
 
   def test_relationships
-    @ws.add_row [1,2,3]
+    @ws.add_row [1, 2, 3]
     assert(@ws.relationships.empty?, "No Drawing relationship until you add a chart")
     @ws.add_chart Axlsx::Pie3DChart
     assert_equal(@ws.relationships.size, 1, "adding a chart creates the relationship")
@@ -533,14 +529,14 @@ class TestWorksheet < Test::Unit::TestCase
 
   def test_protect_range_with_cells
     @ws.add_row [1, 2, 3]
-    assert_nothing_raised {@ws.protect_range(@ws.rows.first.cells) }
+    assert_nothing_raised { @ws.protect_range(@ws.rows.first.cells) }
     assert_equal('A1:C1', @ws.send(:protected_ranges).last.sqref)
   end
 
   def test_merge_cells
-    @ws.add_row [1,2,3]
-    @ws.add_row [4,5,6]
-    @ws.add_row [7,8,9]
+    @ws.add_row [1, 2, 3]
+    @ws.add_row [4, 5, 6]
+    @ws.add_row [7, 8, 9]
     @ws.merge_cells "A1:A2"
     @ws.merge_cells "B2:C3"
     @ws.merge_cells @ws.rows.last.cells[(0..1)]
@@ -558,12 +554,12 @@ class TestWorksheet < Test::Unit::TestCase
 
   def test_auto_filter
     assert(@ws.auto_filter.range.nil?)
-    assert(@wb.defined_names.none?{|defined_name| defined_name.name=='_xlnm._FilterDatabase'})
+    assert(@wb.defined_names.none? { |defined_name| defined_name.name == '_xlnm._FilterDatabase' })
     assert_raise(ArgumentError) { @ws.auto_filter = 123 }
     @ws.auto_filter.range = "A1:D9"
     assert_equal(@ws.auto_filter.range, "A1:D9")
     @ws.to_xml_string
-    assert(@wb.defined_names.any?{|defined_name| defined_name.name=='_xlnm._FilterDatabase'})
+    assert(@wb.defined_names.any? { |defined_name| defined_name.name == '_xlnm._FilterDatabase' })
   end
 
   def test_auto_filter_assign
@@ -571,7 +567,7 @@ class TestWorksheet < Test::Unit::TestCase
 
     assert(@ws.auto_filter.range.nil?)
     assert(other_ws.auto_filter.range.nil?)
-    assert(@wb.defined_names.none?{|defined_name| defined_name.name=='_xlnm._FilterDatabase'})
+    assert(@wb.defined_names.none? { |defined_name| defined_name.name == '_xlnm._FilterDatabase' })
     assert_raise(ArgumentError) { @ws.auto_filter = 123 }
 
     @ws.auto_filter = "A1:D9"
@@ -583,12 +579,11 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.to_xml_string
     other_ws.to_xml_string
 
-    filter_database = @wb.defined_names.select{|defined_name| defined_name.name=='_xlnm._FilterDatabase'}
+    filter_database = @wb.defined_names.select { |defined_name| defined_name.name == '_xlnm._FilterDatabase' }
     assert_equal(2, filter_database.size)
     assert_equal(@ws.index, filter_database[0].local_sheet_id)
     assert_equal(other_ws.index, filter_database[1].local_sheet_id)
   end
-
 
   def test_sheet_pr_for_auto_filter
     @ws.auto_filter.range = 'A1:D9'
@@ -598,7 +593,7 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_outline_level_rows
-    3.times { @ws.add_row [1,2,3] }
+    3.times { @ws.add_row [1, 2, 3] }
     @ws.outline_level_rows 0, 2
     assert_equal(1, @ws.rows[0].outline_level)
     assert_equal(true, @ws.rows[2].hidden)
@@ -606,7 +601,7 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_outline_level_columns
-    3.times { @ws.add_row [1,2,3] }
+    3.times { @ws.add_row [1, 2, 3] }
     @ws.outline_level_columns 0, 2
     assert_equal(1, @ws.column_info[0].outline_level)
     assert_equal(true, @ws.column_info[2].hidden)
@@ -695,7 +690,7 @@ class TestWorksheet < Test::Unit::TestCase
       sheet.add_row ['', 'Butter', 'Dairy',      4.99]
       sheet.add_row ['', 'Bread', 'Baked Goods', 3.45]
       sheet.add_row ['', 'Broccoli', 'Produce',  2.99]
-      sheet.add_row ['', 'Pizza', 'Frozen Foods',  4.99]
+      sheet.add_row ['', 'Pizza', 'Frozen Foods', 4.99]
       sheet.column_widths 5, 20, 20, 20
 
       sheet.add_style 'B2:D2', b: true
@@ -722,16 +717,16 @@ class TestWorksheet < Test::Unit::TestCase
 
     wb.add_worksheet do |sheet|
       20.times.each do
-        sheet.add_row [1,2,3,4,5]
+        sheet.add_row [1, 2, 3, 4, 5]
       end
 
       sheet.add_border "B2:D5"
-      sheet.add_border ["C3:C4", "D3:D4", "A2"], {color: "FF00000"}
+      sheet.add_border ["C3:C4", "D3:D4", "A2"], { color: "FF00000" }
       sheet.add_border "B10:E10", [:top, :bottom, :left, :right]
       sheet.add_border "B12:E12", :all
       sheet.add_border "B14:E14", Axlsx::Border::EDGES
-      sheet.add_border "B16:E16", {edges: :all, style: :thick}
-      sheet.add_border "B18:E18", {edges: [:top], style: :thick, color: "FFFFF00"}
+      sheet.add_border "B16:E16", { edges: :all, style: :thick }
+      sheet.add_border "B18:E18", { edges: [:top], style: :thick, color: "FFFFF00" }
     end
 
     wb.apply_styles
@@ -791,7 +786,7 @@ class TestWorksheet < Test::Unit::TestCase
       sz: 11,
       family: 1
     }
-    assert_equal b2_cell_style, wb.styles.style_index.values.find{|x| x == b2_cell_style}
+    assert_equal b2_cell_style, wb.styles.style_index.values.find { |x| x == b2_cell_style }
 
     d3_cell_style = {
       border: {
@@ -804,7 +799,7 @@ class TestWorksheet < Test::Unit::TestCase
       sz: 11,
       family: 1
     }
-    assert_equal d3_cell_style, wb.styles.style_index.values.find{|x| x == d3_cell_style}
+    assert_equal d3_cell_style, wb.styles.style_index.values.find { |x| x == d3_cell_style }
   end
 
   def test_mixed_borders_1
@@ -838,7 +833,7 @@ class TestWorksheet < Test::Unit::TestCase
       sheet.add_border 'B2:D4', style: :medium
       sheet.add_style 'D2:D4', border: { style: :thin, color: '000000' }
     end
-    
+
     wb.apply_styles
 
     assert_equal 8, wb.styled_cells.count
@@ -877,24 +872,23 @@ class TestWorksheet < Test::Unit::TestCase
     wb.styles.fonts[0].sz = 12
 
     wb.add_worksheet do |sheet|
-      sheet.add_row [1,2,3]
+      sheet.add_row [1, 2, 3]
       sheet.add_style "A1:C1", { color: "FFFFFF" }
     end
 
     wb.apply_styles
 
     assert_equal 1, wb.styles.style_index.size
-    
+
     assert_equal(
       {
-        type: :xf, 
-        name: "Times New Roman", 
-        sz: 12, 
-        family: 1, 
-        color: "FFFFFF",
-      }, 
+        type: :xf,
+        name: "Times New Roman",
+        sz: 12,
+        family: 1,
+        color: "FFFFFF"
+      },
       wb.styles.style_index.values.first
     )
   end
-
 end

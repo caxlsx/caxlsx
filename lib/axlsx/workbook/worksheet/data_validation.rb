@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   # Data validation allows the validation of cell data
   #
@@ -23,7 +22,7 @@ module Axlsx
     # @option options [Boolean] showInputMessage - A boolean value indicating whether to display the input prompt message.
     # @option options [String] sqref - Range over which data validation is applied, in "A1:B2" format.
     # @option options [Symbol] type - The type of data validation.
-    def initialize(options={})
+    def initialize(options = {})
       # defaults
       @formula1 = @formula2 = @error = @errorTitle = @operator = @prompt = @promptTitle = @sqref = nil
       @allowBlank = @showErrorMessage = true
@@ -176,7 +175,6 @@ module Axlsx
     # default none
     attr_reader :type
 
-
     # @see formula1
     def formula1=(v); Axlsx::validate_string(v); @formula1 = v end
 
@@ -246,9 +244,10 @@ module Axlsx
       str << '</dataValidation>'
     end
 
-  private
+    private
+
     def get_valid_attributes
-      attributes = [:allowBlank, :error, :errorStyle, :errorTitle, :prompt, :promptTitle, :showErrorMessage, :showInputMessage, :sqref, :type ]
+      attributes = [:allowBlank, :error, :errorStyle, :errorTitle, :prompt, :promptTitle, :showErrorMessage, :showInputMessage, :sqref, :type]
 
       if [:whole, :decimal, :data, :time, :date, :textLength].include?(@type)
         attributes << [:operator, :formula1]

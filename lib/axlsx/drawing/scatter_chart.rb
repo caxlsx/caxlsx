@@ -1,12 +1,9 @@
-# encoding: UTF-8
 module Axlsx
-
   # The ScatterChart allows you to insert a scatter chart into your worksheet
   # @see Worksheet#add_chart
   # @see Chart#add_series
   # @see README for an example
   class ScatterChart < Chart
-
     include Axlsx::OptionsParser
 
     # The Style for the scatter chart
@@ -30,11 +27,11 @@ module Axlsx
     alias :yValAxis :y_val_axis
 
     # Creates a new scatter chart
-    def initialize(frame, options={})
+    def initialize(frame, options = {})
       @vary_colors = 0
       @scatter_style = :lineMarker
 
-           super(frame, options)
+      super(frame, options)
       @series_type = ScatterSeries
       @d_lbls = nil
       parse_options options

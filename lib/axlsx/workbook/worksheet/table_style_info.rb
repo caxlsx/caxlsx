@@ -1,5 +1,4 @@
 module Axlsx
-
   # The table style info class manages style attributes for defined tables in
   # a worksheet
   class TableStyleInfo
@@ -15,7 +14,7 @@ module Axlsx
     # @option [Boolean] show_column_stripes indicates if column stripes should
     #                   be shown
     # @option [Boolean] show_row_stripes indicates if row stripes should be shown
-    # @option [String] name The name of the style to apply to your table. 
+    # @option [String] name The name of the style to apply to your table.
     #                  Only predefined styles are currently supported.
     #                  @see Annex G. (normative) Predefined SpreadsheetML Style Definitions in part 1 of the specification.
     def initialize(options = {})
@@ -27,7 +26,7 @@ module Axlsx
     # boolean attributes for this object
     boolean_attr_accessor :show_first_column, :show_last_column, :show_row_stripes, :show_column_stripes
     serializable_attributes :show_first_column, :show_last_column, :show_row_stripes, :show_column_stripes,
-      :name
+                            :name
 
     # Initialize all the values to false as Excel requires them to
     # explicitly be disabled or all will show.

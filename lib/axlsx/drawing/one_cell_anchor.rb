@@ -1,11 +1,9 @@
-# encoding: UTF-8
 module Axlsx
   # This class details a single cell anchor for drawings.
   # @note The recommended way to manage drawings, images and charts is Worksheet#add_chart or Worksheet#add_image.
   # @see Worksheet#add_chart
   # @see Worksheet#add_image
   class OneCellAnchor
-
     include Axlsx::OptionsParser
 
     # Creates a new OneCellAnchor object and an Pic associated with it.
@@ -16,7 +14,7 @@ module Axlsx
     # @option options [String] image_src the file location of the image you will render
     # @option options [String] name the name attribute for the rendered image
     # @option options [String] descr the description of the image rendered
-    def initialize(drawing, options={})
+    def initialize(drawing, options = {})
       @drawing = drawing
       @width = 0
       @height = 0
@@ -54,9 +52,10 @@ module Axlsx
     # We just 'figure it out' for you.
     # @param [Array, String, Cell, Integer] x Accepts many inputs for defining the starting position of the cell.
     # @param [Integer] y When x is an integer, this value is used for the row index at which the anchor starts.
-    def start_at(x, y=0)
+    def start_at(x, y = 0)
       from.coord x, y
     end
+
     #
     # @see height
     def height=(v) Axlsx::validate_unsigned_int(v); @height = v; end
@@ -92,8 +91,7 @@ module Axlsx
     def ext
       cy = @height * 914400 / 96
       cx = @width * 914400 / 96
-      {:cy=>cy, :cx=>cx}
+      { :cy => cy, :cx => cx }
     end
-
   end
 end

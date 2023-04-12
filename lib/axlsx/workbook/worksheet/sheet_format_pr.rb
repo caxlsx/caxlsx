@@ -1,6 +1,5 @@
 module Axlsx
-
-  #Sheet formatting properties
+  # Sheet formatting properties
   # <xsd:complexType name="CT_SheetFormatPr">
   #   <xsd:attribute name="baseColWidth" type="xsd:unsignedInt" use="optional" default="8"/>
   #   <xsd:attribute name="defaultColWidth" type="xsd:double" use="optional"/>
@@ -11,7 +10,7 @@ module Axlsx
   #   <xsd:attribute name="thickBottom" type="xsd:boolean" use="optional" default="false"/>
   #   <xsd:attribute name="outlineLevelRow" type="xsd:unsignedByte" use="optional" default="0"/>
   #   <xsd:attribute name="outlineLevelCol" type="xsd:unsignedByte" use="optional" default="0"/>
-  #</xsd:complexType>
+  # </xsd:complexType>
 
   class SheetFormatPr
     include Axlsx::SerializedAttributes
@@ -29,29 +28,30 @@ module Axlsx
     # @option [Boolean] thick_bottom 'True' if rows have a thick bottom border by default.
     # @option [Integer] outline_level_row Highest number of outline level for rows in this sheet. These values shall be in synch with the actual sheet outline levels.
     # @option [Integer] outline_level_col Highest number of outline levels for columns in this sheet. These values shall be in synch with the actual sheet outline levels.
-    def initialize(options={})
+    def initialize(options = {})
       set_defaults
       parse_options options
     end
 
     serializable_attributes :base_col_width, :default_col_width, :default_row_height,
-      :custom_height, :zero_height, :thick_top, :thick_bottom,
-      :outline_level_row, :outline_level_col
+                            :custom_height, :zero_height, :thick_top, :thick_bottom,
+                            :outline_level_row, :outline_level_col
 
     float_attr_accessor :default_col_width, :default_row_height
 
     boolean_attr_accessor :custom_height, :zero_height, :thick_top, :thick_bottom
 
-    unsigned_int_attr_accessor :base_col_width, :outline_level_row, :outline_level_col 
+    unsigned_int_attr_accessor :base_col_width, :outline_level_row, :outline_level_col
 
     # serializes this object to an xml string
     # @param [String] str The string this objects serialization will be appended to
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = '')
       str << "<sheetFormatPr #{serialized_attributes}/>"
     end
 
     private
+
     def set_defaults
       @base_col_width = 8
       @default_row_height = 18

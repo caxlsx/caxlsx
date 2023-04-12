@@ -1,12 +1,9 @@
-# encoding: UTF-8
 module Axlsx
-
   # The BubbleChart allows you to insert a bubble chart into your worksheet
   # @see Worksheet#add_chart
   # @see Chart#add_series
   # @see README for an example
   class BubbleChart < Chart
-
     include Axlsx::OptionsParser
 
     # the x value axis
@@ -24,10 +21,10 @@ module Axlsx
     alias :yValAxis :y_val_axis
 
     # Creates a new bubble chart
-    def initialize(frame, options={})
+    def initialize(frame, options = {})
       @vary_colors = 0
 
-           super(frame, options)
+      super(frame, options)
       @series_type = BubbleSeries
       @d_lbls = nil
       parse_options options

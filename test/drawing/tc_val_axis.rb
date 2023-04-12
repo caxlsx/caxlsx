@@ -4,6 +4,7 @@ class TestValAxis < Test::Unit::TestCase
   def setup
     @axis = Axlsx::ValAxis.new
   end
+
   def teardown
   end
 
@@ -20,5 +21,4 @@ class TestValAxis < Test::Unit::TestCase
     assert_raise(ArgumentError, "requires valid crossBetween") { @axis.cross_between = :my_eyes }
     assert_nothing_raised("accepts valid crossBetween") { @axis.cross_between = :midCat }
   end
-
 end

@@ -1,8 +1,6 @@
-# encoding: UTF-8
 module Axlsx
-  #A SerAxis object defines a series axis
+  # A SerAxis object defines a series axis
   class SerAxis < Axis
-
     # The number of tick lables to skip between labels
     # @return [Integer]
     attr_reader :tick_lbl_skip
@@ -16,7 +14,7 @@ module Axlsx
     # Creates a new SerAxis object
     # @option options [Integer] tick_lbl_skip
     # @option options [Integer] tick_mark_skip
-    def initialize(options={})
+    def initialize(options = {})
       @tick_lbl_skip, @tick_mark_skip = 1, 1
       super(options)
     end
@@ -40,6 +38,4 @@ module Axlsx
       str << '</c:serAx>'
     end
   end
-
-
 end

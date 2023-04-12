@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   # The Fill is a formatting object that manages the background color, and pattern for cells.
   # @note The recommended way to manage styles in your workbook is to use Styles#add_style.
@@ -6,7 +5,6 @@ module Axlsx
   # @see PatternFill
   # @see GradientFill
   class Fill
-
     # The type of fill
     # @return [PatternFill, GradientFill]
     attr_reader :fill_type
@@ -29,7 +27,5 @@ module Axlsx
 
     # @see fill_type
     def fill_type=(v) DataTypeValidator.validate "Fill.fill_type", [PatternFill, GradientFill], v; @fill_type = v; end
-
-
   end
 end

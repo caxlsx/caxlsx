@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'tc_helper.rb'
 
 # <xsd:complexType name="CT_SheetProtection">
@@ -20,19 +19,19 @@ require 'tc_helper.rb'
 # <xsd:attribute name="selectUnlockedCells" type="xsd:boolean" use="optional" default=0/>
 # <xsd:attribute name="password" type="xsd:string" use="optional" default="nil"/>
 # </xsd:complexType>
- 
+
 class TestSheetProtection < Test::Unit::TestCase
   def setup
-    #inverse defaults
+    # inverse defaults
     @boolean_options = { :sheet => false, :objects => true, :scenarios => true, :format_cells => false,
                          :format_columns => false, :format_rows => false, :insert_columns => false, :insert_rows => false,
                          :insert_hyperlinks => false, :delete_columns => false, :delete_rows => false, :select_locked_cells => true,
                          :sort => false, :auto_filter => false, :pivot_tables => false, :select_unlocked_cells => true }
 
     @string_options = { :password => nil }
-    
+
     @options = @boolean_options.merge(@string_options)
-             
+
     @sp = Axlsx::SheetProtection.new(@options)
   end
 
@@ -56,62 +55,7 @@ class TestSheetProtection < Test::Unit::TestCase
     @sp.password = 'fish' # -> CA3F
     doc = Nokogiri::XML(@sp.to_xml_string)
     @options.each do |key, value|
-      assert(doc.xpath("//sheetProtection[@#{key.to_s.gsub(/_(.)/){ $1.upcase }}='#{value}']")) 
+      assert(doc.xpath("//sheetProtection[@#{key.to_s.gsub(/_(.)/) { $1.upcase }}='#{value}']"))
     end
   end
-
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

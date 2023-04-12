@@ -6,15 +6,14 @@ module Axlsx
   # @see Worksheet#add_conditional_formatting
   # @see ConditionalFormattingRule#initialize
   class DataBar
-
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
     class << self
       # This differs from ColorScale. There must be exactly two cfvos one color
       def default_cfvos
-        [{:type => :min, :val => "0"},
-         {:type => :max, :val => "0"}]
+        [{ :type => :min, :val => "0" },
+         { :type => :max, :val => "0" }]
       end
     end
 
@@ -81,32 +80,32 @@ module Axlsx
     end
     alias :minLength= :min_length=
 
-      # @see maxLength
-      def max_length=(v)
-        Axlsx.validate_unsigned_int(v)
-        @max_length = v
-      end
+    # @see maxLength
+    def max_length=(v)
+      Axlsx.validate_unsigned_int(v)
+      @max_length = v
+    end
     alias :maxLength= :max_length=
 
-      # @see showValue
-      def show_value=(v)
-        Axlsx.validate_boolean(v)
-        @show_value = v
-      end
+    # @see showValue
+    def show_value=(v)
+      Axlsx.validate_boolean(v)
+      @show_value = v
+    end
     alias :showValue= :show_value=
 
-      # Sets the color for the data bars.
-      # @param [Color|String] v The color object, or rgb string value to apply
-      def color=(v)
-        @color = v if v.is_a? Color
-        self.color.rgb = v if v.is_a? String
-        @color
-      end
+    # Sets the color for the data bars.
+    # @param [Color|String] v The color object, or rgb string value to apply
+    def color=(v)
+      @color = v if v.is_a? Color
+      self.color.rgb = v if v.is_a? String
+      @color
+    end
 
     # Serialize this object to an xml string
     # @param [String] str
     # @return [String]
-    def to_xml_string(str="")
+    def to_xml_string(str = "")
       serialized_tag('dataBar', str) do
         value_objects.to_xml_string(str)
         self.color.to_xml_string(str)
@@ -124,6 +123,5 @@ module Axlsx
         end
       end
     end
-
   end
 end

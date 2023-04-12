@@ -17,11 +17,10 @@ class TestDefinedNames < Test::Unit::TestCase
   end
 
   def test_boolean_attributes
-   %w(workbook_parameter publish_to_server xlm vb_proceedure function hidden).each do |attr|
+    %w(workbook_parameter publish_to_server xlm vb_proceedure function hidden).each do |attr|
       assert_raise(ArgumentError, 'only booleanish allowed in string attributes') { @dn.send("#{attr}=", 'foo') }
       assert_nothing_raised { @dn.send("#{attr}=", 1) }
     end
-
   end
 
   def test_local_sheet_id
@@ -45,5 +44,4 @@ class TestDefinedNames < Test::Unit::TestCase
     assert_equal(doc.xpath("//definedName[@hidden='1']").size, 1)
     assert_equal('Sheet1!A1:A1', doc.xpath('//definedName').text)
   end
-
 end

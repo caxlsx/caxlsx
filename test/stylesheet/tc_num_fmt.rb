@@ -1,14 +1,12 @@
 require 'tc_helper.rb'
 
 class TestNumFmt < Test::Unit::TestCase
-
   def setup
     @item = Axlsx::NumFmt.new
   end
 
   def teardown
   end
-
 
   def test_initialiation
     assert_equal(@item.numFmtId, 0)
@@ -26,5 +24,4 @@ class TestNumFmt < Test::Unit::TestCase
     assert_nothing_raised { @item.formatCode = "0" }
     assert_equal(@item.formatCode, "0")
   end
-
 end

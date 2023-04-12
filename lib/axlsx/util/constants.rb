@@ -1,5 +1,4 @@
 module Axlsx
-
   # XML Encoding
   ENCODING = "UTF-8".freeze
 
@@ -96,7 +95,7 @@ module Axlsx
   # comment relation for nil target
   COMMENT_R_NULL = "http://purl.oclc.org/ooxml/officeDocument/relationships/comments".freeze
 
-  #vml drawing relation namespace
+  # vml drawing relation namespace
   VML_DRAWING_R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/vmlDrawing'
 
   # VML Drawing content type
@@ -159,9 +158,8 @@ module Axlsx
   # png content type
   PNG_CT = "image/png".freeze
 
-  #drawing content type
+  # drawing content type
   DRAWING_CT = "application/vnd.openxmlformats-officedocument.drawing+xml".freeze
-
 
   # xml content type extensions
   XML_EX = "xml".freeze
@@ -239,7 +237,7 @@ module Axlsx
   COMMENT_PN = "comments%d.xml".freeze
 
   # location of schema files for validation
-  SCHEMA_BASE = (File.dirname(__FILE__)+'/../../schema/').freeze
+  SCHEMA_BASE = (File.dirname(__FILE__) + '/../../schema/').freeze
 
   # App validation schema
   APP_XSD = (SCHEMA_BASE + "shared-documentPropertiesExtended.xsd").freeze

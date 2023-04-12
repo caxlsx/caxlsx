@@ -5,10 +5,10 @@ class TestBubbleChart < Test::Unit::TestCase
     @p = Axlsx::Package.new
     @chart = nil
     @p.workbook.add_worksheet do |sheet|
-      sheet.add_row ["First",  1,  5,  7,  9]
+      sheet.add_row ["First",  1,  5, 7, 9]
       sheet.add_row ["",       1, 25, 49, 81]
       sheet.add_row ["",       1, 42, 60, 75]
-      sheet.add_row ["Second", 5,  2, 14,  9]
+      sheet.add_row ["Second", 5,  2, 14, 9]
       sheet.add_row ["",       5, 10, 15, 20]
       sheet.add_row ["",       5, 28, 92, 13]
       sheet.add_chart(Axlsx::BubbleChart, :title => "example: Bubble Chart") do |chart|
@@ -40,5 +40,4 @@ class TestBubbleChart < Test::Unit::TestCase
     end
     assert(errors.empty?, "error free validation")
   end
-
 end
