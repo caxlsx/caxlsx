@@ -225,7 +225,6 @@ module Axlsx
     # Creates a new Workbook
     # The recommended way to work with workbooks is via Package#workbook
     # @option options [Boolean] date1904. If this is not specified, date1904 is set to false. Office 2011 for Mac defaults to false.
-    # @option options [Boolean] date1904. If this is not specified, date1904 is set to false. Office 2011 for Mac defaults to false.
     def initialize(options = {})
       @styles = Styles.new
       @worksheets = SimpleTypedList.new Worksheet
