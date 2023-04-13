@@ -130,7 +130,7 @@ Axlsx.escape_formulas = true
 Then, set the following on each cell you'd like to add a formula:
 
 ```ruby
-cell.escape_formulas = true
+cell.escape_formulas = false
 ```
 
 Refer to examples/escape_formula.md for how to set `escape_formulas` on the workbook, worksheet, row and/or cell level.
