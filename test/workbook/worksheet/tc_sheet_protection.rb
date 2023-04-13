@@ -44,10 +44,9 @@ class TestSheetProtection < Test::Unit::TestCase
   end
 
   def test_boolean_attribute_validation
-    @boolean_options.each do |key, _value|
+    @boolean_options.each do |key, value|
       assert_raise(ArgumentError, "#{key} must be boolean") { @sp.send("#{key}=".to_sym, 'A') }
-      assert_nothing_raised { @sp.send("#{key}=".to_sym, true) }
-      assert_nothing_raised { @sp.send("#{key}=".to_sym, true) }
+      assert_nothing_raised { @sp.send("#{key}=".to_sym, value) }
     end
   end
 

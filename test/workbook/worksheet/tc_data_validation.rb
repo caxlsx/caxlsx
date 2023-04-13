@@ -44,16 +44,16 @@ class TestDataValidation < Test::Unit::TestCase
   end
 
   def test_boolean_attribute_validation
-    @boolean_options.each do |key, _value|
+    @boolean_options.each do |key, value|
       assert_raise(ArgumentError, "#{key} must be boolean") { @dv.send("#{key}=".to_sym, 'A') }
-      assert_nothing_raised { @dv.send("#{key}=".to_sym, true) }
+      assert_nothing_raised { @dv.send("#{key}=".to_sym, value) }
     end
   end
 
   def test_string_attribute_validation
-    @string_options.each do |key, _value|
+    @string_options.each do |key, value|
       assert_raise(ArgumentError, "#{key} must be string") { @dv.send("#{key}=".to_sym, :symbol) }
-      assert_nothing_raised { @dv.send("#{key}=".to_sym, "foo") }
+      assert_nothing_raised { @dv.send("#{key}=".to_sym, value) }
     end
   end
 
