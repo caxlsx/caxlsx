@@ -7,7 +7,7 @@ class RichText < Test::Unit::TestCase
     p.workbook.styles.add_style :sz => 20
     @rt = Axlsx::RichText.new
     b = true
-    (0..26).each do |r|
+    27.times do |r|
       @rt.add_run "run #{r}, ", :b => (b = !b), :i => !b
     end
     @row = @ws.add_row [@rt]
@@ -17,7 +17,7 @@ class RichText < Test::Unit::TestCase
   def test_initialize
     assert_equal(@c.value, @rt)
     rt_direct = Axlsx::RichText.new('hi', :i => true)
-    rt_indirect = Axlsx::RichText.new()
+    rt_indirect = Axlsx::RichText.new
     rt_indirect.add_run('hi', :i => true)
     assert_equal(rt_direct.runs.length, 1)
     assert_equal(rt_indirect.runs.length, 1)

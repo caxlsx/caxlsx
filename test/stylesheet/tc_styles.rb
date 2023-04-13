@@ -5,8 +5,7 @@ class TestStyles < Test::Unit::TestCase
     @styles = Axlsx::Styles.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
@@ -16,7 +15,7 @@ class TestStyles < Test::Unit::TestCase
       errors.push error
       puts error.message
     end
-    assert(errors.size == 0)
+    assert(errors.empty?)
   end
 
   def test_add_style_border_hash
@@ -73,7 +72,7 @@ class TestStyles < Test::Unit::TestCase
     f_code = { :format_code => "YYYY/MM" }
     num_fmt = { :num_fmt => 5 }
     assert_equal(@styles.parse_num_fmt_options, nil, 'noop if neither :format_code or :num_fmt exist')
-    max = @styles.numFmts.map { |nf| nf.numFmtId }.max
+    max = @styles.numFmts.map(&:numFmtId).max
     @styles.parse_num_fmt_options(f_code)
     assert_equal(@styles.numFmts.last.numFmtId, max + 1, "new numfmts gets next available id")
     assert(@styles.parse_num_fmt_options(num_fmt).is_a?(Integer), "Should return the provided num_fmt if not dxf")
@@ -89,7 +88,7 @@ class TestStyles < Test::Unit::TestCase
   def test_parse_border_basic_options
     b_opts = { :border => { :diagonalUp => 1, :edges => [:left, :right], :color => "FFDADADA", :style => :thick } }
     b = @styles.parse_border_options b_opts
-    assert(b.is_a? Integer)
+    assert(b.is_a?(Integer))
     assert_equal(@styles.parse_border_options(b_opts.merge({ :type => :dxf })).class, Axlsx::Border)
     assert(@styles.borders.last.diagonalUp == 1, "border options are passed in to the initializer")
   end
@@ -129,7 +128,7 @@ class TestStyles < Test::Unit::TestCase
   end
 
   def test_parse_alignment_options
-    assert_equal(@styles.parse_alignment_options {}, nil, "noop if :alignment is not set")
+    assert_equal(@styles.parse_alignment_options, nil, "noop if :alignment is not set")
     assert(@styles.parse_alignment_options(:alignment => {}).is_a?(Axlsx::CellAlignment))
   end
 
@@ -140,7 +139,7 @@ class TestStyles < Test::Unit::TestCase
     original_attributes = Axlsx.instance_values_for(original)
     assert_equal(1, created.b)
     assert_equal(99, created.sz)
-    copied = original_attributes.reject { |key, value| %w(b sz).include? key }
+    copied = original_attributes.reject { |key, _value| %w(b sz).include? key }
     instance_vals = Axlsx.instance_values_for(created)
     copied.each do |key, value|
       assert_equal(instance_vals[key], value)
@@ -161,7 +160,7 @@ class TestStyles < Test::Unit::TestCase
       :family => 1,
       :font_name => "woot font"
     }
-    assert_equal(@styles.parse_font_options {}, nil, "noop if no font keys are set")
+    assert_equal(@styles.parse_font_options, nil, "noop if no font keys are set")
     assert(@styles.parse_font_options(:b => 1).is_a?(Integer), "return index of font if not :dxf type")
     assert_equal(@styles.parse_font_options(:b => 1, :type => :dxf).class, Axlsx::Font, "return font object if :dxf type")
 
@@ -175,7 +174,7 @@ class TestStyles < Test::Unit::TestCase
   end
 
   def test_parse_fill_options
-    assert_equal(@styles.parse_fill_options {}, nil, "noop if no fill keys are set")
+    assert_equal(@styles.parse_fill_options, nil, "noop if no fill keys are set")
     assert(@styles.parse_fill_options(:bg_color => "DE").is_a?(Integer), "return index of fill if not :dxf type")
     assert_equal(@styles.parse_fill_options(:bg_color => "DE", :type => :dxf).class, Axlsx::Fill, "return fill object if :dxf type")
     f = @styles.parse_fill_options(:bg_color => "DE", :type => :dxf)
@@ -183,7 +182,7 @@ class TestStyles < Test::Unit::TestCase
   end
 
   def test_parse_protection_options
-    assert_equal(@styles.parse_protection_options {}, nil, "noop if no protection keys are set")
+    assert_equal(@styles.parse_protection_options, nil, "noop if no protection keys are set")
     assert_equal(@styles.parse_protection_options(:hidden => 1).class, Axlsx::CellProtection, "creates a new cell protection object")
   end
 
@@ -240,8 +239,8 @@ class TestStyles < Test::Unit::TestCase
     dxf = @styles.dxfs.last
     assert_equal(@styles.dxfs.last.fill.fill_type.bgColor.rgb, "FF000000", "fill created with color")
 
-    assert_equal(font_count, (@styles.fonts.size), "font not created under styles")
-    assert_equal(fill_count, (@styles.fills.size), "fill not created under styles")
+    assert_equal(font_count, @styles.fonts.size, "font not created under styles")
+    assert_equal(fill_count, @styles.fills.size, "fill not created under styles")
 
     assert(dxf.border.is_a?(Axlsx::Border), "border is set")
     assert_equal(nil, dxf.numFmt, "number format is not set")
@@ -284,7 +283,7 @@ class TestStyles < Test::Unit::TestCase
       errors.push error
       puts error.message
     end
-    assert(errors.size == 0)
+    assert(errors.empty?)
   end
 
   def test_border_top_without_border_regression

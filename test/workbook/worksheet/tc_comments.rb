@@ -16,7 +16,7 @@ class TestComments < Test::Unit::TestCase
 
   def test_add_comment
     assert_equal(@ws.comments.size, 2)
-    assert_raise(ArgumentError) { @ws.comments.add_comment() }
+    assert_raise(ArgumentError) { @ws.comments.add_comment }
     assert_raise(ArgumentError) { @ws.comments.add_comment(:text => 'Yes We Can', :ref => 'A1') }
     assert_raise(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :ref => 'A1') }
     assert_raise(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :text => 'Yes We Can') }
@@ -49,7 +49,7 @@ class TestComments < Test::Unit::TestCase
     end
     assert_equal(0, errors.length)
 
-    # TODO figure out why these xpath expressions dont work!
+    # TODO: figure out why these xpath expressions dont work!
     # assert(doc.xpath("//comments"))
     # assert_equal(doc.xpath("//xmlns:author").size, @ws.comments.authors.size)
     # assert_equal(doc.xpath("//comment").size, @ws.comments.size)

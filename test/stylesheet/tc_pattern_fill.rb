@@ -5,8 +5,7 @@ class TestPatternFill < Test::Unit::TestCase
     @item = Axlsx::PatternFill.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(@item.patternType, :none)

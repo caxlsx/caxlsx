@@ -92,7 +92,7 @@ class TestVmlShape < Test::Unit::TestCase
   end
 
   def test_to_xml_string
-    str = @comments.vml_drawing.to_xml_string()
+    str = @comments.vml_drawing.to_xml_string
     doc = Nokogiri::XML(str)
     assert_equal(doc.xpath("//v:shape").size, 2)
     assert_equal(1, doc.xpath("//x:Visible").size, 'ClientData/x:Visible element rendering')

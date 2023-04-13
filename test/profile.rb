@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby -s
 
-$:.unshift "#{File.dirname(__FILE__)}/../lib"
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 require 'ruby-prof'
 # RubyProf.measure_mode = RubyProf::MEMORY
@@ -21,4 +21,4 @@ profile = RubyProf.profile do
 end
 
 printer = RubyProf::FlatPrinter.new(profile)
-printer.print(STDOUT, {})
+printer.print($stdout, {})

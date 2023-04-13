@@ -45,7 +45,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_exception_if_name_too_long_because_of_multibyte_characters
     four_characters_for_excel = "\u{1F1EB 1F1F7}" # french flag emoji
     assert_raises(ArgumentError, "name too long!") do
-      @ws.name = four_characters_for_excel + "x" * 28
+      @ws.name = four_characters_for_excel + ("x" * 28)
     end
     assert_nothing_raised { @ws.name = "#{four_characters_for_excel}123456789012345678901234567" }
     assert_nothing_raised { @ws.name = "123456789012345678901234567890…" }
@@ -53,45 +53,45 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_page_margins
-    assert(@ws.page_margins.is_a? Axlsx::PageMargins)
+    assert(@ws.page_margins.is_a?(Axlsx::PageMargins))
   end
 
   def test_page_margins_yeild
     @ws.page_margins do |pm|
-      assert(pm.is_a? Axlsx::PageMargins)
+      assert(pm.is_a?(Axlsx::PageMargins))
       assert(@ws.page_margins == pm)
     end
   end
 
   def test_page_setup
-    assert(@ws.page_setup.is_a? Axlsx::PageSetup)
+    assert(@ws.page_setup.is_a?(Axlsx::PageSetup))
   end
 
   def test_page_setup_yield
     @ws.page_setup do |ps|
-      assert(ps.is_a? Axlsx::PageSetup)
+      assert(ps.is_a?(Axlsx::PageSetup))
       assert(@ws.page_setup == ps)
     end
   end
 
   def test_print_options
-    assert(@ws.print_options.is_a? Axlsx::PrintOptions)
+    assert(@ws.print_options.is_a?(Axlsx::PrintOptions))
   end
 
   def test_print_options_yield
     @ws.print_options do |po|
-      assert(po.is_a? Axlsx::PrintOptions)
+      assert(po.is_a?(Axlsx::PrintOptions))
       assert(@ws.print_options == po)
     end
   end
 
   def test_header_footer
-    assert(@ws.header_footer.is_a? Axlsx::HeaderFooter)
+    assert(@ws.header_footer.is_a?(Axlsx::HeaderFooter))
   end
 
   def test_header_footer_yield
     @ws.header_footer do |hf|
-      assert(hf.is_a? Axlsx::HeaderFooter)
+      assert(hf.is_a?(Axlsx::HeaderFooter))
       assert(@ws.header_footer == hf)
     end
   end
@@ -117,16 +117,16 @@ class TestWorksheet < Test::Unit::TestCase
     print_options = { :grid_lines => true, :headings => true, :horizontal_centered => true, :vertical_centered => true }
     header_footer = { :different_first => false, :different_odd_even => false, :odd_header => 'Header' }
     optioned = @ws.workbook.add_worksheet(:name => 'bob', :page_margins => page_margins, :page_setup => page_setup, :print_options => print_options, :header_footer => header_footer)
-    page_margins.keys.each do |key|
+    page_margins.each_key do |key|
       assert_equal(page_margins[key], optioned.page_margins.send(key))
     end
-    page_setup.keys.each do |key|
+    page_setup.each_key do |key|
       assert_equal(page_setup[key], optioned.page_setup.send(key))
     end
-    print_options.keys.each do |key|
+    print_options.each_key do |key|
       assert_equal(print_options[key], optioned.print_options.send(key))
     end
-    header_footer.keys.each do |key|
+    header_footer.each_key do |key|
       assert_equal(header_footer[key], optioned.header_footer.send(key))
     end
     assert_equal(optioned.name, 'bob')
@@ -215,7 +215,7 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_drawing
-    assert @ws.drawing == nil
+    assert @ws.drawing.nil?
     @ws.add_chart(Axlsx::Pie3DChart)
     assert @ws.drawing.is_a?(Axlsx::Drawing)
   end
@@ -260,7 +260,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_cols_with_block
     @ws.add_row [1, 2, 3]
     @ws.add_row [1]
-    cols = @ws.cols { |row, column| :foo }
+    cols = @ws.cols { |_row, _column| :foo }
     assert_equal(:foo, cols[1][1])
   end
 
@@ -451,7 +451,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_pivot_table 'G5:G6', 'A1:D10'
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert(schema.validate(doc).map { |e| puts e.message; e }.empty?, schema.validate(doc).map { |e| e.message }.join('\n'))
+    assert(schema.validate(doc).map { |e| puts e.message; e }.empty?, schema.validate(doc).map(&:message).join('\n'))
   end
 
   def test_relationships
@@ -786,7 +786,7 @@ class TestWorksheet < Test::Unit::TestCase
       sz: 11,
       family: 1
     }
-    assert_equal b2_cell_style, wb.styles.style_index.values.find { |x| x == b2_cell_style }
+    assert_equal b2_cell_style, (wb.styles.style_index.values.find { |x| x == b2_cell_style })
 
     d3_cell_style = {
       border: {
@@ -799,7 +799,7 @@ class TestWorksheet < Test::Unit::TestCase
       sz: 11,
       family: 1
     }
-    assert_equal d3_cell_style, wb.styles.style_index.values.find { |x| x == d3_cell_style }
+    assert_equal d3_cell_style, (wb.styles.style_index.values.find { |x| x == d3_cell_style })
   end
 
   def test_mixed_borders_1

@@ -7,7 +7,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
       Time.parse "1893-08-05"
       Time.parse "9999-12-31T23:59:59Z"
       true
-    rescue
+    rescue StandardError
       false
     end
   end
@@ -114,8 +114,8 @@ class TestDateTimeConverter < Test::Unit::TestCase
     local = Time.parse "2012-01-01 09:00:00 +0900"
 
     assert_equal local, utc
-    assert_equal Axlsx::DateTimeConverter::time_to_serial(local) - local.utc_offset.to_f / 86400, Axlsx::DateTimeConverter::time_to_serial(utc)
+    assert_equal Axlsx::DateTimeConverter::time_to_serial(local) - (local.utc_offset.to_f / 86400), Axlsx::DateTimeConverter::time_to_serial(utc)
     Axlsx::Workbook.date1904 = true
-    assert_equal Axlsx::DateTimeConverter::time_to_serial(local) - local.utc_offset.to_f / 86400, Axlsx::DateTimeConverter::time_to_serial(utc)
+    assert_equal Axlsx::DateTimeConverter::time_to_serial(local) - (local.utc_offset.to_f / 86400), Axlsx::DateTimeConverter::time_to_serial(utc)
   end
 end

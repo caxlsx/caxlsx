@@ -103,9 +103,9 @@ class TestAxis < Test::Unit::TestCase
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
     doc = Nokogiri::XML(@axis.to_xml_string(str))
     assert(doc.xpath('//a:noFill'))
-    assert(doc.xpath("//c:crosses[@val='#{@axis.crosses.to_s}']"))
-    assert(doc.xpath("//c:crossAx[@val='#{@axis.cross_axis.to_s}']"))
-    assert(doc.xpath("//a:bodyPr[@rot='#{@axis.label_rotation.to_s}']"))
+    assert(doc.xpath("//c:crosses[@val='#{@axis.crosses}']"))
+    assert(doc.xpath("//c:crossAx[@val='#{@axis.cross_axis}']"))
+    assert(doc.xpath("//a:bodyPr[@rot='#{@axis.label_rotation}']"))
     assert(doc.xpath("//a:t[text()='Foo']"))
   end
 end

@@ -5,8 +5,7 @@ class TestColor < Test::Unit::TestCase
     @item = Axlsx::Color.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(@item.auto, nil)

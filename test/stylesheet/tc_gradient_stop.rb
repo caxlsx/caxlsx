@@ -5,8 +5,7 @@ class TestGradientStop < Test::Unit::TestCase
     @item = Axlsx::GradientStop.new(Axlsx::Color.new(:rgb => "FFFF0000"), 1.0)
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(@item.color.rgb, "FFFF0000")

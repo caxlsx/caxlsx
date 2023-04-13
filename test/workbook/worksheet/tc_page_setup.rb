@@ -59,18 +59,18 @@ class TestPageSetup < Test::Unit::TestCase
   end
 
   def test_default_fit_to_page?
-    assert(@ps.fit_to_width == nil && @ps.fit_to_height == nil)
+    assert(@ps.fit_to_width.nil? && @ps.fit_to_height.nil?)
     assert(@ps.fit_to_page? == false)
   end
 
   def test_with_height_fit_to_page?
-    assert(@ps.fit_to_width == nil && @ps.fit_to_height == nil)
+    assert(@ps.fit_to_width.nil? && @ps.fit_to_height.nil?)
     @ps.set(:fit_to_height => 1)
     assert(@ps.fit_to_page?)
   end
 
   def test_with_width_fit_to_page?
-    assert(@ps.fit_to_width == nil && @ps.fit_to_height == nil)
+    assert(@ps.fit_to_width.nil? && @ps.fit_to_height.nil?)
     @ps.set(:fit_to_width => 1)
     assert(@ps.fit_to_page?)
   end

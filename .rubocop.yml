@@ -19,5 +19,8 @@ Layout/CommentIndentation:
 Layout/ExtraSpacing:
   AllowBeforeTrailingComments: true
 
+Lint:
+  Enabled: true
+
 Style:
   Enabled: true

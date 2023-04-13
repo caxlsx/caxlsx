@@ -9,8 +9,7 @@ class TestOneCellAnchor < Test::Unit::TestCase
     @anchor = @image.anchor
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert(@anchor.from.col == 0)

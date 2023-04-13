@@ -4,8 +4,7 @@ class TestSimpleTypedList < Test::Unit::TestCase
     @list = Axlsx::SimpleTypedList.new Integer
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_type_is_a_class_or_array_of_class
     assert_nothing_raised { Axlsx::SimpleTypedList.new Integer }
@@ -29,7 +28,7 @@ class TestSimpleTypedList < Test::Unit::TestCase
   end
 
   def test_concat_should_return_index
-    assert(@list.size == 0)
+    assert(@list.empty?)
     assert(@list << 1 == 0)
     assert(@list << 2 == 1)
     @list.delete_at 0

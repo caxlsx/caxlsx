@@ -5,8 +5,7 @@ class TestCellStyle < Test::Unit::TestCase
     @item = Axlsx::CellStyle.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialiation
     assert_equal(@item.name, nil)

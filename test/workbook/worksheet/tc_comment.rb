@@ -53,7 +53,7 @@ class TestComment < Test::Unit::TestCase
   def test_to_xml_string
     doc = Nokogiri::XML(@c1.to_xml_string)
     assert_equal(doc.xpath("//comment[@ref='#{@c1.ref}']").size, 1)
-    assert_equal(doc.xpath("//comment[@authorId='#{@c1.author_index.to_s}']").size, 1)
+    assert_equal(doc.xpath("//comment[@authorId='#{@c1.author_index}']").size, 1)
     assert_equal(doc.xpath("//t[text()='#{@c1.author}:\n']").size, 1)
     assert_equal(doc.xpath("//t[text()='#{@c1.text}']").size, 1)
   end

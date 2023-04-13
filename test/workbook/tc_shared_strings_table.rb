@@ -39,7 +39,7 @@ class TestSharedStringsTable < Test::Unit::TestCase
       puts error.message
       errors << error
     end
-    assert_equal(errors.size, 0, "sharedStirngs.xml Invalid" + errors.map { |e| e.message }.to_s)
+    assert_equal(errors.size, 0, "sharedStirngs.xml Invalid" + errors.map(&:message).to_s)
   end
 
   def test_remove_control_characters_in_xml_serialization
@@ -47,7 +47,7 @@ class TestSharedStringsTable < Test::Unit::TestCase
     @p.workbook.worksheets[0].add_row [nasties]
 
     # test that the nasty string was added to the shared strings
-    assert @p.workbook.shared_strings.unique_cells.has_key?(nasties)
+    assert @p.workbook.shared_strings.unique_cells.key?(nasties)
 
     # test that none of the control characters are in the XML output for shared strings
     assert_no_match(/#{Axlsx::CONTROL_CHARS}/, @p.workbook.shared_strings.to_xml_string)

@@ -29,6 +29,87 @@ Layout/HeredocIndentation:
     - 'lib/axlsx/drawing/vml_shape.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
+Lint/AmbiguousOperatorPrecedence:
+  Exclude:
+    - 'lib/axlsx/drawing/area_series.rb'
+    - 'lib/axlsx/drawing/line_series.rb'
+    - 'lib/axlsx/drawing/pie_series.rb'
+    - 'lib/axlsx/workbook/worksheet/dimension.rb'
+    - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
+    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
+
+# This cop supports unsafe autocorrection (--autocorrect-all).
+# Configuration parameters: AllowSafeAssignment.
+Lint/AssignmentInCondition:
+  Exclude:
+    - 'lib/axlsx/drawing/area_chart.rb'
+    - 'lib/axlsx/drawing/line_chart.rb'
+    - 'lib/axlsx/workbook/shared_strings_table.rb'
+
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Lint/BooleanSymbol:
+  Exclude:
+    - 'lib/axlsx/stylesheet/font.rb'
+    - 'lib/axlsx/util/validators.rb'
+    - 'lib/axlsx/workbook/worksheet/cell.rb'
+    - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
+    - 'test/util/tc_validators.rb'
+    - 'test/workbook/tc_workbook.rb'
+
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Lint/DisjunctiveAssignmentInConstructor:
+  Exclude:
+    - 'lib/axlsx/drawing/num_data_source.rb'
+
+# Configuration parameters: IgnoreLiteralBranches, IgnoreConstantBranches.
+Lint/DuplicateBranch:
+  Exclude:
+    - 'lib/axlsx/workbook/worksheet/cell.rb'
+    - 'lib/axlsx/workbook/worksheet/merged_cells.rb'
+
+Lint/NonLocalExitFromIterator:
+  Exclude:
+    - 'lib/axlsx/util/validators.rb'
+
+# This cop supports safe autocorrection (--autocorrect).
+Lint/RedundantStringCoercion:
+  Exclude:
+    - 'lib/axlsx/workbook/worksheet/auto_filter/filters.rb'
+    - 'lib/axlsx/workbook/worksheet/cell.rb'
+    - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
+
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: IgnoreEmptyBlocks, AllowUnusedKeywordArguments.
+Lint/UnusedBlockArgument:
+  Exclude:
+    - 'lib/axlsx.rb'
+    - 'lib/axlsx/drawing/axes.rb'
+    - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
+    - 'lib/axlsx/workbook/worksheet/sheet_view.rb'
+
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: AllowUnusedKeywordArguments, IgnoreEmptyMethods, IgnoreNotImplementedMethods.
+Lint/UnusedMethodArgument:
+  Exclude:
+    - 'lib/axlsx/package.rb'
+    - 'lib/axlsx/util/serialized_attributes.rb'
+    - 'lib/axlsx/util/validators.rb'
+
+Lint/UselessAssignment:
+  Exclude:
+    - 'lib/axlsx/workbook/worksheet/header_footer.rb'
+    - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
+
+# Configuration parameters: CheckForMethodsWithNoSideEffects.
+Lint/Void:
+  Exclude:
+    - 'lib/axlsx/drawing/title.rb'
+    - 'lib/axlsx/util/simple_typed_list.rb'
+    - 'lib/axlsx/util/storage.rb'
+    - 'lib/axlsx/workbook/worksheet/data_bar.rb'
+    - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
+
+# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: separated, grouped
 Style/AccessorGrouping:
@@ -47,16 +128,6 @@ Style/Alias:
 Style/AndOr:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/data_validation.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, ProceduralMethods, FunctionalMethods, AllowedMethods, AllowedPatterns, AllowBracesOnProceduralOneLiners, BracesRequiredMethods.
-# SupportedStyles: line_count_based, semantic, braces_for_chaining, always_braces
-# ProceduralMethods: benchmark, bm, bmbm, create, each_with_object, measure, new, realtime, tap, with_object
-# FunctionalMethods: let, let!, subject, watch
-# AllowedMethods: lambda, proc, it
-Style/BlockDelimiters:
-  Exclude:
-    - 'test/benchmark.rb'
 
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: MinBranchesCount.
@@ -98,10 +169,6 @@ Style/CommentAnnotation:
     - 'lib/axlsx/drawing/axis.rb'
     - 'lib/axlsx/drawing/chart.rb'
     - 'lib/axlsx/drawing/view_3D.rb'
-    - 'test/drawing/tc_pie_series.rb'
-    - 'test/workbook/worksheet/tc_cell.rb'
-    - 'test/workbook/worksheet/tc_col.rb'
-    - 'test/workbook/worksheet/tc_comments.rb'
 
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/ConcatArrayLiterals:
@@ -145,17 +212,6 @@ Style/Documentation:
     - 'lib/axlsx/workbook/worksheet/sheet_format_pr.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Style/EachForSimpleLoop:
-  Exclude:
-    - 'test/workbook/worksheet/tc_rich_text.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: compact, expanded
-Style/EmptyMethod:
-  Enabled: false
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/EvalWithLocation:
   Exclude:
     - 'lib/axlsx/util/simple_typed_list.rb'
@@ -164,13 +220,11 @@ Style/EvalWithLocation:
 Style/ExpandPathArguments:
   Exclude:
     - 'axlsx.gemspec'
-    - 'test/tc_package.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 Style/FileWrite:
   Exclude:
     - 'lib/axlsx/util/zip_command.rb'
-    - 'test/benchmark.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
@@ -196,11 +250,6 @@ Style/FormatStringToken:
 # SupportedStyles: always, always_true, never
 Style/FrozenStringLiteralComment:
   Enabled: false
-
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Style/GlobalStdStream:
-  Exclude:
-    - 'test/profile.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: MinBodyLength, AllowConsecutiveConditionals.
@@ -231,8 +280,6 @@ Style/HashConversion:
 Style/HashEachMethods:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
-    - 'test/workbook/worksheet/tc_table_style_info.rb'
-    - 'test/workbook/worksheet/tc_worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, EnforcedShorthandSyntax, UseHashRocketsWithSymbolValues, PreferHashRocketsForNonAlnumEndingSymbols.
@@ -280,10 +327,6 @@ Style/MethodCallWithoutArgsParentheses:
   Exclude:
     - 'lib/axlsx/package.rb'
     - 'test/benchmark.rb'
-    - 'test/drawing/tc_vml_drawing.rb'
-    - 'test/drawing/tc_vml_shape.rb'
-    - 'test/workbook/worksheet/tc_comments.rb'
-    - 'test/workbook/worksheet/tc_rich_text.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
@@ -340,14 +383,6 @@ Style/NegatedIf:
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowedMethods.
-# AllowedMethods: be, be_a, be_an, be_between, be_falsey, be_kind_of, be_instance_of, be_truthy, be_within, eq, eql, end_with, include, match, raise_error, respond_to, start_with
-Style/NestedParenthesizedCalls:
-  Exclude:
-    - 'test/stylesheet/tc_styles.rb'
-    - 'test/workbook/worksheet/tc_worksheet.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, MinBodyLength.
 # SupportedStyles: skip_modifier_ifs, always
 Style/Next:
@@ -364,10 +399,6 @@ Style/NilComparison:
     - 'lib/axlsx/drawing/view_3D.rb'
     - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-    - 'test/drawing/tc_series_title.rb'
-    - 'test/drawing/tc_title.rb'
-    - 'test/workbook/worksheet/tc_page_setup.rb'
-    - 'test/workbook/worksheet/tc_worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: IncludeSemanticChanges.
@@ -377,13 +408,6 @@ Style/NonNilCheck:
     - 'lib/axlsx/util/serialized_attributes.rb'
     - 'lib/axlsx/workbook/worksheet/col.rb'
     - 'lib/axlsx/workbook/worksheet/page_setup.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedOctalStyle.
-# SupportedOctalStyles: zero_with_o, zero_only
-Style/NumericLiteralPrefix:
-  Exclude:
-    - 'test/doc_props/tc_core.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: Strict, AllowedNumbers, AllowedPatterns.
@@ -407,9 +431,6 @@ Style/NumericPredicate:
     - 'test/drawing/tc_marker.rb'
     - 'test/drawing/tc_one_cell_anchor.rb'
     - 'test/drawing/tc_two_cell_anchor.rb'
-    - 'test/rels/tc_relationships.rb'
-    - 'test/stylesheet/tc_styles.rb'
-    - 'test/tc_package.rb'
     - 'test/util/tc_simple_typed_list.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
@@ -443,7 +464,6 @@ Style/ParallelAssignment:
     - 'lib/axlsx/drawing/view_3D.rb'
     - 'lib/axlsx/package.rb'
     - 'lib/axlsx/workbook/worksheet/row.rb'
-    - 'test/rels/tc_relationships.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowSafeAssignment, AllowInMultilineConditions.
@@ -485,7 +505,6 @@ Style/PerlBackrefs:
 Style/PreferredHashMethods:
   Exclude:
     - 'lib/axlsx.rb'
-    - 'test/workbook/tc_shared_strings_table.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
@@ -531,7 +550,6 @@ Style/RedundantInterpolation:
     - 'lib/axlsx/workbook/worksheet/pivot_table_cache_definition.rb'
     - 'lib/axlsx/workbook/worksheet/table.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-    - 'test/content_type/tc_content_type.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 Style/RedundantParentheses:
@@ -545,7 +563,6 @@ Style/RedundantParentheses:
     - 'lib/axlsx/package.rb'
     - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-    - 'test/stylesheet/tc_styles.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 Style/RedundantRegexpEscape:
@@ -573,7 +590,6 @@ Style/RedundantSelf:
 Style/RegexpLiteral:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/cell.rb'
-    - 'test/tc_package.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
@@ -581,7 +597,6 @@ Style/RegexpLiteral:
 Style/RescueStandardError:
   Exclude:
     - 'lib/axlsx.rb'
-    - 'test/workbook/worksheet/tc_date_time_converter.rb'
 
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: ConvertCodeThatCanStartToReturnNil, AllowedMethods, MaxChainLength.
@@ -621,14 +636,6 @@ Style/SoleNestedConditional:
     - 'lib/axlsx/util/validators.rb'
 
 # This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: RequireEnglish, EnforcedStyle.
-# SupportedStyles: use_perl_names, use_english_names, use_builtin_english_names
-Style/SpecialGlobalVars:
-  Exclude:
-    - 'test/benchmark.rb'
-    - 'test/profile.rb'
-
-# This cop supports unsafe autocorrection (--autocorrect-all).
 Style/StringChars:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
@@ -657,11 +664,6 @@ Style/StringLiteralsInInterpolation:
 Style/SymbolArray:
   EnforcedStyle: brackets
 
-# This cop supports safe autocorrection (--autocorrect).
-Style/SymbolLiteral:
-  Exclude:
-    - 'test/doc_props/tc_app.rb'
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowMethodsWithArguments, AllowedMethods, AllowedPatterns, AllowComments.
 # AllowedMethods: define_method
@@ -674,11 +676,6 @@ Style/SymbolProc:
     - 'lib/axlsx/workbook/worksheet/conditional_formatting.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet_hyperlinks.rb'
-    - 'test/doc_props/tc_app.rb'
-    - 'test/doc_props/tc_core.rb'
-    - 'test/stylesheet/tc_styles.rb'
-    - 'test/workbook/tc_shared_strings_table.rb'
-    - 'test/workbook/worksheet/tc_worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, AllowSafeAssignment.
@@ -741,10 +738,6 @@ Style/ZeroLengthPredicate:
     - 'lib/axlsx/util/simple_typed_list.rb'
     - 'lib/axlsx/workbook/workbook.rb'
     - 'lib/axlsx/workbook/worksheet/sheet_pr.rb'
-    - 'test/rels/tc_relationships.rb'
-    - 'test/stylesheet/tc_styles.rb'
-    - 'test/tc_package.rb'
-    - 'test/util/tc_simple_typed_list.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns.

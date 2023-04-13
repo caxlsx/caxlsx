@@ -99,7 +99,7 @@ class TestCell < Test::Unit::TestCase
     assert_raise(ArgumentError, "type must be :string, :integer, :float, :date, :time, :boolean") { @c.type = :array }
     assert_nothing_raised("type can be changed") { @c.type = :string }
     assert_equal(@c.value, "1.0", "changing type casts the value")
-    assert_equal(:float, @row.add_cell(1.0 / 10**7).type, 'properly identify exponential floats as float type')
+    assert_equal(:float, @row.add_cell(1.0 / (10**7)).type, 'properly identify exponential floats as float type')
     assert_equal(@row.add_cell(Time.now).type, :time, 'time should be time')
     assert_equal(@row.add_cell(Date.today).type, :date, 'date should be date')
     assert_equal(@row.add_cell(true).type, :boolean, 'boolean should be boolean')
@@ -112,7 +112,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_col_ref
-    # TODO move to axlsx spec
+    # TODO: move to axlsx spec
     assert_equal(Axlsx.col_ref(0), "A")
   end
 
@@ -133,7 +133,7 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.send(:cell_type_from_value, -1), :integer)
     assert_equal(@c.send(:cell_type_from_value, true), :boolean)
     assert_equal(@c.send(:cell_type_from_value, false), :boolean)
-    assert_equal(@c.send(:cell_type_from_value, 1.0 / 10**6), :float)
+    assert_equal(@c.send(:cell_type_from_value, 1.0 / (10**6)), :float)
     assert_equal(@c.send(:cell_type_from_value, Axlsx::RichText.new), :richtext)
     assert_equal(:iso_8601, @c.send(:cell_type_from_value, '2008-08-30T01:45:36.123+09:00'))
   end
@@ -520,7 +520,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_to_xml
-    # TODO This could use some much more stringent testing related to the xml content generated!
+    # TODO: This could use some much more stringent testing related to the xml content generated!
     @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)", "2013-01-13T13:31:25.123"]
     @ws.rows.last.cells[5].u = true
 
