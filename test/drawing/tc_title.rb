@@ -1,5 +1,3 @@
-$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../"
-
 require 'tc_helper'
 
 class TestTitle < Test::Unit::TestCase
