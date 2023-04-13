@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestDrawing < Test::Unit::TestCase
   def setup

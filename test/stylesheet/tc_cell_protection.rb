@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestCellProtection < Test::Unit::TestCase
   def setup

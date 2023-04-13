@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestRelationships < Test::Unit::TestCase
   def test_for

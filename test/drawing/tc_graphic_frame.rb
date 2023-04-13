@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestGraphicFrame < Test::Unit::TestCase
   def setup

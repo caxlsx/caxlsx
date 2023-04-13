@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestAxes < Test::Unit::TestCase
   def test_constructor_requires_cat_axis_first

@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../"
 
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestTitle < Test::Unit::TestCase
   def setup

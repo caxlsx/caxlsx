@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 require 'support/capture_warnings'
 
 class TestDataValidation < Test::Unit::TestCase

@@ -1,4 +1,5 @@
-require 'tc_helper.rb'
+require 'tc_helper'
+
 class TestMimeTypeUtils < Test::Unit::TestCase
   def setup
     stub_request(:get, 'https://example.com/sample-image.png')
