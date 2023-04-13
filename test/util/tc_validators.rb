@@ -18,8 +18,8 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_int(Array) }
 
     # boolean (as 0 or 1, :true, :false, true, false, or "true," "false")
-    [0, 1, :true, :false, true, false, "true", "false"].each do |_v|
-      assert_nothing_raised { Axlsx.validate_boolean 0 }
+    [0, 1, :true, :false, true, false, "true", "false"].each do |v|
+      assert_nothing_raised { Axlsx.validate_boolean v }
     end
     assert_raise(ArgumentError) { Axlsx.validate_boolean 2 }
 
