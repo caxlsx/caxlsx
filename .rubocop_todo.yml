@@ -326,7 +326,6 @@ Style/LineEndConcatenation:
 Style/MethodCallWithoutArgsParentheses:
   Exclude:
     - 'lib/axlsx/package.rb'
-    - 'test/benchmark.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
@@ -428,10 +427,6 @@ Style/NumericPredicate:
     - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'lib/axlsx/workbook/worksheet/sheet_pr.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-    - 'test/drawing/tc_marker.rb'
-    - 'test/drawing/tc_one_cell_anchor.rb'
-    - 'test/drawing/tc_two_cell_anchor.rb'
-    - 'test/util/tc_simple_typed_list.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 Style/OperatorMethodCall:
@@ -650,13 +645,6 @@ Style/StringConcatenation:
 # SupportedStyles: single_quotes, double_quotes
 Style/StringLiterals:
   Enabled: false
-
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiteralsInInterpolation:
-  Exclude:
-    - 'test/content_type/tc_content_type.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: MinSize.

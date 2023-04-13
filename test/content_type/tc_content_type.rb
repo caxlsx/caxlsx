@@ -70,14 +70,14 @@ class TestContentType < Test::Unit::TestCase
     c = ws.add_chart Axlsx::Pie3DChart
     doc = Nokogiri::XML(@package.send(:content_types).to_xml_string)
 
-    assert_equal(7, doc.xpath("//xmlns:Override").size, "expected 7 types got #{doc.css("Types Override").size}")
+    assert_equal(7, doc.xpath("//xmlns:Override").size, "expected 7 types got #{doc.css('Types Override').size}")
     assert_equal(doc.xpath(o_path % Axlsx::DRAWING_CT).first["PartName"], "/xl/#{ws.drawing.pn}", "Drawing part name invlid")
     assert_equal(doc.xpath(o_path % Axlsx::CHART_CT).last["PartName"], "/xl/#{c.pn}", "Chart part name invlid")
 
     c = ws.add_chart Axlsx::Pie3DChart
     doc = Nokogiri::XML(@package.send(:content_types).to_xml_string)
 
-    assert_equal(8, doc.xpath("//xmlns:Override").size, "expected 7 types got #{doc.css("Types Override").size}")
+    assert_equal(8, doc.xpath("//xmlns:Override").size, "expected 7 types got #{doc.css('Types Override').size}")
     assert_equal(doc.xpath(o_path % Axlsx::CHART_CT).last["PartName"], "/xl/#{c.pn}", "Chart part name invlid")
   end
 end

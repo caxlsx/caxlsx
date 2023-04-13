@@ -57,7 +57,7 @@ Benchmark.bmbm(30) do |x|
         end
       end
     end
-    s = p.to_stream()
+    s = p.to_stream
     File.binwrite('example_streamed.xlsx', s.read)
   end
 
