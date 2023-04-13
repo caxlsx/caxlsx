@@ -47,7 +47,7 @@ class TestCol < Test::Unit::TestCase
   end
 
   def test_widthOverLimit
-    @col.width = 31337
+    @col.width = 31_337
 
     assert_equal(255, @col.width, 'width is set to maximum allowed value')
   end

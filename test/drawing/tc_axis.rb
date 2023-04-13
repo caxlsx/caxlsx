@@ -49,7 +49,7 @@ class TestAxis < Test::Unit::TestCase
     assert_raise(ArgumentError, "requires valid angle") { @axis.label_rotation = 91 }
     assert_raise(ArgumentError, "requires valid angle") { @axis.label_rotation = -91 }
     assert_nothing_raised("accepts valid angle") { @axis.label_rotation = 45 }
-    assert_equal(45 * 60000, @axis.label_rotation)
+    assert_equal(45 * 60_000, @axis.label_rotation)
   end
 
   def test_tick_label_position

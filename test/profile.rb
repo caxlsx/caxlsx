@@ -13,7 +13,7 @@ input = (32..126).to_a.pack('U*').chars.to_a
 profile = RubyProf.profile do
   p = Axlsx::Package.new
   p.workbook.add_worksheet do |sheet|
-    10000.times do
+    10_000.times do
       sheet << row
     end
   end

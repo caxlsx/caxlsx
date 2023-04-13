@@ -408,11 +408,6 @@ Style/NonNilCheck:
     - 'lib/axlsx/workbook/worksheet/col.rb'
     - 'lib/axlsx/workbook/worksheet/page_setup.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: Strict, AllowedNumbers, AllowedPatterns.
-Style/NumericLiterals:
-  MinDigits: 11
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: EnforcedStyle, AllowedMethods, AllowedPatterns.
 # SupportedStyles: predicate, comparison

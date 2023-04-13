@@ -30,3 +30,7 @@ Minitest:
 
 Style:
   Enabled: true
+
+Style/NumericLiterals:
+  Exclude:
+    - 'lib/**/*'
