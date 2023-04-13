@@ -28,20 +28,22 @@ class TestSimpleTypedList < Test::Unit::TestCase
   end
 
   def test_concat_should_return_index
-    assert(@list.empty?)
-    assert(@list << 1 == 0)
-    assert(@list << 2 == 1)
+    assert_empty(@list)
+    assert_equal(0, @list << 1)
+    assert_equal(1, @list << 2)
     @list.delete_at 0
-    assert(@list << 3 == 1)
-    assert(@list.index(2) == 0)
+
+    assert_equal(1, @list << 3)
+    assert_equal(0, @list.index(2))
   end
 
   def test_push_should_return_index
-    assert(@list.push(1) == 0)
-    assert(@list.push(2) == 1)
+    assert_equal(0, @list.push(1))
+    assert_equal(1, @list.push(2))
     @list.delete_at 0
-    assert(@list.push(3) == 1)
-    assert(@list.index(2) == 0)
+
+    assert_equal(1, @list.push(3))
+    assert_equal(0, @list.index(2))
   end
 
   def test_locking
@@ -63,14 +65,17 @@ class TestSimpleTypedList < Test::Unit::TestCase
 
   def test_delete
     @list.push 1
-    assert(@list.size == 1)
+
+    assert_equal(1, @list.size)
     @list.delete 1
-    assert(@list.empty?)
+
+    assert_empty(@list)
   end
 
   def test_equality
     @list.push 1
     @list.push 2
-    assert_equal(@list.to_ary, [1, 2])
+
+    assert_equal([1, 2], @list.to_ary)
   end
 end

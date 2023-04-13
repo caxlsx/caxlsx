@@ -37,6 +37,7 @@ class TestBubbleChart < Test::Unit::TestCase
       errors.push error
       puts error.message
     end
-    assert(errors.empty?, "error free validation")
+
+    assert_empty(errors, "error free validation")
   end
 end

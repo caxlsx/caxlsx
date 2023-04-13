@@ -28,7 +28,7 @@ class TestDataValidation < Test::Unit::TestCase
     end
 
     @nil_options.each do |key, value|
-      assert_equal(nil, dv.send(key.to_sym), "initialized default #{key} should be nil")
+      assert_nil(dv.send(key.to_sym), "initialized default #{key} should be nil")
       assert_equal(value, @dv.send(key.to_sym), "initialized options #{key} should be #{value}")
     end
 
@@ -67,62 +67,62 @@ class TestDataValidation < Test::Unit::TestCase
   def test_formula1
     assert_raise(ArgumentError) { @dv.formula1 = 10 }
     assert_nothing_raised { @dv.formula1 = "=SUM(A1:A1)" }
-    assert_equal(@dv.formula1, "=SUM(A1:A1)")
+    assert_equal("=SUM(A1:A1)", @dv.formula1)
   end
 
   def test_formula2
     assert_raise(ArgumentError) { @dv.formula2 = 10 }
     assert_nothing_raised { @dv.formula2 = "=SUM(A1:A1)" }
-    assert_equal(@dv.formula2, "=SUM(A1:A1)")
+    assert_equal("=SUM(A1:A1)", @dv.formula2)
   end
 
   def test_allowBlank
     assert_raise(ArgumentError) { @dv.allowBlank = "foo´" }
     assert_nothing_raised { @dv.allowBlank = false }
-    assert_equal(@dv.allowBlank, false)
+    refute(@dv.allowBlank)
   end
 
   def test_error
     assert_raise(ArgumentError) { @dv.error = :symbol }
     assert_nothing_raised { @dv.error = "This is a error message" }
-    assert_equal(@dv.error, "This is a error message")
+    assert_equal("This is a error message", @dv.error)
   end
 
   def test_errorStyle
     assert_raise(ArgumentError) { @dv.errorStyle = "foo" }
     assert_nothing_raised { @dv.errorStyle = :information }
-    assert_equal(@dv.errorStyle, :information)
+    assert_equal(:information, @dv.errorStyle)
   end
 
   def test_errorTitle
     assert_raise(ArgumentError) { @dv.errorTitle = :symbol }
     assert_nothing_raised { @dv.errorTitle = "This is the error title" }
-    assert_equal(@dv.errorTitle, "This is the error title")
+    assert_equal("This is the error title", @dv.errorTitle)
   end
 
   def test_operator
     assert_raise(ArgumentError) { @dv.operator = "foo" }
     assert_nothing_raised { @dv.operator = :greaterThan }
-    assert_equal(@dv.operator, :greaterThan)
+    assert_equal(:greaterThan, @dv.operator)
   end
 
   def test_prompt
     assert_raise(ArgumentError) { @dv.prompt = :symbol }
     assert_nothing_raised { @dv.prompt = "This is a prompt message" }
-    assert_equal(@dv.prompt, "This is a prompt message")
+    assert_equal("This is a prompt message", @dv.prompt)
   end
 
   def test_promptTitle
     assert_raise(ArgumentError) { @dv.promptTitle = :symbol }
     assert_nothing_raised { @dv.promptTitle = "This is the prompt title" }
-    assert_equal(@dv.promptTitle, "This is the prompt title")
+    assert_equal("This is the prompt title", @dv.promptTitle)
   end
 
   def test_showDropDown
     warnings = capture_warnings do
       assert_raise(ArgumentError) { @dv.showDropDown = "foo´" }
       assert_nothing_raised { @dv.showDropDown = false }
-      assert_equal(@dv.showDropDown, false)
+      refute(@dv.showDropDown)
     end
 
     assert_equal 2, warnings.size
@@ -132,33 +132,33 @@ class TestDataValidation < Test::Unit::TestCase
   def test_hideDropDown
     assert_raise(ArgumentError) { @dv.hideDropDown = "foo´" }
     assert_nothing_raised { @dv.hideDropDown = false }
-    assert_equal(@dv.hideDropDown, false)
+    refute(@dv.hideDropDown)
     # As hideDropdown is just an alias for showDropDown, we should test the original value too
-    assert_equal(@dv.showDropDown, false)
+    refute(@dv.showDropDown)
   end
 
   def test_showErrorMessage
     assert_raise(ArgumentError) { @dv.showErrorMessage = "foo´" }
     assert_nothing_raised { @dv.showErrorMessage = false }
-    assert_equal(@dv.showErrorMessage, false)
+    refute(@dv.showErrorMessage)
   end
 
   def test_showInputMessage
     assert_raise(ArgumentError) { @dv.showInputMessage = "foo´" }
     assert_nothing_raised { @dv.showInputMessage = false }
-    assert_equal(@dv.showInputMessage, false)
+    refute(@dv.showInputMessage)
   end
 
   def test_sqref
     assert_raise(ArgumentError) { @dv.sqref = 10 }
     assert_nothing_raised { @dv.sqref = "A1:A1" }
-    assert_equal(@dv.sqref, "A1:A1")
+    assert_equal("A1:A1", @dv.sqref)
   end
 
   def test_type
     assert_raise(ArgumentError) { @dv.type = "foo" }
     assert_nothing_raised { @dv.type = :list }
-    assert_equal(@dv.type, :list)
+    assert_equal(:list, @dv.type)
   end
 
   def test_whole_decimal_data_time_textLength_to_xml
@@ -273,6 +273,7 @@ class TestDataValidation < Test::Unit::TestCase
 
   def test_empty_attributes
     v = Axlsx::DataValidation.new
-    assert_equal(nil, v.send(:get_valid_attributes))
+
+    assert_nil(v.send(:get_valid_attributes))
   end
 end

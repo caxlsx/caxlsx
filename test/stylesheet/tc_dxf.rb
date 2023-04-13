@@ -9,12 +9,12 @@ class TestDxf < Test::Unit::TestCase
   def teardown; end
 
   def test_initialiation
-    assert_equal(@item.alignment, nil)
-    assert_equal(@item.protection, nil)
-    assert_equal(@item.numFmt, nil)
-    assert_equal(@item.font, nil)
-    assert_equal(@item.fill, nil)
-    assert_equal(@item.border, nil)
+    assert_nil(@item.alignment)
+    assert_nil(@item.protection)
+    assert_nil(@item.numFmt)
+    assert_nil(@item.font)
+    assert_nil(@item.fill)
+    assert_nil(@item.border)
   end
 
   def test_alignment
@@ -56,6 +56,7 @@ class TestDxf < Test::Unit::TestCase
   def test_to_xml
     @item.border = Axlsx::Border.new
     doc = Nokogiri::XML.parse(@item.to_xml_string)
+
     assert_equal(1, doc.xpath(".//dxf//border").size)
     assert_equal(0, doc.xpath(".//dxf//font").size)
   end
@@ -69,6 +70,7 @@ class TestDxf < Test::Unit::TestCase
     @item.numFmt = Axlsx::NumFmt.new
 
     doc = Nokogiri::XML.parse(@item.to_xml_string)
+
     assert_equal(1, doc.xpath(".//dxf//fill//patternFill[@patternType='solid']//fgColor[@rgb='FF000000']").size)
     assert_equal(1, doc.xpath(".//dxf//font").size)
     assert_equal(1, doc.xpath(".//dxf//protection").size)

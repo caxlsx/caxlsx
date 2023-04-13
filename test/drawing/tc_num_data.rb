@@ -6,7 +6,7 @@ class TestNumData < Test::Unit::TestCase
   end
 
   def test_initialize
-    assert_equal(@num_data.format_code, "General")
+    assert_equal("General", @num_data.format_code)
   end
 
   def test_formula_based_cell; end
@@ -21,7 +21,8 @@ class TestNumData < Test::Unit::TestCase
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '">'
     str << @num_data.to_xml_string
     doc = Nokogiri::XML(str)
-    assert_equal(doc.xpath("//c:numLit/c:ptCount[@val=3]").size, 1)
-    assert_equal(doc.xpath("//c:numLit/c:pt/c:v[text()='1']").size, 1)
+
+    assert_equal(1, doc.xpath("//c:numLit/c:ptCount[@val=3]").size)
+    assert_equal(1, doc.xpath("//c:numLit/c:pt/c:v[text()='1']").size)
   end
 end

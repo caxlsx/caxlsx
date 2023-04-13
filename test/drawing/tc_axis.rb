@@ -6,10 +6,10 @@ class TestAxis < Test::Unit::TestCase
   end
 
   def test_initialization
-    assert_equal(@axis.ax_pos, :b, "axis position default incorrect")
-    assert_equal(@axis.tick_lbl_pos, :nextTo, "tick label position default incorrect")
-    assert_equal(@axis.tick_lbl_pos, :nextTo, "tick label position default incorrect")
-    assert_equal(@axis.crosses, :autoZero, "tick label position default incorrect")
+    assert_equal(:b, @axis.ax_pos, "axis position default incorrect")
+    assert_equal(:nextTo, @axis.tick_lbl_pos, "tick label position default incorrect")
+    assert_equal(:nextTo, @axis.tick_lbl_pos, "tick label position default incorrect")
+    assert_equal(:autoZero, @axis.crosses, "tick label position default incorrect")
     assert(@axis.scaling.is_a?(Axlsx::Scaling) && @axis.scaling.orientation == :minMax, "scaling default incorrect")
     assert_equal('Foo', @axis.title.text)
   end
@@ -20,6 +20,7 @@ class TestAxis < Test::Unit::TestCase
     str = '<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
     doc = Nokogiri::XML(@axis.to_xml_string(str))
+
     assert(doc.xpath("//a:srgbClr[@val='00FF00']"))
   end
 
@@ -32,6 +33,7 @@ class TestAxis < Test::Unit::TestCase
       sheet.add_chart(Axlsx::Line3DChart) do |chart|
         chart.add_series :data => sheet['B2:D2'], :labels => sheet['B1']
         chart.val_axis.title = sheet['A1']
+
         assert_equal('battle victories', chart.val_axis.title.text)
       end
     end
@@ -47,7 +49,7 @@ class TestAxis < Test::Unit::TestCase
     assert_raise(ArgumentError, "requires valid angle") { @axis.label_rotation = 91 }
     assert_raise(ArgumentError, "requires valid angle") { @axis.label_rotation = -91 }
     assert_nothing_raised("accepts valid angle") { @axis.label_rotation = 45 }
-    assert_equal(@axis.label_rotation, 45 * 60000)
+    assert_equal(45 * 60000, @axis.label_rotation)
   end
 
   def test_tick_label_position
@@ -75,15 +77,15 @@ class TestAxis < Test::Unit::TestCase
 
   def test_format_code_resets_source_linked
     create_chart_with_formatting("#,##0.00") do |doc|
-      assert_equal(doc.xpath("//c:valAx/c:numFmt[@formatCode='#,##0.00']").size, 1)
-      assert_equal(doc.xpath("//c:valAx/c:numFmt[@sourceLinked='0']").size, 1)
+      assert_equal(1, doc.xpath("//c:valAx/c:numFmt[@formatCode='#,##0.00']").size)
+      assert_equal(1, doc.xpath("//c:valAx/c:numFmt[@sourceLinked='0']").size)
     end
   end
 
   def test_no_format_code_keeps_source_linked
     create_chart_with_formatting do |doc|
-      assert_equal(doc.xpath("//c:valAx/c:numFmt[@formatCode='General']").size, 1)
-      assert_equal(doc.xpath("//c:valAx/c:numFmt[@sourceLinked='1']").size, 1)
+      assert_equal(1, doc.xpath("//c:valAx/c:numFmt[@formatCode='General']").size)
+      assert_equal(1, doc.xpath("//c:valAx/c:numFmt[@sourceLinked='1']").size)
     end
   end
 
@@ -102,6 +104,7 @@ class TestAxis < Test::Unit::TestCase
     str = '<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
     doc = Nokogiri::XML(@axis.to_xml_string(str))
+
     assert(doc.xpath('//a:noFill'))
     assert(doc.xpath("//c:crosses[@val='#{@axis.crosses}']"))
     assert(doc.xpath("//c:crossAx[@val='#{@axis.cross_axis}']"))

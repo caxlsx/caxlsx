@@ -8,11 +8,12 @@ class TestValAxis < Test::Unit::TestCase
   def teardown; end
 
   def test_initialization
-    assert_equal(@axis.cross_between, :between, "axis crossBetween default incorrect")
+    assert_equal(:between, @axis.cross_between, "axis crossBetween default incorrect")
   end
 
   def test_options
     a = Axlsx::ValAxis.new(:cross_between => :midCat)
+
     assert_equal(:midCat, a.cross_between)
   end
 

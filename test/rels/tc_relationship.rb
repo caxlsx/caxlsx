@@ -4,12 +4,14 @@ class TestRelationships < Test::Unit::TestCase
   def test_instances_with_different_attributes_have_unique_ids
     rel_1 = Axlsx::Relationship.new(Object.new, Axlsx::WORKSHEET_R, 'target')
     rel_2 = Axlsx::Relationship.new(Object.new, Axlsx::COMMENT_R, 'foobar')
+
     assert_not_equal rel_1.Id, rel_2.Id
   end
 
   def test_instances_with_same_attributes_share_id
     source_obj = Object.new
     instance = Axlsx::Relationship.new(source_obj, Axlsx::WORKSHEET_R, 'target')
+
     assert_equal instance.Id, Axlsx::Relationship.new(source_obj, Axlsx::WORKSHEET_R, 'target').Id
   end
 
@@ -18,6 +20,7 @@ class TestRelationships < Test::Unit::TestCase
     t1 = Thread.new { cache1 = Axlsx::Relationship.ids_cache }
     t2 = Thread.new { cache2 = Axlsx::Relationship.ids_cache }
     [t1, t2].each(&:join)
+
     assert_not_same(cache1, cache2)
   end
 
@@ -25,10 +28,12 @@ class TestRelationships < Test::Unit::TestCase
     source_obj = Object.new
     rel_1 = Axlsx::Relationship.new(source_obj, Axlsx::WORKSHEET_R, 'target')
     rel_2 = Axlsx::Relationship.new(source_obj, Axlsx::WORKSHEET_R, '../target')
+
     assert_equal rel_1.Id, rel_2.Id
 
     rel_3 = Axlsx::Relationship.new(source_obj, Axlsx::HYPERLINK_R, 'target', :target_mode => :External)
     rel_4 = Axlsx::Relationship.new(source_obj, Axlsx::HYPERLINK_R, '../target', :target_mode => :External)
+
     assert_not_equal rel_3.Id, rel_4.Id
   end
 
@@ -46,6 +51,7 @@ class TestRelationships < Test::Unit::TestCase
   def test_ampersand_escaping_in_target
     r = Axlsx::Relationship.new(nil, Axlsx::HYPERLINK_R, "http://example.com?foo=1&bar=2", :target_mod => :External)
     doc = Nokogiri::XML(r.to_xml_string)
-    assert_equal(doc.xpath("//Relationship[@Target='http://example.com?foo=1&bar=2']").size, 1)
+
+    assert_equal(1, doc.xpath("//Relationship[@Target='http://example.com?foo=1&bar=2']").size)
   end
 end

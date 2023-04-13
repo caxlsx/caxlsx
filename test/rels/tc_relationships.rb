@@ -9,6 +9,7 @@ class TestRelationships < Test::Unit::TestCase
     rels = Axlsx::Relationships.new
     rels << rel_1
     rels << rel_2
+
     assert_equal rel_1, rels.for(source_obj_1)
     assert_equal rel_2, rels.for(source_obj_2)
   end
@@ -31,6 +32,6 @@ class TestRelationships < Test::Unit::TestCase
       errors << error
     end
 
-    assert(errors.empty?)
+    assert_empty(errors)
   end
 end

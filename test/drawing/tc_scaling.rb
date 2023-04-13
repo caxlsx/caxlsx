@@ -8,7 +8,7 @@ class TestScaling < Test::Unit::TestCase
   def teardown; end
 
   def test_initialization
-    assert(@scaling.orientation == :minMax)
+    assert_equal(:minMax, @scaling.orientation)
   end
 
   def test_logBase

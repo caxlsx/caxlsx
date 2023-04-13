@@ -11,7 +11,7 @@ class TestAreaChart < Test::Unit::TestCase
   def teardown; end
 
   def test_initialization
-    assert_equal(@chart.grouping, :standard, "grouping defualt incorrect")
+    assert_equal(:standard, @chart.grouping, "grouping defualt incorrect")
     assert_equal(@chart.series_type, Axlsx::AreaSeries, "series type incorrect")
     assert(@chart.cat_axis.is_a?(Axlsx::CatAxis), "category axis not created")
     assert(@chart.val_axis.is_a?(Axlsx::ValAxis), "value access not created")
@@ -20,7 +20,7 @@ class TestAreaChart < Test::Unit::TestCase
   def test_grouping
     assert_raise(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
     assert_nothing_raised("allow valid grouping") { @chart.grouping = :stacked }
-    assert(@chart.grouping == :stacked)
+    assert_equal(:stacked, @chart.grouping)
   end
 
   def test_to_xml
@@ -31,6 +31,7 @@ class TestAreaChart < Test::Unit::TestCase
       errors.push error
       puts error.message
     end
-    assert(errors.empty?, "error free validation")
+
+    assert_empty(errors, "error free validation")
   end
 end

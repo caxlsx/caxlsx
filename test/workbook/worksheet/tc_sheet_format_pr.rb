@@ -18,6 +18,7 @@ class TestSheetFormatPr < Test::Unit::TestCase
 
   def test_default_initialization
     sheet_format_pr = Axlsx::SheetFormatPr.new
+
     assert_equal 8, sheet_format_pr.base_col_width
     assert_equal 18, sheet_format_pr.default_row_height
   end
@@ -75,6 +76,7 @@ class TestSheetFormatPr < Test::Unit::TestCase
 
   def test_to_xml_string
     doc = Nokogiri::XML(@sheet_format_pr.to_xml_string)
+
     assert doc.xpath("sheetFormatPr[@thickBottom=1]")
     assert doc.xpath("sheetFormatPr[@baseColWidth=5]")
     assert doc.xpath("sheetFormatPr[@default_col_width=7.2]")

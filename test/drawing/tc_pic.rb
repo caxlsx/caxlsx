@@ -19,15 +19,15 @@ class TestPic < Test::Unit::TestCase
 
   def test_initialization
     assert_equal(@p.workbook.images.first, @image)
-    assert_equal(@image.file_name, 'image1.jpeg')
+    assert_equal('image1.jpeg', @image.file_name)
     assert_equal(@image.image_src, @test_img)
   end
 
   def test_remote_img_initialization
     assert_equal(@p.workbook.images[1], @image_remote)
-    assert_equal(@image_remote.file_name, nil)
+    assert_nil(@image_remote.file_name)
     assert_equal(@image_remote.image_src, @test_img_remote_png)
-    assert_equal(@image_remote.remote?, true)
+    assert_predicate(@image_remote, :remote?)
   end
 
   def test_anchor_swapping
@@ -35,6 +35,7 @@ class TestPic < Test::Unit::TestCase
     assert(@image.anchor.is_a?(Axlsx::OneCellAnchor))
     start_at = @image.anchor.from
     @image.end_at 10, 5
+
     assert(@image.anchor.is_a?(Axlsx::TwoCellAnchor))
     assert_equal(start_at.col, @image.anchor.from.col)
     assert_equal(start_at.row, @image.anchor.from.row)
@@ -43,6 +44,7 @@ class TestPic < Test::Unit::TestCase
 
     # swap from two cell to one cell when width or height are specified
     @image.width = 200
+
     assert(@image.anchor.is_a?(Axlsx::OneCellAnchor))
     assert_equal(start_at.col, @image.anchor.from.col)
     assert_equal(start_at.row, @image.anchor.from.row)
@@ -50,28 +52,29 @@ class TestPic < Test::Unit::TestCase
   end
 
   def test_hyperlink
-    assert_equal(@image.hyperlink.href, "https://github.com/randym")
+    assert_equal("https://github.com/randym", @image.hyperlink.href)
     @image.hyperlink = "http://axlsx.blogspot.com"
-    assert_equal(@image.hyperlink.href, "http://axlsx.blogspot.com")
+
+    assert_equal("http://axlsx.blogspot.com", @image.hyperlink.href)
   end
 
   def test_name
     assert_raise(ArgumentError) { @image.name = 49 }
     assert_nothing_raised { @image.name = "unknown" }
-    assert_equal(@image.name, "unknown")
+    assert_equal("unknown", @image.name)
   end
 
   def test_start_at
     assert_raise(ArgumentError) { @image.start_at "a", 1 }
     assert_nothing_raised { @image.start_at 6, 7 }
-    assert_equal(@image.anchor.from.col, 6)
-    assert_equal(@image.anchor.from.row, 7)
+    assert_equal(6, @image.anchor.from.col)
+    assert_equal(7, @image.anchor.from.row)
   end
 
   def test_width
     assert_raise(ArgumentError) { @image.width = "a" }
     assert_nothing_raised { @image.width = 600 }
-    assert_equal(@image.width, 600)
+    assert_equal(600, @image.width)
   end
 
   def test_height
@@ -99,7 +102,7 @@ class TestPic < Test::Unit::TestCase
   def test_descr
     assert_raise(ArgumentError) { @image.descr = 49 }
     assert_nothing_raised { @image.descr = "test" }
-    assert_equal(@image.descr, "test")
+    assert_equal("test", @image.descr)
   end
 
   def test_to_xml
@@ -110,12 +113,14 @@ class TestPic < Test::Unit::TestCase
       errors.push error
       puts error.message
     end
-    assert(errors.empty?, "error free validation")
+
+    assert_empty(errors, "error free validation")
   end
 
   def test_to_xml_has_correct_r_id
     r_id = @image.anchor.drawing.relationships.for(@image).Id
     doc = Nokogiri::XML(@image.anchor.drawing.to_xml_string)
+
     assert_equal r_id, doc.xpath("//a:blip").first["r:embed"]
   end
 end

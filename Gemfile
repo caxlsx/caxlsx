@@ -3,6 +3,7 @@ gemspec
 
 group :development, :test do
   gem 'rubocop'
+  gem 'rubocop-minitest'
 end
 
 group :test do

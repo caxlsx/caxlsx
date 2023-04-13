@@ -9,6 +9,7 @@ class TestCol < Test::Unit::TestCase
     options = { :width => 12, :collapsed => true, :hidden => true, :outline_level => 1, :phonetic => true, :style => 1 }
 
     col = Axlsx::Col.new 0, 0, options
+
     options.each { |key, value| assert_equal(col.send(key.to_sym), value) }
   end
 
@@ -19,55 +20,59 @@ class TestCol < Test::Unit::TestCase
   end
 
   def test_bestFit
-    assert_equal(@col.bestFit, nil)
+    assert_nil(@col.bestFit)
     assert_raise(NoMethodError, 'bestFit is read only') { @col.bestFit = 'bob' }
     @col.width = 1.999
-    assert_equal(@col.bestFit, true, 'bestFit should be true when width has been set')
+
+    assert(@col.bestFit, 'bestFit should be true when width has been set')
   end
 
   def test_collapsed
-    assert_equal(@col.collapsed, nil)
+    assert_nil(@col.collapsed)
     assert_raise(ArgumentError, 'collapsed must be boolean(ish)') { @col.collapsed = 'bob' }
     assert_nothing_raised('collapsed must be boolean(ish)') { @col.collapsed = true }
   end
 
   def test_customWidth
-    assert_equal(@col.customWidth, nil)
+    assert_nil(@col.customWidth)
     @col.width = 3
     assert_raise(NoMethodError, 'customWidth is read only') { @col.customWidth = 3 }
-    assert_equal(@col.customWidth, true, 'customWidth is true when width is set')
+    assert(@col.customWidth, 'customWidth is true when width is set')
   end
 
   def test_widthUnderLimit
     @col.width = 3
-    assert_equal(@col.width, 3, 'width is set to exact value')
+
+    assert_equal(3, @col.width, 'width is set to exact value')
   end
 
   def test_widthOverLimit
     @col.width = 31337
-    assert_equal(@col.width, 255, 'width is set to maximum allowed value')
+
+    assert_equal(255, @col.width, 'width is set to maximum allowed value')
   end
 
   def test_widthSetToNil
     @col.width = nil
-    assert_equal(@col.width, nil, 'width is set to unspecified value')
+
+    assert_nil(@col.width, 'width is set to unspecified value')
   end
 
   def test_hidden
-    assert_equal(@col.hidden, nil)
+    assert_nil(@col.hidden)
     assert_raise(ArgumentError, 'hidden must be boolean(ish)') { @col.hidden = 'bob' }
     assert_nothing_raised(ArgumentError, 'hidden must be boolean(ish)') { @col.hidden = true }
   end
 
   def test_outlineLevel
-    assert_equal(@col.outlineLevel, nil)
+    assert_nil(@col.outlineLevel)
     assert_raise(ArgumentError, 'outline level cannot be negative') { @col.outlineLevel = -1 }
     assert_raise(ArgumentError, 'outline level cannot be greater than 7') { @col.outlineLevel = 8 }
     assert_nothing_raised('can set outlineLevel') { @col.outlineLevel = 1 }
   end
 
   def test_phonetic
-    assert_equal(@col.phonetic, nil)
+    assert_nil(@col.phonetic)
     assert_raise(ArgumentError, 'phonetic must be boolean(ish)') { @col.phonetic = 'bob' }
     assert_nothing_raised(ArgumentError, 'phonetic must be boolean(ish)') { @col.phonetic = true }
   end
@@ -75,6 +80,7 @@ class TestCol < Test::Unit::TestCase
   def test_to_xml_string
     @col.width = 100
     doc = Nokogiri::XML(@col.to_xml_string)
+
     assert_equal(1, doc.xpath("//col [@bestFit='#{@col.best_fit ? 1 : 0}']").size)
     assert_equal(1, doc.xpath("//col [@max=#{@col.max}]").size)
     assert_equal(1, doc.xpath("//col [@min=#{@col.min}]").size)
@@ -83,9 +89,10 @@ class TestCol < Test::Unit::TestCase
   end
 
   def test_style
-    assert_equal(@col.style, nil)
+    assert_nil(@col.style)
     @col.style = 1
-    assert_equal(@col.style, 1)
+
+    assert_equal(1, @col.style)
     # TODO: check that the style specified is actually in the styles xfs collection
   end
 end

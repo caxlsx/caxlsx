@@ -10,7 +10,8 @@ class TestStrData < Test::Unit::TestCase
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '">'
     str << @str_data.to_xml_string
     doc = Nokogiri::XML(str)
-    assert_equal(doc.xpath("//c:strLit/c:ptCount[@val=3]").size, 1)
-    assert_equal(doc.xpath("//c:strLit/c:pt/c:v[text()='1']").size, 1)
+
+    assert_equal(1, doc.xpath("//c:strLit/c:ptCount[@val=3]").size)
+    assert_equal(1, doc.xpath("//c:strLit/c:pt/c:v[text()='1']").size)
   end
 end

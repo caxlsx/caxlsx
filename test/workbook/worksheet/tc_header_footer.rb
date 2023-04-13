@@ -8,17 +8,17 @@ class TestHeaderFooter < Test::Unit::TestCase
   end
 
   def test_initialize
-    assert_equal(nil, @hf.odd_header)
-    assert_equal(nil, @hf.odd_footer)
+    assert_nil(@hf.odd_header)
+    assert_nil(@hf.odd_footer)
 
-    assert_equal(nil, @hf.even_header)
-    assert_equal(nil, @hf.even_footer)
+    assert_nil(@hf.even_header)
+    assert_nil(@hf.even_footer)
 
-    assert_equal(nil, @hf.first_header)
-    assert_equal(nil, @hf.first_footer)
+    assert_nil(@hf.first_header)
+    assert_nil(@hf.first_footer)
 
-    assert_equal(nil, @hf.different_first)
-    assert_equal(nil, @hf.different_odd_even)
+    assert_nil(@hf.different_first)
+    assert_nil(@hf.different_odd_even)
   end
 
   def test_initialize_with_options
@@ -46,8 +46,8 @@ class TestHeaderFooter < Test::Unit::TestCase
     assert_equal('fh', optioned.first_header)
     assert_equal('ff', optioned.first_footer)
 
-    assert_equal(true, optioned.different_first)
-    assert_equal(true, optioned.different_odd_even)
+    assert(optioned.different_first)
+    assert(optioned.different_odd_even)
   end
 
   def test_string_attributes
@@ -88,8 +88,8 @@ class TestHeaderFooter < Test::Unit::TestCase
     assert_equal('fh', @hf.first_header)
     assert_equal('ff', @hf.first_footer)
 
-    assert_equal(true, @hf.different_first)
-    assert_equal(true, @hf.different_odd_even)
+    assert(@hf.different_first)
+    assert(@hf.different_odd_even)
   end
 
   def test_to_xml_all_values
@@ -108,6 +108,7 @@ class TestHeaderFooter < Test::Unit::TestCase
     )
 
     doc = Nokogiri::XML.parse(@hf.to_xml_string)
+
     assert_equal(1, doc.xpath(".//headerFooter[@differentFirst=1][@differentOddEven=1]").size)
 
     assert_equal(1, doc.xpath(".//headerFooter/oddHeader").size)
@@ -133,6 +134,7 @@ class TestHeaderFooter < Test::Unit::TestCase
     )
 
     doc = Nokogiri::XML.parse(@hf.to_xml_string)
+
     assert_equal(1, doc.xpath(".//headerFooter[@differentOddEven=0]").size)
     assert_equal(0, doc.xpath(".//headerFooter[@differentFirst]").size)
 

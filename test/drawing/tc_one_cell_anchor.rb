@@ -12,10 +12,10 @@ class TestOneCellAnchor < Test::Unit::TestCase
   def teardown; end
 
   def test_initialization
-    assert(@anchor.from.col == 0)
-    assert(@anchor.from.row == 0)
-    assert(@anchor.width == 0)
-    assert(@anchor.height == 0)
+    assert_equal(0, @anchor.from.col)
+    assert_equal(0, @anchor.from.row)
+    assert_equal(0, @anchor.width)
+    assert_equal(0, @anchor.height)
   end
 
   def test_from
@@ -33,7 +33,7 @@ class TestOneCellAnchor < Test::Unit::TestCase
   def test_width
     assert_raise(ArgumentError) { @anchor.width = "a" }
     assert_nothing_raised { @anchor.width = 600 }
-    assert_equal(@anchor.width, 600)
+    assert_equal(600, @anchor.width)
   end
 
   def test_height
@@ -44,6 +44,7 @@ class TestOneCellAnchor < Test::Unit::TestCase
 
   def test_ext
     ext = @anchor.send(:ext)
+
     assert_equal(ext[:cx], (@anchor.width * 914400 / 96))
     assert_equal(ext[:cy], (@anchor.height * 914400 / 96))
   end

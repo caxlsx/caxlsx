@@ -8,15 +8,17 @@ class TestFilters < Test::Unit::TestCase
   end
 
   def test_blank
-    assert_equal true, @filters.blank
+    assert @filters.blank
     assert_raise(ArgumentError) { @filters.blank = :only_if_you_want_it }
     @filters.blank = true
-    assert_equal true, @filters.blank
+
+    assert @filters.blank
   end
 
   def test_calendar_type
     assert_raise(ArgumentError) { @filters.calendar_type = 'monkey calendar' }
     @filters.calendar_type = 'japan'
+
     assert_equal('japan', @filters.calendar_type)
   end
 
@@ -33,17 +35,20 @@ class TestFilters < Test::Unit::TestCase
   def test_apply_is_false_for_matching_values
     keeper = Object.new
     def keeper.value; 'a'; end
-    assert_equal false, @filters.apply(keeper)
+
+    refute @filters.apply(keeper)
   end
 
   def test_apply_is_true_for_non_matching_values
     hidden = Object.new
     def hidden.value; 'b'; end
-    assert_equal true, @filters.apply(hidden)
+
+    assert @filters.apply(hidden)
   end
 
   def test_to_xml_string
     doc = Nokogiri::XML(@filters.to_xml_string)
+
     assert_equal(1, doc.xpath('//filters[@blank=1]').size)
   end
 end

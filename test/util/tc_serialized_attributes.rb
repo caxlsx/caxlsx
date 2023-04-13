@@ -14,6 +14,7 @@ class TestSeralizedAttributes < Test::Unit::TestCase
 
   def test_camel_symbol
     @object.camel_symbol = :foo_bar
+
     assert_equal('camelSymbol="fooBar" ', @object.serialized_attributes)
   end
 end

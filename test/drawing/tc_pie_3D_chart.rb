@@ -11,8 +11,8 @@ class TestPie3DChart < Test::Unit::TestCase
   def teardown; end
 
   def test_initialization
-    assert_equal(@chart.view_3D.rot_x, 30, "view 3d default rot_x incorrect")
-    assert_equal(@chart.view_3D.perspective, 30, "view_3d default perspective incorrect")
+    assert_equal(30, @chart.view_3D.rot_x, "view 3d default rot_x incorrect")
+    assert_equal(30, @chart.view_3D.perspective, "view_3d default perspective incorrect")
     assert_equal(@chart.series_type, Axlsx::PieSeries, "series type incorrect")
   end
 
@@ -20,6 +20,7 @@ class TestPie3DChart < Test::Unit::TestCase
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
     doc = Nokogiri::XML(@chart.to_xml_string)
     errors = schema.validate(doc).map { |error| puts error.message; error }
-    assert(errors.empty?, "error free validation")
+
+    assert_empty(errors, "error free validation")
   end
 end

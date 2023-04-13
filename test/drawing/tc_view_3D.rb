@@ -9,12 +9,13 @@ class TestView3D < Test::Unit::TestCase
 
   def test_options
     v = Axlsx::View3D.new :rot_x => 10, :rot_y => 5, :h_percent => "30%", :depth_percent => "45%", :r_ang_ax => false, :perspective => 10
-    assert_equal(v.rot_x, 10)
-    assert_equal(v.rot_y, 5)
-    assert_equal(v.h_percent, "30%")
-    assert_equal(v.depth_percent, "45%")
-    assert_equal(v.r_ang_ax, false)
-    assert_equal(v.perspective, 10)
+
+    assert_equal(10, v.rot_x)
+    assert_equal(5, v.rot_y)
+    assert_equal("30%", v.h_percent)
+    assert_equal("45%", v.depth_percent)
+    refute(v.r_ang_ax)
+    assert_equal(10, v.perspective)
   end
 
   def test_rot_x

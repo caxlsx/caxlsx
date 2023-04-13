@@ -21,6 +21,7 @@ class TestGraphicFrame < Test::Unit::TestCase
 
   def test_to_xml_has_correct_rId
     doc = Nokogiri::XML(@frame.to_xml_string)
+
     assert_equal @frame.rId, doc.xpath("//c:chart", doc.collect_namespaces).first["r:id"]
   end
 end

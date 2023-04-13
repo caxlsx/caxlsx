@@ -23,12 +23,13 @@ class TestScatterChart < Test::Unit::TestCase
 
   def test_scatter_style
     @chart.scatterStyle = :marker
-    assert(@chart.scatterStyle == :marker)
+
+    assert_equal(:marker, @chart.scatterStyle)
     assert_raise(ArgumentError) { @chart.scatterStyle = :buckshot }
   end
 
   def test_initialization
-    assert_equal(@chart.scatterStyle, :lineMarker, "scatterStyle defualt incorrect")
+    assert_equal(:lineMarker, @chart.scatterStyle, "scatterStyle defualt incorrect")
     assert_equal(@chart.series_type, Axlsx::ScatterSeries, "series type incorrect")
     assert(@chart.xValAxis.is_a?(Axlsx::ValAxis), "independant value axis not created")
     assert(@chart.yValAxis.is_a?(Axlsx::ValAxis), "dependant value axis not created")
@@ -42,6 +43,7 @@ class TestScatterChart < Test::Unit::TestCase
       errors.push error
       puts error.message
     end
-    assert(errors.empty?, "error free validation")
+
+    assert_empty(errors, "error free validation")
   end
 end

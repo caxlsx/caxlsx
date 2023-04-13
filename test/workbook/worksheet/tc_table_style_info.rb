@@ -17,6 +17,7 @@ class TestTableStyleInfo < Test::Unit::TestCase
 
   def test_initialize
     table_style = Axlsx::TableStyleInfo.new @options
+
     @options.each do |key, value|
       assert_equal(value, table_style.send(key.to_sym))
     end

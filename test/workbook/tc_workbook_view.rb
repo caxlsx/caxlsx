@@ -43,6 +43,7 @@ class TestWorkbookView < Test::Unit::TestCase
         value = value ? 1 : 0
       end
       path = "workbookView[@#{Axlsx.camel(key, false)}='#{value}']"
+
       assert_equal(1, doc.xpath(path).size)
     end
   end

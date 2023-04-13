@@ -17,17 +17,20 @@ class TestSharedStringsTable < Test::Unit::TestCase
 
   def test_count
     sst = @p.workbook.shared_strings
-    assert_equal(sst.count, 7)
+
+    assert_equal(7, sst.count)
   end
 
   def test_unique_count
     sst = @p.workbook.shared_strings
-    assert_equal(sst.unique_count, 4)
+
+    assert_equal(4, sst.unique_count)
   end
 
   def test_uses_workbook_xml_space
     assert_equal(@p.workbook.xml_space, @p.workbook.shared_strings.xml_space)
     @p.workbook.xml_space = :default
+
     assert_equal(:default, @p.workbook.shared_strings.xml_space)
   end
 
@@ -39,7 +42,8 @@ class TestSharedStringsTable < Test::Unit::TestCase
       puts error.message
       errors << error
     end
-    assert_equal(errors.size, 0, "sharedStirngs.xml Invalid" + errors.map(&:message).to_s)
+
+    assert_equal(0, errors.size, "sharedStirngs.xml Invalid" + errors.map(&:message).to_s)
   end
 
   def test_remove_control_characters_in_xml_serialization

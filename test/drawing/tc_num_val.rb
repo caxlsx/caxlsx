@@ -6,8 +6,8 @@ class TestNumVal < Test::Unit::TestCase
   end
 
   def test_initialize
-    assert_equal(@num_val.format_code, "General")
-    assert_equal(@num_val.v, "1")
+    assert_equal("General", @num_val.format_code)
+    assert_equal("1", @num_val.v)
   end
 
   def test_format_code
@@ -21,6 +21,6 @@ class TestNumVal < Test::Unit::TestCase
     str << @num_val.to_xml_string(0)
     doc = Nokogiri::XML(str)
     # lets see if this works?
-    assert_equal(doc.xpath("//c:pt/c:v[text()='1']").size, 1)
+    assert_equal(1, doc.xpath("//c:pt/c:v[text()='1']").size)
   end
 end

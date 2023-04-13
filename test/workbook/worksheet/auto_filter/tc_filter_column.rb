@@ -27,17 +27,18 @@ class TestFilterColumn < Test::Unit::TestCase
     filter_column = Axlsx::FilterColumn.new(0, :filters) do |filters|
       filters.filter_items = [700, 100, 5]
     end
+
     assert_equal 3, filter_column.filter.filter_items.size
     assert_equal 700, filter_column.filter.filter_items.first.val
     assert_equal 5, filter_column.filter.filter_items.last.val
   end
 
   def test_default_show_button
-    assert_equal true, @filter_column.show_button
+    assert @filter_column.show_button
   end
 
   def test_default_hidden_button
-    assert_equal false, @filter_column.hidden_button
+    refute @filter_column.hidden_button
   end
 
   def test_show_button
@@ -63,6 +64,7 @@ class TestFilterColumn < Test::Unit::TestCase
 
   def test_to_xml_string
     doc = Nokogiri::XML(@filter_column.to_xml_string)
+
     assert doc.xpath("//filterColumn[@colId=#{@filter_column.col_id}]")
     assert doc.xpath("//filterColumn[@hiddenButton=#{@filter_column.hidden_button}]")
     assert doc.xpath("//filterColumn[@showButton=#{@filter_column.show_button}]")

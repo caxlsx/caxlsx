@@ -12,21 +12,23 @@ class TestSeriesTitle < Test::Unit::TestCase
   def teardown; end
 
   def test_initialization
-    assert(@title.text == "")
-    assert(@title.cell.nil?)
+    assert_equal("", @title.text)
+    assert_nil(@title.cell)
   end
 
   def test_text
     assert_raise(ArgumentError, "text must be a string") { @title.text = 123 }
     @title.cell = @row.cells.first
     @title.text = "bob"
-    assert(@title.cell.nil?, "setting title with text clears the cell")
+
+    assert_nil(@title.cell, "setting title with text clears the cell")
   end
 
   def test_cell
     assert_raise(ArgumentError, "cell must be a Cell") { @title.cell = "123" }
     @title.cell = @row.cells.first
-    assert(@title.text == "one")
+
+    assert_equal("one", @title.text)
   end
 
   def test_to_xml_string_for_special_characters
@@ -36,7 +38,8 @@ class TestSeriesTitle < Test::Unit::TestCase
 
     doc = Nokogiri::XML(@chart.to_xml_string)
     errors = doc.errors
-    assert(errors.empty?, "invalid xml: #{errors.map(&:to_s).join(', ')}")
+
+    assert_empty(errors, "invalid xml: #{errors.map(&:to_s).join(', ')}")
   end
 
   def test_to_xml_string_for_special_characters_in_cell
@@ -48,6 +51,7 @@ class TestSeriesTitle < Test::Unit::TestCase
 
     doc = Nokogiri::XML(@chart.to_xml_string)
     errors = doc.errors
-    assert(errors.empty?, "invalid xml: #{errors.map(&:to_s).join(', ')}")
+
+    assert_empty(errors, "invalid xml: #{errors.map(&:to_s).join(', ')}")
   end
 end
