@@ -7,4 +7,5 @@ end
 
 require 'test/unit'
 require "timecop"
+require 'webmock/test_unit'
 require "axlsx.rb"

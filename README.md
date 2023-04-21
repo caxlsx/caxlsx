@@ -1,5 +1,6 @@
 # Caxlsx (Community Continued Version)
-[![Build Status](https://github.com/caxlsx/caxlsx/workflows/Test/badge.svg)](https://github.com/caxlsx/caxlsx/actions)
+[![Test](https://github.com/caxlsx/caxlsx/actions/workflows/test.yml/badge.svg)](https://github.com/caxlsx/caxlsx/actions/workflows/test.yml)
+[![RuboCop](https://github.com/caxlsx/caxlsx/actions/workflows/rubocop.yml/badge.svg)](https://github.com/caxlsx/caxlsx/actions/workflows/rubocop.yml)
 [![Gem Version](https://badge.fury.io/rb/caxlsx.svg)](https://badge.fury.io/rb/caxlsx)
 ![downloads](https://img.shields.io/gem/dt/caxlsx?label=downloads)
 

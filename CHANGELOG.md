@@ -1,9 +1,10 @@
 CHANGELOG
 ---------
+
 - **Unreleased**: 4.0.0
   - [PR #189](https://github.com/caxlsx/caxlsx/pull/189) - Make `Axlsx::escape_formulas` true by default to mitigate [Formula Injection](https://www.owasp.org/index.php/CSV_Injection) vulnerabilities.
 
-- **Unreleased**: 3.4.0
+- **April.12.23**: 3.4.0
   - [PR #186](https://github.com/caxlsx/caxlsx/pull/186) - Add `escape_formulas` to global, workbook, worksheet, row and cell levels, and standardize behavior.
   - [PR #186](https://github.com/caxlsx/caxlsx/pull/186) - `escape_formulas` should handle all [OWASP-designated formula prefixes](https://owasp.org/www-community/attacks/CSV_Injection).
   - Fix bug when calling `worksheet.add_border("A1:B2", nil)`
