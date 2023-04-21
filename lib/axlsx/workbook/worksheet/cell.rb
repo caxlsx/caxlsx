@@ -72,7 +72,13 @@ module Axlsx
 
     # Leading characters that indicate a formula.
     # See: https://owasp.org/www-community/attacks/CSV_Injection
-    FORMULA_PREFIXES = ['-', '=', '+', '@', '%', '|', "\r", "\t"].freeze
+    FORMULA_PREFIXES = ['='.freeze].freeze
+
+    # Leading characters that indicate an array formula.
+    ARRAY_FORMULA_PREFIXES = ['{='.freeze].freeze
+
+    # Trailing character that indicates an array formula.
+    ARRAY_FORMULA_SUFFIX = '}'.freeze
 
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer]
@@ -393,7 +399,9 @@ module Axlsx
     def is_array_formula?
       return false if escape_formulas
 
-      type == :string && @value.to_s.start_with?('{=') && @value.to_s.end_with?('}')
+      type == :string &&
+        @value.to_s.start_with?(*ARRAY_FORMULA_PREFIXES) &&
+        @value.to_s.end_with?(ARRAY_FORMULA_SUFFIX)
     end
 
     # returns the absolute or relative string style reference for
