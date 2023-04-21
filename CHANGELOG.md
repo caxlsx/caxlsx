@@ -1,6 +1,7 @@
 CHANGELOG
 ---------
-- **Unreleased**
+- **Unreleased**: 3.4.1
+  - [PR #209](https://github.com/caxlsx/caxlsx/pull/209) - Revert characters other than `=` being considered as formulas.
 
 - **April.12.23**: 3.4.0
   - [PR #186](https://github.com/caxlsx/caxlsx/pull/186) - Add `escape_formulas` to global, workbook, worksheet, row and cell levels, and standardize behavior.
