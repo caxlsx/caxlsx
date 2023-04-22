@@ -405,7 +405,35 @@ class TestCell < Test::Unit::TestCase
     assert(doc.xpath("//t[text()='+2']").any?)
   end
 
-  def test_to_xml_string_other_owasp_escaped
+  def test_to_xml_string_owasp_prefixes_that_are_no_excel_formulas
+    # OWASP mentions various prefixes that might designate formulas when data is read as CSV:
+    # https://owasp.org/www-community/attacks/CSV_Injection
+    # Except for `=` none of these prefixes are valid prefixes for formulas in Excel however,
+    # so they should never be interpreted / serialized as formulas by Caxlsx.
+    p = Axlsx::Package.new
+    ws = p.workbook.add_worksheet do |sheet|
+      sheet.add_row [
+        "@1",
+        "%2",
+        "|3",
+        "\rfoo",
+        "\tbar"
+      ], escape_formulas: false
+    end
+    doc = Nokogiri::XML(ws.to_xml_string)
+    doc.remove_namespaces!
+    assert(doc.xpath("//t[text()='@1']").any?)
+    assert(doc.xpath("//t[text()='%2']").any?)
+    assert(doc.xpath("//t[text()='|3']").any?)
+    assert(doc.xpath("//t[text()='\nfoo']").any?)
+    assert(doc.xpath("//t[text()='\tbar']").any?)
+  end
+
+  def test_to_xml_string_owasp_prefixes_that_are_no_excel_formulas_with_escape_formulas
+    # OWASP mentions various prefixes that might designate formulas when data is read as CSV:
+    # https://owasp.org/www-community/attacks/CSV_Injection
+    # Except for `=` none of these prefixes are valid prefixes for formulas in Excel however,
+    # so they should never be interpreted / serialized as formulas by Caxlsx.
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet do |sheet|
       sheet.add_row [
