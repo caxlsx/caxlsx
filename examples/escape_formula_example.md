@@ -10,7 +10,7 @@ The following are possible:
 | Global    | `Axlsx.escape_formulas = true`                                           | Affects worksheets created *after* setting. Does not affect existing worksheets.           |
 | Workbook  | `workbook.escape_formulas = true`                                        | Affects child worksheets added *after* setting. Does not affect existing child worksheets. |
 | Worksheet | `workbook.add_worksheet(name: 'Name', escape_formulas: true)`            |                                                                                            |
-| Worksheet | `worksheet.worksheet = true`                                             | Affects child rows/cells added *after* setting. Does not affect existing child rows/cells. |
+| Worksheet | `worksheet.escape_formulas = true`                                       | Affects child rows/cells added *after* setting. Does not affect existing child rows/cells. |
 | Row       | `worksheet.add_row(['=FOO()', '=BAR()], escape_formulas: [true, false])` | Can specify as either Boolean (all cells) or Array (one value per cell).                   |
 | Row       | `row.escape_formulas = [true, false]`                                    | Changes the `escape_formulas` value on existing cells. Can use either Boolean or Array.    |
 | Cell      | `cell.escape_formulas = true`                                            |                                                                                            |
