@@ -4,7 +4,7 @@ AllCops:
   DisabledByDefault: true
   NewCops: enable
   SuggestExtensions: false
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.7
   Exclude:
     - 'docs/**/*'
     - 'examples/**/*'

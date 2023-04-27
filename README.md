@@ -73,6 +73,8 @@ and Numbers
 gem 'caxlsx'
 ```
 
+**Supported Ruby versions:** Caxlsx supports Ruby 2.7 and newer.
+
 ## Usage
 
 Here's a teaser that kicks about 2% of what the gem can do.
