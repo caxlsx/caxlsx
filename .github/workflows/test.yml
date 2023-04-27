@@ -29,6 +29,8 @@ jobs:
           - ruby: jruby-9.2
           - ruby: jruby-9.3
           - ruby: jruby-9.4
+          - ruby: head
+            allow_failures: true
 
     steps:
     - uses: actions/checkout@v3
