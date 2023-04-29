@@ -171,6 +171,7 @@ module Axlsx
   # @return [Object]
   def self.booleanize(value)
     if value == true || value == false
+      # value ? '1' : '0'
       value ? 1 : 0
     else
       value
