@@ -13,10 +13,15 @@ module Axlsx
       # which of the instance values are serializable
       def serializable_attributes(*symbols)
         @xml_attributes = symbols
+        @camelized_xml_attributes = nil
       end
 
       # a reader for those attributes
       attr_reader :xml_attributes
+
+      def camelized_xml_attributes
+        @camelized_xml_attributes ||= @xml_attributes.map { |attr| Axlsx.camel(attr, false) }
+      end
 
       # This helper registers the attributes that will be formatted as elements.
       def serializable_element_attributes(*symbols)
@@ -47,21 +52,29 @@ module Axlsx
     # serialization to.
     # @param [Hash] additional_attributes An option key value hash for
     # defining values that are not serializable attributes list.
-    def serialized_attributes(str = '', additional_attributes = {})
-      attributes = declared_attributes.merge! additional_attributes
-      attributes.each do |key, value|
-        str << "#{Axlsx.camel(key, false)}=\"#{Axlsx.camel(Axlsx.booleanize(value), false)}\" "
-      end
-      str
-    end
+    def serialized_attributes(str = +'', additional_attributes = {}, camelize_value = true)
+      camelized_xml_attributes = self.class.camelized_xml_attributes
 
-    # A hash of instance variables that have been declared with
-    # seraialized_attributes and are not nil.
-    # This requires ruby 1.9.3 or higher
-    def declared_attributes
-      Axlsx.instance_values_for(self).select do |key, value|
-        value != nil && self.class.xml_attributes.include?(key.to_sym)
+      self.class.xml_attributes.each_with_index do |attr, index|
+        next if additional_attributes.key?(attr)
+
+        value = instance_variable_get(:"@#{attr}")
+        next if value.nil?
+
+        value = Axlsx.booleanize(value)
+        value = Axlsx.camel(value, false) if camelize_value
+        str << camelized_xml_attributes[index] << '="' << value.to_s << '" '
       end
+
+      additional_attributes.each do |attr, value|
+        next if value.nil?
+
+        value = Axlsx.booleanize(value)
+        value = Axlsx.camel(value, false) if camelize_value
+        str << Axlsx.camel(attr, false) << '="' << value.to_s << '" '
+      end
+
+      str
     end
 
     # serialized instance values at text nodes on a camelized element of the
