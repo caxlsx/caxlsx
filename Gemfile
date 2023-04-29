@@ -13,5 +13,6 @@ group :test do
 end
 
 group :profile do
-  gem 'ruby-prof', :platforms => :ruby
+  gem 'memory_profiler'
+  gem 'ruby-prof', platforms: :ruby
 end
