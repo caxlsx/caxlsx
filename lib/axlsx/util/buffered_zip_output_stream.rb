@@ -18,19 +18,19 @@ module Axlsx
     # Create a temporary directory for writing files to.
     #
     # The directory and its contents are removed at the end of the block.
-    def self.open(file_name, encrypter = nil, &block)
+    def self.open(file_name, encrypter = nil)
       Zip::OutputStream.open(file_name, encrypter) do |zos|
         bzos = new(zos)
-        block.call(bzos)
+        yield(bzos)
       ensure
         bzos.flush if bzos
       end
     end
 
-    def self.write_buffer(io = ::StringIO.new, encrypter = nil, &block)
+    def self.write_buffer(io = ::StringIO.new, encrypter = nil)
       Zip::OutputStream.write_buffer(io, encrypter) do |zos|
         bzos = new(zos)
-        block.call(bzos)
+        yield(bzos)
       ensure
         bzos.flush if bzos
       end
@@ -51,7 +51,7 @@ module Axlsx
     alias << write
 
     def flush
-      return if @buffer.size == 0
+      return if @buffer.empty?
 
       @zos << @buffer
       @buffer.clear
