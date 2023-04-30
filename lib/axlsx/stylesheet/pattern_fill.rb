@@ -57,7 +57,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << ('<patternFill patternType="' << patternType.to_s << '">')
+      str << '<patternFill patternType="' << patternType.to_s << '">'
       if fgColor.is_a?(Color)
         fgColor.to_xml_string str, "fgColor"
       end

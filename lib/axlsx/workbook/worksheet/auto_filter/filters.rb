@@ -75,7 +75,9 @@ module Axlsx
 
     # Serialize the object to xml
     def to_xml_string(str = '')
-      str << "<filters #{serialized_attributes}>"
+      str << "<filters "
+      serialized_attributes(str)
+      str << ">"
       filter_items.each { |filter| filter.to_xml_string(str) }
       date_group_items.each { |date_group_item| date_group_item.to_xml_string(str) }
       str << '</filters>'

@@ -73,11 +73,11 @@ module Axlsx
       super(str) do
         if color
           str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/>')
+          str << '<a:srgbClr val="' << color << '"/>'
           str << '</a:solidFill>'
           str << '<a:ln w="28800">'
           str << '<a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/>')
+          str << '<a:srgbClr val="' << color << '"/>'
           str << '</a:solidFill>'
           str << '</a:ln>'
           str << '<a:round/>'
@@ -92,7 +92,7 @@ module Axlsx
 
         @labels.to_xml_string(str) unless @labels.nil?
         @data.to_xml_string(str) unless @data.nil?
-        str << ('<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>')
+        str << '<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>'
       end
     end
 

@@ -44,10 +44,10 @@ module Axlsx
         # needs to override the super color here to push in ln/and something else!
         if color
           str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/>')
+          str << '<a:srgbClr val="' << color << '"/>'
           str << '</a:solidFill>'
           str << '<a:ln><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
+          str << '<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>'
           str << '</c:spPr>'
         end
         @xData.to_xml_string(str) unless @xData.nil?

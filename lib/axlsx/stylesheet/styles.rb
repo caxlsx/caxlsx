@@ -484,7 +484,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << ('<styleSheet xmlns="' << XML_NS << '">')
+      str << '<styleSheet xmlns="' << XML_NS << '">'
       instance_vals = Axlsx.instance_values_for(self)
       [:numFmts, :fonts, :fills, :borders, :cellStyleXfs, :cellXfs, :cellStyles, :dxfs, :tableStyles].each do |key|
         instance_vals[key.to_s].to_xml_string(str) unless instance_vals[key.to_s].nil?
