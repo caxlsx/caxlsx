@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The table style info class manages style attributes for defined tables in
   # a worksheet
@@ -41,7 +42,7 @@ module Axlsx
 
     # seralizes this object to an xml string
     # @param [String] str the string to contact this objects serialization to.
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       serialized_tag('tableStyleInfo', str)
     end
   end

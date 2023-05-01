@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The cols class manages the col object used to manage column widths.
   # This is where the magic happens with autowidth
@@ -12,7 +13,7 @@ module Axlsx
     # Serialize the Cols object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       return if empty?
 
       str << '<cols>'

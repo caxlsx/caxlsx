@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   require 'axlsx/rels/relationship.rb'
 
@@ -19,7 +20,7 @@ module Axlsx
     # serialize relationships
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<Relationships xmlns="' << RELS_R << '">'
       each { |rel| rel.to_xml_string(str) }

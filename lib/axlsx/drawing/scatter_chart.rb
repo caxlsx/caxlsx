@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The ScatterChart allows you to insert a scatter chart into your worksheet
   # @see Worksheet#add_chart
@@ -47,7 +48,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
         str << '<c:scatterChart>'
         str << '<c:scatterStyle val="' << scatter_style.to_s << '"/>'

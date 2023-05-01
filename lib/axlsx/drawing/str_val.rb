@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # This class specifies data for a particular data point.
   class StrVal
@@ -21,7 +22,7 @@ module Axlsx
     end
 
     # serialize the object
-    def to_xml_string(idx, str = "")
+    def to_xml_string(idx, str = +"")
       Axlsx::validate_unsigned_int(idx)
       if !v.to_s.empty?
         str << '<c:pt idx="' << idx.to_s << '"><c:v>' << ::CGI.escapeHTML(v.to_s) << '</c:v></c:pt>'

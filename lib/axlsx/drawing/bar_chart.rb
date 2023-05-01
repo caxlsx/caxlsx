@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The BarChart is a two dimentional barchart that you can add to your worksheet.
   # @see Worksheet#add_chart
@@ -108,7 +109,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
         str << '<c:barChart>'
         str << '<c:barDir val="' << bar_dir.to_s << '"/>'

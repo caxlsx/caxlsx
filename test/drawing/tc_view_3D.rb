@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'tc_helper.rb'
 
 class TestView3D < Test::Unit::TestCase

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The Col class defines column attributes for columns in sheets.
   class Col
@@ -135,7 +136,7 @@ module Axlsx
     # Serialize this columns data to an xml string
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       serialized_tag('col', str)
     end
   end

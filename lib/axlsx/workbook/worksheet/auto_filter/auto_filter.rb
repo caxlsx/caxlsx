@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'axlsx/workbook/worksheet/auto_filter/filter_column.rb'
 require 'axlsx/workbook/worksheet/auto_filter/filters.rb'
 
@@ -67,7 +68,7 @@ module Axlsx
 
     # serialize the object
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       return unless range
 
       str << "<autoFilter ref='#{range}'>"

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # A graphic frame defines a container for a chart object
   # @note The recommended way to manage charts is Worksheet#add_chart
@@ -29,7 +30,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       # macro attribute should be optional!
       str << '<xdr:graphicFrame>'
       str << '<xdr:nvGraphicFramePr>'

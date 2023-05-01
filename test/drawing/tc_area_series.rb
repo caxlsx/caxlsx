@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'tc_helper.rb'
 
 class TestAreaSeries < Test::Unit::TestCase
@@ -55,7 +56,7 @@ class TestAreaSeries < Test::Unit::TestCase
   end
 
   def wrap_with_namespaces(series)
-    '<c:chartSpace xmlns:c="' <<
+    +'<c:chartSpace xmlns:c="' <<
       Axlsx::XML_NS_C <<
       '" xmlns:a="' <<
       Axlsx::XML_NS_A <<

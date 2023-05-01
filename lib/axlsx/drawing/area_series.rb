@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # A AreaSeries defines the title, data and labels for line charts
   # @note The recommended way to manage series is to use Chart#add_series
@@ -69,7 +70,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
         if color
           str << '<c:spPr><a:solidFill>'

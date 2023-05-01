@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   class BorderCreator
     def initialize(worksheet:, cells:, edges: nil, style: nil, color: nil)

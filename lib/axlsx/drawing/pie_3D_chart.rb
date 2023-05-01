@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The Pie3DChart is a three dimentional piechart (who would have guessed?) that you can add to your worksheet.
   # @see Worksheet#add_chart
@@ -29,7 +30,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
         str << '<c:pie3DChart>'
         str << '<c:varyColors val="' << vary_colors.to_s << '"/>'

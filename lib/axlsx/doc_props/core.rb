@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The core object for the package.
   # @note Packages manage their own core object.
@@ -20,7 +21,7 @@ module Axlsx
 
     # serializes the core.xml document
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<cp:coreProperties xmlns:cp="' << CORE_NS << '" xmlns:dc="' << CORE_NS_DC << '" '
       str << 'xmlns:dcmitype="' << CORE_NS_DCMIT << '" xmlns:dcterms="' << CORE_NS_DCT << '" '

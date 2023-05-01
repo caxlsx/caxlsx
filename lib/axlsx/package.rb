@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # Package is responsible for managing all the bits and peices that Open Office XML requires to make a valid
   # xlsx document including validation and serialization.
@@ -109,7 +110,7 @@ module Axlsx
       zip_provider = if zip_command
                        ZipCommand.new(zip_command)
                      else
-                      BufferedZipOutputStream #Zip::OutputStream
+                       BufferedZipOutputStream #Zip::OutputStream
                      end
       Relationship.initialize_ids_cache
       zip_provider.open(output) do |zip|

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # A border part.
   class BorderPr
@@ -60,7 +61,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<' << @name.to_s << ' style="' << @style.to_s << '">'
       @color.to_xml_string(str) if @color.is_a?(Color)
       str << '</' << @name.to_s << '>'

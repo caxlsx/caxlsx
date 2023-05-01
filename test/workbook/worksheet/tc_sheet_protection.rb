@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'tc_helper.rb'
 
 # <xsd:complexType name="CT_SheetProtection">

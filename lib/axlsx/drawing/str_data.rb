@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # This specifies the last string data used for a chart. (e.g. strLit and strCache)
   # This class is extended for NumData to include the formatCode attribute required for numLit and numCache
@@ -25,7 +26,7 @@ module Axlsx
     end
 
     # serialize the object
-    def to_xml_string(str = "")
+    def to_xml_string(str = +'')
       str << '<c:' << @tag_name.to_s << '>'
       str << '<c:ptCount val="' << @pt.size.to_s << '"/>'
       @pt.each_with_index do |value, index|

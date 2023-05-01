@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # When multiple values are chosen to filter by, or when a group of date values are chosen to filter by,
   # this object groups those criteria together.
@@ -74,7 +75,7 @@ module Axlsx
     end
 
     # Serialize the object to xml
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << "<filters "
       serialized_attributes(str)
       str << ">"
@@ -120,7 +121,7 @@ module Axlsx
 
       # Serializes the filter value object
       # @param [String] str The string to concact the serialization information to.
-      def to_xml_string(str = '')
+      def to_xml_string(str = +'')
         str << "<filter val='#{@val.to_s}' />"
       end
     end
@@ -237,7 +238,7 @@ module Axlsx
 
       # Serialize the object to xml
       # @param [String] str The string object this serialization will be concatenated to.
-      def to_xml_string(str = '')
+      def to_xml_string(str = +'')
         serialized_tag('dateGroupItem', str)
       end
     end

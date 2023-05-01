@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # Comments is a collection of Comment objects for a worksheet
   class Comments < SimpleTypedList
@@ -62,7 +63,7 @@ module Axlsx
     # serialize the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = "")
+    def to_xml_string(str = +'')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<comments xmlns="' << XML_NS << '"><authors>'
       authors.each do |author|

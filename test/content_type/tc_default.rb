@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'tc_helper.rb'
 
 class TestDefault < Test::Unit::TestCase

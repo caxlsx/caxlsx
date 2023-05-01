@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # Table
   # @note Worksheet#add_table is the recommended way to create tables for your worksheets.
@@ -71,7 +72,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<table xmlns="' << XML_NS << '" id="' << (index + 1).to_s << '" name="' << @name << '" displayName="' << @name.gsub(/\s/, '_') << '" '
       str << 'ref="' << @ref << '" totalsRowShown="0">'

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # Sheet formatting properties
   # <xsd:complexType name="CT_SheetFormatPr">
@@ -46,7 +47,7 @@ module Axlsx
     # serializes this object to an xml string
     # @param [String] str The string this objects serialization will be appended to
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << "<sheetFormatPr "
       serialized_attributes(str)
       str << "/>"

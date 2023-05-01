@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # This class manages the dimensions for a worksheet.
   # While this node is optional in the specification some readers like
@@ -34,7 +35,7 @@ module Axlsx
 
     # serialize the object
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       return if worksheet.rows.empty?
 
       str << "<dimension ref=\"%s\"></dimension>" % sqref

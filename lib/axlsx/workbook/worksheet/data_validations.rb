@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # A simple, self serializing class for storing conditional formattings
   class DataValidations < SimpleTypedList
@@ -14,7 +15,7 @@ module Axlsx
     attr_reader :worksheet
 
     # serialize the conditional formattings
-    def to_xml_string(str = "")
+    def to_xml_string(str = +'')
       return if empty?
 
       str << "<dataValidations count='#{size}'>"

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'tc_helper.rb'
 
 class TestAxlsx < Test::Unit::TestCase
@@ -100,7 +101,7 @@ class TestAxlsx < Test::Unit::TestCase
   end
 
   def test_sanitize_unfrozen_no_sanitize
-    legit_str = 'legit'
+    legit_str = +'legit'
     sanitized_str = Axlsx.sanitize(legit_str)
 
     assert_equal(sanitized_str,           legit_str,            'should preserve value')

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # This class details a single cell anchor for drawings.
   # @note The recommended way to manage drawings, images and charts is Worksheet#add_chart or Worksheet#add_image.
@@ -72,7 +73,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<xdr:oneCellAnchor>'
       str << '<xdr:from>'
       from.to_xml_string(str)

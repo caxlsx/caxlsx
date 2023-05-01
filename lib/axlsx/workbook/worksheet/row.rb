@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # A Row is a single row in a worksheet.
   # @note The recommended way to manage rows and cells is to use Worksheet#add_row
@@ -86,7 +87,7 @@ module Axlsx
     # @param [Integer] r_index The row index, 0 based.
     # @param [String] str The string this rows xml will be appended to.
     # @return [String]
-    def to_xml_string(r_index, str = '')
+    def to_xml_string(r_index, str = +'')
       serialized_tag('row', str, :r => r_index + 1) do
         each_with_index { |cell, c_index| cell.to_xml_string(r_index, c_index, str) }
       end

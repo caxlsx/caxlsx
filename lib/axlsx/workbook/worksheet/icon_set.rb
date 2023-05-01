@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # Conditional Format Rule icon sets
   # Describes an icon set conditional formatting rule.
@@ -61,7 +62,7 @@ module Axlsx
     # Serialize this object to an xml string
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = "")
+    def to_xml_string(str = +'')
       serialized_tag('iconSet', str) do
         @value_objects.each { |cfvo| cfvo.to_xml_string(str) }
       end

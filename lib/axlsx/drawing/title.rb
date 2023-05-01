@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # A Title stores information about the title of a chart
   class Title
@@ -67,7 +68,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<c:title>'
       unless empty?
         clean_value = Axlsx::trust_input ? @text.to_s : ::CGI.escapeHTML(Axlsx::sanitize(@text.to_s))

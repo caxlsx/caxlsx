@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # A CatAxis object defines a chart category axis
   class CatAxis < Axis
@@ -66,7 +67,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<c:catAx>'
       super(str)
       str << '<c:auto val="' << @auto.to_s << '"/>'

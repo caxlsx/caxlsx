@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # There are more elements in the dLbls spec that allow for
   # customizations and formatting. For now, I am just implementing the
@@ -69,7 +70,7 @@ module Axlsx
 
     # serializes the data labels
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       validate_attributes_for_chart_type
       str << '<c:dLbls>'
       instance_vals = Axlsx.instance_values_for(self)

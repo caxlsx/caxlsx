@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # the access class defines common properties and values for a chart axis.
   class Axis
@@ -146,7 +147,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<c:axId val="' << @id.to_s << '"/>'
       @scaling.to_xml_string str
       str << '<c:delete val="' << @delete.to_s << '"/>'

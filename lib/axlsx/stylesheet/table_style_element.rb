@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # an element of style that belongs to a table style.
   # @note tables and table styles are not supported in this version. This class exists in preparation for that support.
@@ -67,7 +68,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       serialized_tag('tableStyleElement', str)
     end
   end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'tc_helper.rb'
 
 class TestAxis < Test::Unit::TestCase
@@ -17,7 +18,7 @@ class TestAxis < Test::Unit::TestCase
   def test_color
     @axis.color = "00FF00"
     @axis.cross_axis = Axlsx::CatAxis.new
-    str = '<?xml version="1.0" encoding="UTF-8"?>'
+    str = +'<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
     doc = Nokogiri::XML(@axis.to_xml_string(str))
     assert(doc.xpath("//a:srgbClr[@val='00FF00']"))
@@ -99,7 +100,7 @@ class TestAxis < Test::Unit::TestCase
 
   def test_to_xml_string
     @axis.cross_axis = Axlsx::CatAxis.new
-    str = '<?xml version="1.0" encoding="UTF-8"?>'
+    str = +'<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
     doc = Nokogiri::XML(@axis.to_xml_string(str))
     assert(doc.xpath('//a:noFill'))

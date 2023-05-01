@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # Header/Footer options for printing a worksheet. All settings are optional.
   #
@@ -40,7 +41,7 @@ module Axlsx
     # Serializes the header/footer object.
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       serialized_tag('headerFooter', str) do
         serialized_element_attributes(str) do |value|
           value = ::CGI.escapeHTML(value)

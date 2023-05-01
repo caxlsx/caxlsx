@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The AreaChart is a two dimentional line chart (who would have guessed?) that you can add to your worksheet.
   # @example Creating a chart
@@ -72,7 +73,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
         str << "<c:" << node_name << ">"
         str << '<c:grouping val="' << grouping.to_s << '"/>'

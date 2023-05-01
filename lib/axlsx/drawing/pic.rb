@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # a Pic object represents an image in your worksheet
   # Worksheet#add_image is the recommended way to manage images in your sheets
@@ -187,7 +188,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<xdr:pic>'
       str << '<xdr:nvPicPr>'
       str << '<xdr:cNvPr id="2" name="' << name.to_s << '" descr="' << descr.to_s << '">'
@@ -211,9 +212,9 @@ module Axlsx
     # Return correct xml relationship string portion
     def relationship_xml_portion
       if remote?
-        ('<a:blip xmlns:r ="' << XML_NS_R << '" r:link="' << relationship.Id << '">')
+        (+'<a:blip xmlns:r ="' << XML_NS_R << '" r:link="' << relationship.Id << '">')
       else
-        ('<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
+        (+'<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
       end
     end
 

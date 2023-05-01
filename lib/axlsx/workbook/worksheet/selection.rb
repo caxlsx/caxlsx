@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # Selection options for worksheet panes.
   #
@@ -92,7 +93,7 @@ module Axlsx
     # Serializes the data validation
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       serialized_tag 'selection', str
     end
   end

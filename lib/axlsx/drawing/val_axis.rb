@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # the ValAxis class defines a chart value axis.
   class ValAxis < Axis
@@ -24,7 +25,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<c:valAx>'
       super(str)
       str << '<c:crossBetween val="' << @cross_between.to_s << '"/>'

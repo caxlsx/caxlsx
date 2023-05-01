@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The RichTextRun class creates and self serializing text run.
   class RichTextRun
@@ -203,7 +204,7 @@ module Axlsx
     # Serializes the RichTextRun
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       valid = RichTextRun::INLINE_STYLES
       data = Hash[Axlsx.instance_values_for(self).map { |k, v| [k.to_sym, v] }]
       data = data.select { |key, value| valid.include?(key) && !value.nil? }

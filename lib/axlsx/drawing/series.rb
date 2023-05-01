@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # A Series defines the common series attributes and is the super class for all concrete series types.
   # @note The recommended way to manage series is to use Chart#add_series
@@ -55,7 +56,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<c:ser>'
       str << '<c:idx val="' << index.to_s << '"/>'
       str << '<c:order val="' << (order || index).to_s << '"/>'

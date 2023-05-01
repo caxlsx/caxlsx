@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The Shared String Table class is responsible for managing and serializing common strings in a workbook.
   # While the ECMA-376 spec allows for both inline and shared strings it seems that at least some applications like iWorks Numbers
@@ -34,7 +35,7 @@ module Axlsx
       @index = 0
       @xml_space = xml_space
       @unique_cells = {}
-      @shared_xml_string = ""
+      @shared_xml_string = +''
       shareable_cells = cells.flatten.select { |cell| cell.plain_string? || cell.contains_rich_text? }
       @count = shareable_cells.size
       resolve(shareable_cells)
@@ -43,7 +44,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       Axlsx::sanitize(@shared_xml_string)
       str << '<?xml version="1.0" encoding="UTF-8"?><sst xmlns="' << XML_NS << '"'
       str << ' count="' << @count.to_s << '" uniqueCount="' << unique_count.to_s << '"'

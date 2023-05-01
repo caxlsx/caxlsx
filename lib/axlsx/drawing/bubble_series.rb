@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # A BubbleSeries defines the x/y position and bubble size of data in the chart
   # @note The recommended way to manage series is to use Chart#add_series
@@ -39,7 +40,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
         # needs to override the super color here to push in ln/and something else!
         if color

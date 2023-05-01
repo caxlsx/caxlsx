@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # This class details a border used in Office Open XML spreadsheet styles.
   class Border
@@ -54,7 +55,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<border '
       serialized_attributes str
       str << '>'

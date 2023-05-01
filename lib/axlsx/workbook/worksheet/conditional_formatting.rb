@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # Conditional formatting allows styling of ranges based on functions
   #
@@ -72,7 +73,7 @@ module Axlsx
     #    </conditionalFormatting>
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<conditionalFormatting sqref="' << sqref << '">'
       str << rules.collect { |rule| rule.to_xml_string }.join(' ')
       str << '</conditionalFormatting>'

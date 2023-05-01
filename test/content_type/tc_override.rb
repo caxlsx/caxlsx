@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'tc_helper.rb'
 class TestOverride < Test::Unit::TestCase
   def test_content_type_restriction

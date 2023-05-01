@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The Bar3DChart is a three dimentional barchart (who would have guessed?) that you can add to your worksheet.
   # @see Worksheet#add_chart
@@ -118,7 +119,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
         str << '<c:bar3DChart>'
         str << '<c:barDir val="' << bar_dir.to_s << '"/>'

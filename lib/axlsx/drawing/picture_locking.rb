@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The picture locking class defines the locking properties for pictures in your workbook.
   class PictureLocking
@@ -32,7 +33,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       serialized_tag('a:picLocks', str)
     end
   end

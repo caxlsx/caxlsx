@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # A BarSeries defines the title, data and labels for bar charts
   # @note The recommended way to manage series is to use Chart#add_series
@@ -56,7 +57,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
         colors.each_with_index do |c, index|
           str << '<c:dPt>'

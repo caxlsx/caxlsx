@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'tc_helper.rb'
 require 'support/capture_warnings'
 
@@ -233,6 +234,7 @@ class TestPackage < Test::Unit::TestCase
         end
       end
     end
+
     assert package_1.to_stream.string == package_2.to_stream.string, "zip files are not identical"
   end
 
