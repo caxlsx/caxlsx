@@ -111,7 +111,7 @@ module Axlsx
       zip_provider = if zip_command
                        ZipCommand.new(zip_command)
                      else
-                       Zip::OutputStream
+                       BufferedZipOutputStream
                      end
       Relationship.initialize_ids_cache
       zip_provider.open(output) do |zip|
@@ -133,8 +133,9 @@ module Axlsx
       return false unless !confirm_valid || self.validate.empty?
 
       Relationship.initialize_ids_cache
-      zip = write_parts(Zip::OutputStream.new(StringIO.new.binmode, true))
-      stream = zip.close_buffer
+      stream = BufferedZipOutputStream.write_buffer do |zip|
+        write_parts(zip)
+      end
       stream.rewind
       stream
     ensure
