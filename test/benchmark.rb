@@ -4,7 +4,8 @@ $:.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 require 'csv'
 require 'benchmark'
-# Axlsx::trust_input = true
+# Axlsx.trust_input = true
+Axlsx.skip_validations = true
 row = []
 input1 = (32..126).to_a.pack('U*').chars.to_a # these will need to be escaped
 input2 = (65..122).to_a.pack('U*').chars.to_a # these do not need to be escaped

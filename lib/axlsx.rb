@@ -217,4 +217,19 @@ module Axlsx
     Axlsx.validate_boolean(value)
     @escape_formulas = value
   end
+
+  # Determines whether validators (see axlsx/util/validators.rb) should be skipped.
+  # This will give you a huge speed / memory bonus as often there is no need to keep validating all the attributes of
+  # styles, rows, cells, etc.
+  def self.skip_validations
+    @skip_validations ||= false
+  end
+
+  # @param[Boolean] skip_validations A boolean value indicating whether validations should be skipped
+  # @return [Boolean]
+  # @see Axlsx::skip_validations
+  def self.skip_validations=(skip_validations)
+    @skip_validations = skip_validations
+  end
+
 end

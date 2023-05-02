@@ -6,6 +6,7 @@ require 'axlsx'
 require 'memory_profiler'
 
 # Axlsx.trust_input = true
+Axlsx.skip_validations = true
 
 row = []
 input1 = (32..126).to_a.pack('U*').chars.to_a # these will need to be escaped
