@@ -111,21 +111,27 @@ module Axlsx
   # @note This follows the standard spreadsheet convention of naming columns A to Z, followed by AA to AZ etc.
   # @return [String]
   def self.col_ref(index)
-    chars = +''
-    while index >= 26 do
-      index, char = index.divmod(26)
-      chars.prepend((char + 65).chr)
-      index -= 1
+    # Every row will call this for each column / cell and so we can cache result and avoid lots of small object
+    # allocations.
+    @col_ref ||= {}
+    @col_ref[index] ||= begin
+      chars = +''
+      while index >= 26 do
+        index, char = index.divmod(26)
+        chars.prepend((char + 65).chr)
+        index -= 1
+      end
+      chars.prepend((index + 65).chr)
+      chars.freeze
+      chars
     end
-    chars.prepend((index + 65).chr)
-    chars
   end
 
   # @return [String] The alpha(column)numeric(row) reference for this sell.
   # @example Relative Cell Reference
   #   ws.rows.first.cells.first.r #=> "A1"
   def self.cell_r(c_index, r_index)
-    col_ref(c_index) << (r_index + 1).to_s
+    col_ref(c_index) + (r_index + 1).to_s
   end
 
   # Creates an array of individual cell references based on an excel reference range.

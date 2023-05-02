@@ -5,6 +5,9 @@ $:.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 require 'ruby-prof'
 
+# Axlsx.trust_input = true
+Axlsx.skip_validations = true
+
 row = []
 input1 = (32..126).to_a.pack('U*').chars.to_a # these will need to be escaped
 input2 = (65..122).to_a.pack('U*').chars.to_a # these do not need to be escaped
@@ -18,8 +21,10 @@ profile = RubyProf.profile do
       sheet << row
     end
   end
-  p.to_stream
+  p.serialize("example_prof.xlsx", zip_command: 'zip')
 end
 
 printer = RubyProf::FlatPrinter.new(profile)
 printer.print(STDOUT, {})
+
+File.delete("example_prof.xlsx")
