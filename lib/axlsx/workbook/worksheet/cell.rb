@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require 'cgi'
+require 'hescape'
+
 module Axlsx
   # A cell in a worksheet.
   # Cell stores inforamation requried to serialize a single worksheet cell to xml. You must provde the Row that the cell belongs to and the cells value. The data type will automatically be determed if you do not specify the :type option. The default style will be applied if you do not supply the :style option. Changing the cell's type will recast the value to the type specified. Altering the cell's value via the property accessor will also automatically cast the provided value to the cell's type.
@@ -447,7 +448,7 @@ module Axlsx
     # processing time in benchmarking...
     def clean_value
       if (type == :string || type == :text) && !Axlsx::trust_input
-        Axlsx::sanitize(::CGI.escapeHTML(@value.to_s))
+        Axlsx::sanitize(::Hescape.escape_html(@value.to_s))
       else
         @value.to_s
       end

@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'rubyzip', '>= 1.3.0', '< 3'
   s.add_runtime_dependency "htmlentities", "~> 4.3", '>= 4.3.4'
   s.add_runtime_dependency "marcel", '~> 1.0'
+  s.add_runtime_dependency "hescape"
 
   s.add_development_dependency 'yard', "~> 0.9.8"
   s.add_development_dependency 'kramdown', '~> 2.3'
