@@ -45,9 +45,10 @@ module Axlsx
       self.style = val unless val.nil? || val == 0
       val = options.delete(:formula_value)
       self.formula_value = val unless val.nil?
+      val = options.delete(:escape_formulas)
+      self.escape_formulas = val.nil? ? row.worksheet.escape_formulas : val
 
       parse_options(options)
-      self.escape_formulas = row.worksheet.escape_formulas if escape_formulas.nil?
 
       self.value = value
       value.cell = self if contains_rich_text?
