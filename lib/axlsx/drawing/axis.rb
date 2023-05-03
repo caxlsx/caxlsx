@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # the access class defines common properties and values for a chart axis.
   class Axis

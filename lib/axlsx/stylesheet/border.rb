@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # This class details a border used in Office Open XML spreadsheet styles.
   class Border

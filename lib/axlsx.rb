@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'htmlentities'
 require 'axlsx/version.rb'
 require 'marcel'
@@ -237,5 +238,4 @@ module Axlsx
   def self.skip_validations=(skip_validations)
     @skip_validations = skip_validations
   end
-
 end

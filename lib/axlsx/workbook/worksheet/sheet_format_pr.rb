@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # Sheet formatting properties
   # <xsd:complexType name="CT_SheetFormatPr">

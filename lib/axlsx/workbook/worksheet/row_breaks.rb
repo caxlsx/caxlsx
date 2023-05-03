@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # A collection of break objects that define row breaks (page breaks) for printing and preview
 

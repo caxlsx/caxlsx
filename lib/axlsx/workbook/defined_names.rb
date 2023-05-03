@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # a simple types list of DefinedName objects
   class DefinedNames < SimpleTypedList

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # The Break class stores the details for row and column page breaks.
   # @see RowBreaks, ColBreaks

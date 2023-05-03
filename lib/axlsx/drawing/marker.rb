@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # The Marker class defines a point in the worksheet that drawing anchors attach to.
   # @note The recommended way to manage markers is Worksheet#add_chart Markers are created for a two cell anchor based on the :start and :end options.

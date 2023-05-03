@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # A worksheet hyperlink object. Note that this is not the same as a drawing hyperlink object.
   class WorksheetHyperlink

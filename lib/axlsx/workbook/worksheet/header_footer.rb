@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # Header/Footer options for printing a worksheet. All settings are optional.
   #

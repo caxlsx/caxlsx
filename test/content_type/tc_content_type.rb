@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'tc_helper.rb'
 
 class TestContentType < Test::Unit::TestCase

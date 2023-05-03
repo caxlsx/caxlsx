@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # A wraper class for comments that defines its on worksheet
   # serailization

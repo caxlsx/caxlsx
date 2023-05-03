@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # A series title is a Title with a slightly different serialization than chart titles.
   class SeriesTitle < Title

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'tc_helper'
 
 class TestHeaderFooter < Test::Unit::TestCase

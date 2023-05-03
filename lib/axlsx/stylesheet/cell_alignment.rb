@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # CellAlignment stores information about the cell alignment of a style Xf Object.
   # @note Using Styles#add_style is the recommended way to manage cell alignment.

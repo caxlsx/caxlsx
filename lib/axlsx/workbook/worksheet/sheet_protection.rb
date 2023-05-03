@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # The SheetProtection object manages worksheet protection options per sheet.
   class SheetProtection
@@ -86,7 +87,7 @@ module Axlsx
       encoded_password = encode_password(password)
 
       password_as_hex = [encoded_password].pack("v")
-      password_as_string = password_as_hex.unpack("H*").first.upcase
+      password_as_string = password_as_hex.unpack1("H*").upcase
 
       password_as_string[2..3] + password_as_string[0..1]
     end
@@ -102,7 +103,7 @@ module Axlsx
 
       chars.collect! do |char|
         i += 1
-        char     = char.unpack('c')[0] << i # ord << i
+        char     = char.unpack1('c') << i # ord << i
         low_15   = char & 0x7fff
         high_15  = char & 0x7fff << 15
         high_15  = high_15 >> 15

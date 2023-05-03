@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby -s
 # frozen_string_literal: true
+
 $:.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 require 'csv'

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # An default content part. These parts are automatically created by for you based on the content of your package.
   class Default < AbstractContentType

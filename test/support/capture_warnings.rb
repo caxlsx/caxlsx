@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module CaptureWarnings
   def capture_warnings(&block)
     # Turn off warnings with setting $VERBOSE to nil

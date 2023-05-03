@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # The BubbleChart allows you to insert a bubble chart into your worksheet
   # @see Worksheet#add_chart

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # The Col class defines column attributes for columns in sheets.
   class Col

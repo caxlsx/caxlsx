@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # The BarChart is a two dimentional barchart that you can add to your worksheet.
   # @see Worksheet#add_chart

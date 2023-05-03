@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # The Shared String Table class is responsible for managing and serializing common strings in a workbook.
   # While the ECMA-376 spec allows for both inline and shared strings it seems that at least some applications like iWorks Numbers

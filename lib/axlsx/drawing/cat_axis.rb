@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # A CatAxis object defines a chart category axis
   class CatAxis < Axis

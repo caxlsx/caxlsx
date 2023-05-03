@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # A numeric data source for use by charts.
   class NumDataSource

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # A border part.
   class BorderPr

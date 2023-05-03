@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   require 'axlsx/rels/relationship.rb'
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # Validate a value against a specific list of allowed values.
   class RestrictionValidator

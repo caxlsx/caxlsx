@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # This class specifies data for a particular data point.
   class StrVal

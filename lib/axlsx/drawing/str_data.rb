@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # This specifies the last string data used for a chart. (e.g. strLit and strCache)
   # This class is extended for NumData to include the formatCode attribute required for numLit and numCache

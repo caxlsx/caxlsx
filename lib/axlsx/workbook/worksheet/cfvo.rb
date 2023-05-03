@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # Conditional Format Value Object
   # Describes the values of the interpolation points in a gradient scale. This object is used by ColorScale, DataBar and IconSet classes

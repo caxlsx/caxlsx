@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # This is a utility class for serialing the drawing node in a
   # worksheet. Drawing objects have their own serialization that exports

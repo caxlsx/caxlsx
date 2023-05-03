@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # the SheetCalcPr object for the worksheet
   # This object contains calculation properties for the worksheet.

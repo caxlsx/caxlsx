@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # Table
   # @note Worksheet#add_table is the recommended way to create tables for your worksheets.

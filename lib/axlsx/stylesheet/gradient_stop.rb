@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # The GradientStop object represents a color point in a gradient.
   # @see Open Office XML Part 1 §18.8.24

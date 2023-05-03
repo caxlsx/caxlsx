@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # The OutlinePr class manages serialization of a worksheet's outlinePr element, which provides various
   # options to control outlining.

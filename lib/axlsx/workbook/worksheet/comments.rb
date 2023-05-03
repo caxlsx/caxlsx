@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # Comments is a collection of Comment objects for a worksheet
   class Comments < SimpleTypedList

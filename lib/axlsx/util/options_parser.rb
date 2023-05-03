@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # This module defines a single method for parsing options in class
   # initializers.

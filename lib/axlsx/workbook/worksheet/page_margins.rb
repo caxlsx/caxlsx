@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # PageMargins specify the margins when printing a worksheet.
   #

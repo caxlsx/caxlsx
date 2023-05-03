@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # Conditional Format Rule icon sets
   # Describes an icon set conditional formatting rule.

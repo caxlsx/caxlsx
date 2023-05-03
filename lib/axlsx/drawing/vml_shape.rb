@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # A VmlShape is used to position and render a comment.
   class VmlShape

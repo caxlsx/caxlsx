@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # A simple list of merged cells
   class MergedCells < SimpleTypedList

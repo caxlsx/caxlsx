@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'axlsx/workbook/worksheet/auto_filter/filter_column.rb'
 require 'axlsx/workbook/worksheet/auto_filter/filters.rb'
 

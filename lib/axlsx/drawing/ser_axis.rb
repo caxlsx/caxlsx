@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # A SerAxis object defines a series axis
   class SerAxis < Axis

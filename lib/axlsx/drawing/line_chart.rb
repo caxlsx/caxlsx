@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # The LineChart is a two dimentional line chart (who would have guessed?) that you can add to your worksheet.
   # @example Creating a chart

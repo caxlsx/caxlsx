@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # A collection of Cfvo objects that initializes with the required
   # first two items

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # This class manages the dimensions for a worksheet.
   # While this node is optional in the specification some readers like

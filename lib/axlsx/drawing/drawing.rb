@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   require 'axlsx/drawing/d_lbls.rb'
   require 'axlsx/drawing/title.rb'

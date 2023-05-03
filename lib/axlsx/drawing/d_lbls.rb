@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # There are more elements in the dLbls spec that allow for
   # customizations and formatting. For now, I am just implementing the

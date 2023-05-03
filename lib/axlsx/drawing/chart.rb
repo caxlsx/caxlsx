@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # A Chart is the superclass for specific charts
   # @note Worksheet#add_chart is the recommended way to create charts for your worksheets.

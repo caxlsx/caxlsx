@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # The Scaling class defines axis scaling
   class Scaling

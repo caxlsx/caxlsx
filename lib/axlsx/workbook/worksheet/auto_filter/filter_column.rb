@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # The filterColumn collection identifies a particular column in the AutoFilter
   # range and specifies filter information that has been applied to this column.

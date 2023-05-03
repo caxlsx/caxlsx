@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # This class manages the serialization of rows for worksheets
   class SheetData

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # Conditional Format Rule data bar object
   # Describes a data bar conditional formatting rule.

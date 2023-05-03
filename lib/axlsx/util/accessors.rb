@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # This module defines some of the more common validating attribute
   # accessors that we use in Axlsx
@@ -44,7 +45,7 @@ module Axlsx
       end
 
       # Template for defining validated write accessors
-      SETTER = "def %s=(value) Axlsx::%s(value); @%s = value; end".freeze
+      SETTER = "def %s=(value) Axlsx::%s(value); @%s = value; end"
 
       # Creates the reader and writer access methods
       # @param [Array] symbols The names of the attributes to create

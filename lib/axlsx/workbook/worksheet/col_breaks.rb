@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Axlsx
   # A collection of Brake objects.
   # Please do not use this class directly. Instead use
