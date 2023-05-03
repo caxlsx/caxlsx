@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 - **Unreleased**: 4.0.0
-  - Drop support for Ruby versions < 2.7
+  - Drop support for Ruby versions < 2.6
 
 - **April.23.23**: 3.4.1
   - [PR #209](https://github.com/caxlsx/caxlsx/pull/209) - Revert characters other than `=` being considered as formulas.
