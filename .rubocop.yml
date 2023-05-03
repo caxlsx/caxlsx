@@ -1,6 +1,7 @@
 inherit_from: .rubocop_todo.yml
 
 require:
+  - rubocop-performance
   - rubocop-minitest
 
 AllCops:
@@ -28,6 +29,9 @@ Lint:
   Enabled: true
 
 Minitest:
+  Enabled: true
+
+Performance:
   Enabled: true
 
 Style:

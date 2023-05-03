@@ -110,6 +110,59 @@ Lint/Void:
     - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
+Performance/BlockGivenWithExplicitBlock:
+  Exclude:
+    - 'lib/axlsx/util/serialized_attributes.rb'
+
+# Configuration parameters: MinSize.
+Performance/CollectionLiteralInLoop:
+  Exclude:
+    - 'lib/axlsx/package.rb'
+    - 'lib/axlsx/workbook/worksheet/page_margins.rb'
+
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Performance/Detect:
+  Exclude:
+    - 'lib/axlsx/workbook/workbook.rb'
+
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Performance/InefficientHashSearch:
+  Exclude:
+    - 'lib/axlsx/drawing/axes.rb'
+    - 'lib/axlsx/drawing/d_lbls.rb'
+    - 'lib/axlsx/stylesheet/styles.rb'
+    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
+
+# This cop supports safe autocorrection (--autocorrect).
+Performance/RedundantBlockCall:
+  Exclude:
+    - 'lib/axlsx/util/zip_command.rb'
+
+# This cop supports safe autocorrection (--autocorrect).
+Performance/RedundantMatch:
+  Exclude:
+    - 'lib/axlsx.rb'
+    - 'lib/axlsx/stylesheet/color.rb'
+    - 'lib/axlsx/workbook/workbook.rb'
+
+# This cop supports safe autocorrection (--autocorrect).
+Performance/RedundantSplitRegexpArgument:
+  Exclude:
+    - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
+
+# This cop supports safe autocorrection (--autocorrect).
+Performance/RegexpMatch:
+  Exclude:
+    - 'lib/axlsx/stylesheet/color.rb'
+    - 'lib/axlsx/workbook/workbook.rb'
+    - 'lib/axlsx/workbook/worksheet/cell.rb'
+
+# This cop supports safe autocorrection (--autocorrect).
+Performance/StringIdentifierArgument:
+  Exclude:
+    - 'lib/axlsx/drawing/pic.rb'
+
+# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: separated, grouped
 Style/AccessorGrouping:
