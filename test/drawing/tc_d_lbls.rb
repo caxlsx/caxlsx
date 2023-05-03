@@ -15,17 +15,17 @@ class TestDLbls < Test::Unit::TestCase
   def test_initialization
     assert_equal(:bestFit, @d_lbls.d_lbl_pos)
     @boolean_attributes.each do |attr|
-      assert_equal(false, @d_lbls.send(attr))
+      refute(@d_lbls.send(attr))
     end
   end
 
   def test_initialization_with_optoins
-    options_hash = Hash[*[@boolean_attributes.map { |name| [name, true] }]]
+    options_hash = @boolean_attributes.to_h { |name| [name, true] }
 
     d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart, options_hash.merge({ :d_lbl_pos => :t }))
 
     @boolean_attributes.each do |attr|
-      assert_equal(true, d_lbls.send(attr), "boolean attributes set by options")
+      assert(d_lbls.send(attr), "boolean attributes set by options")
     end
     assert_equal(:t, d_lbls.d_lbl_pos, "d_lbl_pos set by options")
   end
@@ -49,6 +49,7 @@ class TestDLbls < Test::Unit::TestCase
     @d_lbls.to_xml_string(str)
     str << '</c:chartSpace>'
     doc = Nokogiri::XML(str)
+
     Axlsx.instance_values_for(@d_lbls).each do |name, value|
       assert(doc.xpath("//c:#{Axlsx::camel(name, false)}[@val='#{value}']"), "#{name} is properly serialized")
     end

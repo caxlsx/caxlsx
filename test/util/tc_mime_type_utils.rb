@@ -1,4 +1,5 @@
-require 'tc_helper.rb'
+require 'tc_helper'
+
 class TestMimeTypeUtils < Test::Unit::TestCase
   def setup
     stub_request(:get, 'https://example.com/sample-image.png')
@@ -8,11 +9,10 @@ class TestMimeTypeUtils < Test::Unit::TestCase
     @test_img_url = "https://example.com/sample-image.png"
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_mime_type_utils
-    assert_equal(Axlsx::MimeTypeUtils::get_mime_type(@test_img), 'image/jpeg')
-    assert_equal(Axlsx::MimeTypeUtils::get_mime_type_from_uri(@test_img_url), 'image/png')
+    assert_equal('image/jpeg', Axlsx::MimeTypeUtils::get_mime_type(@test_img))
+    assert_equal('image/png', Axlsx::MimeTypeUtils::get_mime_type_from_uri(@test_img_url))
   end
 end

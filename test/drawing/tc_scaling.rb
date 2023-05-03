@@ -1,15 +1,14 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestScaling < Test::Unit::TestCase
   def setup
     @scaling = Axlsx::Scaling.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
-    assert(@scaling.orientation == :minMax)
+    assert_equal(:minMax, @scaling.orientation)
   end
 
   def test_logBase

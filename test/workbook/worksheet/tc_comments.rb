@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestComments < Test::Unit::TestCase
   def setup
@@ -15,21 +15,23 @@ class TestComments < Test::Unit::TestCase
   end
 
   def test_add_comment
-    assert_equal(@ws.comments.size, 2)
-    assert_raise(ArgumentError) { @ws.comments.add_comment() }
+    assert_equal(2, @ws.comments.size)
+    assert_raise(ArgumentError) { @ws.comments.add_comment }
     assert_raise(ArgumentError) { @ws.comments.add_comment(:text => 'Yes We Can', :ref => 'A1') }
     assert_raise(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :ref => 'A1') }
     assert_raise(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :text => 'Yes We Can') }
     assert_nothing_raised { @ws.comments.add_comment(:author => 'bob', :text => 'Yes We Can', :ref => 'A1') }
-    assert_equal(@ws.comments.size, 3)
+    assert_equal(3, @ws.comments.size)
   end
 
   def test_authors
     assert_equal(@ws.comments.authors.size, @ws.comments.size)
     @ws.add_comment(:text => 'Yes We Can!', :author => 'bob', :ref => 'F1')
-    assert_equal(@ws.comments.authors.size, 3)
+
+    assert_equal(3, @ws.comments.authors.size)
     @ws.add_comment(:text => 'Yes We Can!', :author => 'bob', :ref => 'F1')
-    assert_equal(@ws.comments.authors.size, 3, 'only unique authors are returned')
+
+    assert_equal(3, @ws.comments.authors.size, 'only unique authors are returned')
   end
 
   def test_pn
@@ -47,9 +49,10 @@ class TestComments < Test::Unit::TestCase
     schema.validate(doc).each do |error|
       errors << error
     end
+
     assert_equal(0, errors.length)
 
-    # TODO figure out why these xpath expressions dont work!
+    # TODO: figure out why these xpath expressions dont work!
     # assert(doc.xpath("//comments"))
     # assert_equal(doc.xpath("//xmlns:author").size, @ws.comments.authors.size)
     # assert_equal(doc.xpath("//comment").size, @ws.comments.size)

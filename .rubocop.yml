@@ -1,10 +1,15 @@
 inherit_from: .rubocop_todo.yml
 
+require:
+  - rubocop-minitest
+
 AllCops:
   DisabledByDefault: true
   NewCops: enable
   SuggestExtensions: false
   TargetRubyVersion: 2.6
+  DisplayStyleGuide: true
+  ExtraDetails: true
   Exclude:
     - 'docs/**/*'
     - 'examples/**/*'
@@ -19,5 +24,15 @@ Layout/CommentIndentation:
 Layout/ExtraSpacing:
   AllowBeforeTrailingComments: true
 
+Lint:
+  Enabled: true
+
+Minitest:
+  Enabled: true
+
 Style:
   Enabled: true
+
+Style/NumericLiterals:
+  Exclude:
+    - 'lib/**/*'

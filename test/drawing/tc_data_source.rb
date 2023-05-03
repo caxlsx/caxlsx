@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestNumDataSource < Test::Unit::TestCase
   def setup
@@ -16,6 +16,7 @@ class TestNumDataSource < Test::Unit::TestCase
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '">'
     str << @data_source.to_xml_string
     doc = Nokogiri::XML(str)
-    assert_equal(doc.xpath("//c:val").size, 1)
+
+    assert_equal(1, doc.xpath("//c:val").size)
   end
 end

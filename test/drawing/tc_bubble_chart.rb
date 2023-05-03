@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestBubbleChart < Test::Unit::TestCase
   def setup
@@ -21,8 +21,7 @@ class TestBubbleChart < Test::Unit::TestCase
     end
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert_equal(@chart.series_type, Axlsx::BubbleSeries, "series type incorrect")
@@ -38,6 +37,7 @@ class TestBubbleChart < Test::Unit::TestCase
       errors.push error
       puts error.message
     end
-    assert(errors.empty?, "error free validation")
+
+    assert_empty(errors, "error free validation")
   end
 end

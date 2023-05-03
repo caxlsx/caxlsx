@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestLine3DChart < Test::Unit::TestCase
   def setup
@@ -8,11 +8,10 @@ class TestLine3DChart < Test::Unit::TestCase
     @chart = ws.add_chart Axlsx::Line3DChart, :title => "fishery"
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
-    assert_equal(@chart.grouping, :standard, "grouping defualt incorrect")
+    assert_equal(:standard, @chart.grouping, "grouping defualt incorrect")
     assert_equal(@chart.series_type, Axlsx::LineSeries, "series type incorrect")
     assert(@chart.catAxis.is_a?(Axlsx::CatAxis), "category axis not created")
     assert(@chart.valAxis.is_a?(Axlsx::ValAxis), "value access not created")
@@ -22,13 +21,13 @@ class TestLine3DChart < Test::Unit::TestCase
   def test_grouping
     assert_raise(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
     assert_nothing_raised("allow valid grouping") { @chart.grouping = :stacked }
-    assert(@chart.grouping == :stacked)
+    assert_equal(:stacked, @chart.grouping)
   end
 
   def test_gapDepth
     assert_raise(ArgumentError, "require valid gapDepth") { @chart.gapDepth = 200 }
     assert_nothing_raised("allow valid gapDepth") { @chart.gapDepth = "200%" }
-    assert(@chart.gapDepth == "200%")
+    assert_equal("200%", @chart.gapDepth)
   end
 
   def test_to_xml
@@ -39,6 +38,7 @@ class TestLine3DChart < Test::Unit::TestCase
       errors.push error
       puts error.message
     end
-    assert(errors.empty?, "error free validation")
+
+    assert_empty(errors, "error free validation")
   end
 end

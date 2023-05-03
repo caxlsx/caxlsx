@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestGraphicFrame < Test::Unit::TestCase
   def setup
@@ -8,8 +8,7 @@ class TestGraphicFrame < Test::Unit::TestCase
     @frame = @chart.graphic_frame
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
     assert(@frame.anchor.is_a?(Axlsx::TwoCellAnchor))
@@ -22,6 +21,7 @@ class TestGraphicFrame < Test::Unit::TestCase
 
   def test_to_xml_has_correct_rId
     doc = Nokogiri::XML(@frame.to_xml_string)
+
     assert_equal @frame.rId, doc.xpath("//c:chart", doc.collect_namespaces).first["r:id"]
   end
 end

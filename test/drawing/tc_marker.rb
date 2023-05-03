@@ -1,18 +1,17 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestMarker < Test::Unit::TestCase
   def setup
     @marker = Axlsx::Marker.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
-    assert(@marker.col == 0)
-    assert(@marker.colOff == 0)
-    assert(@marker.row == 0)
-    assert(@marker.rowOff == 0)
+    assert_equal(0, @marker.col)
+    assert_equal(0, @marker.colOff)
+    assert_equal(0, @marker.row)
+    assert_equal(0, @marker.rowOff)
   end
 
   def test_col
@@ -37,7 +36,8 @@ class TestMarker < Test::Unit::TestCase
 
   def test_coord
     @marker.coord 5, 10
-    assert_equal(@marker.col, 5)
-    assert_equal(@marker.row, 10)
+
+    assert_equal(5, @marker.col)
+    assert_equal(10, @marker.row)
   end
 end

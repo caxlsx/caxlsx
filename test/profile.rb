@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby -s
 
-$:.unshift "#{File.dirname(__FILE__)}/../lib"
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 require 'ruby-prof'
 # RubyProf.measure_mode = RubyProf::MEMORY
@@ -13,7 +13,7 @@ input = (32..126).to_a.pack('U*').chars.to_a
 profile = RubyProf.profile do
   p = Axlsx::Package.new
   p.workbook.add_worksheet do |sheet|
-    10000.times do
+    10_000.times do
       sheet << row
     end
   end
@@ -21,4 +21,4 @@ profile = RubyProf.profile do
 end
 
 printer = RubyProf::FlatPrinter.new(profile)
-printer.print(STDOUT, {})
+printer.print($stdout, {})

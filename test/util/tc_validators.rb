@@ -1,10 +1,9 @@
-require 'tc_helper.rb'
-class TestValidators < Test::Unit::TestCase
-  def setup
-  end
+require 'tc_helper'
 
-  def teardown
-  end
+class TestValidators < Test::Unit::TestCase
+  def setup; end
+
+  def teardown; end
 
   def test_validators
     # unsigned_int
@@ -21,7 +20,7 @@ class TestValidators < Test::Unit::TestCase
 
     # boolean (as 0 or 1, :true, :false, true, false, or "true," "false")
     [0, 1, :true, :false, true, false, "true", "false"].each do |v|
-      assert_nothing_raised { Axlsx.validate_boolean 0 }
+      assert_nothing_raised { Axlsx.validate_boolean v }
     end
     assert_raise(ArgumentError) { Axlsx.validate_boolean 2 }
 

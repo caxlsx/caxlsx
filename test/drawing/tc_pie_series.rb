@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestPieSeries < Test::Unit::TestCase
   def setup
@@ -9,23 +9,24 @@ class TestPieSeries < Test::Unit::TestCase
   end
 
   def test_initialize
-    assert_equal(@series.title.text, "bob", "series title has been applied")
+    assert_equal("bob", @series.title.text, "series title has been applied")
     assert_equal(@series.labels.class, Axlsx::AxDataSource)
     assert_equal(@series.data.class, Axlsx::NumDataSource)
-    assert_equal(@series.explosion, nil, "series shape has been applied")
+    assert_nil(@series.explosion, "series shape has been applied")
   end
 
   def test_explosion
     assert_raise(ArgumentError, "require valid explosion") { @series.explosion = :lots }
     assert_nothing_raised("allow valid explosion") { @series.explosion = 20 }
-    assert(@series.explosion == 20)
+    assert_equal(20, @series.explosion)
     # issue 58 - explosion caused to_xml_string to fail - now tested
     assert_nothing_raised("allow to_xml_string") { @series.to_xml_string }
   end
 
   def test_to_xml_string
     doc = Nokogiri::XML(@series.to_xml_string)
+
     assert(doc.xpath("//srgbClr[@val='#{@series.colors[0]}']"))
   end
-  # TODO test unique serialization parts
+  # TODO: test unique serialization parts
 end

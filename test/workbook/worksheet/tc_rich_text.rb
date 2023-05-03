@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class RichText < Test::Unit::TestCase
   def setup
@@ -7,7 +7,7 @@ class RichText < Test::Unit::TestCase
     p.workbook.styles.add_style :sz => 20
     @rt = Axlsx::RichText.new
     b = true
-    (0..26).each do |r|
+    27.times do |r|
       @rt.add_run "run #{r}, ", :b => (b = !b), :i => !b
     end
     @row = @ws.add_row [@rt]
@@ -17,21 +17,24 @@ class RichText < Test::Unit::TestCase
   def test_initialize
     assert_equal(@c.value, @rt)
     rt_direct = Axlsx::RichText.new('hi', :i => true)
-    rt_indirect = Axlsx::RichText.new()
+    rt_indirect = Axlsx::RichText.new
     rt_indirect.add_run('hi', :i => true)
-    assert_equal(rt_direct.runs.length, 1)
-    assert_equal(rt_indirect.runs.length, 1)
+
+    assert_equal(1, rt_direct.runs.length)
+    assert_equal(1, rt_indirect.runs.length)
     row = @ws.add_row [rt_direct, rt_indirect]
+
     assert_equal(row[0].to_xml_string(0, 0), row[1].to_xml_string(0, 0))
   end
 
   def test_textruns
     runs = @rt.runs
-    assert_equal(runs.length, 27)
-    assert_equal(runs.first.b, false)
-    assert_equal(runs.first.i, true)
-    assert_equal(runs[1].b, true)
-    assert_equal(runs[1].i, false)
+
+    assert_equal(27, runs.length)
+    refute(runs.first.b)
+    assert(runs.first.i)
+    assert(runs[1].b)
+    refute(runs[1].i)
   end
 
   def test_implicit_richtext
@@ -39,6 +42,7 @@ class RichText < Test::Unit::TestCase
     row_rt = @ws.add_row [rt]
     row_imp = @ws.add_row ['a']
     row_imp[0].b = true
+
     assert_equal(row_rt[0].to_xml_string(0, 0), row_imp[0].to_xml_string(0, 0))
   end
 end

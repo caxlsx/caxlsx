@@ -1,4 +1,5 @@
-require 'tc_helper.rb'
+require 'tc_helper'
+
 class TestProtectedRange < Test::Unit::TestCase
   def setup
     @p = Axlsx::Package.new
@@ -11,6 +12,7 @@ class TestProtectedRange < Test::Unit::TestCase
 
   def test_range
     r = @ws.protect_range('A1:B1')
+
     assert_equal('A1:B1', r.sqref)
   end
 end

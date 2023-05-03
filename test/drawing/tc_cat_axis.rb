@@ -1,17 +1,16 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestCatAxis < Test::Unit::TestCase
   def setup
     @axis = Axlsx::CatAxis.new
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_initialization
-    assert_equal(@axis.auto, 1, "axis auto default incorrect")
-    assert_equal(@axis.lbl_algn, :ctr, "label align default incorrect")
-    assert_equal(@axis.lbl_offset, "100", "label offset default incorrect")
+    assert_equal(1, @axis.auto, "axis auto default incorrect")
+    assert_equal(:ctr, @axis.lbl_algn, "label align default incorrect")
+    assert_equal("100", @axis.lbl_offset, "label offset default incorrect")
   end
 
   def test_auto

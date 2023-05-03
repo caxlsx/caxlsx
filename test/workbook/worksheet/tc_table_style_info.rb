@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestTableStyleInfo < Test::Unit::TestCase
   def setup
@@ -17,6 +17,7 @@ class TestTableStyleInfo < Test::Unit::TestCase
 
   def test_initialize
     table_style = Axlsx::TableStyleInfo.new @options
+
     @options.each do |key, value|
       assert_equal(value, table_style.send(key.to_sym))
     end
@@ -24,7 +25,7 @@ class TestTableStyleInfo < Test::Unit::TestCase
 
   def test_boolean_properties
     table_style = Axlsx::TableStyleInfo.new
-    @options.keys.each do |key|
+    @options.each_key do |key|
       assert_nothing_raised { table_style.send("#{key.to_sym}=", true) }
       assert_raises(ArgumentError) { table_style.send(key.to_sym, 'foo') }
     end

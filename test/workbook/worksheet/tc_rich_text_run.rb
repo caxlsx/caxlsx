@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class RichTextRun < Test::Unit::TestCase
   def setup
@@ -15,21 +15,24 @@ class RichTextRun < Test::Unit::TestCase
   end
 
   def test_initialize
-    assert_equal(@rtr.value, 'hihihi')
-    assert_equal(@rtr.b, true)
-    assert_equal(@rtr.i, false)
+    assert_equal('hihihi', @rtr.value)
+    assert(@rtr.b)
+    refute(@rtr.i)
   end
 
   def test_font_size_with_custom_style_and_no_sz
     @c.style = @c.row.worksheet.workbook.styles.add_style :bg_color => 'FF00FF'
     sz = @rtr.send(:font_size)
+
     assert_equal(sz, @c.row.worksheet.workbook.styles.fonts.first.sz * 1.5)
     sz = @rtr2.send(:font_size)
+
     assert_equal(sz, @c.row.worksheet.workbook.styles.fonts.first.sz)
   end
 
   def test_font_size_with_bolding
     @c.style = @c.row.worksheet.workbook.styles.add_style :b => true
+
     assert_equal(@c.row.worksheet.workbook.styles.fonts.first.sz * 1.5, @rtr.send(:font_size))
     assert_equal(@c.row.worksheet.workbook.styles.fonts.first.sz * 1.5, @rtr2.send(:font_size)) # is this the correct behaviour?
   end
@@ -37,107 +40,111 @@ class RichTextRun < Test::Unit::TestCase
   def test_font_size_with_custom_sz
     @c.style = @c.row.worksheet.workbook.styles.add_style :sz => 52
     sz = @rtr.send(:font_size)
-    assert_equal(sz, 52 * 1.5)
+
+    assert_equal(52 * 1.5, sz)
     sz2 = @rtr2.send(:font_size)
-    assert_equal(sz2, 52)
+
+    assert_equal(52, sz2)
   end
 
   def test_rtr_with_sz
     @rtr.sz = 25
+
     assert_equal(25, @rtr.send(:font_size))
   end
 
   def test_color
     assert_raise(ArgumentError) { @rtr.color = -1.1 }
     assert_nothing_raised { @rtr.color = "FF00FF00" }
-    assert_equal(@rtr.color.rgb, "FF00FF00")
+    assert_equal("FF00FF00", @rtr.color.rgb)
   end
 
   def test_scheme
     assert_raise(ArgumentError) { @rtr.scheme = -1.1 }
     assert_nothing_raised { @rtr.scheme = :major }
-    assert_equal(@rtr.scheme, :major)
+    assert_equal(:major, @rtr.scheme)
   end
 
   def test_vertAlign
     assert_raise(ArgumentError) { @rtr.vertAlign = -1.1 }
     assert_nothing_raised { @rtr.vertAlign = :baseline }
-    assert_equal(@rtr.vertAlign, :baseline)
+    assert_equal(:baseline, @rtr.vertAlign)
   end
 
   def test_sz
     assert_raise(ArgumentError) { @rtr.sz = -1.1 }
     assert_nothing_raised { @rtr.sz = 12 }
-    assert_equal(@rtr.sz, 12)
+    assert_equal(12, @rtr.sz)
   end
 
   def test_extend
     assert_raise(ArgumentError) { @rtr.extend = -1.1 }
     assert_nothing_raised { @rtr.extend = false }
-    assert_equal(@rtr.extend, false)
+    refute(@rtr.extend)
   end
 
   def test_condense
     assert_raise(ArgumentError) { @rtr.condense = -1.1 }
     assert_nothing_raised { @rtr.condense = false }
-    assert_equal(@rtr.condense, false)
+    refute(@rtr.condense)
   end
 
   def test_shadow
     assert_raise(ArgumentError) { @rtr.shadow = -1.1 }
     assert_nothing_raised { @rtr.shadow = false }
-    assert_equal(@rtr.shadow, false)
+    refute(@rtr.shadow)
   end
 
   def test_outline
     assert_raise(ArgumentError) { @rtr.outline = -1.1 }
     assert_nothing_raised { @rtr.outline = false }
-    assert_equal(@rtr.outline, false)
+    refute(@rtr.outline)
   end
 
   def test_strike
     assert_raise(ArgumentError) { @rtr.strike = -1.1 }
     assert_nothing_raised { @rtr.strike = false }
-    assert_equal(@rtr.strike, false)
+    refute(@rtr.strike)
   end
 
   def test_u
     @c.type = :string
     assert_raise(ArgumentError) { @c.u = -1.1 }
     assert_nothing_raised { @c.u = :single }
-    assert_equal(@c.u, :single)
+    assert_equal(:single, @c.u)
     doc = Nokogiri::XML(@c.to_xml_string(1, 1))
+
     assert(doc.xpath('//u[@val="single"]'))
   end
 
   def test_i
     assert_raise(ArgumentError) { @c.i = -1.1 }
     assert_nothing_raised { @c.i = false }
-    assert_equal(@c.i, false)
+    refute(@c.i)
   end
 
   def test_rFont
     assert_raise(ArgumentError) { @c.font_name = -1.1 }
     assert_nothing_raised { @c.font_name = "Arial" }
-    assert_equal(@c.font_name, "Arial")
+    assert_equal("Arial", @c.font_name)
   end
 
   def test_charset
     assert_raise(ArgumentError) { @c.charset = -1.1 }
     assert_nothing_raised { @c.charset = 1 }
-    assert_equal(@c.charset, 1)
+    assert_equal(1, @c.charset)
   end
 
   def test_family
     assert_raise(ArgumentError) { @rtr.family = 0 }
     assert_nothing_raised { @rtr.family = 1 }
-    assert_equal(@rtr.family, 1)
+    assert_equal(1, @rtr.family)
   end
 
   def test_b
     assert_raise(ArgumentError) { @c.b = -1.1 }
     assert_nothing_raised { @c.b = false }
-    assert_equal(@c.b, false)
+    refute(@c.b)
   end
 
   def test_multiline_autowidth
@@ -148,8 +155,9 @@ class RichTextRun < Test::Unit::TestCase
     @ws.add_row [rt], :style => wrap
     ar = [0]
     awtr.autowidth(ar)
+
     assert_equal(2, ar.length)
-    assert_equal(13.2, ar[0])
+    assert_in_delta(13.2, ar[0])
     assert_equal(0, ar[1])
   end
 
@@ -161,7 +169,8 @@ class RichTextRun < Test::Unit::TestCase
       puts error.message
       errors.push error
     end
-    assert(errors.empty?, "error free validation")
+
+    assert_empty(errors, "error free validation")
 
     assert(doc.xpath('//rPr/b[@val=1]'))
     assert(doc.xpath('//rPr/i[@val=0]'))

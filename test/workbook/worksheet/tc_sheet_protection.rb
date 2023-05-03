@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 # <xsd:complexType name="CT_SheetProtection">
 # <xsd:attribute name="sheet" type="xsd:boolean" use="optional" default=0/>
@@ -46,14 +46,14 @@ class TestSheetProtection < Test::Unit::TestCase
   def test_boolean_attribute_validation
     @boolean_options.each do |key, value|
       assert_raise(ArgumentError, "#{key} must be boolean") { @sp.send("#{key}=".to_sym, 'A') }
-      assert_nothing_raised { @sp.send("#{key}=".to_sym, true) }
-      assert_nothing_raised { @sp.send("#{key}=".to_sym, true) }
+      assert_nothing_raised { @sp.send("#{key}=".to_sym, value) }
     end
   end
 
   def test_to_xml_string
     @sp.password = 'fish' # -> CA3F
     doc = Nokogiri::XML(@sp.to_xml_string)
+
     @options.each do |key, value|
       assert(doc.xpath("//sheetProtection[@#{key.to_s.gsub(/_(.)/) { $1.upcase }}='#{value}']"))
     end

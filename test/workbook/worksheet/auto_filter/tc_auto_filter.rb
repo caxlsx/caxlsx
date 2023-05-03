@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestAutoFilter < Test::Unit::TestCase
   def setup
@@ -15,6 +15,7 @@ class TestAutoFilter < Test::Unit::TestCase
 
   def test_to_xml_string
     doc = Nokogiri::XML(@auto_filter.to_xml_string)
+
     assert(doc.xpath("autoFilter[@ref='#{@auto_filter.range}']"))
   end
 
@@ -30,8 +31,9 @@ class TestAutoFilter < Test::Unit::TestCase
   end
 
   def test_applya
-    assert_equal nil, @auto_filter.worksheet.rows.last.hidden
+    assert_nil @auto_filter.worksheet.rows.last.hidden
     @auto_filter.apply
-    assert_equal true, @auto_filter.worksheet.rows.last.hidden
+
+    assert @auto_filter.worksheet.rows.last.hidden
   end
 end

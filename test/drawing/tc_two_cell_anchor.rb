@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestTwoCellAnchor < Test::Unit::TestCase
   def setup
@@ -10,10 +10,10 @@ class TestTwoCellAnchor < Test::Unit::TestCase
   end
 
   def test_initialization
-    assert(@anchor.from.col == 0)
-    assert(@anchor.from.row == 0)
-    assert(@anchor.to.col == 5)
-    assert(@anchor.to.row == 10)
+    assert_equal(0, @anchor.from.col)
+    assert_equal(0, @anchor.from.row)
+    assert_equal(5, @anchor.to.col)
+    assert_equal(10, @anchor.to.row)
   end
 
   def test_index
@@ -26,9 +26,10 @@ class TestTwoCellAnchor < Test::Unit::TestCase
     # this is actually raised in the graphic frame
     assert_raise(ArgumentError, 'invalid Chart') { @ws.add_chart Axlsx::TwoCellAnchor }
     a = @ws.add_chart Axlsx::Chart, :start_at => [15, 35], :end_at => [90, 45]
-    assert_equal(a.graphic_frame.anchor.from.col, 15)
-    assert_equal(a.graphic_frame.anchor.from.row, 35)
-    assert_equal(a.graphic_frame.anchor.to.col, 90)
-    assert_equal(a.graphic_frame.anchor.to.row, 45)
+
+    assert_equal(15, a.graphic_frame.anchor.from.col)
+    assert_equal(35, a.graphic_frame.anchor.from.row)
+    assert_equal(90, a.graphic_frame.anchor.to.col)
+    assert_equal(45, a.graphic_frame.anchor.to.row)
   end
 end

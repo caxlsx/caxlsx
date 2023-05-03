@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestPivotTableCacheDefinition < Test::Unit::TestCase
   def setup
@@ -37,7 +37,7 @@ class TestPivotTableCacheDefinition < Test::Unit::TestCase
     data_sheet.name = "Pivot Table Data Source"
     @pivot_table.data_sheet = data_sheet
 
-    assert(@cache_definition.to_xml_string.include?(data_sheet.name), "must set the data source correctly")
+    assert_includes(@cache_definition.to_xml_string, data_sheet.name, "must set the data source correctly")
   end
 
   def test_to_xml_string
@@ -48,7 +48,8 @@ class TestPivotTableCacheDefinition < Test::Unit::TestCase
       errors.push error
       puts error.message
     end
-    assert(errors.empty?, "error free validation")
+
+    assert_empty(errors, "error free validation")
   end
 
   def test_to_xml_string_for_special_characters
@@ -57,6 +58,7 @@ class TestPivotTableCacheDefinition < Test::Unit::TestCase
 
     doc = Nokogiri::XML(@cache_definition.to_xml_string)
     errors = doc.errors
-    assert(errors.empty?, "invalid xml: #{errors.map(&:to_s).join(', ')}")
+
+    assert_empty(errors, "invalid xml: #{errors.map(&:to_s).join(', ')}")
   end
 end

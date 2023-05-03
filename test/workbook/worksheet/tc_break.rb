@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestBreak < Test::Unit::TestCase
   def setup
@@ -27,14 +27,14 @@ class TestBreak < Test::Unit::TestCase
   end
 
   def test_man
-    assert_equal(true, @break.man)
+    assert(@break.man)
     assert_raises ArgumentError do
       Axlsx::Break.new(:man => -1)
     end
   end
 
   def test_pt
-    assert_equal(false, @break.pt)
+    refute(@break.pt)
     assert_raises ArgumentError do
       Axlsx::Break.new(:pt => -1)
     end
@@ -42,6 +42,7 @@ class TestBreak < Test::Unit::TestCase
 
   def test_to_xml_string
     doc = Nokogiri::XML(@break.to_xml_string)
-    assert_equal(doc.xpath('//brk[@id="1"][@min="1"][@max="10"][@pt=0][@man=1]').size, 1)
+
+    assert_equal(1, doc.xpath('//brk[@id="1"][@min="1"][@max="10"][@pt=0][@man=1]').size)
   end
 end

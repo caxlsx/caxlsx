@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestAreaSeries < Test::Unit::TestCase
   def setup
@@ -16,42 +16,48 @@ class TestAreaSeries < Test::Unit::TestCase
   end
 
   def test_initialize
-    assert_equal(@series.title.text, "bob", "series title has been applied")
+    assert_equal("bob", @series.title.text, "series title has been applied")
     assert_equal(@series.labels.class, Axlsx::AxDataSource)
     assert_equal(@series.data.class, Axlsx::NumDataSource)
   end
 
   def test_show_marker
-    assert_equal(true, @series.show_marker)
+    assert(@series.show_marker)
     @series.show_marker = false
-    assert_equal(false, @series.show_marker)
+
+    refute(@series.show_marker)
   end
 
   def test_smooth
-    assert_equal(true, @series.smooth)
+    assert(@series.smooth)
     @series.smooth = false
-    assert_equal(false, @series.smooth)
+
+    refute(@series.smooth)
   end
 
   def test_marker_symbol
     assert_equal(:default, @series.marker_symbol)
     @series.marker_symbol = :circle
+
     assert_equal(:circle, @series.marker_symbol)
   end
 
   def test_to_xml_string
     doc = Nokogiri::XML(wrap_with_namespaces(@series))
+
     assert(doc.xpath("//srgbClr[@val='#{@series.color}']"))
-    assert_equal(xpath_with_namespaces(doc, "//c:marker").size, 0)
+    assert_equal(0, xpath_with_namespaces(doc, "//c:marker").size)
     assert(doc.xpath("//smooth"))
 
     @series.marker_symbol = :diamond
     doc = Nokogiri::XML(wrap_with_namespaces(@series))
-    assert_equal(xpath_with_namespaces(doc, "//c:marker/c:symbol[@val='diamond']").size, 1)
+
+    assert_equal(1, xpath_with_namespaces(doc, "//c:marker/c:symbol[@val='diamond']").size)
 
     @series.show_marker = false
     doc = Nokogiri::XML(wrap_with_namespaces(@series))
-    assert_equal(xpath_with_namespaces(doc, "//c:marker/c:symbol[@val='none']").size, 1)
+
+    assert_equal(1, xpath_with_namespaces(doc, "//c:marker/c:symbol[@val='none']").size)
   end
 
   def wrap_with_namespaces(series)

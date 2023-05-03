@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestOutlinePr < Test::Unit::TestCase
   def setup
@@ -6,14 +6,14 @@ class TestOutlinePr < Test::Unit::TestCase
   end
 
   def test_summary_below
-    assert_equal false, @outline_pr.summary_below
+    refute @outline_pr.summary_below
   end
 
   def test_summary_right
-    assert_equal true, @outline_pr.summary_right
+    assert @outline_pr.summary_right
   end
 
   def test_apply_styles
-    assert_equal false, @outline_pr.apply_styles
+    refute @outline_pr.apply_styles
   end
 end

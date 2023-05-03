@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestCell < Test::Unit::TestCase
   def setup
@@ -15,14 +15,15 @@ class TestCell < Test::Unit::TestCase
 
   def test_initialize
     assert_equal(@row.cells.last, @c, "the cell was added to the row")
-    assert_equal(@c.type, :float, "type option is applied")
-    assert_equal(@c.style, 1, "style option is applied")
-    assert_equal(@c.value, 1.0, "type option is applied and value is casted")
-    assert_equal(@c.escape_formulas, true, "escape formulas option is applied")
+    assert_equal(:float, @c.type, "type option is applied")
+    assert_equal(1, @c.style, "style option is applied")
+    assert_in_delta(@c.value, 1.0, 0.001, "type option is applied and value is casted")
+    assert(@c.escape_formulas, "escape formulas option is applied")
   end
 
   def test_style_date_data
     c = Axlsx::Cell.new(@c.row, Time.now)
+
     assert_equal(Axlsx::STYLE_DATE, c.style)
   end
 
@@ -39,20 +40,21 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_r
-    assert_equal(@c.r, "A1", "calculate cell reference")
+    assert_equal("A1", @c.r, "calculate cell reference")
   end
 
   def test_wide_r
-    assert_equal(@cAA.r, "AA2", "calculate cell reference")
+    assert_equal("AA2", @cAA.r, "calculate cell reference")
   end
 
   def test_r_abs
-    assert_equal(@c.r_abs, "$A$1", "calculate absolute cell reference")
-    assert_equal(@cAA.r_abs, "$AA$2", "needs to accept multi-digit columns")
+    assert_equal("$A$1", @c.r_abs, "calculate absolute cell reference")
+    assert_equal("$AA$2", @cAA.r_abs, "needs to accept multi-digit columns")
   end
 
   def test_name
     @c.name = 'foo'
+
     assert_equal(1, @ws.workbook.defined_names.size)
     assert_equal('foo', @ws.workbook.defined_names.last.name)
   end
@@ -60,6 +62,7 @@ class TestCell < Test::Unit::TestCase
   def test_autowidth
     style = @c.row.worksheet.workbook.styles.add_style({ :alignment => { :horizontal => :center, :vertical => :center, :wrap_text => true } })
     @c.style = style
+
     assert_in_delta(6.6, @c.autowidth, 0.01)
   end
 
@@ -67,11 +70,13 @@ class TestCell < Test::Unit::TestCase
     style = @c.row.worksheet.workbook.styles.add_style(b: true)
     @c.row.worksheet.workbook.bold_font_multiplier = 1.05
     @c.style = style
+
     assert_in_delta(6.93, @c.autowidth, 0.01)
   end
 
   def test_autowidth_with_font_scale_divisor
     @c.row.worksheet.workbook.font_scale_divisor = 11.0
+
     assert_in_delta(6.0, @c.autowidth, 0.01)
   end
 
@@ -79,6 +84,7 @@ class TestCell < Test::Unit::TestCase
     @c.type = :time
     now = DateTime.now
     @c.value = now
+
     assert_equal(@c.value, now.to_time)
   end
 
@@ -86,55 +92,56 @@ class TestCell < Test::Unit::TestCase
     @c.type = :date
     now = Time.now
     @c.value = now
+
     assert_equal(@c.value, now.to_date)
   end
 
   def test_style
     assert_raise(ArgumentError, "must reject invalid style indexes") { @c.style = @c.row.worksheet.workbook.styles.cellXfs.size }
     assert_nothing_raised("must allow valid style index changes") { @c.style = 1 }
-    assert_equal(@c.style, 1)
+    assert_equal(1, @c.style)
   end
 
   def test_type
     assert_raise(ArgumentError, "type must be :string, :integer, :float, :date, :time, :boolean") { @c.type = :array }
     assert_nothing_raised("type can be changed") { @c.type = :string }
-    assert_equal(@c.value, "1.0", "changing type casts the value")
-    assert_equal(:float, @row.add_cell(1.0 / 10**7).type, 'properly identify exponential floats as float type')
-    assert_equal(@row.add_cell(Time.now).type, :time, 'time should be time')
-    assert_equal(@row.add_cell(Date.today).type, :date, 'date should be date')
-    assert_equal(@row.add_cell(true).type, :boolean, 'boolean should be boolean')
+    assert_equal("1.0", @c.value, "changing type casts the value")
+    assert_equal(:float, @row.add_cell(1.0 / (10**7)).type, 'properly identify exponential floats as float type')
+    assert_equal(:time, @row.add_cell(Time.now).type, 'time should be time')
+    assert_equal(:date, @row.add_cell(Date.today).type, 'date should be date')
+    assert_equal(:boolean, @row.add_cell(true).type, 'boolean should be boolean')
   end
 
   def test_value
     assert_raise(ArgumentError, "type must be :string, :integer, :float, :date, :time, :boolean") { @c.type = :array }
     assert_nothing_raised("type can be changed") { @c.type = :string }
-    assert_equal(@c.value, "1.0", "changing type casts the value")
+    assert_equal("1.0", @c.value, "changing type casts the value")
   end
 
   def test_col_ref
-    # TODO move to axlsx spec
-    assert_equal(Axlsx.col_ref(0), "A")
+    # TODO: move to axlsx spec
+    assert_equal("A", Axlsx.col_ref(0))
   end
 
   def test_cell_type_from_value
-    assert_equal(@c.send(:cell_type_from_value, 1.0), :float)
-    assert_equal(@c.send(:cell_type_from_value, "1e1"), :float)
-    assert_equal(@c.send(:cell_type_from_value, "1e#{Float::MAX_10_EXP}"), :float)
-    assert_equal(@c.send(:cell_type_from_value, "1e#{Float::MAX_10_EXP + 1}"), :string)
-    assert_equal(@c.send(:cell_type_from_value, "1e-1"), :float)
-    assert_equal(@c.send(:cell_type_from_value, "1e#{Float::MIN_10_EXP}"), :float)
-    assert_equal(@c.send(:cell_type_from_value, "1e#{Float::MIN_10_EXP - 1}"), :string)
-    assert_equal(@c.send(:cell_type_from_value, 1), :integer)
-    assert_equal(@c.send(:cell_type_from_value, Date.today), :date)
-    assert_equal(@c.send(:cell_type_from_value, Time.now), :time)
-    assert_equal(@c.send(:cell_type_from_value, []), :string)
-    assert_equal(@c.send(:cell_type_from_value, "d"), :string)
-    assert_equal(@c.send(:cell_type_from_value, nil), :string)
-    assert_equal(@c.send(:cell_type_from_value, -1), :integer)
-    assert_equal(@c.send(:cell_type_from_value, true), :boolean)
-    assert_equal(@c.send(:cell_type_from_value, false), :boolean)
-    assert_equal(@c.send(:cell_type_from_value, 1.0 / 10**6), :float)
-    assert_equal(@c.send(:cell_type_from_value, Axlsx::RichText.new), :richtext)
+    assert_equal(:float, @c.send(:cell_type_from_value, 1.0))
+    assert_equal(:float, @c.send(:cell_type_from_value, "1e1"))
+    assert_equal(:float, @c.send(:cell_type_from_value, "1e#{Float::MAX_10_EXP}"))
+    assert_equal(:string, @c.send(:cell_type_from_value, "1e#{Float::MAX_10_EXP + 1}"))
+    assert_equal(:float, @c.send(:cell_type_from_value, "1e-1"))
+    assert_equal(:float, @c.send(:cell_type_from_value, "1e#{Float::MIN_10_EXP}"))
+    assert_equal(:string, @c.send(:cell_type_from_value, "1e#{Float::MIN_10_EXP - 1}"))
+    assert_equal(:integer, @c.send(:cell_type_from_value, 1))
+    assert_equal(:date, @c.send(:cell_type_from_value, Date.today))
+    assert_equal(:time, @c.send(:cell_type_from_value, Time.now))
+    assert_equal(:string, @c.send(:cell_type_from_value, []))
+    assert_equal(:string, @c.send(:cell_type_from_value, "d"))
+    assert_equal(:string, @c.send(:cell_type_from_value, nil))
+    assert_equal(:integer, @c.send(:cell_type_from_value, -1))
+    assert_equal(:boolean, @c.send(:cell_type_from_value, true))
+    assert_equal(:boolean, @c.send(:cell_type_from_value, false))
+    assert_equal(:float, @c.send(:cell_type_from_value, 1.0 / (10**6)))
+    assert_equal(:richtext, @c.send(:cell_type_from_value, Axlsx::RichText.new))
     assert_equal(:iso_8601, @c.send(:cell_type_from_value, '2008-08-30T01:45:36.123+09:00'))
   end
 
@@ -159,27 +166,35 @@ class TestCell < Test::Unit::TestCase
     ]
 
     number_strings.each do |number_string|
-      assert_equal(@c.send(:cell_type_from_value, mimic_number.new(number_string)), :string)
+      assert_equal(:string, @c.send(:cell_type_from_value, mimic_number.new(number_string)))
     end
   end
 
   def test_cast_value
     @c.type = :string
-    assert_equal(@c.send(:cast_value, 1.0), "1.0")
+
+    assert_equal("1.0", @c.send(:cast_value, 1.0))
     @c.type = :integer
-    assert_equal(@c.send(:cast_value, 1.0), 1)
+
+    assert_equal(1, @c.send(:cast_value, 1.0))
     @c.type = :float
-    assert_equal(@c.send(:cast_value, "1.0"), 1.0)
+
+    assert_in_delta(@c.send(:cast_value, "1.0"), 1.0)
     @c.type = :string
-    assert_equal(@c.send(:cast_value, nil), nil)
+
+    assert_nil(@c.send(:cast_value, nil))
     @c.type = :richtext
-    assert_equal(@c.send(:cast_value, nil), nil)
+
+    assert_nil(@c.send(:cast_value, nil))
     @c.type = :float
-    assert_equal(@c.send(:cast_value, nil), nil)
+
+    assert_nil(@c.send(:cast_value, nil))
     @c.type = :boolean
-    assert_equal(@c.send(:cast_value, true), 1)
-    assert_equal(@c.send(:cast_value, false), 0)
+
+    assert_equal(1, @c.send(:cast_value, true))
+    assert_equal(0, @c.send(:cast_value, false))
     @c.type = :iso_8601
+
     assert_equal("2012-10-10T12:24", @c.send(:cast_value, "2012-10-10T12:24"))
   end
 
@@ -193,173 +208,190 @@ class TestCell < Test::Unit::TestCase
     time = subtime.now
 
     @c.type = :time
+
     assert_equal(time, @c.send(:cast_value, time))
   end
 
   def test_color
     assert_raise(ArgumentError) { @c.color = -1.1 }
     assert_nothing_raised { @c.color = "FF00FF00" }
-    assert_equal(@c.color.rgb, "FF00FF00")
+    assert_equal("FF00FF00", @c.color.rgb)
   end
 
   def test_scheme
     assert_raise(ArgumentError) { @c.scheme = -1.1 }
     assert_nothing_raised { @c.scheme = :major }
-    assert_equal(@c.scheme, :major)
+    assert_equal(:major, @c.scheme)
   end
 
   def test_vertAlign
     assert_raise(ArgumentError) { @c.vertAlign = -1.1 }
     assert_nothing_raised { @c.vertAlign = :baseline }
-    assert_equal(@c.vertAlign, :baseline)
+    assert_equal(:baseline, @c.vertAlign)
   end
 
   def test_sz
     assert_raise(ArgumentError) { @c.sz = -1.1 }
     assert_nothing_raised { @c.sz = 12 }
-    assert_equal(@c.sz, 12)
+    assert_equal(12, @c.sz)
   end
 
   def test_extend
     assert_raise(ArgumentError) { @c.extend = -1.1 }
     assert_nothing_raised { @c.extend = false }
-    assert_equal(@c.extend, false)
+    refute(@c.extend)
   end
 
   def test_condense
     assert_raise(ArgumentError) { @c.condense = -1.1 }
     assert_nothing_raised { @c.condense = false }
-    assert_equal(@c.condense, false)
+    refute(@c.condense)
   end
 
   def test_shadow
     assert_raise(ArgumentError) { @c.shadow = -1.1 }
     assert_nothing_raised { @c.shadow = false }
-    assert_equal(@c.shadow, false)
+    refute(@c.shadow)
   end
 
   def test_outline
     assert_raise(ArgumentError) { @c.outline = -1.1 }
     assert_nothing_raised { @c.outline = false }
-    assert_equal(@c.outline, false)
+    refute(@c.outline)
   end
 
   def test_strike
     assert_raise(ArgumentError) { @c.strike = -1.1 }
     assert_nothing_raised { @c.strike = false }
-    assert_equal(@c.strike, false)
+    refute(@c.strike)
   end
 
   def test_u
     @c.type = :string
     assert_raise(ArgumentError) { @c.u = -1.1 }
     assert_nothing_raised { @c.u = :single }
-    assert_equal(@c.u, :single)
+    assert_equal(:single, @c.u)
     doc = Nokogiri::XML(@c.to_xml_string(1, 1))
+
     assert(doc.xpath('//u[@val="single"]'))
   end
 
   def test_i
     assert_raise(ArgumentError) { @c.i = -1.1 }
     assert_nothing_raised { @c.i = false }
-    assert_equal(@c.i, false)
+    refute(@c.i)
   end
 
   def test_rFont
     assert_raise(ArgumentError) { @c.font_name = -1.1 }
     assert_nothing_raised { @c.font_name = "Arial" }
-    assert_equal(@c.font_name, "Arial")
+    assert_equal("Arial", @c.font_name)
   end
 
   def test_charset
     assert_raise(ArgumentError) { @c.charset = -1.1 }
     assert_nothing_raised { @c.charset = 1 }
-    assert_equal(@c.charset, 1)
+    assert_equal(1, @c.charset)
   end
 
   def test_family
     assert_raise(ArgumentError) { @c.family = -1.1 }
     assert_nothing_raised { @c.family = 5 }
-    assert_equal(@c.family, 5)
+    assert_equal(5, @c.family)
   end
 
   def test_b
     assert_raise(ArgumentError) { @c.b = -1.1 }
     assert_nothing_raised { @c.b = false }
-    assert_equal(@c.b, false)
+    refute(@c.b)
   end
 
   def test_merge_with_string
     @c.row.add_cell 2
     @c.row.add_cell 3
     @c.merge "A2"
-    assert_equal(@c.row.worksheet.send(:merged_cells).last, "A1:A2")
+
+    assert_equal("A1:A2", @c.row.worksheet.send(:merged_cells).last)
   end
 
   def test_merge_with_cell
     @c.row.add_cell 2
     @c.row.add_cell 3
     @c.merge @row.cells.last
-    assert_equal(@c.row.worksheet.send(:merged_cells).last, "A1:C1")
+
+    assert_equal("A1:C1", @c.row.worksheet.send(:merged_cells).last)
   end
 
   def test_reverse_merge_with_cell
     @c.row.add_cell 2
     @c.row.add_cell 3
     @row.cells.last.merge @c
-    assert_equal(@c.row.worksheet.send(:merged_cells).last, "A1:C1")
+
+    assert_equal("A1:C1", @c.row.worksheet.send(:merged_cells).last)
   end
 
   def test_ssti
     assert_raise(ArgumentError, "ssti must be an unsigned integer!") { @c.send(:ssti=, -1) }
     @c.send :ssti=, 1
-    assert_equal(@c.ssti, 1)
+
+    assert_equal(1, @c.ssti)
   end
 
   def test_plain_string
     @c.escape_formulas = false
 
     @c.type = :integer
-    assert_equal(@c.plain_string?, false)
+
+    refute_predicate(@c, :plain_string?)
 
     @c.type = :string
     @c.value = 'plain string'
-    assert_equal(@c.plain_string?, true)
+
+    assert_predicate(@c, :plain_string?)
 
     @c.value = nil
-    assert_equal(@c.plain_string?, false)
+
+    refute_predicate(@c, :plain_string?)
 
     @c.value = ''
-    assert_equal(@c.plain_string?, false)
+
+    refute_predicate(@c, :plain_string?)
 
     @c.value = '=sum'
-    assert_equal(@c.plain_string?, false)
+
+    refute_predicate(@c, :plain_string?)
 
     @c.value = '{=sum}'
-    assert_equal(@c.plain_string?, false)
+
+    refute_predicate(@c, :plain_string?)
 
     @c.escape_formulas = true
 
     @c.value = '=sum'
-    assert_equal(@c.plain_string?, true)
+
+    assert_predicate(@c, :plain_string?)
 
     @c.value = '{=sum}'
-    assert_equal(@c.plain_string?, true)
+
+    assert_predicate(@c, :plain_string?)
 
     @c.value = 'plain string'
     @c.font_name = 'Arial'
-    assert_equal(@c.plain_string?, false)
+
+    refute_predicate(@c, :plain_string?)
   end
 
   def test_to_xml_string
     c_xml = Nokogiri::XML(@c.to_xml_string(1, 1))
-    assert_equal(c_xml.xpath("/c[@s=1]").size, 1)
+
+    assert_equal(1, c_xml.xpath("/c[@s=1]").size)
   end
 
   def test_to_xml_string_nil
     @c.value = nil
     c_xml = Nokogiri::XML(@c.to_xml_string(1, 1))
-    assert_equal(c_xml.xpath("/c[@s=1]").size, 1)
+
+    assert_equal(1, c_xml.xpath("/c[@s=1]").size)
   end
 
   def test_to_xml_string_with_run
@@ -371,7 +403,8 @@ class TestCell < Test::Unit::TestCase
     @c.font_name = 'arial'
     @c.color = 'FF0000'
     c_xml = Nokogiri::XML(@c.to_xml_string(1, 1))
-    assert(c_xml.xpath("//b").any?)
+
+    assert_predicate(c_xml.xpath("//b"), :any?)
   end
 
   def test_to_xml_string_formula
@@ -381,7 +414,8 @@ class TestCell < Test::Unit::TestCase
     end
     doc = Nokogiri::XML(ws.to_xml_string)
     doc.remove_namespaces!
-    assert(doc.xpath("//f[text()='IF(2+2=4,4,5)']").any?)
+
+    assert_predicate(doc.xpath("//f[text()='IF(2+2=4,4,5)']"), :any?)
   end
 
   def test_to_xml_string_formula_escaped
@@ -391,7 +425,8 @@ class TestCell < Test::Unit::TestCase
     end
     doc = Nokogiri::XML(ws.to_xml_string)
     doc.remove_namespaces!
-    assert(doc.xpath("//t[text()='=IF(2+2=4,4,5)']").any?)
+
+    assert_predicate(doc.xpath("//t[text()='=IF(2+2=4,4,5)']"), :any?)
   end
 
   def test_to_xml_string_numeric_escaped
@@ -401,8 +436,9 @@ class TestCell < Test::Unit::TestCase
     end
     doc = Nokogiri::XML(ws.to_xml_string)
     doc.remove_namespaces!
-    assert(doc.xpath("//t[text()='-1']").any?)
-    assert(doc.xpath("//t[text()='+2']").any?)
+
+    assert_predicate(doc.xpath("//t[text()='-1']"), :any?)
+    assert_predicate(doc.xpath("//t[text()='+2']"), :any?)
   end
 
   def test_to_xml_string_owasp_prefixes_that_are_no_excel_formulas
@@ -422,11 +458,12 @@ class TestCell < Test::Unit::TestCase
     end
     doc = Nokogiri::XML(ws.to_xml_string)
     doc.remove_namespaces!
-    assert(doc.xpath("//t[text()='@1']").any?)
-    assert(doc.xpath("//t[text()='%2']").any?)
-    assert(doc.xpath("//t[text()='|3']").any?)
-    assert(doc.xpath("//t[text()='\nfoo']").any?)
-    assert(doc.xpath("//t[text()='\tbar']").any?)
+
+    assert_predicate(doc.xpath("//t[text()='@1']"), :any?)
+    assert_predicate(doc.xpath("//t[text()='%2']"), :any?)
+    assert_predicate(doc.xpath("//t[text()='|3']"), :any?)
+    assert_predicate(doc.xpath("//t[text()='\nfoo']"), :any?)
+    assert_predicate(doc.xpath("//t[text()='\tbar']"), :any?)
   end
 
   def test_to_xml_string_owasp_prefixes_that_are_no_excel_formulas_with_escape_formulas
@@ -446,11 +483,12 @@ class TestCell < Test::Unit::TestCase
     end
     doc = Nokogiri::XML(ws.to_xml_string)
     doc.remove_namespaces!
-    assert(doc.xpath("//t[text()='@1']").any?)
-    assert(doc.xpath("//t[text()='%2']").any?)
-    assert(doc.xpath("//t[text()='|3']").any?)
-    assert(doc.xpath("//t[text()='\nfoo']").any?)
-    assert(doc.xpath("//t[text()='\tbar']").any?)
+
+    assert_predicate(doc.xpath("//t[text()='@1']"), :any?)
+    assert_predicate(doc.xpath("//t[text()='%2']"), :any?)
+    assert_predicate(doc.xpath("//t[text()='|3']"), :any?)
+    assert_predicate(doc.xpath("//t[text()='\nfoo']"), :any?)
+    assert_predicate(doc.xpath("//t[text()='\tbar']"), :any?)
   end
 
   def test_to_xml_string_formula_escape_array_parameter
@@ -465,9 +503,9 @@ class TestCell < Test::Unit::TestCase
     doc = Nokogiri::XML(ws.to_xml_string)
     doc.remove_namespaces!
 
-    assert(doc.xpath("//t[text()='=IF(2+2=4,4,5)']").any?)
-    assert(doc.xpath("//f[text()='IF(13+13=4,4,5)']").any?)
-    assert(doc.xpath("//t[text()='=IF(99+99=4,4,5)']").any?)
+    assert_predicate(doc.xpath("//t[text()='=IF(2+2=4,4,5)']"), :any?)
+    assert_predicate(doc.xpath("//f[text()='IF(13+13=4,4,5)']"), :any?)
+    assert_predicate(doc.xpath("//t[text()='=IF(99+99=4,4,5)']"), :any?)
   end
 
   def test_to_xml_string_array_formula
@@ -477,9 +515,10 @@ class TestCell < Test::Unit::TestCase
     end
     doc = Nokogiri::XML(ws.to_xml_string)
     doc.remove_namespaces!
-    assert(doc.xpath("//f[text()='SUM(C2:C11*D2:D11)']").any?)
-    assert(doc.xpath("//f[@t='array']").any?)
-    assert(doc.xpath("//f[@ref='A1']").any?)
+
+    assert_predicate(doc.xpath("//f[text()='SUM(C2:C11*D2:D11)']"), :any?)
+    assert_predicate(doc.xpath("//f[@t='array']"), :any?)
+    assert_predicate(doc.xpath("//f[@ref='A1']"), :any?)
   end
 
   def test_to_xml_string_text_formula
@@ -490,37 +529,41 @@ class TestCell < Test::Unit::TestCase
     doc = Nokogiri::XML(ws.to_xml_string)
     doc.remove_namespaces!
 
-    assert(doc.xpath("//f[text()='1+1']").empty?)
-    assert(doc.xpath("//t[text()='=1+1']").any?)
+    assert_empty(doc.xpath("//f[text()='1+1']"))
+    assert_predicate(doc.xpath("//t[text()='=1+1']"), :any?)
 
-    assert(doc.xpath("//f[text()='1+1']").empty?)
-    assert(doc.xpath("//t[text()='-1+1']").any?)
+    assert_empty(doc.xpath("//f[text()='1+1']"))
+    assert_predicate(doc.xpath("//t[text()='-1+1']"), :any?)
   end
 
   def test_font_size_with_custom_style_and_no_sz
     @c.style = @c.row.worksheet.workbook.styles.add_style :bg_color => 'FF00FF'
     sz = @c.send(:font_size)
+
     assert_equal(sz, @c.row.worksheet.workbook.styles.fonts.first.sz)
   end
 
   def test_font_size_with_bolding
     @c.style = @c.row.worksheet.workbook.styles.add_style :b => true
+
     assert_equal(@c.row.worksheet.workbook.styles.fonts.first.sz * 1.5, @c.send(:font_size))
   end
 
   def test_font_size_with_custom_sz
     @c.style = @c.row.worksheet.workbook.styles.add_style :sz => 52
     sz = @c.send(:font_size)
-    assert_equal(sz, 52)
+
+    assert_equal(52, sz)
   end
 
   def test_cell_with_sz
     @c.sz = 25
+
     assert_equal(25, @c.send(:font_size))
   end
 
   def test_to_xml
-    # TODO This could use some much more stringent testing related to the xml content generated!
+    # TODO: This could use some much more stringent testing related to the xml content generated!
     @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)", "2013-01-13T13:31:25.123"]
     @ws.rows.last.cells[5].u = true
 
@@ -531,6 +574,7 @@ class TestCell < Test::Unit::TestCase
       errors.push error
       puts error.message
     end
-    assert(errors.empty?, "error free validation")
+
+    assert_empty(errors, "error free validation")
   end
 end

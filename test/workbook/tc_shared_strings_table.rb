@@ -1,4 +1,4 @@
-require 'tc_helper.rb'
+require 'tc_helper'
 
 class TestSharedStringsTable < Test::Unit::TestCase
   def setup
@@ -17,17 +17,20 @@ class TestSharedStringsTable < Test::Unit::TestCase
 
   def test_count
     sst = @p.workbook.shared_strings
-    assert_equal(sst.count, 7)
+
+    assert_equal(7, sst.count)
   end
 
   def test_unique_count
     sst = @p.workbook.shared_strings
-    assert_equal(sst.unique_count, 4)
+
+    assert_equal(4, sst.unique_count)
   end
 
   def test_uses_workbook_xml_space
     assert_equal(@p.workbook.xml_space, @p.workbook.shared_strings.xml_space)
     @p.workbook.xml_space = :default
+
     assert_equal(:default, @p.workbook.shared_strings.xml_space)
   end
 
@@ -39,7 +42,8 @@ class TestSharedStringsTable < Test::Unit::TestCase
       puts error.message
       errors << error
     end
-    assert_equal(errors.size, 0, "sharedStirngs.xml Invalid" + errors.map { |e| e.message }.to_s)
+
+    assert_equal(0, errors.size, "sharedStirngs.xml Invalid" + errors.map(&:message).to_s)
   end
 
   def test_remove_control_characters_in_xml_serialization
@@ -47,7 +51,7 @@ class TestSharedStringsTable < Test::Unit::TestCase
     @p.workbook.worksheets[0].add_row [nasties]
 
     # test that the nasty string was added to the shared strings
-    assert @p.workbook.shared_strings.unique_cells.has_key?(nasties)
+    assert @p.workbook.shared_strings.unique_cells.key?(nasties)
 
     # test that none of the control characters are in the XML output for shared strings
     assert_no_match(/#{Axlsx::CONTROL_CHARS}/, @p.workbook.shared_strings.to_xml_string)
