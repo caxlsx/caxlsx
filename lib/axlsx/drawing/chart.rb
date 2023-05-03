@@ -49,7 +49,7 @@ module Axlsx
     # @return [Series]
     attr_reader :series_type
 
-    # TODO data labels!
+    # TODO: data labels!
     def d_lbls
       @d_lbls ||= DLbls.new(self.class)
     end
@@ -210,7 +210,7 @@ module Axlsx
       str << ('<c:style val="' << style.to_s << '"/>')
       str << '<c:chart>'
       @title.to_xml_string(str) unless @title.empty?
-      str << ('<c:autoTitleDeleted val="' << (@title == nil).to_s << '"/>')
+      str << ('<c:autoTitleDeleted val="' << @title.nil?.to_s << '"/>')
       @view_3D.to_xml_string(str) if @view_3D
       str << '<c:floor><c:thickness val="0"/></c:floor>'
       str << '<c:sideWall><c:thickness val="0"/></c:sideWall>'

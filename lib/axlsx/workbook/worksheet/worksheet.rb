@@ -544,9 +544,9 @@ module Axlsx
     # @param [Integer|Float|nil] widths
     def column_widths(*widths)
       widths.each_with_index do |value, index|
-        next if value == nil
+        next if value.nil?
 
-        Axlsx::validate_unsigned_numeric(value) unless value == nil
+        Axlsx::validate_unsigned_numeric(value) unless value.nil?
         find_or_create_column_info(index).width = value
       end
     end
@@ -637,7 +637,7 @@ module Axlsx
     # Serializes the worksheet object to an xml string
     # This intentionally does not use nokogiri for performance reasons
     # @return [String]
-    def to_xml_string str = ''
+    def to_xml_string(str = '')
       add_autofilter_defined_name_to_workbook
       auto_filter.apply if auto_filter.range
       str << '<?xml version="1.0" encoding="UTF-8"?>'

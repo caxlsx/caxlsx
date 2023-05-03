@@ -119,7 +119,7 @@ module Axlsx
       # Serializes the filter value object
       # @param [String] str The string to concact the serialization information to.
       def to_xml_string(str = '')
-        str << "<filter val='#{@val.to_s}' />"
+        str << "<filter val='#{@val}' />"
       end
     end
 
