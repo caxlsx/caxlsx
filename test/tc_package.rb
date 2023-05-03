@@ -290,7 +290,7 @@ class TestPackage < Test::Unit::TestCase
     @package.to_stream # ensure all cell_serializer paths are hit
     p = @package.send(:parts)
 
-    assert_equal(1, p.count { |part| part[:entry] =~ %r{xl/sharedStrings.xml} }, "shared strings table missing")
+    assert_equal(1, p.count { |part| part[:entry].include?('xl/sharedStrings.xml') }, "shared strings table missing")
   end
 
   def test_workbook_is_a_workbook
