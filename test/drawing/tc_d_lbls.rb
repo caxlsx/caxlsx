@@ -20,7 +20,7 @@ class TestDLbls < Test::Unit::TestCase
   end
 
   def test_initialization_with_optoins
-    options_hash = @boolean_attributes.map { |name| [name, true] }.to_h
+    options_hash = @boolean_attributes.to_h { |name| [name, true] }
 
     d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart, options_hash.merge({ :d_lbl_pos => :t }))
 
