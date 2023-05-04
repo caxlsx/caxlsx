@@ -29,8 +29,8 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
-      str << ('<stop position="' << position.to_s << '">')
+    def to_xml_string(str = +'')
+      str << (+'<stop position="' << position.to_s << '">')
       self.color.to_xml_string(str)
       str << '</stop>'
     end

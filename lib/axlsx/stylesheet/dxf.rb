@@ -64,7 +64,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<dxf>'
       # Dxf elements have no attributes. All of the instance variables
       # are child elements.

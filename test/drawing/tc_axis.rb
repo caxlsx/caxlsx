@@ -19,7 +19,7 @@ class TestAxis < Test::Unit::TestCase
   def test_color
     @axis.color = "00FF00"
     @axis.cross_axis = Axlsx::CatAxis.new
-    str = '<?xml version="1.0" encoding="UTF-8"?>'
+    str = +'<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
     doc = Nokogiri::XML(@axis.to_xml_string(str))
 
@@ -103,7 +103,7 @@ class TestAxis < Test::Unit::TestCase
 
   def test_to_xml_string
     @axis.cross_axis = Axlsx::CatAxis.new
-    str = '<?xml version="1.0" encoding="UTF-8"?>'
+    str = +'<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
     doc = Nokogiri::XML(@axis.to_xml_string(str))
 

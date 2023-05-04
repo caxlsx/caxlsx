@@ -33,7 +33,7 @@ module Axlsx
     # @note As all attributes default to "false" according to the xml schema definition, the generated xml includes only those attributes that are set to true.
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       serialized_tag 'printOptions', str
     end
   end

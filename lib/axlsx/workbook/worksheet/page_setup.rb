@@ -232,7 +232,7 @@ module Axlsx
     # Serializes the page settings element.
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       serialized_tag('pageSetup', str)
     end
   end

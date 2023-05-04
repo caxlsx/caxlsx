@@ -41,7 +41,7 @@ module Axlsx
     # @param [String] str if this string object is provided we append
     # our output to that object. Use this - it helps limit the number of
     # objects created during serialization
-    def to_xml_string(str = "")
+    def to_xml_string(str = +'')
       serialized_tag 'protectedRange', str
     end
   end

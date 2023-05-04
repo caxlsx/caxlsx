@@ -68,7 +68,7 @@ module Axlsx
     # Serialize the WorkbookView
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<workbookView '
       serialized_attributes str
       str << '></workbookView>'

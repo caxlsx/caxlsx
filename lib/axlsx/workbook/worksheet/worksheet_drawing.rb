@@ -52,7 +52,7 @@ module Axlsx
 
     # Serialize the drawing for the worksheet
     # @param [String] str
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       return unless has_drawing?
 
       str << "<drawing r:id='#{relationship.Id}'/>"

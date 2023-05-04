@@ -219,9 +219,9 @@ module Axlsx
 
     # Serialize the app.xml document
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << ('<Properties xmlns="' << APP_NS << '" xmlns:vt="' << APP_NS_VT << '">')
+      str << (+'<Properties xmlns="' << APP_NS << '" xmlns:vt="' << APP_NS_VT << '">')
       Axlsx.instance_values_for(self).each do |key, value|
         node_name = Axlsx.camel(key)
         str << "<#{node_name}>#{value}</#{node_name}>"

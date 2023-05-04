@@ -233,16 +233,16 @@ module Axlsx
     # Serializes the data validation
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       valid_attributes = get_valid_attributes
 
       str << '<dataValidation '
       str << Axlsx.instance_values_for(self).map do |key, value|
-        '' << key << '="' << Axlsx.booleanize(value).to_s << '"' if (valid_attributes.include?(key.to_sym) && !CHILD_ELEMENTS.include?(key.to_sym))
+        +'' << key << '="' << Axlsx.booleanize(value).to_s << '"' if (valid_attributes.include?(key.to_sym) && !CHILD_ELEMENTS.include?(key.to_sym))
       end.join(' ')
       str << '>'
-      str << ('<formula1>' << self.formula1 << '</formula1>') if @formula1 and valid_attributes.include?(:formula1)
-      str << ('<formula2>' << self.formula2 << '</formula2>') if @formula2 and valid_attributes.include?(:formula2)
+      str << (+'<formula1>' << self.formula1 << '</formula1>') if @formula1 and valid_attributes.include?(:formula1)
+      str << (+'<formula2>' << self.formula2 << '</formula2>') if @formula2 and valid_attributes.include?(:formula2)
       str << '</dataValidation>'
     end
 

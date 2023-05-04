@@ -74,8 +74,8 @@ module Axlsx
     #    </conditionalFormatting>
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
-      str << ('<conditionalFormatting sqref="' << sqref << '">')
+    def to_xml_string(str = +'')
+      str << (+'<conditionalFormatting sqref="' << sqref << '">')
       str << rules.collect { |rule| rule.to_xml_string }.join(' ')
       str << '</conditionalFormatting>'
     end

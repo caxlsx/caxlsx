@@ -57,9 +57,9 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
-        str << ('<c:gapDepth val="' << @gap_depth.to_s << '"/>') unless @gap_depth.nil?
+        str << (+'<c:gapDepth val="' << @gap_depth.to_s << '"/>') unless @gap_depth.nil?
       end
     end
   end

@@ -8,7 +8,7 @@ class TestStrData < Test::Unit::TestCase
   end
 
   def test_to_xml_string_strLit
-    str = '<?xml version="1.0" encoding="UTF-8"?>'
+    str = +'<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '">'
     str << @str_data.to_xml_string
     doc = Nokogiri::XML(str)

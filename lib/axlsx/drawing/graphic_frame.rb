@@ -31,11 +31,11 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       # macro attribute should be optional!
       str << '<xdr:graphicFrame>'
       str << '<xdr:nvGraphicFramePr>'
-      str << ('<xdr:cNvPr id="' << @anchor.drawing.index.to_s << '" name="' << 'item_' << @anchor.drawing.index.to_s << '"/>')
+      str << (+'<xdr:cNvPr id="' << @anchor.drawing.index.to_s << '" name="' << 'item_' << @anchor.drawing.index.to_s << '"/>')
       str << '<xdr:cNvGraphicFramePr/>'
       str << '</xdr:nvGraphicFramePr>'
       str << '<xdr:xfrm>'
@@ -43,8 +43,8 @@ module Axlsx
       str << '<a:ext cx="0" cy="0"/>'
       str << '</xdr:xfrm>'
       str << '<a:graphic>'
-      str << ('<a:graphicData uri="' << XML_NS_C << '">')
-      str << ('<c:chart xmlns:c="' << XML_NS_C << '" xmlns:r="' << XML_NS_R << '" r:id="' << rId << '"/>')
+      str << (+'<a:graphicData uri="' << XML_NS_C << '">')
+      str << (+'<c:chart xmlns:c="' << XML_NS_C << '" xmlns:r="' << XML_NS_R << '" r:id="' << rId << '"/>')
       str << '</a:graphicData>'
       str << '</a:graphic>'
       str << '</xdr:graphicFrame>'

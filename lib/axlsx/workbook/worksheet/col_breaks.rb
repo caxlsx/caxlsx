@@ -25,10 +25,10 @@ module Axlsx
     # <colBreaks count="1" manualBreakCount="1">
     # <brk id="3" max="1048575" man="1"/>
     # </colBreaks>
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       return if empty?
 
-      str << ('<colBreaks count="' << size.to_s << '" manualBreakCount="' << size.to_s << '">')
+      str << (+'<colBreaks count="' << size.to_s << '" manualBreakCount="' << size.to_s << '">')
       each { |brk| brk.to_xml_string(str) }
       str << '</colBreaks>'
     end

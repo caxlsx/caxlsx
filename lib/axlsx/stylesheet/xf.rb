@@ -134,7 +134,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<xf '
       serialized_attributes str
       str << '>'

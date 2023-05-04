@@ -11,7 +11,7 @@ module Axlsx
     # Serialize to xml
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       return if empty?
 
       str << "<bookViews>"

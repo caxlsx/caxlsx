@@ -133,7 +133,7 @@ class TestRow < Test::Unit::TestCase
     @row.outlineLevel = 2
     @row.collapsed = true
     @row.hidden = true
-    r_s_xml = Nokogiri::XML(@row.to_xml_string(0, ''))
+    r_s_xml = Nokogiri::XML(@row.to_xml_string(0))
 
     assert_equal(1, r_s_xml.xpath(".//row[@r=1]").size)
   end
@@ -141,7 +141,7 @@ class TestRow < Test::Unit::TestCase
   def test_to_xml_string_with_custom_height
     @row.add_cell 1
     @row.height = 20
-    r_s_xml = Nokogiri::XML(@row.to_xml_string(0, ''))
+    r_s_xml = Nokogiri::XML(@row.to_xml_string(0))
 
     assert_equal(1, r_s_xml.xpath(".//row[@r=1][@ht=20][@customHeight=1]").size)
   end

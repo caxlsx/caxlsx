@@ -16,7 +16,7 @@ module Axlsx
     attr_reader :worksheet
 
     # serialize the conditional formattings
-    def to_xml_string(str = "")
+    def to_xml_string(str = +'')
       return if empty?
 
       each { |item| item.to_xml_string(str) }

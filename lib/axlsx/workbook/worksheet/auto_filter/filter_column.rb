@@ -87,7 +87,7 @@ module Axlsx
     end
 
     # Serialize the object to xml
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << "<filterColumn #{serialized_attributes}>"
       @filter.to_xml_string(str)
       str << "</filterColumn>"

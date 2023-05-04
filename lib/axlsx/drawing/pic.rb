@@ -189,10 +189,10 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<xdr:pic>'
       str << '<xdr:nvPicPr>'
-      str << ('<xdr:cNvPr id="2" name="' << name.to_s << '" descr="' << descr.to_s << '">')
+      str << (+'<xdr:cNvPr id="2" name="' << name.to_s << '" descr="' << descr.to_s << '">')
       hyperlink.to_xml_string(str) if hyperlink.is_a?(Hyperlink)
       str << '</xdr:cNvPr><xdr:cNvPicPr>'
       picture_locking.to_xml_string(str)
@@ -213,9 +213,9 @@ module Axlsx
     # Return correct xml relationship string portion
     def relationship_xml_portion
       if remote?
-        ('<a:blip xmlns:r ="' << XML_NS_R << '" r:link="' << relationship.Id << '">')
+        (+'<a:blip xmlns:r ="' << XML_NS_R << '" r:link="' << relationship.Id << '">')
       else
-        ('<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
+        (+'<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
       end
     end
 

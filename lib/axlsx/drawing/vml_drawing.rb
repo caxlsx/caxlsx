@@ -20,7 +20,7 @@ module Axlsx
     # serialize the vml_drawing to xml.
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << <<BAD_PROGRAMMER
 <xml xmlns:v="urn:schemas-microsoft-com:vml"
  xmlns:o="urn:schemas-microsoft-com:office:office"

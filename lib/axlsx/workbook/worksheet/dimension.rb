@@ -36,7 +36,7 @@ module Axlsx
 
     # serialize the object
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       return if worksheet.rows.empty?
 
       str << "<dimension ref=\"%s\"></dimension>" % sqref

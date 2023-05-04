@@ -92,7 +92,7 @@ module Axlsx
     # @return [String]
     # @note For compatibility, this is a noop unless custom margins have been specified.
     # @see #custom_margins_specified?
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       serialized_tag('pageMargins', str)
     end
   end

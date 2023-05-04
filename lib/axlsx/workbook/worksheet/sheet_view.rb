@@ -192,7 +192,7 @@ module Axlsx
     # Serializes the data validation
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<sheetViews>'
       str << '<sheetView '
       serialized_attributes str

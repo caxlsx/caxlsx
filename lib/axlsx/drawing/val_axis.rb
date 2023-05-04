@@ -26,10 +26,10 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<c:valAx>'
       super(str)
-      str << ('<c:crossBetween val="' << @cross_between.to_s << '"/>')
+      str << (+'<c:crossBetween val="' << @cross_between.to_s << '"/>')
       str << '</c:valAx>'
     end
   end

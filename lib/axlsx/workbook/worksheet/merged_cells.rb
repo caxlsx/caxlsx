@@ -28,7 +28,7 @@ module Axlsx
     # serialize the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       return if empty?
 
       str << "<mergeCells count='#{size}'>"

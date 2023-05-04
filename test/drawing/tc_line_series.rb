@@ -63,7 +63,7 @@ class TestLineSeries < Test::Unit::TestCase
   end
 
   def wrap_with_namespaces(series)
-    '<c:chartSpace xmlns:c="' <<
+    +'<c:chartSpace xmlns:c="' <<
       Axlsx::XML_NS_C <<
       '" xmlns:a="' <<
       Axlsx::XML_NS_A <<

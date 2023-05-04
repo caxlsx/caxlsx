@@ -84,7 +84,7 @@ module Axlsx
     # Serialize this color_scale object data to an xml string
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<colorScale>'
       value_objects.to_xml_string(str)
       colors.each { |color| color.to_xml_string(str) }

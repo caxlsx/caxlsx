@@ -100,7 +100,7 @@ class TestAxlsx < Test::Unit::TestCase
   end
 
   def test_sanitize_unfrozen_control_strippped
-    needs_sanitize = "legit\x08" # Backspace control char
+    needs_sanitize = +"legit\x08" # Backspace control char
     sanitized_str = Axlsx.sanitize(needs_sanitize)
 
     assert_equal('legit', sanitized_str, 'should strip control chars')
@@ -108,7 +108,7 @@ class TestAxlsx < Test::Unit::TestCase
   end
 
   def test_sanitize_unfrozen_no_sanitize
-    legit_str = 'legit'
+    legit_str = +'legit'
     sanitized_str = Axlsx.sanitize(legit_str)
 
     assert_equal(sanitized_str,           legit_str,            'should preserve value')

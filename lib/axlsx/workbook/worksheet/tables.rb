@@ -25,7 +25,7 @@ module Axlsx
     # renders the tables xml
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = "")
+    def to_xml_string(str = +'')
       return if empty?
 
       str << "<tableParts count='#{size}'>"

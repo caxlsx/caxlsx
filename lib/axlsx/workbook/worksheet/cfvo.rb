@@ -55,7 +55,7 @@ module Axlsx
     # serialize the Csvo object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       serialized_tag('cfvo', str)
     end
   end

@@ -51,7 +51,7 @@ module Axlsx
     # Seraalize the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       return unless has_comments?
 
       str << "<legacyDrawing r:id='#{drawing_rId}' />"
