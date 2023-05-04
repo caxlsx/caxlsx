@@ -65,7 +65,7 @@ module Axlsx
 
     # encodes password for protection locking
     def password=(v)
-      return if v == nil
+      return if v.nil?
 
       @password = create_password_hash(v)
     end

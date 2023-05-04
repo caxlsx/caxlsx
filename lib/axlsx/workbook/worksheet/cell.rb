@@ -481,7 +481,7 @@ module Axlsx
       return unless INLINE_STYLES.include?(attr.to_sym)
 
       Axlsx.send(validator, value) unless validator.nil?
-      self.instance_variable_set :"@#{attr.to_s}", value
+      self.instance_variable_set :"@#{attr}", value
       @is_text_run = true
     end
 

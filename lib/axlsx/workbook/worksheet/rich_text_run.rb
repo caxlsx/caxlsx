@@ -197,7 +197,7 @@ module Axlsx
       return unless INLINE_STYLES.include?(attr.to_sym)
 
       Axlsx.send(validator, value) unless validator.nil?
-      self.instance_variable_set :"@#{attr.to_s}", value
+      self.instance_variable_set :"@#{attr}", value
     end
 
     # Serializes the RichTextRun
@@ -253,7 +253,7 @@ module Axlsx
 
     # Converts the value to the correct XML representation (fixes issues with
     # Numbers)
-    def xml_value value
+    def xml_value(value)
       if value == true
         1
       elsif value == false
