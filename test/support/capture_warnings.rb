@@ -1,5 +1,5 @@
 module CaptureWarnings
-  def capture_warnings(&block)
+  def capture_warnings
     # Turn off warnings with setting $VERBOSE to nil
     original_verbose = $VERBOSE
     $VERBOSE = nil
@@ -8,7 +8,7 @@ module CaptureWarnings
     original_warn = Kernel.instance_method(:warn)
     warnings = []
     Kernel.send(:define_method, :warn) { |string| warnings << string }
-    block.call
+    yield
 
     # Revert to the original warn method and set back $VERBOSE to previous value
     Kernel.send(:define_method, :warn, original_warn)
