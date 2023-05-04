@@ -23,12 +23,6 @@ Layout/HashAlignment:
     - 'test/tc_axlsx.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Layout/HeredocIndentation:
-  Exclude:
-    - 'lib/axlsx/drawing/vml_drawing.rb'
-    - 'lib/axlsx/drawing/vml_shape.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Lint/AmbiguousOperatorPrecedence:
   Exclude:
     - 'lib/axlsx/drawing/area_series.rb'
