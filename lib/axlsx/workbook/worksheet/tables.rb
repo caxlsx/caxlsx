@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A simple, self serializing class for storing tables
   class Tables < SimpleTypedList
@@ -23,7 +25,7 @@ module Axlsx
     # renders the tables xml
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = "")
+    def to_xml_string(str = +'')
       return if empty?
 
       str << "<tableParts count='#{size}'>"

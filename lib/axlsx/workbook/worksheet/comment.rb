@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A comment is the text data for a comment
   class Comment
@@ -59,17 +61,17 @@ module Axlsx
     # serialize the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = "")
+    def to_xml_string(str = +'')
       author = @comments.authors[author_index]
-      str << ('<comment ref="' << ref << '" authorId="' << author_index.to_s << '">')
+      str << (+'<comment ref="' << ref << '" authorId="' << author_index.to_s << '">')
       str << '<text>'
       unless author.to_s == ""
         str << '<r><rPr><b/><color indexed="81"/></rPr>'
-        str << ("<t>" << ::CGI.escapeHTML(author.to_s) << ":\n</t></r>")
+        str << (+"<t>" << ::CGI.escapeHTML(author.to_s) << ":\n</t></r>")
       end
       str << '<r>'
       str << '<rPr><color indexed="81"/></rPr>'
-      str << ('<t>' << ::CGI.escapeHTML(text) << '</t></r></text>')
+      str << (+'<t>' << ::CGI.escapeHTML(text) << '</t></r></text>')
       str << '</comment>'
     end
 

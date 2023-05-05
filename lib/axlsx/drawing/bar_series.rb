@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A BarSeries defines the title, data and labels for bar charts
   # @note The recommended way to manage series is to use Chart#add_series
@@ -56,19 +58,19 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
         colors.each_with_index do |c, index|
           str << '<c:dPt>'
-          str << ('<c:idx val="' << index.to_s << '"/>')
+          str << (+'<c:idx val="' << index.to_s << '"/>')
           str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << c << '"/>')
+          str << (+'<a:srgbClr val="' << c << '"/>')
           str << '</a:solidFill></c:spPr></c:dPt>'
         end
 
         if series_color
           str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << series_color << '"/>')
+          str << (+'<a:srgbClr val="' << series_color << '"/>')
           str << '</a:solidFill>'
           str << '</c:spPr>'
         end
@@ -76,7 +78,7 @@ module Axlsx
         @labels.to_xml_string(str) unless @labels.nil?
         @data.to_xml_string(str) unless @data.nil?
         # this is actually only required for shapes other than box
-        str << ('<c:shape val="' << shape.to_s << '"></c:shape>')
+        str << (+'<c:shape val="' << shape.to_s << '"></c:shape>')
       end
     end
 

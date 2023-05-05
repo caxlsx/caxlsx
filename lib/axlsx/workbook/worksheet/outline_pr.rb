@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The OutlinePr class manages serialization of a worksheet's outlinePr element, which provides various
   # options to control outlining.
@@ -25,7 +27,7 @@ module Axlsx
     # Serialize the object
     # @param [String] str serialized output will be appended to this object if provided.
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << "<outlinePr #{serialized_attributes} />"
     end
   end

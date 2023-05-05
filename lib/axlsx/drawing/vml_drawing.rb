@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # a vml drawing used for comments in excel.
   class VmlDrawing
@@ -18,7 +20,7 @@ module Axlsx
     # serialize the vml_drawing to xml.
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << <<~XML
         <xml xmlns:v="urn:schemas-microsoft-com:vml"
          xmlns:o="urn:schemas-microsoft-com:office:office"

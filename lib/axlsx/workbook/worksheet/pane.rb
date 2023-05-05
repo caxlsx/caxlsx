@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # Pane options for a worksheet.
   #
@@ -120,7 +122,7 @@ module Axlsx
     # Serializes the data validation
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       finalize
       serialized_tag 'pane', str
     end

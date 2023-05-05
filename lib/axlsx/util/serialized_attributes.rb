@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # This module allows us to define a list of symbols defining which
   # attributes will be serialized for a class.
@@ -47,7 +49,7 @@ module Axlsx
     # serialization to.
     # @param [Hash] additional_attributes An option key value hash for
     # defining values that are not serializable attributes list.
-    def serialized_attributes(str = '', additional_attributes = {})
+    def serialized_attributes(str = +'', additional_attributes = {})
       attributes = declared_attributes.merge! additional_attributes
       attributes.each do |key, value|
         str << "#{Axlsx.camel(key, false)}=\"#{Axlsx.camel(Axlsx.booleanize(value), false)}\" "
@@ -71,7 +73,7 @@ module Axlsx
     # @param [String] str The string instance to which serialized data is appended
     # @param [Array] additional_attributes An array of additional attribute names.
     # @return [String] The serialized output.
-    def serialized_element_attributes(str = '', additional_attributes = [], &block)
+    def serialized_element_attributes(str = +'', additional_attributes = [], &block)
       attrs = self.class.xml_element_attributes + additional_attributes
       values = Axlsx.instance_values_for(self)
       attrs.each do |attribute_name|

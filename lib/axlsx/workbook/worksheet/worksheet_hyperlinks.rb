@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A collection of hyperlink objects for a worksheet
   class WorksheetHyperlinks < SimpleTypedList
@@ -27,7 +29,7 @@ module Axlsx
 
     # seralize the collection of hyperlinks
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       return if empty?
 
       str << '<hyperlinks>'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # Table
   # @note Worksheet#add_pivot_table is the recommended way to create tables for your worksheets.
@@ -43,15 +45,15 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << ('<pivotCacheDefinition xmlns="' << XML_NS << '" xmlns:r="' << XML_NS_R << '" invalid="1" refreshOnLoad="1" recordCount="0">')
+      str << (+'<pivotCacheDefinition xmlns="' << XML_NS << '" xmlns:r="' << XML_NS_R << '" invalid="1" refreshOnLoad="1" recordCount="0">')
       str << '<cacheSource type="worksheet">'
-      str << ('<worksheetSource ref="' << pivot_table.range << '" sheet="' << pivot_table.data_sheet.name << '"/>')
+      str << (+'<worksheetSource ref="' << pivot_table.range << '" sheet="' << pivot_table.data_sheet.name << '"/>')
       str << '</cacheSource>'
-      str << ('<cacheFields count="' << pivot_table.header_cells_count.to_s << '">')
+      str << (+'<cacheFields count="' << pivot_table.header_cells_count.to_s << '">')
       pivot_table.header_cells.each do |cell|
-        str << ('<cacheField name="' << cell.clean_value << '" numFmtId="0">')
+        str << (+'<cacheField name="' << cell.clean_value << '" numFmtId="0">')
         str <<     '<sharedItems count="0">'
         str <<     '</sharedItems>'
         str << '</cacheField>'

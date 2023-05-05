@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # An override content part. These parts are automatically created by for you based on the content of your package.
   class Override < AbstractContentType
@@ -14,7 +16,7 @@ module Axlsx
     alias :PartName= :part_name=
 
     # Serializes this object to xml
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(NODE_NAME, str)
     end
   end

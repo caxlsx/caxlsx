@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # TableStyles represents a collection of style definitions for table styles and pivot table styles.
   # @note Support for custom table styles does not exist in this version. Many of the classes required are defined in preparation for future release. Please do not attempt to add custom table styles.
@@ -31,7 +33,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<tableStyles '
       serialized_attributes str, { :count => self.size }
       str << '>'

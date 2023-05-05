@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # View options for a worksheet.
   #
@@ -190,7 +192,7 @@ module Axlsx
     # Serializes the data validation
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<sheetViews>'
       str << '<sheetView '
       serialized_attributes str

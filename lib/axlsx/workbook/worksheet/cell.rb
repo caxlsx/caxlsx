@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'cgi'
 module Axlsx
   # A cell in a worksheet.
@@ -72,13 +74,13 @@ module Axlsx
 
     # Leading characters that indicate a formula.
     # See: https://owasp.org/www-community/attacks/CSV_Injection
-    FORMULA_PREFIXES = ['='.freeze].freeze
+    FORMULA_PREFIXES = ['='].freeze
 
     # Leading characters that indicate an array formula.
-    ARRAY_FORMULA_PREFIXES = ['{='.freeze].freeze
+    ARRAY_FORMULA_PREFIXES = ['{='].freeze
 
     # Trailing character that indicates an array formula.
-    ARRAY_FORMULA_SUFFIX = '}'.freeze
+    ARRAY_FORMULA_SUFFIX = '}'
 
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer]
@@ -386,7 +388,7 @@ module Axlsx
     # @param [Integer] c_index The cell index in the row.
     # @param [String] str The string index the cell content will be appended to. Defaults to empty string.
     # @return [String] xml text for the cell
-    def to_xml_string(r_index, c_index, str = '')
+    def to_xml_string(r_index, c_index, str = +'')
       CellSerializer.to_xml_string r_index, c_index, self, str
     end
 

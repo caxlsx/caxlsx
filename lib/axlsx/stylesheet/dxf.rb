@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The Dxf class defines an incremental formatting record for use in Styles. The recommended way to manage styles for your workbook is with Styles#add_style
   # @see Styles#add_style
@@ -62,7 +64,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<dxf>'
       # Dxf elements have no attributes. All of the instance variables
       # are child elements.

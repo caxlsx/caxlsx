@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A PieSeries defines the data and labels and explosion for pie charts series.
   # @note The recommended way to manage series is to use Chart#add_series
@@ -42,14 +44,14 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
         str << '<c:explosion val="' + @explosion.to_s + '"/>' unless @explosion.nil?
         colors.each_with_index do |c, index|
           str << '<c:dPt>'
-          str << ('<c:idx val="' << index.to_s << '"/>')
+          str << (+'<c:idx val="' << index.to_s << '"/>')
           str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << c << '"/>')
+          str << (+'<a:srgbClr val="' << c << '"/>')
           str << '</a:solidFill></c:spPr></c:dPt>'
         end
         @labels.to_xml_string str unless @labels.nil?

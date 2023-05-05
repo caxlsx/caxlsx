@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # <xsd:complexType name="CT_BookView">
 #     <xsd:sequence>
 #       <xsd:element name="extLst" type="CT_ExtensionList" minOccurs="0" maxOccurs="1"/>
@@ -66,7 +68,7 @@ module Axlsx
     # Serialize the WorkbookView
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << '<workbookView '
       serialized_attributes str
       str << '></workbookView>'

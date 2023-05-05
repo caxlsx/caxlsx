@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The RichTextRun class creates and self serializing text run.
   class RichTextRun
@@ -203,7 +205,7 @@ module Axlsx
     # Serializes the RichTextRun
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       valid = RichTextRun::INLINE_STYLES
       data = Hash[Axlsx.instance_values_for(self).map { |k, v| [k.to_sym, v] }]
       data = data.select { |key, value| valid.include?(key) && !value.nil? }
@@ -212,15 +214,15 @@ module Axlsx
       data.keys.each do |key|
         case key
         when :font_name
-          str << ('<rFont val="' << font_name << '"/>')
+          str << (+'<rFont val="' << font_name << '"/>')
         when :color
           str << data[key].to_xml_string
         else
-          str << ('<' << key.to_s << ' val="' << xml_value(data[key]) << '"/>')
+          str << (+'<' << key.to_s << ' val="' << xml_value(data[key]) << '"/>')
         end
       end
       clean_value = Axlsx::trust_input ? @value.to_s : ::CGI.escapeHTML(Axlsx::sanitize(@value.to_s))
-      str << ('</rPr><t>' << clean_value << '</t></r>')
+      str << (+'</rPr><t>' << clean_value << '</t></r>')
     end
 
     private

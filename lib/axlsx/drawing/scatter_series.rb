@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A ScatterSeries defines the x and y position of data in the chart
   # @note The recommended way to manage series is to use Chart#add_series
@@ -78,22 +80,22 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
         # needs to override the super color here to push in ln/and something else!
         if color
           str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/>')
+          str << (+'<a:srgbClr val="' << color << '"/>')
           str << '</a:solidFill>'
           str << '<a:ln><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
+          str << (+'<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
           str << '</c:spPr>'
           str << '<c:marker>'
           str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/>')
+          str << (+'<a:srgbClr val="' << color << '"/>')
           str << '</a:solidFill>'
           str << '<a:ln><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
+          str << (+'<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
           str << '</c:spPr>'
           str << marker_symbol_xml
           str << '</c:marker>'
@@ -108,7 +110,7 @@ module Axlsx
         end
         @xData.to_xml_string(str) unless @xData.nil?
         @yData.to_xml_string(str) unless @yData.nil?
-        str << ('<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>')
+        str << (+'<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>')
       end
       str
     end

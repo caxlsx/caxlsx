@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tc_helper'
 
 class TestStrVal < Test::Unit::TestCase
@@ -11,7 +13,7 @@ class TestStrVal < Test::Unit::TestCase
   end
 
   def test_to_xml_string
-    str = '<?xml version="1.0" encoding="UTF-8"?>'
+    str = +'<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '">'
     str << @str_val.to_xml_string(0)
     doc = Nokogiri::XML(str)
@@ -20,7 +22,7 @@ class TestStrVal < Test::Unit::TestCase
   end
 
   def test_to_xml_string_special_characters
-    str = '<?xml version="1.0" encoding="UTF-8"?>'
+    str = +'<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '">'
     str << @str_val_with_special_characters.to_xml_string(0)
     doc = Nokogiri::XML(str)

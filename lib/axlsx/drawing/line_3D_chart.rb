@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The Line3DChart is a three dimentional line chart (who would have guessed?) that you can add to your worksheet.
   # @example Creating a chart
@@ -55,9 +57,9 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
-        str << ('<c:gapDepth val="' << @gap_depth.to_s << '"/>') unless @gap_depth.nil?
+        str << (+'<c:gapDepth val="' << @gap_depth.to_s << '"/>') unless @gap_depth.nil?
       end
     end
   end

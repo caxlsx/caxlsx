@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The LineChart is a two dimentional line chart (who would have guessed?) that you can add to your worksheet.
   # @example Creating a chart
@@ -72,16 +74,16 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       super(str) do
-        str << ("<c:" << node_name << ">")
-        str << ('<c:grouping val="' << grouping.to_s << '"/>')
-        str << ('<c:varyColors val="' << vary_colors.to_s << '"/>')
+        str << (+"<c:" << node_name << ">")
+        str << (+'<c:grouping val="' << grouping.to_s << '"/>')
+        str << (+'<c:varyColors val="' << vary_colors.to_s << '"/>')
         @series.each { |ser| ser.to_xml_string(str) }
         @d_lbls.to_xml_string(str) if @d_lbls
         yield if block_given?
         axes.to_xml_string(str, :ids => true)
-        str << ("</c:" << node_name << ">")
+        str << (+"</c:" << node_name << ">")
         axes.to_xml_string(str)
       end
     end

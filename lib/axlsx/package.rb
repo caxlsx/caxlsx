@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # Package is responsible for managing all the bits and peices that Open Office XML requires to make a valid
   # xlsx document including validation and serialization.

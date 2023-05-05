@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # the SheetCalcPr object for the worksheet
   # This object contains calculation properties for the worksheet.
@@ -21,7 +23,7 @@ module Axlsx
     # @param [String] str the string to append this objects serialized
     # content to.
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << "<sheetCalcPr #{serialized_attributes}/>"
     end
   end

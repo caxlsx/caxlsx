@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A simple list of merged cells
   class MergedCells < SimpleTypedList
@@ -26,7 +28,7 @@ module Axlsx
     # serialize the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       return if empty?
 
       str << "<mergeCells count='#{size}'>"

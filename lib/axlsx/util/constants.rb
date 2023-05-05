@@ -1,240 +1,242 @@
+# frozen_string_literal: true
+
 module Axlsx
   # XML Encoding
-  ENCODING = "UTF-8".freeze
+  ENCODING = "UTF-8"
 
   # spreadsheetML namespace
-  XML_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main".freeze
+  XML_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
 
   # content-types namespace
-  XML_NS_T = "http://schemas.openxmlformats.org/package/2006/content-types".freeze
+  XML_NS_T = "http://schemas.openxmlformats.org/package/2006/content-types"
 
   # extended-properties namespace
-  APP_NS = "http://schemas.openxmlformats.org/officeDocument/2006/extended-properties".freeze
+  APP_NS = "http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"
 
   # doc props namespace
-  APP_NS_VT = "http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes".freeze
+  APP_NS_VT = "http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"
 
   # core properties namespace
-  CORE_NS = "http://schemas.openxmlformats.org/package/2006/metadata/core-properties".freeze
+  CORE_NS = "http://schemas.openxmlformats.org/package/2006/metadata/core-properties"
 
   # dc elements (core) namespace
-  CORE_NS_DC = "http://purl.org/dc/elements/1.1/".freeze
+  CORE_NS_DC = "http://purl.org/dc/elements/1.1/"
 
   # dcmit (core) namespcace
-  CORE_NS_DCMIT = "http://purl.org/dc/dcmitype/".freeze
+  CORE_NS_DCMIT = "http://purl.org/dc/dcmitype/"
 
   # dc terms namespace
-  CORE_NS_DCT = "http://purl.org/dc/terms/".freeze
+  CORE_NS_DCT = "http://purl.org/dc/terms/"
 
   # xml schema namespace
-  CORE_NS_XSI = "http://www.w3.org/2001/XMLSchema-instance".freeze
+  CORE_NS_XSI = "http://www.w3.org/2001/XMLSchema-instance"
 
   # Digital signature namespace
-  DIGITAL_SIGNATURE_NS = "http://schemas.openxmlformats.org/package/2006/digital-signature".freeze
+  DIGITAL_SIGNATURE_NS = "http://schemas.openxmlformats.org/package/2006/digital-signature"
 
   # spreadsheet drawing namespace
-  XML_NS_XDR = "http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing".freeze
+  XML_NS_XDR = "http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing"
 
   # drawing namespace
-  XML_NS_A  = "http://schemas.openxmlformats.org/drawingml/2006/main".freeze
+  XML_NS_A  = "http://schemas.openxmlformats.org/drawingml/2006/main"
 
   # chart namespace
-  XML_NS_C  = "http://schemas.openxmlformats.org/drawingml/2006/chart".freeze
+  XML_NS_C  = "http://schemas.openxmlformats.org/drawingml/2006/chart"
 
   # relationships namespace
-  XML_NS_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships".freeze
+  XML_NS_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 
   # relationships name space
-  RELS_R = "http://schemas.openxmlformats.org/package/2006/relationships".freeze
+  RELS_R = "http://schemas.openxmlformats.org/package/2006/relationships"
 
   # table rels namespace
-  TABLE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/table".freeze
+  TABLE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/table"
 
   # pivot table rels namespace
-  PIVOT_TABLE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/pivotTable".freeze
+  PIVOT_TABLE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/pivotTable"
 
   # pivot table cache definition namespace
-  PIVOT_TABLE_CACHE_DEFINITION_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/pivotCacheDefinition".freeze
+  PIVOT_TABLE_CACHE_DEFINITION_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/pivotCacheDefinition"
 
   # workbook rels namespace
-  WORKBOOK_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument".freeze
+  WORKBOOK_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"
 
   # worksheet rels namespace
-  WORKSHEET_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet".freeze
+  WORKSHEET_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet"
 
   # app rels namespace
-  APP_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties".freeze
+  APP_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties"
 
   # core rels namespace
-  CORE_R = "http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties".freeze
+  CORE_R = "http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties"
 
   # digital signature rels namespace
-  DIGITAL_SIGNATURE_R = "http://schemas.openxmlformats.org/package/2006/relationships/digital- signature/signature".freeze
+  DIGITAL_SIGNATURE_R = "http://schemas.openxmlformats.org/package/2006/relationships/digital- signature/signature"
 
   # styles rels namespace
-  STYLES_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles".freeze
+  STYLES_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"
 
   # shared strings namespace
-  SHARED_STRINGS_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings".freeze
+  SHARED_STRINGS_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings"
 
   # drawing rels namespace
-  DRAWING_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/drawing".freeze
+  DRAWING_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/drawing"
 
   # chart rels namespace
-  CHART_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart".freeze
+  CHART_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart"
 
   # image rels namespace
-  IMAGE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image".freeze
+  IMAGE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
 
   # hyperlink rels namespace
-  HYPERLINK_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink".freeze
+  HYPERLINK_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink"
 
   # comment rels namespace
-  COMMENT_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments".freeze
+  COMMENT_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments"
 
   # comment relation for nil target
-  COMMENT_R_NULL = "http://purl.oclc.org/ooxml/officeDocument/relationships/comments".freeze
+  COMMENT_R_NULL = "http://purl.oclc.org/ooxml/officeDocument/relationships/comments"
 
   # vml drawing relation namespace
   VML_DRAWING_R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/vmlDrawing'
 
   # VML Drawing content type
-  VML_DRAWING_CT = "application/vnd.openxmlformats-officedocument.vmlDrawing".freeze
+  VML_DRAWING_CT = "application/vnd.openxmlformats-officedocument.vmlDrawing"
 
   # table content type
-  TABLE_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml".freeze
+  TABLE_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml"
 
   # pivot table content type
-  PIVOT_TABLE_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotTable+xml".freeze
+  PIVOT_TABLE_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotTable+xml"
 
   # pivot table cache definition content type
-  PIVOT_TABLE_CACHE_DEFINITION_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotCacheDefinition+xml".freeze
+  PIVOT_TABLE_CACHE_DEFINITION_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotCacheDefinition+xml"
 
   # workbook content type
-  WORKBOOK_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml".freeze
+  WORKBOOK_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"
 
   # app content type
-  APP_CT = "application/vnd.openxmlformats-officedocument.extended-properties+xml".freeze
+  APP_CT = "application/vnd.openxmlformats-officedocument.extended-properties+xml"
 
   # rels content type
-  RELS_CT = "application/vnd.openxmlformats-package.relationships+xml".freeze
+  RELS_CT = "application/vnd.openxmlformats-package.relationships+xml"
 
   # styles content type
-  STYLES_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml".freeze
+  STYLES_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"
 
   # xml content type
-  XML_CT = "application/xml".freeze
+  XML_CT = "application/xml"
 
   # worksheet content type
-  WORKSHEET_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml".freeze
+  WORKSHEET_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"
 
   # shared strings content type
-  SHARED_STRINGS_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml".freeze
+  SHARED_STRINGS_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"
 
   # core content type
-  CORE_CT = "application/vnd.openxmlformats-package.core-properties+xml".freeze
+  CORE_CT = "application/vnd.openxmlformats-package.core-properties+xml"
 
   # digital signature xml content type
-  DIGITAL_SIGNATURE_XML_CT = "application/vnd.openxmlformats-package.digital-signature-xmlsignature+xml".freeze
+  DIGITAL_SIGNATURE_XML_CT = "application/vnd.openxmlformats-package.digital-signature-xmlsignature+xml"
 
   # digital signature origin content type
-  DIGITAL_SIGNATURE_ORIGIN_CT = "application/vnd.openxmlformats-package.digital-signature-origin".freeze
+  DIGITAL_SIGNATURE_ORIGIN_CT = "application/vnd.openxmlformats-package.digital-signature-origin"
 
   # digital signature certificate content type
-  DIGITAL_SIGNATURE_CERTIFICATE_CT = "application/vnd.openxmlformats-package.digital-signature-certificate".freeze
+  DIGITAL_SIGNATURE_CERTIFICATE_CT = "application/vnd.openxmlformats-package.digital-signature-certificate"
 
   # chart content type
-  CHART_CT = "application/vnd.openxmlformats-officedocument.drawingml.chart+xml".freeze
+  CHART_CT = "application/vnd.openxmlformats-officedocument.drawingml.chart+xml"
 
   # comments content type
-  COMMENT_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.comments+xml".freeze
+  COMMENT_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.comments+xml"
 
   # jpeg content type
-  JPEG_CT = "image/jpeg".freeze
+  JPEG_CT = "image/jpeg"
 
   # gif content type
-  GIF_CT = "image/gif".freeze
+  GIF_CT = "image/gif"
 
   # png content type
-  PNG_CT = "image/png".freeze
+  PNG_CT = "image/png"
 
   # drawing content type
-  DRAWING_CT = "application/vnd.openxmlformats-officedocument.drawing+xml".freeze
+  DRAWING_CT = "application/vnd.openxmlformats-officedocument.drawing+xml"
 
   # xml content type extensions
-  XML_EX = "xml".freeze
+  XML_EX = "xml"
 
   # jpeg extension
-  JPEG_EX = "jpeg".freeze
+  JPEG_EX = "jpeg"
 
   # gif extension
-  GIF_EX = "gif".freeze
+  GIF_EX = "gif"
 
   # png extension
-  PNG_EX = "png".freeze
+  PNG_EX = "png"
 
   # rels content type extension
-  RELS_EX = "rels".freeze
+  RELS_EX = "rels"
 
   # workbook part
-  WORKBOOK_PN = "xl/workbook.xml".freeze
+  WORKBOOK_PN = "xl/workbook.xml"
 
   # styles part
-  STYLES_PN = "styles.xml".freeze
+  STYLES_PN = "styles.xml"
 
   # shared_strings  part
-  SHARED_STRINGS_PN = "sharedStrings.xml".freeze
+  SHARED_STRINGS_PN = "sharedStrings.xml"
 
   # app part
-  APP_PN = "docProps/app.xml".freeze
+  APP_PN = "docProps/app.xml"
 
   # core part
-  CORE_PN = "docProps/core.xml".freeze
+  CORE_PN = "docProps/core.xml"
 
   # content types part
-  CONTENT_TYPES_PN = "[Content_Types].xml".freeze
+  CONTENT_TYPES_PN = "[Content_Types].xml"
 
   # rels part
-  RELS_PN = "_rels/.rels".freeze
+  RELS_PN = "_rels/.rels"
 
   # workbook rels part
-  WORKBOOK_RELS_PN = "xl/_rels/workbook.xml.rels".freeze
+  WORKBOOK_RELS_PN = "xl/_rels/workbook.xml.rels"
 
   # worksheet part
-  WORKSHEET_PN = "worksheets/sheet%d.xml".freeze
+  WORKSHEET_PN = "worksheets/sheet%d.xml"
 
   # worksheet rels part
-  WORKSHEET_RELS_PN = "worksheets/_rels/sheet%d.xml.rels".freeze
+  WORKSHEET_RELS_PN = "worksheets/_rels/sheet%d.xml.rels"
 
   # drawing part
-  DRAWING_PN = "drawings/drawing%d.xml".freeze
+  DRAWING_PN = "drawings/drawing%d.xml"
 
   # drawing rels part
-  DRAWING_RELS_PN = "drawings/_rels/drawing%d.xml.rels".freeze
+  DRAWING_RELS_PN = "drawings/_rels/drawing%d.xml.rels"
 
   # vml drawing part
-  VML_DRAWING_PN = "drawings/vmlDrawing%d.vml".freeze
+  VML_DRAWING_PN = "drawings/vmlDrawing%d.vml"
 
   # drawing part
-  TABLE_PN = "tables/table%d.xml".freeze
+  TABLE_PN = "tables/table%d.xml"
 
   # pivot table parts
-  PIVOT_TABLE_PN = "pivotTables/pivotTable%d.xml".freeze
+  PIVOT_TABLE_PN = "pivotTables/pivotTable%d.xml"
 
   # pivot table cache definition part name
-  PIVOT_TABLE_CACHE_DEFINITION_PN = "pivotCache/pivotCacheDefinition%d.xml".freeze
+  PIVOT_TABLE_CACHE_DEFINITION_PN = "pivotCache/pivotCacheDefinition%d.xml"
 
   # pivot table rels parts
-  PIVOT_TABLE_RELS_PN = "pivotTables/_rels/pivotTable%d.xml.rels".freeze
+  PIVOT_TABLE_RELS_PN = "pivotTables/_rels/pivotTable%d.xml.rels"
 
   # chart part
-  CHART_PN = "charts/chart%d.xml".freeze
+  CHART_PN = "charts/chart%d.xml"
 
   # chart part
-  IMAGE_PN = "media/image%d.%s".freeze
+  IMAGE_PN = "media/image%d.%s"
 
   # comment part
-  COMMENT_PN = "comments%d.xml".freeze
+  COMMENT_PN = "comments%d.xml"
 
   # location of schema files for validation
   SCHEMA_BASE = (File.dirname(__FILE__) + '/../../schema/').freeze
@@ -279,46 +281,46 @@ module Axlsx
   WORKSHEET_NAME_FORBIDDEN_CHARS = '[]*/\?:'.chars.freeze
 
   # error messages RestrictionValidor
-  ERR_RESTRICTION = "Invalid Data: %s. %s must be one of %s.".freeze
+  ERR_RESTRICTION = "Invalid Data: %s. %s must be one of %s."
 
   # error message DataTypeValidator
-  ERR_TYPE = "Invalid Data %s for %s. must be %s.".freeze
+  ERR_TYPE = "Invalid Data %s for %s. must be %s."
 
   # error message for RegexValidator
-  ERR_REGEX = "Invalid Data. %s does not match %s.".freeze
+  ERR_REGEX = "Invalid Data. %s does not match %s."
 
   # error message for RangeValidator
-  ERR_RANGE = "Invalid Data. %s must be between %s and %s, (inclusive:%s) you gave: %s".freeze
+  ERR_RANGE = "Invalid Data. %s must be between %s and %s, (inclusive:%s) you gave: %s"
 
   # error message for sheets that use explicit empty string name
-  ERR_SHEET_NAME_EMPTY = "Your worksheet name is empty. Worksheet name can't be empty. Please assign name of your sheet or don't use name option at all.".freeze
+  ERR_SHEET_NAME_EMPTY = "Your worksheet name is empty. Worksheet name can't be empty. Please assign name of your sheet or don't use name option at all."
 
   # error message for sheets that use a name which is longer than 31 bytes
-  ERR_SHEET_NAME_TOO_LONG = "Your worksheet name '%s' is too long. Worksheet names must be #{WORKSHEET_MAX_NAME_LENGTH} characters (bytes) or less".freeze
+  ERR_SHEET_NAME_TOO_LONG = "Your worksheet name '%s' is too long. Worksheet names must be #{WORKSHEET_MAX_NAME_LENGTH} characters (bytes) or less"
 
   # error message for sheets that use a name which include invalid characters
-  ERR_SHEET_NAME_CHARACTER_FORBIDDEN = "Your worksheet name '%s' contains a character which is not allowed by MS Excel and will cause repair warnings. Please change the name of your sheet.".freeze
+  ERR_SHEET_NAME_CHARACTER_FORBIDDEN = "Your worksheet name '%s' contains a character which is not allowed by MS Excel and will cause repair warnings. Please change the name of your sheet."
 
   # error message for duplicate sheet names
-  ERR_DUPLICATE_SHEET_NAME = "There is already a worksheet in this workbook named '%s'. Please use a unique name".freeze
+  ERR_DUPLICATE_SHEET_NAME = "There is already a worksheet in this workbook named '%s'. Please use a unique name"
 
   # error message when user does not provide color and or style options for border in Style#add_sytle
-  ERR_INVALID_BORDER_OPTIONS = "border hash must include both style and color. e.g. :border => { :color => 'FF000000', :style => :thin }. You provided: %s".freeze
+  ERR_INVALID_BORDER_OPTIONS = "border hash must include both style and color. e.g. :border => { :color => 'FF000000', :style => :thin }. You provided: %s"
 
   # error message for invalid border id reference
-  ERR_INVALID_BORDER_ID = "The border id you specified (%s) does not exist. Please add a border with Style#add_style before referencing its index.".freeze
+  ERR_INVALID_BORDER_ID = "The border id you specified (%s) does not exist. Please add a border with Style#add_style before referencing its index."
 
   # error message for invalid angles
-  ERR_ANGLE = "Angles must be a value between -90 and 90. You provided: %s".freeze
+  ERR_ANGLE = "Angles must be a value between -90 and 90. You provided: %s"
 
   # error message for non 'integerish' value
-  ERR_INTEGERISH = "You value must be, or be castable via to_i, an Integer. You provided %s".freeze
+  ERR_INTEGERISH = "You value must be, or be castable via to_i, an Integer. You provided %s"
 
   # error message for invalid cell reference
-  ERR_CELL_REFERENCE_INVALID = "Invalid cell definition `%s`".freeze
+  ERR_CELL_REFERENCE_INVALID = "Invalid cell definition `%s`"
 
   # error message for cell reference with last cell missing
-  ERR_CELL_REFERENCE_MISSING_CELL = "Missing cell `%s` for the specified range `%s`".freeze
+  ERR_CELL_REFERENCE_MISSING_CELL = "Missing cell `%s` for the specified range `%s`"
 
   # Regex to match forbidden control characters
   # The following will be automatically stripped from worksheets.
