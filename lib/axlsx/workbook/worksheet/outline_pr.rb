@@ -28,7 +28,9 @@ module Axlsx
     # @param [String] str serialized output will be appended to this object if provided.
     # @return [String]
     def to_xml_string(str = +'')
-      str << "<outlinePr #{serialized_attributes} />"
+      str << '<outlinePr '
+      serialized_attributes(str)
+      str << '/>'
     end
   end
 end

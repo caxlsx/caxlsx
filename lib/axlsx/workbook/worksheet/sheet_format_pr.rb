@@ -49,7 +49,9 @@ module Axlsx
     # @param [String] str The string this objects serialization will be appended to
     # @return [String]
     def to_xml_string(str = +'')
-      str << "<sheetFormatPr #{serialized_attributes}/>"
+      str << '<sheetFormatPr '
+      serialized_attributes(str)
+      str << '/>'
     end
 
     private

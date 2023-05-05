@@ -24,7 +24,9 @@ module Axlsx
     # content to.
     # @return [String]
     def to_xml_string(str = +'')
-      str << "<sheetCalcPr #{serialized_attributes}/>"
+      str << '<sheetCalcPr '
+      serialized_attributes(str)
+      str << '/>'
     end
   end
 end

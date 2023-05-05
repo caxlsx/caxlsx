@@ -11,11 +11,11 @@ module Axlsx
 
       str << '<c:tx>'
       str << '<c:strRef>'
-      str << (+'<c:f>' << Axlsx::cell_range([@cell]) << '</c:f>')
+      str << '<c:f>' << Axlsx::cell_range([@cell]) << '</c:f>'
       str << '<c:strCache>'
       str << '<c:ptCount val="1"/>'
       str << '<c:pt idx="0">'
-      str << (+'<c:v>' << clean_value << '</c:v>')
+      str << '<c:v>' << clean_value << '</c:v>'
       str << '</c:pt>'
       str << '</c:strCache>'
       str << '</c:strRef>'

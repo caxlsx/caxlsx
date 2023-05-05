@@ -38,7 +38,9 @@ module Axlsx
 
     # serialize to xml
     def to_xml_string(str = +'')
-      str << (+'<pageSetUpPr ' << serialized_attributes << '/>')
+      str << '<pageSetUpPr '
+      serialized_attributes(str)
+      str << '/>'
     end
   end
 end

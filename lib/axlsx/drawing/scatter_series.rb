@@ -85,17 +85,17 @@ module Axlsx
         # needs to override the super color here to push in ln/and something else!
         if color
           str << '<c:spPr><a:solidFill>'
-          str << (+'<a:srgbClr val="' << color << '"/>')
+          str << '<a:srgbClr val="' << color << '"/>'
           str << '</a:solidFill>'
           str << '<a:ln><a:solidFill>'
-          str << (+'<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
+          str << '<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>'
           str << '</c:spPr>'
           str << '<c:marker>'
           str << '<c:spPr><a:solidFill>'
-          str << (+'<a:srgbClr val="' << color << '"/>')
+          str << '<a:srgbClr val="' << color << '"/>'
           str << '</a:solidFill>'
           str << '<a:ln><a:solidFill>'
-          str << (+'<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
+          str << '<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>'
           str << '</c:spPr>'
           str << marker_symbol_xml
           str << '</c:marker>'
@@ -110,7 +110,7 @@ module Axlsx
         end
         @xData.to_xml_string(str) unless @xData.nil?
         @yData.to_xml_string(str) unless @yData.nil?
-        str << (+'<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>')
+        str << '<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>'
       end
       str
     end
