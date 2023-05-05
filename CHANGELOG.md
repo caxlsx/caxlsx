@@ -2,7 +2,6 @@ CHANGELOG
 ---------
 - **Unreleased**: 4.0.0
   - Drop support for Ruby versions < 2.6
-  - Drop support for Ruby versions < 2.7
   - Added frozen string literals
 
 - **April.23.23**: 3.4.1
