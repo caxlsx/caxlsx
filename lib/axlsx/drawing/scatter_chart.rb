@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The ScatterChart allows you to insert a scatter chart into your worksheet
   # @see Worksheet#add_chart

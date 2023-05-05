@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # View options for a worksheet.
   #

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # 3D attributes for a chart.
   class View3D

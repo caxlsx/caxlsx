@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A SimpleTypedList is a type restrictive collection that allows some of the methods from Array and supports basic xml serialization.
   # @private

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The table style info class manages style attributes for defined tables in
   # a worksheet

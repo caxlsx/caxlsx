@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # Conditional Format Rule color scale object
   # Describes a gradated color scale in this conditional formatting rule.

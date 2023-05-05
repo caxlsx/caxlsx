@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A Title stores information about the title of a chart
   class Title

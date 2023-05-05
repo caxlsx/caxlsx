@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A relationship defines a reference between package parts.
   # @note Packages automatically manage relationships.

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # Page setup settings for printing a worksheet. All settings are optional.
   #

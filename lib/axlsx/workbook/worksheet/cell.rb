@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'cgi'
 module Axlsx
   # A cell in a worksheet.
@@ -72,13 +74,13 @@ module Axlsx
 
     # Leading characters that indicate a formula.
     # See: https://owasp.org/www-community/attacks/CSV_Injection
-    FORMULA_PREFIXES = ['='.freeze].freeze
+    FORMULA_PREFIXES = ['='].freeze
 
     # Leading characters that indicate an array formula.
-    ARRAY_FORMULA_PREFIXES = ['{='.freeze].freeze
+    ARRAY_FORMULA_PREFIXES = ['{='].freeze
 
     # Trailing character that indicates an array formula.
-    ARRAY_FORMULA_SUFFIX = '}'.freeze
+    ARRAY_FORMULA_SUFFIX = '}'
 
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer]

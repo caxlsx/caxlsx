@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The RichTextRun class creates and self serializing text run.
   class RichTextRun

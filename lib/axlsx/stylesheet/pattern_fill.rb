@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A PatternFill is the pattern and solid fill styling for a cell.
   # @note The recommended way to manage styles is with Styles#add_style

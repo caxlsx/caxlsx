@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A ScatterSeries defines the x and y position of data in the chart
   # @note The recommended way to manage series is to use Chart#add_series

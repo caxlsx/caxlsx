@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # <xsd:complexType name="CT_BookView">
 #     <xsd:sequence>
 #       <xsd:element name="extLst" type="CT_ExtensionList" minOccurs="0" maxOccurs="1"/>

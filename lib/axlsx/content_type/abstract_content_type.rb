@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # This class extracts the common parts from Default and Override
   class AbstractContentType

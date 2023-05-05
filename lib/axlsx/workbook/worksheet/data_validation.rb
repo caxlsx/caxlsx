@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # Data validation allows the validation of cell data
   #

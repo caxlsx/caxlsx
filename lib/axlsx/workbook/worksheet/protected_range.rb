@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The Protected Range class represents a set of cells in the worksheet
   # @note the recommended way to manage protected ranges with via Worksheet#protect_range

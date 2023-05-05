@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   require 'axlsx/workbook/worksheet/sheet_calc_pr.rb'
   require 'axlsx/workbook/worksheet/auto_filter/auto_filter.rb'

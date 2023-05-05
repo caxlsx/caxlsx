@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tc_helper'
 
 def shared_test_pivot_table_xml_validity(pivot_table)

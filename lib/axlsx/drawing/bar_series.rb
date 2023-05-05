@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A BarSeries defines the title, data and labels for bar charts
   # @note The recommended way to manage series is to use Chart#add_series

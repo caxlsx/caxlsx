@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # Options for printing a worksheet. All options are boolean and false by default.
   #

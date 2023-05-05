@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The SheetProtection object manages worksheet protection options per sheet.
   class SheetProtection

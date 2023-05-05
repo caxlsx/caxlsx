@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The cols class manages the col object used to manage column widths.
   # This is where the magic happens with autowidth

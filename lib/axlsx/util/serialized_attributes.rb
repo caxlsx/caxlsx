@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # This module allows us to define a list of symbols defining which
   # attributes will be serialized for a class.

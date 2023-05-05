@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # a hyperlink object adds an action to an image when clicked so that when the image is clicked the link is fecthed.
   # @note using the hyperlink option when calling add_image on a drawing object is the recommended way to manage hyperlinks

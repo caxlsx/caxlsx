@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # Conditional formatting rules specify formulas whose evaluations
   # format cells

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A collection of hyperlink objects for a worksheet
   class WorksheetHyperlinks < SimpleTypedList

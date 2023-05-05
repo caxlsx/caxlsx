@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # the ValAxis class defines a chart value axis.
   class ValAxis < Axis

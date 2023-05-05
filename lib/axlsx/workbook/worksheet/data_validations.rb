@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A simple, self serializing class for storing conditional formattings
   class DataValidations < SimpleTypedList

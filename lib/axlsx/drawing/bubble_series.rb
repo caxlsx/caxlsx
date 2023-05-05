@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A BubbleSeries defines the x/y position and bubble size of data in the chart
   # @note The recommended way to manage series is to use Chart#add_series

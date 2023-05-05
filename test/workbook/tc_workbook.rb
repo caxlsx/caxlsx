@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tc_helper'
 
 class TestWorkbook < Test::Unit::TestCase

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   require 'axlsx/stylesheet/border.rb'
   require 'axlsx/stylesheet/border_pr.rb'

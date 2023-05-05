@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tc_helper'
 
 class TestNumDataSource < Test::Unit::TestCase

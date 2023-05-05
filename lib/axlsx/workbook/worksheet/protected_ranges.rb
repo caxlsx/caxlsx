@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # A self serializing collection of ranges that should be protected in
   # the worksheet

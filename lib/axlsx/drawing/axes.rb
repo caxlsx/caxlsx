@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The Axes class creates and manages axis information and
   # serialization for charts.

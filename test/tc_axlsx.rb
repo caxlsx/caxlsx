@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tc_helper'
 
 class TestAxlsx < Test::Unit::TestCase
@@ -92,7 +94,7 @@ class TestAxlsx < Test::Unit::TestCase
   end
 
   def test_sanitize_frozen_control_strippped
-    needs_sanitize = "legit\x08".freeze # Backspace control char
+    needs_sanitize = "legit\x08" # Backspace control char
 
     assert_equal('legit', Axlsx.sanitize(needs_sanitize), 'should strip control chars')
   end

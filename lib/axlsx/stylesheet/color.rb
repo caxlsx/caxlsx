@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The color class represents a color used for borders, fills an fonts
   class Color

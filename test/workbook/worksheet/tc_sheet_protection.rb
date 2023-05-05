@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tc_helper'
 
 # <xsd:complexType name="CT_SheetProtection">

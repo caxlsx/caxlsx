@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #  <definedNames>
 #    <definedName name="_xlnm.Print_Titles" localSheetId="0">Sheet1!$1:$1</definedName>
 #  </definedNames>

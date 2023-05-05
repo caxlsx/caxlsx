@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # The core object for the package.
   # @note Packages manage their own core object.
