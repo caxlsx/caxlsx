@@ -105,7 +105,10 @@ module Axlsx
     def to_xml_string(str = +'')
       h = Axlsx.instance_values_for(self).reject { |k, _| k == "source_obj" }
       str << '<Relationship '
-      h.each { |key, value| str << key.to_s << '="' << Axlsx::coder.encode(value.to_s) << '" ' }
+      h.each_with_index do |key_value, index|
+        str << ' ' unless index.zero?
+        str << key_value.first.to_s << '="' << Axlsx::coder.encode(key_value.last.to_s) << '"'
+      end
       str << '/>'
     end
 

@@ -235,10 +235,12 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = +'')
       valid_attributes = get_valid_attributes
+      h = Axlsx.instance_values_for(self).select { |key, _| valid_attributes.include?(key.to_sym) && !CHILD_ELEMENTS.include?(key.to_sym) }
 
       str << '<dataValidation '
-      Axlsx.instance_values_for(self).each do |key, value|
-        str << key << '="' << Axlsx.booleanize(value).to_s << '" ' if (valid_attributes.include?(key.to_sym) && !CHILD_ELEMENTS.include?(key.to_sym))
+      h.each_with_index do |key_value, index|
+        str << ' ' unless index.zero?
+        str << key_value.first << '="' << Axlsx.booleanize(key_value.last).to_s << '"'
       end
       str << '>'
       str << '<formula1>' << self.formula1 << '</formula1>' if @formula1 and valid_attributes.include?(:formula1)

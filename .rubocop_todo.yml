@@ -441,7 +441,6 @@ Style/ParenthesesAroundCondition:
     - 'lib/axlsx/stylesheet/font.rb'
     - 'lib/axlsx/util/validators.rb'
     - 'lib/axlsx/workbook/worksheet/cell.rb'
-    - 'lib/axlsx/workbook/worksheet/data_validation.rb'
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
