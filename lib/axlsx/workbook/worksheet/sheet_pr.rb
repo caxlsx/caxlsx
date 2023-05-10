@@ -52,7 +52,9 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = +'')
       update_properties
-      str << "<sheetPr #{serialized_attributes}>"
+      str << '<sheetPr '
+      serialized_attributes(str)
+      str << '>'
       tab_color.to_xml_string(str, 'tabColor') if tab_color
       outline_pr.to_xml_string(str) if @outline_pr
       page_setup_pr.to_xml_string(str)

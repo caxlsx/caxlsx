@@ -174,9 +174,9 @@ module Axlsx
     def to_xml_string(str = +'')
       classname = @allowed_types[0].name.split('::').last
       el_name = serialize_as.to_s || (classname[0, 1].downcase + classname[1..-1])
-      str << (+'<' << el_name << ' count="' << size.to_s << '">')
+      str << '<' << el_name << ' count="' << size.to_s << '">'
       each { |item| item.to_xml_string(str) }
-      str << (+'</' << el_name << '>')
+      str << '</' << el_name << '>'
     end
   end
 end

@@ -40,23 +40,21 @@ module Axlsx
       @current_file = "#{@dir}/#{entry.name}"
       @files << entry.name
       FileUtils.mkdir_p(File.dirname(@current_file))
+      @io = File.open(@current_file, "wb")
     end
 
     # Write to a buffer that will be written to the current entry
     def write(content)
-      @buffer << content
+      @io << content
     end
     alias << write
 
     private
 
     def write_file
-      if @current_file
-        @buffer.rewind
-        File.open(@current_file, "wb") { |f| f.write @buffer.read }
-      end
+      @io.close if @current_file
       @current_file = nil
-      @buffer = StringIO.new
+      @io = nil
     end
 
     def zip_parts(output)

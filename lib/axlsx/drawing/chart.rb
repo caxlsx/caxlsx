@@ -206,13 +206,13 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = +'')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << (+'<c:chartSpace xmlns:c="' << XML_NS_C << '" xmlns:a="' << XML_NS_A << '" xmlns:r="' << XML_NS_R << '">')
-      str << (+'<c:date1904 val="' << Axlsx::Workbook.date1904.to_s << '"/>')
-      str << (+'<c:roundedCorners val="' << rounded_corners.to_s << '"/>')
-      str << (+'<c:style val="' << style.to_s << '"/>')
+      str << '<c:chartSpace xmlns:c="' << XML_NS_C << '" xmlns:a="' << XML_NS_A << '" xmlns:r="' << XML_NS_R << '">'
+      str << '<c:date1904 val="' << Axlsx::Workbook.date1904.to_s << '"/>'
+      str << '<c:roundedCorners val="' << rounded_corners.to_s << '"/>'
+      str << '<c:style val="' << style.to_s << '"/>'
       str << '<c:chart>'
       @title.to_xml_string(str) unless @title.empty?
-      str << (+'<c:autoTitleDeleted val="' << @title.nil?.to_s << '"/>')
+      str << '<c:autoTitleDeleted val="' << @title.nil?.to_s << '"/>'
       @view_3D.to_xml_string(str) if @view_3D
       str << '<c:floor><c:thickness val="0"/></c:floor>'
       str << '<c:sideWall><c:thickness val="0"/></c:sideWall>'
@@ -223,13 +223,13 @@ module Axlsx
       str << '</c:plotArea>'
       if @show_legend
         str << '<c:legend>'
-        str << (+'<c:legendPos val="' << @legend_position.to_s << '"/>')
+        str << '<c:legendPos val="' << @legend_position.to_s << '"/>'
         str << '<c:layout/>'
         str << '<c:overlay val="0"/>'
         str << '</c:legend>'
       end
-      str << (+'<c:plotVisOnly val="' << @plot_visible_only.to_s << '"/>')
-      str << (+'<c:dispBlanksAs val="' << display_blanks_as.to_s << '"/>')
+      str << '<c:plotVisOnly val="' << @plot_visible_only.to_s << '"/>'
+      str << '<c:dispBlanksAs val="' << display_blanks_as.to_s << '"/>'
       str << '<c:showDLblsOverMax val="1"/>'
       str << '</c:chart>'
       if bg_color
