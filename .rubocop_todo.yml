@@ -112,14 +112,6 @@ Performance/Detect:
   Exclude:
     - 'lib/axlsx/workbook/workbook.rb'
 
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Performance/InefficientHashSearch:
-  Exclude:
-    - 'lib/axlsx/drawing/axes.rb'
-    - 'lib/axlsx/drawing/d_lbls.rb'
-    - 'lib/axlsx/stylesheet/styles.rb'
-    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-
 # This cop supports safe autocorrection (--autocorrect).
 Performance/RedundantBlockCall:
   Exclude:

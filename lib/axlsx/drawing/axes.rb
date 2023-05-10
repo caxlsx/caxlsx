@@ -9,7 +9,7 @@ module Axlsx
     # class of the axis type to construct. The :cat_axis, if there is one,
     # must come first (we assume a Ruby 1.9+ Hash or an OrderedHash).
     def initialize(options = {})
-      raise(ArgumentError, "CatAxis must come first") if options.keys.include?(:cat_axis) && options.keys.first != :cat_axis
+      raise(ArgumentError, "CatAxis must come first") if options.key?(:cat_axis) && options.keys.first != :cat_axis
 
       options.each do |name, axis_class|
         add_axis(name, axis_class)

@@ -329,7 +329,7 @@ module Axlsx
 
       Axlsx.instance_values_for(fonts.first).each do |key, value|
         # Thanks for that 1.8.7 - cant do a simple merge...
-        options[key.to_sym] = value unless options.keys.include?(key.to_sym)
+        options[key.to_sym] = value unless options.key?(key.to_sym)
       end
       font = Font.new(options)
       font.color = Color.new(:rgb => options[:fg_color]) if options[:fg_color]
@@ -383,7 +383,7 @@ module Axlsx
       end
 
       validate_border_hash = ->(val) {
-        if !(val.keys.include?(:style) && val.keys.include?(:color))
+        if !(val.key?(:style) && val.key?(:color))
           raise ArgumentError, (ERR_INVALID_BORDER_OPTIONS % options[:border])
         end
       }
