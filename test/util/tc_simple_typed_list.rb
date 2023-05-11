@@ -82,7 +82,16 @@ class TestSimpleTypedList < Test::Unit::TestCase
     @list.push 1
     @list.push 2
 
-    assert_equal([1, 2], @list.to_ary)
+    assert_equal([1, 2], @list)
+  end
+
+  def test_to_a
+    refute_equal(@list.object_id, @list.to_a.object_id)
+    assert_instance_of(Array, @list.to_a)
+  end
+
+  def test_to_ary
+    assert_equal(@list.object_id, @list.to_ary.object_id)
   end
 
   def test_insert

@@ -84,12 +84,6 @@ module Axlsx
       self
     end
 
-    def to_ary
-      @list
-    end
-
-    alias :to_a :to_ary
-
     # join operator
     # @param [Array] v the array to join
     # @raise [ArgumentError] if any of the values being joined are not
