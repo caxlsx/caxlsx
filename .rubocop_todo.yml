@@ -91,7 +91,6 @@ Lint/UselessAssignment:
 Lint/Void:
   Exclude:
     - 'lib/axlsx/drawing/title.rb'
-    - 'lib/axlsx/util/simple_typed_list.rb'
     - 'lib/axlsx/util/storage.rb'
     - 'lib/axlsx/workbook/worksheet/data_bar.rb'
     - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
@@ -215,10 +214,6 @@ Style/ConditionalAssignment:
     - 'lib/axlsx/stylesheet/styles.rb'
     - 'lib/axlsx/workbook/workbook.rb'
     - 'lib/axlsx/workbook/worksheet/data_bar.rb'
-
-Style/DocumentDynamicEvalDefinition:
-  Exclude:
-    - 'lib/axlsx/util/simple_typed_list.rb'
 
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
@@ -350,7 +345,6 @@ Style/MutableConstant:
     - 'lib/axlsx/drawing/pic.rb'
     - 'lib/axlsx/drawing/view_3D.rb'
     - 'lib/axlsx/stylesheet/dxf.rb'
-    - 'lib/axlsx/util/simple_typed_list.rb'
     - 'lib/axlsx/util/storage.rb'
     - 'lib/axlsx/workbook/worksheet/auto_filter/filter_column.rb'
     - 'lib/axlsx/workbook/worksheet/auto_filter/filters.rb'
@@ -395,7 +389,6 @@ Style/NumericPredicate:
     - 'spec/**/*'
     - 'lib/axlsx/package.rb'
     - 'lib/axlsx/stylesheet/font.rb'
-    - 'lib/axlsx/util/simple_typed_list.rb'
     - 'lib/axlsx/util/validators.rb'
     - 'lib/axlsx/workbook/workbook.rb'
     - 'lib/axlsx/workbook/worksheet/cell.rb'
@@ -596,7 +589,6 @@ Style/SlicingWithRange:
     - 'lib/axlsx.rb'
     - 'lib/axlsx/drawing/area_chart.rb'
     - 'lib/axlsx/drawing/line_chart.rb'
-    - 'lib/axlsx/util/simple_typed_list.rb'
     - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
@@ -698,7 +690,6 @@ Style/YodaCondition:
 Style/ZeroLengthPredicate:
   Exclude:
     - 'lib/axlsx/package.rb'
-    - 'lib/axlsx/util/simple_typed_list.rb'
     - 'lib/axlsx/workbook/workbook.rb'
     - 'lib/axlsx/workbook/worksheet/sheet_pr.rb'
 
@@ -706,4 +697,4 @@ Style/ZeroLengthPredicate:
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns.
 # URISchemes: http, https
 Layout/LineLength:
-  Max: 574
+  Max: 559
