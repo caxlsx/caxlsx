@@ -83,8 +83,14 @@ class TestAxlsx < Test::Unit::TestCase
     end
   end
 
+  def test_row_ref
+    assert_equal('1', Axlsx.row_ref(0))
+    assert_equal('100', Axlsx.row_ref(99))
+  end
+
   def test_cell_r
-    # todo
+    assert_equal('A1', Axlsx.cell_r(0, 0))
+    assert_equal('Z26', Axlsx.cell_r(25, 25))
   end
 
   def test_range_to_a
