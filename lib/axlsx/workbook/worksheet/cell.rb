@@ -46,7 +46,7 @@ module Axlsx
       val = options.delete(:formula_value)
       self.formula_value = val unless val.nil?
       val = options.delete(:escape_formulas)
-      self.escape_formulas = val.nil? ? row.worksheet.escape_formulas : val
+      self.escape_formulas = val unless val.nil?
 
       parse_options(options)
 
@@ -146,7 +146,9 @@ module Axlsx
     # Allowing user-generated data to be interpreted as formulas is a security risk.
     # See https://www.owasp.org/index.php/CSV_Injection for details.
     # @return [Boolean]
-    attr_reader :escape_formulas
+    def escape_formulas
+      defined?(@escape_formulas) ? @escape_formulas : row.worksheet.escape_formulas
+    end
 
     # Sets whether to treat values starting with an equals sign as formulas or as literal strings.
     # @param [Boolean] value The value to set.
