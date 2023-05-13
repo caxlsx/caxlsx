@@ -291,7 +291,7 @@ module Axlsx
 
     # @see u
     def u=(v)
-      v = :single if [true, 1, :true, 'true'].include?(v)
+      v = :single if VALID_BOOLEAN_TRUE_VALUES.include?(v)
       set_run_style :validate_cell_u, :u, v
     end
 
