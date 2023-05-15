@@ -106,11 +106,6 @@ Performance/CollectionLiteralInLoop:
     - 'lib/axlsx/package.rb'
     - 'lib/axlsx/workbook/worksheet/page_margins.rb'
 
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Performance/Detect:
-  Exclude:
-    - 'lib/axlsx/workbook/workbook.rb'
-
 # This cop supports safe autocorrection (--autocorrect).
 Performance/RedundantBlockCall:
   Exclude:
@@ -121,7 +116,6 @@ Performance/RedundantMatch:
   Exclude:
     - 'lib/axlsx.rb'
     - 'lib/axlsx/stylesheet/color.rb'
-    - 'lib/axlsx/workbook/workbook.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 Performance/RedundantSplitRegexpArgument:
@@ -132,7 +126,6 @@ Performance/RedundantSplitRegexpArgument:
 Performance/RegexpMatch:
   Exclude:
     - 'lib/axlsx/stylesheet/color.rb'
-    - 'lib/axlsx/workbook/workbook.rb'
     - 'lib/axlsx/workbook/worksheet/cell.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
