@@ -58,6 +58,9 @@ class TestSimpleTypedList < Test::Unit::TestCase
     assert_raise(ArgumentError) { @list.delete 1  }
     assert_raise(ArgumentError) { @list.delete_at 1 }
     assert_raise(ArgumentError) { @list.delete_at 2 }
+    assert_raise(ArgumentError) { @list.insert(1, 3) }
+    assert_raise(ArgumentError) { @list[1] = 3 }
+
     @list.push 4
     assert_nothing_raised { @list.delete_at 3 }
     @list.unlock
@@ -79,6 +82,35 @@ class TestSimpleTypedList < Test::Unit::TestCase
     @list.push 1
     @list.push 2
 
-    assert_equal([1, 2], @list.to_ary)
+    assert_equal([1, 2], @list)
+  end
+
+  def test_to_a
+    refute_equal(@list.object_id, @list.to_a.object_id)
+    assert_instance_of(Array, @list.to_a)
+  end
+
+  def test_to_ary
+    assert_equal(@list.object_id, @list.to_ary.object_id)
+  end
+
+  def test_insert
+    assert_raise(ArgumentError) { @list << nil }
+
+    assert_equal(1, @list.insert(0, 1))
+    assert_equal(2, @list.insert(1, 2))
+    assert_equal(3, @list.insert(0, 3))
+
+    assert_equal([3, 1, 2], @list)
+  end
+
+  def test_setter
+    assert_raise(ArgumentError) { @list[0] = nil }
+
+    assert_equal(1, @list[0] = 1)
+    assert_equal(2, @list[1] = 2)
+    assert_equal(3, @list[0] = 3)
+
+    assert_equal([3, 2], @list)
   end
 end
