@@ -73,7 +73,7 @@ and Numbers
 gem 'caxlsx'
 ```
 
-**Supported Ruby versions:** Caxlsx supports Ruby 2.7 and newer.
+**Supported Ruby versions:** Caxlsx supports Ruby 2.6 and newer.
 
 ## Usage
 
