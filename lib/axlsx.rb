@@ -125,7 +125,6 @@ module Axlsx
       end
       chars.prepend((i + 65).chr)
       chars.freeze
-      chars
     end
   end
 
@@ -133,7 +132,8 @@ module Axlsx
   # @note The spreadsheet rows are 1-based and the passed in index is 0-based, so we add 1.
   # @return [String]
   def self.row_ref(index)
-    (index + 1).to_s
+    @row_ref ||= {}
+    @row_ref[index] ||= (index + 1).to_s.freeze
   end
 
   # @return [String] The alpha(column)numeric(row) reference for this sell.
