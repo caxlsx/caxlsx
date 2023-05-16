@@ -58,7 +58,6 @@ Lint/DisjunctiveAssignmentInConstructor:
 # Configuration parameters: IgnoreLiteralBranches, IgnoreConstantBranches.
 Lint/DuplicateBranch:
   Exclude:
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'lib/axlsx/workbook/worksheet/merged_cells.rb'
 
 Lint/NonLocalExitFromIterator:
@@ -133,7 +132,6 @@ Performance/RegexpMatch:
   Exclude:
     - 'lib/axlsx/stylesheet/color.rb'
     - 'lib/axlsx/workbook/workbook.rb'
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 Performance/StringIdentifierArgument:
@@ -323,7 +321,6 @@ Style/MultipleComparison:
   Exclude:
     - 'lib/axlsx.rb'
     - 'lib/axlsx/stylesheet/font.rb'
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
     - 'test/workbook/tc_workbook_view.rb'
 
@@ -383,7 +380,6 @@ Style/NumericPredicate:
     - 'lib/axlsx/stylesheet/font.rb'
     - 'lib/axlsx/util/validators.rb'
     - 'lib/axlsx/workbook/workbook.rb'
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'lib/axlsx/workbook/worksheet/sheet_pr.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
@@ -425,7 +421,6 @@ Style/ParenthesesAroundCondition:
   Exclude:
     - 'lib/axlsx/stylesheet/font.rb'
     - 'lib/axlsx/util/validators.rb'
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
@@ -546,13 +541,6 @@ Style/RedundantSelf:
   Enabled: false
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, AllowInnerSlashes.
-# SupportedStyles: slashes, percent_r, mixed
-Style/RegexpLiteral:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: implicit, explicit
 Style/RescueStandardError:
@@ -620,7 +608,6 @@ Style/SymbolProc:
     - 'lib/axlsx/drawing/drawing.rb'
     - 'lib/axlsx/stylesheet/styles.rb'
     - 'lib/axlsx/workbook/workbook.rb'
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet_hyperlinks.rb'
 

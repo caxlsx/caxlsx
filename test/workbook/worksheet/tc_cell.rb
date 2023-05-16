@@ -567,7 +567,7 @@ class TestCell < Test::Unit::TestCase
   def test_to_xml
     # TODO: This could use some much more stringent testing related to the xml content generated!
     @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)", "2013-01-13T13:31:25.123"]
-    @ws.rows.last.cells[5].u = true
+    @ws.rows.last.cells[5].u = :single
 
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)

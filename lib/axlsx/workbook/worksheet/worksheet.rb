@@ -429,7 +429,6 @@ module Axlsx
     #    Allowing user generated data to be interpreted as formulas can be dangerous
     #   (see https://www.owasp.org/index.php/CSV_Injection for details).
     def add_row(values = [], options = {})
-      options[:escape_formulas] = escape_formulas if options[:escape_formulas].nil?
       row = Row.new(self, values, options)
       update_column_info row, options.delete(:widths)
       yield row if block_given?
