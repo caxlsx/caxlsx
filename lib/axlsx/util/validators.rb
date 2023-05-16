@@ -107,9 +107,7 @@ module Axlsx
   end
 
   VALID_BOOLEAN_CLASSES = [TrueClass, FalseClass, Integer, String, Symbol].freeze
-  VALID_BOOLEAN_TRUE_VALUES = [true, 1, '1', 'true', :true].freeze
-  VALID_BOOLEAN_FALSE_VALUES = [false, 0, '0', 'false', :false].freeze
-  VALID_BOOLEAN_VALUES = VALID_BOOLEAN_TRUE_VALUES.zip(VALID_BOOLEAN_FALSE_VALUES).flatten.freeze
+  VALID_BOOLEAN_VALUES = [true, false, 1, 0, '1', '0', 'true', 'false', :true, :false].freeze
   BOOLEAN_VALIDATOR = lambda { |arg| VALID_BOOLEAN_VALUES.include?(arg) }
 
   # Requires that the value is a form that can be evaluated as a boolean in an xml document.

@@ -285,15 +285,13 @@ module Axlsx
     def extend=(v) set_run_style :validate_boolean, :extend, v; end
 
     # The inline underline property for the cell.
-    # It must be one of :none, :single, :double, :singleAccounting, :doubleAccounting, true
+    # It must be one of :none, :single, :double, :singleAccounting, :doubleAccounting
     # @return [Boolean]
     # @return [String]
-    # @note true is for backwards compatability and is reassigned to :single
     attr_reader :u
 
     # @see u
     def u=(v)
-      v = :single if VALID_BOOLEAN_TRUE_VALUES.include?(v)
       set_run_style :validate_cell_u, :u, v
     end
 
