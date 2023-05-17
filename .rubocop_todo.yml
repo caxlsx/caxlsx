@@ -76,7 +76,6 @@ Lint/UnusedBlockArgument:
 Lint/UnusedMethodArgument:
   Exclude:
     - 'lib/axlsx/package.rb'
-    - 'lib/axlsx/util/serialized_attributes.rb'
     - 'lib/axlsx/util/validators.rb'
 
 Lint/UselessAssignment:
@@ -91,11 +90,6 @@ Lint/Void:
     - 'lib/axlsx/util/storage.rb'
     - 'lib/axlsx/workbook/worksheet/data_bar.rb'
     - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
-Performance/BlockGivenWithExplicitBlock:
-  Exclude:
-    - 'lib/axlsx/util/serialized_attributes.rb'
 
 # Configuration parameters: MinSize.
 Performance/CollectionLiteralInLoop:
@@ -349,7 +343,6 @@ Style/Next:
 Style/NonNilCheck:
   Exclude:
     - 'lib/axlsx/drawing/d_lbls.rb'
-    - 'lib/axlsx/util/serialized_attributes.rb'
     - 'lib/axlsx/workbook/worksheet/col.rb'
     - 'lib/axlsx/workbook/worksheet/page_setup.rb'
 
@@ -377,6 +370,7 @@ Style/OptionalBooleanParameter:
   Exclude:
     - 'lib/axlsx.rb'
     - 'lib/axlsx/package.rb'
+    - 'lib/axlsx/util/serialized_attributes.rb'
     - 'lib/axlsx/util/validators.rb'
     - 'lib/axlsx/workbook/workbook.rb'
     - 'lib/axlsx/workbook/worksheet/cell.rb'

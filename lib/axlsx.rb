@@ -185,7 +185,7 @@ module Axlsx
   # @return [Object]
   def self.booleanize(value)
     if BOOLEAN_VALUES.include?(value)
-      value ? 1 : 0
+      value ? '1' : '0'
     else
       value
     end
