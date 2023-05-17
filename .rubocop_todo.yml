@@ -131,11 +131,6 @@ Performance/RegexpMatch:
     - 'lib/axlsx/workbook/workbook.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Performance/StringIdentifierArgument:
-  Exclude:
-    - 'lib/axlsx/drawing/pic.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: separated, grouped
 Style/AccessorGrouping:
