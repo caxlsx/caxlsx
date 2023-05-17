@@ -98,7 +98,7 @@ module Axlsx
     # @return [String]
     def encode_password(password)
       i = 0
-      chars = password.split(//)
+      chars = password.split("")
       count = chars.size
 
       chars.collect! do |char|

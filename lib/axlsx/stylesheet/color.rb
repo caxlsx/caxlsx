@@ -55,7 +55,7 @@ module Axlsx
       v = v.upcase
       v = v * 3 if v.size == 2
       v = v.rjust(8, 'FF')
-      raise ArgumentError, "Invalid color rgb value: #{v}." unless v.match(/[0-9A-F]{8}/)
+      raise ArgumentError, "Invalid color rgb value: #{v}." unless /[0-9A-F]{8}/.match?(v)
 
       @rgb = v
     end
