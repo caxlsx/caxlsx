@@ -42,12 +42,13 @@ module Axlsx
       self.type = type unless type == :string
 
       val = options.delete(:style)
-      self.style = val unless val.nil? || val == 0
+      self.style = val unless val.nil? || val.zero?
       val = options.delete(:formula_value)
       self.formula_value = val unless val.nil?
+      val = options.delete(:escape_formulas)
+      self.escape_formulas = val unless val.nil?
 
       parse_options(options)
-      self.escape_formulas = row.worksheet.escape_formulas if escape_formulas.nil?
 
       self.value = value
       value.cell = self if contains_rich_text?
@@ -71,16 +72,6 @@ module Axlsx
     # An array of valid cell types
     CELL_TYPES = [:date, :time, :float, :integer, :richtext,
                   :string, :boolean, :iso_8601, :text].freeze
-
-    # Leading characters that indicate a formula.
-    # See: https://owasp.org/www-community/attacks/CSV_Injection
-    FORMULA_PREFIXES = ['='].freeze
-
-    # Leading characters that indicate an array formula.
-    ARRAY_FORMULA_PREFIXES = ['{='].freeze
-
-    # Trailing character that indicates an array formula.
-    ARRAY_FORMULA_SUFFIX = '}'
 
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer]
@@ -145,7 +136,9 @@ module Axlsx
     # Allowing user-generated data to be interpreted as formulas is a security risk.
     # See https://www.owasp.org/index.php/CSV_Injection for details.
     # @return [Boolean]
-    attr_reader :escape_formulas
+    def escape_formulas
+      defined?(@escape_formulas) ? @escape_formulas : row.worksheet.escape_formulas
+    end
 
     # Sets whether to treat values starting with an equals sign as formulas or as literal strings.
     # @param [Boolean] value The value to set.
@@ -282,15 +275,13 @@ module Axlsx
     def extend=(v) set_run_style :validate_boolean, :extend, v; end
 
     # The inline underline property for the cell.
-    # It must be one of :none, :single, :double, :singleAccounting, :doubleAccounting, true
+    # It must be one of :none, :single, :double, :singleAccounting, :doubleAccounting
     # @return [Boolean]
     # @return [String]
-    # @note true is for backwards compatability and is reassigned to :single
     attr_reader :u
 
     # @see u
     def u=(v)
-      v = :single if (v == true || v == 1 || v == :true || v == 'true')
       set_run_style :validate_cell_u, :u, v
     end
 
@@ -353,7 +344,7 @@ module Axlsx
     # @example Absolute Cell Reference
     #   ws.rows.first.cells.first.r #=> "$A$1"
     def r_abs
-      "$#{r.match(%r{([A-Z]+)([0-9]+)})[1, 2].join('$')}"
+      "$#{r.match(/([A-Z]+)([0-9]+)/)[1, 2].join('$')}"
     end
 
     # @return [Integer] The cellXfs item index applied to this cell.
@@ -378,7 +369,7 @@ module Axlsx
       start, stop = if target.is_a?(String)
                       [self.r, target]
                     elsif target.is_a?(Cell)
-                      Axlsx.sort_cells([self, target]).map { |c| c.r }
+                      Axlsx.sort_cells([self, target]).map(&:r)
                     end
       self.row.worksheet.merge_cells "#{start}:#{stop}" unless stop.nil?
     end
@@ -395,14 +386,14 @@ module Axlsx
     def is_formula?
       return false if escape_formulas
 
-      type == :string && @value.to_s.start_with?(*FORMULA_PREFIXES)
+      type == :string && @value.to_s.start_with?(FORMULA_PREFIX)
     end
 
     def is_array_formula?
       return false if escape_formulas
 
       type == :string &&
-        @value.to_s.start_with?(*ARRAY_FORMULA_PREFIXES) &&
+        @value.to_s.start_with?(ARRAY_FORMULA_PREFIX) &&
         @value.to_s.end_with?(ARRAY_FORMULA_SUFFIX)
     end
 
@@ -508,13 +499,11 @@ module Axlsx
         :time
       elsif v.is_a?(TrueClass) || v.is_a?(FalseClass)
         :boolean
-      elsif v.to_s =~ Axlsx::NUMERIC_REGEX && v.respond_to?(:to_i)
+      elsif v.respond_to?(:to_i) && v.to_s =~ Axlsx::NUMERIC_REGEX
         :integer
-      elsif v.to_s =~ Axlsx::SAFE_FLOAT_REGEX && v.respond_to?(:to_f)
+      elsif v.respond_to?(:to_f) && (v.to_s =~ Axlsx::SAFE_FLOAT_REGEX || ((matchdata = v.to_s.match(MAYBE_FLOAT_REGEX)) && matchdata[:exp].to_i.between?(Float::MIN_10_EXP, Float::MAX_10_EXP)))
         :float
-      elsif (matchdata = v.to_s.match(MAYBE_FLOAT_REGEX)) && (Float::MIN_10_EXP..Float::MAX_10_EXP).cover?(matchdata[:exp].to_i) && v.respond_to?(:to_f)
-        :float
-      elsif v.to_s =~ Axlsx::ISO_8601_REGEX
+      elsif Axlsx::ISO_8601_REGEX.match?(v.to_s)
         :iso_8601
       elsif v.is_a? RichText
         :richtext
@@ -532,14 +521,14 @@ module Axlsx
 
       case type
       when :date
-        self.style = STYLE_DATE if self.style == 0
+        self.style = STYLE_DATE if self.style.zero?
         if !v.is_a?(Date) && v.respond_to?(:to_date)
           v.to_date
         else
           v
         end
       when :time
-        self.style = STYLE_DATE if self.style == 0
+        self.style = STYLE_DATE if self.style.zero?
         if !v.is_a?(Time) && v.respond_to?(:to_time)
           v.to_time
         else

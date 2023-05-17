@@ -106,8 +106,8 @@ module Axlsx
     DataTypeValidator.validate :signed_int, Integer, v
   end
 
-  VALID_BOOLEAN_CLASSES = [String, Integer, Symbol, TrueClass, FalseClass].freeze
-  VALID_BOOLEAN_VALUES = [0, 1, 'true', 'false', :true, :false, true, false, '0', '1'].freeze
+  VALID_BOOLEAN_CLASSES = [TrueClass, FalseClass, Integer, String, Symbol].freeze
+  VALID_BOOLEAN_VALUES = [true, false, 1, 0, '1', '0', 'true', 'false', :true, :false].freeze
   BOOLEAN_VALIDATOR = lambda { |arg| VALID_BOOLEAN_VALUES.include?(arg) }
 
   # Requires that the value is a form that can be evaluated as a boolean in an xml document.
