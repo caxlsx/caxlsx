@@ -239,7 +239,7 @@ module Axlsx
     def swap_anchor(new_anchor)
       new_anchor.drawing.anchors.delete(new_anchor)
       @anchor.drawing.anchors[@anchor.drawing.anchors.index(@anchor)] = new_anchor
-      new_anchor.instance_variable_set "@object", @anchor.object
+      new_anchor.instance_variable_set :@object, @anchor.object
       @anchor = new_anchor
     end
   end

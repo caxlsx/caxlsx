@@ -20,7 +20,6 @@ Layout/FirstHashElementIndentation:
 Layout/HashAlignment:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/border_creator.rb'
-    - 'test/tc_axlsx.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 Lint/AmbiguousOperatorPrecedence:
@@ -58,7 +57,6 @@ Lint/DisjunctiveAssignmentInConstructor:
 # Configuration parameters: IgnoreLiteralBranches, IgnoreConstantBranches.
 Lint/DuplicateBranch:
   Exclude:
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'lib/axlsx/workbook/worksheet/merged_cells.rb'
 
 Lint/NonLocalExitFromIterator:
@@ -69,7 +67,6 @@ Lint/NonLocalExitFromIterator:
 # Configuration parameters: IgnoreEmptyBlocks, AllowUnusedKeywordArguments.
 Lint/UnusedBlockArgument:
   Exclude:
-    - 'lib/axlsx.rb'
     - 'lib/axlsx/drawing/axes.rb'
     - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
     - 'lib/axlsx/workbook/worksheet/sheet_view.rb'
@@ -114,7 +111,6 @@ Performance/RedundantBlockCall:
 # This cop supports safe autocorrection (--autocorrect).
 Performance/RedundantMatch:
   Exclude:
-    - 'lib/axlsx.rb'
     - 'lib/axlsx/stylesheet/color.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
@@ -126,12 +122,6 @@ Performance/RedundantSplitRegexpArgument:
 Performance/RegexpMatch:
   Exclude:
     - 'lib/axlsx/stylesheet/color.rb'
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
-Performance/StringIdentifierArgument:
-  Exclude:
-    - 'lib/axlsx/drawing/pic.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
@@ -259,7 +249,6 @@ Style/GuardClause:
 # Configuration parameters: AllowSplatArgument.
 Style/HashConversion:
   Exclude:
-    - 'lib/axlsx.rb'
     - 'lib/axlsx/workbook/worksheet/cell_serializer.rb'
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
 
@@ -314,9 +303,7 @@ Style/LineEndConcatenation:
 # Configuration parameters: AllowMethodComparison.
 Style/MultipleComparison:
   Exclude:
-    - 'lib/axlsx.rb'
     - 'lib/axlsx/stylesheet/font.rb'
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
     - 'test/workbook/tc_workbook_view.rb'
 
@@ -376,7 +363,6 @@ Style/NumericPredicate:
     - 'lib/axlsx/stylesheet/font.rb'
     - 'lib/axlsx/util/validators.rb'
     - 'lib/axlsx/workbook/workbook.rb'
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'lib/axlsx/workbook/worksheet/sheet_pr.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
@@ -418,7 +404,6 @@ Style/ParenthesesAroundCondition:
   Exclude:
     - 'lib/axlsx/stylesheet/font.rb'
     - 'lib/axlsx/util/validators.rb'
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
@@ -442,7 +427,6 @@ Style/PercentLiteralDelimiters:
 # This cop supports safe autocorrection (--autocorrect).
 Style/PerlBackrefs:
   Exclude:
-    - 'lib/axlsx.rb'
     - 'test/workbook/worksheet/tc_sheet_protection.rb'
 
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -464,7 +448,6 @@ Style/QuotedSymbols:
 # SupportedStyles: compact, exploded
 Style/RaiseArgs:
   Exclude:
-    - 'lib/axlsx.rb'
     - 'lib/axlsx/package.rb'
     - 'lib/axlsx/util/zip_command.rb'
     - 'lib/axlsx/workbook/worksheet/border_creator.rb'
@@ -483,7 +466,6 @@ Style/RedundantCondition:
 # This cop supports safe autocorrection (--autocorrect).
 Style/RedundantFileExtensionInRequire:
   Exclude:
-    - 'lib/axlsx.rb'
     - 'lib/axlsx/content_type/content_type.rb'
     - 'lib/axlsx/drawing/drawing.rb'
     - 'lib/axlsx/rels/relationships.rb'
@@ -521,7 +503,6 @@ Style/RedundantParentheses:
 # This cop supports safe autocorrection (--autocorrect).
 Style/RedundantRegexpEscape:
   Exclude:
-    - 'lib/axlsx.rb'
     - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
     - 'lib/axlsx/workbook/worksheet/table.rb'
 
@@ -529,7 +510,6 @@ Style/RedundantRegexpEscape:
 # Configuration parameters: AllowMultipleReturnValues.
 Style/RedundantReturn:
   Exclude:
-    - 'lib/axlsx.rb'
     - 'lib/axlsx/package.rb'
     - 'lib/axlsx/stylesheet/styles.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
@@ -537,20 +517,6 @@ Style/RedundantReturn:
 # This cop supports safe autocorrection (--autocorrect).
 Style/RedundantSelf:
   Enabled: false
-
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, AllowInnerSlashes.
-# SupportedStyles: slashes, percent_r, mixed
-Style/RegexpLiteral:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: implicit, explicit
-Style/RescueStandardError:
-  Exclude:
-    - 'lib/axlsx.rb'
 
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: ConvertCodeThatCanStartToReturnNil, AllowedMethods, MaxChainLength.
@@ -571,7 +537,6 @@ Style/SingleLineMethods:
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/SlicingWithRange:
   Exclude:
-    - 'lib/axlsx.rb'
     - 'lib/axlsx/drawing/area_chart.rb'
     - 'lib/axlsx/drawing/line_chart.rb'
     - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
@@ -613,7 +578,6 @@ Style/SymbolProc:
     - 'lib/axlsx/drawing/drawing.rb'
     - 'lib/axlsx/stylesheet/styles.rb'
     - 'lib/axlsx/workbook/workbook.rb'
-    - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet_hyperlinks.rb'
 
@@ -647,11 +611,6 @@ Style/TrivialAccessors:
 Style/UnpackFirst:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
-Style/WhileUntilDo:
-  Exclude:
-    - 'lib/axlsx.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 Style/WhileUntilModifier:
