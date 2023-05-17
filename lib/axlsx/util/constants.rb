@@ -413,4 +413,6 @@ module Axlsx
 
   # Numeric recognition
   NUMERIC_REGEX = /\A[+-]?\d+?\Z/.freeze
+
+  BOOLEAN_VALUES = [true, false].freeze
 end
