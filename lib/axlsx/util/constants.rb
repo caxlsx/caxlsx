@@ -166,8 +166,8 @@ module Axlsx
   # xml content type extensions
   XML_EX = "xml"
 
-  # jpeg extension
-  JPEG_EX = "jpeg"
+  # jpeg extensions
+  JPEG_EXS = ["jpeg", "jpg"].freeze
 
   # gif extension
   GIF_EX = "gif"
