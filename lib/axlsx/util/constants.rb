@@ -414,5 +414,15 @@ module Axlsx
   # Numeric recognition
   NUMERIC_REGEX = /\A[+-]?\d+?\Z/.freeze
 
+  # Leading characters that indicate a formula.
+  # See: https://owasp.org/www-community/attacks/CSV_Injection
+  FORMULA_PREFIX = '='
+
+  # Leading characters that indicate an array formula.
+  ARRAY_FORMULA_PREFIX = '{='
+
+  # Trailing character that indicates an array formula.
+  ARRAY_FORMULA_SUFFIX = '}'
+
   BOOLEAN_VALUES = [true, false].freeze
 end
