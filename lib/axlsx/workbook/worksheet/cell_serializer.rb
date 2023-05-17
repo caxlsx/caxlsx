@@ -10,7 +10,9 @@ module Axlsx
       # @param [String] str The string to apend serialization to.
       # @return [String]
       def to_xml_string(row_index, column_index, cell, str = +'')
-        str << '<c r="' << Axlsx::cell_r(column_index, row_index) << '" s="' << cell.style.to_s << '" '
+        str << '<c r="'
+        str << Axlsx::col_ref(column_index) << Axlsx::row_ref(row_index)
+        str << '" s="' << cell.style.to_s << '" '
         return str << '/>' if cell.value.nil?
 
         method = cell.type

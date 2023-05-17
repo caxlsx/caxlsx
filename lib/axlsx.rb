@@ -1,29 +1,29 @@
 # frozen_string_literal: true
 
 require 'htmlentities'
-require 'axlsx/version.rb'
+require 'axlsx/version'
 require 'marcel'
 
-require 'axlsx/util/simple_typed_list.rb'
-require 'axlsx/util/constants.rb'
-require 'axlsx/util/validators.rb'
-require 'axlsx/util/accessors.rb'
+require 'axlsx/util/simple_typed_list'
+require 'axlsx/util/constants'
+require 'axlsx/util/validators'
+require 'axlsx/util/accessors'
 require 'axlsx/util/serialized_attributes'
 require 'axlsx/util/options_parser'
 require 'axlsx/util/mime_type_utils'
 require 'axlsx/util/buffered_zip_output_stream'
 require 'axlsx/util/zip_command'
 
-require 'axlsx/stylesheet/styles.rb'
+require 'axlsx/stylesheet/styles'
 
-require 'axlsx/doc_props/app.rb'
-require 'axlsx/doc_props/core.rb'
-require 'axlsx/content_type/content_type.rb'
-require 'axlsx/rels/relationships.rb'
+require 'axlsx/doc_props/app'
+require 'axlsx/doc_props/core'
+require 'axlsx/content_type/content_type'
+require 'axlsx/rels/relationships'
 
-require 'axlsx/drawing/drawing.rb'
-require 'axlsx/workbook/workbook.rb'
-require 'axlsx/package.rb'
+require 'axlsx/drawing/drawing'
+require 'axlsx/workbook/workbook'
+require 'axlsx/package'
 # required gems
 require 'nokogiri'
 require 'zip'
@@ -35,9 +35,9 @@ require 'time'
 
 begin
   if Gem.loaded_specs.has_key?("axlsx_styler")
-    raise StandardError.new("Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly.")
+    raise StandardError, "Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly."
   end
-rescue
+rescue StandardError
   # Do nothing
 end
 
@@ -53,7 +53,7 @@ module Axlsx
   #
   # Defining as a class method on Axlsx to refrain from monkeypatching Object for all users of this gem.
   def self.instance_values_for(object)
-    Hash[object.instance_variables.map { |name| [name.to_s[1..-1], object.instance_variable_get(name)] }]
+    object.instance_variables.to_h { |name| [name.to_s[1..], object.instance_variable_get(name)] }
   end
 
   # determines the cell range for the items provided
@@ -105,37 +105,51 @@ module Axlsx
 
     row_index = (numbers_str.to_i - 1)
 
-    return [col_index, row_index]
+    [col_index, row_index]
   end
 
   # converts the column index into alphabetical values.
   # @note This follows the standard spreadsheet convention of naming columns A to Z, followed by AA to AZ etc.
   # @return [String]
   def self.col_ref(index)
-    chars = +''
-    while index >= 26 do
-      index, char = index.divmod(26)
-      chars.prepend((char + 65).chr)
-      index -= 1
+    # Every row will call this for each column / cell and so we can cache result and avoid lots of small object
+    # allocations.
+    @col_ref ||= {}
+    @col_ref[index] ||= begin
+      i = index
+      chars = +''
+      while i >= 26
+        i, char = i.divmod(26)
+        chars.prepend((char + 65).chr)
+        i -= 1
+      end
+      chars.prepend((i + 65).chr)
+      chars.freeze
     end
-    chars.prepend((index + 65).chr)
-    chars
+  end
+
+  # converts the row index into string values.
+  # @note The spreadsheet rows are 1-based and the passed in index is 0-based, so we add 1.
+  # @return [String]
+  def self.row_ref(index)
+    @row_ref ||= {}
+    @row_ref[index] ||= (index + 1).to_s.freeze
   end
 
   # @return [String] The alpha(column)numeric(row) reference for this sell.
   # @example Relative Cell Reference
   #   ws.rows.first.cells.first.r #=> "A1"
   def self.cell_r(c_index, r_index)
-    col_ref(c_index) << (r_index + 1).to_s
+    col_ref(c_index) + row_ref(r_index)
   end
 
   # Creates an array of individual cell references based on an excel reference range.
   # @param [String] range A cell range, for example A1:D5
   # @return [Array]
   def self.range_to_a(range)
-    range.match(/^(\w+?\d+)\:(\w+?\d+)$/)
-    start_col, start_row = name_to_indices($1)
-    end_col,   end_row   = name_to_indices($2)
+    range =~ /^(\w+?\d+):(\w+?\d+)$/
+    start_col, start_row = name_to_indices(::Regexp.last_match(1))
+    end_col,   end_row   = name_to_indices(::Regexp.last_match(2))
     (start_row..end_row).to_a.map do |row_num|
       (start_col..end_col).to_a.map do |col_num|
         cell_r(col_num, row_num)
@@ -149,7 +163,7 @@ module Axlsx
   def self.camel(s = "", all_caps = true)
     s = s.to_s
     s = s.capitalize if all_caps
-    s.gsub(/_(.)/) { $1.upcase }
+    s.gsub(/_(.)/) { ::Regexp.last_match(1).upcase }
   end
 
   # returns the provided string with all invalid control charaters
@@ -170,7 +184,7 @@ module Axlsx
   # @param [Object] value The value to process
   # @return [Object]
   def self.booleanize(value)
-    if value == true || value == false
+    if BOOLEAN_VALUES.include?(value)
       value ? 1 : 0
     else
       value
@@ -181,7 +195,7 @@ module Axlsx
   # @param [Hash] Hash to merge into
   # @param [Hash] Hash to be added
   def self.hash_deep_merge(first_hash, second_hash)
-    first_hash.merge(second_hash) do |key, this_val, other_val|
+    first_hash.merge(second_hash) do |_key, this_val, other_val|
       if this_val.is_a?(Hash) && other_val.is_a?(Hash)
         Axlsx.hash_deep_merge(this_val, other_val)
       else

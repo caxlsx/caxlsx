@@ -423,4 +423,6 @@ module Axlsx
 
   # Trailing character that indicates an array formula.
   ARRAY_FORMULA_SUFFIX = '}'
+
+  BOOLEAN_VALUES = [true, false].freeze
 end

@@ -395,8 +395,8 @@ module Axlsx
     # retrieve the cells from. e.g. range('Sheet1!A1:B2') will return an array of four cells [A1, A2, B1, B2] while range('Sheet1!A1') will return a single Cell.
     # @return [Cell, Array]
     def [](cell_def)
-      sheet_name = cell_def.split('!')[0] if cell_def.match('!')
-      worksheet =  self.worksheets.select { |s| s.name == sheet_name }.first
+      sheet_name = cell_def.split('!')[0] if cell_def.include?('!')
+      worksheet =  self.worksheets.find { |s| s.name == sheet_name }
       raise ArgumentError, 'Unknown Sheet' unless sheet_name && worksheet.is_a?(Worksheet)
 
       worksheet[cell_def.gsub(/.+!/, "")]

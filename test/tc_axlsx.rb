@@ -3,6 +3,7 @@
 require 'tc_helper'
 
 class TestAxlsx < Test::Unit::TestCase
+  # rubocop:disable Layout/HashAlignment
   def setup_wide
     @wide_test_points = {
       "A3"    =>                              0,
@@ -15,6 +16,7 @@ class TestAxlsx < Test::Unit::TestCase
       "BZU3"  => (2 * (26**2)) + (26 * 26) + 20
     }
   end
+  # rubocop:enable Layout/HashAlignment
 
   def test_cell_range_empty_if_no_cell
     assert_equal("", Axlsx.cell_range([]))
@@ -83,8 +85,14 @@ class TestAxlsx < Test::Unit::TestCase
     end
   end
 
+  def test_row_ref
+    assert_equal('1', Axlsx.row_ref(0))
+    assert_equal('100', Axlsx.row_ref(99))
+  end
+
   def test_cell_r
-    # todo
+    assert_equal('A1', Axlsx.cell_r(0, 0))
+    assert_equal('Z26', Axlsx.cell_r(25, 25))
   end
 
   def test_range_to_a
