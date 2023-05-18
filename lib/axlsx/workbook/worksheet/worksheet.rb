@@ -581,7 +581,7 @@ module Axlsx
     end
 
     # Set the style for cells in a specific column
-    # @param [String|Array] cell references
+    # @param [String|Array] cell_refs Cell references
     # @param [Hash] styles
     def add_style(cell_refs, *styles)
       if !cell_refs.is_a?(Array)
@@ -602,8 +602,8 @@ module Axlsx
     end
 
     # Set the style for cells in a specific column
-    # @param [String|Array] cell references
-    # @param [Hash|Array|Symbol] border options
+    # @param [String|Array] cell_refs Cell references
+    # @param [Hash|Array|Symbol] options border options
     def add_border(cell_refs, options = nil)
       if options.is_a?(Hash)
         border_edges = options[:edges]
