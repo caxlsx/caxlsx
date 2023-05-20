@@ -239,7 +239,7 @@ module Axlsx
       end
 
       workbook.comments.each do |comment|
-        if comment.size > 0
+        unless comment.empty?
           parts << { :entry => "xl/#{comment.pn}", :doc => comment, :schema => SML_XSD }
           parts << { :entry => "xl/#{comment.vml_drawing.pn}", :doc => comment.vml_drawing, :schema => nil }
         end
@@ -314,13 +314,13 @@ module Axlsx
       end
 
       workbook.comments.each do |comment|
-        if comment.size > 0
+        unless comment.empty?
           c_types << Axlsx::Override.new(:PartName => "/xl/#{comment.pn}",
                                          :ContentType => COMMENT_CT)
         end
       end
 
-      if workbook.comments.size > 0
+      unless workbook.comments.empty?
         c_types << Axlsx::Default.new(:Extension => "vml", :ContentType => VML_DRAWING_CT)
       end
 

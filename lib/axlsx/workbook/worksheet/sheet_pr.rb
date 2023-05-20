@@ -82,7 +82,7 @@ module Axlsx
 
     def update_properties
       page_setup_pr.fit_to_page = worksheet.fit_to_page?
-      if worksheet.auto_filter.columns.size > 0
+      unless worksheet.auto_filter.columns.empty?
         self.filter_mode = 1
         self.enable_format_conditions_calculation = 1
       end

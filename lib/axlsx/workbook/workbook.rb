@@ -406,7 +406,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      add_worksheet(name: 'Sheet1') unless worksheets.size > 0
+      add_worksheet(name: 'Sheet1') if worksheets.empty?
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<workbook xmlns="' << XML_NS << '" xmlns:r="' << XML_NS_R << '">'
       str << '<workbookPr date1904="' << @@date1904.to_s << '"/>'
