@@ -47,8 +47,10 @@ class TestWorkbook < Test::Unit::TestCase
   def test_sheet_by_name_retrieval
     @wb.add_worksheet(:name => 'foo')
     @wb.add_worksheet(:name => 'bar')
+    @wb.add_worksheet(:name => "testin'")
 
     assert_equal('foo', @wb.sheet_by_name('foo').name)
+    assert_equal("testin&apos;", @wb.sheet_by_name("testin'").name)
   end
 
   def test_worksheet_empty_name

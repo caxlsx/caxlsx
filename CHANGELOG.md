@@ -5,6 +5,7 @@ CHANGELOG
   - Added frozen string literals
   - Fix `SimpleTypedList#to_a` and `SimpleTypedList#to_ary` returning the internal list instance
   - Remove ability to set `u=` to true in favor of using :single or one of the other underline options
+  - Fix `Workbook#sheet_by_name` not returning sheets with encoded characters in the name
 
 - **April.23.23**: 3.4.1
   - [PR #209](https://github.com/caxlsx/caxlsx/pull/209) - Revert characters other than `=` being considered as formulas.

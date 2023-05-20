@@ -221,8 +221,8 @@ module Axlsx
     # @param [String] name The name of the sheet you are looking for
     # @return [Worksheet] The sheet found, or nil
     def sheet_by_name(name)
-      index = @worksheets.index { |sheet| sheet.name == name }
-      @worksheets[index] if index
+      encoded_name = Axlsx.coder.encode(name)
+      @worksheets.find { |sheet| sheet.name == encoded_name }
     end
 
     # Creates a new Workbook.
