@@ -63,7 +63,6 @@ module Axlsx
     def name=(v)
       @name = v.bytes.to_a << 0
       @name_size = @name.size * 2
-      @name
     end
 
     # The size of the stream

@@ -101,7 +101,6 @@ module Axlsx
     def color=(v)
       @color = v if v.is_a? Color
       self.color.rgb = v if v.is_a? String
-      @color
     end
 
     # Serialize this object to an xml string
