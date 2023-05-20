@@ -9,7 +9,7 @@ jobs:
   test_ruby_versions:
     runs-on: ubuntu-20.04
 
-    continue-on-error: ${{ matrix.allow_failures || false }}
+    continue-on-error: ${{ matrix.allow_failures == 'allow failures' || false }}
 
     env:
       BUNDLE_GEMFILE: "${{ matrix.gemfile }}" ### allows adding gemfile: to the matrix, bundler will automatically pick this up
@@ -26,7 +26,9 @@ jobs:
           - ruby: jruby-9.3
           - ruby: jruby-9.4
           - ruby: head
-            allow_failures: true
+            allow_failures: 'allow failures'
+          - ruby: jruby-head
+            allow_failures: 'allow failures'
 
     steps:
     - uses: actions/checkout@v3
