@@ -53,7 +53,7 @@ module Axlsx
     def rgb=(v)
       Axlsx::validate_string(v)
       v = v.upcase
-      v = v * 3 if v.size == 2
+      v *= 3 if v.size == 2
       v = v.rjust(8, 'FF')
       raise ArgumentError, "Invalid color rgb value: #{v}." unless /[0-9A-F]{8}/.match?(v)
 
