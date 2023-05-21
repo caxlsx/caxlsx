@@ -3,9 +3,9 @@
 require "date"
 
 module Axlsx
-  # The DateTimeConverter class converts both data and time types to their apprpriate excel serializations
+  # The DateTimeConverter class converts both data and time types to their apprpriate Excel serializations
   class DateTimeConverter
-    # The date_to_serial method converts Date objects to the equivelant excel serialized forms
+    # The date_to_serial method converts Date objects to the equivelant Excel serialized forms
     # @param [Date] date the date to be serialized
     # @return [Numeric]
     def self.date_to_serial(date)
@@ -14,7 +14,7 @@ module Axlsx
       (offset_date - epoch).to_f
     end
 
-    # The time_to_serial methond converts a Time object its excel serialized form.
+    # The time_to_serial methond converts a Time object its Excel serialized form.
     # @param [Time] time the time to be serialized
     # @return [Numeric]
     def self.time_to_serial(time)

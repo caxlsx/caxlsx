@@ -143,7 +143,7 @@ module Axlsx
     col_ref(c_index) + row_ref(r_index)
   end
 
-  # Creates an array of individual cell references based on an excel reference range.
+  # Creates an array of individual cell references based on an Excel reference range.
   # @param [String] range A cell range, for example A1:D5
   # @return [Array]
   def self.range_to_a(range)
@@ -206,7 +206,7 @@ module Axlsx
 
   # Instructs the serializer to not try to escape cell value input.
   # This will give you a huge speed bonus, but if you content has <, > or other xml character data
-  # the workbook will be invalid and excel will complain.
+  # the workbook will be invalid and Excel will complain.
   def self.trust_input
     @trust_input ||= false
   end

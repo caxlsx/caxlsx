@@ -65,7 +65,7 @@ module Axlsx
     # Specifies the visible state of this sheet. Allowed states are
     # :visible, :hidden or :very_hidden. The default value is :visible.
     #
-    # Worksheets in the :hidden state can be shown using the sheet formatting properties in excel.
+    # Worksheets in the :hidden state can be shown using the sheet formatting properties in Excel.
     # :very_hidden sheets should be inaccessible to end users.
     # @param [Symbol] sheet_state The visible state for this sheet.
     def state=(sheet_state)
@@ -173,7 +173,7 @@ module Axlsx
       @rows.transpose(&block)
     end
 
-    # A range that excel will apply an auto-filter to "A1:B3"
+    # A range that Excel will apply an auto-filter to "A1:B3"
     # This will turn filtering on for the cells in the range.
     # The first row is considered the header, while subsequent rows are considered to be data.
     # @return String
@@ -519,7 +519,7 @@ module Axlsx
     end
 
     # Adds a page break (row break) to the worksheet
-    # @param cell A Cell object or excel style string reference indicating where the break
+    # @param cell A Cell object or Excel style string reference indicating where the break
     # should be added to the sheet.
     # @example
     #   ws.add_page_break("A4")
@@ -661,7 +661,7 @@ module Axlsx
       r
     end
 
-    # Returns the cell or cells defined using excel style A1:B3 references.
+    # Returns the cell or cells defined using Excel style A1:B3 references.
     # @param [String|Integer] cell_def the string defining the cell or range of cells, or the rownumber
     # @return [Cell, Array]
     def [](cell_def)

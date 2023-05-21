@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Axlsx
-  # a vml drawing used for comments in excel.
+  # a vml drawing used for comments in Excel.
   class VmlDrawing
     # creates a new Vml Drawing object.
     # @param [Comments] comments the comments object this drawing is associated with
