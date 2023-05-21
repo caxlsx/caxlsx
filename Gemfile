@@ -4,9 +4,9 @@ source 'https://rubygems.org'
 gemspec
 
 group :development, :test do
-  gem 'rubocop', '~> 1.50.2'
-  gem 'rubocop-minitest', '~> 0.30.0'
-  gem 'rubocop-performance', '~> 1.17.1'
+  gem 'rubocop', '~> 1.51.0'
+  gem 'rubocop-minitest', '~> 0.31.0'
+  gem 'rubocop-performance', '~> 1.18.0'
 end
 
 group :test do
