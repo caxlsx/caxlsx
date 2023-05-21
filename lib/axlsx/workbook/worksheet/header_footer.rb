@@ -45,7 +45,7 @@ module Axlsx
     def to_xml_string(str = +'')
       serialized_tag('headerFooter', str) do
         serialized_element_attributes(str) do |value|
-          value = ::CGI.escapeHTML(value)
+          ::CGI.escapeHTML(value)
         end
       end
     end
