@@ -83,7 +83,7 @@ module Axlsx
     attr_accessor :raw_style
 
     # The index of the cellXfs item to be applied to this cell.
-    # @param [Hash] styles
+    # @param [Hash] style
     # @see Axlsx::Styles
     def add_style(style)
       self.raw_style ||= {}
@@ -115,7 +115,7 @@ module Axlsx
     # automatically determed.
     # @see Cell#cell_type_from_value
     # @return [Symbol] The type of data this cell's value is cast to.
-    # @raise [ArgumentExeption] Cell.type must be one of [:date, time, :float, :integer, :string, :boolean]
+    # @raise [ArgumentError] Cell.type must be one of [:date, time, :float, :integer, :string, :boolean]
     # @note
     #  If the value provided cannot be cast into the type specified, type is changed to :string and the following logic is applied.
     #   :string to :integer or :float, type conversions always return 0 or 0.0

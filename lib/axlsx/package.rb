@@ -159,7 +159,7 @@ module Axlsx
     #
     #   If by chance you are able to create a package that does not validate it indicates that the internal
     #   validation is not robust enough and needs to be improved. Please report your errors to the gem author.
-    # @see http://www.ecma-international.org/publications/standards/Ecma-376.htm
+    # @see https://www.ecma-international.org/publications-and-standards/standards/ecma-376/
     # @example
     #  # The following will output any error messages found in serialization.
     #  p = Axlsx::Package.new

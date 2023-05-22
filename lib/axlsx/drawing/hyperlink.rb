@@ -15,7 +15,7 @@ module Axlsx
     # @option options [String] tgtFrame Target frame for opening hyperlink
     # @option options [String] invalidUrl supposedly use to store the href when we know it is an invalid resource.
     # @option options [String] href the target resource this hyperlink links to. This is actually stored on the relationship.
-    # @option options [String] action A string that can be used to perform specific actions. For excel please see this reference: http://msdn.microsoft.com/en-us/library/ff532419%28v=office.12%29.aspx
+    # @option options [String] action A string that can be used to perform specific actions. For Excel please see this reference: https://msdn.microsoft.com/en-us/library/ff532419%28v=office.12%29.aspx
     # @option options [Boolean] endSnd terminate any sound events when processing this link
     # @option options [Boolean] history include this link in the list of visited links for the applications history.
     # @option options [Boolean] highlightClick indicate that the link has already been visited.
@@ -40,7 +40,7 @@ module Axlsx
     alias :invalidUrl :invalid_url
     alias :invalidUrl= :invalid_url=
 
-    # An action to take when the link is clicked. The specification says "This can be used to specify a slide to be navigated to or a script of code to be run." but in most cases you will not need to do anything with this. MS does reserve a few interesting strings. @see http://msdn.microsoft.com/en-us/library/ff532419%28v=office.12%29.aspx
+    # An action to take when the link is clicked. The specification says "This can be used to specify a slide to be navigated to or a script of code to be run." but in most cases you will not need to do anything with this. MS does reserve a few interesting strings. @see https://msdn.microsoft.com/en-us/library/ff532419%28v=office.12%29.aspx
     # @return [String]
     attr_accessor :action
 

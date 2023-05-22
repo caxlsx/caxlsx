@@ -39,7 +39,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :iLevel
 
-    # Determines if this named style should show in the list of styles when using excel
+    # Determines if this named style should show in the list of styles when using Excel
     # @return [Boolean]
     attr_reader :hidden
 

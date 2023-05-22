@@ -356,7 +356,7 @@ module Axlsx
   # x1F Information Separator One
   #
   # The following are not dealt with.
-  # If you have this in your data, expect excel to blow up!
+  # If you have this in your data, expect Excel to blow up!
   #
   # x7F	Delete
   # x80	Control 0080

@@ -20,7 +20,7 @@ module Axlsx
     serializable_attributes :formatCode, :numFmtId
 
     # @return [String] The formatting to use for this number format.
-    # @see http://support.microsoft.com/kb/264372
+    # @see https://support.microsoft.com/kb/264372
     attr_reader :formatCode
 
     # @return [Integer] An unsigned integer referencing a standard or custom number format.

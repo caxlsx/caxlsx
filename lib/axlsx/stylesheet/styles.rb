@@ -110,7 +110,7 @@ module Axlsx
     # @see Styles#add_style
     attr_reader :dxfs
 
-    # The collection of table styles that will be available to the user in the excel UI
+    # The collection of table styles that will be available to the user in the Excel UI
     # @return [SimpleTypedList]
     # @note The recommended way to manage styles is with add_style
     # @see Styles#add_style

@@ -43,7 +43,7 @@ module Axlsx
     end
 
     # The id of the relationship (eg. "rId123"). Most instances get their own unique id.
-    # However, some instances need to share the same id – see {#should_use_same_id_as?}
+    # However, some instances need to share the same id – see {#ids_cache_key}
     # for details.
     # @return [String]
     attr_reader :Id
