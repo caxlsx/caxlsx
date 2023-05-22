@@ -80,6 +80,11 @@ module Axlsx
       defined?(@style) ? @style : 0
     end
 
+    # Internal
+    def style_str
+      defined?(@style) ? @style.to_s : '0'
+    end
+
     attr_accessor :raw_style
 
     # The index of the cellXfs item to be applied to this cell.
