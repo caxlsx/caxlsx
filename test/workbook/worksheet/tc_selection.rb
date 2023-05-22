@@ -4,7 +4,7 @@ require 'tc_helper'
 
 class TestSelection < Test::Unit::TestCase
   def setup
-    @options = { :active_cell => 'A2', :active_cell_id => 1, :pane => :top_left, :sqref => 'A2' }
+    @options = { active_cell: 'A2', active_cell_id: 1, pane: :top_left, sqref: 'A2' }
     @selection = Axlsx::Selection.new(@options)
   end
 
@@ -34,12 +34,12 @@ class TestSelection < Test::Unit::TestCase
 
   def test_to_xml
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name => "sheetview"
+    @ws = p.workbook.add_worksheet name: "sheetview"
     @ws.sheet_view do |vs|
-      vs.add_selection(:top_left, { :active_cell => 'B2', :sqref => 'B2' })
-      vs.add_selection(:top_right, { :active_cell => 'I10', :sqref => 'I10' })
-      vs.add_selection(:bottom_left, { :active_cell => 'E55', :sqref => 'E55' })
-      vs.add_selection(:bottom_right, { :active_cell => 'I57', :sqref => 'I57' })
+      vs.add_selection(:top_left, { active_cell: 'B2', sqref: 'B2' })
+      vs.add_selection(:top_right, { active_cell: 'I10', sqref: 'I10' })
+      vs.add_selection(:bottom_left, { active_cell: 'E55', sqref: 'E55' })
+      vs.add_selection(:bottom_right, { active_cell: 'I57', sqref: 'I57' })
     end
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)

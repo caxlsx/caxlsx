@@ -8,7 +8,7 @@ class TestCol < Test::Unit::TestCase
   end
 
   def test_initialize
-    options = { :width => 12, :collapsed => true, :hidden => true, :outline_level => 1, :phonetic => true, :style => 1 }
+    options = { width: 12, collapsed: true, hidden: true, outline_level: 1, phonetic: true, style: 1 }
 
     col = Axlsx::Col.new 0, 0, options
 

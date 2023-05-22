@@ -8,7 +8,7 @@ class TestAutoFilter < Test::Unit::TestCase
     3.times { |index| ws.add_row [1 * index, 2 * index, 3 * index] }
     @auto_filter = ws.auto_filter
     @auto_filter.range = 'A1:C3'
-    @auto_filter.add_column 0, :filters, :filter_items => [1]
+    @auto_filter.add_column 0, :filters, filter_items: [1]
   end
 
   def test_defined_name

@@ -7,8 +7,8 @@ class TestVmlShape < Test::Unit::TestCase
     p = Axlsx::Package.new
     wb = p.workbook
     @ws = wb.add_worksheet
-    @ws.add_comment :ref => 'A1', :text => 'penut machine', :author => 'crank', :visible => true
-    @ws.add_comment :ref => 'C3', :text => 'rust bucket', :author => 'PO', :visible => false
+    @ws.add_comment ref: 'A1', text: 'penut machine', author: 'crank', visible: true
+    @ws.add_comment ref: 'C3', text: 'rust bucket', author: 'PO', visible: false
     @comments = @ws.comments
   end
 

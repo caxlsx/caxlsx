@@ -39,7 +39,7 @@ class TestDxf < Test::Unit::TestCase
 
   def test_fill
     assert_raise(ArgumentError) { @item.fill = 1 }
-    assert_nothing_raised { @item.fill = Axlsx::Fill.new(Axlsx::PatternFill.new(:patternType => :solid, :fgColor => Axlsx::Color.new(:rgb => "FF000000"))) }
+    assert_nothing_raised { @item.fill = Axlsx::Fill.new(Axlsx::PatternFill.new(patternType: :solid, fgColor: Axlsx::Color.new(rgb: "FF000000"))) }
     assert @item.fill.is_a? Axlsx::Fill
   end
 
@@ -66,7 +66,7 @@ class TestDxf < Test::Unit::TestCase
   def test_many_options_xml
     @item.border = Axlsx::Border.new
     @item.alignment = Axlsx::CellAlignment.new
-    @item.fill = Axlsx::Fill.new(Axlsx::PatternFill.new(:patternType => :solid, :fgColor => Axlsx::Color.new(:rgb => "FF000000")))
+    @item.fill = Axlsx::Fill.new(Axlsx::PatternFill.new(patternType: :solid, fgColor: Axlsx::Color.new(rgb: "FF000000")))
     @item.font = Axlsx::Font.new
     @item.protection = Axlsx::CellProtection.new
     @item.numFmt = Axlsx::NumFmt.new

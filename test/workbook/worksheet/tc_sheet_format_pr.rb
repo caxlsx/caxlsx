@@ -5,15 +5,15 @@ require 'tc_helper'
 class TestSheetFormatPr < Test::Unit::TestCase
   def setup
     @options = {
-      :base_col_width => 5,
-      :default_col_width => 7.2,
-      :default_row_height => 5.2,
-      :custom_height => true,
-      :zero_height => false,
-      :thick_top => true,
-      :thick_bottom => true,
-      :outline_level_row => 0,
-      :outline_level_col => 0
+      base_col_width: 5,
+      default_col_width: 7.2,
+      default_row_height: 5.2,
+      custom_height: true,
+      zero_height: false,
+      thick_top: true,
+      thick_bottom: true,
+      outline_level_row: 0,
+      outline_level_col: 0
     }
     @sheet_format_pr = Axlsx::SheetFormatPr.new(@options)
   end

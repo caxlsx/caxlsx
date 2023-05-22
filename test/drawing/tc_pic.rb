@@ -15,8 +15,8 @@ class TestPic < Test::Unit::TestCase
     @test_img_fake = File.dirname(__FILE__) + "/../fixtures/image1_fake.jpg"
     @test_img_remote_png = "https://example.com/sample-image.png"
     @test_img_remote_fake = "invalid_URI"
-    @image = ws.add_image :image_src => @test_img, :hyperlink => 'https://github.com/randym', :tooltip => "What's up doc?", :opacity => 5
-    @image_remote = ws.add_image :image_src => @test_img_remote_png, remote: true, :hyperlink => 'https://github.com/randym', :tooltip => "What's up doc?", :opacity => 5
+    @image = ws.add_image image_src: @test_img, hyperlink: 'https://github.com/randym', tooltip: "What's up doc?", opacity: 5
+    @image_remote = ws.add_image image_src: @test_img_remote_png, remote: true, hyperlink: 'https://github.com/randym', tooltip: "What's up doc?", opacity: 5
   end
 
   def test_initialization

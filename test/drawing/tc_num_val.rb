@@ -4,7 +4,7 @@ require 'tc_helper'
 
 class TestNumVal < Test::Unit::TestCase
   def setup
-    @num_val = Axlsx::NumVal.new :v => 1
+    @num_val = Axlsx::NumVal.new v: 1
   end
 
   def test_initialize

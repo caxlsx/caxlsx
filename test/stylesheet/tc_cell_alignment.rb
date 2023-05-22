@@ -17,9 +17,9 @@ class TestCellAlignment < Test::Unit::TestCase
     assert_nil(@item.justifyLastLine)
     assert_nil(@item.shrinkToFit)
     assert_nil(@item.readingOrder)
-    options = { :horizontal => :left, :vertical => :top, :textRotation => 3,
-                :wrapText => true, :indent => 2, :relativeIndent => 5,
-                :justifyLastLine => true, :shrinkToFit => true, :readingOrder => 2 }
+    options = { horizontal: :left, vertical: :top, textRotation: 3,
+                wrapText: true, indent: 2, relativeIndent: 5,
+                justifyLastLine: true, shrinkToFit: true, readingOrder: 2 }
     ca = Axlsx::CellAlignment.new options
 
     options.each do |key, value|

@@ -4,7 +4,7 @@ require 'tc_helper'
 
 class TestPageSetUpPr < Test::Unit::TestCase
   def setup
-    @page_setup_pr = Axlsx::PageSetUpPr.new(:fit_to_page => true, :auto_page_breaks => true)
+    @page_setup_pr = Axlsx::PageSetUpPr.new(fit_to_page: true, auto_page_breaks: true)
   end
 
   def test_fit_to_page

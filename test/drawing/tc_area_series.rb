@@ -5,15 +5,15 @@ require 'tc_helper'
 class TestAreaSeries < Test::Unit::TestCase
   def setup
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name => "hmmm"
-    chart = @ws.add_chart Axlsx::AreaChart, :title => "fishery"
+    @ws = p.workbook.add_worksheet name: "hmmm"
+    chart = @ws.add_chart Axlsx::AreaChart, title: "fishery"
     @series = chart.add_series(
-      :data => [0, 1, 2],
-      :labels => ["zero", "one", "two"],
-      :title => "bob",
-      :color => "#FF0000",
-      :show_marker => true,
-      :smooth => true
+      data: [0, 1, 2],
+      labels: ["zero", "one", "two"],
+      title: "bob",
+      color: "#FF0000",
+      show_marker: true,
+      smooth: true
     )
   end
 

@@ -7,8 +7,8 @@ class TestVmlDrawing < Test::Unit::TestCase
     p = Axlsx::Package.new
     wb = p.workbook
     @ws = wb.add_worksheet
-    @ws.add_comment :ref => 'A1', :text => 'penut machine', :author => 'crank'
-    @ws.add_comment :ref => 'C3', :text => 'rust bucket', :author => 'PO'
+    @ws.add_comment ref: 'A1', text: 'penut machine', author: 'crank'
+    @ws.add_comment ref: 'C3', text: 'rust bucket', author: 'PO'
     @vml_drawing = @ws.comments.vml_drawing
   end
 

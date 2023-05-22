@@ -5,16 +5,16 @@ require 'tc_helper'
 class TestSheetView < Test::Unit::TestCase
   def setup
     # inverse defaults for booleans
-    @boolean_options = { :right_to_left => true, :show_formulas => true, :show_outline_symbols => true,
-                         :show_white_space => true, :tab_selected => true, :default_grid_color => false, :show_grid_lines => false,
-                         :show_row_col_headers => false, :show_ruler => false, :show_zeros => false, :window_protection => true }
-    @symbol_options = { :view => :page_break_preview }
-    @nil_options = { :color_id => 2, :top_left_cell => 'A2' }
-    @int_0 = { :zoom_scale_normal => 100, :zoom_scale_page_layout_view => 100, :zoom_scale_sheet_layout_view => 100, :workbook_view_id => 2 }
-    @int_100 = { :zoom_scale => 10 }
+    @boolean_options = { right_to_left: true, show_formulas: true, show_outline_symbols: true,
+                         show_white_space: true, tab_selected: true, default_grid_color: false, show_grid_lines: false,
+                         show_row_col_headers: false, show_ruler: false, show_zeros: false, window_protection: true }
+    @symbol_options = { view: :page_break_preview }
+    @nil_options = { color_id: 2, top_left_cell: 'A2' }
+    @int_0 = { zoom_scale_normal: 100, zoom_scale_page_layout_view: 100, zoom_scale_sheet_layout_view: 100, workbook_view_id: 2 }
+    @int_100 = { zoom_scale: 10 }
 
-    @integer_options = { :color_id => 2, :workbook_view_id => 2 }.merge(@int_0).merge(@int_100)
-    @string_options = { :top_left_cell => 'A2' }
+    @integer_options = { color_id: 2, workbook_view_id: 2 }.merge(@int_0).merge(@int_100)
+    @string_options = { top_left_cell: 'A2' }
 
     @options = @boolean_options.merge(@boolean_options).merge(@symbol_options).merge(@nil_options).merge(@int_0).merge(@int_100)
 
@@ -189,7 +189,7 @@ class TestSheetView < Test::Unit::TestCase
 
   def test_to_xml
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name => "sheetview"
+    @ws = p.workbook.add_worksheet name: "sheetview"
     @ws.sheet_view do |vs|
       vs.view = :page_break_preview
     end
@@ -206,7 +206,7 @@ class TestSheetView < Test::Unit::TestCase
   end
 
   def test_add_selection
-    @sv.add_selection(:top_left, :active_cell => "A1")
+    @sv.add_selection(:top_left, active_cell: "A1")
 
     assert_equal('A1', @sv.selections[:top_left].active_cell)
   end

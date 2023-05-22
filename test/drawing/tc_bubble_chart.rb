@@ -13,11 +13,11 @@ class TestBubbleChart < Test::Unit::TestCase
       sheet.add_row ["Second", 5,  2, 14, 9]
       sheet.add_row ["",       5, 10, 15, 20]
       sheet.add_row ["",       5, 28, 92, 13]
-      sheet.add_chart(Axlsx::BubbleChart, :title => "example: Bubble Chart") do |chart|
+      sheet.add_chart(Axlsx::BubbleChart, title: "example: Bubble Chart") do |chart|
         chart.start_at 0, 4
         chart.end_at 10, 19
-        chart.add_series :xData => sheet["B1:E1"], :yData => sheet["B2:E2"], :bubbleSize => sheet["B3:E3"], :title => sheet["A1"]
-        chart.add_series :xData => sheet["B4:E4"], :yData => sheet["B5:E5"], :bubbleSize => sheet["B6:E6"], :title => sheet["A3"]
+        chart.add_series xData: sheet["B1:E1"], yData: sheet["B2:E2"], bubbleSize: sheet["B3:E3"], title: sheet["A1"]
+        chart.add_series xData: sheet["B4:E4"], yData: sheet["B5:E5"], bubbleSize: sheet["B6:E6"], title: sheet["A3"]
         @chart = chart
       end
     end

@@ -5,14 +5,14 @@ require 'tc_helper'
 class TestConditionalFormatting < Test::Unit::TestCase
   def setup
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name => "hmmm"
-    @cfs = @ws.add_conditional_formatting("A1:A1", [{ :type => :cellIs, :dxfId => 0, :priority => 1, :operator => :greaterThan, :formula => "0.5" }])
+    @ws = p.workbook.add_worksheet name: "hmmm"
+    @cfs = @ws.add_conditional_formatting("A1:A1", [{ type: :cellIs, dxfId: 0, priority: 1, operator: :greaterThan, formula: "0.5" }])
     @cf = @cfs.first
     @cfr = @cf.rules.first
   end
 
   def test_initialize_with_options
-    optioned = Axlsx::ConditionalFormatting.new(:sqref => "AA1:AB100", :rules => [1, 2])
+    optioned = Axlsx::ConditionalFormatting.new(sqref: "AA1:AB100", rules: [1, 2])
 
     assert_equal("AA1:AB100", optioned.sqref)
     assert_equal([1, 2], optioned.rules)
@@ -26,14 +26,14 @@ class TestConditionalFormatting < Test::Unit::TestCase
       cs.value_objects.first.val = 5
     end
 
-    data_bar = Axlsx::DataBar.new :color => "FFFF0000"
-    icon_set = Axlsx::IconSet.new :iconSet => "5Rating"
-    cfr = Axlsx::ConditionalFormattingRule.new({ :type => :containsText, :text => "TRUE",
-                                                 :dxfId => 0, :priority => 1,
-                                                 :formula => 'NOT(ISERROR(SEARCH("FALSE",AB1)))',
-                                                 :color_scale => color_scale,
-                                                 :data_bar => data_bar,
-                                                 :icon_set => icon_set })
+    data_bar = Axlsx::DataBar.new color: "FFFF0000"
+    icon_set = Axlsx::IconSet.new iconSet: "5Rating"
+    cfr = Axlsx::ConditionalFormattingRule.new({ type: :containsText, text: "TRUE",
+                                                 dxfId: 0, priority: 1,
+                                                 formula: 'NOT(ISERROR(SEARCH("FALSE",AB1)))',
+                                                 color_scale: color_scale,
+                                                 data_bar: data_bar,
+                                                 icon_set: icon_set })
 
     assert(cfr.data_bar.is_a?(Axlsx::DataBar))
     assert(cfr.icon_set.is_a?(Axlsx::IconSet))
@@ -72,15 +72,15 @@ class TestConditionalFormatting < Test::Unit::TestCase
       cs.value_objects.first.val = 5
     end
 
-    data_bar = Axlsx::DataBar.new :color => "FFFF0000"
-    icon_set = Axlsx::IconSet.new :iconSet => "5Rating"
+    data_bar = Axlsx::DataBar.new color: "FFFF0000"
+    icon_set = Axlsx::IconSet.new iconSet: "5Rating"
 
-    cfs = @ws.add_conditional_formatting("B2:B2", [{ :type => :containsText, :text => "TRUE",
-                                                     :dxfId => 0, :priority => 1,
-                                                     :formula => 'NOT(ISERROR(SEARCH("FALSE",AB1)))',
-                                                     :color_scale => color_scale,
-                                                     :data_bar => data_bar,
-                                                     :icon_set => icon_set }])
+    cfs = @ws.add_conditional_formatting("B2:B2", [{ type: :containsText, text: "TRUE",
+                                                     dxfId: 0, priority: 1,
+                                                     formula: 'NOT(ISERROR(SEARCH("FALSE",AB1)))',
+                                                     color_scale: color_scale,
+                                                     data_bar: data_bar,
+                                                     icon_set: icon_set }])
     doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
 
     assert_equal(1, doc.xpath(".//conditionalFormatting[@sqref='B2:B2']//cfRule[@type='containsText'][@dxfId=0][@priority=1]").size)
@@ -114,11 +114,11 @@ class TestConditionalFormatting < Test::Unit::TestCase
   end
 
   def test_many_options
-    cf = Axlsx::ConditionalFormatting.new(:sqref => "B3:B4")
-    cf.add_rule({ :type => :cellIs, :aboveAverage => false, :bottom => false, :dxfId => 0,
-                  :equalAverage => false, :priority => 2, :operator => :lessThan, :text => "",
-                  :percent => false, :rank => 0, :stdDev => 1, :stopIfTrue => true, :timePeriod => :today,
-                  :formula => "0.0" })
+    cf = Axlsx::ConditionalFormatting.new(sqref: "B3:B4")
+    cf.add_rule({ type: :cellIs, aboveAverage: false, bottom: false, dxfId: 0,
+                  equalAverage: false, priority: 2, operator: :lessThan, text: "",
+                  percent: false, rank: 0, stdDev: 1, stopIfTrue: true, timePeriod: :today,
+                  formula: "0.0" })
     doc = Nokogiri::XML.parse(cf.to_xml_string)
 
     assert_equal(1, doc.xpath(".//conditionalFormatting//cfRule[@type='cellIs'][@aboveAverage=0][@bottom=0][@dxfId=0][@equalAverage=0][@priority=2][@operator='lessThan'][@text=''][@percent=0][@rank=0][@stdDev=1][@stopIfTrue=1][@timePeriod='today']").size)
@@ -133,7 +133,7 @@ class TestConditionalFormatting < Test::Unit::TestCase
   end
 
   def test_multiple_formats
-    @ws.add_conditional_formatting "B3:B3", { :type => :cellIs, :dxfId => 0, :priority => 1, :operator => :greaterThan, :formula => "1" }
+    @ws.add_conditional_formatting "B3:B3", { type: :cellIs, dxfId: 0, priority: 1, operator: :greaterThan, formula: "1" }
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
     assert doc.xpath("//xmlns:worksheet/xmlns:conditionalFormatting//xmlns:cfRule[@type='cellIs'][@dxfId=0][@priority=1][@operator='greaterThan']//xmlns:formula='1'")
@@ -141,7 +141,7 @@ class TestConditionalFormatting < Test::Unit::TestCase
   end
 
   def test_multiple_formulas
-    @ws.add_conditional_formatting "B3:B3", { :type => :cellIs, :dxfId => 0, :priority => 1, :operator => :between, :formula => ["1 <> 2", "5"] }
+    @ws.add_conditional_formatting "B3:B3", { type: :cellIs, dxfId: 0, priority: 1, operator: :between, formula: ["1 <> 2", "5"] }
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
     assert doc.xpath("//xmlns:worksheet/xmlns:conditionalFormatting//xmlns:cfRule[@type='cellIs'][@dxfId=0][@priority=1][@operator='between']//xmlns:formula='1 <> 2'")

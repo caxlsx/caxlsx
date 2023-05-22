@@ -4,7 +4,7 @@ require 'tc_helper'
 
 class TestDataBar < Test::Unit::TestCase
   def setup
-    @data_bar = Axlsx::DataBar.new :color => "FF638EC6"
+    @data_bar = Axlsx::DataBar.new color: "FF638EC6"
   end
 
   def test_defaults
@@ -14,7 +14,7 @@ class TestDataBar < Test::Unit::TestCase
   end
 
   def test_override_default_cfvos
-    data_bar = Axlsx::DataBar.new({ :color => 'FF00FF00' }, { :type => :min, :val => "20" })
+    data_bar = Axlsx::DataBar.new({ color: 'FF00FF00' }, { type: :min, val: "20" })
 
     assert_equal("20", data_bar.value_objects.first.val)
     assert_equal("0", data_bar.value_objects.last.val)

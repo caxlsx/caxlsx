@@ -13,7 +13,7 @@ class TestTableStyleElement < Test::Unit::TestCase
     assert_nil(@item.type)
     assert_nil(@item.size)
     assert_nil(@item.dxfId)
-    options = { :type => :headerRow, :size => 10, :dxfId => 1 }
+    options = { type: :headerRow, size: 10, dxfId: 1 }
 
     tse = Axlsx::TableStyleElement.new options
 

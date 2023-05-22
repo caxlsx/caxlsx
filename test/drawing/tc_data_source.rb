@@ -4,7 +4,7 @@ require 'tc_helper'
 
 class TestNumDataSource < Test::Unit::TestCase
   def setup
-    @data_source = Axlsx::NumDataSource.new :data => ["1", "2", "3"]
+    @data_source = Axlsx::NumDataSource.new data: ["1", "2", "3"]
   end
 
   def test_tag_name

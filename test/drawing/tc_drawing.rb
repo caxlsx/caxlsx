@@ -13,7 +13,7 @@ class TestDrawing < Test::Unit::TestCase
   end
 
   def test_add_chart
-    chart = @ws.add_chart(Axlsx::Pie3DChart, :title => "bob", :start_at => [0, 0], :end_at => [1, 1])
+    chart = @ws.add_chart(Axlsx::Pie3DChart, title: "bob", start_at: [0, 0], end_at: [1, 1])
 
     assert(chart.is_a?(Axlsx::Pie3DChart), "must create a chart")
     assert_equal(@ws.workbook.charts.last, chart, "must be added to workbook charts collection")
@@ -27,7 +27,7 @@ class TestDrawing < Test::Unit::TestCase
 
   def test_add_image
     src = File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
-    image = @ws.add_image(:image_src => src, :start_at => [0, 0], :width => 600, :height => 400)
+    image = @ws.add_image(image_src: src, start_at: [0, 0], width: 600, height: 400)
 
     assert(@ws.drawing.anchors.last.is_a?(Axlsx::OneCellAnchor))
     assert(image.is_a?(Axlsx::Pic))
@@ -37,17 +37,17 @@ class TestDrawing < Test::Unit::TestCase
 
   def test_add_two_cell_anchor_image
     src = File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
-    image = @ws.add_image(:image_src => src, :start_at => [0, 0], :end_at => [15, 0])
+    image = @ws.add_image(image_src: src, start_at: [0, 0], end_at: [15, 0])
 
     assert(@ws.drawing.anchors.last.is_a?(Axlsx::TwoCellAnchor))
     assert(image.is_a?(Axlsx::Pic))
   end
 
   def test_charts
-    chart = @ws.add_chart(Axlsx::Pie3DChart, :title => "bob", :start_at => [0, 0], :end_at => [1, 1])
+    chart = @ws.add_chart(Axlsx::Pie3DChart, title: "bob", start_at: [0, 0], end_at: [1, 1])
 
     assert_equal(@ws.drawing.charts.last, chart, "add chart is returned")
-    chart = @ws.add_chart(Axlsx::Pie3DChart, :title => "nancy", :start_at => [1, 5], :end_at => [5, 10])
+    chart = @ws.add_chart(Axlsx::Pie3DChart, title: "nancy", start_at: [1, 5], end_at: [5, 10])
 
     assert_equal(@ws.drawing.charts.last, chart, "add chart is returned")
   end
@@ -71,10 +71,10 @@ class TestDrawing < Test::Unit::TestCase
   end
 
   def test_relationships
-    @ws.add_chart(Axlsx::Pie3DChart, :title => "bob", :start_at => [0, 0], :end_at => [1, 1])
+    @ws.add_chart(Axlsx::Pie3DChart, title: "bob", start_at: [0, 0], end_at: [1, 1])
 
     assert_equal(1, @ws.drawing.relationships.size, "adding a chart adds a relationship")
-    @ws.add_chart(Axlsx::Pie3DChart, :title => "nancy", :start_at => [1, 5], :end_at => [5, 10])
+    @ws.add_chart(Axlsx::Pie3DChart, title: "nancy", start_at: [1, 5], end_at: [5, 10])
 
     assert_equal(2, @ws.drawing.relationships.size, "adding a chart adds a relationship")
   end

@@ -2,7 +2,7 @@
 
 require File.expand_path(File.dirname(__FILE__) + '/lib/axlsx/version.rb')
 
-task :build => :gendoc do
+task build: :gendoc do
   system "gem build axlsx.gemspec"
 end
 
@@ -23,8 +23,8 @@ Rake::TestTask.new do |t|
   t.warning = true
 end
 
-task :release => :build do
+task release: :build do
   system "gem push caxlsx-#{Axlsx::VERSION}.gem"
 end
 
-task :default => :test
+task default: :test

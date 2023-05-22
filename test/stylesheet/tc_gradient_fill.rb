@@ -56,15 +56,15 @@ class TestGradientFill < Test::Unit::TestCase
   end
 
   def test_stop
-    @item.stop << Axlsx::GradientStop.new(Axlsx::Color.new(:rgb => "00000000"), 0.5)
+    @item.stop << Axlsx::GradientStop.new(Axlsx::Color.new(rgb: "00000000"), 0.5)
 
     assert_equal(1, @item.stop.size)
     assert(@item.stop.last.is_a?(Axlsx::GradientStop))
   end
 
   def test_to_xml_string
-    @item.stop << Axlsx::GradientStop.new(Axlsx::Color.new(:rgb => "000000"), 0.5)
-    @item.stop << Axlsx::GradientStop.new(Axlsx::Color.new(:rgb => "FFFFFF"), 0.5)
+    @item.stop << Axlsx::GradientStop.new(Axlsx::Color.new(rgb: "000000"), 0.5)
+    @item.stop << Axlsx::GradientStop.new(Axlsx::Color.new(rgb: "FFFFFF"), 0.5)
     @item.type = :path
     doc = Nokogiri::XML(@item.to_xml_string)
 

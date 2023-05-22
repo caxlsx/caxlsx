@@ -50,7 +50,7 @@ class TestAxlsx < Test::Unit::TestCase
 
   def test_cell_range_absolute
     p = Axlsx::Package.new
-    ws = p.workbook.add_worksheet :name => "Sheet <'>\" 1"
+    ws = p.workbook.add_worksheet name: "Sheet <'>\" 1"
     row = ws.add_row
     c1 = row.add_cell
     c2 = row.add_cell
