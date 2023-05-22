@@ -171,7 +171,7 @@ module Axlsx
     # @see Comment
     # @return [Comments]
     def comments
-      worksheets.map { |sheet| sheet.comments }.compact
+      worksheets.map(&:comments).compact
     end
 
     # The styles associated with this workbook
@@ -369,7 +369,7 @@ module Axlsx
     # generates a shared string object against all cells in all worksheets.
     # @return [SharedStringTable]
     def shared_strings
-      SharedStringsTable.new(worksheets.collect { |ws| ws.cells }, xml_space)
+      SharedStringsTable.new(worksheets.collect(&:cells), xml_space)
     end
 
     # The xml:space attribute for the worksheet.
