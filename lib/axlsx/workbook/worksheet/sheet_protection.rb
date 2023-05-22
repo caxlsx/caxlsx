@@ -107,7 +107,7 @@ module Axlsx
         low_15   = char & 0x7fff
         high_15  = char & 0x7fff << 15
         high_15  = high_15 >> 15
-        char     = low_15 | high_15
+        low_15 | high_15
       end
 
       encoded_password = 0x0000
