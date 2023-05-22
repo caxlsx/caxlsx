@@ -223,13 +223,6 @@ Style/GuardClause:
     - 'lib/axlsx/workbook/worksheet/table.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowSplatArgument.
-Style/HashConversion:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/cell_serializer.rb'
-    - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowedReceivers.
 # AllowedReceivers: Thread.current
@@ -243,12 +236,6 @@ Style/HashEachMethods:
 # SupportedShorthandSyntax: always, never, either, consistent
 Style/HashSyntax:
   Enabled: false
-
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Style/HashTransformKeys:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/cell_serializer.rb'
-    - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowIfModifier.
