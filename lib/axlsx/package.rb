@@ -145,7 +145,7 @@ module Axlsx
     # Encrypt the package into a CFB using the password provided
     # This is not ready yet
     def encrypt(file_name, password)
-      return false
+      false
       # moc = MsOffCrypto.new(file_name, password)
       # moc.save
     end
@@ -386,7 +386,7 @@ module Axlsx
         options.merge!(secondary_options || {})
         invalid_keys = options.keys - [:confirm_valid, :zip_command]
         if invalid_keys.any?
-          raise ArgumentError.new("Invalid keyword arguments: #{invalid_keys}")
+          raise ArgumentError, "Invalid keyword arguments: #{invalid_keys}"
         end
 
         [options.fetch(:confirm_valid, false), options.fetch(:zip_command, nil)]

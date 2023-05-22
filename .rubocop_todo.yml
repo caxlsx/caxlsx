@@ -394,24 +394,9 @@ Style/QuotedSymbols:
     - 'lib/axlsx/workbook/worksheet/worksheet_hyperlink.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, AllowedCompactTypes.
-# SupportedStyles: compact, exploded
-Style/RaiseArgs:
-  Exclude:
-    - 'lib/axlsx/package.rb'
-    - 'lib/axlsx/util/zip_command.rb'
-    - 'lib/axlsx/workbook/worksheet/border_creator.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/RandomWithOffset:
   Exclude:
     - 'lib/axlsx/drawing/vml_shape.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantCondition:
-  Exclude:
-    - 'lib/axlsx/drawing/area_series.rb'
-    - 'lib/axlsx/drawing/line_series.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 Style/RedundantFileExtensionInRequire:
@@ -457,14 +442,6 @@ Style/RedundantRegexpEscape:
     - 'lib/axlsx/workbook/worksheet/table.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowMultipleReturnValues.
-Style/RedundantReturn:
-  Exclude:
-    - 'lib/axlsx/package.rb'
-    - 'lib/axlsx/stylesheet/styles.rb'
-    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/RedundantSelf:
   Enabled: false
 
@@ -473,11 +450,6 @@ Style/RedundantSelf:
 # AllowedMethods: present?, blank?, presence, try, try!
 Style/SafeNavigation:
   Enabled: false
-
-# This cop supports safe autocorrection (--autocorrect).
-Style/SelfAssignment:
-  Exclude:
-    - 'lib/axlsx/stylesheet/color.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowIfMethodIsEmpty.
@@ -491,12 +463,6 @@ Style/SlicingWithRange:
     - 'lib/axlsx/drawing/line_chart.rb'
     - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowModifier.
-Style/SoleNestedConditional:
-  Exclude:
-    - 'lib/axlsx/util/validators.rb'
 
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/StringChars:
