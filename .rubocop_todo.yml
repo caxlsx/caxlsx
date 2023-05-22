@@ -308,11 +308,8 @@ Style/NonNilCheck:
 Style/NumericPredicate:
   Exclude:
     - 'spec/**/*'
-    - 'lib/axlsx/package.rb'
     - 'lib/axlsx/stylesheet/font.rb'
     - 'lib/axlsx/util/validators.rb'
-    - 'lib/axlsx/workbook/workbook.rb'
-    - 'lib/axlsx/workbook/worksheet/sheet_pr.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
@@ -545,13 +542,6 @@ Style/WordArray:
 Style/YodaCondition:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/col.rb'
-
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Style/ZeroLengthPredicate:
-  Exclude:
-    - 'lib/axlsx/package.rb'
-    - 'lib/axlsx/workbook/workbook.rb'
-    - 'lib/axlsx/workbook/worksheet/sheet_pr.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns.
