@@ -77,11 +77,6 @@ Lint/UnusedMethodArgument:
     - 'lib/axlsx/package.rb'
     - 'lib/axlsx/util/validators.rb'
 
-Lint/UselessAssignment:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/header_footer.rb'
-    - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
-
 # Configuration parameters: MinSize.
 Performance/CollectionLiteralInLoop:
   Exclude:
@@ -243,11 +238,6 @@ Style/Lambda:
     - 'lib/axlsx/stylesheet/gradient_stop.rb'
     - 'lib/axlsx/stylesheet/styles.rb'
     - 'lib/axlsx/util/validators.rb'
-
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Style/LineEndConcatenation:
-  Exclude:
-    - 'lib/axlsx/package.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowMethodComparison.
