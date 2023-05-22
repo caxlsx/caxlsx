@@ -243,8 +243,8 @@ module Axlsx
         str << key_value.first << '="' << Axlsx.booleanize(key_value.last).to_s << '"'
       end
       str << '>'
-      str << '<formula1>' << self.formula1 << '</formula1>' if @formula1 and valid_attributes.include?(:formula1)
-      str << '<formula2>' << self.formula2 << '</formula2>' if @formula2 and valid_attributes.include?(:formula2)
+      str << '<formula1>' << formula1 << '</formula1>' if formula1 && valid_attributes.include?(:formula1)
+      str << '<formula2>' << formula2 << '</formula2>' if formula2 && valid_attributes.include?(:formula2)
       str << '</dataValidation>'
     end
 
