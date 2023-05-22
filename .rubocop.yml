@@ -34,6 +34,9 @@ Minitest:
 Performance:
   Enabled: true
 
+Security:
+  Enabled: true
+
 Style:
   Enabled: true
 
