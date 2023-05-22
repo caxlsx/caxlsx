@@ -135,7 +135,6 @@ module Axlsx
         end
         @data << data_field
       end
-      @data
     end
 
     # The pages

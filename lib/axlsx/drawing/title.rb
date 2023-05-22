@@ -32,7 +32,6 @@ module Axlsx
       DataTypeValidator.validate 'Title.text', String, v
       @text = v
       @cell = nil
-      v
     end
 
     # @see text_size
@@ -40,7 +39,6 @@ module Axlsx
       DataTypeValidator.validate 'Title.text_size', String, v
       @text_size = v
       @cell = nil
-      v
     end
 
     # @see cell
@@ -48,7 +46,6 @@ module Axlsx
       DataTypeValidator.validate 'Title.text', Cell, v
       @cell = v
       @text = v.value.to_s
-      v
     end
 
     # Check if the title is empty.

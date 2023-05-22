@@ -82,14 +82,6 @@ Lint/UselessAssignment:
     - 'lib/axlsx/workbook/worksheet/header_footer.rb'
     - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
 
-# Configuration parameters: CheckForMethodsWithNoSideEffects.
-Lint/Void:
-  Exclude:
-    - 'lib/axlsx/drawing/title.rb'
-    - 'lib/axlsx/util/storage.rb'
-    - 'lib/axlsx/workbook/worksheet/data_bar.rb'
-    - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
-
 # Configuration parameters: MinSize.
 Performance/CollectionLiteralInLoop:
   Exclude:
