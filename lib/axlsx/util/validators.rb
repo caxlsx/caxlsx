@@ -41,7 +41,7 @@ module Axlsx
     # @param [Regexp] regex The regular expression to evaluate
     # @param [Any] v The value to validate.
     def self.validate(name, regex, v)
-      raise ArgumentError, (ERR_REGEX % [v.inspect, regex.to_s]) unless (v.respond_to?(:to_s) && v.to_s.match(regex))
+      raise ArgumentError, (ERR_REGEX % [v.inspect, regex.to_s]) unless (v.respond_to?(:to_s) && regex.match?(v.to_s))
     end
   end
 
