@@ -11,7 +11,7 @@ input2 = (65..122).to_a.pack('U*').chars.to_a # these do not need to be escaped
 10.times { row << input1.shuffle.join }
 10.times { row << input2.shuffle.join }
 
-profile = RubyProf.profile do
+result = RubyProf::Profile.profile do
   p = Axlsx::Package.new
   p.workbook.add_worksheet do |sheet|
     10_000.times do
@@ -21,5 +21,5 @@ profile = RubyProf.profile do
   p.to_stream
 end
 
-printer = RubyProf::FlatPrinter.new(profile)
+printer = RubyProf::FlatPrinter.new(result)
 printer.print($stdout, {})
