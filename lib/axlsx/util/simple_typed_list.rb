@@ -15,6 +15,12 @@ module Axlsx
       undef_method name
     end
 
+    # We often call index(element) on instances of SimpleTypedList. Thus, we do not want to inherit Array
+    # implementation of == / eql? which walks the elements calling == / eql?. Instead we want the fast
+    # and original versions from BasicObject.
+    alias :== :equal?
+    alias :eql? :equal?
+
     # Creats a new typed list
     # @param [Array, Class] type An array of Class objects or a single Class object
     # @param [String] serialize_as The tag name to use in serialization
