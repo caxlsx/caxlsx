@@ -390,24 +390,22 @@ module Axlsx
 
       if options[:border].nil?
         base_border_opts = {}
-      else
-        if options[:border].is_a?(Array)
-          borders_array += options[:border]
+      elsif options[:border].is_a?(Array)
+        borders_array += options[:border]
 
-          base_border_opts = {}
+        base_border_opts = {}
 
-          options[:border].each do |b_opts|
-            if b_opts[:edges].nil?
-              base_border_opts = base_border_opts.merge(b_opts)
-            end
+        options[:border].each do |b_opts|
+          if b_opts[:edges].nil?
+            base_border_opts = base_border_opts.merge(b_opts)
           end
-        else
-          borders_array << options[:border]
-
-          base_border_opts = options[:border]
-
-          validate_border_hash.call(base_border_opts)
         end
+      else
+        borders_array << options[:border]
+
+        base_border_opts = options[:border]
+
+        validate_border_hash.call(base_border_opts)
       end
 
       Border::EDGES.each do |edge|
