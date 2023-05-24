@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-require 'axlsx.rb'
+require 'axlsx'
