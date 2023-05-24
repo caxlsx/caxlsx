@@ -273,14 +273,6 @@ Style/Next:
   Exclude:
     - 'lib/axlsx/stylesheet/styles.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: IncludeSemanticChanges.
-Style/NonNilCheck:
-  Exclude:
-    - 'lib/axlsx/drawing/d_lbls.rb'
-    - 'lib/axlsx/workbook/worksheet/col.rb'
-    - 'lib/axlsx/workbook/worksheet/page_setup.rb'
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: EnforcedStyle, AllowedMethods, AllowedPatterns.
 # SupportedStyles: predicate, comparison

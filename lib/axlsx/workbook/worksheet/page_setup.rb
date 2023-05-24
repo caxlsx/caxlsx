@@ -225,8 +225,8 @@ module Axlsx
     # We treat any page set up that has a value set for fit_to_width or fit_to_height value as fit_to_page.
     # @return [Boolean]
     def fit_to_page?
-      # is there some better what to express this?
-      (fit_to_width != nil || fit_to_height != nil)
+      # is there some better way to express this?
+      (!fit_to_width.nil? || !fit_to_height.nil?)
     end
 
     # Serializes the page settings element.
