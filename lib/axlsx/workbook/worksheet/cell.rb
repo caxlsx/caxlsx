@@ -504,9 +504,9 @@ module Axlsx
         :time
       elsif v.is_a?(TrueClass) || v.is_a?(FalseClass)
         :boolean
-      elsif v.respond_to?(:to_i) && v.to_s =~ Axlsx::NUMERIC_REGEX
+      elsif v.respond_to?(:to_i) && Axlsx::NUMERIC_REGEX.match?(v.to_s)
         :integer
-      elsif v.respond_to?(:to_f) && (v.to_s =~ Axlsx::SAFE_FLOAT_REGEX || ((matchdata = v.to_s.match(MAYBE_FLOAT_REGEX)) && matchdata[:exp].to_i.between?(Float::MIN_10_EXP, Float::MAX_10_EXP)))
+      elsif v.respond_to?(:to_f) && (Axlsx::SAFE_FLOAT_REGEX.match?(v.to_s) || ((matchdata = MAYBE_FLOAT_REGEX.match(v.to_s)) && matchdata[:exp].to_i.between?(Float::MIN_10_EXP, Float::MAX_10_EXP)))
         :float
       elsif Axlsx::ISO_8601_REGEX.match?(v.to_s)
         :iso_8601
