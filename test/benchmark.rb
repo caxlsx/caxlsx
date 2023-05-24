@@ -11,9 +11,22 @@ input1 = (32..126).to_a.pack('U*').chars.to_a # these will need to be escaped
 input2 = (65..122).to_a.pack('U*').chars.to_a # these do not need to be escaped
 10.times { row << input1.shuffle.join }
 10.times { row << input2.shuffle.join }
-times = 3000
+times = 3_000
 
 Benchmark.bmbm(30) do |x|
+  x.report('axlsx_merged_cells') do
+    p = Axlsx::Package.new
+    p.workbook do |wb|
+      wb.add_worksheet do |sheet|
+        times.times do
+          sheet << row
+          sheet.merge_cells(sheet.rows.last.cells)
+        end
+      end
+    end
+    p.serialize("example_axlsx_merged_cells.xlsx")
+  end
+
   x.report('axlsx_noautowidth') do
     p = Axlsx::Package.new
     p.workbook do |wb|
@@ -85,4 +98,4 @@ Benchmark.bmbm(30) do |x|
     end
   end
 end
-File.delete("example.csv", "example_streamed.xlsx", "example_shared.xlsx", "example_autowidth.xlsx", "example_noautowidth.xlsx", "example_zip_command.xlsx")
+File.delete("example_axlsx_merged_cells.xlsx", "example.csv", "example_streamed.xlsx", "example_shared.xlsx", "example_autowidth.xlsx", "example_noautowidth.xlsx", "example_zip_command.xlsx")
