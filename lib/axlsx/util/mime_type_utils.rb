@@ -16,7 +16,7 @@ module Axlsx
     # @param [String] v URI
     # @return [String] File mime type
     def self.get_mime_type_from_uri(v)
-      Marcel::MimeType.for(URI.open(v))
+      Marcel::MimeType.for(URI.parse(v).open)
     end
   end
 end

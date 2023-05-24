@@ -17,4 +17,8 @@ class TestMimeTypeUtils < Test::Unit::TestCase
     assert_equal('image/jpeg', Axlsx::MimeTypeUtils::get_mime_type(@test_img))
     assert_equal('image/png', Axlsx::MimeTypeUtils::get_mime_type_from_uri(@test_img_url))
   end
+
+  def test_escape_uri
+    assert_raise(URI::InvalidURIError) { Axlsx::MimeTypeUtils::get_mime_type_from_uri('| ls') }
+  end
 end
