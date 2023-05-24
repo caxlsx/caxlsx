@@ -84,11 +84,6 @@ Performance/CollectionLiteralInLoop:
     - 'lib/axlsx/workbook/worksheet/page_margins.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Performance/RedundantBlockCall:
-  Exclude:
-    - 'lib/axlsx/util/zip_command.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: separated, grouped
 Style/AccessorGrouping:

@@ -25,10 +25,10 @@ module Axlsx
     # Create a temporary directory for writing files to.
     #
     # The directory and its contents are removed at the end of the block.
-    def open(output, &block)
+    def open(output)
       Dir.mktmpdir do |dir|
         @dir = dir
-        block.call(self)
+        yield(self)
         write_file
         zip_parts(output)
       end
