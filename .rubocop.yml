@@ -16,6 +16,9 @@ AllCops:
     - 'examples/**/*'
     - 'vendor/bundle/**/*'
 
+Gemspec:
+  Enabled: true
+
 Layout:
   Enabled: true
 
