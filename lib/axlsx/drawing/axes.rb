@@ -32,7 +32,7 @@ module Axlsx
     def to_xml_string(str = +'', options = {})
       if options[:ids]
         # CatAxis must come first in the XML (for Microsoft Excel at least)
-        sorted = axes.sort_by { |name, axis| axis.kind_of?(CatAxis) ? 0 : 1 }
+        sorted = axes.sort_by { |name, axis| axis.is_a?(CatAxis) ? 0 : 1 }
         sorted.each { |axis| str << '<c:axId val="' << axis[1].id.to_s << '"/>' }
       else
         axes.each { |axis| axis[1].to_xml_string(str) }

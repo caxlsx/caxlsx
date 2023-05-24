@@ -108,7 +108,7 @@ module Axlsx
 
     # @see top_left_cell
     def top_left_cell=(v)
-      cell = (v.class == Axlsx::Cell ? v.r_abs : v)
+      cell = (v.instance_of?(Axlsx::Cell) ? v.r_abs : v)
       Axlsx::validate_string(cell)
       @top_left_cell = cell
     end
