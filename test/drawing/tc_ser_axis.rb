@@ -10,7 +10,7 @@ class TestSerAxis < Test::Unit::TestCase
   def teardown; end
 
   def test_options
-    a = Axlsx::SerAxis.new(:tick_lbl_skip => 9, :tick_mark_skip => 7)
+    a = Axlsx::SerAxis.new(tick_lbl_skip: 9, tick_mark_skip: 7)
 
     assert_equal(9, a.tick_lbl_skip)
     assert_equal(7, a.tick_mark_skip)

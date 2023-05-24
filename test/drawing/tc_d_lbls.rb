@@ -24,7 +24,7 @@ class TestDLbls < Test::Unit::TestCase
   def test_initialization_with_optoins
     options_hash = @boolean_attributes.to_h { |name| [name, true] }
 
-    d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart, options_hash.merge({ :d_lbl_pos => :t }))
+    d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart, options_hash.merge({ d_lbl_pos: :t }))
 
     @boolean_attributes.each do |attr|
       assert(d_lbls.send(attr), "boolean attributes set by options")

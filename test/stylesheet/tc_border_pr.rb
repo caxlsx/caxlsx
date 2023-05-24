@@ -17,7 +17,7 @@ class TestBorderPr < Test::Unit::TestCase
 
   def test_color
     assert_raise(ArgumentError) { @bpr.color = :red }
-    assert_nothing_raised { @bpr.color = Axlsx::Color.new :rgb => "FF000000" }
+    assert_nothing_raised { @bpr.color = Axlsx::Color.new rgb: "FF000000" }
     assert(@bpr.color.is_a?(Axlsx::Color))
   end
 

@@ -5,8 +5,8 @@ require 'tc_helper'
 class TestPane < Test::Unit::TestCase
   def setup
     # inverse defaults for booleans
-    @nil_options = { :active_pane => :bottom_left, :state => :frozen, :top_left_cell => 'A2' }
-    @int_0_options = { :x_split => 2, :y_split => 2 }
+    @nil_options = { active_pane: :bottom_left, state: :frozen, top_left_cell: 'A2' }
+    @int_0_options = { x_split: 2, y_split: 2 }
     @options = @nil_options.merge(@int_0_options)
     @pane = Axlsx::Pane.new(@options)
   end
@@ -48,7 +48,7 @@ class TestPane < Test::Unit::TestCase
   end
 
   def test_to_xml_frozen
-    pane = Axlsx::Pane.new :state => :frozen, :y_split => 2
+    pane = Axlsx::Pane.new state: :frozen, y_split: 2
     doc = Nokogiri::XML(pane.to_xml_string)
 
     assert_equal(1, doc.xpath("//pane[@topLeftCell='A3']").size)

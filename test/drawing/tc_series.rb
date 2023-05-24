@@ -5,9 +5,9 @@ require 'tc_helper'
 class TestSeries < Test::Unit::TestCase
   def setup
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name => "hmmm"
-    chart = @ws.add_chart Axlsx::Chart, :title => "fishery"
-    @series = chart.add_series :title => "bob"
+    @ws = p.workbook.add_worksheet name: "hmmm"
+    chart = @ws.add_chart Axlsx::Chart, title: "fishery"
+    @series = chart.add_series title: "bob"
   end
 
   def test_initialize

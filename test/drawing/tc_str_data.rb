@@ -4,7 +4,7 @@ require 'tc_helper'
 
 class TestStrData < Test::Unit::TestCase
   def setup
-    @str_data = Axlsx::StrData.new :data => ["1", "2", "3"]
+    @str_data = Axlsx::StrData.new data: ["1", "2", "3"]
   end
 
   def test_to_xml_string_strLit

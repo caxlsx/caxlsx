@@ -8,13 +8,13 @@ class TestDataValidation < Test::Unit::TestCase
 
   def setup
     # inverse defaults
-    @boolean_options = { :allowBlank => false, :hideDropDown => true, :showErrorMessage => false, :showInputMessage => true }
-    @nil_options = { :formula1 => 'foo', :formula2 => 'foo', :errorTitle => 'foo', :operator => :lessThan, :prompt => 'foo', :promptTitle => 'foo', :sqref => 'foo' }
-    @type_option = { :type => :whole }
-    @error_style_option = { :errorStyle => :warning }
+    @boolean_options = { allowBlank: false, hideDropDown: true, showErrorMessage: false, showInputMessage: true }
+    @nil_options = { formula1: 'foo', formula2: 'foo', errorTitle: 'foo', operator: :lessThan, prompt: 'foo', promptTitle: 'foo', sqref: 'foo' }
+    @type_option = { type: :whole }
+    @error_style_option = { errorStyle: :warning }
 
-    @string_options = { :formula1 => 'foo', :formula2 => 'foo', :error => 'foo', :errorTitle => 'foo', :prompt => 'foo', :promptTitle => 'foo', :sqref => 'foo' }
-    @symbol_options = { :errorStyle => :warning, :operator => :lessThan, :type => :whole }
+    @string_options = { formula1: 'foo', formula2: 'foo', error: 'foo', errorTitle: 'foo', prompt: 'foo', promptTitle: 'foo', sqref: 'foo' }
+    @symbol_options = { errorStyle: :warning, operator: :lessThan, type: :whole }
 
     @options = @boolean_options.merge(@nil_options).merge(@type_option).merge(@error_style_option)
 
@@ -165,11 +165,11 @@ class TestDataValidation < Test::Unit::TestCase
 
   def test_whole_decimal_data_time_textLength_to_xml
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name => "data_validation"
-    @ws.add_data_validation("A1", { :type => :whole, :operator => :between, :formula1 => '5', :formula2 => '10',
-                                    :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values between 5 and 10',
-                                    :errorStyle => :information, :showInputMessage => true, :promptTitle => 'Be carful!',
-                                    :prompt => 'Only values between 5 and 10' })
+    @ws = p.workbook.add_worksheet name: "data_validation"
+    @ws.add_data_validation("A1", { type: :whole, operator: :between, formula1: '5', formula2: '10',
+                                    showErrorMessage: true, errorTitle: 'Wrong input', error: 'Only values between 5 and 10',
+                                    errorStyle: :information, showInputMessage: true, promptTitle: 'Be carful!',
+                                    prompt: 'Only values between 5 and 10' })
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
@@ -194,11 +194,11 @@ class TestDataValidation < Test::Unit::TestCase
 
   def test_list_to_xml
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name => "data_validation"
-    @ws.add_data_validation("A1", { :type => :list, :formula1 => 'A1:A5',
-                                    :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values from list',
-                                    :errorStyle => :stop, :showInputMessage => true, :promptTitle => 'Be carful!',
-                                    :prompt => 'Only values from list', :hideDropDown => true })
+    @ws = p.workbook.add_worksheet name: "data_validation"
+    @ws.add_data_validation("A1", { type: :list, formula1: 'A1:A5',
+                                    showErrorMessage: true, errorTitle: 'Wrong input', error: 'Only values from list',
+                                    errorStyle: :stop, showInputMessage: true, promptTitle: 'Be carful!',
+                                    prompt: 'Only values from list', hideDropDown: true })
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
@@ -218,11 +218,11 @@ class TestDataValidation < Test::Unit::TestCase
 
   def test_custom_to_xml
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name => "data_validation"
-    @ws.add_data_validation("A1", { :type => :custom, :formula1 => '=5/2',
-                                    :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values corresponding formula',
-                                    :errorStyle => :stop, :showInputMessage => true, :promptTitle => 'Be carful!',
-                                    :prompt => 'Only values corresponding formula' })
+    @ws = p.workbook.add_worksheet name: "data_validation"
+    @ws.add_data_validation("A1", { type: :custom, formula1: '=5/2',
+                                    showErrorMessage: true, errorTitle: 'Wrong input', error: 'Only values corresponding formula',
+                                    errorStyle: :stop, showInputMessage: true, promptTitle: 'Be carful!',
+                                    prompt: 'Only values corresponding formula' })
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
@@ -241,15 +241,15 @@ class TestDataValidation < Test::Unit::TestCase
 
   def test_multiple_datavalidations_to_xml
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name => "data_validation"
-    @ws.add_data_validation("A1", { :type => :whole, :operator => :between, :formula1 => '5', :formula2 => '10',
-                                    :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values between 5 and 10',
-                                    :errorStyle => :information, :showInputMessage => true, :promptTitle => 'Be carful!',
-                                    :prompt => 'Only values between 5 and 10' })
-    @ws.add_data_validation("B1", { :type => :list, :formula1 => 'A1:A5',
-                                    :showErrorMessage => true, :errorTitle => 'Wrong input', :error => 'Only values from list',
-                                    :errorStyle => :stop, :showInputMessage => true, :promptTitle => 'Be carful!',
-                                    :prompt => 'Only values from list', :hideDropDown => true })
+    @ws = p.workbook.add_worksheet name: "data_validation"
+    @ws.add_data_validation("A1", { type: :whole, operator: :between, formula1: '5', formula2: '10',
+                                    showErrorMessage: true, errorTitle: 'Wrong input', error: 'Only values between 5 and 10',
+                                    errorStyle: :information, showInputMessage: true, promptTitle: 'Be carful!',
+                                    prompt: 'Only values between 5 and 10' })
+    @ws.add_data_validation("B1", { type: :list, formula1: 'A1:A5',
+                                    showErrorMessage: true, errorTitle: 'Wrong input', error: 'Only values from list',
+                                    errorStyle: :stop, showInputMessage: true, promptTitle: 'Be carful!',
+                                    prompt: 'Only values from list', hideDropDown: true })
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 

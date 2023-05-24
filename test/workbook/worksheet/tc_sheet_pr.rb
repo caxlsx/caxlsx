@@ -6,16 +6,16 @@ class TestSheetPr < Test::Unit::TestCase
   def setup
     worksheet = Axlsx::Package.new.workbook.add_worksheet
     @options = {
-      :sync_horizontal => false,
-      :sync_vertical => false,
-      :transition_evaluation => true,
-      :transition_entry => true,
-      :published => false,
-      :filter_mode => true,
-      :enable_format_conditions_calculation => false,
-      :code_name => '007',
-      :sync_ref => 'foo',
-      :tab_color => 'FFFF6666'
+      sync_horizontal: false,
+      sync_vertical: false,
+      transition_evaluation: true,
+      transition_entry: true,
+      published: false,
+      filter_mode: true,
+      enable_format_conditions_calculation: false,
+      code_name: '007',
+      sync_ref: 'foo',
+      tab_color: 'FFFF6666'
     }
     @sheet_pr = Axlsx::SheetPr.new(worksheet, @options)
   end

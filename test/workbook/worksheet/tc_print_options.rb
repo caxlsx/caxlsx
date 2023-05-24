@@ -5,7 +5,7 @@ require 'tc_helper'
 class TestPrintOptions < Test::Unit::TestCase
   def setup
     p = Axlsx::Package.new
-    ws = p.workbook.add_worksheet :name => "hmmm"
+    ws = p.workbook.add_worksheet name: "hmmm"
     @po = ws.print_options
   end
 
@@ -17,7 +17,7 @@ class TestPrintOptions < Test::Unit::TestCase
   end
 
   def test_initialize_with_options
-    optioned = Axlsx::PrintOptions.new(:grid_lines => true, :headings => true, :horizontal_centered => true, :vertical_centered => true)
+    optioned = Axlsx::PrintOptions.new(grid_lines: true, headings: true, horizontal_centered: true, vertical_centered: true)
 
     assert(optioned.grid_lines)
     assert(optioned.headings)
@@ -26,7 +26,7 @@ class TestPrintOptions < Test::Unit::TestCase
   end
 
   def test_set_all_values
-    @po.set(:grid_lines => true, :headings => true, :horizontal_centered => true, :vertical_centered => true)
+    @po.set(grid_lines: true, headings: true, horizontal_centered: true, vertical_centered: true)
 
     assert(@po.grid_lines)
     assert(@po.headings)
@@ -35,7 +35,7 @@ class TestPrintOptions < Test::Unit::TestCase
   end
 
   def test_set_some_values
-    @po.set(:grid_lines => true, :headings => true)
+    @po.set(grid_lines: true, headings: true)
 
     assert(@po.grid_lines)
     assert(@po.headings)
@@ -44,7 +44,7 @@ class TestPrintOptions < Test::Unit::TestCase
   end
 
   def test_to_xml
-    @po.set(:grid_lines => true, :headings => true, :horizontal_centered => true, :vertical_centered => true)
+    @po.set(grid_lines: true, headings: true, horizontal_centered: true, vertical_centered: true)
     doc = Nokogiri::XML.parse(@po.to_xml_string)
 
     assert_equal(1, doc.xpath(".//printOptions[@gridLines=1][@headings=1][@horizontalCentered=1][@verticalCentered=1]").size)

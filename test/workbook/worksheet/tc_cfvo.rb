@@ -4,7 +4,7 @@ require 'tc_helper'
 
 class TestCfvo < Test::Unit::TestCase
   def setup
-    @cfvo = Axlsx::Cfvo.new(:val => "0", :type => :min)
+    @cfvo = Axlsx::Cfvo.new(val: "0", type: :min)
   end
 
   def test_val

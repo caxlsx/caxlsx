@@ -5,7 +5,7 @@ require 'tc_helper'
 class TestPageMargins < Test::Unit::TestCase
   def setup
     p = Axlsx::Package.new
-    ws = p.workbook.add_worksheet :name => "hmmm"
+    ws = p.workbook.add_worksheet name: "hmmm"
     @pm = ws.page_margins
   end
 
@@ -19,7 +19,7 @@ class TestPageMargins < Test::Unit::TestCase
   end
 
   def test_initialize_with_options
-    optioned = Axlsx::PageMargins.new(:left => 2, :right => 3, :top => 2, :bottom => 1, :header => 0.1, :footer => 0.1)
+    optioned = Axlsx::PageMargins.new(left: 2, right: 3, top: 2, bottom: 1, header: 0.1, footer: 0.1)
 
     assert_equal(2, optioned.left)
     assert_equal(3, optioned.right)
@@ -30,7 +30,7 @@ class TestPageMargins < Test::Unit::TestCase
   end
 
   def test_set_all_values
-    @pm.set(:left => 1.1, :right => 1.2, :top => 1.3, :bottom => 1.4, :header => 0.8, :footer => 0.9)
+    @pm.set(left: 1.1, right: 1.2, top: 1.3, bottom: 1.4, header: 0.8, footer: 0.9)
 
     assert_in_delta(1.1, @pm.left)
     assert_in_delta(1.2, @pm.right)
@@ -41,7 +41,7 @@ class TestPageMargins < Test::Unit::TestCase
   end
 
   def test_set_some_values
-    @pm.set(:left => 1.1, :right => 1.2)
+    @pm.set(left: 1.1, right: 1.2)
 
     assert_in_delta(1.1, @pm.left)
     assert_in_delta(1.2, @pm.right)
