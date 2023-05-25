@@ -29,7 +29,10 @@ module Axlsx
       parse_options options
     end
 
-    serializable_attributes :left, :right, :bottom, :top, :header, :footer
+    # Possible margins to set
+    MARGIN_KEYS = [:left, :right, :top, :bottom, :header, :footer].freeze
+
+    serializable_attributes(*MARGIN_KEYS)
 
     # Default left and right margin (in inches)
     DEFAULT_LEFT_RIGHT = 0.75
@@ -65,10 +68,10 @@ module Axlsx
     attr_reader :footer
 
     # Set some or all margins at once.
-    # @param [Hash] margins the margins to set (possible keys are :left, :right, :top, :bottom, :header and :footer).
+    # @param [Hash] margins the margins to set. See {MARGIN_KEYS} for a list of possible keys.
     def set(margins)
       margins.select do |k, v|
-        next unless [:left, :right, :top, :bottom, :header, :footer].include? k
+        next unless MARGIN_KEYS.include? k
 
         send("#{k}=", v)
       end

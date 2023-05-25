@@ -330,11 +330,11 @@ module Axlsx
       end
       exts = workbook.images.map { |image| image.extname.downcase }
       exts.uniq.each do |ext|
-        ct = if ['jpeg', 'jpg'].include?(ext)
+        ct = if JPEG_EXS.include?(ext)
                JPEG_CT
-             elsif ext == 'gif'
+             elsif ext == GIF_EX
                GIF_CT
-             elsif ext == 'png'
+             elsif ext == PNG_EX
                PNG_CT
              end
         c_types << Axlsx::Default.new(:ContentType => ct, :Extension => ext)
