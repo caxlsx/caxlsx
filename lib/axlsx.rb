@@ -33,12 +33,8 @@ require 'bigdecimal'
 require 'set'
 require 'time'
 
-begin
-  if Gem.loaded_specs.has_key?("axlsx_styler")
-    raise StandardError, "Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly."
-  end
-rescue StandardError
-  # Do nothing
+if Gem.loaded_specs.has_key?("axlsx_styler")
+  raise StandardError, "Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly."
 end
 
 # xlsx generation with charts, images, automated column width, customizable styles
