@@ -60,11 +60,6 @@ Lint/DisjunctiveAssignmentInConstructor:
   Exclude:
     - 'lib/axlsx/drawing/num_data_source.rb'
 
-# Configuration parameters: IgnoreLiteralBranches, IgnoreConstantBranches.
-Lint/DuplicateBranch:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/merged_cells.rb'
-
 Lint/NonLocalExitFromIterator:
   Exclude:
     - 'lib/axlsx/util/validators.rb'
@@ -96,12 +91,6 @@ Style/AccessorGrouping:
 # SupportedStyles: prefer_alias, prefer_alias_method
 Style/Alias:
   Enabled: false
-
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: MinBranchesCount.
-Style/CaseLikeIf:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/merged_cells.rb'
 
 Style/ClassVars:
   Exclude:
