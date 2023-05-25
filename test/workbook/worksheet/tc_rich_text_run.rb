@@ -151,7 +151,7 @@ class RichTextRun < Test::Unit::TestCase
 
   def test_multiline_autowidth
     wrap = @p.workbook.styles.add_style({ alignment: { wrap_text: true } })
-    awtr = Axlsx::RichTextRun.new('I\'m bold' + "\n", b: true)
+    awtr = Axlsx::RichTextRun.new("I'm bold\n", b: true)
     rt = Axlsx::RichText.new
     rt.runs << awtr
     @ws.add_row [rt], style: wrap

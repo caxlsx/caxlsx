@@ -423,7 +423,14 @@ Style/StringChars:
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: Mode.
 Style/StringConcatenation:
-  Enabled: false
+  Exclude:
+    - 'lib/axlsx/drawing/area_series.rb'
+    - 'lib/axlsx/drawing/line_series.rb'
+    - 'lib/axlsx/drawing/pie_series.rb'
+    - 'lib/axlsx/drawing/scatter_series.rb'
+    - 'lib/axlsx/stylesheet/color.rb'
+    - 'lib/axlsx/util/constants.rb'
+    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
