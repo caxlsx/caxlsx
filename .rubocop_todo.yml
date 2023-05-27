@@ -165,16 +165,6 @@ Style/ConcatArrayLiterals:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/icon_set.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, SingleLineConditionsOnly, IncludeTernaryExpressions.
-# SupportedStyles: assign_to_condition, assign_inside_condition
-Style/ConditionalAssignment:
-  Exclude:
-    - 'lib/axlsx/drawing/title.rb'
-    - 'lib/axlsx/stylesheet/styles.rb'
-    - 'lib/axlsx/workbook/workbook.rb'
-    - 'lib/axlsx/workbook/worksheet/data_bar.rb'
-
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
   Exclude:

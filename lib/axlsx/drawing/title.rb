@@ -20,11 +20,11 @@ module Axlsx
     def initialize(title = "", title_size = "")
       self.cell = title if title.is_a?(Cell)
       self.text = title.to_s unless title.is_a?(Cell)
-      if title_size.to_s.empty?
-        self.text_size = "1600"
-      else
-        self.text_size = title_size.to_s
-      end
+      self.text_size = if title_size.to_s.empty?
+                         "1600"
+                       else
+                         title_size.to_s
+                       end
     end
 
     # @see text

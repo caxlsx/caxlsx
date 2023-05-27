@@ -265,12 +265,12 @@ module Axlsx
       alignment = parse_alignment_options options
       protection = parse_protection_options options
 
-      case options[:type]
-      when :dxf
-        style = Dxf.new :fill => fill, :font => font, :numFmt => numFmt, :border => border, :alignment => alignment, :protection => protection
-      else
-        style = Xf.new :fillId => fill || 0, :fontId => font || 0, :numFmtId => numFmt || 0, :borderId => border || 0, :alignment => alignment, :protection => protection, :applyFill => !fill.nil?, :applyFont => !font.nil?, :applyNumberFormat => !numFmt.nil?, :applyBorder => !border.nil?, :applyAlignment => !alignment.nil?, :applyProtection => !protection.nil?
-      end
+      style = case options[:type]
+              when :dxf
+                Dxf.new :fill => fill, :font => font, :numFmt => numFmt, :border => border, :alignment => alignment, :protection => protection
+              else
+                Xf.new :fillId => fill || 0, :fontId => font || 0, :numFmtId => numFmt || 0, :borderId => border || 0, :alignment => alignment, :protection => protection, :applyFill => !fill.nil?, :applyFont => !font.nil?, :applyNumberFormat => !numFmt.nil?, :applyBorder => !border.nil?, :applyAlignment => !alignment.nil?, :applyProtection => !protection.nil?
+              end
 
       if options[:type] == :xf
         xf_index = (cellXfs << style)
