@@ -45,7 +45,7 @@ module Axlsx
     # The name of the worksheet
     # @return [String]
     def name
-      @name ||= "Sheet" + (index + 1).to_s
+      @name ||= "Sheet#{index + 1}"
     end
 
     # Whether to treat values starting with an equals sign as formulas or as literal strings.
