@@ -12,15 +12,13 @@ module Axlsx
     end
 
     # adds cells to the merged cells collection
-    # @param [Array||String] cells The cells to add to the merged cells
+    # @param [Array|String] cells The cells to add to the merged cells
     # collection. This can be an array of actual cells or a string style
     # range like 'A1:C1'
     def add(cells)
       self << if cells.is_a?(String)
                 cells
               elsif cells.is_a?(Array)
-                Axlsx::cell_range(cells, false)
-              elsif cells.is_a?(Row)
                 Axlsx::cell_range(cells, false)
               end
     end
