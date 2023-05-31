@@ -73,6 +73,9 @@ module Axlsx
     CELL_TYPES = [:date, :time, :float, :integer, :richtext,
                   :string, :boolean, :iso_8601, :text].freeze
 
+    # A regular expression to match the alpha(column)numeric(row) reference of a cell
+    CELL_REFERENCE_REGEX = /([A-Z]+)([0-9]+)/.freeze
+
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer]
     # @see Axlsx::Styles
@@ -345,11 +348,11 @@ module Axlsx
       Axlsx::cell_r index, @row.row_index
     end
 
-    # @return [String] The absolute alpha(column)numeric(row) reference for this sell.
+    # @return [String] The absolute alpha(column)numeric(row) reference for this cell.
     # @example Absolute Cell Reference
     #   ws.rows.first.cells.first.r #=> "$A$1"
     def r_abs
-      "$#{r.match(/([A-Z]+)([0-9]+)/)[1, 2].join('$')}"
+      "$#{CELL_REFERENCE_REGEX.match(r)[1, 2].join('$')}"
     end
 
     # @return [Integer] The cellXfs item index applied to this cell.
