@@ -125,11 +125,6 @@ Style/ClassVars:
     - 'lib/axlsx/workbook/workbook.rb'
     - 'lib/axlsx/workbook/worksheet/dimension.rb'
 
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Style/ConcatArrayLiterals:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/icon_set.rb'
-
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
   Exclude:
