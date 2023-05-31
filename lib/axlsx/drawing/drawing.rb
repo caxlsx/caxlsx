@@ -109,14 +109,14 @@ module Axlsx
     # @return [Array]
     def hyperlinks
       links = self.images.select { |a| a.hyperlink.is_a?(Hyperlink) }
-      links.map { |a| a.hyperlink }
+      links.map(&:hyperlink)
     end
 
     # An array of image objects that are associated with this drawing's anchors
     # @return [Array]
     def images
       images = @anchors.select { |a| a.object.is_a?(Pic) }
-      images.map { |a| a.object }
+      images.map(&:object)
     end
 
     # The index of this drawing in the owning workbooks's drawings collection.

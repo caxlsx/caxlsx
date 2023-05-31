@@ -470,7 +470,7 @@ module Axlsx
       # When the type is :dxf we always need to create a new numFmt object
       if options[:format_code] || options[:type] == :dxf
         # If this is a standard xf we pull from numFmts the highest current and increment for num_fmt
-        options[:num_fmt] ||= (@numFmts.map { |num_fmt| num_fmt.numFmtId }.max + 1) if options[:type] != :dxf
+        options[:num_fmt] ||= (@numFmts.map(&:numFmtId).max + 1) if options[:type] != :dxf
         numFmt = NumFmt.new(:numFmtId => options[:num_fmt] || 0, :formatCode => options[:format_code].to_s)
         options[:type] == :dxf ? numFmt : (numFmts << numFmt; numFmt.numFmtId)
       else

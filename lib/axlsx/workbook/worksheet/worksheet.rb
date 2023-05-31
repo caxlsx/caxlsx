@@ -760,7 +760,7 @@ module Axlsx
       raise ArgumentError, (ERR_SHEET_NAME_CHARACTER_FORBIDDEN % name) if WORKSHEET_NAME_FORBIDDEN_CHARS.any? { |char| name.include? char }
 
       name = Axlsx::coder.encode(name)
-      sheet_names = @workbook.worksheets.reject { |s| s == self }.map { |s| s.name }
+      sheet_names = @workbook.worksheets.reject { |s| s == self }.map(&:name)
       raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % name) if sheet_names.include?(name)
     end
 
