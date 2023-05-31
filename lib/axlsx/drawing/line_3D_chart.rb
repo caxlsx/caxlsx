@@ -26,7 +26,7 @@ module Axlsx
     alias :gapDepth :gap_depth
 
     # validation regex for gap amount percent
-    GAP_AMOUNT_PERCENT = /0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/
+    GAP_AMOUNT_PERCENT = /0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/.freeze
 
     # the category axis
     # @return [Axis]

@@ -24,7 +24,7 @@ module Axlsx
     serializable_attributes :blank, :calendar_type
 
     # Allowed calendar types
-    CALENDAR_TYPES = %w(gregorian gregorianUs gregorianMeFrench gregorianArabic hijri hebrew taiwan japan thai korea saka gregorianXlitEnglish gregorianXlitFrench none)
+    CALENDAR_TYPES = %w(gregorian gregorianUs gregorianMeFrench gregorianArabic hijri hebrew taiwan japan thai korea saka gregorianXlitEnglish gregorianXlitFrench none).freeze
 
     # Flag indicating whether to filter by blank.
     # @return [Boolean]
@@ -157,7 +157,7 @@ module Axlsx
       serializable_attributes :date_time_grouping, :year, :month, :day, :hour, :minute, :second
 
       # Allowed date time groupings
-      DATE_TIME_GROUPING = %w(year month day hour minute second)
+      DATE_TIME_GROUPING = %w(year month day hour minute second).freeze
 
       # Grouping level
       # This must be one of year, month, day, hour, minute or second.

@@ -35,7 +35,7 @@ module Axlsx
     COLORS = {
       :red => 0,
       :black => 1
-    }
+    }.freeze
 
     # The color of this node in the directory tree. Defaults to black if not specified
     # @return [Integer] color

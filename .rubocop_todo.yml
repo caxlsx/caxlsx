@@ -243,22 +243,6 @@ Style/MultipleComparison:
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
     - 'test/workbook/tc_workbook_view.rb'
 
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: literals, strict
-Style/MutableConstant:
-  Exclude:
-    - 'lib/axlsx/drawing/cat_axis.rb'
-    - 'lib/axlsx/drawing/line_3D_chart.rb'
-    - 'lib/axlsx/drawing/pic.rb'
-    - 'lib/axlsx/drawing/view_3D.rb'
-    - 'lib/axlsx/stylesheet/dxf.rb'
-    - 'lib/axlsx/util/storage.rb'
-    - 'lib/axlsx/workbook/worksheet/auto_filter/filter_column.rb'
-    - 'lib/axlsx/workbook/worksheet/auto_filter/filters.rb'
-    - 'lib/axlsx/workbook/worksheet/data_bar.rb'
-    - 'lib/axlsx/workbook/worksheet/sheet_view.rb'
-
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: both, prefix, postfix

@@ -38,7 +38,7 @@ module Axlsx
     serializable_attributes :min_length, :max_length, :show_value
 
     # instance values that must be serialized as their own elements - e.g. not attributes.
-    CHILD_ELEMENTS = [:value_objects, :color]
+    CHILD_ELEMENTS = [:value_objects, :color].freeze
 
     # minLength attribute
     # The minimum length of the data bar, as a percentage of the cell width.

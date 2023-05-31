@@ -42,7 +42,7 @@ module Axlsx
     alias :tickMarkSkip :tick_mark_skip
 
     # regex for validating label offset
-    LBL_OFFSET_REGEX = /0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)/
+    LBL_OFFSET_REGEX = /0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)/.freeze
 
     # @see tick_lbl_skip
     def tick_lbl_skip=(v) Axlsx::validate_unsigned_int(v); @tick_lbl_skip = v; end
