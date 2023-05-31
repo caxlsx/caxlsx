@@ -130,7 +130,7 @@ module Axlsx
 
     # @see u
     def u=(v)
-      v = :single if (v == true || v == 1 || v == :true || v == 'true')
+      v = :single if v == true || v == 1 || v == :true || v == 'true'
       set_run_style :validate_cell_u, :u, v
     end
 
@@ -242,7 +242,7 @@ module Axlsx
       return sz if sz
 
       font = styles.fonts[styles.cellXfs[style].fontId] || styles.fonts[0]
-      (font.b || (defined?(@b) && @b)) ? (font.sz * 1.5) : font.sz
+      font.b || (defined?(@b) && @b) ? (font.sz * 1.5) : font.sz
     end
 
     def style

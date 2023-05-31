@@ -110,7 +110,7 @@ module Axlsx
         end
         @xData.to_xml_string(str) unless @xData.nil?
         @yData.to_xml_string(str) unless @yData.nil?
-        str << '<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>'
+        str << '<c:smooth val="' << (smooth ? '1' : '0') << '"/>'
       end
       str
     end

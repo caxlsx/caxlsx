@@ -308,14 +308,6 @@ Style/ParallelAssignment:
     - 'lib/axlsx/workbook/worksheet/row.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowSafeAssignment, AllowInMultilineConditions.
-Style/ParenthesesAroundCondition:
-  Exclude:
-    - 'lib/axlsx/stylesheet/font.rb'
-    - 'lib/axlsx/util/validators.rb'
-    - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: PreferredDelimiters.
 Style/PercentLiteralDelimiters:
   Exclude:
@@ -371,19 +363,6 @@ Style/RedundantInterpolation:
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Style/RedundantParentheses:
-  Exclude:
-    - 'lib/axlsx/drawing/area_series.rb'
-    - 'lib/axlsx/drawing/bar_3D_chart.rb'
-    - 'lib/axlsx/drawing/bar_chart.rb'
-    - 'lib/axlsx/drawing/line_3D_chart.rb'
-    - 'lib/axlsx/drawing/line_series.rb'
-    - 'lib/axlsx/drawing/scatter_series.rb'
-    - 'lib/axlsx/package.rb'
-    - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
-    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/RedundantRegexpEscape:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
@@ -428,16 +407,6 @@ Style/StringLiterals:
 # SupportedStyles: percent, brackets
 Style/SymbolArray:
   EnforcedStyle: brackets
-
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, AllowSafeAssignment.
-# SupportedStyles: require_parentheses, require_no_parentheses, require_parentheses_when_complex
-Style/TernaryParentheses:
-  Exclude:
-    - 'lib/axlsx/drawing/area_series.rb'
-    - 'lib/axlsx/drawing/line_series.rb'
-    - 'lib/axlsx/drawing/scatter_series.rb'
-    - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: ExactNameMatch, AllowPredicates, AllowDSLWriters, IgnoreClassMethods, AllowedMethods.
