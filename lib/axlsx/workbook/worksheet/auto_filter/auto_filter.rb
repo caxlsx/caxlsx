@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'axlsx/workbook/worksheet/auto_filter/filter_column.rb'
-require 'axlsx/workbook/worksheet/auto_filter/filters.rb'
+require 'axlsx/workbook/worksheet/auto_filter/filter_column'
+require 'axlsx/workbook/worksheet/auto_filter/filters'
 
 module Axlsx
   # This class represents an auto filter range in a worksheet

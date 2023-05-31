@@ -401,17 +401,6 @@ Style/RandomWithOffset:
   Exclude:
     - 'lib/axlsx/drawing/vml_shape.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantFileExtensionInRequire:
-  Exclude:
-    - 'lib/axlsx/content_type/content_type.rb'
-    - 'lib/axlsx/drawing/drawing.rb'
-    - 'lib/axlsx/rels/relationships.rb'
-    - 'lib/axlsx/stylesheet/styles.rb'
-    - 'lib/axlsx/workbook/workbook.rb'
-    - 'lib/axlsx/workbook/worksheet/auto_filter/auto_filter.rb'
-    - 'lib/caxlsx.rb'
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/RedundantInterpolation:
   Exclude:

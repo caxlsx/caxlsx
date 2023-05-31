@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Axlsx
-  require 'axlsx/rels/relationship.rb'
+  require 'axlsx/rels/relationship'
 
   # Relationships are a collection of Relations that define how package parts are related.
   # @note The package automatically manages releationships.
