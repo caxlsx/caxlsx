@@ -239,25 +239,25 @@ module Axlsx
   COMMENT_PN = "comments%d.xml"
 
   # location of schema files for validation
-  SCHEMA_BASE = (File.dirname(__FILE__) + '/../../schema/').freeze
+  SCHEMA_BASE = "#{File.dirname(__FILE__)}/../../schema/"
 
   # App validation schema
-  APP_XSD = (SCHEMA_BASE + "shared-documentPropertiesExtended.xsd").freeze
+  APP_XSD = "#{SCHEMA_BASE}shared-documentPropertiesExtended.xsd"
 
   # core validation schema
-  CORE_XSD = (SCHEMA_BASE + "opc-coreProperties.xsd").freeze
+  CORE_XSD = "#{SCHEMA_BASE}opc-coreProperties.xsd"
 
   # content types validation schema
-  CONTENT_TYPES_XSD = (SCHEMA_BASE + "opc-contentTypes.xsd").freeze
+  CONTENT_TYPES_XSD = "#{SCHEMA_BASE}opc-contentTypes.xsd"
 
   # rels validation schema
-  RELS_XSD = (SCHEMA_BASE + "opc-relationships.xsd").freeze
+  RELS_XSD = "#{SCHEMA_BASE}opc-relationships.xsd"
 
   # spreadsheetML validation schema
-  SML_XSD = (SCHEMA_BASE + "sml.xsd").freeze
+  SML_XSD = "#{SCHEMA_BASE}sml.xsd"
 
   # drawing validation schema
-  DRAWING_XSD = (SCHEMA_BASE + "dml-spreadsheetDrawing.xsd").freeze
+  DRAWING_XSD = "#{SCHEMA_BASE}dml-spreadsheetDrawing.xsd"
 
   # number format id for pecentage formatting using the default formatting id.
   NUM_FMT_PERCENT = 9

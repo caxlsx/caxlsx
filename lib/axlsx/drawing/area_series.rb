@@ -89,7 +89,7 @@ module Axlsx
         if !@show_marker
           str << '<c:marker><c:symbol val="none"/></c:marker>'
         elsif @marker_symbol != :default
-          str << '<c:marker><c:symbol val="' + @marker_symbol.to_s + '"/></c:marker>'
+          str << '<c:marker><c:symbol val="' << @marker_symbol.to_s << '"/></c:marker>'
         end
 
         @labels.to_xml_string(str) unless @labels.nil?

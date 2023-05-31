@@ -31,10 +31,6 @@ Layout/HashAlignment:
 # This cop supports safe autocorrection (--autocorrect).
 Lint/AmbiguousOperatorPrecedence:
   Exclude:
-    - 'lib/axlsx/drawing/area_series.rb'
-    - 'lib/axlsx/drawing/line_series.rb'
-    - 'lib/axlsx/drawing/pie_series.rb'
-    - 'lib/axlsx/workbook/worksheet/dimension.rb'
     - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
@@ -210,7 +206,6 @@ Style/FormatString:
     - 'lib/axlsx/drawing/vml_drawing.rb'
     - 'lib/axlsx/util/accessors.rb'
     - 'lib/axlsx/util/validators.rb'
-    - 'lib/axlsx/workbook/worksheet/dimension.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
@@ -454,18 +449,6 @@ Style/SlicingWithRange:
 Style/StringChars:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
-
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: Mode.
-Style/StringConcatenation:
-  Exclude:
-    - 'lib/axlsx/drawing/area_series.rb'
-    - 'lib/axlsx/drawing/line_series.rb'
-    - 'lib/axlsx/drawing/pie_series.rb'
-    - 'lib/axlsx/drawing/scatter_series.rb'
-    - 'lib/axlsx/stylesheet/color.rb'
-    - 'lib/axlsx/util/constants.rb'
-    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
