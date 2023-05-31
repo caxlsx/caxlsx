@@ -242,12 +242,6 @@ Style/HashEachMethods:
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowIfModifier.
-Style/IfInsideElse:
-  Exclude:
-    - 'lib/axlsx/stylesheet/styles.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/IfUnlessModifier:
   Enabled: false
 
