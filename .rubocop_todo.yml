@@ -229,13 +229,6 @@ Style/GuardClause:
     - 'lib/axlsx/workbook/worksheet/table.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: AllowedReceivers.
-# AllowedReceivers: Thread.current
-Style/HashEachMethods:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
-
 # This cop supports safe autocorrection (--autocorrect).
 Style/IfUnlessModifier:
   Enabled: false

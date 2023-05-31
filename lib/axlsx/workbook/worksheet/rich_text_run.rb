@@ -211,14 +211,14 @@ module Axlsx
       data = data.select { |key, value| valid.include?(key) && !value.nil? }
 
       str << '<r><rPr>'
-      data.keys.each do |key|
+      data.each do |key, val|
         case key
         when :font_name
           str << '<rFont val="' << font_name << '"/>'
         when :color
-          str << data[key].to_xml_string
+          str << val.to_xml_string
         else
-          str << '<' << key.to_s << ' val="' << xml_value(data[key]) << '"/>'
+          str << '<' << key.to_s << ' val="' << xml_value(val) << '"/>'
         end
       end
       clean_value = Axlsx::trust_input ? @value.to_s : ::CGI.escapeHTML(Axlsx::sanitize(@value.to_s))
