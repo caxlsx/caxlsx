@@ -93,7 +93,7 @@ module Axlsx
     def ext
       cy = @height * 914400 / 96
       cx = @width * 914400 / 96
-      { :cy => cy, :cx => cx }
+      { cy: cy, cx: cx }
     end
   end
 end

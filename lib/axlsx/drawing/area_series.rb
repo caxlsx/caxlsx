@@ -41,7 +41,7 @@ module Axlsx
       @smooth = false
       @labels, @data = nil, nil
       super(chart, options)
-      @labels = AxDataSource.new(:data => options[:labels]) unless options[:labels].nil?
+      @labels = AxDataSource.new(data: options[:labels]) unless options[:labels].nil?
       @data = NumDataSource.new(options) unless options[:data].nil?
     end
 

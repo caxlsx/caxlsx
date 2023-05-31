@@ -448,7 +448,7 @@ module Axlsx
     # @see ConditionalFormattingRule#initialize
     # @see file:examples/example_conditional_formatting.rb
     def add_conditional_formatting(cells, rules)
-      cf = ConditionalFormatting.new(:sqref => cells)
+      cf = ConditionalFormatting.new(sqref: cells)
       cf.add_rules rules
       conditional_formattings << cf
       conditional_formattings
@@ -531,9 +531,9 @@ module Axlsx
                                   cell.pos
                                 end
       if column_index > 0
-        col_breaks.add_break(:id => column_index)
+        col_breaks.add_break(id: column_index)
       end
-      row_breaks.add_break(:id => row_index)
+      row_breaks.add_break(id: row_index)
     end
 
     # This is a helper method that Lets you specify a fixed width for multiple columns in a worksheet in one go.

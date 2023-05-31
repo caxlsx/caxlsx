@@ -38,7 +38,7 @@ module Axlsx
       @shape = :box
       @colors = []
       super(chart, options)
-      self.labels = AxDataSource.new({ :data => options[:labels] }) unless options[:labels].nil?
+      self.labels = AxDataSource.new({ data: options[:labels] }) unless options[:labels].nil?
       self.data = NumDataSource.new(options) unless options[:data].nil?
     end
 

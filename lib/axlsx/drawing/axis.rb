@@ -15,7 +15,7 @@ module Axlsx
       @id = rand(8**8)
       @format_code = "General"
       @delete = @label_rotation = 0
-      @scaling = Scaling.new(:orientation => :minMax)
+      @scaling = Scaling.new(orientation: :minMax)
       @title = @color = nil
       self.ax_pos = :b
       self.tick_lbl_pos = :nextTo

@@ -77,7 +77,7 @@ module Axlsx
       @gap_width, @gap_depth, @shape = nil, nil, nil
       super(frame, options)
       @series_type = BarSeries
-      @view_3D = View3D.new({ :r_ang_ax => 1 }.merge(options))
+      @view_3D = View3D.new({ r_ang_ax: 1 }.merge(options))
       @d_lbls = nil
     end
 
@@ -131,7 +131,7 @@ module Axlsx
         str << '<c:gapWidth val="' << @gap_width.to_s << '"/>' unless @gap_width.nil?
         str << '<c:gapDepth val="' << @gap_depth.to_s << '"/>' unless @gap_depth.nil?
         str << '<c:shape val="' << @shape.to_s << '"/>' unless @shape.nil?
-        axes.to_xml_string(str, :ids => true)
+        axes.to_xml_string(str, ids: true)
         str << '</c:bar3DChart>'
         axes.to_xml_string(str)
       end
@@ -141,7 +141,7 @@ module Axlsx
     # category axes specified via axes[:val_axes] and axes[:cat_axis]
     # @return [Axes]
     def axes
-      @axes ||= Axes.new(:cat_axis => CatAxis, :val_axis => ValAxis)
+      @axes ||= Axes.new(cat_axis: CatAxis, val_axis: ValAxis)
     end
   end
 end

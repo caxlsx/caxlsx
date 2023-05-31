@@ -35,7 +35,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = +'')
       str << '<tableStyles '
-      serialized_attributes str, { :count => self.size }
+      serialized_attributes str, { count: self.size }
       str << '>'
       each { |table_style| table_style.to_xml_string(str) }
       str << '</tableStyles>'

@@ -75,7 +75,7 @@ module Axlsx
 
     # @see tab_color
     def tab_color=(v)
-      @tab_color = Color.new(:rgb => v)
+      @tab_color = Color.new(rgb: v)
     end
 
     private
