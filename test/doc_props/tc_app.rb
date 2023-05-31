@@ -41,6 +41,6 @@ class TestApp < Test::Unit::TestCase
       errors << error
     end
 
-    assert_equal(0, errors.size, "app.xml invalid" + errors.map(&:message).to_s)
+    assert_equal(0, errors.size, "app.xml invalid#{errors.map(&:message)}")
   end
 end

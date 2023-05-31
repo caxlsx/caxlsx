@@ -9,10 +9,10 @@ class TestPic < Test::Unit::TestCase
 
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
-    @test_img = @test_img_jpg = File.dirname(__FILE__) + "/../fixtures/image1.jpeg"
-    @test_img_png =  File.dirname(__FILE__) + "/../fixtures/image1.png"
-    @test_img_gif =  File.dirname(__FILE__) + "/../fixtures/image1.gif"
-    @test_img_fake = File.dirname(__FILE__) + "/../fixtures/image1_fake.jpg"
+    @test_img = @test_img_jpg = "#{File.dirname(__FILE__)}/../fixtures/image1.jpeg"
+    @test_img_png =  "#{File.dirname(__FILE__)}/../fixtures/image1.png"
+    @test_img_gif =  "#{File.dirname(__FILE__)}/../fixtures/image1.gif"
+    @test_img_fake = "#{File.dirname(__FILE__)}/../fixtures/image1_fake.jpg"
     @test_img_remote_png = "https://example.com/sample-image.png"
     @test_img_remote_fake = "invalid_URI"
     @image = ws.add_image image_src: @test_img, hyperlink: 'https://github.com/randym', tooltip: "What's up doc?", opacity: 5

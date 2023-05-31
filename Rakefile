@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require File.expand_path(File.dirname(__FILE__) + '/lib/axlsx/version.rb')
+require File.expand_path("#{File.dirname(__FILE__)}/lib/axlsx/version.rb")
 
 task build: :gendoc do
   system "gem build axlsx.gemspec"
 end
 
 task :benchmark do
-  require File.expand_path(File.dirname(__FILE__) + '/test/benchmark.rb')
+  require File.expand_path("#{File.dirname(__FILE__)}/test/benchmark.rb")
 end
 
 task :gendoc do
