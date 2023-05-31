@@ -91,12 +91,12 @@ module Axlsx
     end
 
     # join operator
-    # @param [Array] v the array to join
+    # @param [Array] other the array to join
     # @raise [ArgumentError] if any of the values being joined are not
     # one of the allowed types
     # @return [SimpleTypedList]
-    def +(v)
-      v.each do |item|
+    def +(other)
+      other.each do |item|
         self << item
       end
       super
