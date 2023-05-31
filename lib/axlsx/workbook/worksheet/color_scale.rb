@@ -12,8 +12,8 @@ module Axlsx
       # These are the default conditional formatting value objects
       # that define a two tone color gradient.
       def default_cfvos
-        [{ :type => :min, :val => 0, :color => 'FFFF7128' },
-         { :type => :max, :val => 0, :color => 'FFFFEF9C' }]
+        [{ type: :min, val: 0, color: 'FFFF7128' },
+         { type: :max, val: 0, color: 'FFFFEF9C' }]
       end
 
       # A builder for two tone color gradient
@@ -31,9 +31,9 @@ module Axlsx
       #   color_scale = Axlsx::ColorScale.three_tone
       # @see examples/example.rb conditional formatting examples.
       def three_tone
-        self.new({ :type => :min, :val => 0, :color => 'FFF8696B' },
-                 { :type => :percent, :val => '50', :color => 'FFFFEB84' },
-                 { :type => :max, :val => 0, :color => 'FF63BE7B' })
+        self.new({ type: :min, val: 0, color: 'FFF8696B' },
+                 { type: :percent, val: '50', color: 'FFFFEB84' },
+                 { type: :max, val: 0, color: 'FF63BE7B' })
       end
     end
     # A simple typed list of cfvos
@@ -68,9 +68,9 @@ module Axlsx
     # @option [Any] val The value of the cfvo to add
     # @option [String] The rgb color for the cfvo
     def add(options = {})
-      value_objects << Cfvo.new(:type => options[:type] || :min, :val => options[:val] || 0)
-      colors << Color.new(:rgb => options[:color] || "FF000000")
-      { :cfvo => value_objects.last, :color => colors.last }
+      value_objects << Cfvo.new(type: options[:type] || :min, val: options[:val] || 0)
+      colors << Color.new(rgb: options[:color] || "FF000000")
+      { cfvo: value_objects.last, color: colors.last }
     end
 
     # removes the cfvo and color pair at the index specified.

@@ -158,7 +158,7 @@ module Axlsx
     # param [Hash] options
     # return [Selection]
     def add_selection(pane, options = {})
-      @selections[pane] = Selection.new(options.merge(:pane => pane))
+      @selections[pane] = Selection.new(options.merge(pane: pane))
     end
 
     # @see color_id

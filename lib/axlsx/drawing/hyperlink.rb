@@ -86,14 +86,14 @@ module Axlsx
     # The relationship object for this hyperlink.
     # @return [Relationship]
     def relationship
-      Relationship.new(self, HYPERLINK_R, href, :target_mode => :External)
+      Relationship.new(self, HYPERLINK_R, href, target_mode: :External)
     end
 
     # Serializes the object
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      serialized_tag 'a:hlinkClick', str, { :'r:id' => relationship.Id, :'xmlns:r' => XML_NS_R }
+      serialized_tag 'a:hlinkClick', str, { 'r:id': relationship.Id, 'xmlns:r': XML_NS_R }
     end
   end
 end

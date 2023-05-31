@@ -46,11 +46,6 @@ Security:
 Style:
   Enabled: true
 
-# FIXME: remove this rule
-Style/HashSyntax:
-  Exclude:
-    - 'lib/**/*'
-
 Style/Semicolon:
   AllowAsExpressionSeparator: true
 

@@ -187,7 +187,7 @@ module Axlsx
 
     # Assigns a background color to chart area
     def bg_color=(v)
-      DataTypeValidator.validate(:color, Color, Color.new(:rgb => v))
+      DataTypeValidator.validate(:color, Color, Color.new(rgb: v))
       @bg_color = v
     end
 

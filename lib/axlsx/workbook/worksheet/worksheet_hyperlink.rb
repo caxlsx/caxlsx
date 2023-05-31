@@ -52,7 +52,7 @@ module Axlsx
     def relationship
       return unless @target == :external
 
-      Relationship.new(self, HYPERLINK_R, location, :target_mode => :External)
+      Relationship.new(self, HYPERLINK_R, location, target_mode: :External)
     end
 
     # Seralize the object
@@ -69,7 +69,7 @@ module Axlsx
     # r:id should only be specified for external targets.
     # @return [Hash]
     def location_or_id
-      @target == :external ? { :"r:id" => relationship.Id } : { :location => Axlsx::coder.encode(location) }
+      @target == :external ? { "r:id": relationship.Id } : { location: Axlsx::coder.encode(location) }
     end
   end
 end

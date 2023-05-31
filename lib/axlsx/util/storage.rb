@@ -9,9 +9,9 @@ module Axlsx
 
     # storage types
     TYPES = {
-      :root => 5,
-      :stream => 2,
-      :storage => 1
+      root: 5,
+      stream: 2,
+      storage: 1
     }.freeze
 
     # Creates a byte string for this storage
@@ -33,8 +33,8 @@ module Axlsx
 
     # storage colors
     COLORS = {
-      :red => 0,
-      :black => 1
+      red: 0,
+      black: 1
     }.freeze
 
     # The color of this node in the directory tree. Defaults to black if not specified
