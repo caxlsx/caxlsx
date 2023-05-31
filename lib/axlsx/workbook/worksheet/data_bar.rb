@@ -117,11 +117,11 @@ module Axlsx
 
     def initialize_cfvos(cfvos)
       self.class.default_cfvos.each_with_index.map do |default, index|
-        if index < cfvos.size
-          value_objects << Cfvo.new(default.merge(cfvos[index]))
-        else
-          value_objects << Cfvo.new(default)
-        end
+        value_objects << if index < cfvos.size
+                           Cfvo.new(default.merge(cfvos[index]))
+                         else
+                           Cfvo.new(default)
+                         end
       end
     end
   end

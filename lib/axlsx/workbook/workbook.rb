@@ -202,11 +202,11 @@ module Axlsx
       styled_cells.each do |cell|
         current_style = styles.style_index[cell.style]
 
-        if current_style
-          new_style = Axlsx.hash_deep_merge(current_style, cell.raw_style)
-        else
-          new_style = cell.raw_style
-        end
+        new_style = if current_style
+                      Axlsx.hash_deep_merge(current_style, cell.raw_style)
+                    else
+                      cell.raw_style
+                    end
 
         cell.style = styles.add_style(new_style)
       end
