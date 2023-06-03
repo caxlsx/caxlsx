@@ -41,14 +41,16 @@ module Axlsx
       type = options.delete(:type) || cell_type_from_value(value)
       self.type = type unless type == :string
 
-      val = options.delete(:style)
-      self.style = val unless val.nil? || val.zero?
-      val = options.delete(:formula_value)
-      self.formula_value = val unless val.nil?
-      val = options.delete(:escape_formulas)
-      self.escape_formulas = val unless val.nil?
+      unless options.empty?
+        val = options.delete(:style)
+        self.style = val unless val.nil? || val.zero?
+        val = options.delete(:formula_value)
+        self.formula_value = val unless val.nil?
+        val = options.delete(:escape_formulas)
+        self.escape_formulas = val unless val.nil?
 
-      parse_options(options)
+        parse_options(options)
+      end
 
       self.value = value
       value.cell = self if contains_rich_text?
