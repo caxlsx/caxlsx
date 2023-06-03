@@ -48,7 +48,7 @@ module Axlsx
       val = options.delete(:escape_formulas)
       self.escape_formulas = val unless val.nil?
 
-      parse_options(options)
+      parse_options(options) unless options.empty?
 
       self.value = value
       value.cell = self if contains_rich_text?
