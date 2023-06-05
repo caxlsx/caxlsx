@@ -99,14 +99,14 @@ module Axlsx
     # space between bar or column clusters, as a percentage of the bar or column width.
     def gap_width=(v)
       RangeValidator.validate "Bar3DChart.gap_width", 0, 500, v
-      @gap_width = (v)
+      @gap_width = v
     end
     alias :gapWidth= :gap_width=
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     def gap_depth=(v)
       RangeValidator.validate "Bar3DChart.gap_depth", 0, 500, v
-      @gap_depth = (v)
+      @gap_depth = v
     end
     alias :gapDepth= :gap_depth=
 

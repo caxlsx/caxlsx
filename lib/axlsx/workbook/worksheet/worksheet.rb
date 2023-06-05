@@ -753,7 +753,7 @@ module Axlsx
     def validate_sheet_name(name)
       DataTypeValidator.validate :worksheet_name, String, name
       # ignore first character (BOM) after encoding to utf16 because Excel does so, too.
-      raise ArgumentError, (ERR_SHEET_NAME_EMPTY) if name.empty?
+      raise ArgumentError, ERR_SHEET_NAME_EMPTY if name.empty?
 
       character_length = name.encode("utf-16")[1..-1].encode("utf-16").bytesize / 2
       raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % name) if character_length > WORKSHEET_MAX_NAME_LENGTH

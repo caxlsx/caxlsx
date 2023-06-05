@@ -41,7 +41,7 @@ module Axlsx
     # @param [Regexp] regex The regular expression to evaluate
     # @param [Any] v The value to validate.
     def self.validate(name, regex, v)
-      raise ArgumentError, (ERR_REGEX % [v.inspect, regex.to_s]) unless (v.respond_to?(:to_s) && regex.match?(v.to_s))
+      raise ArgumentError, (ERR_REGEX % [v.inspect, regex.to_s]) unless v.respond_to?(:to_s) && regex.match?(v.to_s)
     end
   end
 
@@ -71,7 +71,7 @@ module Axlsx
   # @para, [Any] v the value to validate
   # @raise [ArgumentError] raised if the value cannot be converted to an integer
   def self.validate_integerish(v)
-    raise ArgumentError, (ERR_INTEGERISH % v.inspect) unless (v.respond_to?(:to_i) && v.to_i.is_a?(Integer))
+    raise ArgumentError, (ERR_INTEGERISH % v.inspect) unless v.respond_to?(:to_i) && v.to_i.is_a?(Integer)
   end
 
   # Requires that the value is between -54000000 and 54000000
@@ -79,7 +79,7 @@ module Axlsx
   # @raise [ArgumentError] raised if the value cannot be converted to an integer between the allowed angle values for chart label rotation.
   # @return [Boolean] true if the data is valid
   def self.validate_angle(v)
-    raise ArgumentError, (ERR_ANGLE % v.inspect) unless (v.to_i >= -5400000 && v.to_i <= 5400000)
+    raise ArgumentError, (ERR_ANGLE % v.inspect) unless v.to_i >= -5400000 && v.to_i <= 5400000
   end
 
   # Validates an unsigned intger
