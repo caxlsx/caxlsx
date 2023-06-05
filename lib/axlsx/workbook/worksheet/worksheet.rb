@@ -345,13 +345,13 @@ module Axlsx
     # The part name of this worksheet
     # @return [String]
     def pn
-      WORKSHEET_PN % (index + 1)
+      format(WORKSHEET_PN, index + 1)
     end
 
     # The relationship part name of this worksheet
     # @return [String]
     def rels_pn
-      WORKSHEET_RELS_PN % (index + 1)
+      format(WORKSHEET_RELS_PN, index + 1)
     end
 
     # The relationship id of this worksheet.
@@ -673,7 +673,7 @@ module Axlsx
         parts.first
       else
         if parts.size > 2
-          raise ArgumentError, (ERR_CELL_REFERENCE_INVALID % cell_def)
+          raise ArgumentError, format(ERR_CELL_REFERENCE_INVALID, cell_def)
         elsif parts.first.nil?
           raise ArgumentError, format(ERR_CELL_REFERENCE_MISSING_CELL, cell_def.split(":").first, cell_def)
         elsif parts.last.nil?
@@ -756,12 +756,12 @@ module Axlsx
       raise ArgumentError, ERR_SHEET_NAME_EMPTY if name.empty?
 
       character_length = name.encode("utf-16")[1..-1].encode("utf-16").bytesize / 2
-      raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % name) if character_length > WORKSHEET_MAX_NAME_LENGTH
-      raise ArgumentError, (ERR_SHEET_NAME_CHARACTER_FORBIDDEN % name) if WORKSHEET_NAME_FORBIDDEN_CHARS.any? { |char| name.include? char }
+      raise ArgumentError, format(ERR_SHEET_NAME_TOO_LONG, name) if character_length > WORKSHEET_MAX_NAME_LENGTH
+      raise ArgumentError, format(ERR_SHEET_NAME_CHARACTER_FORBIDDEN, name) if WORKSHEET_NAME_FORBIDDEN_CHARS.any? { |char| name.include? char }
 
       name = Axlsx::coder.encode(name)
       sheet_names = @workbook.worksheets.reject { |s| s == self }.map(&:name)
-      raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % name) if sheet_names.include?(name)
+      raise ArgumentError, format(ERR_DUPLICATE_SHEET_NAME, name) if sheet_names.include?(name)
     end
 
     def serializable_parts

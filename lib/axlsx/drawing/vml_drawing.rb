@@ -14,7 +14,7 @@ module Axlsx
     # The part name for this vml drawing
     # @return [String]
     def pn
-      VML_DRAWING_PN % (@comments.worksheet.index + 1)
+      format(VML_DRAWING_PN, @comments.worksheet.index + 1)
     end
 
     # serialize the vml_drawing to xml.

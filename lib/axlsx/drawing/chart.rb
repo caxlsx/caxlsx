@@ -124,7 +124,7 @@ module Axlsx
     # The part name for this chart
     # @return [String]
     def pn
-      CHART_PN % (index + 1)
+      format(CHART_PN, index + 1)
     end
 
     # The title object for the chart.

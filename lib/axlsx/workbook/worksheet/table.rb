@@ -44,7 +44,7 @@ module Axlsx
     # The part name for this table
     # @return [String]
     def pn
-      TABLE_PN % (index + 1)
+      format(TABLE_PN, index + 1)
     end
 
     # The relationship id for this table.
