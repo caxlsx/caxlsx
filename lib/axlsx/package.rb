@@ -101,7 +101,7 @@ module Axlsx
     #   s = p.to_stream()
     #   File.open('example_streamed.xlsx', 'wb') { |f| f.write(s.read) }
     def serialize(output, options = {}, secondary_options = nil)
-      if !workbook.styles_applied
+      unless workbook.styles_applied
         workbook.apply_styles
       end
 
@@ -126,7 +126,7 @@ module Axlsx
     # @param [Boolean] confirm_valid Validate the package prior to serialization.
     # @return [StringIO|Boolean] False if confirm_valid and validation errors exist. rewound string IO if not.
     def to_stream(confirm_valid = false)
-      if !workbook.styles_applied
+      unless workbook.styles_applied
         workbook.apply_styles
       end
 

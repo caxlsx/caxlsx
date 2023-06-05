@@ -244,20 +244,6 @@ Style/MultipleComparison:
     - 'test/workbook/tc_workbook_view.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: both, prefix, postfix
-Style/NegatedIf:
-  Exclude:
-    - 'lib/axlsx/drawing/num_val.rb'
-    - 'lib/axlsx/drawing/str_val.rb'
-    - 'lib/axlsx/package.rb'
-    - 'lib/axlsx/stylesheet/styles.rb'
-    - 'lib/axlsx/util/zip_command.rb'
-    - 'lib/axlsx/workbook/workbook.rb'
-    - 'lib/axlsx/workbook/worksheet/border_creator.rb'
-    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, MinBodyLength.
 # SupportedStyles: skip_modifier_ifs, always
 Style/Next:
