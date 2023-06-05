@@ -20,7 +20,7 @@ module Axlsx
     # The part name for this object
     # @return [String]
     def pn
-      "#{COMMENT_PN % (index + 1)}"
+      format(COMMENT_PN, index + 1)
     end
 
     # Creates a new Comments object

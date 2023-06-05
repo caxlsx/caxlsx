@@ -354,10 +354,10 @@ module Axlsx
     def relationships
       r = Relationships.new
       @worksheets.each do |sheet|
-        r << Relationship.new(sheet, WORKSHEET_R, WORKSHEET_PN % (r.size + 1))
+        r << Relationship.new(sheet, WORKSHEET_R, format(WORKSHEET_PN, r.size + 1))
       end
       pivot_tables.each_with_index do |pivot_table, index|
-        r << Relationship.new(pivot_table.cache_definition, PIVOT_TABLE_CACHE_DEFINITION_R, PIVOT_TABLE_CACHE_DEFINITION_PN % (index + 1))
+        r << Relationship.new(pivot_table.cache_definition, PIVOT_TABLE_CACHE_DEFINITION_R, format(PIVOT_TABLE_CACHE_DEFINITION_PN, index + 1))
       end
       r << Relationship.new(self, STYLES_R, STYLES_PN)
       if use_shared_strings

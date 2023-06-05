@@ -124,14 +124,14 @@ module Axlsx
     # The part name for this image used in serialization and relationship building
     # @return [String]
     def pn
-      "#{IMAGE_PN % [(index + 1), extname]}"
+      format(IMAGE_PN, index + 1, extname)
     end
 
     # The relationship object for this pic.
     # @return [Relationship]
     def relationship
       if remote?
-        Relationship.new(self, IMAGE_R, "#{image_src}", target_mode: :External)
+        Relationship.new(self, IMAGE_R, image_src.to_s, target_mode: :External)
       else
         Relationship.new(self, IMAGE_R, "../#{pn}")
       end

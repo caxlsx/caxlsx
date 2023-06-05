@@ -159,13 +159,13 @@ module Axlsx
     # The part name for this table
     # @return [String]
     def pn
-      "#{PIVOT_TABLE_PN % (index + 1)}"
+      format(PIVOT_TABLE_PN, index + 1)
     end
 
     # The relationship part name of this pivot table
     # @return [String]
     def rels_pn
-      "#{PIVOT_TABLE_RELS_PN % (index + 1)}"
+      format(PIVOT_TABLE_RELS_PN, index + 1)
     end
 
     # The cache_definition for this pivot table

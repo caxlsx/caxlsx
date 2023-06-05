@@ -111,7 +111,7 @@ module Axlsx
       val = Axlsx.instance_values_for(self)[name]
       return "" if val.nil?
 
-      "<%s:%s val='%s'/>" % [namespace, Axlsx::camel(name, false), val]
+      format("<%s:%s val='%s'/>", namespace, Axlsx::camel(name, false), val)
     end
   end
 end

@@ -10,7 +10,7 @@ module Axlsx
     # @raise [ArgumentError] Raised if the value provided is not in the list of choices.
     # @return [Boolean] true if validation succeeds.
     def self.validate(name, choices, v)
-      raise ArgumentError, (ERR_RESTRICTION % [v.to_s, name, choices.inspect]) unless choices.include?(v)
+      raise ArgumentError, format(ERR_RESTRICTION, v.to_s, name, choices.inspect) unless choices.include?(v)
 
       true
     end
@@ -31,7 +31,7 @@ module Axlsx
                else
                  min < value && value < max
                end
-      raise ArgumentError, (ERR_RANGE % [value.inspect, min.to_s, max.to_s, inclusive]) unless passes
+      raise ArgumentError, format(ERR_RANGE, value.inspect, min.to_s, max.to_s, inclusive) unless passes
     end
   end
 
@@ -41,7 +41,7 @@ module Axlsx
     # @param [Regexp] regex The regular expression to evaluate
     # @param [Any] v The value to validate.
     def self.validate(name, regex, v)
-      raise ArgumentError, (ERR_REGEX % [v.inspect, regex.to_s]) unless v.respond_to?(:to_s) && regex.match?(v.to_s)
+      raise ArgumentError, format(ERR_REGEX, v.inspect, regex.to_s) unless v.respond_to?(:to_s) && regex.match?(v.to_s)
     end
   end
 
@@ -56,14 +56,14 @@ module Axlsx
     # @see validate_boolean
     def self.validate(name, types, v, other = false)
       if other.is_a?(Proc) && !other.call(v)
-        raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect])
+        raise ArgumentError, format(ERR_TYPE, v.inspect, name, types.inspect)
       end
 
       v_class = v.is_a?(Class) ? v : v.class
       Array(types).each do |t|
         return if v_class <= t
       end
-      raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect])
+      raise ArgumentError, format(ERR_TYPE, v.inspect, name, types.inspect)
     end
   end
 
@@ -71,7 +71,7 @@ module Axlsx
   # @para, [Any] v the value to validate
   # @raise [ArgumentError] raised if the value cannot be converted to an integer
   def self.validate_integerish(v)
-    raise ArgumentError, (ERR_INTEGERISH % v.inspect) unless v.respond_to?(:to_i) && v.to_i.is_a?(Integer)
+    raise ArgumentError, format(ERR_INTEGERISH, v.inspect) unless v.respond_to?(:to_i) && v.to_i.is_a?(Integer)
   end
 
   # Requires that the value is between -54000000 and 54000000
@@ -79,7 +79,7 @@ module Axlsx
   # @raise [ArgumentError] raised if the value cannot be converted to an integer between the allowed angle values for chart label rotation.
   # @return [Boolean] true if the data is valid
   def self.validate_angle(v)
-    raise ArgumentError, (ERR_ANGLE % v.inspect) unless v.to_i >= -5400000 && v.to_i <= 5400000
+    raise ArgumentError, format(ERR_ANGLE, v.inspect) unless v.to_i >= -5400000 && v.to_i <= 5400000
   end
 
   # Validates an unsigned intger

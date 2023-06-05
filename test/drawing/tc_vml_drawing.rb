@@ -16,6 +16,12 @@ class TestVmlDrawing < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx::VmlDrawing.new }
   end
 
+  def test_pn
+    str = @vml_drawing.pn
+
+    assert_equal("drawings/vmlDrawing1.vml", str)
+  end
+
   def test_to_xml_string
     str = @vml_drawing.to_xml_string
     doc = Nokogiri::XML(str)

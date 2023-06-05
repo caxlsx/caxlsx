@@ -37,7 +37,7 @@ class TestComments < Test::Unit::TestCase
   end
 
   def test_pn
-    assert_equal(@ws.comments.pn, Axlsx::COMMENT_PN % (@ws.index + 1).to_s)
+    assert_equal(@ws.comments.pn, format(Axlsx::COMMENT_PN, @ws.index + 1))
   end
 
   def test_index

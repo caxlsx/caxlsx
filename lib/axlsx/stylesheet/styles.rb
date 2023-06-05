@@ -370,7 +370,7 @@ module Axlsx
 
       if options[:border].is_a?(Integer)
         if options[:border] >= borders.size
-          raise ArgumentError, (ERR_INVALID_BORDER_ID % options[:border])
+          raise ArgumentError, format(ERR_INVALID_BORDER_ID, options[:border])
         end
 
         if options[:type] == :dxf
@@ -382,7 +382,7 @@ module Axlsx
 
       validate_border_hash = ->(val) {
         unless val.key?(:style) && val.key?(:color)
-          raise ArgumentError, (ERR_INVALID_BORDER_OPTIONS % options[:border])
+          raise ArgumentError, format(ERR_INVALID_BORDER_OPTIONS, options[:border])
         end
       }
 
