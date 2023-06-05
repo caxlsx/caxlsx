@@ -131,7 +131,7 @@ module Axlsx
     # @return [Relationship]
     def relationship
       if remote?
-        Relationship.new(self, IMAGE_R, "#{image_src}", target_mode: :External)
+        Relationship.new(self, IMAGE_R, image_src.to_s, target_mode: :External)
       else
         Relationship.new(self, IMAGE_R, "../#{pn}")
       end

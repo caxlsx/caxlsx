@@ -144,6 +144,12 @@ class TestPivotTable < Test::Unit::TestCase
     assert_equal(2, @ws.relationships.size, "adding a pivot table adds a relationship")
   end
 
+  def test_rels_pn
+    @ws.add_pivot_table('G5:G6', 'A1:D5')
+
+    assert_equal("pivotTables/_rels/pivotTable1.xml.rels", @ws.pivot_tables.first.rels_pn)
+  end
+
   def test_to_xml_string
     pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5', { no_subtotals_on_headers: ['Year'] }) do |pt|
       pt.rows = ['Year', 'Month']

@@ -323,19 +323,6 @@ Style/RandomWithOffset:
   Exclude:
     - 'lib/axlsx/drawing/vml_shape.rb'
 
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Style/RedundantInterpolation:
-  Exclude:
-    - 'lib/axlsx/drawing/chart.rb'
-    - 'lib/axlsx/drawing/drawing.rb'
-    - 'lib/axlsx/drawing/pic.rb'
-    - 'lib/axlsx/drawing/vml_drawing.rb'
-    - 'lib/axlsx/workbook/worksheet/comments.rb'
-    - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
-    - 'lib/axlsx/workbook/worksheet/pivot_table_cache_definition.rb'
-    - 'lib/axlsx/workbook/worksheet/table.rb'
-    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-
 # This cop supports safe autocorrection (--autocorrect).
 Style/RedundantRegexpEscape:
   Exclude:

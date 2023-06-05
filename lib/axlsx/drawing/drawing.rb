@@ -128,14 +128,14 @@ module Axlsx
     # The part name for this drawing
     # @return [String]
     def pn
-      "#{DRAWING_PN % (index + 1)}"
+      DRAWING_PN % (index + 1)
     end
 
     # The relational part name for this drawing
     # #NOTE This should be rewritten to return an Axlsx::Relationship object.
     # @return [String]
     def rels_pn
-      "#{DRAWING_RELS_PN % (index + 1)}"
+      DRAWING_RELS_PN % (index + 1)
     end
 
     # A list of objects this drawing holds.

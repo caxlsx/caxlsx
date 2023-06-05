@@ -345,13 +345,13 @@ module Axlsx
     # The part name of this worksheet
     # @return [String]
     def pn
-      "#{WORKSHEET_PN % (index + 1)}"
+      WORKSHEET_PN % (index + 1)
     end
 
     # The relationship part name of this worksheet
     # @return [String]
     def rels_pn
-      "#{WORKSHEET_RELS_PN % (index + 1)}"
+      WORKSHEET_RELS_PN % (index + 1)
     end
 
     # The relationship id of this worksheet.

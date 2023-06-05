@@ -26,7 +26,7 @@ module Axlsx
     # The part name for this table
     # @return [String]
     def pn
-      "#{PIVOT_TABLE_CACHE_DEFINITION_PN % (index + 1)}"
+      PIVOT_TABLE_CACHE_DEFINITION_PN % (index + 1)
     end
 
     # The identifier for this cache
