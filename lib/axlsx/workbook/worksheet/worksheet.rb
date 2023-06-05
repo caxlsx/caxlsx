@@ -675,9 +675,9 @@ module Axlsx
         if parts.size > 2
           raise ArgumentError, (ERR_CELL_REFERENCE_INVALID % cell_def)
         elsif parts.first.nil?
-          raise ArgumentError, (ERR_CELL_REFERENCE_MISSING_CELL % [cell_def.split(":").first, cell_def])
+          raise ArgumentError, format(ERR_CELL_REFERENCE_MISSING_CELL, cell_def.split(":").first, cell_def)
         elsif parts.last.nil?
-          raise ArgumentError, (ERR_CELL_REFERENCE_MISSING_CELL % [cell_def.split(":").last, cell_def])
+          raise ArgumentError, format(ERR_CELL_REFERENCE_MISSING_CELL, cell_def.split(":").last, cell_def)
         end
 
         range(*parts)

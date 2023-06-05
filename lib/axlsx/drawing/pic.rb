@@ -124,7 +124,7 @@ module Axlsx
     # The part name for this image used in serialization and relationship building
     # @return [String]
     def pn
-      "#{IMAGE_PN % [(index + 1), extname]}"
+      format(IMAGE_PN, index + 1, extname)
     end
 
     # The relationship object for this pic.
