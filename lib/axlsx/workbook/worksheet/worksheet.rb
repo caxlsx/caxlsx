@@ -181,6 +181,10 @@ module Axlsx
       @auto_filter ||= AutoFilter.new self
     end
 
+    def sort_state
+      @sort_state ||= SortState.new self
+    end
+
     # Indicates if the worksheet will be fit by witdh or height to a specific number of pages.
     # To alter the width or height for page fitting, please use page_setup.fit_to_widht or page_setup.fit_to_height.
     # If you want the worksheet to fit on more pages (e.g. 2x2), set {PageSetup#fit_to_width} and {PageSetup#fit_to_height} accordingly.
@@ -336,6 +340,11 @@ module Axlsx
     def auto_filter=(v)
       DataTypeValidator.validate :worksheet_auto_filter, String, v
       auto_filter.range = v
+    end
+
+    def sort_state=(v)
+      DataTypeValidator.validate :worksheet_sort_state, String, v
+      sort_state.range = v
     end
 
     # Accessor for controlling whether leading and trailing spaces in cells are
@@ -768,7 +777,7 @@ module Axlsx
     def serializable_parts
       [sheet_pr, dimension, sheet_view, sheet_format_pr, column_info,
        sheet_data, sheet_calc_pr, @sheet_protection, protected_ranges,
-       auto_filter, merged_cells, conditional_formattings,
+       auto_filter, sort_state, merged_cells, conditional_formattings,
        data_validations, hyperlinks, print_options, page_margins,
        page_setup, header_footer, row_breaks, col_breaks, worksheet_drawing, worksheet_comments,
        tables]

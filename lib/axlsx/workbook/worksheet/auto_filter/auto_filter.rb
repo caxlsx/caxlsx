@@ -70,7 +70,7 @@ module Axlsx
     # serialize the object
     # @return [String]
     def to_xml_string(str = +'')
-      return unless range
+      # return unless range
 
       str << "<autoFilter ref='#{range}'>"
       columns.each { |filter_column| filter_column.to_xml_string(str) }

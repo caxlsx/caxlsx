@@ -59,6 +59,7 @@ module Axlsx
   require 'axlsx/workbook/worksheet/sheet_format_pr.rb'
   require 'axlsx/workbook/worksheet/pane.rb'
   require 'axlsx/workbook/worksheet/selection.rb'
+  require 'axlsx/workbook/worksheet/sort_state/sort_state.rb'
 
   # The Workbook class is an xlsx workbook that manages worksheets, charts, drawings and styles.
   # The following parts of the Office Open XML spreadsheet specification are not implimented in this version.
