@@ -69,7 +69,7 @@ module Axlsx
     end
 
     def sort_state
-      @sort_state ||= SortState.new(self)
+      @sort_state ||= SortState.new(@worksheet, self)
     end
 
     def sort_state=(v)
@@ -81,6 +81,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = +'')
       # return unless range
+      sort_state.apply
 
       str << "<autoFilter ref='#{range}'>"
       columns.each { |filter_column| filter_column.to_xml_string(str) }

@@ -4,10 +4,11 @@ module Axlsx
   # This class performs sorting on a range in a worksheet
   class SortState
    # creates a new SortState object
-    attr_reader :sort_conditions
-    attr_reader :worksheet
     # @param [Worksheet] worksheet
-    def initialize(range)
+    def initialize(worksheet, range)
+      raise ArgumentError, 'you must provide a worksheet' unless worksheet.is_a?(Worksheet)
+
+      @worksheet = worksheet
       @sort_conditions = []
     end
 
@@ -16,6 +17,8 @@ module Axlsx
     # Watch out! The header row should not be included in the range.
     # @return [String]
     attr_accessor :range
+    attr_reader :sort_conditions
+    attr_reader :worksheet
 
     def defined_name
       return unless range
@@ -39,9 +42,19 @@ module Axlsx
       self
     end
 
+    def apply
+      first_cell, last_cell = range.split(':')
+      start_point = Axlsx::name_to_indices(first_cell)
+      end_point = Axlsx::name_to_indices(last_cell)
+      # The +1 is so we skip the header row with the filter drop downs
+      rows = worksheet.rows[(start_point.last + 1)..end_point.last] || []
+      sorted_rows = rows.sort_by { |row| row.cells[2].value }
+      sorted_rows
+    end
+
     def to_xml_string(str = +'')
       str << "<sortState xmlns:xlrd2='http://schemas.microsoft.com/office/spreadsheetml/2017/richdata2' ref='A2:D31'>"
-      str << "<sortCondition ref='C2:C31' descending='1' />"
+      str << "<sortCondition descending='1' ref='C2:C31' />"
       str << "</sortState>"
     end
   end
