@@ -2,6 +2,7 @@
 
 require 'axlsx/workbook/worksheet/auto_filter/filter_column.rb'
 require 'axlsx/workbook/worksheet/auto_filter/filters.rb'
+require 'axlsx/workbook/worksheet/auto_filter/sort_state.rb'
 
 module Axlsx
   # This class represents an auto filter range in a worksheet
@@ -67,6 +68,15 @@ module Axlsx
       end
     end
 
+    def sort_state
+      @sort_state ||= SortState.new(self)
+    end
+
+    def sort_state=(v)
+      DataTypeValidator.validate :worksheet_sort_state, String, v
+      sort_state.range = v
+    end
+
     # serialize the object
     # @return [String]
     def to_xml_string(str = +'')
@@ -74,6 +84,7 @@ module Axlsx
 
       str << "<autoFilter ref='#{range}'>"
       columns.each { |filter_column| filter_column.to_xml_string(str) }
+      sort_state.to_xml_string(str)
       str << "</autoFilter>"
     end
   end
