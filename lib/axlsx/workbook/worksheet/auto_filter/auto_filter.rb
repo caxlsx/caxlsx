@@ -69,12 +69,12 @@ module Axlsx
     end
 
     def sort_state
-      @sort_state ||= SortState.new(@worksheet, self)
+      @sort_state ||= SortState.new(self.range)
     end
 
     def sort_state=(v)
-      DataTypeValidator.validate :worksheet_sort_state, String, v
-      sort_state.range = v
+      DataTypeValidator.validate :worksheet_sort_state, Array, v
+      sort_state.sort_conditions_array = v
     end
 
     # serialize the object
@@ -84,7 +84,7 @@ module Axlsx
 
       str << "<autoFilter ref='#{range}'>"
       columns.each { |filter_column| filter_column.to_xml_string(str) }
-      sort_state.to_xml_string(str)
+      @sort_state.to_xml_string(str)
       str << "</autoFilter>"
     end
   end

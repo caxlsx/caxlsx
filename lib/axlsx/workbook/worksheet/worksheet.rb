@@ -166,11 +166,10 @@ module Axlsx
 
     def rows
       @rows ||= SimpleTypedList.new Row
-      range = auto_filter.sort_state.range # Get the range of the first table in the workbook
+      # range = auto_filter.sort_state.range # Get the range of the first table in the workbook
+      sort_conditions = auto_filter.sort_state.sort_conditions # Get the sort conditions for the first table in the workbook
 
-      sort_condition = auto_filter.sort_state.sort_condition(0) # Get the sort conditions for the first table in the workbook
-
-      @rows = @rows.sort_by { |row| [row.cells[sort_condition.col_id].value]}
+      @rows = @rows.sort_by { |row| [row.cells[sort_conditions.col_id].value]}
     end
 
     # returns the sheet data as columns
@@ -343,7 +342,7 @@ module Axlsx
     # The auto filter range for the worksheet
     # @param [String] v
     # @see auto_filter
-    def auto_filter=(v)
+    def auto_filter=(v1)
       DataTypeValidator.validate :worksheet_auto_filter, String, v
       auto_filter.range = v
     end
