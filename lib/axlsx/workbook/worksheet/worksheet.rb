@@ -159,8 +159,18 @@ module Axlsx
     # @note The recommended way to manage rows is Worksheet#add_row
     # @return [SimpleTypedList]
     # @see Worksheet#add_row
+    # def rows
+    #   @rows ||= SimpleTypedList.new Row
+    #   @rows = @rows.sort_by { |row| row.cells[2].value }
+    # end
+
     def rows
       @rows ||= SimpleTypedList.new Row
+      range = auto_filter.sort_state.range # Get the range of the first table in the workbook
+
+      sort_column = auto_filter.sort_state.sort_condition.col_id # Get the sort conditions for the first table in the workbook
+
+      @rows = @rows.sort_by { |row| [row.cells[sort_column].value]}
     end
 
     # returns the sheet data as columns

@@ -1,17 +1,17 @@
 module Axlsx
 
   class SortCondition
-    def initialize(col_id, ascending, options)
+
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    def initialize(col_id)
+      self.col_id = col_id
+      # @descending = descending
+      # @options = options
     end
 
-    def ref
-      column_to_sort
-    end
-
-
-
-
-
+    attr_reader :col_id
 
     def to_xml_string(str = +'')
       # str << '<sortCondition '
@@ -19,7 +19,7 @@ module Axlsx
       # str << '>'
       # @filter.to_xml_string(str)
       # str << "</sortCondition>"
-      '<sortCondition ref="B2:B277"></sortCondition>'
+      '<sortCondition ref=''></sortCondition>'
     end
 
 

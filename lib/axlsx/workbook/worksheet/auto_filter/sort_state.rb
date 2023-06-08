@@ -9,7 +9,6 @@ module Axlsx
       raise ArgumentError, 'you must provide a worksheet' unless worksheet.is_a?(Worksheet)
 
       @worksheet = worksheet
-      @sort_conditions = []
     end
 
     # The range the sorting should be applied to.
@@ -26,30 +25,9 @@ module Axlsx
       Axlsx.cell_range(range.split(':').collect { |name| worksheet.name_to_cell(name) })
     end
 
-    # Adds a sort condition to the worksheet.
-    #
-    # @param [String] reference The cell range to sort.
-    # @param [Hash] options The sort options.
-    #
-    # @option options [String] :sort_by Specifies the column or columns to sort by.
-    # @option options [Boolean] :descending Specifies whether to sort in descending order.
-    # @option options [Boolean] :case_sensitive Specifies whether the sort is case sensitive.
-    #
-    # @return [SortState] self
-    def add_sort_condition(reference, options = {})
-      sort_condition = SortCondition.new(reference, options)
-      @sort_conditions << sort_condition
-      self
-    end
-
-    def apply
-      first_cell, last_cell = range.split(':')
-      start_point = Axlsx::name_to_indices(first_cell)
-      end_point = Axlsx::name_to_indices(last_cell)
-      # The +1 is so we skip the header row with the filter drop downs
-      rows = worksheet.rows[(start_point.last + 1)..end_point.last] || []
-      sorted_rows = rows.sort_by { |row| row.cells[2].value }
-      sorted_rows
+    def sort_condition(col_id)
+      @sort_condition << SortCondition.new(col_id)
+      # @sort_conditions.append(@sort_condition)
     end
 
     def to_xml_string(str = +'')
