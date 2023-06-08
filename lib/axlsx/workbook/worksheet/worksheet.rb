@@ -168,9 +168,9 @@ module Axlsx
       @rows ||= SimpleTypedList.new Row
       range = auto_filter.sort_state.range # Get the range of the first table in the workbook
 
-      sort_column = auto_filter.sort_state.sort_condition.col_id # Get the sort conditions for the first table in the workbook
+      sort_condition = auto_filter.sort_state.sort_condition(0) # Get the sort conditions for the first table in the workbook
 
-      @rows = @rows.sort_by { |row| [row.cells[sort_column].value]}
+      @rows = @rows.sort_by { |row| [row.cells[sort_condition.col_id].value]}
     end
 
     # returns the sheet data as columns

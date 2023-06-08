@@ -1,4 +1,4 @@
-
+require 'axlsx/workbook/worksheet/auto_filter/sort_condition.rb'
 
 module Axlsx
   # This class performs sorting on a range in a worksheet
@@ -26,7 +26,7 @@ module Axlsx
     end
 
     def sort_condition(col_id)
-      @sort_condition << SortCondition.new(col_id)
+      @sort_condition ||= SortCondition.new(col_id)
       # @sort_conditions.append(@sort_condition)
     end
 

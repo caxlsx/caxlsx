@@ -6,7 +6,7 @@ module Axlsx
     include Axlsx::SerializedAttributes
 
     def initialize(col_id)
-      self.col_id = col_id
+      @col_id = col_id
       # @descending = descending
       # @options = options
     end
