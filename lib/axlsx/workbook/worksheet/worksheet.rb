@@ -167,8 +167,9 @@ module Axlsx
     def rows
       @rows ||= SimpleTypedList.new Row
       # range = auto_filter.sort_state.range # Get the range of the first table in the workbook
-      if auto_filter.sort_state.sort_conditions.transpose != []
-        @rows.sort_by { |row| [row.cells[auto_filter.sort_state.sort_conditions.col_id].value]}
+      if auto_filter.sort_state.sort_conditions.to_a != []
+        sort_conditions = auto_filter.sort_state.sort_conditions.to_a
+        @rows = @rows.sort_by { |row| row.cells[sort_conditions.first.col_id].value }
       end
       @rows
     end
