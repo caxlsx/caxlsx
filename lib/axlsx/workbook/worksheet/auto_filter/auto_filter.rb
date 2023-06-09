@@ -69,7 +69,7 @@ module Axlsx
     end
 
     def sort_state
-      @sort_state ||= SortState.new(self.range)
+      @sort_state ||= SortState.new self
     end
 
     def sort_state=(v)

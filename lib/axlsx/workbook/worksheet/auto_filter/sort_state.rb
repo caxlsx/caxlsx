@@ -5,19 +5,21 @@ module Axlsx
   class SortState
    # creates a new SortState object
     # @param [Worksheet] worksheet
-    def initialize(range)
-      @range = range
+    def initialize(auto_filter)
+      @auto_filter = auto_filter
 
     end
+
+    attr_reader :sort_conditions
 
     # The range the sorting should be applied to.
     # This should be a string like 'A2:B8'.
     # Watch out! The header row should not be included in the range.
     # @return [String]
-    attr_accessor :range
-    attr_accessor :sort_conditions_array
-    attr_reader :sort_conditions
-    attr_reader :worksheet
+    # attr_accessor :range
+    # attr_accessor :sort_conditions_array
+    # attr_reader :sort_conditions
+    # attr_reader :worksheet
 
     def defined_name
       return unless range
@@ -26,18 +28,12 @@ module Axlsx
     end
 
     def sort_conditions
-      @sort_conditions = []
-      byebug
-      sort_conditions_array.each do |sort_condition_array|
-        sort_condition ||= SortCondition.new sort_condition_array[0], sort_condition_array[1], sort_condition_array[2]
-        @sort_conditions.append(sort_condition)
-      end
-      @sort_conditions
+      @sort_conditions ||= SimpleTypedList.new SortCondition
     end
 
-    def sort_conditions=(v)
-      # DataTypeValidator.validate :sort_state_sort_conditions, Array, v
-      sort_conditions.sort_conditions_array = v
+    def add_sort_condition(col_id, descending = false, options = {})
+      sort_conditions << SortCondition.new(col_id, descending, options)
+      sort_conditions.last
     end
 
     def to_xml_string(str = +'')
