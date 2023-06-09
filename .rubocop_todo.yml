@@ -248,11 +248,6 @@ Style/NumericPredicate:
     - 'lib/axlsx/util/validators.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-Style/OperatorMethodCall:
-  Exclude:
-    - 'lib/axlsx/drawing/vml_shape.rb'
-
 # Configuration parameters: AllowedMethods.
 # AllowedMethods: respond_to_missing?
 Style/OptionalBooleanParameter:
@@ -317,11 +312,6 @@ Style/PreferredHashMethods:
 Style/QuotedSymbols:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/worksheet_hyperlink.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
-Style/RandomWithOffset:
-  Exclude:
-    - 'lib/axlsx/drawing/vml_shape.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 Style/RedundantRegexpEscape:
