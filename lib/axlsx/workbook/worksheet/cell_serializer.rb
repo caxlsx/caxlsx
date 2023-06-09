@@ -27,7 +27,7 @@ module Axlsx
         if cell.is_text_run?
           valid = RichTextRun::INLINE_STYLES - [:value, :type]
           data = Axlsx.instance_values_for(cell).transform_keys(&:to_sym)
-          data = data.select { |key, value| valid.include?(key) && !value.nil? }
+          data = data.select { |key, value| !value.nil? && valid.include?(key) }
           RichText.new(cell.value.to_s, data).to_xml_string(str)
         elsif cell.contains_rich_text?
           cell.value.to_xml_string(str)

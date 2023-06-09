@@ -177,12 +177,12 @@ module Axlsx
 
     # Indicates if the cell is good for shared string table
     def plain_string?
-      (type == :string || type == :text) &&         # String typed
-        !is_text_run? &&          # No inline styles
-        !@value.nil? &&           # Not nil
-        !@value.empty? &&         # Not empty
-        !is_formula? &&           # Not a formula
-        !is_array_formula?        # Not an array formula
+      (type == :string || type == :text) && # String typed
+        !value.nil? &&
+        !value.empty? &&
+        !is_text_run? && # No inline styles
+        !is_formula? &&
+        !is_array_formula?
     end
 
     # The inline font_name property for the cell
@@ -426,7 +426,7 @@ module Axlsx
     # Attempts to determine the correct width for this cell's content
     # @return [Float]
     def autowidth
-      return if is_formula? || value.nil?
+      return if value.nil? || is_formula?
 
       if contains_rich_text?
         string_width('', font_size) + value.autowidth
@@ -525,7 +525,7 @@ module Axlsx
     #   About Time - Time in OOXML is *different* from what you might expect. The history as to why is interesting, but you can safely assume that if you are generating docs on a mac, you will want to specify Workbook.1904 as true when using time typed values.
     # @see Axlsx#date1904
     def cast_value(v)
-      return v if v.is_a?(RichText) || v.nil?
+      return v if v.nil? || v.is_a?(RichText)
 
       case type
       when :date

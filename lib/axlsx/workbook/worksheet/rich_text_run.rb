@@ -208,7 +208,7 @@ module Axlsx
     def to_xml_string(str = +'')
       valid = RichTextRun::INLINE_STYLES
       data = Axlsx.instance_values_for(self).transform_keys(&:to_sym)
-      data = data.select { |key, value| valid.include?(key) && !value.nil? }
+      data = data.select { |key, value| !value.nil? && valid.include?(key) }
 
       str << '<r><rPr>'
       data.each do |key, val|
