@@ -169,8 +169,24 @@ module Axlsx
       # range = auto_filter.sort_state.range # Get the range of the first table in the workbook
       if auto_filter.sort_state.sort_conditions.to_a != []
         sort_conditions = auto_filter.sort_state.sort_conditions.to_a
-        # sort_array = sort_conditions.map { |condition| row.cells[condition.col_id].value }
-        @rows = @rows.sort_by { |row| sort_conditions.map { |condition| row.cells[condition.col_id].value } }
+        # # sort_array = sort_conditions.map { |condition| row.cells[condition.col_id].value }
+        # @rows = @rows.sort_by { |row| sort_conditions.map { |condition| condition.descending, row.cells[condition.col_id].value } }
+        @rows = @rows.sort do |row1, row2|
+          comparison = 0
+
+          sort_conditions.each do |condition|
+            cell_value_row1 = row1.cells[condition.col_id].value
+            cell_value_row2 = row2.cells[condition.col_id].value
+
+            comparison = cell_value_row1 <=> cell_value_row2
+            comparison = -comparison if condition.descending
+
+            break unless comparison.zero?
+          end
+
+          comparison
+        end
+
       end
       @rows
     end

@@ -12,6 +12,8 @@ module Axlsx
     end
 
     attr_reader :col_id
+    attr_reader :descending
+    attr_reader :options
     attr_accessor :sort_conditions_array
 
     def to_xml_string(str = +'')
