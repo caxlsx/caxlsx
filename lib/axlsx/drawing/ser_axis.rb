@@ -22,11 +22,11 @@ module Axlsx
     end
 
     # @see tickLblSkip
-    def tick_lbl_skip=(v) Axlsx::validate_unsigned_int(v); @tick_lbl_skip = v; end
+    def tick_lbl_skip=(v) Axlsx.validate_unsigned_int(v); @tick_lbl_skip = v; end
     alias :tickLblSkip= :tick_lbl_skip=
 
     # @see tickMarkSkip
-    def tick_mark_skip=(v) Axlsx::validate_unsigned_int(v); @tick_mark_skip = v; end
+    def tick_mark_skip=(v) Axlsx.validate_unsigned_int(v); @tick_mark_skip = v; end
     alias :tickMarkSkip= :tick_mark_skip=
 
     # Serializes the object

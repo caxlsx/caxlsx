@@ -11,7 +11,7 @@ module Axlsx
       # @return [String]
       def to_xml_string(row_index, column_index, cell, str = +'')
         str << '<c r="'
-        str << Axlsx::col_ref(column_index) << Axlsx::row_ref(row_index)
+        str << Axlsx.col_ref(column_index) << Axlsx.row_ref(row_index)
         str << '" s="' << cell.style_str << '" '
         return str << '/>' if cell.value.nil?
 
@@ -50,7 +50,7 @@ module Axlsx
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def date(cell, str = +'')
-        value_serialization false, DateTimeConverter::date_to_serial(cell.value).to_s, str
+        value_serialization false, DateTimeConverter.date_to_serial(cell.value).to_s, str
       end
 
       # Serializes cells that are type time
@@ -58,7 +58,7 @@ module Axlsx
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def time(cell, str = +'')
-        value_serialization false, DateTimeConverter::time_to_serial(cell.value).to_s, str
+        value_serialization false, DateTimeConverter.time_to_serial(cell.value).to_s, str
       end
 
       # Serializes cells that are type boolean

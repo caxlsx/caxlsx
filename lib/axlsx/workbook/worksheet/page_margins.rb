@@ -78,17 +78,17 @@ module Axlsx
     end
 
     # @see left
-    def left=(v); Axlsx::validate_unsigned_numeric(v); @left = v end
+    def left=(v); Axlsx.validate_unsigned_numeric(v); @left = v end
     # @see right
-    def right=(v); Axlsx::validate_unsigned_numeric(v); @right = v end
+    def right=(v); Axlsx.validate_unsigned_numeric(v); @right = v end
     # @see top
-    def top=(v); Axlsx::validate_unsigned_numeric(v); @top = v end
+    def top=(v); Axlsx.validate_unsigned_numeric(v); @top = v end
     # @see bottom
-    def bottom=(v); Axlsx::validate_unsigned_numeric(v); @bottom = v end
+    def bottom=(v); Axlsx.validate_unsigned_numeric(v); @bottom = v end
     # @see header
-    def header=(v); Axlsx::validate_unsigned_numeric(v); @header = v end
+    def header=(v); Axlsx.validate_unsigned_numeric(v); @header = v end
     # @see footer
-    def footer=(v); Axlsx::validate_unsigned_numeric(v); @footer = v end
+    def footer=(v); Axlsx.validate_unsigned_numeric(v); @footer = v end
 
     # Serializes the page margins element
     # @param [String] str

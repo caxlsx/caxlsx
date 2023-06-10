@@ -19,7 +19,7 @@ module Axlsx
       self << if cells.is_a?(String)
                 cells
               elsif cells.is_a?(Array)
-                Axlsx::cell_range(cells, false)
+                Axlsx.cell_range(cells, false)
               end
     end
 

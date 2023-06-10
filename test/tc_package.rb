@@ -319,8 +319,8 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def test_name_to_indices
-    assert_equal([0, 0], Axlsx::name_to_indices('A1'))
-    assert_equal([0, 99], Axlsx::name_to_indices('A100'), 'needs to axcept rows that contain 0')
+    assert_equal([0, 0], Axlsx.name_to_indices('A1'))
+    assert_equal([0, 99], Axlsx.name_to_indices('A100'), 'needs to axcept rows that contain 0')
   end
 
   def test_to_stream

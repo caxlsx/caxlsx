@@ -327,7 +327,7 @@ module Axlsx
     # @param [String] name
     def name=(name)
       validate_sheet_name name
-      @name = Axlsx::coder.encode(name)
+      @name = Axlsx.coder.encode(name)
     end
 
     # The auto filter range for the worksheet
@@ -547,7 +547,7 @@ module Axlsx
       widths.each_with_index do |value, index|
         next if value.nil?
 
-        Axlsx::validate_unsigned_numeric(value) unless value.nil?
+        Axlsx.validate_unsigned_numeric(value) unless value.nil?
         find_or_create_column_info(index).width = value
       end
     end
@@ -688,7 +688,7 @@ module Axlsx
     # @param [String] name The cell or cell range to return. "A1" will return the first cell of the first row.
     # @return [Cell]
     def name_to_cell(name)
-      col_index, row_index = *Axlsx::name_to_indices(name)
+      col_index, row_index = *Axlsx.name_to_indices(name)
 
       r = rows[row_index]
 
@@ -759,7 +759,7 @@ module Axlsx
       raise ArgumentError, format(ERR_SHEET_NAME_TOO_LONG, name) if character_length > WORKSHEET_MAX_NAME_LENGTH
       raise ArgumentError, format(ERR_SHEET_NAME_CHARACTER_FORBIDDEN, name) if WORKSHEET_NAME_FORBIDDEN_CHARS.any? { |char| name.include? char }
 
-      name = Axlsx::coder.encode(name)
+      name = Axlsx.coder.encode(name)
       sheet_names = @workbook.worksheets.reject { |s| s == self }.map(&:name)
       raise ArgumentError, format(ERR_DUPLICATE_SHEET_NAME, name) if sheet_names.include?(name)
     end
