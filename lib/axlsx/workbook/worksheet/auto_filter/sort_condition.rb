@@ -4,16 +4,16 @@ module Axlsx
 
     include Axlsx::OptionsParser
 
-    def initialize(col_id, descending = false, options = {})
+    def initialize(col_id, descending, custom_order)
       @col_id = col_id
       Axlsx::validate_boolean(descending)
       @descending = descending
-      @options = options
+      @custom_order = custom_order
     end
 
     attr_reader :col_id
     attr_reader :descending
-    attr_reader :options
+    attr_reader :custom_order
     attr_accessor :sort_conditions_array
 
     def ref_to_single_column(ref, col_id)
@@ -42,8 +42,9 @@ module Axlsx
 
       str << '<sortCondition '
       str << 'descending="1" ' if @descending
-      str << "ref='#{ref}' />"
-      # str << "customList='#{@options}' />"
+      str << "ref='#{ref}' "
+      str << "customList='#{@custom_order.join(',')}' " if @custom_order != []
+      str << "/>"
     end
 
 

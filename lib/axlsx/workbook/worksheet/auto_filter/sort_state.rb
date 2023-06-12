@@ -31,8 +31,8 @@ module Axlsx
       @sort_conditions ||= SimpleTypedList.new SortCondition
     end
 
-    def add_sort_condition(col_id, descending = false, options = {})
-      sort_conditions << SortCondition.new(col_id, descending, options)
+    def add_sort_condition(col_id, descending = false, custom_order = [])
+      sort_conditions << SortCondition.new(col_id, descending, custom_order)
       sort_conditions.last
 
       # TODO - add data validation to the arguments here

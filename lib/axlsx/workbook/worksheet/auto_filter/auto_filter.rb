@@ -68,7 +68,13 @@ module Axlsx
             cell_value_row1 = row1.cells[condition.col_id].value
             cell_value_row2 = row2.cells[condition.col_id].value
 
-            comparison = cell_value_row1 <=> cell_value_row2
+            if condition.custom_order != []
+              order = condition.custom_order
+              comparison = order.index(cell_value_row1) <=> order.index(cell_value_row2)
+            else
+              comparison = cell_value_row1 <=> cell_value_row2
+            end
+
             comparison = -comparison if condition.descending
 
             break unless comparison.zero?
