@@ -42,8 +42,8 @@ module Axlsx
 
       str << '<sortCondition '
       str << 'descending="1" ' if @descending
-      str << "ref='#{ref}' "
-      # str << "customList='#{options}' />"
+      str << "ref='#{ref}' />"
+      # str << "customList='#{@options}' />"
     end
 
 
