@@ -80,7 +80,7 @@ module Axlsx
     # initialize the vml shape based on this comment's ref/position in the worksheet.
     # by default, all columns are 5 columns wide and 5 rows high
     def initialize_vml_shape
-      pos = Axlsx::name_to_indices(ref)
+      pos = Axlsx.name_to_indices(ref)
       @vml_shape = VmlShape.new(row: pos[1], column: pos[0], visible: @visible) do |vml|
         vml.left_column = vml.column
         vml.right_column = vml.column + 2

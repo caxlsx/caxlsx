@@ -75,7 +75,7 @@ module Axlsx
     # @param [String] v The data for this storages stream
     # @return [Array]
     def data=(v)
-      Axlsx::validate_string(v)
+      Axlsx.validate_string(v)
       self.type = TYPES[:stream] unless @type
       @size = v.size
       @data = v.bytes.to_a

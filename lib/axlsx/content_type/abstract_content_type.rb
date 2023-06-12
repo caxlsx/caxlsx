@@ -18,7 +18,7 @@ module Axlsx
 
     # The content type.
     # @see Axlsx#validate_content_type
-    def content_type=(v) Axlsx::validate_content_type v; @content_type = v end
+    def content_type=(v) Axlsx.validate_content_type v; @content_type = v end
     alias :ContentType= :content_type=
 
     # Serialize the contenty type to xml
@@ -26,7 +26,7 @@ module Axlsx
       str << '<' << node_name << ' '
       Axlsx.instance_values_for(self).each_with_index do |key_value, index|
         str << ' ' unless index.zero?
-        str << Axlsx::camel(key_value.first) << '="' << key_value.last.to_s << '"'
+        str << Axlsx.camel(key_value.first) << '="' << key_value.last.to_s << '"'
       end
       str << '/>'
     end

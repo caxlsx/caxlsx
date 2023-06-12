@@ -78,7 +78,7 @@ module Axlsx
       %w(d_lbl_pos show_legend_key show_val show_cat_name show_ser_name show_percent show_bubble_size show_leader_lines).each do |key|
         next unless instance_vals.key?(key) && !instance_vals[key].nil?
 
-        str << "<c:#{Axlsx::camel(key, false)} val='#{instance_vals[key]}' />"
+        str << "<c:#{Axlsx.camel(key, false)} val='#{instance_vals[key]}' />"
       end
       str << '</c:dLbls>'
     end

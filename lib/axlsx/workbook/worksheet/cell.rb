@@ -345,7 +345,7 @@ module Axlsx
     # @example Relative Cell Reference
     #   ws.rows.first.cells.first.r #=> "A1"
     def r
-      Axlsx::cell_r index, @row.row_index
+      Axlsx.cell_r index, @row.row_index
     end
 
     # @return [String] The absolute alpha(column)numeric(row) reference for this cell.
@@ -358,7 +358,7 @@ module Axlsx
     # @return [Integer] The cellXfs item index applied to this cell.
     # @raise [ArgumentError] Invalid cellXfs id if the value provided is not within cellXfs items range.
     def style=(v)
-      Axlsx::validate_unsigned_int(v)
+      Axlsx.validate_unsigned_int(v)
       count = styles.cellXfs.size
       raise ArgumentError, "Invalid cellXfs id" unless v < count
 
@@ -446,8 +446,8 @@ module Axlsx
     # TODO find a better way to do this as it accounts for 30% of
     # processing time in benchmarking...
     def clean_value
-      if (type == :string || type == :text) && !Axlsx::trust_input
-        Axlsx::sanitize(::CGI.escapeHTML(@value.to_s))
+      if (type == :string || type == :text) && !Axlsx.trust_input
+        Axlsx.sanitize(::CGI.escapeHTML(@value.to_s))
       else
         @value.to_s
       end
@@ -488,7 +488,7 @@ module Axlsx
 
     # @see ssti
     def ssti=(v)
-      Axlsx::validate_unsigned_int(v)
+      Axlsx.validate_unsigned_int(v)
       @ssti = v
     end
 

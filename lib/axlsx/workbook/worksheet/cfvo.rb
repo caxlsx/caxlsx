@@ -40,10 +40,10 @@ module Axlsx
     attr_reader :val
 
     # @see type
-    def type=(v); Axlsx::validate_conditional_formatting_value_object_type(v); @type = v end
+    def type=(v); Axlsx.validate_conditional_formatting_value_object_type(v); @type = v end
 
     # @see gte
-    def gte=(v); Axlsx::validate_boolean(v); @gte = v end
+    def gte=(v); Axlsx.validate_boolean(v); @gte = v end
 
     # @see val
     def val=(v)

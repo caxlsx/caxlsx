@@ -41,7 +41,7 @@ module Axlsx
     # @param [String|Cell] cell_reference The string reference or cell that defines where this hyperlink shows in the worksheet.
     def ref=(cell_reference)
       cell_reference = cell_reference.r if cell_reference.is_a?(Cell)
-      Axlsx::validate_string cell_reference
+      Axlsx.validate_string cell_reference
       @ref = cell_reference
     end
 
@@ -69,7 +69,7 @@ module Axlsx
     # r:id should only be specified for external targets.
     # @return [Hash]
     def location_or_id
-      @target == :external ? { "r:id": relationship.Id } : { location: Axlsx::coder.encode(location) }
+      @target == :external ? { "r:id": relationship.Id } : { location: Axlsx.coder.encode(location) }
     end
   end
 end

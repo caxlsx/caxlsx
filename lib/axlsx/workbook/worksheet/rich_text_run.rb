@@ -221,7 +221,7 @@ module Axlsx
           str << '<' << key.to_s << ' val="' << xml_value(val) << '"/>'
         end
       end
-      clean_value = Axlsx::trust_input ? @value.to_s : ::CGI.escapeHTML(Axlsx::sanitize(@value.to_s))
+      clean_value = Axlsx.trust_input ? @value.to_s : ::CGI.escapeHTML(Axlsx.sanitize(@value.to_s))
       str << '</rPr><t>' << clean_value << '</t></r>'
     end
 

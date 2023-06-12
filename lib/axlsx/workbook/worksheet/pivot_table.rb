@@ -266,7 +266,7 @@ module Axlsx
     # References for header cells
     # @return [Array]
     def header_cell_refs
-      Axlsx::range_to_a(header_range).first
+      Axlsx.range_to_a(header_range).first
     end
 
     # The header cells for the pivot table

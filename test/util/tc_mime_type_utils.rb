@@ -14,11 +14,11 @@ class TestMimeTypeUtils < Test::Unit::TestCase
   def teardown; end
 
   def test_mime_type_utils
-    assert_equal('image/jpeg', Axlsx::MimeTypeUtils::get_mime_type(@test_img))
-    assert_equal('image/png', Axlsx::MimeTypeUtils::get_mime_type_from_uri(@test_img_url))
+    assert_equal('image/jpeg', Axlsx::MimeTypeUtils.get_mime_type(@test_img))
+    assert_equal('image/png', Axlsx::MimeTypeUtils.get_mime_type_from_uri(@test_img_url))
   end
 
   def test_escape_uri
-    assert_raise(URI::InvalidURIError) { Axlsx::MimeTypeUtils::get_mime_type_from_uri('| ls') }
+    assert_raise(URI::InvalidURIError) { Axlsx::MimeTypeUtils.get_mime_type_from_uri('| ls') }
   end
 end

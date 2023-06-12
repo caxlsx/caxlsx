@@ -156,10 +156,6 @@ Style/ClassVars:
     - 'lib/axlsx/workbook/workbook.rb'
     - 'lib/axlsx/workbook/worksheet/dimension.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-Style/ColonMethodCall:
-  Enabled: false
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/ConcatArrayLiterals:
   Exclude:
