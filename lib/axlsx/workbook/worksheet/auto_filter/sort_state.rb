@@ -34,11 +34,26 @@ module Axlsx
     def add_sort_condition(col_id, descending = false, options = {})
       sort_conditions << SortCondition.new(col_id, descending, options)
       sort_conditions.last
+
+      # TODO - add data validation to the arguments here
+    end
+
+    def increment_cell_value(str)
+      letter = str[/[A-Za-z]+/]
+      number = str[/\d+/].to_i
+
+      incremented_number = number + 1
+
+      "#{letter}#{incremented_number}"
     end
 
     def to_xml_string(str = +'')
-      str << "<sortState xmlns:xlrd2='http://schemas.microsoft.com/office/spreadsheetml/2017/richdata2' ref='A2:D31'>"
-      str << "<sortCondition descending='1' ref='C2:C31' />"
+      ref = @auto_filter.range
+      first_cell, last_cell = ref.split(':')
+      ref = increment_cell_value(first_cell) + ':' + last_cell
+
+      str << "<sortState xmlns:xlrd2='http://schemas.microsoft.com/office/spreadsheetml/2017/richdata2' ref='#{ref}'>"
+      sort_conditions.each { |sort_condition| sort_condition.to_xml_string(str, ref) }
       str << "</sortState>"
     end
   end
