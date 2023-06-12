@@ -90,7 +90,7 @@ module Axlsx
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def formula_serialization(cell, str = +'')
-        str << 't="str"><f>' << cell.clean_value.to_s.delete_prefix(FORMULA_PREFIX) << '</f>'
+        str << 't="str"><f>' << cell.clean_value.delete_prefix(FORMULA_PREFIX) << '</f>'
         str << '<v>' << cell.formula_value.to_s << '</v>' unless cell.formula_value.nil?
       end
 
@@ -99,7 +99,7 @@ module Axlsx
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def array_formula_serialization(cell, str = +'')
-        str << 't="str">' << '<f t="array" ref="' << cell.r << '">' << cell.clean_value.to_s.delete_prefix(ARRAY_FORMULA_PREFIX).delete_suffix(ARRAY_FORMULA_SUFFIX) << '</f>'
+        str << 't="str">' << '<f t="array" ref="' << cell.r << '">' << cell.clean_value.delete_prefix(ARRAY_FORMULA_PREFIX).delete_suffix(ARRAY_FORMULA_SUFFIX) << '</f>'
         str << '<v>' << cell.formula_value.to_s << '</v>' unless cell.formula_value.nil?
       end
 

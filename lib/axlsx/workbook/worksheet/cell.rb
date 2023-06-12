@@ -442,9 +442,10 @@ module Axlsx
       end
     end
 
-    # Returns the sanatized value
-    # TODO find a better way to do this as it accounts for 30% of
+    # Returns the sanitized value
+    # TODO: find a better way to do this as it accounts for 30% of
     # processing time in benchmarking...
+    # @return [String] The sanitized value
     def clean_value
       if (type == :string || type == :text) && !Axlsx.trust_input
         Axlsx.sanitize(::CGI.escapeHTML(@value.to_s))
