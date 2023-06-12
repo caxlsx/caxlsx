@@ -88,7 +88,7 @@ module Axlsx
     # @see Col#outline
     def outline_level=(v)
       Axlsx.validate_unsigned_numeric(v)
-      raise ArgumentError, 'outlineLevel must be between 0 and 7' unless 0 <= v && v <= 7
+      raise ArgumentError, 'outlineLevel must be between 0 and 7' unless v >= 0 && v <= 7
 
       @outline_level = v
     end
@@ -114,7 +114,7 @@ module Axlsx
       # current @width value.
       # TODO!!!
       # Axlsx.validate_unsigned_numeric(v) unless v == nil
-      @custom_width = @best_fit = v != nil
+      @custom_width = @best_fit = !v.nil?
       @width = v.nil? ? v : [v, MAX_WIDTH].min
     end
 

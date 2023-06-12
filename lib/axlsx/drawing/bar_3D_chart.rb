@@ -77,7 +77,7 @@ module Axlsx
       @gap_width, @gap_depth, @shape = nil, nil, nil
       super(frame, options)
       @series_type = BarSeries
-      @view_3D = View3D.new({ :r_ang_ax => 1 }.merge(options))
+      @view_3D = View3D.new({ r_ang_ax: 1 }.merge(options))
       @d_lbls = nil
     end
 
@@ -99,14 +99,14 @@ module Axlsx
     # space between bar or column clusters, as a percentage of the bar or column width.
     def gap_width=(v)
       RangeValidator.validate "Bar3DChart.gap_width", 0, 500, v
-      @gap_width = (v)
+      @gap_width = v
     end
     alias :gapWidth= :gap_width=
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     def gap_depth=(v)
       RangeValidator.validate "Bar3DChart.gap_depth", 0, 500, v
-      @gap_depth = (v)
+      @gap_depth = v
     end
     alias :gapDepth= :gap_depth=
 
@@ -131,7 +131,7 @@ module Axlsx
         str << '<c:gapWidth val="' << @gap_width.to_s << '"/>' unless @gap_width.nil?
         str << '<c:gapDepth val="' << @gap_depth.to_s << '"/>' unless @gap_depth.nil?
         str << '<c:shape val="' << @shape.to_s << '"/>' unless @shape.nil?
-        axes.to_xml_string(str, :ids => true)
+        axes.to_xml_string(str, ids: true)
         str << '</c:bar3DChart>'
         axes.to_xml_string(str)
       end
@@ -141,7 +141,7 @@ module Axlsx
     # category axes specified via axes[:val_axes] and axes[:cat_axis]
     # @return [Axes]
     def axes
-      @axes ||= Axes.new(:cat_axis => CatAxis, :val_axis => ValAxis)
+      @axes ||= Axes.new(cat_axis: CatAxis, val_axis: ValAxis)
     end
   end
 end

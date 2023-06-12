@@ -24,7 +24,7 @@ module Axlsx
     def relationships
       return [] if empty?
 
-      map { |hyperlink| hyperlink.relationship }
+      map(&:relationship)
     end
 
     # seralize the collection of hyperlinks

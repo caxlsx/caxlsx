@@ -9,7 +9,7 @@ class TestProtectedRange < Test::Unit::TestCase
   end
 
   def test_initialize_options
-    assert_nothing_raised { Axlsx::ProtectedRange.new(:sqref => 'A1:B1', :name => "only bob") }
+    assert_nothing_raised { Axlsx::ProtectedRange.new(sqref: 'A1:B1', name: "only bob") }
   end
 
   def test_range

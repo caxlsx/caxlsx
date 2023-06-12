@@ -45,7 +45,7 @@ module Axlsx
     # The name of the worksheet
     # @return [String]
     def name
-      @name ||= "Sheet" + (index + 1).to_s
+      @name ||= "Sheet#{index + 1}"
     end
 
     # Whether to treat values starting with an equals sign as formulas or as literal strings.
@@ -65,7 +65,7 @@ module Axlsx
     # Specifies the visible state of this sheet. Allowed states are
     # :visible, :hidden or :very_hidden. The default value is :visible.
     #
-    # Worksheets in the :hidden state can be shown using the sheet formatting properties in excel.
+    # Worksheets in the :hidden state can be shown using the sheet formatting properties in Excel.
     # :very_hidden sheets should be inaccessible to end users.
     # @param [Symbol] sheet_state The visible state for this sheet.
     def state=(sheet_state)
@@ -173,7 +173,7 @@ module Axlsx
       @rows.transpose(&block)
     end
 
-    # A range that excel will apply an auto-filter to "A1:B3"
+    # A range that Excel will apply an auto-filter to "A1:B3"
     # This will turn filtering on for the cells in the range.
     # The first row is considered the header, while subsequent rows are considered to be data.
     # @return String
@@ -187,7 +187,7 @@ module Axlsx
     # @return Boolean
     # @see #page_setup
     def fit_to_page?
-      return false unless Axlsx.instance_values_for(self).keys.include?('page_setup')
+      return false unless Axlsx.instance_values_for(self).key?('page_setup')
 
       page_setup.fit_to_page?
     end
@@ -327,7 +327,7 @@ module Axlsx
     # @param [String] name
     def name=(name)
       validate_sheet_name name
-      @name = Axlsx::coder.encode(name)
+      @name = Axlsx.coder.encode(name)
     end
 
     # The auto filter range for the worksheet
@@ -345,13 +345,13 @@ module Axlsx
     # The part name of this worksheet
     # @return [String]
     def pn
-      "#{WORKSHEET_PN % (index + 1)}"
+      format(WORKSHEET_PN, index + 1)
     end
 
     # The relationship part name of this worksheet
     # @return [String]
     def rels_pn
-      "#{WORKSHEET_RELS_PN % (index + 1)}"
+      format(WORKSHEET_RELS_PN, index + 1)
     end
 
     # The relationship id of this worksheet.
@@ -429,7 +429,6 @@ module Axlsx
     #    Allowing user generated data to be interpreted as formulas can be dangerous
     #   (see https://www.owasp.org/index.php/CSV_Injection for details).
     def add_row(values = [], options = {})
-      options[:escape_formulas] = escape_formulas if options[:escape_formulas].nil?
       row = Row.new(self, values, options)
       update_column_info row, options.delete(:widths)
       yield row if block_given?
@@ -449,7 +448,7 @@ module Axlsx
     # @see ConditionalFormattingRule#initialize
     # @see file:examples/example_conditional_formatting.rb
     def add_conditional_formatting(cells, rules)
-      cf = ConditionalFormatting.new(:sqref => cells)
+      cf = ConditionalFormatting.new(sqref: cells)
       cf.add_rules rules
       conditional_formattings << cf
       conditional_formattings
@@ -520,7 +519,7 @@ module Axlsx
     end
 
     # Adds a page break (row break) to the worksheet
-    # @param cell A Cell object or excel style string reference indicating where the break
+    # @param cell A Cell object or Excel style string reference indicating where the break
     # should be added to the sheet.
     # @example
     #   ws.add_page_break("A4")
@@ -532,9 +531,9 @@ module Axlsx
                                   cell.pos
                                 end
       if column_index > 0
-        col_breaks.add_break(:id => column_index)
+        col_breaks.add_break(id: column_index)
       end
-      row_breaks.add_break(:id => row_index)
+      row_breaks.add_break(id: row_index)
     end
 
     # This is a helper method that Lets you specify a fixed width for multiple columns in a worksheet in one go.
@@ -548,7 +547,7 @@ module Axlsx
       widths.each_with_index do |value, index|
         next if value.nil?
 
-        Axlsx::validate_unsigned_numeric(value) unless value.nil?
+        Axlsx.validate_unsigned_numeric(value) unless value.nil?
         find_or_create_column_info(index).width = value
       end
     end
@@ -582,10 +581,10 @@ module Axlsx
     end
 
     # Set the style for cells in a specific column
-    # @param [String|Array] cell references
+    # @param [String|Array] cell_refs Cell references
     # @param [Hash] styles
     def add_style(cell_refs, *styles)
-      if !cell_refs.is_a?(Array)
+      unless cell_refs.is_a?(Array)
         cell_refs = [cell_refs]
       end
 
@@ -603,8 +602,8 @@ module Axlsx
     end
 
     # Set the style for cells in a specific column
-    # @param [String|Array] cell references
-    # @param [Hash|Array|Symbol] border options
+    # @param [String|Array] cell_refs Cell references
+    # @param [Hash|Array|Symbol] options border options
     def add_border(cell_refs, options = nil)
       if options.is_a?(Hash)
         border_edges = options[:edges]
@@ -614,7 +613,7 @@ module Axlsx
         border_edges = options
       end
 
-      if !cell_refs.is_a?(Array)
+      unless cell_refs.is_a?(Array)
         cell_refs = [cell_refs]
       end
 
@@ -662,7 +661,7 @@ module Axlsx
       r
     end
 
-    # Returns the cell or cells defined using excel style A1:B3 references.
+    # Returns the cell or cells defined using Excel style A1:B3 references.
     # @param [String|Integer] cell_def the string defining the cell or range of cells, or the rownumber
     # @return [Cell, Array]
     def [](cell_def)
@@ -674,11 +673,11 @@ module Axlsx
         parts.first
       else
         if parts.size > 2
-          raise ArgumentError, (ERR_CELL_REFERENCE_INVALID % cell_def)
+          raise ArgumentError, format(ERR_CELL_REFERENCE_INVALID, cell_def)
         elsif parts.first.nil?
-          raise ArgumentError, (ERR_CELL_REFERENCE_MISSING_CELL % [cell_def.split(":").first, cell_def])
+          raise ArgumentError, format(ERR_CELL_REFERENCE_MISSING_CELL, cell_def.split(":").first, cell_def)
         elsif parts.last.nil?
-          raise ArgumentError, (ERR_CELL_REFERENCE_MISSING_CELL % [cell_def.split(":").last, cell_def])
+          raise ArgumentError, format(ERR_CELL_REFERENCE_MISSING_CELL, cell_def.split(":").last, cell_def)
         end
 
         range(*parts)
@@ -689,12 +688,12 @@ module Axlsx
     # @param [String] name The cell or cell range to return. "A1" will return the first cell of the first row.
     # @return [Cell]
     def name_to_cell(name)
-      col_index, row_index = *Axlsx::name_to_indices(name)
+      col_index, row_index = *Axlsx.name_to_indices(name)
 
       r = rows[row_index]
 
       if r
-        return r[col_index]
+        r[col_index]
       end
     end
 
@@ -754,15 +753,15 @@ module Axlsx
     def validate_sheet_name(name)
       DataTypeValidator.validate :worksheet_name, String, name
       # ignore first character (BOM) after encoding to utf16 because Excel does so, too.
-      raise ArgumentError, (ERR_SHEET_NAME_EMPTY) if name.empty?
+      raise ArgumentError, ERR_SHEET_NAME_EMPTY if name.empty?
 
       character_length = name.encode("utf-16")[1..-1].encode("utf-16").bytesize / 2
-      raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % name) if character_length > WORKSHEET_MAX_NAME_LENGTH
-      raise ArgumentError, (ERR_SHEET_NAME_CHARACTER_FORBIDDEN % name) if WORKSHEET_NAME_FORBIDDEN_CHARS.any? { |char| name.include? char }
+      raise ArgumentError, format(ERR_SHEET_NAME_TOO_LONG, name) if character_length > WORKSHEET_MAX_NAME_LENGTH
+      raise ArgumentError, format(ERR_SHEET_NAME_CHARACTER_FORBIDDEN, name) if WORKSHEET_NAME_FORBIDDEN_CHARS.any? { |char| name.include? char }
 
-      name = Axlsx::coder.encode(name)
-      sheet_names = @workbook.worksheets.reject { |s| s == self }.map { |s| s.name }
-      raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % name) if sheet_names.include?(name)
+      name = Axlsx.coder.encode(name)
+      sheet_names = @workbook.worksheets.reject { |s| s == self }.map(&:name)
+      raise ArgumentError, format(ERR_DUPLICATE_SHEET_NAME, name) if sheet_names.include?(name)
     end
 
     def serializable_parts
@@ -851,7 +850,7 @@ module Axlsx
     end
 
     def add_autofilter_defined_name_to_workbook
-      return if !auto_filter.range
+      return unless auto_filter.range
 
       workbook.add_defined_name auto_filter.defined_name, name: '_xlnm._FilterDatabase', local_sheet_id: index, hidden: 1
     end

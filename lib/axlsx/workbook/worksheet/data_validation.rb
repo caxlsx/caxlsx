@@ -178,57 +178,57 @@ module Axlsx
     attr_reader :type
 
     # @see formula1
-    def formula1=(v); Axlsx::validate_string(v); @formula1 = v end
+    def formula1=(v); Axlsx.validate_string(v); @formula1 = v end
 
     # @see formula2
-    def formula2=(v); Axlsx::validate_string(v); @formula2 = v end
+    def formula2=(v); Axlsx.validate_string(v); @formula2 = v end
 
     # @see allowBlank
-    def allowBlank=(v); Axlsx::validate_boolean(v); @allowBlank = v end
+    def allowBlank=(v); Axlsx.validate_boolean(v); @allowBlank = v end
 
     # @see error
-    def error=(v); Axlsx::validate_string(v); @error = v end
+    def error=(v); Axlsx.validate_string(v); @error = v end
 
     # @see errorStyle
-    def errorStyle=(v); Axlsx::validate_data_validation_error_style(v); @errorStyle = v end
+    def errorStyle=(v); Axlsx.validate_data_validation_error_style(v); @errorStyle = v end
 
     # @see errorTitle
-    def errorTitle=(v); Axlsx::validate_string(v); @errorTitle = v end
+    def errorTitle=(v); Axlsx.validate_string(v); @errorTitle = v end
 
     # @see operator
-    def operator=(v); Axlsx::validate_data_validation_operator(v); @operator = v end
+    def operator=(v); Axlsx.validate_data_validation_operator(v); @operator = v end
 
     # @see prompt
-    def prompt=(v); Axlsx::validate_string(v); @prompt = v end
+    def prompt=(v); Axlsx.validate_string(v); @prompt = v end
 
     # @see promptTitle
-    def promptTitle=(v); Axlsx::validate_string(v); @promptTitle = v end
+    def promptTitle=(v); Axlsx.validate_string(v); @promptTitle = v end
 
     # @see showDropDown
     def showDropDown=(v)
       warn 'The `showDropDown` has an inverted logic, false shows the dropdown list! You should use `hideDropDown` instead.'
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       @showDropDown = v
     end
 
     # @see hideDropDown
     def hideDropDown=(v)
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       # It's just an alias for the showDropDown attribute, hideDropDown should set the value of the original showDropDown.
       @showDropDown = v
     end
 
     # @see showErrorMessage
-    def showErrorMessage=(v); Axlsx::validate_boolean(v); @showErrorMessage = v end
+    def showErrorMessage=(v); Axlsx.validate_boolean(v); @showErrorMessage = v end
 
     # @see showInputMessage
-    def showInputMessage=(v); Axlsx::validate_boolean(v); @showInputMessage = v end
+    def showInputMessage=(v); Axlsx.validate_boolean(v); @showInputMessage = v end
 
     # @see sqref
-    def sqref=(v); Axlsx::validate_string(v); @sqref = v end
+    def sqref=(v); Axlsx.validate_string(v); @sqref = v end
 
     # @see type
-    def type=(v); Axlsx::validate_data_validation_type(v); @type = v end
+    def type=(v); Axlsx.validate_data_validation_type(v); @type = v end
 
     # Serializes the data validation
     # @param [String] str
@@ -243,8 +243,8 @@ module Axlsx
         str << key_value.first << '="' << Axlsx.booleanize(key_value.last).to_s << '"'
       end
       str << '>'
-      str << '<formula1>' << self.formula1 << '</formula1>' if @formula1 and valid_attributes.include?(:formula1)
-      str << '<formula2>' << self.formula2 << '</formula2>' if @formula2 and valid_attributes.include?(:formula2)
+      str << '<formula1>' << formula1 << '</formula1>' if formula1 && valid_attributes.include?(:formula1)
+      str << '<formula2>' << formula2 << '</formula2>' if formula2 && valid_attributes.include?(:formula2)
       str << '</dataValidation>'
     end
 

@@ -63,7 +63,7 @@ module Axlsx
     # @see rules
     def rules=(v); @rules = v end
     # @see sqref
-    def sqref=(v); Axlsx::validate_string(v); @sqref = v end
+    def sqref=(v); Axlsx.validate_string(v); @sqref = v end
 
     # Serializes the conditional formatting element
     # @example Conditional Formatting XML looks like:

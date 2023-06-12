@@ -24,8 +24,8 @@ module Axlsx
 
     # serialize the object
     def to_xml_string(idx, str = +'')
-      Axlsx::validate_unsigned_int(idx)
-      if !v.to_s.empty?
+      Axlsx.validate_unsigned_int(idx)
+      unless v.to_s.empty?
         str << '<c:pt idx="' << idx.to_s << '"><c:v>' << ::CGI.escapeHTML(v.to_s) << '</c:v></c:pt>'
       end
     end

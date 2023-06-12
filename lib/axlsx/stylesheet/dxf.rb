@@ -8,7 +8,7 @@ module Axlsx
 
     # The order in which the child elements is put in the XML seems to
     # be important for Excel
-    CHILD_ELEMENTS = [:font, :numFmt, :fill, :alignment, :border, :protection]
+    CHILD_ELEMENTS = [:font, :numFmt, :fill, :alignment, :border, :protection].freeze
     # does not support extList (ExtensionList)
 
     # The cell alignment for this style

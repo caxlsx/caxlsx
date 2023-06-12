@@ -13,7 +13,7 @@ class TestTableStyle < Test::Unit::TestCase
     assert_equal("fisher", @item.name)
     assert_nil(@item.pivot)
     assert_nil(@item.table)
-    ts = Axlsx::TableStyle.new 'price', :pivot => true, :table => true
+    ts = Axlsx::TableStyle.new 'price', pivot: true, table: true
 
     assert_equal('price', ts.name)
     assert(ts.pivot)

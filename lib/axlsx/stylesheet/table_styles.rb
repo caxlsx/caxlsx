@@ -26,16 +26,16 @@ module Axlsx
     attr_reader :defaultPivotStyle
 
     # @see defaultTableStyle
-    def defaultTableStyle=(v) Axlsx::validate_string(v); @defaultTableStyle = v; end
+    def defaultTableStyle=(v) Axlsx.validate_string(v); @defaultTableStyle = v; end
     # @see defaultPivotStyle
-    def defaultPivotStyle=(v) Axlsx::validate_string(v); @defaultPivotStyle = v; end
+    def defaultPivotStyle=(v) Axlsx.validate_string(v); @defaultPivotStyle = v; end
 
     # Serializes the object
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
       str << '<tableStyles '
-      serialized_attributes str, { :count => self.size }
+      serialized_attributes str, { count: self.size }
       str << '>'
       each { |table_style| table_style.to_xml_string(str) }
       str << '</tableStyles>'

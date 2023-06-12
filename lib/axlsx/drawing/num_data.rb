@@ -25,13 +25,13 @@ module Axlsx
       @tag_name = values.first.is_a?(Cell) ? :numCache : :numLit
       values.each do |value|
         value = value.is_formula? ? 0 : value.value if value.is_a?(Cell)
-        @pt << NumVal.new(:v => value)
+        @pt << NumVal.new(v: value)
       end
     end
 
     # @see format_code
     def format_code=(v = 'General')
-      Axlsx::validate_string(v)
+      Axlsx.validate_string(v)
       @format_code = v
     end
 

@@ -25,10 +25,10 @@ module Axlsx
     # Create a temporary directory for writing files to.
     #
     # The directory and its contents are removed at the end of the block.
-    def open(output, &block)
+    def open(output)
       Dir.mktmpdir do |dir|
         @dir = dir
-        block.call(self)
+        yield(self)
         write_file
         zip_parts(output)
       end
@@ -63,8 +63,8 @@ module Axlsx
       escaped_dir = Shellwords.shellescape(@dir)
       command = "cd #{escaped_dir} && #{@zip_command} #{output} #{inputs}"
       stdout_and_stderr, status = Open3.capture2e(command)
-      if !status.success?
-        raise(ZipError.new(stdout_and_stderr))
+      unless status.success?
+        raise ZipError, stdout_and_stderr
       end
     end
   end

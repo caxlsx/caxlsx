@@ -42,18 +42,18 @@ module Axlsx
     alias :tickMarkSkip :tick_mark_skip
 
     # regex for validating label offset
-    LBL_OFFSET_REGEX = /0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)/
+    LBL_OFFSET_REGEX = /0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)/.freeze
 
     # @see tick_lbl_skip
-    def tick_lbl_skip=(v) Axlsx::validate_unsigned_int(v); @tick_lbl_skip = v; end
+    def tick_lbl_skip=(v) Axlsx.validate_unsigned_int(v); @tick_lbl_skip = v; end
     alias :tickLblSkip= :tick_lbl_skip=
 
     # @see tick_mark_skip
-    def tick_mark_skip=(v) Axlsx::validate_unsigned_int(v); @tick_mark_skip = v; end
+    def tick_mark_skip=(v) Axlsx.validate_unsigned_int(v); @tick_mark_skip = v; end
     alias :tickMarkSkip= :tick_mark_skip=
 
     # From the docs: This element specifies that this axis is a date or text axis based on the data that is used for the axis labels, not a specific choice.
-    def auto=(v) Axlsx::validate_boolean(v); @auto = v; end
+    def auto=(v) Axlsx.validate_boolean(v); @auto = v; end
 
     # specifies how the perpendicular axis is crossed
     # must be one of [:ctr, :l, :r]

@@ -47,21 +47,21 @@ module Axlsx
     attr_reader :tint
 
     # @see auto
-    def auto=(v) Axlsx::validate_boolean v; @auto = v end
+    def auto=(v) Axlsx.validate_boolean v; @auto = v end
 
     # @see color
     def rgb=(v)
-      Axlsx::validate_string(v)
+      Axlsx.validate_string(v)
       v = v.upcase
-      v = v * 3 if v.size == 2
+      v *= 3 if v.size == 2
       v = v.rjust(8, 'FF')
-      raise ArgumentError, "Invalid color rgb value: #{v}." unless v.match(/[0-9A-F]{8}/)
+      raise ArgumentError, "Invalid color rgb value: #{v}." unless /[0-9A-F]{8}/.match?(v)
 
       @rgb = v
     end
 
     # @see tint
-    def tint=(v) Axlsx::validate_float v; @tint = v end
+    def tint=(v) Axlsx.validate_float v; @tint = v end
 
     # This version does not support themes
     # def theme=(v) Axlsx::validate_unsigned_integer v; @theme = v end
@@ -73,7 +73,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'', tag_name = 'color')
-      serialized_tag('' + tag_name + '', str)
+      serialized_tag(tag_name.to_s, str)
     end
   end
 end

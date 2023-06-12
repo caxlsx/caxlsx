@@ -166,8 +166,8 @@ module Axlsx
   # xml content type extensions
   XML_EX = "xml"
 
-  # jpeg extension
-  JPEG_EX = "jpeg"
+  # jpeg extensions
+  JPEG_EXS = ["jpeg", "jpg"].freeze
 
   # gif extension
   GIF_EX = "gif"
@@ -239,25 +239,25 @@ module Axlsx
   COMMENT_PN = "comments%d.xml"
 
   # location of schema files for validation
-  SCHEMA_BASE = (File.dirname(__FILE__) + '/../../schema/').freeze
+  SCHEMA_BASE = "#{File.dirname(__FILE__)}/../../schema/"
 
   # App validation schema
-  APP_XSD = (SCHEMA_BASE + "shared-documentPropertiesExtended.xsd").freeze
+  APP_XSD = "#{SCHEMA_BASE}shared-documentPropertiesExtended.xsd"
 
   # core validation schema
-  CORE_XSD = (SCHEMA_BASE + "opc-coreProperties.xsd").freeze
+  CORE_XSD = "#{SCHEMA_BASE}opc-coreProperties.xsd"
 
   # content types validation schema
-  CONTENT_TYPES_XSD = (SCHEMA_BASE + "opc-contentTypes.xsd").freeze
+  CONTENT_TYPES_XSD = "#{SCHEMA_BASE}opc-contentTypes.xsd"
 
   # rels validation schema
-  RELS_XSD = (SCHEMA_BASE + "opc-relationships.xsd").freeze
+  RELS_XSD = "#{SCHEMA_BASE}opc-relationships.xsd"
 
   # spreadsheetML validation schema
-  SML_XSD = (SCHEMA_BASE + "sml.xsd").freeze
+  SML_XSD = "#{SCHEMA_BASE}sml.xsd"
 
   # drawing validation schema
-  DRAWING_XSD = (SCHEMA_BASE + "dml-spreadsheetDrawing.xsd").freeze
+  DRAWING_XSD = "#{SCHEMA_BASE}dml-spreadsheetDrawing.xsd"
 
   # number format id for pecentage formatting using the default formatting id.
   NUM_FMT_PERCENT = 9
@@ -356,7 +356,7 @@ module Axlsx
   # x1F Information Separator One
   #
   # The following are not dealt with.
-  # If you have this in your data, expect excel to blow up!
+  # If you have this in your data, expect Excel to blow up!
   #
   # x7F	Delete
   # x80	Control 0080
@@ -413,4 +413,16 @@ module Axlsx
 
   # Numeric recognition
   NUMERIC_REGEX = /\A[+-]?\d+?\Z/.freeze
+
+  # Leading characters that indicate a formula.
+  # See: https://owasp.org/www-community/attacks/CSV_Injection
+  FORMULA_PREFIX = '='
+
+  # Leading characters that indicate an array formula.
+  ARRAY_FORMULA_PREFIX = '{='
+
+  # Trailing character that indicates an array formula.
+  ARRAY_FORMULA_SUFFIX = '}'
+
+  BOOLEAN_VALUES = [true, false].freeze
 end

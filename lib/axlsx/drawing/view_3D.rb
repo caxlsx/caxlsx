@@ -18,10 +18,10 @@ module Axlsx
     end
 
     # Validation for hPercent
-    H_PERCENT_REGEX = /0*(([5-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)/
+    H_PERCENT_REGEX = /0*(([5-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)/.freeze
 
     # validation for depthPercent
-    DEPTH_PERCENT_REGEX = /0*(([2-9][0-9])|([1-9][0-9][0-9])|(1[0-9][0-9][0-9])|2000)/
+    DEPTH_PERCENT_REGEX = /0*(([2-9][0-9])|([1-9][0-9][0-9])|(1[0-9][0-9][0-9])|2000)/.freeze
 
     # x rotation for the chart
     # must be between -90 and 90
@@ -82,7 +82,7 @@ module Axlsx
     alias :depthPercent= :depth_percent=
 
     # @see r_ang_ax
-    def r_ang_ax=(v) Axlsx::validate_boolean(v); @r_ang_ax = v; end
+    def r_ang_ax=(v) Axlsx.validate_boolean(v); @r_ang_ax = v; end
     alias :rAngAx= :r_ang_ax=
 
     # @see perspective
@@ -111,7 +111,7 @@ module Axlsx
       val = Axlsx.instance_values_for(self)[name]
       return "" if val.nil?
 
-      "<%s:%s val='%s'/>" % [namespace, Axlsx::camel(name, false), val]
+      format("<%s:%s val='%s'/>", namespace, Axlsx.camel(name, false), val)
     end
   end
 end

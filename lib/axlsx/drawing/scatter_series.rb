@@ -43,7 +43,7 @@ module Axlsx
         @smooth = [:smooth, :smoothMarker].include?(chart.scatter_style)
       else
         # Set smoothing according to the option provided
-        Axlsx::validate_boolean(options[:smooth])
+        Axlsx.validate_boolean(options[:smooth])
         @smooth = options[:smooth]
       end
       @ln_width = options[:ln_width] unless options[:ln_width].nil?
@@ -51,8 +51,8 @@ module Axlsx
       @marker_symbol = :default
 
       super(chart, options)
-      @xData = AxDataSource.new(:tag_name => :xVal, :data => options[:xData]) unless options[:xData].nil?
-      @yData = NumDataSource.new({ :tag_name => :yVal, :data => options[:yData] }) unless options[:yData].nil?
+      @xData = AxDataSource.new(tag_name: :xVal, data: options[:xData]) unless options[:xData].nil?
+      @yData = NumDataSource.new({ tag_name: :yVal, data: options[:yData] }) unless options[:yData].nil?
     end
 
     # @see color
@@ -62,7 +62,7 @@ module Axlsx
 
     # @see smooth
     def smooth=(v)
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       @smooth = v
     end
 
@@ -73,7 +73,7 @@ module Axlsx
 
     # @see marker_symbol
     def marker_symbol=(v)
-      Axlsx::validate_marker_symbol(v)
+      Axlsx.validate_marker_symbol(v)
       @marker_symbol = v
     end
 
@@ -110,7 +110,7 @@ module Axlsx
         end
         @xData.to_xml_string(str) unless @xData.nil?
         @yData.to_xml_string(str) unless @yData.nil?
-        str << '<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>'
+        str << '<c:smooth val="' << (smooth ? '1' : '0') << '"/>'
       end
       str
     end
@@ -121,7 +121,7 @@ module Axlsx
       if !@show_marker
         '<c:symbol val="none"/>'
       elsif @marker_symbol != :default
-        '<c:symbol val="' + @marker_symbol.to_s + '"/>'
+        '<c:symbol val="' << @marker_symbol.to_s << '"/>'
       end.to_s
     end
   end

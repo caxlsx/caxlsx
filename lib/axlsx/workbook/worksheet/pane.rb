@@ -96,28 +96,28 @@ module Axlsx
 
     # @see active_pane
     def active_pane=(v)
-      Axlsx::validate_pane_type(v)
-      @active_pane = Axlsx::camel(v.to_s, false)
+      Axlsx.validate_pane_type(v)
+      @active_pane = Axlsx.camel(v.to_s, false)
     end
 
     # @see state
     def state=(v)
-      Axlsx::validate_split_state_type(v)
-      @state = Axlsx::camel(v.to_s, false)
+      Axlsx.validate_split_state_type(v)
+      @state = Axlsx.camel(v.to_s, false)
     end
 
     # @see top_left_cell
     def top_left_cell=(v)
-      cell = (v.class == Axlsx::Cell ? v.r_abs : v)
-      Axlsx::validate_string(cell)
+      cell = (v.instance_of?(Axlsx::Cell) ? v.r_abs : v)
+      Axlsx.validate_string(cell)
       @top_left_cell = cell
     end
 
     # @see x_split
-    def x_split=(v); Axlsx::validate_unsigned_int(v); @x_split = v end
+    def x_split=(v); Axlsx.validate_unsigned_int(v); @x_split = v end
 
     # @see y_split
-    def y_split=(v); Axlsx::validate_unsigned_int(v); @y_split = v end
+    def y_split=(v); Axlsx.validate_unsigned_int(v); @y_split = v end
 
     # Serializes the data validation
     # @param [String] str

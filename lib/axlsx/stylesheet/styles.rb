@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
 module Axlsx
-  require 'axlsx/stylesheet/border.rb'
-  require 'axlsx/stylesheet/border_pr.rb'
-  require 'axlsx/stylesheet/cell_alignment.rb'
-  require 'axlsx/stylesheet/cell_style.rb'
-  require 'axlsx/stylesheet/color.rb'
-  require 'axlsx/stylesheet/fill.rb'
-  require 'axlsx/stylesheet/font.rb'
-  require 'axlsx/stylesheet/gradient_fill.rb'
-  require 'axlsx/stylesheet/gradient_stop.rb'
-  require 'axlsx/stylesheet/num_fmt.rb'
-  require 'axlsx/stylesheet/pattern_fill.rb'
-  require 'axlsx/stylesheet/table_style.rb'
-  require 'axlsx/stylesheet/table_styles.rb'
-  require 'axlsx/stylesheet/table_style_element.rb'
-  require 'axlsx/stylesheet/dxf.rb'
-  require 'axlsx/stylesheet/xf.rb'
-  require 'axlsx/stylesheet/cell_protection.rb'
+  require 'axlsx/stylesheet/border'
+  require 'axlsx/stylesheet/border_pr'
+  require 'axlsx/stylesheet/cell_alignment'
+  require 'axlsx/stylesheet/cell_style'
+  require 'axlsx/stylesheet/color'
+  require 'axlsx/stylesheet/fill'
+  require 'axlsx/stylesheet/font'
+  require 'axlsx/stylesheet/gradient_fill'
+  require 'axlsx/stylesheet/gradient_stop'
+  require 'axlsx/stylesheet/num_fmt'
+  require 'axlsx/stylesheet/pattern_fill'
+  require 'axlsx/stylesheet/table_style'
+  require 'axlsx/stylesheet/table_styles'
+  require 'axlsx/stylesheet/table_style_element'
+  require 'axlsx/stylesheet/dxf'
+  require 'axlsx/stylesheet/xf'
+  require 'axlsx/stylesheet/cell_protection'
 
   # The Styles class manages worksheet styles
   # In addition to creating the require style objects for a valid xlsx package, this class provides the key mechanism for adding styles to your workbook, and safely applying them to the cells of your worksheet.
@@ -110,7 +110,7 @@ module Axlsx
     # @see Styles#add_style
     attr_reader :dxfs
 
-    # The collection of table styles that will be available to the user in the excel UI
+    # The collection of table styles that will be available to the user in the Excel UI
     # @return [SimpleTypedList]
     # @note The recommended way to manage styles is with add_style
     # @see Styles#add_style
@@ -265,12 +265,12 @@ module Axlsx
       alignment = parse_alignment_options options
       protection = parse_protection_options options
 
-      case options[:type]
-      when :dxf
-        style = Dxf.new :fill => fill, :font => font, :numFmt => numFmt, :border => border, :alignment => alignment, :protection => protection
-      else
-        style = Xf.new :fillId => fill || 0, :fontId => font || 0, :numFmtId => numFmt || 0, :borderId => border || 0, :alignment => alignment, :protection => protection, :applyFill => !fill.nil?, :applyFont => !font.nil?, :applyNumberFormat => !numFmt.nil?, :applyBorder => !border.nil?, :applyAlignment => !alignment.nil?, :applyProtection => !protection.nil?
-      end
+      style = case options[:type]
+              when :dxf
+                Dxf.new fill: fill, font: font, numFmt: numFmt, border: border, alignment: alignment, protection: protection
+              else
+                Xf.new fillId: fill || 0, fontId: font || 0, numFmtId: numFmt || 0, borderId: border || 0, alignment: alignment, protection: protection, applyFill: !fill.nil?, applyFont: !font.nil?, applyNumberFormat: !numFmt.nil?, applyBorder: !border.nil?, applyAlignment: !alignment.nil?, applyProtection: !protection.nil?
+              end
 
       if options[:type] == :xf
         xf_index = (cellXfs << style)
@@ -278,11 +278,9 @@ module Axlsx
         # Add styles to style_index cache for re-use
         style_index[xf_index] = raw_style
 
-        return xf_index
+        xf_index
       else
-        dxf_index = (dxfs << style)
-
-        return dxf_index
+        dxfs << style
       end
     end
 
@@ -329,10 +327,10 @@ module Axlsx
 
       Axlsx.instance_values_for(fonts.first).each do |key, value|
         # Thanks for that 1.8.7 - cant do a simple merge...
-        options[key.to_sym] = value unless options.keys.include?(key.to_sym)
+        options[key.to_sym] = value unless options.key?(key.to_sym)
       end
       font = Font.new(options)
-      font.color = Color.new(:rgb => options[:fg_color]) if options[:fg_color]
+      font.color = Color.new(rgb: options[:fg_color]) if options[:fg_color]
       font.name = options[:font_name] if options[:font_name]
       options[:type] == :dxf ? font : fonts << font
     end
@@ -344,7 +342,7 @@ module Axlsx
     def parse_fill_options(options = {})
       return unless options[:bg_color]
 
-      color = Color.new(:rgb => options[:bg_color])
+      color = Color.new(rgb: options[:bg_color])
       dxf = options[:type] == :dxf
       color_key = dxf ? :bgColor : :fgColor
       pattern = PatternFill.new(:patternType => :solid, color_key => color)
@@ -372,7 +370,7 @@ module Axlsx
 
       if options[:border].is_a?(Integer)
         if options[:border] >= borders.size
-          raise ArgumentError, (ERR_INVALID_BORDER_ID % options[:border])
+          raise ArgumentError, format(ERR_INVALID_BORDER_ID, options[:border])
         end
 
         if options[:type] == :dxf
@@ -383,8 +381,8 @@ module Axlsx
       end
 
       validate_border_hash = ->(val) {
-        if !(val.keys.include?(:style) && val.keys.include?(:color))
-          raise ArgumentError, (ERR_INVALID_BORDER_OPTIONS % options[:border])
+        unless val.key?(:style) && val.key?(:color)
+          raise ArgumentError, format(ERR_INVALID_BORDER_OPTIONS, options[:border])
         end
       }
 
@@ -392,24 +390,22 @@ module Axlsx
 
       if options[:border].nil?
         base_border_opts = {}
-      else
-        if options[:border].is_a?(Array)
-          borders_array += options[:border]
+      elsif options[:border].is_a?(Array)
+        borders_array += options[:border]
 
-          base_border_opts = {}
+        base_border_opts = {}
 
-          options[:border].each do |b_opts|
-            if b_opts[:edges].nil?
-              base_border_opts = base_border_opts.merge(b_opts)
-            end
+        options[:border].each do |b_opts|
+          if b_opts[:edges].nil?
+            base_border_opts = base_border_opts.merge(b_opts)
           end
-        else
-          borders_array << options[:border]
-
-          base_border_opts = options[:border]
-
-          validate_border_hash.call(base_border_opts)
         end
+      else
+        borders_array << options[:border]
+
+        base_border_opts = options[:border]
+
+        validate_border_hash.call(base_border_opts)
       end
 
       Border::EDGES.each do |edge|
@@ -443,23 +439,23 @@ module Axlsx
           next
         end
 
-        if !edge_b_opts.empty?
+        unless edge_b_opts.empty?
           if base_border_opts.empty?
             validate_border_hash.call(edge_b_opts)
           end
 
           border.prs << BorderPr.new({
-            :name => edge,
-            :style => edge_b_opts[:style],
-            :color => Color.new(:rgb => edge_b_opts[:color])
+            name: edge,
+            style: edge_b_opts[:style],
+            color: Color.new(rgb: edge_b_opts[:color])
           })
         end
       end
 
       if options[:type] == :dxf
-        return border
+        border
       else
-        return borders << border
+        borders << border
       end
     end
 
@@ -474,8 +470,8 @@ module Axlsx
       # When the type is :dxf we always need to create a new numFmt object
       if options[:format_code] || options[:type] == :dxf
         # If this is a standard xf we pull from numFmts the highest current and increment for num_fmt
-        options[:num_fmt] ||= (@numFmts.map { |num_fmt| num_fmt.numFmtId }.max + 1) if options[:type] != :dxf
-        numFmt = NumFmt.new(:numFmtId => options[:num_fmt] || 0, :formatCode => options[:format_code].to_s)
+        options[:num_fmt] ||= (@numFmts.map(&:numFmtId).max + 1) if options[:type] != :dxf
+        numFmt = NumFmt.new(numFmtId: options[:num_fmt] || 0, formatCode: options[:format_code].to_s)
         options[:type] == :dxf ? numFmt : (numFmts << numFmt; numFmt.numFmtId)
       else
         options[:num_fmt]
@@ -500,46 +496,46 @@ module Axlsx
     # Axlsx::STYLE_THIN_BORDER
     def load_default_styles
       @numFmts = SimpleTypedList.new NumFmt, 'numFmts'
-      @numFmts << NumFmt.new(:numFmtId => NUM_FMT_YYYYMMDD, :formatCode => "yyyy/mm/dd")
-      @numFmts << NumFmt.new(:numFmtId => NUM_FMT_YYYYMMDDHHMMSS, :formatCode => "yyyy/mm/dd hh:mm:ss")
+      @numFmts << NumFmt.new(numFmtId: NUM_FMT_YYYYMMDD, formatCode: "yyyy/mm/dd")
+      @numFmts << NumFmt.new(numFmtId: NUM_FMT_YYYYMMDDHHMMSS, formatCode: "yyyy/mm/dd hh:mm:ss")
 
       @numFmts.lock
 
       @fonts = SimpleTypedList.new Font, 'fonts'
-      @fonts << Font.new(:name => "Arial", :sz => 11, :family => 1)
+      @fonts << Font.new(name: "Arial", sz: 11, family: 1)
       @fonts.lock
 
       @fills = SimpleTypedList.new Fill, 'fills'
-      @fills << Fill.new(Axlsx::PatternFill.new(:patternType => :none))
-      @fills << Fill.new(Axlsx::PatternFill.new(:patternType => :gray125))
+      @fills << Fill.new(Axlsx::PatternFill.new(patternType: :none))
+      @fills << Fill.new(Axlsx::PatternFill.new(patternType: :gray125))
       @fills.lock
 
       @borders = SimpleTypedList.new Border, 'borders'
       @borders << Border.new
       black_border = Border.new
       [:left, :right, :top, :bottom].each do |item|
-        black_border.prs << BorderPr.new(:name => item, :style => :thin, :color => Color.new(:rgb => "FF000000"))
+        black_border.prs << BorderPr.new(name: item, style: :thin, color: Color.new(rgb: "FF000000"))
       end
       @borders << black_border
       @borders.lock
 
       @cellStyleXfs = SimpleTypedList.new Xf, "cellStyleXfs"
-      @cellStyleXfs << Xf.new(:borderId => 0, :numFmtId => 0, :fontId => 0, :fillId => 0)
+      @cellStyleXfs << Xf.new(borderId: 0, numFmtId: 0, fontId: 0, fillId: 0)
       @cellStyleXfs.lock
 
       @cellStyles = SimpleTypedList.new CellStyle, 'cellStyles'
-      @cellStyles << CellStyle.new(:name => "Normal", :builtinId => 0, :xfId => 0)
+      @cellStyles << CellStyle.new(name: "Normal", builtinId: 0, xfId: 0)
       @cellStyles.lock
 
       @cellXfs = SimpleTypedList.new Xf, "cellXfs"
-      @cellXfs << Xf.new(:borderId => 0, :xfId => 0, :numFmtId => 0, :fontId => 0, :fillId => 0)
-      @cellXfs << Xf.new(:borderId => 1, :xfId => 0, :numFmtId => 0, :fontId => 0, :fillId => 0)
+      @cellXfs << Xf.new(borderId: 0, xfId: 0, numFmtId: 0, fontId: 0, fillId: 0)
+      @cellXfs << Xf.new(borderId: 1, xfId: 0, numFmtId: 0, fontId: 0, fillId: 0)
       # default date formatting
-      @cellXfs << Xf.new(:borderId => 0, :xfId => 0, :numFmtId => 14, :fontId => 0, :fillId => 0, :applyNumberFormat => 1)
+      @cellXfs << Xf.new(borderId: 0, xfId: 0, numFmtId: 14, fontId: 0, fillId: 0, applyNumberFormat: 1)
       @cellXfs.lock
 
       @dxfs = SimpleTypedList.new(Dxf, "dxfs"); @dxfs.lock
-      @tableStyles = TableStyles.new(:defaultTableStyle => "TableStyleMedium9", :defaultPivotStyle => "PivotStyleLight16"); @tableStyles.lock
+      @tableStyles = TableStyles.new(defaultTableStyle: "TableStyleMedium9", defaultPivotStyle: "PivotStyleLight16"); @tableStyles.lock
     end
   end
 end

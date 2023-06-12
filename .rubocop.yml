@@ -16,6 +16,9 @@ AllCops:
     - 'examples/**/*'
     - 'vendor/bundle/**/*'
 
+Gemspec:
+  Enabled: true
+
 Layout:
   Enabled: true
 
@@ -31,7 +34,13 @@ Lint:
 Minitest:
   Enabled: true
 
+Naming:
+  Enabled: true
+
 Performance:
+  Enabled: true
+
+Security:
   Enabled: true
 
 Style:

@@ -49,7 +49,7 @@ module Axlsx
     attr_reader :showValue
 
     # @see iconSet
-    def iconSet=(v); Axlsx::validate_icon_set(v); @iconSet = v end
+    def iconSet=(v); Axlsx.validate_icon_set(v); @iconSet = v end
 
     # @see showValue
     def showValue=(v); Axlsx.validate_boolean(v); @showValue = v end
@@ -75,7 +75,7 @@ module Axlsx
     # I am keeping this private for now as I am not sure what impact changes to the required two cfvo objects will do.
     def initialize_value_objects
       @value_objects = SimpleTypedList.new Cfvo
-      @value_objects.concat [Cfvo.new(:type => :percent, :val => 0), Cfvo.new(:type => :percent, :val => 33), Cfvo.new(:type => :percent, :val => 67)]
+      @value_objects.concat [Cfvo.new(type: :percent, val: 0), Cfvo.new(type: :percent, val: 33), Cfvo.new(type: :percent, val: 67)]
       @value_objects.lock
     end
   end

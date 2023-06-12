@@ -5,7 +5,7 @@ require 'tc_helper'
 class TestRow < Test::Unit::TestCase
   def setup
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name => "hmmm"
+    @ws = p.workbook.add_worksheet name: "hmmm"
     @row = @ws.add_row
   end
 
@@ -17,7 +17,7 @@ class TestRow < Test::Unit::TestCase
   end
 
   def test_initialize_with_fixed_height
-    row = @ws.add_row([1, 2, 3, 4, 5], :height => 40)
+    row = @ws.add_row([1, 2, 3, 4, 5], height: 40)
 
     assert_equal(40, row.height)
     assert(row.custom_height)
@@ -55,13 +55,13 @@ class TestRow < Test::Unit::TestCase
   end
 
   def test_array_to_cells
-    r = @ws.add_row [1, 2, 3], :style => 1, :types => [:integer, :string, :float]
+    r = @ws.add_row [1, 2, 3], style: 1, types: [:integer, :string, :float]
 
     assert_equal(3, r.cells.size)
     r.cells.each do |c|
       assert_equal(1, c.style)
     end
-    r = @ws.add_row [1, 2, 3], :style => [1]
+    r = @ws.add_row [1, 2, 3], style: [1]
 
     assert_equal(1, r.cells.first.style, "only apply style to cells with at the same index of of the style array")
     assert_equal(0, r.cells.last.style, "only apply style to cells with at the same index of of the style array")

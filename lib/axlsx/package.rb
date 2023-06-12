@@ -33,7 +33,7 @@ module Axlsx
     # Shortcut to specify that the workbook should use autowidth
     # @see Workbook#use_autowidth
     def use_autowidth=(v)
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       workbook.use_autowidth = v
     end
 
@@ -46,7 +46,7 @@ module Axlsx
     # Shortcut to specify that the workbook should use shared strings
     # @see Workbook#use_shared_strings
     def use_shared_strings=(v)
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       workbook.use_shared_strings = v
     end
 
@@ -101,7 +101,7 @@ module Axlsx
     #   s = p.to_stream()
     #   File.open('example_streamed.xlsx', 'wb') { |f| f.write(s.read) }
     def serialize(output, options = {}, secondary_options = nil)
-      if !workbook.styles_applied
+      unless workbook.styles_applied
         workbook.apply_styles
       end
 
@@ -126,7 +126,7 @@ module Axlsx
     # @param [Boolean] confirm_valid Validate the package prior to serialization.
     # @return [StringIO|Boolean] False if confirm_valid and validation errors exist. rewound string IO if not.
     def to_stream(confirm_valid = false)
-      if !workbook.styles_applied
+      unless workbook.styles_applied
         workbook.apply_styles
       end
 
@@ -145,7 +145,7 @@ module Axlsx
     # Encrypt the package into a CFB using the password provided
     # This is not ready yet
     def encrypt(file_name, password)
-      return false
+      false
       # moc = MsOffCrypto.new(file_name, password)
       # moc.save
     end
@@ -159,7 +159,7 @@ module Axlsx
     #
     #   If by chance you are able to create a package that does not validate it indicates that the internal
     #   validation is not robust enough and needs to be improved. Please report your errors to the gem author.
-    # @see http://www.ecma-international.org/publications/standards/Ecma-376.htm
+    # @see https://www.ecma-international.org/publications-and-standards/standards/ecma-376/
     # @example
     #  # The following will output any error messages found in serialization.
     #  p = Axlsx::Package.new
@@ -216,57 +216,57 @@ module Axlsx
     # @private
     def parts
       parts = [
-        { :entry => "xl/#{STYLES_PN}", :doc => workbook.styles, :schema => SML_XSD },
-        { :entry => CORE_PN, :doc => @core, :schema => CORE_XSD },
-        { :entry => APP_PN, :doc => @app, :schema => APP_XSD },
-        { :entry => WORKBOOK_RELS_PN, :doc => workbook.relationships, :schema => RELS_XSD },
-        { :entry => WORKBOOK_PN, :doc => workbook, :schema => SML_XSD }
+        { entry: "xl/#{STYLES_PN}", doc: workbook.styles, schema: SML_XSD },
+        { entry: CORE_PN, doc: @core, schema: CORE_XSD },
+        { entry: APP_PN, doc: @app, schema: APP_XSD },
+        { entry: WORKBOOK_RELS_PN, doc: workbook.relationships, schema: RELS_XSD },
+        { entry: WORKBOOK_PN, doc: workbook, schema: SML_XSD }
       ]
 
       workbook.drawings.each do |drawing|
-        parts << { :entry => "xl/#{drawing.rels_pn}", :doc => drawing.relationships, :schema => RELS_XSD }
-        parts << { :entry => "xl/#{drawing.pn}", :doc => drawing, :schema => DRAWING_XSD }
+        parts << { entry: "xl/#{drawing.rels_pn}", doc: drawing.relationships, schema: RELS_XSD }
+        parts << { entry: "xl/#{drawing.pn}", doc: drawing, schema: DRAWING_XSD }
       end
 
       workbook.tables.each do |table|
-        parts << { :entry => "xl/#{table.pn}", :doc => table, :schema => SML_XSD }
+        parts << { entry: "xl/#{table.pn}", doc: table, schema: SML_XSD }
       end
       workbook.pivot_tables.each do |pivot_table|
         cache_definition = pivot_table.cache_definition
-        parts << { :entry => "xl/#{pivot_table.rels_pn}", :doc => pivot_table.relationships, :schema => RELS_XSD }
-        parts << { :entry => "xl/#{pivot_table.pn}", :doc => pivot_table } # , :schema => SML_XSD}
-        parts << { :entry => "xl/#{cache_definition.pn}", :doc => cache_definition } # , :schema => SML_XSD}
+        parts << { entry: "xl/#{pivot_table.rels_pn}", doc: pivot_table.relationships, schema: RELS_XSD }
+        parts << { entry: "xl/#{pivot_table.pn}", doc: pivot_table } # , :schema => SML_XSD}
+        parts << { entry: "xl/#{cache_definition.pn}", doc: cache_definition } # , :schema => SML_XSD}
       end
 
       workbook.comments.each do |comment|
-        if comment.size > 0
-          parts << { :entry => "xl/#{comment.pn}", :doc => comment, :schema => SML_XSD }
-          parts << { :entry => "xl/#{comment.vml_drawing.pn}", :doc => comment.vml_drawing, :schema => nil }
+        unless comment.empty?
+          parts << { entry: "xl/#{comment.pn}", doc: comment, schema: SML_XSD }
+          parts << { entry: "xl/#{comment.vml_drawing.pn}", doc: comment.vml_drawing, schema: nil }
         end
       end
 
       workbook.charts.each do |chart|
-        parts << { :entry => "xl/#{chart.pn}", :doc => chart, :schema => DRAWING_XSD }
+        parts << { entry: "xl/#{chart.pn}", doc: chart, schema: DRAWING_XSD }
       end
 
       workbook.images.each do |image|
-        parts << { :entry => "xl/#{image.pn}", :path => image.image_src } unless image.remote?
+        parts << { entry: "xl/#{image.pn}", path: image.image_src } unless image.remote?
       end
 
       if use_shared_strings
-        parts << { :entry => "xl/#{SHARED_STRINGS_PN}", :doc => workbook.shared_strings, :schema => SML_XSD }
+        parts << { entry: "xl/#{SHARED_STRINGS_PN}", doc: workbook.shared_strings, schema: SML_XSD }
       end
 
       workbook.worksheets.each do |sheet|
-        parts << { :entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships, :schema => RELS_XSD }
-        parts << { :entry => "xl/#{sheet.pn}", :doc => sheet, :schema => SML_XSD }
+        parts << { entry: "xl/#{sheet.rels_pn}", doc: sheet.relationships, schema: RELS_XSD }
+        parts << { entry: "xl/#{sheet.pn}", doc: sheet, schema: SML_XSD }
       end
 
       # Sort parts for correct MIME detection
       [
-        { :entry => CONTENT_TYPES_PN, :doc => content_types, :schema => CONTENT_TYPES_XSD },
-        { :entry => RELS_PN, :doc => relationships, :schema => RELS_XSD },
-        *(parts.sort_by { |part| part[:entry] }.reverse)
+        { entry: CONTENT_TYPES_PN, doc: content_types, schema: CONTENT_TYPES_XSD },
+        { entry: RELS_PN, doc: relationships, schema: RELS_XSD },
+        *parts.sort_by { |part| part[:entry] }.reverse
       ]
     end
 
@@ -292,56 +292,56 @@ module Axlsx
     def content_types
       c_types = base_content_types
       workbook.drawings.each do |drawing|
-        c_types << Axlsx::Override.new(:PartName => "/xl/#{drawing.pn}",
-                                       :ContentType => DRAWING_CT)
+        c_types << Axlsx::Override.new(PartName: "/xl/#{drawing.pn}",
+                                       ContentType: DRAWING_CT)
       end
 
       workbook.charts.each do |chart|
-        c_types << Axlsx::Override.new(:PartName => "/xl/#{chart.pn}",
-                                       :ContentType => CHART_CT)
+        c_types << Axlsx::Override.new(PartName: "/xl/#{chart.pn}",
+                                       ContentType: CHART_CT)
       end
 
       workbook.tables.each do |table|
-        c_types << Axlsx::Override.new(:PartName => "/xl/#{table.pn}",
-                                       :ContentType => TABLE_CT)
+        c_types << Axlsx::Override.new(PartName: "/xl/#{table.pn}",
+                                       ContentType: TABLE_CT)
       end
 
       workbook.pivot_tables.each do |pivot_table|
-        c_types << Axlsx::Override.new(:PartName => "/xl/#{pivot_table.pn}",
-                                       :ContentType => PIVOT_TABLE_CT)
-        c_types << Axlsx::Override.new(:PartName => "/xl/#{pivot_table.cache_definition.pn}",
-                                       :ContentType => PIVOT_TABLE_CACHE_DEFINITION_CT)
+        c_types << Axlsx::Override.new(PartName: "/xl/#{pivot_table.pn}",
+                                       ContentType: PIVOT_TABLE_CT)
+        c_types << Axlsx::Override.new(PartName: "/xl/#{pivot_table.cache_definition.pn}",
+                                       ContentType: PIVOT_TABLE_CACHE_DEFINITION_CT)
       end
 
       workbook.comments.each do |comment|
-        if comment.size > 0
-          c_types << Axlsx::Override.new(:PartName => "/xl/#{comment.pn}",
-                                         :ContentType => COMMENT_CT)
+        unless comment.empty?
+          c_types << Axlsx::Override.new(PartName: "/xl/#{comment.pn}",
+                                         ContentType: COMMENT_CT)
         end
       end
 
-      if workbook.comments.size > 0
-        c_types << Axlsx::Default.new(:Extension => "vml", :ContentType => VML_DRAWING_CT)
+      unless workbook.comments.empty?
+        c_types << Axlsx::Default.new(Extension: "vml", ContentType: VML_DRAWING_CT)
       end
 
       workbook.worksheets.each do |sheet|
-        c_types << Axlsx::Override.new(:PartName => "/xl/#{sheet.pn}",
-                                       :ContentType => WORKSHEET_CT)
+        c_types << Axlsx::Override.new(PartName: "/xl/#{sheet.pn}",
+                                       ContentType: WORKSHEET_CT)
       end
       exts = workbook.images.map { |image| image.extname.downcase }
       exts.uniq.each do |ext|
-        ct = if ['jpeg', 'jpg'].include?(ext)
+        ct = if JPEG_EXS.include?(ext)
                JPEG_CT
-             elsif ext == 'gif'
+             elsif ext == GIF_EX
                GIF_CT
-             elsif ext == 'png'
+             elsif ext == PNG_EX
                PNG_CT
              end
-        c_types << Axlsx::Default.new(:ContentType => ct, :Extension => ext)
+        c_types << Axlsx::Default.new(ContentType: ct, Extension: ext)
       end
       if use_shared_strings
-        c_types << Axlsx::Override.new(:PartName => "/xl/#{SHARED_STRINGS_PN}",
-                                       :ContentType => SHARED_STRINGS_CT)
+        c_types << Axlsx::Override.new(PartName: "/xl/#{SHARED_STRINGS_PN}",
+                                       ContentType: SHARED_STRINGS_CT)
       end
       c_types
     end
@@ -351,12 +351,12 @@ module Axlsx
     # @private
     def base_content_types
       c_types = ContentType.new
-      c_types << Default.new(:ContentType => RELS_CT, :Extension => RELS_EX)
-      c_types << Default.new(:Extension => XML_EX, :ContentType => XML_CT)
-      c_types << Override.new(:PartName => "/#{APP_PN}", :ContentType => APP_CT)
-      c_types << Override.new(:PartName => "/#{CORE_PN}", :ContentType => CORE_CT)
-      c_types << Override.new(:PartName => "/xl/#{STYLES_PN}", :ContentType => STYLES_CT)
-      c_types << Axlsx::Override.new(:PartName => "/#{WORKBOOK_PN}", :ContentType => WORKBOOK_CT)
+      c_types << Default.new(ContentType: RELS_CT, Extension: RELS_EX)
+      c_types << Default.new(Extension: XML_EX, ContentType: XML_CT)
+      c_types << Override.new(PartName: "/#{APP_PN}", ContentType: APP_CT)
+      c_types << Override.new(PartName: "/#{CORE_PN}", ContentType: CORE_CT)
+      c_types << Override.new(PartName: "/xl/#{STYLES_PN}", ContentType: STYLES_CT)
+      c_types << Axlsx::Override.new(PartName: "/#{WORKBOOK_PN}", ContentType: WORKBOOK_CT)
       c_types.lock
       c_types
     end
@@ -379,19 +379,19 @@ module Axlsx
     # @private
     def parse_serialize_options(options, secondary_options)
       if secondary_options
-        warn "[DEPRECATION] Axlsx::Package#serialize with 3 arguments is deprecated. " +
+        warn "[DEPRECATION] Axlsx::Package#serialize with 3 arguments is deprecated. " \
              "Use keyword args instead e.g., package.serialize(output, confirm_valid: false, zip_command: 'zip')"
       end
       if options.is_a?(Hash)
         options.merge!(secondary_options || {})
         invalid_keys = options.keys - [:confirm_valid, :zip_command]
         if invalid_keys.any?
-          raise ArgumentError.new("Invalid keyword arguments: #{invalid_keys}")
+          raise ArgumentError, "Invalid keyword arguments: #{invalid_keys}"
         end
 
         [options.fetch(:confirm_valid, false), options.fetch(:zip_command, nil)]
       else
-        warn "[DEPRECATION] Axlsx::Package#serialize with confirm_valid as a boolean is deprecated. " +
+        warn "[DEPRECATION] Axlsx::Package#serialize with confirm_valid as a boolean is deprecated. " \
              "Use keyword args instead e.g., package.serialize(output, confirm_valid: false)"
         parse_serialize_options((secondary_options || {}).merge(confirm_valid: options), nil)
       end

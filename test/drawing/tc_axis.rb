@@ -4,7 +4,7 @@ require 'tc_helper'
 
 class TestAxis < Test::Unit::TestCase
   def setup
-    @axis = Axlsx::Axis.new :gridlines => false, :title => 'Foo'
+    @axis = Axlsx::Axis.new gridlines: false, title: 'Foo'
   end
 
   def test_initialization
@@ -28,12 +28,12 @@ class TestAxis < Test::Unit::TestCase
 
   def test_cell_based_axis_title
     p = Axlsx::Package.new
-    p.workbook.add_worksheet(:name => 'foosheet') do |sheet|
+    p.workbook.add_worksheet(name: 'foosheet') do |sheet|
       sheet.add_row ['battle victories']
       sheet.add_row ['bird', 1, 2, 1]
       sheet.add_row ['cat', 7, 9, 10]
       sheet.add_chart(Axlsx::Line3DChart) do |chart|
-        chart.add_series :data => sheet['B2:D2'], :labels => sheet['B1']
+        chart.add_series data: sheet['B2:D2'], labels: sheet['B1']
         chart.val_axis.title = sheet['A1']
 
         assert_equal('battle victories', chart.val_axis.title.text)
@@ -66,10 +66,10 @@ class TestAxis < Test::Unit::TestCase
 
   def create_chart_with_formatting(format_string = nil)
     p = Axlsx::Package.new
-    p.workbook.add_worksheet(:name => "Formatting Test") do |sheet|
+    p.workbook.add_worksheet(name: "Formatting Test") do |sheet|
       sheet.add_row(['test', 20])
-      sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0, 5], :end_at => [10, 20], :title => "Test Formatting") do |chart|
-        chart.add_series :data => sheet["B1:B1"], :labels => sheet["A1:A1"]
+      sheet.add_chart(Axlsx::Bar3DChart, start_at: [0, 5], end_at: [10, 20], title: "Test Formatting") do |chart|
+        chart.add_series data: sheet["B1:B1"], labels: sheet["A1:A1"]
         chart.val_axis.format_code = format_string if format_string
         doc = Nokogiri::XML(chart.to_xml_string)
         yield doc

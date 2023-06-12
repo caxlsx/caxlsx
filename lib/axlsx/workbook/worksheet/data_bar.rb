@@ -14,8 +14,8 @@ module Axlsx
     class << self
       # This differs from ColorScale. There must be exactly two cfvos one color
       def default_cfvos
-        [{ :type => :min, :val => "0" },
-         { :type => :max, :val => "0" }]
+        [{ type: :min, val: "0" },
+         { type: :max, val: "0" }]
       end
     end
 
@@ -38,7 +38,7 @@ module Axlsx
     serializable_attributes :min_length, :max_length, :show_value
 
     # instance values that must be serialized as their own elements - e.g. not attributes.
-    CHILD_ELEMENTS = [:value_objects, :color]
+    CHILD_ELEMENTS = [:value_objects, :color].freeze
 
     # minLength attribute
     # The minimum length of the data bar, as a percentage of the cell width.
@@ -72,7 +72,7 @@ module Axlsx
     # the color object used in the data bar formatting
     # @return [Color]
     def color
-      @color ||= Color.new :rgb => "FF0000FF"
+      @color ||= Color.new rgb: "FF0000FF"
     end
 
     # @see minLength
@@ -101,7 +101,6 @@ module Axlsx
     def color=(v)
       @color = v if v.is_a? Color
       self.color.rgb = v if v.is_a? String
-      @color
     end
 
     # Serialize this object to an xml string
@@ -118,11 +117,11 @@ module Axlsx
 
     def initialize_cfvos(cfvos)
       self.class.default_cfvos.each_with_index.map do |default, index|
-        if index < cfvos.size
-          value_objects << Cfvo.new(default.merge(cfvos[index]))
-        else
-          value_objects << Cfvo.new(default)
-        end
+        value_objects << if index < cfvos.size
+                           Cfvo.new(default.merge(cfvos[index]))
+                         else
+                           Cfvo.new(default)
+                         end
       end
     end
   end

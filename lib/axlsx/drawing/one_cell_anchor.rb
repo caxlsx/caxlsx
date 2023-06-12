@@ -60,10 +60,10 @@ module Axlsx
 
     #
     # @see height
-    def height=(v) Axlsx::validate_unsigned_int(v); @height = v; end
+    def height=(v) Axlsx.validate_unsigned_int(v); @height = v; end
 
     # @see width
-    def width=(v) Axlsx::validate_unsigned_int(v); @width = v; end
+    def width=(v) Axlsx.validate_unsigned_int(v); @width = v; end
 
     # The index of this anchor in the drawing
     # @return [Integer]
@@ -93,7 +93,7 @@ module Axlsx
     def ext
       cy = @height * 914400 / 96
       cx = @width * 914400 / 96
-      { :cy => cy, :cx => cx }
+      { cy: cy, cx: cx }
     end
   end
 end

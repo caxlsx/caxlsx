@@ -12,20 +12,20 @@ class TestPackage < Test::Unit::TestCase
     ws.add_row ['Can', 'we', 'build it?']
     ws.add_row ['Yes!', 'We', 'can!']
     @rt = Axlsx::RichText.new
-    @rt.add_run "run 1", :b => true, :i => false
+    @rt.add_run "run 1", b: true, i: false
     ws.add_row [@rt]
 
-    ws.rows.last.add_cell('b', :type => :text)
+    ws.rows.last.add_cell('b', type: :text)
 
     ws.outline_level_rows 0, 1
     ws.outline_level_columns 0, 1
-    ws.add_hyperlink :ref => ws.rows.first.cells.last, :location => 'https://github.com/randym'
-    ws.workbook.add_defined_name("#{ws.name}!A1:C2", :name => '_xlnm.Print_Titles', :hidden => true)
+    ws.add_hyperlink ref: ws.rows.first.cells.last, location: 'https://github.com/randym'
+    ws.workbook.add_defined_name("#{ws.name}!A1:C2", name: '_xlnm.Print_Titles', hidden: true)
     ws.workbook.add_view active_tab: 1, first_sheet: 0
     ws.protect_range('A1:C1')
     ws.protect_range(ws.rows.last.cells)
-    ws.add_comment :author => 'alice', :text => 'Hi Bob', :ref => 'A12'
-    ws.add_comment :author => 'bob', :text => 'Hi Alice', :ref => 'F19'
+    ws.add_comment author: 'alice', text: 'Hi Bob', ref: 'A12'
+    ws.add_comment author: 'bob', text: 'Hi Alice', ref: 'F19'
     ws.sheet_view do |vs|
       vs.pane do |p|
         p.active_pane = :top_right
@@ -35,54 +35,54 @@ class TestPackage < Test::Unit::TestCase
         p.top_left_cell = 'C44'
       end
 
-      vs.add_selection(:top_left, { :active_cell => 'A2', :sqref => 'A2' })
-      vs.add_selection(:top_right, { :active_cell => 'I10', :sqref => 'I10' })
-      vs.add_selection(:bottom_left, { :active_cell => 'E55', :sqref => 'E55' })
-      vs.add_selection(:bottom_right, { :active_cell => 'I57', :sqref => 'I57' })
+      vs.add_selection(:top_left, { active_cell: 'A2', sqref: 'A2' })
+      vs.add_selection(:top_right, { active_cell: 'I10', sqref: 'I10' })
+      vs.add_selection(:bottom_left, { active_cell: 'E55', sqref: 'E55' })
+      vs.add_selection(:bottom_right, { active_cell: 'I57', sqref: 'I57' })
     end
 
-    ws.add_chart(Axlsx::Pie3DChart, :title => "これは？", :start_at => [0, 3]) do |chart|
-      chart.add_series :data => [1, 2, 3], :labels => ["a", "b", "c"]
+    ws.add_chart(Axlsx::Pie3DChart, title: "これは？", start_at: [0, 3]) do |chart|
+      chart.add_series data: [1, 2, 3], labels: ["a", "b", "c"]
       chart.d_lbls.show_val = true
       chart.d_lbls.d_lbl_pos = :outEnd
       chart.d_lbls.show_percent = true
     end
 
-    ws.add_chart(Axlsx::Line3DChart, :title => "axis labels") do |chart|
+    ws.add_chart(Axlsx::Line3DChart, title: "axis labels") do |chart|
       chart.valAxis.title = 'bob'
       chart.d_lbls.show_val = true
     end
 
-    ws.add_chart(Axlsx::Bar3DChart, :title => 'bar chart') do |chart|
-      chart.add_series :data => [1, 4, 5], :labels => %w(A B C)
+    ws.add_chart(Axlsx::Bar3DChart, title: 'bar chart') do |chart|
+      chart.add_series data: [1, 4, 5], labels: %w(A B C)
       chart.d_lbls.show_percent = true
     end
 
-    ws.add_chart(Axlsx::ScatterChart, :title => 'scat man') do |chart|
-      chart.add_series :xData => [1, 2, 3, 4], :yData => [4, 3, 2, 1]
+    ws.add_chart(Axlsx::ScatterChart, title: 'scat man') do |chart|
+      chart.add_series xData: [1, 2, 3, 4], yData: [4, 3, 2, 1]
       chart.d_lbls.show_val = true
     end
 
-    ws.add_chart(Axlsx::BubbleChart, :title => 'bubble chart') do |chart|
-      chart.add_series :xData => [1, 2, 3, 4], :yData => [1, 3, 2, 4]
+    ws.add_chart(Axlsx::BubbleChart, title: 'bubble chart') do |chart|
+      chart.add_series xData: [1, 2, 3, 4], yData: [1, 3, 2, 4]
       chart.d_lbls.show_val = true
     end
 
     @fname = 'axlsx_test_serialization.xlsx'
     img = File.expand_path('fixtures/image1.jpeg', __dir__)
-    ws.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink => "http://axlsx.blogspot.com") do |image|
+    ws.add_image(image_src: img, noSelect: true, noMove: true, hyperlink: "http://axlsx.blogspot.com") do |image|
       image.width = 720
       image.height = 666
       image.hyperlink.tooltip = "Labeled Link"
       image.start_at 5, 5
       image.end_at 10, 10
     end
-    ws.add_image :image_src => File.expand_path('fixtures/image1.gif', __dir__) do |image|
+    ws.add_image image_src: File.expand_path('fixtures/image1.gif', __dir__) do |image|
       image.start_at 0, 20
       image.width = 360
       image.height = 333
     end
-    ws.add_image :image_src => File.expand_path('fixtures/image1.png', __dir__) do |image|
+    ws.add_image image_src: File.expand_path('fixtures/image1.png', __dir__) do |image|
       image.start_at 9, 20
       image.width = 180
       image.height = 167
@@ -126,7 +126,7 @@ class TestPackage < Test::Unit::TestCase
 
   def test_created_at_is_propagated_to_core
     time = Time.utc(2013, 1, 1, 12, 0)
-    p = Axlsx::Package.new :created_at => time
+    p = Axlsx::Package.new created_at: time
 
     assert_equal(time, p.core.created)
   end
@@ -237,8 +237,8 @@ class TestPackage < Test::Unit::TestCase
 
   def test_serialization_creates_identical_files_for_identical_packages
     package_1, package_2 = Array.new(2) do
-      Axlsx::Package.new(:created_at => Time.utc(2013, 1, 1)).tap do |p|
-        p.workbook.add_worksheet(:name => "Basic Worksheet") do |sheet|
+      Axlsx::Package.new(created_at: Time.utc(2013, 1, 1)).tap do |p|
+        p.workbook.add_worksheet(name: "Basic Worksheet") do |sheet|
           sheet.add_row [1, 2, 3]
         end
       end
@@ -319,8 +319,8 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def test_name_to_indices
-    assert_equal([0, 0], Axlsx::name_to_indices('A1'))
-    assert_equal([0, 99], Axlsx::name_to_indices('A100'), 'needs to axcept rows that contain 0')
+    assert_equal([0, 0], Axlsx.name_to_indices('A1'))
+    assert_equal([0, 99], Axlsx.name_to_indices('A100'), 'needs to axcept rows that contain 0')
   end
 
   def test_to_stream

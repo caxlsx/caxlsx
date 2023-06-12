@@ -56,7 +56,7 @@ module Axlsx
         symbols.each do |symbol|
           attr_reader symbol
 
-          module_eval(SETTER % [symbol, validator, symbol], __FILE__, __LINE__)
+          module_eval(format(SETTER, symbol, validator, symbol), __FILE__, __LINE__)
         end
       end
     end

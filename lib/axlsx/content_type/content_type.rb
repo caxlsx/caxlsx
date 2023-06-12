@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Axlsx
-  require 'axlsx/content_type/abstract_content_type.rb'
-  require 'axlsx/content_type/default.rb'
-  require 'axlsx/content_type/override.rb'
+  require 'axlsx/content_type/abstract_content_type'
+  require 'axlsx/content_type/default'
+  require 'axlsx/content_type/override'
 
   # ContentTypes used in the package. This is automatically managed by the package package.
   class ContentType < SimpleTypedList

@@ -118,7 +118,7 @@ class TestFont < Test::Unit::TestCase
   # def color=(v) DataTypeValidator.validate "Font.color", Color, v; @color=v end
   def test_color
     assert_raise(ArgumentError) { @item.color = -7 }
-    assert_nothing_raised { @item.color = Axlsx::Color.new(:rgb => "00000000") }
+    assert_nothing_raised { @item.color = Axlsx::Color.new(rgb: "00000000") }
     assert(@item.color.is_a?(Axlsx::Color))
   end
 

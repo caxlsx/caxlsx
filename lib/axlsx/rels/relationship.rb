@@ -43,7 +43,7 @@ module Axlsx
     end
 
     # The id of the relationship (eg. "rId123"). Most instances get their own unique id.
-    # However, some instances need to share the same id – see {#should_use_same_id_as?}
+    # However, some instances need to share the same id – see {#ids_cache_key}
     # for details.
     # @return [String]
     attr_reader :Id
@@ -92,9 +92,9 @@ module Axlsx
     end
 
     # @see Target
-    def Target=(v) Axlsx::validate_string v; @Target = v end
+    def Target=(v) Axlsx.validate_string v; @Target = v end
     # @see Type
-    def Type=(v) Axlsx::validate_relationship_type v; @Type = v end
+    def Type=(v) Axlsx.validate_relationship_type v; @Type = v end
 
     # @see TargetMode
     def TargetMode=(v) RestrictionValidator.validate 'Relationship.TargetMode', [:External, :Internal], v; @TargetMode = v; end
@@ -107,7 +107,7 @@ module Axlsx
       str << '<Relationship '
       h.each_with_index do |key_value, index|
         str << ' ' unless index.zero?
-        str << key_value.first.to_s << '="' << Axlsx::coder.encode(key_value.last.to_s) << '"'
+        str << key_value.first.to_s << '="' << Axlsx.coder.encode(key_value.last.to_s) << '"'
       end
       str << '/>'
     end

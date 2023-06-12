@@ -7,7 +7,7 @@ class TestChart < Test::Unit::TestCase
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
     @row = ws.add_row ["one", 1, Time.now]
-    @chart = ws.add_chart Axlsx::Bar3DChart, :title => "fishery", :bg_color => "000000"
+    @chart = ws.add_chart Axlsx::Bar3DChart, title: "fishery", bg_color: "000000"
   end
 
   def teardown; end
@@ -101,7 +101,7 @@ class TestChart < Test::Unit::TestCase
   end
 
   def test_add_series
-    s = @chart.add_series :data => [0, 1, 2, 3], :labels => ["one", 1, "anything"], :title => "bob"
+    s = @chart.add_series data: [0, 1, 2, 3], labels: ["one", 1, "anything"], title: "bob"
 
     assert_equal(@chart.series.last, s, "series has been added to chart series collection")
     assert_equal("bob", s.title.text, "series title has been applied")

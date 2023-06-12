@@ -75,14 +75,14 @@ module Axlsx
 
     # @see tab_color
     def tab_color=(v)
-      @tab_color = Color.new(:rgb => v)
+      @tab_color = Color.new(rgb: v)
     end
 
     private
 
     def update_properties
       page_setup_pr.fit_to_page = worksheet.fit_to_page?
-      if worksheet.auto_filter.columns.size > 0
+      unless worksheet.auto_filter.columns.empty?
         self.filter_mode = 1
         self.enable_format_conditions_calculation = 1
       end

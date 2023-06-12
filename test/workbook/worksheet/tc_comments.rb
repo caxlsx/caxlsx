@@ -7,8 +7,8 @@ class TestComments < Test::Unit::TestCase
     p = Axlsx::Package.new
     wb = p.workbook
     @ws = wb.add_worksheet
-    @c1 = @ws.add_comment :ref => 'A1', :text => 'penut machine', :author => 'crank'
-    @c2 = @ws.add_comment :ref => 'C3', :text => 'rust bucket', :author => 'PO'
+    @c1 = @ws.add_comment ref: 'A1', text: 'penut machine', author: 'crank'
+    @c2 = @ws.add_comment ref: 'C3', text: 'rust bucket', author: 'PO'
   end
 
   def test_initialize
@@ -19,25 +19,25 @@ class TestComments < Test::Unit::TestCase
   def test_add_comment
     assert_equal(2, @ws.comments.size)
     assert_raise(ArgumentError) { @ws.comments.add_comment }
-    assert_raise(ArgumentError) { @ws.comments.add_comment(:text => 'Yes We Can', :ref => 'A1') }
-    assert_raise(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :ref => 'A1') }
-    assert_raise(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :text => 'Yes We Can') }
-    assert_nothing_raised { @ws.comments.add_comment(:author => 'bob', :text => 'Yes We Can', :ref => 'A1') }
+    assert_raise(ArgumentError) { @ws.comments.add_comment(text: 'Yes We Can', ref: 'A1') }
+    assert_raise(ArgumentError) { @ws.comments.add_comment(author: 'bob', ref: 'A1') }
+    assert_raise(ArgumentError) { @ws.comments.add_comment(author: 'bob', text: 'Yes We Can') }
+    assert_nothing_raised { @ws.comments.add_comment(author: 'bob', text: 'Yes We Can', ref: 'A1') }
     assert_equal(3, @ws.comments.size)
   end
 
   def test_authors
     assert_equal(@ws.comments.authors.size, @ws.comments.size)
-    @ws.add_comment(:text => 'Yes We Can!', :author => 'bob', :ref => 'F1')
+    @ws.add_comment(text: 'Yes We Can!', author: 'bob', ref: 'F1')
 
     assert_equal(3, @ws.comments.authors.size)
-    @ws.add_comment(:text => 'Yes We Can!', :author => 'bob', :ref => 'F1')
+    @ws.add_comment(text: 'Yes We Can!', author: 'bob', ref: 'F1')
 
     assert_equal(3, @ws.comments.authors.size, 'only unique authors are returned')
   end
 
   def test_pn
-    assert_equal(@ws.comments.pn, Axlsx::COMMENT_PN % (@ws.index + 1).to_s)
+    assert_equal(@ws.comments.pn, format(Axlsx::COMMENT_PN, @ws.index + 1))
   end
 
   def test_index

@@ -41,7 +41,7 @@ module Axlsx
         str << '<c:varyColors val="' << vary_colors.to_s << '"/>'
         @series.each { |ser| ser.to_xml_string(str) }
         d_lbls.to_xml_string(str) if @d_lbls
-        axes.to_xml_string(str, :ids => true)
+        axes.to_xml_string(str, ids: true)
         str << '</c:bubbleChart>'
         axes.to_xml_string(str)
       end
@@ -52,7 +52,7 @@ module Axlsx
     # a y_val_axis
     # @return [Axes]
     def axes
-      @axes ||= Axes.new(:x_val_axis => ValAxis, :y_val_axis => ValAxis)
+      @axes ||= Axes.new(x_val_axis: ValAxis, y_val_axis: ValAxis)
     end
   end
 end

@@ -31,7 +31,7 @@ module Axlsx
       @explosion = nil
       @colors = []
       super(chart, options)
-      self.labels = AxDataSource.new(:data => options[:labels]) unless options[:labels].nil?
+      self.labels = AxDataSource.new(data: options[:labels]) unless options[:labels].nil?
       self.data = NumDataSource.new(options) unless options[:data].nil?
     end
 
@@ -39,14 +39,14 @@ module Axlsx
     def colors=(v) DataTypeValidator.validate "BarSeries.colors", [Array], v; @colors = v end
 
     # @see explosion
-    def explosion=(v) Axlsx::validate_unsigned_int(v); @explosion = v; end
+    def explosion=(v) Axlsx.validate_unsigned_int(v); @explosion = v; end
 
     # Serializes the object
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
       super(str) do
-        str << '<c:explosion val="' + @explosion.to_s + '"/>' unless @explosion.nil?
+        str << '<c:explosion val="' << @explosion.to_s << '"/>' unless @explosion.nil?
         colors.each_with_index do |c, index|
           str << '<c:dPt>'
           str << '<c:idx val="' << index.to_s << '"/>'

@@ -18,7 +18,7 @@ class TestCore < Test::Unit::TestCase
       errors << error
     end
 
-    assert_equal(0, errors.size, "core.xml Invalid" + errors.map(&:message).to_s)
+    assert_equal(0, errors.size, "core.xml Invalid#{errors.map(&:message)}")
   end
 
   def test_populates_created
@@ -27,7 +27,7 @@ class TestCore < Test::Unit::TestCase
 
   def test_created_as_option
     time = Time.utc(2013, 1, 1, 12, 0)
-    c = Axlsx::Core.new :created => time
+    c = Axlsx::Core.new created: time
     doc = Nokogiri::XML(c.to_xml_string)
 
     assert_equal(doc.xpath('//dcterms:created').text, time.xmlschema, "dcterms:created incorrect")
@@ -38,7 +38,7 @@ class TestCore < Test::Unit::TestCase
   end
 
   def test_creator_as_option
-    c = Axlsx::Core.new :creator => "some guy"
+    c = Axlsx::Core.new creator: "some guy"
     doc = Nokogiri::XML(c.to_xml_string)
 
     assert_equal("some guy", doc.xpath('//dc:creator').text)

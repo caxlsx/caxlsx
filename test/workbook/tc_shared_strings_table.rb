@@ -4,13 +4,13 @@ require 'tc_helper'
 
 class TestSharedStringsTable < Test::Unit::TestCase
   def setup
-    @p = Axlsx::Package.new :use_shared_strings => true
+    @p = Axlsx::Package.new use_shared_strings: true
 
     ws = @p.workbook.add_worksheet
     ws.add_row ['a', 1, 'b']
     ws.add_row ['b', 1, 'c']
     ws.add_row ['c', 1, 'd']
-    ws.rows.last.add_cell('b', :type => :text)
+    ws.rows.last.add_cell('b', type: :text)
   end
 
   def test_workbook_has_shared_strings
@@ -45,7 +45,7 @@ class TestSharedStringsTable < Test::Unit::TestCase
       errors << error
     end
 
-    assert_equal(0, errors.size, "sharedStirngs.xml Invalid" + errors.map(&:message).to_s)
+    assert_equal(0, errors.size, "sharedStirngs.xml Invalid#{errors.map(&:message)}")
   end
 
   def test_remove_control_characters_in_xml_serialization

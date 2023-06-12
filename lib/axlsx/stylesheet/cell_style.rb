@@ -39,7 +39,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :iLevel
 
-    # Determines if this named style should show in the list of styles when using excel
+    # Determines if this named style should show in the list of styles when using Excel
     # @return [Boolean]
     attr_reader :hidden
 
@@ -48,17 +48,17 @@ module Axlsx
     attr_reader :customBuiltin
 
     # @see name
-    def name=(v) Axlsx::validate_string v; @name = v end
+    def name=(v) Axlsx.validate_string v; @name = v end
     # @see xfId
-    def xfId=(v) Axlsx::validate_unsigned_int v; @xfId = v end
+    def xfId=(v) Axlsx.validate_unsigned_int v; @xfId = v end
     # @see builtinId
-    def builtinId=(v) Axlsx::validate_unsigned_int v; @builtinId = v end
+    def builtinId=(v) Axlsx.validate_unsigned_int v; @builtinId = v end
     # @see iLivel
-    def iLevel=(v) Axlsx::validate_unsigned_int v; @iLevel = v end
+    def iLevel=(v) Axlsx.validate_unsigned_int v; @iLevel = v end
     # @see hidden
-    def hidden=(v) Axlsx::validate_boolean v; @hidden = v end
+    def hidden=(v) Axlsx.validate_boolean v; @hidden = v end
     # @see customBuiltin
-    def customBuiltin=(v) Axlsx::validate_boolean v; @customBuiltin = v end
+    def customBuiltin=(v) Axlsx.validate_boolean v; @customBuiltin = v end
 
     # Serializes the object
     # @param [String] str

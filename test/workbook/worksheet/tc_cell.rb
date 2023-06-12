@@ -6,10 +6,10 @@ class TestCell < Test::Unit::TestCase
   def setup
     p = Axlsx::Package.new
     p.use_shared_strings = true
-    @ws = p.workbook.add_worksheet :name => "hmmm"
-    p.workbook.styles.add_style :sz => 20
+    @ws = p.workbook.add_worksheet name: "hmmm"
+    p.workbook.styles.add_style sz: 20
     @row = @ws.add_row
-    @c = @row.add_cell 1, :type => :float, :style => 1, :escape_formulas => true
+    @c = @row.add_cell 1, type: :float, style: 1, escape_formulas: true
     data = (0..26).map { |index| index }
     @ws.add_row data
     @cAA = @ws["AA2"]
@@ -62,7 +62,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_autowidth
-    style = @c.row.worksheet.workbook.styles.add_style({ :alignment => { :horizontal => :center, :vertical => :center, :wrap_text => true } })
+    style = @c.row.worksheet.workbook.styles.add_style({ alignment: { horizontal: :center, vertical: :center, wrap_text: true } })
     @c.style = style
 
     assert_in_delta(6.6, @c.autowidth, 0.01)
@@ -539,20 +539,20 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_font_size_with_custom_style_and_no_sz
-    @c.style = @c.row.worksheet.workbook.styles.add_style :bg_color => 'FF00FF'
+    @c.style = @c.row.worksheet.workbook.styles.add_style bg_color: 'FF00FF'
     sz = @c.send(:font_size)
 
     assert_equal(sz, @c.row.worksheet.workbook.styles.fonts.first.sz)
   end
 
   def test_font_size_with_bolding
-    @c.style = @c.row.worksheet.workbook.styles.add_style :b => true
+    @c.style = @c.row.worksheet.workbook.styles.add_style b: true
 
     assert_equal(@c.row.worksheet.workbook.styles.fonts.first.sz * 1.5, @c.send(:font_size))
   end
 
   def test_font_size_with_custom_sz
-    @c.style = @c.row.worksheet.workbook.styles.add_style :sz => 52
+    @c.style = @c.row.worksheet.workbook.styles.add_style sz: 52
     sz = @c.send(:font_size)
 
     assert_equal(52, sz)
@@ -567,7 +567,7 @@ class TestCell < Test::Unit::TestCase
   def test_to_xml
     # TODO: This could use some much more stringent testing related to the xml content generated!
     @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)", "2013-01-13T13:31:25.123"]
-    @ws.rows.last.cells[5].u = true
+    @ws.rows.last.cells[5].u = :single
 
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)

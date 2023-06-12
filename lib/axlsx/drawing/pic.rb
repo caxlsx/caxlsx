@@ -30,7 +30,7 @@ module Axlsx
     end
 
     # allowed mime types
-    ALLOWED_MIME_TYPES = %w(image/jpeg image/png image/gif)
+    ALLOWED_MIME_TYPES = %w(image/jpeg image/png image/gif).freeze
 
     # The name to use for this picture
     # @return [String]
@@ -78,7 +78,7 @@ module Axlsx
     end
 
     def image_src=(v)
-      Axlsx::validate_string(v)
+      Axlsx.validate_string(v)
       if remote?
         RegexValidator.validate('Pic.image_src', /\A#{URI::DEFAULT_PARSER.make_regexp}\z/, v)
         RestrictionValidator.validate 'Pic.image_src', ALLOWED_MIME_TYPES, MimeTypeUtils.get_mime_type_from_uri(v)
@@ -91,13 +91,13 @@ module Axlsx
     end
 
     # @see name
-    def name=(v) Axlsx::validate_string(v); @name = v; end
+    def name=(v) Axlsx.validate_string(v); @name = v; end
 
     # @see descr
-    def descr=(v) Axlsx::validate_string(v); @descr = v; end
+    def descr=(v) Axlsx.validate_string(v); @descr = v; end
 
     # @see remote
-    def remote=(v) Axlsx::validate_boolean(v); @remote = v; end
+    def remote=(v) Axlsx.validate_boolean(v); @remote = v; end
 
     def remote?
       remote == 1 || remote.to_s == 'true'
@@ -124,14 +124,14 @@ module Axlsx
     # The part name for this image used in serialization and relationship building
     # @return [String]
     def pn
-      "#{IMAGE_PN % [(index + 1), extname]}"
+      format(IMAGE_PN, index + 1, extname)
     end
 
     # The relationship object for this pic.
     # @return [Relationship]
     def relationship
       if remote?
-        Relationship.new(self, IMAGE_R, "#{image_src}", target_mode: :External)
+        Relationship.new(self, IMAGE_R, image_src.to_s, target_mode: :External)
       else
         Relationship.new(self, IMAGE_R, "../#{pn}")
       end
@@ -223,7 +223,7 @@ module Axlsx
     def use_one_cell_anchor
       return if @anchor.is_a?(OneCellAnchor)
 
-      new_anchor = OneCellAnchor.new(@anchor.drawing, :start_at => [@anchor.from.col, @anchor.from.row])
+      new_anchor = OneCellAnchor.new(@anchor.drawing, start_at: [@anchor.from.col, @anchor.from.row])
       swap_anchor(new_anchor)
     end
 
@@ -231,7 +231,7 @@ module Axlsx
     def use_two_cell_anchor
       return if @anchor.is_a?(TwoCellAnchor)
 
-      new_anchor = TwoCellAnchor.new(@anchor.drawing, :start_at => [@anchor.from.col, @anchor.from.row])
+      new_anchor = TwoCellAnchor.new(@anchor.drawing, start_at: [@anchor.from.col, @anchor.from.row])
       swap_anchor(new_anchor)
     end
 
@@ -239,7 +239,7 @@ module Axlsx
     def swap_anchor(new_anchor)
       new_anchor.drawing.anchors.delete(new_anchor)
       @anchor.drawing.anchors[@anchor.drawing.anchors.index(@anchor)] = new_anchor
-      new_anchor.instance_variable_set "@object", @anchor.object
+      new_anchor.instance_variable_set :@object, @anchor.object
       @anchor = new_anchor
     end
   end

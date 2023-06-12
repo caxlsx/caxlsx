@@ -4,8 +4,8 @@ require 'tc_helper'
 
 class TestStrVal < Test::Unit::TestCase
   def setup
-    @str_val = Axlsx::StrVal.new :v => "1"
-    @str_val_with_special_characters = Axlsx::StrVal.new :v => "a & b <c>"
+    @str_val = Axlsx::StrVal.new v: "1"
+    @str_val_with_special_characters = Axlsx::StrVal.new v: "a & b <c>"
   end
 
   def test_initialize

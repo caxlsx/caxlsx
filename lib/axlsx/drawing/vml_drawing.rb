@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Axlsx
-  # a vml drawing used for comments in excel.
+  # a vml drawing used for comments in Excel.
   class VmlDrawing
     # creates a new Vml Drawing object.
     # @param [Comments] comments the comments object this drawing is associated with
@@ -14,7 +14,7 @@ module Axlsx
     # The part name for this vml drawing
     # @return [String]
     def pn
-      "#{VML_DRAWING_PN}" % (@comments.worksheet.index + 1)
+      format(VML_DRAWING_PN, @comments.worksheet.index + 1)
     end
 
     # serialize the vml_drawing to xml.

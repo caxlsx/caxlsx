@@ -76,14 +76,14 @@ module Axlsx
       str << '<c:dLbls>'
       instance_vals = Axlsx.instance_values_for(self)
       %w(d_lbl_pos show_legend_key show_val show_cat_name show_ser_name show_percent show_bubble_size show_leader_lines).each do |key|
-        next unless instance_vals.keys.include?(key) && instance_vals[key] != nil
+        next unless instance_vals.key?(key) && !instance_vals[key].nil?
 
-        str << "<c:#{Axlsx::camel(key, false)} val='#{instance_vals[key]}' />"
+        str << "<c:#{Axlsx.camel(key, false)} val='#{instance_vals[key]}' />"
       end
       str << '</c:dLbls>'
     end
 
-    # nills out d_lbl_pos and show_leader_lines as these attributes, while valid in the spec actually chrash excel for any chart type other than pie charts.
+    # nills out d_lbl_pos and show_leader_lines as these attributes, while valid in the spec actually crash Excel for any chart type other than pie charts.
     def validate_attributes_for_chart_type
       return if [Pie3DChart, LineChart].include? @chart_type
 

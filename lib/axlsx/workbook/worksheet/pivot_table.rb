@@ -124,7 +124,7 @@ module Axlsx
       @data = []
       v.each do |data_field|
         if data_field.is_a? String
-          data_field = { :ref => data_field }
+          data_field = { ref: data_field }
         end
         data_field.each do |key, value|
           if key == :num_fmt
@@ -135,7 +135,6 @@ module Axlsx
         end
         @data << data_field
       end
-      @data
     end
 
     # The pages
@@ -160,13 +159,13 @@ module Axlsx
     # The part name for this table
     # @return [String]
     def pn
-      "#{PIVOT_TABLE_PN % (index + 1)}"
+      format(PIVOT_TABLE_PN, index + 1)
     end
 
     # The relationship part name of this pivot table
     # @return [String]
     def rels_pn
-      "#{PIVOT_TABLE_RELS_PN % (index + 1)}"
+      format(PIVOT_TABLE_RELS_PN, index + 1)
     end
 
     # The cache_definition for this pivot table
@@ -246,7 +245,7 @@ module Axlsx
         str << "<dataFields count=\"#{data.size}\">"
         data.each do |datum_value|
           # The correct name prefix in ["Sum","Average", etc...]
-          str << "<dataField name='#{(datum_value[:subtotal] || '')} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
+          str << "<dataField name='#{datum_value[:subtotal] || ''} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
           str << " numFmtId='#{datum_value[:num_fmt]}'" if datum_value[:num_fmt]
           str << " subtotal='#{datum_value[:subtotal]}' " if datum_value[:subtotal]
           str << "/>"
@@ -267,7 +266,7 @@ module Axlsx
     # References for header cells
     # @return [Array]
     def header_cell_refs
-      Axlsx::range_to_a(header_range).first
+      Axlsx.range_to_a(header_range).first
     end
 
     # The header cells for the pivot table

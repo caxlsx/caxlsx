@@ -37,11 +37,11 @@ module Axlsx
     # @param [Chart] chart
     def initialize(chart, options = {})
       @show_marker = false
-      @marker_symbol = options[:marker_symbol] ? options[:marker_symbol] : :default
+      @marker_symbol = options[:marker_symbol] || :default
       @smooth = false
       @labels, @data = nil, nil
       super(chart, options)
-      @labels = AxDataSource.new(:data => options[:labels]) unless options[:labels].nil?
+      @labels = AxDataSource.new(data: options[:labels]) unless options[:labels].nil?
       @data = NumDataSource.new(options) unless options[:data].nil?
     end
 
@@ -52,19 +52,19 @@ module Axlsx
 
     # @see show_marker
     def show_marker=(v)
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       @show_marker = v
     end
 
     # @see marker_symbol
     def marker_symbol=(v)
-      Axlsx::validate_marker_symbol(v)
+      Axlsx.validate_marker_symbol(v)
       @marker_symbol = v
     end
 
     # @see smooth
     def smooth=(v)
-      Axlsx::validate_boolean(v)
+      Axlsx.validate_boolean(v)
       @smooth = v
     end
 
@@ -89,12 +89,12 @@ module Axlsx
         if !@show_marker
           str << '<c:marker><c:symbol val="none"/></c:marker>'
         elsif @marker_symbol != :default
-          str << '<c:marker><c:symbol val="' + @marker_symbol.to_s + '"/></c:marker>'
+          str << '<c:marker><c:symbol val="' << @marker_symbol.to_s << '"/></c:marker>'
         end
 
         @labels.to_xml_string(str) unless @labels.nil?
         @data.to_xml_string(str) unless @data.nil?
-        str << '<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>'
+        str << '<c:smooth val="' << (smooth ? '1' : '0') << '"/>'
       end
     end
 

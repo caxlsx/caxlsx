@@ -89,7 +89,7 @@ module Axlsx
     # @param [String] str The string this rows xml will be appended to.
     # @return [String]
     def to_xml_string(r_index, str = +'')
-      serialized_tag('row', str, :r => r_index + 1) do
+      serialized_tag('row', str, r: Axlsx.row_ref(r_index)) do
         each_with_index { |cell, c_index| cell.to_xml_string(r_index, c_index, str) }
       end
     end
@@ -129,7 +129,7 @@ module Axlsx
     # @see height
     def height=(v)
       unless v.nil?
-        Axlsx::validate_unsigned_numeric(v)
+        Axlsx.validate_unsigned_numeric(v)
         @custom_height = true
         @ht = v
       end

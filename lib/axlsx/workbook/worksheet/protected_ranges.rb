@@ -19,9 +19,9 @@ module Axlsx
       sqref = if cells.is_a?(String)
                 cells
               elsif cells.is_a?(SimpleTypedList) || cells.is_a?(Array)
-                Axlsx::cell_range(cells, false)
+                Axlsx.cell_range(cells, false)
               end
-      self << ProtectedRange.new(:sqref => sqref, :name => "Range#{size}")
+      self << ProtectedRange.new(sqref: sqref, name: "Range#{size}")
       last
     end
 

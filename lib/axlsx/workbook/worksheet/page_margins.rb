@@ -29,7 +29,10 @@ module Axlsx
       parse_options options
     end
 
-    serializable_attributes :left, :right, :bottom, :top, :header, :footer
+    # Possible margins to set
+    MARGIN_KEYS = [:left, :right, :top, :bottom, :header, :footer].freeze
+
+    serializable_attributes(*MARGIN_KEYS)
 
     # Default left and right margin (in inches)
     DEFAULT_LEFT_RIGHT = 0.75
@@ -65,27 +68,27 @@ module Axlsx
     attr_reader :footer
 
     # Set some or all margins at once.
-    # @param [Hash] margins the margins to set (possible keys are :left, :right, :top, :bottom, :header and :footer).
+    # @param [Hash] margins the margins to set. See {MARGIN_KEYS} for a list of possible keys.
     def set(margins)
       margins.select do |k, v|
-        next unless [:left, :right, :top, :bottom, :header, :footer].include? k
+        next unless MARGIN_KEYS.include? k
 
         send("#{k}=", v)
       end
     end
 
     # @see left
-    def left=(v); Axlsx::validate_unsigned_numeric(v); @left = v end
+    def left=(v); Axlsx.validate_unsigned_numeric(v); @left = v end
     # @see right
-    def right=(v); Axlsx::validate_unsigned_numeric(v); @right = v end
+    def right=(v); Axlsx.validate_unsigned_numeric(v); @right = v end
     # @see top
-    def top=(v); Axlsx::validate_unsigned_numeric(v); @top = v end
+    def top=(v); Axlsx.validate_unsigned_numeric(v); @top = v end
     # @see bottom
-    def bottom=(v); Axlsx::validate_unsigned_numeric(v); @bottom = v end
+    def bottom=(v); Axlsx.validate_unsigned_numeric(v); @bottom = v end
     # @see header
-    def header=(v); Axlsx::validate_unsigned_numeric(v); @header = v end
+    def header=(v); Axlsx.validate_unsigned_numeric(v); @header = v end
     # @see footer
-    def footer=(v); Axlsx::validate_unsigned_numeric(v); @footer = v end
+    def footer=(v); Axlsx.validate_unsigned_numeric(v); @footer = v end
 
     # Serializes the page margins element
     # @param [String] str

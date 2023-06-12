@@ -3,6 +3,7 @@
 require 'tc_helper'
 
 class TestAxlsx < Test::Unit::TestCase
+  # rubocop:disable Layout/HashAlignment
   def setup_wide
     @wide_test_points = {
       "A3"    =>                              0,
@@ -15,6 +16,7 @@ class TestAxlsx < Test::Unit::TestCase
       "BZU3"  => (2 * (26**2)) + (26 * 26) + 20
     }
   end
+  # rubocop:enable Layout/HashAlignment
 
   def test_cell_range_empty_if_no_cell
     assert_equal("", Axlsx.cell_range([]))
@@ -48,7 +50,7 @@ class TestAxlsx < Test::Unit::TestCase
 
   def test_cell_range_absolute
     p = Axlsx::Package.new
-    ws = p.workbook.add_worksheet :name => "Sheet <'>\" 1"
+    ws = p.workbook.add_worksheet name: "Sheet <'>\" 1"
     row = ws.add_row
     c1 = row.add_cell
     c2 = row.add_cell
@@ -83,14 +85,20 @@ class TestAxlsx < Test::Unit::TestCase
     end
   end
 
+  def test_row_ref
+    assert_equal('1', Axlsx.row_ref(0))
+    assert_equal('100', Axlsx.row_ref(99))
+  end
+
   def test_cell_r
-    # todo
+    assert_equal('A1', Axlsx.cell_r(0, 0))
+    assert_equal('Z26', Axlsx.cell_r(25, 25))
   end
 
   def test_range_to_a
-    assert_equal([['A1', 'B1', 'C1']],                         Axlsx::range_to_a('A1:C1'))
-    assert_equal([['A1', 'B1', 'C1'], ['A2', 'B2', 'C2']],     Axlsx::range_to_a('A1:C2'))
-    assert_equal([['Z5', 'AA5', 'AB5'], ['Z6', 'AA6', 'AB6']], Axlsx::range_to_a('Z5:AB6'))
+    assert_equal([['A1', 'B1', 'C1']],                         Axlsx.range_to_a('A1:C1'))
+    assert_equal([['A1', 'B1', 'C1'], ['A2', 'B2', 'C2']],     Axlsx.range_to_a('A1:C2'))
+    assert_equal([['Z5', 'AA5', 'AB5'], ['Z6', 'AA6', 'AB6']], Axlsx.range_to_a('Z5:AB6'))
   end
 
   def test_sanitize_frozen_control_strippped
@@ -157,15 +165,15 @@ class TestAxlsx < Test::Unit::TestCase
   def test_escape_formulas
     Axlsx.instance_variable_set(:@escape_formulas, nil)
 
-    refute Axlsx::escape_formulas
+    refute Axlsx.escape_formulas
 
-    Axlsx::escape_formulas = true
+    Axlsx.escape_formulas = true
 
-    assert Axlsx::escape_formulas
+    assert Axlsx.escape_formulas
 
-    Axlsx::escape_formulas = false
+    Axlsx.escape_formulas = false
 
-    refute Axlsx::escape_formulas
+    refute Axlsx.escape_formulas
   ensure
     Axlsx.instance_variable_set(:@escape_formulas, nil)
   end

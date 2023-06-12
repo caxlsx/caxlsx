@@ -130,7 +130,7 @@ module Axlsx
 
     # @see u
     def u=(v)
-      v = :single if (v == true || v == 1 || v == :true || v == 'true')
+      v = :single if v == true || v == 1 || v == :true || v == 'true'
       set_run_style :validate_cell_u, :u, v
     end
 
@@ -140,7 +140,7 @@ module Axlsx
 
     # @param [String] v The 8 character representation for an rgb color #FFFFFFFF"
     def color=(v)
-      @color = v.is_a?(Color) ? v : Color.new(:rgb => v)
+      @color = v.is_a?(Color) ? v : Color.new(rgb: v)
     end
 
     # The inline sz property for the cell
@@ -207,21 +207,21 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = +'')
       valid = RichTextRun::INLINE_STYLES
-      data = Hash[Axlsx.instance_values_for(self).map { |k, v| [k.to_sym, v] }]
-      data = data.select { |key, value| valid.include?(key) && !value.nil? }
+      data = Axlsx.instance_values_for(self).transform_keys(&:to_sym)
+      data = data.select { |key, value| !value.nil? && valid.include?(key) }
 
       str << '<r><rPr>'
-      data.keys.each do |key|
+      data.each do |key, val|
         case key
         when :font_name
           str << '<rFont val="' << font_name << '"/>'
         when :color
-          str << data[key].to_xml_string
+          str << val.to_xml_string
         else
-          str << '<' << key.to_s << ' val="' << xml_value(data[key]) << '"/>'
+          str << '<' << key.to_s << ' val="' << xml_value(val) << '"/>'
         end
       end
-      clean_value = Axlsx::trust_input ? @value.to_s : ::CGI.escapeHTML(Axlsx::sanitize(@value.to_s))
+      clean_value = Axlsx.trust_input ? @value.to_s : ::CGI.escapeHTML(Axlsx.sanitize(@value.to_s))
       str << '</rPr><t>' << clean_value << '</t></r>'
     end
 
@@ -242,7 +242,7 @@ module Axlsx
       return sz if sz
 
       font = styles.fonts[styles.cellXfs[style].fontId] || styles.fonts[0]
-      (font.b || (defined?(@b) && @b)) ? (font.sz * 1.5) : font.sz
+      font.b || (defined?(@b) && @b) ? (font.sz * 1.5) : font.sz
     end
 
     def style

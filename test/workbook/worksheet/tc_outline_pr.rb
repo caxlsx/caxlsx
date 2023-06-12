@@ -4,7 +4,7 @@ require 'tc_helper'
 
 class TestOutlinePr < Test::Unit::TestCase
   def setup
-    @outline_pr = Axlsx::OutlinePr.new(:summary_below => false, :summary_right => true, :apply_styles => false)
+    @outline_pr = Axlsx::OutlinePr.new(summary_below: false, summary_right: true, apply_styles: false)
   end
 
   def test_summary_below

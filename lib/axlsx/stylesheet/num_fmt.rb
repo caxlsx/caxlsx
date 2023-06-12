@@ -20,7 +20,7 @@ module Axlsx
     serializable_attributes :formatCode, :numFmtId
 
     # @return [String] The formatting to use for this number format.
-    # @see http://support.microsoft.com/kb/264372
+    # @see https://support.microsoft.com/kb/264372
     attr_reader :formatCode
 
     # @return [Integer] An unsigned integer referencing a standard or custom number format.
@@ -61,10 +61,10 @@ module Axlsx
     attr_reader :numFmtId
 
     # @see numFmtId
-    def numFmtId=(v) Axlsx::validate_unsigned_int v; @numFmtId = v end
+    def numFmtId=(v) Axlsx.validate_unsigned_int v; @numFmtId = v end
 
     # @see formatCode
-    def formatCode=(v) Axlsx::validate_string v; @formatCode = v end
+    def formatCode=(v) Axlsx.validate_string v; @formatCode = v end
 
     # Serializes the object
     # @param [String] str
@@ -75,11 +75,7 @@ module Axlsx
 
     # Override to avoid removing underscores
     def serialized_attributes(str = +'', additional_attributes = {})
-      attributes = declared_attributes.merge! additional_attributes
-      attributes.each do |key, value|
-        str << "#{Axlsx.camel(key, false)}=\"#{Axlsx.booleanize(value)}\" "
-      end
-      str
+      super(str, additional_attributes, false)
     end
   end
 end

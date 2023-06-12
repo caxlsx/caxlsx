@@ -62,7 +62,7 @@ module Axlsx
 
     # Configures the vary_colors options for this chart
     # @param [Boolean] v The value to set
-    def vary_colors=(v) Axlsx::validate_boolean(v); @vary_colors = v; end
+    def vary_colors=(v) Axlsx.validate_boolean(v); @vary_colors = v; end
 
     # The title object for the chart.
     # @return [Title]
@@ -124,7 +124,7 @@ module Axlsx
     # The part name for this chart
     # @return [String]
     def pn
-      "#{CHART_PN % (index + 1)}"
+      format(CHART_PN, index + 1)
     end
 
     # The title object for the chart.
@@ -149,13 +149,13 @@ module Axlsx
     # Show the legend in the chart
     # @param [Boolean] v
     # @return [Boolean]
-    def show_legend=(v) Axlsx::validate_boolean(v); @show_legend = v; end
+    def show_legend=(v) Axlsx.validate_boolean(v); @show_legend = v; end
 
     # How to display blank values
     # @see display_blanks_as
     # @param [Symbol] v
     # @return [Symbol]
-    def display_blanks_as=(v) Axlsx::validate_display_blanks_as(v); @display_blanks_as = v; end
+    def display_blanks_as=(v) Axlsx.validate_display_blanks_as(v); @display_blanks_as = v; end
 
     # The style for the chart.
     # see ECMA Part 1 §21.2.2.196
@@ -187,19 +187,19 @@ module Axlsx
 
     # Assigns a background color to chart area
     def bg_color=(v)
-      DataTypeValidator.validate(:color, Color, Color.new(:rgb => v))
+      DataTypeValidator.validate(:color, Color, Color.new(rgb: v))
       @bg_color = v
     end
 
     # Whether only data from visible cells should be plotted.
     # @param [Boolean] v
     # @return [Boolean]
-    def plot_visible_only=(v) Axlsx::validate_boolean(v); @plot_visible_only = v; end
+    def plot_visible_only=(v) Axlsx.validate_boolean(v); @plot_visible_only = v; end
 
     # Whether the chart area shall have rounded corners.
     # @param [Boolean] v
     # @return [Boolean]
-    def rounded_corners=(v) Axlsx::validate_boolean(v); @rounded_corners = v; end
+    def rounded_corners=(v) Axlsx.validate_boolean(v); @rounded_corners = v; end
 
     # Serializes the object
     # @param [String] str

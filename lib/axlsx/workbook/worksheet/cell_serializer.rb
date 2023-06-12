@@ -10,7 +10,9 @@ module Axlsx
       # @param [String] str The string to apend serialization to.
       # @return [String]
       def to_xml_string(row_index, column_index, cell, str = +'')
-        str << '<c r="' << Axlsx::cell_r(column_index, row_index) << '" s="' << cell.style.to_s << '" '
+        str << '<c r="'
+        str << Axlsx.col_ref(column_index) << Axlsx.row_ref(row_index)
+        str << '" s="' << cell.style_str << '" '
         return str << '/>' if cell.value.nil?
 
         method = cell.type
@@ -24,8 +26,8 @@ module Axlsx
       def run_xml_string(cell, str = +'')
         if cell.is_text_run?
           valid = RichTextRun::INLINE_STYLES - [:value, :type]
-          data = Hash[Axlsx.instance_values_for(cell).map { |k, v| [k.to_sym, v] }]
-          data = data.select { |key, value| valid.include?(key) && !value.nil? }
+          data = Axlsx.instance_values_for(cell).transform_keys(&:to_sym)
+          data = data.select { |key, value| !value.nil? && valid.include?(key) }
           RichText.new(cell.value.to_s, data).to_xml_string(str)
         elsif cell.contains_rich_text?
           cell.value.to_xml_string(str)
@@ -48,7 +50,7 @@ module Axlsx
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def date(cell, str = +'')
-        value_serialization false, DateTimeConverter::date_to_serial(cell.value).to_s, str
+        value_serialization false, DateTimeConverter.date_to_serial(cell.value).to_s, str
       end
 
       # Serializes cells that are type time
@@ -56,7 +58,7 @@ module Axlsx
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def time(cell, str = +'')
-        value_serialization false, DateTimeConverter::time_to_serial(cell.value).to_s, str
+        value_serialization false, DateTimeConverter.time_to_serial(cell.value).to_s, str
       end
 
       # Serializes cells that are type boolean
@@ -88,7 +90,7 @@ module Axlsx
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def formula_serialization(cell, str = +'')
-        str << 't="str"><f>' << cell.clean_value.to_s.sub('=', '') << '</f>'
+        str << 't="str"><f>' << cell.clean_value.delete_prefix(FORMULA_PREFIX) << '</f>'
         str << '<v>' << cell.formula_value.to_s << '</v>' unless cell.formula_value.nil?
       end
 
@@ -97,7 +99,7 @@ module Axlsx
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def array_formula_serialization(cell, str = +'')
-        str << 't="str">' << '<f t="array" ref="' << cell.r << '">' << cell.clean_value.to_s.sub('{=', '').sub(/}$/, '') << '</f>'
+        str << 't="str">' << '<f t="array" ref="' << cell.r << '">' << cell.clean_value.delete_prefix(ARRAY_FORMULA_PREFIX).delete_suffix(ARRAY_FORMULA_SUFFIX) << '</f>'
         str << '<v>' << cell.formula_value.to_s << '</v>' unless cell.formula_value.nil?
       end
 

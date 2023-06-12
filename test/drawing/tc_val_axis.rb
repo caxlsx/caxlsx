@@ -14,7 +14,7 @@ class TestValAxis < Test::Unit::TestCase
   end
 
   def test_options
-    a = Axlsx::ValAxis.new(:cross_between => :midCat)
+    a = Axlsx::ValAxis.new(cross_between: :midCat)
 
     assert_equal(:midCat, a.cross_between)
   end
