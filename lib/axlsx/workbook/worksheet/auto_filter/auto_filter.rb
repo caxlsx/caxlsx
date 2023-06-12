@@ -58,6 +58,33 @@ module Axlsx
       # The +1 is so we skip the header row with the filter drop downs
       rows = worksheet.rows[(start_point.last + 1)..end_point.last] || []
 
+      if sort_state.sort_conditions.to_a != []
+        sort_conditions = sort_state.sort_conditions.to_a
+
+        sorted_rows = rows.sort do |row1, row2|
+          comparison = 0
+
+          sort_conditions.each do |condition|
+            cell_value_row1 = row1.cells[condition.col_id].value
+            cell_value_row2 = row2.cells[condition.col_id].value
+
+            comparison = cell_value_row1 <=> cell_value_row2
+            comparison = -comparison if condition.descending
+
+            break unless comparison.zero?
+          end
+
+          comparison
+        end
+        insert_index = start_point.last + 1
+
+        sorted_rows.each do |row|
+          # Insert the row at the specified index
+          worksheet.rows[insert_index] = row
+          insert_index += 1
+        end
+      end
+
       column_offset = start_point.first
       columns.each do |column|
         rows.each do |row|
