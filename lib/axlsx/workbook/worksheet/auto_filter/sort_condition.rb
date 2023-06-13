@@ -43,6 +43,8 @@ module Axlsx
       letters.pack('C*')
     end
 
+    # serialize the object
+    # @return [String]
     def to_xml_string(str = +'', ref)
       ref = ref_to_single_column(ref, @col_id)
 

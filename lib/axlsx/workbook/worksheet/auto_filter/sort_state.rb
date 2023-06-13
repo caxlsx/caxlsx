@@ -40,7 +40,11 @@ module Axlsx
       "#{letter}#{incremented_number}"
     end
 
+    # serialize the object
+    # @return [String]
     def to_xml_string(str = +'')
+      return unless sort_conditions != []
+
       ref = @auto_filter.range
       first_cell, last_cell = ref.split(':')
       ref = increment_cell_value(first_cell) + ':' + last_cell
