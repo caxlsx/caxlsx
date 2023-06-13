@@ -2,12 +2,15 @@ module Axlsx
 
   class SortCondition
 
-    include Axlsx::OptionsParser
-
+    # Creates a new SortCondition object
+    # @param [Integer] col_id Zero-based index indicating the AutoFilter column to which the sorting should be applied to
+    # @param [Boolean] a Boolean value if the order should be descending = true or false
+    # @param [Array] An array containg a custom sorting list in order.
     def initialize(col_id, descending, custom_order)
       @col_id = col_id
       Axlsx::validate_boolean(descending)
       @descending = descending
+      DataTypeValidator.validate :sort_condition_custom_order, Array, custom_order
       @custom_order = custom_order
     end
 
@@ -16,6 +19,8 @@ module Axlsx
     attr_reader :custom_order
     attr_accessor :sort_conditions_array
 
+    # converts the ref String from the sort_state to a string representing the ref of a single column
+    # for the xml string to be returned.
     def ref_to_single_column(ref, col_id)
       first_cell, last_cell = ref.split(':')
 
@@ -28,6 +33,7 @@ module Axlsx
       modified_range = "#{first_column}#{first_row}:#{last_column}#{last_row}"
     end
 
+    # Get the right letter representing the column from the col_id
     def get_column_letter(col_id)
       letters = []
       while col_id >= 0
@@ -46,7 +52,5 @@ module Axlsx
       str << "customList='#{@custom_order.join(',')}' " if @custom_order != []
       str << "/>"
     end
-
-
   end
 end

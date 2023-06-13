@@ -49,8 +49,8 @@ module Axlsx
       columns.last
     end
 
-    # actually performs the filtering of rows who's cells do not
-    # match the filter.
+    # Performs the sorting of the rows based on the sort_state conditions. Then it actually performs
+    # the filtering of rows who's cells do not match the filter.
     def apply
       first_cell, last_cell = range.split(':')
       start_point = Axlsx.name_to_indices(first_cell)
@@ -58,6 +58,7 @@ module Axlsx
       # The +1 is so we skip the header row with the filter drop downs
       rows = worksheet.rows[(start_point.last + 1)..end_point.last] || []
 
+      # the sorting of the rows if sort_conditions are available.
       if sort_state.sort_conditions.to_a != []
         sort_conditions = sort_state.sort_conditions.to_a
 
@@ -105,16 +106,11 @@ module Axlsx
       @sort_state ||= SortState.new self
     end
 
-    def sort_state=(v)
-      DataTypeValidator.validate :worksheet_sort_state, Array, v
-      sort_state.sort_conditions_array = v
-    end
-
     # serialize the object
     # @return [String]
     def to_xml_string(str = +'')
       # return unless range
-
+      byebug
       str << "<autoFilter ref='#{range}'>"
       columns.each { |filter_column| filter_column.to_xml_string(str) }
       @sort_state.to_xml_string(str)

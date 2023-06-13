@@ -4,7 +4,7 @@ module Axlsx
   # This class performs sorting on a range in a worksheet
   class SortState
    # creates a new SortState object
-    # @param [Worksheet] worksheet
+    # @param [AutoFilter] the auto_filter that this sort_state belongs to
     def initialize(auto_filter)
       @auto_filter = auto_filter
 
@@ -12,32 +12,25 @@ module Axlsx
 
     attr_reader :sort_conditions
 
-    # The range the sorting should be applied to.
-    # This should be a string like 'A2:B8'.
-    # Watch out! The header row should not be included in the range.
-    # @return [String]
-    # attr_accessor :range
-    # attr_accessor :sort_conditions_array
-    # attr_reader :sort_conditions
-    # attr_reader :worksheet
-
-    def defined_name
-      return unless range
-
-      Axlsx.cell_range(@range.split(':').collect { |name| worksheet.name_to_cell(name) })
-    end
-
+    # A collection of SortConditions for this sort_state
+    # @return [SimpleTypedList]
     def sort_conditions
       @sort_conditions ||= SimpleTypedList.new SortCondition
     end
 
+    # Adds a SortCondition to the sort_state. This is the recommended way to add conditions to it.
+    # It requires a col_id for the sorting, descending and the custom order are optional.
+    # @param [Integer] col_id Zero-based index indicating the AutoFilter column to which the sorting should be applied to
+    # @param [Boolean] a Boolean value if the order should be descending = true or false
+    # @param [Array] An array containg a custom sorting list in order.
+    # @return [SortCondition]
     def add_sort_condition(col_id, descending = false, custom_order = [])
       sort_conditions << SortCondition.new(col_id, descending, custom_order)
       sort_conditions.last
-
-      # TODO - add data validation to the arguments here
     end
 
+    # method to increment the String representing the range of the autofilter by 1 row for the sortCondition
+    # xml string
     def increment_cell_value(str)
       letter = str[/[A-Za-z]+/]
       number = str[/\d+/].to_i
