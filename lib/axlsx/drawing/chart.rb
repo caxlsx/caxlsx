@@ -160,7 +160,7 @@ module Axlsx
     # The style for the chart.
     # see ECMA Part 1 §21.2.2.196
     # @param [Integer] v must be between 1 and 48
-    def style=(v) DataTypeValidator.validate "Chart.style", Integer, v, lambda { |arg| arg >= 1 && arg <= 48 }; @style = v; end
+    def style=(v) DataTypeValidator.validate "Chart.style", Integer, v, ->(arg) { arg >= 1 && arg <= 48 }; @style = v; end
 
     # @see legend_position
     def legend_position=(v) RestrictionValidator.validate "Chart.legend_position", [:b, :l, :r, :t, :tr], v; @legend_position = v; end

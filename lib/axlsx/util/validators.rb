@@ -83,7 +83,7 @@ module Axlsx
   end
 
   # Validates an unsigned intger
-  UINT_VALIDATOR = lambda { |arg| arg.respond_to?(:>=) && arg >= 0 }
+  UINT_VALIDATOR = ->(arg) { arg.respond_to?(:>=) && arg >= 0 }
 
   # Requires that the value is a Integer and is greater or equal to 0
   # @param [Any] v The value validated
@@ -109,7 +109,7 @@ module Axlsx
 
   VALID_BOOLEAN_CLASSES = [TrueClass, FalseClass, Integer, String, Symbol].freeze
   VALID_BOOLEAN_VALUES = [true, false, 1, 0, '1', '0', 'true', 'false', :true, :false].freeze
-  BOOLEAN_VALIDATOR = lambda { |arg| VALID_BOOLEAN_VALUES.include?(arg) }
+  BOOLEAN_VALIDATOR = ->(arg) { VALID_BOOLEAN_VALUES.include?(arg) }
 
   # Requires that the value is a form that can be evaluated as a boolean in an xml document.
   # The value must be an instance of String, Integer, Symbol, TrueClass or FalseClass and
@@ -137,14 +137,14 @@ module Axlsx
     RegexValidator.validate "number_with_unit", /\A[0-9]+(\.[0-9]+)?(mm|cm|in|pt|pc|pi)\Z/, v
   end
 
-  SCALE_10_400_VALIDATOR = lambda { |arg| arg >= 10 && arg <= 400 }
+  SCALE_10_400_VALIDATOR = ->(arg) { arg >= 10 && arg <= 400 }
 
   # Requires that the value is an integer ranging from 10 to 400.
   def self.validate_scale_10_400(v)
     DataTypeValidator.validate "page_scale", Integer, v, SCALE_10_400_VALIDATOR
   end
 
-  SCALE_0_10_400_VALIDATOR = lambda { |arg| arg == 0 || (arg >= 10 && arg <= 400) }
+  SCALE_0_10_400_VALIDATOR = ->(arg) { arg == 0 || (arg >= 10 && arg <= 400) }
 
   # Requires that the value is an integer ranging from 10 to 400 or 0.
   def self.validate_scale_0_10_400(v)
