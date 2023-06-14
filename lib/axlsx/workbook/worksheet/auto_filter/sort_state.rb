@@ -29,7 +29,7 @@ module Axlsx
       sort_conditions.last
     end
 
-    # method to increment the String representing the range of the autofilter by 1 row for the sortCondition
+    # method to increment the String representing the first cell of the range of the autofilter by 1 row for the sortCondition
     # xml string
     def increment_cell_value(str)
       letter = str[/[A-Za-z]+/]

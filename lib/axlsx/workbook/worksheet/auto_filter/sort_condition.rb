@@ -48,8 +48,8 @@ module Axlsx
     def to_xml_string(str = +'', ref)
       ref = ref_to_single_column(ref, @col_id)
 
-      str << '<sortCondition '
-      str << 'descending="1" ' if @descending
+      str << "<sortCondition "
+      str << "descending='1' " if @descending
       str << "ref='#{ref}' "
       str << "customList='#{@custom_order.join(',')}' " if @custom_order != []
       str << "/>"
