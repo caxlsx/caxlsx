@@ -37,7 +37,7 @@ module Axlsx
 
     # Helper method to tell us if there are comments in the comments collection
     # @return [Boolean]
-    def has_comments?
+    def has_comments? # rubocop:disable Naming/PredicateName
       !comments.empty?
     end
 
