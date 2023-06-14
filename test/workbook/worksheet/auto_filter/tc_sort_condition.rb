@@ -3,12 +3,10 @@ require 'tc_helper'
 class TestSortCondition < Test::Unit::TestCase
   def setup
     ws = Axlsx::Package.new.workbook.add_worksheet
-    ws.add_row ['number', 'letter', 'custom order']
-    ws.add_row [1, 'B', 'high']
-    ws.add_row [2, 'C', 'low']
-    ws.add_row [3, 'A', 'middle']
+    ws.add_row ['first', 'second', 'third']
+    3.times { |index| ws.add_row [1 * index, 2 * index, 3 * index] }
+    ws.auto_filter = 'A1:C4'
     @auto_filter = ws.auto_filter
-    @auto_filter.range = 'A1:C4'
     @auto_filter.sort_state.add_sort_condition(0)
     @auto_filter.sort_state.add_sort_condition(1, true)
     @auto_filter.sort_state.add_sort_condition(2, false, ['low', 'middle', 'high'])
@@ -27,9 +25,15 @@ class TestSortCondition < Test::Unit::TestCase
   def test_to_xml_string
     doc = Nokogiri::XML(@sort_state.to_xml_string)
 
-    assert_equal(doc.xpath("sortState//sortCondition").size, 3)
-    assert_equal(doc.xpath("sortState//sortCondition")[0].attribute('ref').value, 'A2:A4')
-    assert_equal(doc.xpath("sortState//sortCondition")[1].attribute('descending').value, '1')
-    assert_equal(doc.xpath("sortState//sortCondition")[2].attribute('customList').value, 'low,middle,high')
+    assert_equal doc.xpath("sortState//sortCondition").size, 3
+    assert_equal doc.xpath("sortState//sortCondition")[0].attribute('ref').value, 'A2:A4'
+    assert_nil doc.xpath("sortState//sortCondition")[0].attribute('descending')
+    assert_nil doc.xpath("sortState//sortCondition")[0].attribute('customList')
+    assert_equal doc.xpath("sortState//sortCondition")[1].attribute('descending').value, '1'
+    assert_equal doc.xpath("sortState//sortCondition")[1].attribute('ref').value, 'B2:B4'
+    assert_nil doc.xpath("sortState//sortCondition")[1].attribute('customList')
+    assert_equal doc.xpath("sortState//sortCondition")[2].attribute('ref').value, 'C2:C4'
+    assert_equal doc.xpath("sortState//sortCondition")[2].attribute('customList').value, 'low,middle,high'
+    assert_nil doc.xpath("sortState//sortCondition")[2].attribute('descending')
   end
 end

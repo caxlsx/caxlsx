@@ -102,6 +102,8 @@ module Axlsx
       end
     end
 
+    # the SortState object for this AutoFilter
+    # @return [SortState]
     def sort_state
       @sort_state ||= SortState.new self
     end

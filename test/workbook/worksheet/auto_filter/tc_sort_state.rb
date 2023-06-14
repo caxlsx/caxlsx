@@ -3,15 +3,11 @@ require 'tc_helper'
 class TestSortState < Test::Unit::TestCase
   def setup
     ws = Axlsx::Package.new.workbook.add_worksheet
-    ws.add_row ['number', 'letter', 'custom order']
-    ws.add_row [1, 'B', 'high']
-    ws.add_row [2, 'C', 'low']
-    ws.add_row [3, 'A', 'middle']
+    ws.add_row ['first', 'second', 'third']
+    3.times { |index| ws.add_row [1 * index, 2 * index, 3 * index] }
+    ws.auto_filter = 'A1:C4'
     @auto_filter = ws.auto_filter
-    @auto_filter.range = 'A1:C4'
     @auto_filter.sort_state.add_sort_condition(0)
-    @auto_filter.sort_state.add_sort_condition(1, true)
-    @auto_filter.sort_state.add_sort_condition(2, false, ['low', 'middle', 'high'])
     @sort_state = @auto_filter.sort_state
   end
 
