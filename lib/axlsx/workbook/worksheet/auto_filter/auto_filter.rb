@@ -112,7 +112,7 @@ module Axlsx
     # the sorting rules will need to be applied manually after generating to alter the order of the rows.
     # @return [Boolean]
     def sort_on_generate
-      @sort_on_generate ||= false
+      @sort_on_generate ||= true
     end
 
     # @param [Boolean] Flag indicating whether the AutoFilter should sort the rows when generating the file.

@@ -7,10 +7,10 @@ class TestAutoFilter < Test::Unit::TestCase
     ws = Axlsx::Package.new.workbook.add_worksheet
     ws.add_row ['first', 'second', 'third']
     3.times { |index| ws.add_row [1 * index, 2 * index, 3 * index] }
-    ws.auto_filter = "A1:C4"
+    ws.auto_filter = 'A1:C4'
     @auto_filter = ws.auto_filter
     @auto_filter.add_column 0, :filters, filter_items: [1]
-    @auto_filter.sort_state.add_sort_condition 0, true, [0, 2, 1]
+    @auto_filter.sort_state.add_sort_condition 0, order: :desc
   end
 
   def test_defined_name
@@ -37,11 +37,13 @@ class TestAutoFilter < Test::Unit::TestCase
 
   def test_apply
     assert_nil @auto_filter.worksheet.rows.last.hidden
+    # assert_equal @auto_filter.worksheet.rows.last.cells, ''
     assert @auto_filter.worksheet.rows.last.cells.none? { |cell| cell.value == 0 }
 
     @auto_filter.apply
 
     assert @auto_filter.worksheet.rows.last.hidden
-    assert @auto_filter.worksheet.rows.last.cells.all? { |cell| cell.value == 0 }
+    assert_equal @auto_filter.worksheet.rows.last.cells, ''
+    # assert @auto_filter.worksheet.rows.last.cells.all? { |cell| cell.value == 0 }
   end
 end
