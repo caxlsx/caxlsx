@@ -7,6 +7,7 @@ CHANGELOG
   - Remove ability to set `u=` to true in favor of using :single or one of the other underline options
   - Fix `Workbook#sheet_by_name` not returning sheets with encoded characters in the name
   - Raise exception if `axlsx_styler` gem is present as its code was merged directly into `caxlsx` in v3.3.0
+  - Add 'SortState' and 'SortCondition' classes to the 'AutoFilter' class to add sorting to the generated file.
 
 - **April.23.23**: 3.4.1
   - [PR #209](https://github.com/caxlsx/caxlsx/pull/209) - Revert characters other than `=` being considered as formulas.
