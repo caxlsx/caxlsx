@@ -34,7 +34,7 @@ module Axlsx
     # explicitly be disabled or all will show.
     def initialize_defaults
       %w(show_first_column show_last_column show_row_stripes show_column_stripes).each do |attr|
-        self.send("#{attr}=", 0)
+        send("#{attr}=", 0)
       end
     end
 

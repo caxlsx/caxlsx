@@ -16,7 +16,7 @@ module Axlsx
         return str << '/>' if cell.value.nil?
 
         method = cell.type
-        self.send(method, cell, str)
+        send(method, cell, str)
         str << '</c>'
       end
 
