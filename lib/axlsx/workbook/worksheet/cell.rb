@@ -167,7 +167,7 @@ module Axlsx
 
     # Indicates that the cell has one or more of the custom cell styles applied.
     # @return [Boolean]
-    def is_text_run?
+    def is_text_run? # rubocop:disable Naming/PredicateName
       defined?(@is_text_run) && @is_text_run && !contains_rich_text?
     end
 
@@ -391,13 +391,13 @@ module Axlsx
       CellSerializer.to_xml_string r_index, c_index, self, str
     end
 
-    def is_formula?
+    def is_formula? # rubocop:disable Naming/PredicateName
       return false if escape_formulas
 
       type == :string && @value.to_s.start_with?(FORMULA_PREFIX)
     end
 
-    def is_array_formula?
+    def is_array_formula? # rubocop:disable Naming/PredicateName
       return false if escape_formulas
 
       type == :string &&
