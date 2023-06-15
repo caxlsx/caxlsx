@@ -59,7 +59,7 @@ module Axlsx
       rows = worksheet.rows[(start_point.last + 1)..end_point.last] || []
 
       # the sorting of the rows if sort_conditions are available.
-      if sort_state.sort_conditions.to_a != []
+      if !sort_state.sort_conditions.to_a.empty? && self.sort_on_generate
         sort_conditions = sort_state.sort_conditions.to_a
 
         sorted_rows = rows.sort do |row1, row2|
@@ -69,14 +69,14 @@ module Axlsx
             cell_value_row1 = row1.cells[condition.col_id].value
             cell_value_row2 = row2.cells[condition.col_id].value
 
-            if condition.custom_order != []
-              order = condition.custom_order
+            unless condition.custom_list.empty?
+              order = condition.custom_list
               comparison = order.index(cell_value_row1) <=> order.index(cell_value_row2)
             else
               comparison = cell_value_row1 <=> cell_value_row2
             end
 
-            comparison = -comparison if condition.descending
+            comparison = -comparison if condition.order == :desc
 
             break unless comparison.zero?
           end
@@ -106,6 +106,20 @@ module Axlsx
     # @return [SortState]
     def sort_state
       @sort_state ||= SortState.new self
+    end
+
+    # Flag indicating whether the AutoFilter should sort the rows when generating the file. If false,
+    # the sorting rules will need to be applied manually after generating to alter the order of the rows.
+    # @return [Boolean]
+    def sort_on_generate
+      @sort_on_generate ||= false
+    end
+
+    # @param [Boolean] Flag indicating whether the AutoFilter should sort the rows when generating the file.
+    # @return [Boolean]
+    def sort_on_generate=(v)
+      Axlsx.validate_boolean v
+      @sort_on_generate = v
     end
 
     # serialize the object

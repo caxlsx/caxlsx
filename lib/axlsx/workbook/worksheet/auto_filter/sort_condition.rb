@@ -4,19 +4,20 @@ module Axlsx
 
     # Creates a new SortCondition object
     # @param [Integer] col_id Zero-based index indicating the AutoFilter column to which the sorting should be applied to
-    # @param [Boolean] a Boolean value if the order should be descending = true or false
+    # @param [Symbol] The order the column should be sorted on, can only be :asc or :desc
     # @param [Array] An array containg a custom sorting list in order.
-    def initialize(col_id, descending, custom_order)
+    def initialize(col_id, order:, custom_list:)
       @col_id = col_id
-      Axlsx::validate_boolean(descending)
-      @descending = descending
-      DataTypeValidator.validate :sort_condition_custom_order, Array, custom_order
-      @custom_order = custom_order
+      RestrictionValidator.validate 'SortCondition.order', [:asc, :desc], order
+      @order = order
+
+      DataTypeValidator.validate :sort_condition_custom_list, Array, custom_list
+      @custom_list = custom_list
     end
 
     attr_reader :col_id
-    attr_reader :descending
-    attr_reader :custom_order
+    attr_reader :order
+    attr_reader :custom_list
     attr_accessor :sort_conditions_array
 
     # converts the ref String from the sort_state to a string representing the ref of a single column
@@ -49,9 +50,9 @@ module Axlsx
       ref = ref_to_single_column(ref, @col_id)
 
       str << "<sortCondition "
-      str << "descending='1' " if @descending
+      str << "descending='1' " if @order == :desc
       str << "ref='#{ref}' "
-      str << "customList='#{@custom_order.join(',')}' " if @custom_order != []
+      str << "customList='#{@custom_list.join(',')}' " unless @custom_list.empty?
       str << "/>"
     end
   end
