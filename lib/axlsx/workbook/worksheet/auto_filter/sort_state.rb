@@ -1,4 +1,4 @@
-require 'axlsx/workbook/worksheet/auto_filter/sort_condition.rb'
+require 'axlsx/workbook/worksheet/auto_filter/sort_condition'
 
 module Axlsx
   # This class performs sorting on a range in a worksheet

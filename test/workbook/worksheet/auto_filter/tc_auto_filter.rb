@@ -20,8 +20,8 @@ class TestAutoFilter < Test::Unit::TestCase
   def test_to_xml_string
     doc = Nokogiri::XML(@auto_filter.worksheet.to_xml_string)
 
-    assert_equal(doc.at_xpath('//xmlns:autoFilter')['ref'], 'A1:C4')
-    assert_equal(doc.at_xpath('//xmlns:autoFilter').children.size, 2)
+    assert_equal('A1:C4', doc.at_xpath('//xmlns:autoFilter')['ref'])
+    assert_equal(2, doc.at_xpath('//xmlns:autoFilter').children.size)
   end
 
   def test_columns
@@ -43,6 +43,6 @@ class TestAutoFilter < Test::Unit::TestCase
 
     assert @auto_filter.worksheet.rows.last.hidden
     assert @auto_filter.worksheet.rows.last.cells.all? { |cell| cell.value == 0 }
-    assert_equal @auto_filter.worksheet.rows[2].map { |cell| cell.value }, [2, 4, 6]
+    assert_equal([2, 4, 6], @auto_filter.worksheet.rows[2].map { |cell| cell.value })
   end
 end

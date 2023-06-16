@@ -23,12 +23,12 @@ class TestSortState < Test::Unit::TestCase
   end
 
   def test_increment_cell_value
-    assert_equal @sort_state.increment_cell_value('A1'), 'A2'
+    assert_equal('A2', @sort_state.increment_cell_value('A1'))
   end
 
   def test_to_xml_string
     doc = Nokogiri::XML(@sort_state.to_xml_string)
 
-    assert_equal(doc.xpath("sortState")[0].attribute('ref').value, 'A2:C4')
+    assert_equal('A2:C4', doc.xpath("sortState")[0].attribute('ref').value)
   end
 end

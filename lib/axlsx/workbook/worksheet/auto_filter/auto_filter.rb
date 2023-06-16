@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'axlsx/workbook/worksheet/auto_filter/filter_column.rb'
-require 'axlsx/workbook/worksheet/auto_filter/filters.rb'
-require 'axlsx/workbook/worksheet/auto_filter/sort_state.rb'
+require 'axlsx/workbook/worksheet/auto_filter/filter_column'
+require 'axlsx/workbook/worksheet/auto_filter/filters'
+require 'axlsx/workbook/worksheet/auto_filter/sort_state'
 
 module Axlsx
   # This class represents an auto filter range in a worksheet
@@ -69,11 +69,11 @@ module Axlsx
             cell_value_row1 = row1.cells[condition.col_id].value
             cell_value_row2 = row2.cells[condition.col_id].value
 
-            unless condition.custom_list.empty?
+            if condition.custom_list.empty?
+              comparison = cell_value_row1 <=> cell_value_row2
+            else
               order = condition.custom_list
               comparison = order.index(cell_value_row1) <=> order.index(cell_value_row2)
-            else
-              comparison = cell_value_row1 <=> cell_value_row2
             end
 
             comparison = -comparison if condition.order == :desc

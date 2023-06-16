@@ -1,7 +1,5 @@
 module Axlsx
-
   class SortCondition
-
     # Creates a new SortCondition object
     # @param [Integer] col_id Zero-based index indicating the AutoFilter column to which the sorting should be applied to
     # @param [Symbol] The order the column should be sorted on, can only be :asc or :desc
@@ -15,9 +13,7 @@ module Axlsx
       @custom_list = custom_list
     end
 
-    attr_reader :col_id
-    attr_reader :order
-    attr_reader :custom_list
+    attr_reader :col_id, :order, :custom_list
     attr_accessor :sort_conditions_array
 
     # converts the ref String from the sort_state to a string representing the ref of a single column
