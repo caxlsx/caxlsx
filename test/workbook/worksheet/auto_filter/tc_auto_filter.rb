@@ -37,12 +37,12 @@ class TestAutoFilter < Test::Unit::TestCase
 
   def test_apply
     assert_nil @auto_filter.worksheet.rows.last.hidden
-    assert @auto_filter.worksheet.rows.last.cells.none? { |cell| cell.value == 0 }
+    assert(@auto_filter.worksheet.rows.last.cells.none? { |cell| cell.value.zero? })
 
     @auto_filter.apply
 
     assert @auto_filter.worksheet.rows.last.hidden
-    assert @auto_filter.worksheet.rows.last.cells.all? { |cell| cell.value == 0 }
-    assert_equal([2, 4, 6], @auto_filter.worksheet.rows[2].map { |cell| cell.value })
+    assert(@auto_filter.worksheet.rows.last.cells.all? { |cell| cell.value.zero? })
+    assert_equal([2, 4, 6], @auto_filter.worksheet.rows[2].map(&:value))
   end
 end

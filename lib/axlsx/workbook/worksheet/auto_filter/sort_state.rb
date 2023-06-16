@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'axlsx/workbook/worksheet/auto_filter/sort_condition'
 
 module Axlsx
@@ -8,8 +10,6 @@ module Axlsx
     def initialize(auto_filter)
       @auto_filter = auto_filter
     end
-
-    attr_reader :sort_conditions
 
     # A collection of SortConditions for this sort_state
     # @return [SimpleTypedList]
@@ -46,7 +46,7 @@ module Axlsx
 
       ref = @auto_filter.range
       first_cell, last_cell = ref.split(':')
-      ref = increment_cell_value(first_cell) + ':' + last_cell
+      ref = "#{increment_cell_value(first_cell)}:#{last_cell}"
 
       str << "<sortState xmlns:xlrd2='http://schemas.microsoft.com/office/spreadsheetml/2017/richdata2' ref='#{ref}'>"
       sort_conditions.each { |sort_condition| sort_condition.to_xml_string(str, ref) }

@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Axlsx
+  # This class represents a individual sort condition belonging to the sort state of an auto filter
   class SortCondition
     # Creates a new SortCondition object
     # @param [Integer] col_id Zero-based index indicating the AutoFilter column to which the sorting should be applied to
@@ -27,7 +30,7 @@ module Axlsx
       first_column = get_column_letter(col_id)
       last_column = first_column
 
-      modified_range = "#{first_column}#{first_row}:#{last_column}#{last_row}"
+      "#{first_column}#{first_row}:#{last_column}#{last_row}"
     end
 
     # Get the right letter representing the column from the col_id
@@ -42,7 +45,7 @@ module Axlsx
 
     # serialize the object
     # @return [String]
-    def to_xml_string(str = +'', ref)
+    def to_xml_string(str, ref)
       ref = ref_to_single_column(ref, @col_id)
 
       str << "<sortCondition "
