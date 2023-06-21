@@ -69,7 +69,9 @@ module Axlsx
             cell_value_row1 = row1.cells[condition.col_id].value
             cell_value_row2 = row2.cells[condition.col_id].value
 
-            if condition.custom_list.empty?
+            if cell_value_row1.nil? || cell_value_row2.nil?
+              comparison = cell_value_row1.nil? ? -1 : 1
+            elsif condition.custom_list.empty?
               comparison = cell_value_row1 <=> cell_value_row2
             else
               order = condition.custom_list
