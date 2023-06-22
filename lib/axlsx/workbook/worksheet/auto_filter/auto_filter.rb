@@ -59,7 +59,7 @@ module Axlsx
       rows = worksheet.rows[(start_point.last + 1)..end_point.last] || []
 
       # the sorting of the rows if sort_conditions are available.
-      if !sort_state.sort_conditions.to_a.empty? && self.sort_on_generate
+      if !sort_state.sort_conditions.to_a.empty? && sort_on_generate
         sort_conditions = sort_state.sort_conditions.to_a
 
         sorted_rows = rows.sort do |row1, row2|
