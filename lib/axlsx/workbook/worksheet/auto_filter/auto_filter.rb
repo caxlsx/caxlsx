@@ -59,24 +59,24 @@ module Axlsx
       rows = worksheet.rows[(start_point.last + 1)..end_point.last] || []
 
       # the sorting of the rows if sort_conditions are available.
-      if !sort_state.sort_conditions.to_a.empty? && sort_on_generate
-        sort_conditions = sort_state.sort_conditions.to_a
-
+      if !sort_state.sort_conditions.empty? && sort_on_generate
+        sort_conditions = sort_state.sort_conditions
         sorted_rows = rows.sort do |row1, row2|
           comparison = 0
 
           sort_conditions.each do |condition|
             cell_value_row1 = row1.cells[condition.col_id].value
             cell_value_row2 = row2.cells[condition.col_id].value
-
-            if cell_value_row1.nil? || cell_value_row2.nil?
-              comparison = cell_value_row1.nil? ? -1 : 1
-            elsif condition.custom_list.empty?
-              comparison = cell_value_row1 <=> cell_value_row2
-            else
-              order = condition.custom_list
-              comparison = order.index(cell_value_row1) <=> order.index(cell_value_row2)
-            end
+            custom_list = condition.custom_list
+            comparison = if cell_value_row1.nil? || cell_value_row2.nil?
+                           cell_value_row1.nil? ? -1 : 1
+                         elsif custom_list.empty?
+                           cell_value_row1 <=> cell_value_row2
+                         elsif custom_list.index(cell_value_row1) && custom_list.index(cell_value_row2)
+                           custom_list.index(cell_value_row1) <=> custom_list.index(cell_value_row2)
+                         else
+                           custom_list.index(cell_value_row1).nil? ? -1 : 1
+                         end
 
             comparison = -comparison if condition.order == :desc
 
