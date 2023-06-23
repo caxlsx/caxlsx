@@ -131,7 +131,9 @@ module Axlsx
 
       str << "<autoFilter ref='#{range}'>"
       columns.each { |filter_column| filter_column.to_xml_string(str) }
-      @sort_state.to_xml_string(str)
+      if !@sort_state.nil?
+        @sort_state.to_xml_string(str)
+      end
       str << "</autoFilter>"
     end
   end
