@@ -24,23 +24,15 @@ module Axlsx
     def ref_to_single_column(ref, col_id)
       first_cell, last_cell = ref.split(':')
 
+      start_point = Axlsx.name_to_indices(first_cell)
+
       first_row = first_cell[/\d+/]
       last_row = last_cell[/\d+/]
 
-      first_column = get_column_letter(col_id)
+      first_column = Axlsx.col_ref(col_id + start_point.first)
       last_column = first_column
 
       "#{first_column}#{first_row}:#{last_column}#{last_row}"
-    end
-
-    # Get the right letter representing the column from the col_id
-    def get_column_letter(col_id)
-      letters = []
-      while col_id >= 0
-        letters.unshift((col_id % 26) + 65)
-        col_id = (col_id / 26).to_i - 1
-      end
-      letters.pack('C*')
     end
 
     # serialize the object

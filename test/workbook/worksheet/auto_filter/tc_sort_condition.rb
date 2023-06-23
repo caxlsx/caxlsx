@@ -20,10 +20,6 @@ class TestSortCondition < Test::Unit::TestCase
     assert_equal('A2:A4', @sort_conditions[0].ref_to_single_column('A2:C4', 0))
   end
 
-  def test_get_column_letter
-    assert_equal('CW', @sort_conditions[0].get_column_letter(100))
-  end
-
   def test_to_xml_string
     doc = Nokogiri::XML(@sort_state.to_xml_string)
 
