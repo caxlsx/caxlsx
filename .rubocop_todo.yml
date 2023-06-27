@@ -291,10 +291,6 @@ Style/RedundantRegexpEscape:
     - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
     - 'lib/axlsx/workbook/worksheet/table.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantSelf:
-  Enabled: false
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: ConvertCodeThatCanStartToReturnNil, AllowedMethods, MaxChainLength.
 # AllowedMethods: present?, blank?, presence, try, try!

@@ -10,7 +10,7 @@ module Axlsx
     def parse_options(options = {})
       options.each do |key, value|
         key = :"#{key}="
-        self.send(key, value) if !value.nil? && self.respond_to?(key)
+        send(key, value) if !value.nil? && respond_to?(key)
       end
     end
   end

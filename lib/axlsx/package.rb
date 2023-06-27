@@ -106,7 +106,7 @@ module Axlsx
       end
 
       confirm_valid, zip_command = parse_serialize_options(options, secondary_options)
-      return false unless !confirm_valid || self.validate.empty?
+      return false unless !confirm_valid || validate.empty?
 
       zip_provider = if zip_command
                        ZipCommand.new(zip_command)
@@ -130,7 +130,7 @@ module Axlsx
         workbook.apply_styles
       end
 
-      return false unless !confirm_valid || self.validate.empty?
+      return false unless !confirm_valid || validate.empty?
 
       Relationship.initialize_ids_cache
       stream = BufferedZipOutputStream.write_buffer do |zip|
