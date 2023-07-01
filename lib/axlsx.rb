@@ -33,7 +33,7 @@ require 'bigdecimal'
 require 'set'
 require 'time'
 
-if Gem.loaded_specs.has_key?("axlsx_styler")
+if Gem.loaded_specs.key?("axlsx_styler")
   raise StandardError, "Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly."
 end
 

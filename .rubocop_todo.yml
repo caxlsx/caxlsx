@@ -271,13 +271,6 @@ Style/PerlBackrefs:
   Exclude:
     - 'test/workbook/worksheet/tc_sheet_protection.rb'
 
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: short, verbose
-Style/PreferredHashMethods:
-  Exclude:
-    - 'lib/axlsx.rb'
-
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: same_as_string_literals, single_quotes, double_quotes
