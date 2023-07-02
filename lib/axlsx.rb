@@ -30,6 +30,7 @@ require 'zip'
 
 # core dependencies
 require 'bigdecimal'
+require 'cgi'
 require 'set'
 require 'time'
 
