@@ -397,9 +397,8 @@ module Axlsx
   # x0A Line Feed (Lf)
   # x0D Carriage Return (Cr)
   # x09 Character Tabulation
-  # @see http://www.codetable.net/asciikeycodes
-  pattern = "\x0-\x08\x0B\x0C\x0E-\x1F"
-  pattern = pattern.respond_to?(:encode) ? pattern.encode('UTF-8') : pattern
+  # @see https://www.codetable.net/asciikeycodes
+  pattern = "\x0-\x08\x0B\x0C\x0E-\x1F".encode('UTF-8')
 
   # The regular expression used to remove control characters from worksheets
   CONTROL_CHARS = pattern.freeze
