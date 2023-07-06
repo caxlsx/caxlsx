@@ -65,8 +65,8 @@ module Axlsx
           comparison = 0
 
           sort_conditions.each do |condition|
-            cell_value_row1 = row1.cells[condition.col_id + start_point.first].value
-            cell_value_row2 = row2.cells[condition.col_id + start_point.first].value
+            cell_value_row1 = row1.cells[condition.column_index + start_point.first].value
+            cell_value_row2 = row2.cells[condition.column_index + start_point.first].value
             custom_list = condition.custom_list
             comparison = if cell_value_row1.nil? || cell_value_row2.nil?
                            cell_value_row1.nil? ? -1 : 1

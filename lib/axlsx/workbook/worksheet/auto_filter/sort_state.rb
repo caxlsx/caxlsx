@@ -18,13 +18,13 @@ module Axlsx
     end
 
     # Adds a SortCondition to the sort_state. This is the recommended way to add conditions to it.
-    # It requires a col_id for the sorting, descending and the custom order are optional.
-    # @param [Integer] col_id Zero-based index indicating the AutoFilter column to which the sorting should be applied to
+    # It requires a column_index for the sorting, descending and the custom order are optional.
+    # @param [Integer] column_index Zero-based index indicating the AutoFilter column to which the sorting should be applied to
     # @param [Symbol] The order the column should be sorted on, can only be :asc or :desc
     # @param [Array] An array containg a custom sorting list in order.
     # @return [SortCondition]
-    def add_sort_condition(col_id, order: :asc, custom_list: [])
-      sort_conditions << SortCondition.new(col_id, order: order, custom_list: custom_list)
+    def add_sort_condition(column_index:, order: :asc, custom_list: [])
+      sort_conditions << SortCondition.new(column_index: column_index, order: order, custom_list: custom_list)
       sort_conditions.last
     end
 
