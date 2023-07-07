@@ -25,9 +25,9 @@ wb.add_worksheet(name: 'Sort State') do |sheet|
   sheet.add_row [11, 'A', 'low']
   sheet.add_row [12, 'A', 'medium']
   sheet.auto_filter = 'A1:C13'
-  sheet.auto_filter.sort_state.add_sort_condition 1
-  sheet.auto_filter.sort_state.add_sort_condition 2, custom_list: ['low', 'medium', 'high']
-  sheet.auto_filter.sort_state.add_sort_condition 0, order: :desc
+  sheet.auto_filter.sort_state.add_sort_condition column_index: 1
+  sheet.auto_filter.sort_state.add_sort_condition column_index: 2, custom_list: ['low', 'medium', 'high']
+  sheet.auto_filter.sort_state.add_sort_condition column_index: 0, order: :desc
 end
 
 p.serialize 'sort_state_example.xlsx'
