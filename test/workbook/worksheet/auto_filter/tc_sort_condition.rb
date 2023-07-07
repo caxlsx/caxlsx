@@ -9,9 +9,9 @@ class TestSortCondition < Test::Unit::TestCase
     3.times { |index| ws.add_row [1 * index, 2 * index, 3 * index] }
     ws.auto_filter = 'A1:C4'
     @auto_filter = ws.auto_filter
-    @auto_filter.sort_state.add_sort_condition(0)
-    @auto_filter.sort_state.add_sort_condition(1, order: :desc)
-    @auto_filter.sort_state.add_sort_condition(2, custom_list: ['low', 'middle', 'high'])
+    @auto_filter.sort_state.add_sort_condition(column_index: 0)
+    @auto_filter.sort_state.add_sort_condition(column_index: 1, order: :desc)
+    @auto_filter.sort_state.add_sort_condition(column_index: 2, custom_list: ['low', 'middle', 'high'])
     @sort_state = @auto_filter.sort_state
     @sort_conditions = @sort_state.sort_conditions
   end

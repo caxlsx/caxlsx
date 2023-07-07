@@ -9,7 +9,7 @@ class TestSortState < Test::Unit::TestCase
     3.times { |index| ws.add_row [1 * index, 2 * index, 3 * index] }
     ws.auto_filter = 'A1:C4'
     @auto_filter = ws.auto_filter
-    @auto_filter.sort_state.add_sort_condition(0)
+    @auto_filter.sort_state.add_sort_condition(column_index: 0)
     @sort_state = @auto_filter.sort_state
   end
 
@@ -19,7 +19,7 @@ class TestSortState < Test::Unit::TestCase
   end
 
   def test_add_sort_conditions
-    @sort_state.add_sort_condition(0) do |condition|
+    @sort_state.add_sort_condition(column_index: 0) do |condition|
       assert condition.is_a? SortCondition
     end
   end
