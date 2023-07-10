@@ -19,7 +19,6 @@ module Axlsx
     end
 
     attr_reader :column_index, :order, :custom_list
-    attr_accessor :sort_conditions_array
 
     # converts the ref String from the sort_state to a string representing the ref of a single column
     # for the xml string to be returned.
@@ -40,12 +39,12 @@ module Axlsx
     # serialize the object
     # @return [String]
     def to_xml_string(str, ref)
-      ref = ref_to_single_column(ref, @column_index)
+      ref = ref_to_single_column(ref, column_index)
 
       str << "<sortCondition "
-      str << "descending='1' " if @order == :desc
+      str << "descending='1' " if order == :desc
       str << "ref='#{ref}' "
-      str << "customList='#{@custom_list.join(',')}' " unless @custom_list.empty?
+      str << "customList='#{custom_list.join(',')}' " unless custom_list.empty?
       str << "/>"
     end
   end

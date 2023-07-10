@@ -13,9 +13,10 @@ module Axlsx
       raise ArgumentError, 'you must provide a worksheet' unless worksheet.is_a?(Worksheet)
 
       @worksheet = worksheet
+      @sort_on_generate = true
     end
 
-    attr_reader :worksheet
+    attr_reader :worksheet, :sort_on_generate
 
     # The range the autofilter should be applied to.
     # This should be a string like 'A1:B8'
@@ -75,7 +76,7 @@ module Axlsx
                          elsif custom_list.index(cell_value_row1) && custom_list.index(cell_value_row2)
                            custom_list.index(cell_value_row1) <=> custom_list.index(cell_value_row2)
                          else
-                           custom_list.index(cell_value_row1).nil? ? -1 : 1
+                           custom_list.index(cell_value_row1).nil? ? 1 : -1
                          end
 
             comparison = -comparison if condition.order == :desc
@@ -110,14 +111,9 @@ module Axlsx
       @sort_state ||= SortState.new self
     end
 
-    # Flag indicating whether the AutoFilter should sort the rows when generating the file. If false,
-    # the sorting rules will need to be applied manually after generating to alter the order of the rows.
-    # @return [Boolean]
-    def sort_on_generate
-      @sort_on_generate ||= true
-    end
-
-    # @param [Boolean] Flag indicating whether the AutoFilter should sort the rows when generating the file.
+    # @param [Boolean] Flag indicating whether the AutoFilter should sort the rows when generating the
+    # file. If false, the sorting rules will need to be applied manually after generating to alter
+    # the order of the rows.
     # @return [Boolean]
     def sort_on_generate=(v)
       Axlsx.validate_boolean v
