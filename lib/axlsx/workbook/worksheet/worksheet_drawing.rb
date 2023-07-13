@@ -15,8 +15,12 @@ module Axlsx
       @drawing = nil
     end
 
+    # The worksheet that owns the drawing
+    # @return [Worksheet]
     attr_reader :worksheet
 
+    # The drawing object
+    # @return [Drawing]
     attr_reader :drawing
 
     # adds a chart to the drawing object

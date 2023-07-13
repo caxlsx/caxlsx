@@ -122,13 +122,6 @@ Naming/VariableNumber:
 
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
-# SupportedStyles: separated, grouped
-Style/AccessorGrouping:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/worksheet_drawing.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
 # SupportedStyles: prefer_alias, prefer_alias_method
 Style/Alias:
   Enabled: false
