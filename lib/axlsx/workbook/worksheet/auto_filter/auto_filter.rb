@@ -70,16 +70,15 @@ module Axlsx
             cell_value_row2 = row2.cells[condition.column_index + start_point.first].value
             custom_list = condition.custom_list
             comparison = if cell_value_row1.nil? || cell_value_row2.nil?
-                           cell_value_row1.nil? ? -1 : 1
+                           cell_value_row1.nil? ? 1 : -1
                          elsif custom_list.empty?
-                           cell_value_row1 <=> cell_value_row2
-                         elsif custom_list.index(cell_value_row1) && custom_list.index(cell_value_row2)
-                           custom_list.index(cell_value_row1) <=> custom_list.index(cell_value_row2)
+                           condition.order == :asc ? cell_value_row1 <=> cell_value_row2 : cell_value_row2 <=> cell_value_row1
                          else
-                           custom_list.index(cell_value_row1).nil? ? 1 : -1
-                         end
+                           index1 = custom_list.index(cell_value_row1) || custom_list.size
+                           index2 = custom_list.index(cell_value_row2) || custom_list.size
 
-            comparison = -comparison if condition.order == :desc
+                           condition.order == :asc ? index1 <=> index2 : index2 <=> index1
+                         end
 
             break unless comparison.zero?
           end
