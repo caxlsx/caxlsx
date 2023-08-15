@@ -2,6 +2,7 @@
 
 require 'axlsx/workbook/worksheet/auto_filter/filter_column'
 require 'axlsx/workbook/worksheet/auto_filter/filters'
+require 'axlsx/workbook/worksheet/auto_filter/sort_state'
 
 module Axlsx
   # This class represents an auto filter range in a worksheet
@@ -12,9 +13,10 @@ module Axlsx
       raise ArgumentError, 'you must provide a worksheet' unless worksheet.is_a?(Worksheet)
 
       @worksheet = worksheet
+      @sort_on_generate = true
     end
 
-    attr_reader :worksheet
+    attr_reader :worksheet, :sort_on_generate
 
     # The range the autofilter should be applied to.
     # This should be a string like 'A1:B8'
@@ -48,14 +50,49 @@ module Axlsx
       columns.last
     end
 
-    # actually performs the filtering of rows who's cells do not
-    # match the filter.
+    # Performs the sorting of the rows based on the sort_state conditions. Then it actually performs
+    # the filtering of rows who's cells do not match the filter.
     def apply
       first_cell, last_cell = range.split(':')
       start_point = Axlsx.name_to_indices(first_cell)
       end_point = Axlsx.name_to_indices(last_cell)
       # The +1 is so we skip the header row with the filter drop downs
       rows = worksheet.rows[(start_point.last + 1)..end_point.last] || []
+
+      # the sorting of the rows if sort_conditions are available.
+      if !sort_state.sort_conditions.empty? && sort_on_generate
+        sort_conditions = sort_state.sort_conditions
+        sorted_rows = rows.sort do |row1, row2|
+          comparison = 0
+
+          sort_conditions.each do |condition|
+            cell_value_row1 = row1.cells[condition.column_index + start_point.first].value
+            cell_value_row2 = row2.cells[condition.column_index + start_point.first].value
+            custom_list = condition.custom_list
+            comparison = if cell_value_row1.nil? || cell_value_row2.nil?
+                           cell_value_row1.nil? ? 1 : -1
+                         elsif custom_list.empty?
+                           condition.order == :asc ? cell_value_row1 <=> cell_value_row2 : cell_value_row2 <=> cell_value_row1
+                         else
+                           index1 = custom_list.index(cell_value_row1) || custom_list.size
+                           index2 = custom_list.index(cell_value_row2) || custom_list.size
+
+                           condition.order == :asc ? index1 <=> index2 : index2 <=> index1
+                         end
+
+            break unless comparison.zero?
+          end
+
+          comparison
+        end
+        insert_index = start_point.last + 1
+
+        sorted_rows.each do |row|
+          # Insert the row at the specified index
+          worksheet.rows[insert_index] = row
+          insert_index += 1
+        end
+      end
 
       column_offset = start_point.first
       columns.each do |column|
@@ -67,6 +104,21 @@ module Axlsx
       end
     end
 
+    # the SortState object for this AutoFilter
+    # @return [SortState]
+    def sort_state
+      @sort_state ||= SortState.new self
+    end
+
+    # @param [Boolean] Flag indicating whether the AutoFilter should sort the rows when generating the
+    # file. If false, the sorting rules will need to be applied manually after generating to alter
+    # the order of the rows.
+    # @return [Boolean]
+    def sort_on_generate=(v)
+      Axlsx.validate_boolean v
+      @sort_on_generate = v
+    end
+
     # serialize the object
     # @return [String]
     def to_xml_string(str = +'')
@@ -74,6 +126,9 @@ module Axlsx
 
       str << "<autoFilter ref='#{range}'>"
       columns.each { |filter_column| filter_column.to_xml_string(str) }
+      unless @sort_state.nil?
+        @sort_state.to_xml_string(str)
+      end
       str << "</autoFilter>"
     end
   end
