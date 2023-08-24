@@ -110,7 +110,7 @@ module Axlsx
       @sort_state ||= SortState.new self
     end
 
-    # @param [Boolean] Flag indicating whether the AutoFilter should sort the rows when generating the
+    # @param [Boolean] v Flag indicating whether the AutoFilter should sort the rows when generating the
     # file. If false, the sorting rules will need to be applied manually after generating to alter
     # the order of the rows.
     # @return [Boolean]
