@@ -1,0 +1,32 @@
+name: YARD
+
+on:
+  push:
+    branches: ['*']
+  pull_request:
+    branches: ['*']
+
+permissions:
+  contents: read
+
+jobs:
+  rubocop:
+    name: YARD
+    runs-on: ${{ matrix.os }}
+    env:
+      BUNDLE_JOBS: 4
+      BUNDLE_RETRY: 3
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        ruby-version: ['3.2']
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+    - name: Lint YARD documentation
+      run: bundle exec yard doc --fail-on-warning --no-output --no-progress
