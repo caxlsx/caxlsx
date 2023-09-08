@@ -63,7 +63,7 @@ module Axlsx
     # chart based on the actual class type and not a fixed node name.
     # @return [String]
     def node_name
-      path = self.class.to_s
+      path = self.class.name
       if i = path.rindex('::')
         path = path[(i + 2)..-1]
       end
