@@ -10,6 +10,7 @@ CHANGELOG
   - Add 'SortState' and 'SortCondition' classes to the 'AutoFilter' class to add sorting to the generated file.
   - [PR #189](https://github.com/caxlsx/caxlsx/pull/189) - Make `Axlsx::escape_formulas` true by default to mitigate [Formula Injection](https://www.owasp.org/index.php/CSV_Injection) vulnerabilities.
   - [PR #269](https://github.com/caxlsx/caxlsx/pull/269) - Add optional interpolation points to icon sets
+  - [PR #304](https://github.com/caxlsx/caxlsx/pull/304) - Fix data validations for none type validations
 
 - **April.23.23**: 3.4.1
   - [PR #209](https://github.com/caxlsx/caxlsx/pull/209) - Revert characters other than `=` being considered as formulas.

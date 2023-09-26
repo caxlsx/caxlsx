@@ -254,17 +254,15 @@ module Axlsx
       attributes = [:allowBlank, :error, :errorStyle, :errorTitle, :prompt, :promptTitle, :showErrorMessage, :showInputMessage, :sqref, :type]
 
       if [:whole, :decimal, :data, :time, :date, :textLength].include?(@type)
-        attributes << [:operator, :formula1]
-        attributes << [:formula2] if [:between, :notBetween].include?(@operator)
+        attributes << :operator << :formula1
+        attributes << :formula2 if [:between, :notBetween].include?(@operator)
       elsif @type == :list
-        attributes << [:showDropDown, :formula1]
+        attributes << :showDropDown << :formula1
       elsif @type == :custom
-        attributes << [:formula1]
-      else
-        attributes = []
+        attributes << :formula1
       end
 
-      attributes.flatten!
+      attributes
     end
   end
 end
