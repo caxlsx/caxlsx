@@ -7,6 +7,8 @@ This is a complex example with a worksheet full of data.
 ```ruby
 require 'axlsx'
 
+Axlsx.escape_formulas = false
+
 p = Axlsx::Package.new
 wb = p.workbook
 
