@@ -49,7 +49,7 @@ Types:
 Customizations:
 * [Chart colors](chart_colors_example.md)
 * [Hide gridlines](hide_gridlines_in_chart_example.md)
-* [Chart series color](chart_series_example.md)
+* [Chart series color](chart_series_color_example.md)
 
 ### Columns
 
