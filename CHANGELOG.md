@@ -4,16 +4,16 @@ CHANGELOG
 
 
 - **October.30.23**: 4.0.0
+  - [PR #189](https://github.com/caxlsx/caxlsx/pull/189) **breaking** Make `Axlsx::escape_formulas` true by default to mitigate [Formula Injection](https://www.owasp.org/index.php/CSV_Injection) vulnerabilities.
+  - [PR #212](https://github.com/caxlsx/caxlsx/pull/212) **breaking** Raise exception if `axlsx_styler` gem is present as its code was merged directly into `caxlsx` in v3.3.0
+  - [PR #225](https://github.com/caxlsx/caxlsx/pull/225) **breaking** Remove ability to set `u=` to true in favor of using :single or one of the other underline options
   - Drop support for Ruby versions < 2.6
-  - Added frozen string literals
-  - Fix `SimpleTypedList#to_a` and `SimpleTypedList#to_ary` returning the internal list instance
-  - Remove ability to set `u=` to true in favor of using :single or one of the other underline options
-  - Fix `Workbook#sheet_by_name` not returning sheets with encoded characters in the name
-  - Raise exception if `axlsx_styler` gem is present as its code was merged directly into `caxlsx` in v3.3.0
-  - Add 'SortState' and 'SortCondition' classes to the 'AutoFilter' class to add sorting to the generated file.
-  - [PR #189](https://github.com/caxlsx/caxlsx/pull/189) - Make `Axlsx::escape_formulas` true by default to mitigate [Formula Injection](https://www.owasp.org/index.php/CSV_Injection) vulnerabilities.
-  - [PR #269](https://github.com/caxlsx/caxlsx/pull/269) - Add optional interpolation points to icon sets
-  - [PR #304](https://github.com/caxlsx/caxlsx/pull/304) - Fix data validations for none type validations
+  - [PR #219](https://github.com/caxlsx/caxlsx/pull/219) Added frozen string literals
+  - [PR #223](https://github.com/caxlsx/caxlsx/pull/223) Fix `SimpleTypedList#to_a` and `SimpleTypedList#to_ary` returning the internal list instance
+  - [PR #239](https://github.com/caxlsx/caxlsx/pull/239) Fix `Workbook#sheet_by_name` not returning sheets with encoded characters in the name
+  - [PR #286](https://github.com/caxlsx/caxlsx/pull/286) Add 'SortState' and 'SortCondition' classes to the 'AutoFilter' class to add sorting to the generated file.
+  - [PR #269](https://github.com/caxlsx/caxlsx/pull/269) Add optional interpolation points to icon sets
+  - [PR #304](https://github.com/caxlsx/caxlsx/pull/304) Fix data validations for none type validations
 
 - **April.23.23**: 3.4.1
   - [PR #209](https://github.com/caxlsx/caxlsx/pull/209) - Revert characters other than `=` being considered as formulas.
