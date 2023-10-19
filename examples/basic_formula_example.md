@@ -7,6 +7,8 @@ You could insert formulas
 ```ruby
 require 'axlsx'
 
+Axlsx.escape_formulas = false
+
 p = Axlsx::Package.new
 wb = p.workbook
 

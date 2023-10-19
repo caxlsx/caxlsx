@@ -7,6 +7,8 @@ If you have a list of data that you want to group and summarize, you can create 
 ```ruby
 require 'axlsx'
 
+Axlsx.escape_formulas = false
+
 p = Axlsx::Package.new
 wb = p.workbook
 

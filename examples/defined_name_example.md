@@ -7,6 +7,8 @@ You could use defined names in formulas
 ```ruby
 require 'axlsx'
 
+Axlsx.escape_formulas = false
+
 p = Axlsx::Package.new
 wb = p.workbook
 

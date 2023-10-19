@@ -7,6 +7,8 @@ When you add a formula in Excel, it immediately calculates its value and store i
 ```ruby
 require 'axlsx'
 
+Axlsx.escape_formulas = false
+
 p = Axlsx::Package.new
 wb = p.workbook
 
