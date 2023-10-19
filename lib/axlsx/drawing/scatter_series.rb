@@ -121,7 +121,7 @@ module Axlsx
       if !@show_marker
         '<c:symbol val="none"/>'
       elsif @marker_symbol != :default
-        '<c:symbol val="' << @marker_symbol.to_s << '"/>'
+        +'<c:symbol val="' << @marker_symbol.to_s << '"/>'
       end.to_s
     end
   end

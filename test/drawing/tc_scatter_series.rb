@@ -60,6 +60,15 @@ class TestScatterSeries < Test::Unit::TestCase
     assert_equal(1, doc.xpath("//a:ln[@w='#{@series.ln_width}']").length)
   end
 
+  def test_to_xml_string_non_default_marker
+    @chart = @ws.add_chart Axlsx::ScatterChart, title: 'Line chart', scatter_style: :smoothMarker
+    @series = @chart.add_series xData: [1, 2, 4], yData: [1, 3, 9]
+    @series.marker_symbol = :circle
+    doc = Nokogiri::XML(@chart.to_xml_string)
+
+    assert_equal(1, doc.xpath("//c:symbol[@val='#{@series.marker_symbol}']").length)
+  end
+
   def test_false_show_marker
     @chart = @ws.add_chart Axlsx::ScatterChart, title: 'Smooth Chart', scatter_style: :smoothMarker
     @series = @chart.add_series xData: [1, 2, 4], yData: [1, 3, 9]
