@@ -16,6 +16,8 @@ Gem::Specification.new do |s|
   MSG
   s.files = Dir.glob("{lib/**/*,examples/**/*.rb,examples/**/*.jpeg}") + %w{LICENSE README.md Rakefile CHANGELOG.md .yardopts .yardopts_guide}
 
+  s.metadata = { 'rubygems_mfa_required' => 'true' }
+
   s.add_runtime_dependency "htmlentities", "~> 4.3", '>= 4.3.4'
   s.add_runtime_dependency "marcel", '~> 1.0'
   s.add_runtime_dependency 'nokogiri', '~> 1.10', '>= 1.10.4'
