@@ -239,6 +239,24 @@ class TestDataValidation < Test::Unit::TestCase
     assert doc.xpath("//xmlns:worksheet/xmlns:dataValidations/xmlns:dataValidation/xmlns:formula1='=5/2'")
   end
 
+  def test_none_to_xml
+    p = Axlsx::Package.new
+    @ws = p.workbook.add_worksheet name: "data_validation"
+    @ws.add_data_validation("A1", { type: :none,
+                                    showInputMessage: true, promptTitle: 'Be careful!',
+                                    prompt: 'This is a warning to be extra careful editing this cell' })
+
+    doc = Nokogiri::XML.parse(@ws.to_xml_string)
+
+    # test attributes
+    assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='1']/xmlns:dataValidation[@sqref='A1']
+      [@promptTitle='Be careful!'][@prompt='This is a warning to be extra careful editing this cell']
+      [@allowBlank=1][@showInputMessage=1][@type='none']").size)
+    assert doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='1']/xmlns:dataValidation[@sqref='A1']
+      [@promptTitle='Be careful!'][@prompt='This is a warning to be extra careful editing this cell']
+      [@allowBlank=1][@showInputMessage=1][@type='none']")
+  end
+
   def test_multiple_datavalidations_to_xml
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet name: "data_validation"
@@ -276,6 +294,15 @@ class TestDataValidation < Test::Unit::TestCase
   def test_empty_attributes
     v = Axlsx::DataValidation.new
 
-    assert_nil(v.send(:get_valid_attributes))
+    assert_equal([:allowBlank,
+                  :error,
+                  :errorStyle,
+                  :errorTitle,
+                  :prompt,
+                  :promptTitle,
+                  :showErrorMessage,
+                  :showInputMessage,
+                  :sqref,
+                  :type], v.send(:get_valid_attributes))
   end
 end
