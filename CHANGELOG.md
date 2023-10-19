@@ -1,6 +1,9 @@
 CHANGELOG
 ---------
-- **Unreleased**: 4.0.0
+- **Unreleased**
+
+
+- **October.30.23**: 4.0.0
   - Drop support for Ruby versions < 2.6
   - Added frozen string literals
   - Fix `SimpleTypedList#to_a` and `SimpleTypedList#to_ary` returning the internal list instance
