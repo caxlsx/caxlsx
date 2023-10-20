@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require File.expand_path('../lib/axlsx/version', __FILE__)
+require File.expand_path('lib/axlsx/version', __dir__)
 
 Gem::Specification.new do |s|
   s.name        = 'caxlsx'
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = <<~MSG
     xlsx spreadsheet generation with charts, images, automated column width, customizable styles and full schema validation. Axlsx helps you create beautiful Office Open XML Spreadsheet documents (Excel, Google Spreadsheets, Numbers, LibreOffice) without having to understand the entire ECMA specification. Check out the README for some examples of how easy it is. Best of all, you can validate your xlsx file before serialization so you know for sure that anything generated is going to load on your client's machine.
   MSG
-  s.files = Dir.glob("{lib/**/*,examples/**/*.rb,examples/**/*.jpeg}") + %w{LICENSE README.md Rakefile CHANGELOG.md .yardopts .yardopts_guide}
+  s.files = Dir.glob("{lib/**/*,examples/**/*.rb,examples/**/*.jpeg}") + %w[LICENSE README.md Rakefile CHANGELOG.md .yardopts .yardopts_guide]
 
   s.metadata = { 'rubygems_mfa_required' => 'true' }
 

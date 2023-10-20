@@ -134,11 +134,6 @@ Style/Documentation:
     - 'lib/axlsx/workbook/worksheet/sheet_format_pr.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Style/ExpandPathArguments:
-  Exclude:
-    - 'axlsx.gemspec'
-
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: MaxUnannotatedPlaceholdersAllowed, AllowedMethods, AllowedPatterns.
 # SupportedStyles: annotated, template, unannotated
 Style/FormatStringToken:
@@ -220,7 +215,6 @@ Style/ParallelAssignment:
 # Configuration parameters: PreferredDelimiters.
 Style/PercentLiteralDelimiters:
   Exclude:
-    - 'axlsx.gemspec'
     - 'lib/axlsx/drawing/d_lbls.rb'
     - 'lib/axlsx/drawing/pic.rb'
     - 'lib/axlsx/drawing/view_3D.rb'
