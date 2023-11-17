@@ -1,6 +1,7 @@
 CHANGELOG
 ---------
 - **Unreleased**
+  - [PR #312](https://github.com/caxlsx/caxlsx/pull/312) Added 2D/flat PieChart drawing
 
 
 - **October.30.23**: 4.0.0
