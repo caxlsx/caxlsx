@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Axlsx
-  # The Pie3DChart is a three dimentional piechart (who would have guessed?) that you can add to your worksheet.
+  # The Pie3DChart is a three dimensional pie chart (who would have guessed?) that you can add to your worksheet.
   # @see Worksheet#add_chart
   # @see Chart#add_series
   # @see README for an example
