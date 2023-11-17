@@ -55,4 +55,12 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
     assert_equal(0, doc.xpath("//xmlns:hyperlink[@location='#{@a.location}']").size)
     assert_equal(1, doc.xpath("//xmlns:hyperlink[@r:id='#{@a.relationship.Id}']").size)
   end
+
+  def test_to_xml_string_with_underscores
+    @a.location = "'dummy_sheet_2'!A1"
+    doc = Nokogiri::XML(@ws.to_xml_string)
+
+    assert_equal(1, doc.xpath("//xmlns:hyperlink/@location").size)
+    assert_equal(@a.location, doc.xpath("//xmlns:hyperlink/@location").first.value)
+  end
 end

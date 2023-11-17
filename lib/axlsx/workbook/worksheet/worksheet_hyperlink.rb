@@ -60,7 +60,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = +'')
       str << '<hyperlink '
-      serialized_attributes str, location_or_id
+      serialized_attributes str, location_or_id, false
       str << '/>'
     end
 
