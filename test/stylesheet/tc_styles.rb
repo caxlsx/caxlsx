@@ -323,7 +323,7 @@ class TestStyles < Test::Unit::TestCase
     }
 
     borders.each do |edge, b_opts|
-      @styles.add_style("border_#{edge}".to_sym => b_opts)
+      @styles.add_style("border_#{edge}": b_opts)
 
       current_border = @styles.borders.last
 

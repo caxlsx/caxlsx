@@ -364,7 +364,7 @@ module Axlsx
     #   { :border => { :style => :thick, :color => "FFFF0000", :edges => [:top, :bottom] }
     # @return [Border|Integer]
     def parse_border_options(options = {})
-      if options[:border].nil? && Border::EDGES.all? { |x| options["border_#{x}".to_sym].nil? }
+      if options[:border].nil? && Border::EDGES.all? { |x| options[:"border_#{x}"].nil? }
         return nil
       end
 
@@ -409,7 +409,7 @@ module Axlsx
       end
 
       Border::EDGES.each do |edge|
-        val = options["border_#{edge}".to_sym]
+        val = options[:"border_#{edge}"]
 
         if val
           borders_array << val.merge(edges: [edge])
@@ -430,8 +430,8 @@ module Axlsx
           end
         end
 
-        if options["border_#{edge}".to_sym]
-          edge_b_opts = edge_b_opts.merge(options["border_#{edge}".to_sym])
+        if options[:"border_#{edge}"]
+          edge_b_opts = edge_b_opts.merge(options[:"border_#{edge}"])
           skip_edge = false
         end
 
