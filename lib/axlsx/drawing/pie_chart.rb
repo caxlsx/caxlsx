@@ -1,12 +1,10 @@
 # frozen_string_literal: true
-
 module Axlsx
   # The PieChart is a pie chart that you can add to your worksheet.
   # @see Worksheet#add_chart
   # @see Chart#add_series
   # @see README for an example
   class PieChart < Chart
-
     # Creates a new pie chart object
     # @param [GraphicFrame] frame The workbook that owns this chart.
     # @option options [Cell, String] title
@@ -33,6 +31,5 @@ module Axlsx
         str << '</c:pieChart>'
       end
     end
-
   end
 end
