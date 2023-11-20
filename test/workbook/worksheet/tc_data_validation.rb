@@ -47,22 +47,22 @@ class TestDataValidation < Test::Unit::TestCase
 
   def test_boolean_attribute_validation
     @boolean_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be boolean") { @dv.send("#{key}=".to_sym, 'A') }
-      assert_nothing_raised { @dv.send("#{key}=".to_sym, value) }
+      assert_raise(ArgumentError, "#{key} must be boolean") { @dv.send(:"#{key}=", 'A') }
+      assert_nothing_raised { @dv.send(:"#{key}=", value) }
     end
   end
 
   def test_string_attribute_validation
     @string_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be string") { @dv.send("#{key}=".to_sym, :symbol) }
-      assert_nothing_raised { @dv.send("#{key}=".to_sym, value) }
+      assert_raise(ArgumentError, "#{key} must be string") { @dv.send(:"#{key}=", :symbol) }
+      assert_nothing_raised { @dv.send(:"#{key}=", value) }
     end
   end
 
   def test_symbol_attribute_validation
     @symbol_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be symbol") { @dv.send("#{key}=".to_sym, "foo") }
-      assert_nothing_raised { @dv.send("#{key}=".to_sym, value) }
+      assert_raise(ArgumentError, "#{key} must be symbol") { @dv.send(:"#{key}=", "foo") }
+      assert_nothing_raised { @dv.send(:"#{key}=", value) }
     end
   end
 

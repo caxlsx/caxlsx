@@ -47,29 +47,29 @@ class TestSheetView < Test::Unit::TestCase
 
   def test_boolean_attribute_validation
     @boolean_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be boolean") { @sv.send("#{key}=".to_sym, 'A') }
-      assert_nothing_raised { @sv.send("#{key}=".to_sym, value) }
+      assert_raise(ArgumentError, "#{key} must be boolean") { @sv.send(:"#{key}=", 'A') }
+      assert_nothing_raised { @sv.send(:"#{key}=", value) }
     end
   end
 
   def test_string_attribute_validation
     @string_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be string") { @sv.send("#{key}=".to_sym, :symbol) }
-      assert_nothing_raised { @sv.send("#{key}=".to_sym, value) }
+      assert_raise(ArgumentError, "#{key} must be string") { @sv.send(:"#{key}=", :symbol) }
+      assert_nothing_raised { @sv.send(:"#{key}=", value) }
     end
   end
 
   def test_symbol_attribute_validation
     @symbol_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be symbol") { @sv.send("#{key}=".to_sym, "foo") }
-      assert_nothing_raised { @sv.send("#{key}=".to_sym, value) }
+      assert_raise(ArgumentError, "#{key} must be symbol") { @sv.send(:"#{key}=", "foo") }
+      assert_nothing_raised { @sv.send(:"#{key}=", value) }
     end
   end
 
   def test_integer_attribute_validation
     @integer_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be integer") { @sv.send("#{key}=".to_sym, "foo") }
-      assert_nothing_raised { @sv.send("#{key}=".to_sym, value) }
+      assert_raise(ArgumentError, "#{key} must be integer") { @sv.send(:"#{key}=", "foo") }
+      assert_nothing_raised { @sv.send(:"#{key}=", value) }
     end
   end
 
