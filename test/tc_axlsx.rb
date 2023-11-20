@@ -126,7 +126,7 @@ class TestAxlsx < Test::Unit::TestCase
   class InstanceValuesSubject
     def initialize(args = {})
       args.each do |key, v|
-        instance_variable_set("@#{key}".to_sym, v)
+        instance_variable_set(:"@#{key}", v)
       end
     end
   end
