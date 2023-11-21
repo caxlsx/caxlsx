@@ -459,6 +459,19 @@ class TestWorksheet < Test::Unit::TestCase
     assert(@ws.styles.is_a?(Axlsx::Styles), 'worksheet provides access to styles')
   end
 
+  def test_column_styles
+    red = @ws.styles.add_style bg_color: 'FF0000'
+    green = @ws.styles.add_style bg_color: '00FF00'
+    blue = @ws.styles.add_style bg_color: '0000FF'
+
+    @ws.column_styles red, nil, green, blue
+
+    assert_equal @ws.column_info[0].style, red
+    assert_nil @ws.column_info[1]
+    assert_equal @ws.column_info[2].style, green
+    assert_equal @ws.column_info[3].style, blue
+  end
+
   def test_to_xml_string_with_illegal_chars
     old = Axlsx.trust_input
     Axlsx.trust_input = false

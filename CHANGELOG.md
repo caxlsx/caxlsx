@@ -3,7 +3,7 @@ CHANGELOG
 - **Unreleased**
   - [PR #316](https://github.com/caxlsx/caxlsx/pull/316) Prevent camelization of hyperlink locations
   - [PR #312](https://github.com/caxlsx/caxlsx/pull/312) Added 2D/flat PieChart drawing
-
+  - [PR #317](https://github.com/caxlsx/caxlsx/pull/317) Apply style for columns without defining cells
 
 - **October.30.23**: 4.0.0
   - [PR #189](https://github.com/caxlsx/caxlsx/pull/189) **breaking** Make `Axlsx::escape_formulas` true by default to mitigate [Formula Injection](https://www.owasp.org/index.php/CSV_Injection) vulnerabilities.

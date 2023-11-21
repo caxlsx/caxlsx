@@ -67,6 +67,32 @@ class TestRow < Test::Unit::TestCase
     assert_equal(0, r.cells.last.style, "only apply style to cells with at the same index of of the style array")
   end
 
+  def test_array_to_cells_with_column_styles
+    red = @ws.styles.add_style bg_color: 'FF0000'
+    green = @ws.styles.add_style bg_color: '00FF00'
+    blue = @ws.styles.add_style bg_color: '0000FF'
+
+    @ws.column_styles red, nil, green
+
+    @ws.add_row([1, 2, 3], style: blue).then do |r|
+      assert_equal(blue, r.cells[0].style, "override all styles when providing only one value")
+      assert_equal(blue, r.cells[1].style, "override all styles when providing only one value")
+      assert_equal(blue, r.cells[2].style, "override all styles when providing only one value")
+    end
+
+    @ws.add_row [1, 2, 3], style: [blue] do |r|
+      assert_equal(blue, r.cells[0].style, "apply style to cells with at the same index of of the style array")
+      assert_equal(0, r.cells[1].style, "keep the 0 style if neither column nor row style got defined")
+      assert_equal(green, r.cells[2].style, "keep column style if it wasn't overridden")
+    end
+
+    @ws.add_row [1, 2, 3] do |r|
+      assert_equal(red, r.cells[0].style, "use column style without overrides")
+      assert_equal(0, r.cells[1].style, "use column style without overrides")
+      assert_equal(green, r.cells[2].style, "use column style without overrides")
+    end
+  end
+
   def test_array_to_cells_with_escape_formulas
     row = ['=HYPERLINK("http://www.example.com", "CSV Payload")', '=Bar']
     @ws.add_row row, escape_formulas: true
