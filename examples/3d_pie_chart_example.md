@@ -11,7 +11,7 @@ p = Axlsx::Package.new
 wb = p.workbook
 
 wb.add_worksheet(name: 'Pie Chart') do |sheet|
-  sheet.add_row ['A Simple Bar Chart']
+  sheet.add_row ['A Simple 3D Pie Chart']
 
   sheet.add_row ['A', 3]
   sheet.add_row ['B', 10]
