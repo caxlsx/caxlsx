@@ -36,14 +36,18 @@ class TestFilters < Test::Unit::TestCase
 
   def test_apply_is_false_for_matching_values
     keeper = Object.new
-    def keeper.value; 'a'; end
+    def keeper.value
+      'a'
+    end
 
     refute @filters.apply(keeper)
   end
 
   def test_apply_is_true_for_non_matching_values
     hidden = Object.new
-    def hidden.value; 'b'; end
+    def hidden.value
+      'b'
+    end
 
     assert @filters.apply(hidden)
   end

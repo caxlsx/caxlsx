@@ -249,7 +249,9 @@ module Axlsx
 
     # Instance level access to the class variable 1904
     # @return [Boolean]
-    def date1904() @@date1904; end
+    def date1904
+      @@date1904
+    end
 
     # see @date1904
     def date1904=(v)
@@ -266,7 +268,9 @@ module Axlsx
 
     # retrieves the date1904 attribute
     # @return [Boolean]
-    def self.date1904() @@date1904; end
+    def self.date1904
+      @@date1904
+    end
 
     # Whether to treat values starting with an equals sign as formulas or as literal strings.
     # Allowing user-generated data to be interpreted as formulas is a security risk.

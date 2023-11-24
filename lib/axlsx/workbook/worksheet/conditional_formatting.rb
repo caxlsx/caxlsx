@@ -61,7 +61,9 @@ module Axlsx
     end
 
     # @see rules
-    def rules=(v); @rules = v end
+    def rules=(v)
+      @rules = v
+    end
 
     # @see sqref
     def sqref=(v)
