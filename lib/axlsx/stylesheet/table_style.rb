@@ -33,11 +33,22 @@ module Axlsx
     attr_reader :table
 
     # @see name
-    def name=(v) Axlsx.validate_string v; @name = v end
+    def name=(v)
+      Axlsx.validate_string v
+      @name = v
+    end
+
     # @see pivot
-    def pivot=(v) Axlsx.validate_boolean v; @pivot = v end
+    def pivot=(v)
+      Axlsx.validate_boolean v
+      @pivot = v
+    end
+
     # @see table
-    def table=(v) Axlsx.validate_boolean v; @table = v end
+    def table=(v)
+      Axlsx.validate_boolean v
+      @table = v
+    end
 
     # Serializes the object
     # @param [String] str

@@ -49,11 +49,22 @@ module Axlsx
     attr_reader :patternType
 
     # @see fgColor
-    def fgColor=(v) DataTypeValidator.validate "PatternFill.fgColor", Color, v; @fgColor = v end
+    def fgColor=(v)
+      DataTypeValidator.validate "PatternFill.fgColor", Color, v
+      @fgColor = v
+    end
+
     # @see bgColor
-    def bgColor=(v) DataTypeValidator.validate "PatternFill.bgColor", Color, v; @bgColor = v end
+    def bgColor=(v)
+      DataTypeValidator.validate "PatternFill.bgColor", Color, v
+      @bgColor = v
+    end
+
     # @see patternType
-    def patternType=(v) Axlsx.validate_pattern_type v; @patternType = v end
+    def patternType=(v)
+      Axlsx.validate_pattern_type v
+      @patternType = v
+    end
 
     # Serializes the object
     # @param [String] str

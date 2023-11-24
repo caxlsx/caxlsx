@@ -91,13 +91,22 @@ module Axlsx
     end
 
     # @see name
-    def name=(v) Axlsx.validate_string(v); @name = v; end
+    def name=(v)
+      Axlsx.validate_string(v)
+      @name = v
+    end
 
     # @see descr
-    def descr=(v) Axlsx.validate_string(v); @descr = v; end
+    def descr=(v)
+      Axlsx.validate_string(v)
+      @descr = v
+    end
 
     # @see remote
-    def remote=(v) Axlsx.validate_boolean(v); @remote = v; end
+    def remote=(v)
+      Axlsx.validate_boolean(v)
+      @remote = v
+    end
 
     def remote?
       remote == 1 || remote.to_s == 'true'

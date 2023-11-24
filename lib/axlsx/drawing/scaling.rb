@@ -35,14 +35,28 @@ module Axlsx
     attr_reader :min
 
     # @see logBase
-    def logBase=(v) DataTypeValidator.validate "Scaling.logBase", [Integer], v, ->(arg) { arg >= 2 && arg <= 1000 }; @logBase = v; end
+    def logBase=(v)
+      DataTypeValidator.validate "Scaling.logBase", [Integer], v, ->(arg) { arg >= 2 && arg <= 1000 }
+      @logBase = v
+    end
+
     # @see orientation
-    def orientation=(v) RestrictionValidator.validate "Scaling.orientation", [:minMax, :maxMin], v; @orientation = v; end
+    def orientation=(v)
+      RestrictionValidator.validate "Scaling.orientation", [:minMax, :maxMin], v
+      @orientation = v
+    end
+
     # @see max
-    def max=(v) DataTypeValidator.validate "Scaling.max", Float, v; @max = v; end
+    def max=(v)
+      DataTypeValidator.validate "Scaling.max", Float, v
+      @max = v
+    end
 
     # @see min
-    def min=(v) DataTypeValidator.validate "Scaling.min", Float, v; @min = v; end
+    def min=(v)
+      DataTypeValidator.validate "Scaling.min", Float, v
+      @min = v
+    end
 
     # Serializes the object
     # @param [String] str

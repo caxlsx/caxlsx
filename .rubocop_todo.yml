@@ -250,7 +250,12 @@ Style/SafeNavigation:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowIfMethodIsEmpty.
 Style/SingleLineMethods:
-  Enabled: false
+  Exclude:
+    - 'lib/axlsx/workbook/workbook.rb'
+    - 'lib/axlsx/workbook/worksheet/cell.rb'
+    - 'lib/axlsx/workbook/worksheet/conditional_formatting.rb'
+    - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
+    - 'test/workbook/worksheet/auto_filter/tc_filters.rb'
 
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/SlicingWithRange:

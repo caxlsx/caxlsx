@@ -86,34 +86,63 @@ module Axlsx
     alias :readingOrder :reading_order
 
     # @see horizontal
-    def horizontal=(v) Axlsx.validate_horizontal_alignment v; @horizontal = v end
+    def horizontal=(v)
+      Axlsx.validate_horizontal_alignment v
+      @horizontal = v
+    end
+
     # @see vertical
-    def vertical=(v) Axlsx.validate_vertical_alignment v; @vertical = v end
+    def vertical=(v)
+      Axlsx.validate_vertical_alignment v
+      @vertical = v
+    end
+
     # @see textRotation
-    def text_rotation=(v) Axlsx.validate_unsigned_int v; @text_rotation = v end
+    def text_rotation=(v)
+      Axlsx.validate_unsigned_int v
+      @text_rotation = v
+    end
     alias :textRotation= :text_rotation=
 
     # @see wrapText
-    def wrap_text=(v) Axlsx.validate_boolean v; @wrap_text = v end
+    def wrap_text=(v)
+      Axlsx.validate_boolean v
+      @wrap_text = v
+    end
     alias :wrapText= :wrap_text=
 
     # @see indent
-    def indent=(v) Axlsx.validate_unsigned_int v; @indent = v end
+    def indent=(v)
+      Axlsx.validate_unsigned_int v
+      @indent = v
+    end
 
     # @see relativeIndent
-    def relative_indent=(v) Axlsx.validate_int v; @relative_indent = v end
+    def relative_indent=(v)
+      Axlsx.validate_int v
+      @relative_indent = v
+    end
     alias :relativeIndent= :relative_indent=
 
     # @see justifyLastLine
-    def justify_last_line=(v) Axlsx.validate_boolean v; @justify_last_line = v end
+    def justify_last_line=(v)
+      Axlsx.validate_boolean v
+      @justify_last_line = v
+    end
     alias :justifyLastLine= :justify_last_line=
 
     # @see shrinkToFit
-    def shrink_to_fit=(v) Axlsx.validate_boolean v; @shrink_to_fit = v end
+    def shrink_to_fit=(v)
+      Axlsx.validate_boolean v
+      @shrink_to_fit = v
+    end
     alias :shrinkToFit= :shrink_to_fit=
 
     # @see readingOrder
-    def reading_order=(v) Axlsx.validate_unsigned_int v; @reading_order = v end
+    def reading_order=(v)
+      Axlsx.validate_unsigned_int v
+      @reading_order = v
+    end
     alias :readingOrder= :reading_order=
 
     # Serializes the object

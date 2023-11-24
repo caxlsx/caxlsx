@@ -80,7 +80,10 @@ module Axlsx
     end
 
     # @see active_cell_id
-    def active_cell_id=(v); Axlsx.validate_unsigned_int(v); @active_cell_id = v end
+    def active_cell_id=(v)
+      Axlsx.validate_unsigned_int(v)
+      @active_cell_id = v
+    end
 
     # @see pane
     def pane=(v)
@@ -89,7 +92,10 @@ module Axlsx
     end
 
     # @see sqref
-    def sqref=(v); Axlsx.validate_string(v); @sqref = v end
+    def sqref=(v)
+      Axlsx.validate_string(v)
+      @sqref = v
+    end
 
     # Serializes the data validation
     # @param [String] str

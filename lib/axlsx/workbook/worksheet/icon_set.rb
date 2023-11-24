@@ -56,7 +56,10 @@ module Axlsx
     attr_reader :interpolationPoints
 
     # @see iconSet
-    def iconSet=(v); Axlsx.validate_icon_set(v); @iconSet = v end
+    def iconSet=(v)
+      Axlsx.validate_icon_set(v)
+      @iconSet = v
+    end
 
     # @see interpolationPoints
     def interpolationPoints=(v)
@@ -66,13 +69,22 @@ module Axlsx
     end
 
     # @see showValue
-    def showValue=(v); Axlsx.validate_boolean(v); @showValue = v end
+    def showValue=(v)
+      Axlsx.validate_boolean(v)
+      @showValue = v
+    end
 
     # @see percent
-    def percent=(v); Axlsx.validate_boolean(v); @percent = v end
+    def percent=(v)
+      Axlsx.validate_boolean(v)
+      @percent = v
+    end
 
     # @see reverse
-    def reverse=(v); Axlsx.validate_boolean(v); @reverse = v end
+    def reverse=(v)
+      Axlsx.validate_boolean(v)
+      @reverse = v
+    end
 
     # Serialize this object to an xml string
     # @param [String] str

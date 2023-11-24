@@ -101,9 +101,15 @@ module Axlsx
     private
 
     # assigns the data for this series
-    def data=(v) DataTypeValidator.validate "Series.data", [NumDataSource], v; @data = v; end
+    def data=(v)
+      DataTypeValidator.validate "Series.data", [NumDataSource], v
+      @data = v
+    end
 
     # assigns the labels for this series
-    def labels=(v) DataTypeValidator.validate "Series.labels", [AxDataSource], v; @labels = v; end
+    def labels=(v)
+      DataTypeValidator.validate "Series.labels", [AxDataSource], v
+      @labels = v
+    end
   end
 end

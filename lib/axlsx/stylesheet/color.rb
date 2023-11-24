@@ -47,7 +47,10 @@ module Axlsx
     attr_reader :tint
 
     # @see auto
-    def auto=(v) Axlsx.validate_boolean v; @auto = v end
+    def auto=(v)
+      Axlsx.validate_boolean v
+      @auto = v
+    end
 
     # @see color
     def rgb=(v)
@@ -61,7 +64,10 @@ module Axlsx
     end
 
     # @see tint
-    def tint=(v) Axlsx.validate_float v; @tint = v end
+    def tint=(v)
+      Axlsx.validate_float v
+      @tint = v
+    end
 
     # This version does not support themes
     # def theme=(v) Axlsx::validate_unsigned_integer v; @theme = v end

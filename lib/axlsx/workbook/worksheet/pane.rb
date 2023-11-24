@@ -114,10 +114,16 @@ module Axlsx
     end
 
     # @see x_split
-    def x_split=(v); Axlsx.validate_unsigned_int(v); @x_split = v end
+    def x_split=(v)
+      Axlsx.validate_unsigned_int(v)
+      @x_split = v
+    end
 
     # @see y_split
-    def y_split=(v); Axlsx.validate_unsigned_int(v); @y_split = v end
+    def y_split=(v)
+      Axlsx.validate_unsigned_int(v)
+      @y_split = v
+    end
 
     # Serializes the data validation
     # @param [String] str

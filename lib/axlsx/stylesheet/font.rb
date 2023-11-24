@@ -112,15 +112,34 @@ module Axlsx
     attr_reader :sz
 
     # @see name
-    def name=(v) Axlsx.validate_string v; @name = v end
+    def name=(v)
+      Axlsx.validate_string v
+      @name = v
+    end
+
     # @see charset
-    def charset=(v) Axlsx.validate_unsigned_int v; @charset = v end
+    def charset=(v)
+      Axlsx.validate_unsigned_int v
+      @charset = v
+    end
+
     # @see family
-    def family=(v) Axlsx.validate_unsigned_int v; @family = v end
+    def family=(v)
+      Axlsx.validate_unsigned_int v
+      @family = v
+    end
+
     # @see b
-    def b=(v) Axlsx.validate_boolean v; @b = v end
+    def b=(v)
+      Axlsx.validate_boolean v
+      @b = v
+    end
+
     # @see i
-    def i=(v) Axlsx.validate_boolean v; @i = v end
+    def i=(v)
+      Axlsx.validate_boolean v
+      @i = v
+    end
 
     # @see u
     def u=(v)
@@ -131,19 +150,46 @@ module Axlsx
     end
 
     # @see strike
-    def strike=(v) Axlsx.validate_boolean v; @strike = v end
+    def strike=(v)
+      Axlsx.validate_boolean v
+      @strike = v
+    end
+
     # @see outline
-    def outline=(v) Axlsx.validate_boolean v; @outline = v end
+    def outline=(v)
+      Axlsx.validate_boolean v
+      @outline = v
+    end
+
     # @see shadow
-    def shadow=(v) Axlsx.validate_boolean v; @shadow = v end
+    def shadow=(v)
+      Axlsx.validate_boolean v
+      @shadow = v
+    end
+
     # @see condense
-    def condense=(v) Axlsx.validate_boolean v; @condense = v end
+    def condense=(v)
+      Axlsx.validate_boolean v
+      @condense = v
+    end
+
     # @see extend
-    def extend=(v) Axlsx.validate_boolean v; @extend = v end
+    def extend=(v)
+      Axlsx.validate_boolean v
+      @extend = v
+    end
+
     # @see color
-    def color=(v) DataTypeValidator.validate "Font.color", Color, v; @color = v end
+    def color=(v)
+      DataTypeValidator.validate "Font.color", Color, v
+      @color = v
+    end
+
     # @see sz
-    def sz=(v) Axlsx.validate_unsigned_int v; @sz = v end
+    def sz=(v)
+      Axlsx.validate_unsigned_int v
+      @sz = v
+    end
 
     # Serializes the object
     # @param [String] str

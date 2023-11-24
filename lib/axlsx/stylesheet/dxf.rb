@@ -49,17 +49,40 @@ module Axlsx
     end
 
     # @see Dxf#alignment
-    def alignment=(v) DataTypeValidator.validate "Dxf.alignment", CellAlignment, v; @alignment = v end
+    def alignment=(v)
+      DataTypeValidator.validate "Dxf.alignment", CellAlignment, v
+      @alignment = v
+    end
+
     # @see protection
-    def protection=(v) DataTypeValidator.validate "Dxf.protection", CellProtection, v; @protection = v end
+    def protection=(v)
+      DataTypeValidator.validate "Dxf.protection", CellProtection, v
+      @protection = v
+    end
+
     # @see numFmt
-    def numFmt=(v) DataTypeValidator.validate "Dxf.numFmt", NumFmt, v; @numFmt = v end
+    def numFmt=(v)
+      DataTypeValidator.validate "Dxf.numFmt", NumFmt, v
+      @numFmt = v
+    end
+
     # @see font
-    def font=(v) DataTypeValidator.validate "Dxf.font", Font, v; @font = v end
+    def font=(v)
+      DataTypeValidator.validate "Dxf.font", Font, v
+      @font = v
+    end
+
     # @see border
-    def border=(v) DataTypeValidator.validate "Dxf.border", Border, v; @border = v end
+    def border=(v)
+      DataTypeValidator.validate "Dxf.border", Border, v
+      @border = v
+    end
+
     # @see fill
-    def fill=(v) DataTypeValidator.validate "Dxf.fill", Fill, v; @fill = v end
+    def fill=(v)
+      DataTypeValidator.validate "Dxf.fill", Fill, v
+      @fill = v
+    end
 
     # Serializes the object
     # @param [String] str

@@ -40,7 +40,10 @@ module Axlsx
     end
 
     # @see order
-    def order=(v) Axlsx.validate_unsigned_int(v); @order = v; end
+    def order=(v)
+      Axlsx.validate_unsigned_int(v)
+      @order = v
+    end
 
     # @see title
     def title=(v)
@@ -52,7 +55,10 @@ module Axlsx
     private
 
     # assigns the chart for this series
-    def chart=(v) DataTypeValidator.validate "Series.chart", Chart, v; @chart = v; end
+    def chart=(v)
+      DataTypeValidator.validate "Series.chart", Chart, v
+      @chart = v
+    end
 
     # Serializes the object
     # @param [String] str
