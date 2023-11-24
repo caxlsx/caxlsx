@@ -280,7 +280,7 @@ module Axlsx
     #     calculation. Thus the performance benefits of turning this off are
     #     marginal unless you are creating a very large sheet.
     # @return [Boolean]
-    def use_autowidth() @use_autowidth; end
+    attr_reader :use_autowidth
 
     # see @use_autowidth
     def use_autowidth=(v = true) Axlsx.validate_boolean v; @use_autowidth = v; end
