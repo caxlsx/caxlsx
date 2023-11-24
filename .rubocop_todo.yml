@@ -257,7 +257,6 @@ Style/SlicingWithRange:
   Exclude:
     - 'lib/axlsx/drawing/area_chart.rb'
     - 'lib/axlsx/drawing/line_chart.rb'
-    - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
@@ -283,7 +282,6 @@ Style/TrivialAccessors:
     - 'lib/axlsx/drawing/bubble_series.rb'
     - 'lib/axlsx/drawing/line_series.rb'
     - 'lib/axlsx/drawing/scatter_series.rb'
-    - 'lib/axlsx/workbook/workbook.rb'
     - 'lib/axlsx/workbook/worksheet/conditional_formatting.rb'
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet_hyperlink.rb'
