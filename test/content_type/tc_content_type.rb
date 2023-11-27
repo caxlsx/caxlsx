@@ -10,8 +10,9 @@ class TestContentType < Test::Unit::TestCase
 
   def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::CONTENT_TYPES_XSD))
+    errors = schema.validate(@doc)
 
-    assert_empty(schema.validate(@doc).map { |e| puts e.message; e.message })
+    assert_empty(errors)
   end
 
   def test_pre_built_types

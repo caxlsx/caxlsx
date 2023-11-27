@@ -5,13 +5,9 @@ require 'tc_helper'
 def shared_test_pivot_table_xml_validity(pivot_table)
   schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
   doc = Nokogiri::XML(pivot_table.to_xml_string)
-  errors = []
-  schema.validate(doc).each do |error|
-    errors.push error
-    puts error.message
-  end
+  errors = schema.validate(doc)
 
-  assert_empty(errors, "error free validation")
+  assert_empty(errors)
 end
 
 class TestPivotTable < Test::Unit::TestCase

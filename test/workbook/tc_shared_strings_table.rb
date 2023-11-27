@@ -39,13 +39,9 @@ class TestSharedStringsTable < Test::Unit::TestCase
   def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@p.workbook.shared_strings.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      puts error.message
-      errors << error
-    end
+    errors = schema.validate(doc)
 
-    assert_equal(0, errors.size, "sharedStirngs.xml Invalid#{errors.map(&:message)}")
+    assert_empty(errors)
   end
 
   def test_remove_control_characters_in_xml_serialization

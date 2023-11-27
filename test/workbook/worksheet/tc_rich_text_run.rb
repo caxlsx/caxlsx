@@ -166,13 +166,9 @@ class RichTextRun < Test::Unit::TestCase
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      puts error.message
-      errors.push error
-    end
+    errors = schema.validate(doc)
 
-    assert_empty(errors, "error free validation")
+    assert_empty(errors)
 
     assert(doc.xpath('//rPr/b[@val=1]'))
     assert(doc.xpath('//rPr/i[@val=0]'))

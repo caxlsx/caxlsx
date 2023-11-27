@@ -36,11 +36,8 @@ class TestApp < Test::Unit::TestCase
   def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::APP_XSD))
     doc = Nokogiri::XML(@app.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      errors << error
-    end
+    errors = schema.validate(doc)
 
-    assert_equal(0, errors.size, "app.xml invalid#{errors.map(&:message)}")
+    assert_empty(errors)
   end
 end

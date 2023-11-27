@@ -447,8 +447,9 @@ class TestWorksheet < Test::Unit::TestCase
   def test_to_xml_string
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
+    errors = schema.validate(doc)
 
-    assert_empty(schema.validate(doc).map { |e| puts e.message; e }, "error free validation")
+    assert_empty(errors)
   end
 
   def test_styles
@@ -487,8 +488,9 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_pivot_table 'G5:G6', 'A1:D10'
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
+    errors = schema.validate(doc)
 
-    assert_empty(schema.validate(doc).map { |e| puts e.message; e }, schema.validate(doc).map(&:message).join('\n'))
+    assert_empty(errors)
   end
 
   def test_relationships

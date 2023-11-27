@@ -571,12 +571,8 @@ class TestCell < Test::Unit::TestCase
 
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      errors.push error
-      puts error.message
-    end
+    errors = schema.validate(doc)
 
-    assert_empty(errors, "error free validation")
+    assert_empty(errors)
   end
 end
