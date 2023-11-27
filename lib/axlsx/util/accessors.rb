@@ -44,19 +44,21 @@ module Axlsx
         validated_attr_accessor(symbols, :validate_boolean)
       end
 
-      # Template for defining validated write accessors
-      SETTER = "def %s=(value) Axlsx::%s(value); @%s = value; end"
-
       # Creates the reader and writer access methods
-      # @param [Array] symbols The names of the attributes to create
-      # @param [String] validator The axlsx validation method to use when
+      # @param [Array<Symbol, String>] symbols The names of the attributes to create
+      # @param [Symbol|String] validator The axlsx validation method to use when
       # validating assignation.
       # @see lib/axlsx/util/validators.rb
       def validated_attr_accessor(symbols, validator)
         symbols.each do |symbol|
           attr_reader symbol
 
-          module_eval(format(SETTER, symbol, validator, symbol), __FILE__, __LINE__)
+          module_eval <<-RUBY_EVAL, __FILE__, __LINE__ + 1
+            def #{symbol}=(value)      # def name=(value)
+              Axlsx.#{validator} value #   Axlsx.validate_string value
+              @#{symbol} = value       #   @name = value
+            end                        # end
+          RUBY_EVAL
         end
       end
     end
