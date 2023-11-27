@@ -75,7 +75,7 @@ module Axlsx
     attr_reader :paragraphs
     alias :Paragraphs :paragraphs
 
-    # @return [Intger] The number of slides in the document.
+    # @return [Integer] The number of slides in the document.
     attr_reader :slides
     alias :Slides :slides
 
