@@ -121,7 +121,7 @@ module Axlsx
 
     # @return [String] The name of the application
     attr_reader :application
-    alias :Applicatoin :application
+    alias :Application :application
 
     # @return [String] The version of the application.
     attr_reader :app_version
