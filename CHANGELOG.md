@@ -2,6 +2,7 @@ CHANGELOG
 ---------
 - **Unreleased**
   - [PR #316](https://github.com/caxlsx/caxlsx/pull/316) Prevent camelization of hyperlink locations
+  - [PR #312](https://github.com/caxlsx/caxlsx/pull/312) Added 2D/flat PieChart drawing
 
 
 - **October.30.23**: 4.0.0
