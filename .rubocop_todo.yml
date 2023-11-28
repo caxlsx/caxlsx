@@ -247,11 +247,6 @@ Style/RedundantRegexpEscape:
 Style/SafeNavigation:
   Enabled: false
 
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowIfMethodIsEmpty.
-Style/SingleLineMethods:
-  Enabled: false
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/SlicingWithRange:
   Exclude:

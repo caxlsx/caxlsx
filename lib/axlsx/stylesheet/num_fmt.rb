@@ -61,10 +61,16 @@ module Axlsx
     attr_reader :numFmtId
 
     # @see numFmtId
-    def numFmtId=(v) Axlsx.validate_unsigned_int v; @numFmtId = v end
+    def numFmtId=(v)
+      Axlsx.validate_unsigned_int v
+      @numFmtId = v
+    end
 
     # @see formatCode
-    def formatCode=(v) Axlsx.validate_string v; @formatCode = v end
+    def formatCode=(v)
+      Axlsx.validate_string v
+      @formatCode = v
+    end
 
     # Serializes the object
     # @param [String] str

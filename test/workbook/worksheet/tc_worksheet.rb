@@ -33,7 +33,10 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_name_unique
-    assert_raise(ArgumentError, "worksheet name must be unique") { n = @ws.name; @ws.workbook.add_worksheet(name: n) }
+    assert_raise(ArgumentError, "worksheet name must be unique") do
+      n = @ws.name
+      @ws.workbook.add_worksheet(name: n)
+    end
   end
 
   def test_name_unique_only_checks_other_worksheet_names

@@ -53,11 +53,22 @@ module Axlsx
     end
 
     # @see name
-    def name=(v) RestrictionValidator.validate "BorderPr.name", [:start, :end, :left, :right, :top, :bottom, :diagonal, :vertical, :horizontal], v; @name = v end
+    def name=(v)
+      RestrictionValidator.validate "BorderPr.name", [:start, :end, :left, :right, :top, :bottom, :diagonal, :vertical, :horizontal], v
+      @name = v
+    end
+
     # @see color
-    def color=(v) DataTypeValidator.validate(:color, Color, v); @color = v end
+    def color=(v)
+      DataTypeValidator.validate(:color, Color, v)
+      @color = v
+    end
+
     # @see style
-    def style=(v) RestrictionValidator.validate "BorderPr.style", [:none, :thin, :medium, :dashed, :dotted, :thick, :double, :hair, :mediumDashed, :dashDot, :mediumDashDot, :dashDotDot, :mediumDashDotDot, :slantDashDot], v; @style = v end
+    def style=(v)
+      RestrictionValidator.validate "BorderPr.style", [:none, :thin, :medium, :dashed, :dotted, :thick, :double, :hair, :mediumDashed, :dashDot, :mediumDashDot, :dashDotDot, :mediumDashDotDot, :slantDashDot], v
+      @style = v
+    end
 
     # Serializes the object
     # @param [String] str

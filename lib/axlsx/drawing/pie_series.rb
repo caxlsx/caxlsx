@@ -36,10 +36,16 @@ module Axlsx
     end
 
     # @see colors
-    def colors=(v) DataTypeValidator.validate "BarSeries.colors", [Array], v; @colors = v end
+    def colors=(v)
+      DataTypeValidator.validate "BarSeries.colors", [Array], v
+      @colors = v
+    end
 
     # @see explosion
-    def explosion=(v) Axlsx.validate_unsigned_int(v); @explosion = v; end
+    def explosion=(v)
+      Axlsx.validate_unsigned_int(v)
+      @explosion = v
+    end
 
     # Serializes the object
     # @param [String] str
@@ -63,9 +69,15 @@ module Axlsx
     private
 
     # assigns the data for this series
-    def data=(v) DataTypeValidator.validate "Series.data", [NumDataSource], v; @data = v; end
+    def data=(v)
+      DataTypeValidator.validate "Series.data", [NumDataSource], v
+      @data = v
+    end
 
     # assigns the labels for this series
-    def labels=(v) DataTypeValidator.validate "Series.labels", [AxDataSource], v; @labels = v; end
+    def labels=(v)
+      DataTypeValidator.validate "Series.labels", [AxDataSource], v
+      @labels = v
+    end
   end
 end

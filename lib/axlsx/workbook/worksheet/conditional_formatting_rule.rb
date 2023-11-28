@@ -155,33 +155,88 @@ module Axlsx
     end
 
     # @see type
-    def type=(v); Axlsx.validate_conditional_formatting_type(v); @type = v end
+    def type=(v)
+      Axlsx.validate_conditional_formatting_type(v)
+      @type = v
+    end
+
     # @see aboveAverage
-    def aboveAverage=(v); Axlsx.validate_boolean(v); @aboveAverage = v end
+    def aboveAverage=(v)
+      Axlsx.validate_boolean(v)
+      @aboveAverage = v
+    end
+
     # @see bottom
-    def bottom=(v); Axlsx.validate_boolean(v); @bottom = v end
+    def bottom=(v)
+      Axlsx.validate_boolean(v)
+      @bottom = v
+    end
+
     # @see dxfId
-    def dxfId=(v); Axlsx.validate_unsigned_numeric(v); @dxfId = v end
+    def dxfId=(v)
+      Axlsx.validate_unsigned_numeric(v)
+      @dxfId = v
+    end
+
     # @see equalAverage
-    def equalAverage=(v); Axlsx.validate_boolean(v); @equalAverage = v end
+    def equalAverage=(v)
+      Axlsx.validate_boolean(v)
+      @equalAverage = v
+    end
+
     # @see priority
-    def priority=(v); Axlsx.validate_unsigned_numeric(v); @priority = v end
+    def priority=(v)
+      Axlsx.validate_unsigned_numeric(v)
+      @priority = v
+    end
+
     # @see operator
-    def operator=(v); Axlsx.validate_conditional_formatting_operator(v); @operator = v end
+    def operator=(v)
+      Axlsx.validate_conditional_formatting_operator(v)
+      @operator = v
+    end
+
     # @see text
-    def text=(v); Axlsx.validate_string(v); @text = v end
+    def text=(v)
+      Axlsx.validate_string(v)
+      @text = v
+    end
+
     # @see percent
-    def percent=(v); Axlsx.validate_boolean(v); @percent = v end
+    def percent=(v)
+      Axlsx.validate_boolean(v)
+      @percent = v
+    end
+
     # @see rank
-    def rank=(v); Axlsx.validate_unsigned_numeric(v); @rank = v end
+    def rank=(v)
+      Axlsx.validate_unsigned_numeric(v)
+      @rank = v
+    end
+
     # @see stdDev
-    def stdDev=(v); Axlsx.validate_unsigned_numeric(v); @stdDev = v end
+    def stdDev=(v)
+      Axlsx.validate_unsigned_numeric(v)
+      @stdDev = v
+    end
+
     # @see stopIfTrue
-    def stopIfTrue=(v); Axlsx.validate_boolean(v); @stopIfTrue = v end
+    def stopIfTrue=(v)
+      Axlsx.validate_boolean(v)
+      @stopIfTrue = v
+    end
+
     # @see timePeriod
-    def timePeriod=(v); Axlsx.validate_time_period_type(v); @timePeriod = v end
+    def timePeriod=(v)
+      Axlsx.validate_time_period_type(v)
+      @timePeriod = v
+    end
+
     # @see formula
-    def formula=(v); [*v].each { |x| Axlsx.validate_string(x) }; @formula = [*v].map { |form| ::CGI.escapeHTML(form) } end
+    def formula=(v)
+      [*v].each { |x| Axlsx.validate_string(x) }
+      @formula = [*v].map { |form| ::CGI.escapeHTML(form) }
+    end
 
     # @see color_scale
     def color_scale=(v)

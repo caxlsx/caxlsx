@@ -62,7 +62,10 @@ module Axlsx
 
     # Configures the vary_colors options for this chart
     # @param [Boolean] v The value to set
-    def vary_colors=(v) Axlsx.validate_boolean(v); @vary_colors = v; end
+    def vary_colors=(v)
+      Axlsx.validate_boolean(v)
+      @vary_colors = v
+    end
 
     # The title object for the chart.
     # @return [Title]
@@ -149,21 +152,33 @@ module Axlsx
     # Show the legend in the chart
     # @param [Boolean] v
     # @return [Boolean]
-    def show_legend=(v) Axlsx.validate_boolean(v); @show_legend = v; end
+    def show_legend=(v)
+      Axlsx.validate_boolean(v)
+      @show_legend = v
+    end
 
     # How to display blank values
     # @see display_blanks_as
     # @param [Symbol] v
     # @return [Symbol]
-    def display_blanks_as=(v) Axlsx.validate_display_blanks_as(v); @display_blanks_as = v; end
+    def display_blanks_as=(v)
+      Axlsx.validate_display_blanks_as(v)
+      @display_blanks_as = v
+    end
 
     # The style for the chart.
     # see ECMA Part 1 §21.2.2.196
     # @param [Integer] v must be between 1 and 48
-    def style=(v) DataTypeValidator.validate "Chart.style", Integer, v, ->(arg) { arg >= 1 && arg <= 48 }; @style = v; end
+    def style=(v)
+      DataTypeValidator.validate "Chart.style", Integer, v, ->(arg) { arg >= 1 && arg <= 48 }
+      @style = v
+    end
 
     # @see legend_position
-    def legend_position=(v) RestrictionValidator.validate "Chart.legend_position", [:b, :l, :r, :t, :tr], v; @legend_position = v; end
+    def legend_position=(v)
+      RestrictionValidator.validate "Chart.legend_position", [:b, :l, :r, :t, :tr], v
+      @legend_position = v
+    end
 
     # backwards compatibility to allow chart.to and chart.from access to anchor markers
     # @note This will be disconinued in version 2.0.0. Please use the end_at method
@@ -194,12 +209,18 @@ module Axlsx
     # Whether only data from visible cells should be plotted.
     # @param [Boolean] v
     # @return [Boolean]
-    def plot_visible_only=(v) Axlsx.validate_boolean(v); @plot_visible_only = v; end
+    def plot_visible_only=(v)
+      Axlsx.validate_boolean(v)
+      @plot_visible_only = v
+    end
 
     # Whether the chart area shall have rounded corners.
     # @param [Boolean] v
     # @return [Boolean]
-    def rounded_corners=(v) Axlsx.validate_boolean(v); @rounded_corners = v; end
+    def rounded_corners=(v)
+      Axlsx.validate_boolean(v)
+      @rounded_corners = v
+    end
 
     # Serializes the object
     # @param [String] str
@@ -290,7 +311,10 @@ module Axlsx
     end
 
     # sets the view_3D object for the chart
-    def view_3D=(v) DataTypeValidator.validate "#{self.class}.view_3D", View3D, v; @view_3D = v; end
+    def view_3D=(v)
+      DataTypeValidator.validate "#{self.class}.view_3D", View3D, v
+      @view_3D = v
+    end
     alias :view3D= :view_3D=
   end
 end

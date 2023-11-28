@@ -833,7 +833,10 @@ module Axlsx
       @worksheet_comments ||= WorksheetComments.new self
     end
 
-    def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
+    def workbook=(v)
+      DataTypeValidator.validate "Worksheet.workbook", Workbook, v
+      @workbook = v
+    end
 
     def update_column_info(cells, widths = nil)
       cells.each_with_index do |cell, index|

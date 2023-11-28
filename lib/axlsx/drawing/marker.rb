@@ -34,13 +34,28 @@ module Axlsx
     attr_reader :rowOff
 
     # @see col
-    def col=(v) Axlsx.validate_unsigned_int v; @col = v end
+    def col=(v)
+      Axlsx.validate_unsigned_int v
+      @col = v
+    end
+
     # @see colOff
-    def colOff=(v) Axlsx.validate_int v; @colOff = v end
+    def colOff=(v)
+      Axlsx.validate_int v
+      @colOff = v
+    end
+
     # @see row
-    def row=(v) Axlsx.validate_unsigned_int v; @row = v end
+    def row=(v)
+      Axlsx.validate_unsigned_int v
+      @row = v
+    end
+
     # @see rowOff
-    def rowOff=(v) Axlsx.validate_int v; @rowOff = v end
+    def rowOff=(v)
+      Axlsx.validate_int v
+      @rowOff = v
+    end
 
     # shortcut to set the column, row position for this marker
     # @param col the column for the marker, a Cell object or a string reference like "B7"

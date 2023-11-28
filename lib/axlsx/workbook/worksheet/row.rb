@@ -143,7 +143,10 @@ module Axlsx
     private
 
     # assigns the owning worksheet for this row
-    def worksheet=(v) DataTypeValidator.validate :row_worksheet, Worksheet, v; @worksheet = v; end
+    def worksheet=(v)
+      DataTypeValidator.validate :row_worksheet, Worksheet, v
+      @worksheet = v
+    end
 
     # Converts values, types, and style options into cells and associates them with this row.
     # A new cell is created for each item in the values array.

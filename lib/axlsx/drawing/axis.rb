@@ -99,29 +99,47 @@ module Axlsx
 
     # The position of the axis
     # must be one of [:l, :r, :t, :b]
-    def ax_pos=(v) RestrictionValidator.validate "#{self.class}.ax_pos", [:l, :r, :b, :t], v; @ax_pos = v; end
+    def ax_pos=(v)
+      RestrictionValidator.validate "#{self.class}.ax_pos", [:l, :r, :b, :t], v
+      @ax_pos = v
+    end
     alias :axPos= :ax_pos=
 
     # the position of the tick labels
     # must be one of [:nextTo, :high, :low1]
-    def tick_lbl_pos=(v) RestrictionValidator.validate "#{self.class}.tick_lbl_pos", [:nextTo, :high, :low, :none], v; @tick_lbl_pos = v; end
+    def tick_lbl_pos=(v)
+      RestrictionValidator.validate "#{self.class}.tick_lbl_pos", [:nextTo, :high, :low, :none], v
+      @tick_lbl_pos = v
+    end
     alias :tickLblPos= :tick_lbl_pos=
 
     # The number format format code for this axis
     # default :General
-    def format_code=(v) Axlsx.validate_string(v); @format_code = v; end
+    def format_code=(v)
+      Axlsx.validate_string(v)
+      @format_code = v
+    end
 
     # Specify if gridlines should be shown for this axis
     # default true
-    def gridlines=(v) Axlsx.validate_boolean(v); @gridlines = v; end
+    def gridlines=(v)
+      Axlsx.validate_boolean(v)
+      @gridlines = v
+    end
 
     # Specify if axis should be removed from the chart
     # default false
-    def delete=(v) Axlsx.validate_boolean(v); @delete = v; end
+    def delete=(v)
+      Axlsx.validate_boolean(v)
+      @delete = v
+    end
 
     # specifies how the perpendicular axis is crossed
     # must be one of [:autoZero, :min, :max]
-    def crosses=(v) RestrictionValidator.validate "#{self.class}.crosses", [:autoZero, :min, :max], v; @crosses = v; end
+    def crosses=(v)
+      RestrictionValidator.validate "#{self.class}.crosses", [:autoZero, :min, :max], v
+      @crosses = v
+    end
 
     # Specify the degree of label rotation to apply to labels
     # default true

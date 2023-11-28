@@ -472,7 +472,12 @@ module Axlsx
         # If this is a standard xf we pull from numFmts the highest current and increment for num_fmt
         options[:num_fmt] ||= (@numFmts.map(&:numFmtId).max + 1) if options[:type] != :dxf
         numFmt = NumFmt.new(numFmtId: options[:num_fmt] || 0, formatCode: options[:format_code].to_s)
-        options[:type] == :dxf ? numFmt : (numFmts << numFmt; numFmt.numFmtId)
+        if options[:type] == :dxf
+          numFmt
+        else
+          numFmts << numFmt
+          numFmt.numFmtId
+        end
       else
         options[:num_fmt]
       end
@@ -534,8 +539,10 @@ module Axlsx
       @cellXfs << Xf.new(borderId: 0, xfId: 0, numFmtId: 14, fontId: 0, fillId: 0, applyNumberFormat: 1)
       @cellXfs.lock
 
-      @dxfs = SimpleTypedList.new(Dxf, "dxfs"); @dxfs.lock
-      @tableStyles = TableStyles.new(defaultTableStyle: "TableStyleMedium9", defaultPivotStyle: "PivotStyleLight16"); @tableStyles.lock
+      @dxfs = SimpleTypedList.new(Dxf, "dxfs")
+      @dxfs.lock
+      @tableStyles = TableStyles.new(defaultTableStyle: "TableStyleMedium9", defaultPivotStyle: "PivotStyleLight16")
+      @tableStyles.lock
     end
   end
 end

@@ -92,12 +92,22 @@ module Axlsx
     end
 
     # @see Target
-    def Target=(v) Axlsx.validate_string v; @Target = v end
+    def Target=(v)
+      Axlsx.validate_string v
+      @Target = v
+    end
+
     # @see Type
-    def Type=(v) Axlsx.validate_relationship_type v; @Type = v end
+    def Type=(v)
+      Axlsx.validate_relationship_type v
+      @Type = v
+    end
 
     # @see TargetMode
-    def TargetMode=(v) RestrictionValidator.validate 'Relationship.TargetMode', [:External, :Internal], v; @TargetMode = v; end
+    def TargetMode=(v)
+      RestrictionValidator.validate 'Relationship.TargetMode', [:External, :Internal], v
+      @TargetMode = v
+    end
 
     # serialize relationship
     # @param [String] str

@@ -162,7 +162,10 @@ module Axlsx
     end
 
     # @see color_id
-    def color_id=(v); Axlsx.validate_unsigned_int(v); @color_id = v end
+    def color_id=(v)
+      Axlsx.validate_unsigned_int(v)
+      @color_id = v
+    end
 
     # @see top_left_cell
     def top_left_cell=(v)
@@ -172,22 +175,40 @@ module Axlsx
     end
 
     # @see view
-    def view=(v); Axlsx.validate_sheet_view_type(v); @view = v end
+    def view=(v)
+      Axlsx.validate_sheet_view_type(v)
+      @view = v
+    end
 
     # @see workbook_view_id
-    def workbook_view_id=(v); Axlsx.validate_unsigned_int(v); @workbook_view_id = v end
+    def workbook_view_id=(v)
+      Axlsx.validate_unsigned_int(v)
+      @workbook_view_id = v
+    end
 
     # @see zoom_scale
-    def zoom_scale=(v); Axlsx.validate_scale_0_10_400(v); @zoom_scale = v end
+    def zoom_scale=(v)
+      Axlsx.validate_scale_0_10_400(v)
+      @zoom_scale = v
+    end
 
     # @see zoom_scale_normal
-    def zoom_scale_normal=(v); Axlsx.validate_scale_0_10_400(v); @zoom_scale_normal = v end
+    def zoom_scale_normal=(v)
+      Axlsx.validate_scale_0_10_400(v)
+      @zoom_scale_normal = v
+    end
 
     # @see zoom_scale_page_layout_view
-    def zoom_scale_page_layout_view=(v); Axlsx.validate_scale_0_10_400(v); @zoom_scale_page_layout_view = v end
+    def zoom_scale_page_layout_view=(v)
+      Axlsx.validate_scale_0_10_400(v)
+      @zoom_scale_page_layout_view = v
+    end
 
     # @see zoom_scale_sheet_layout_view
-    def zoom_scale_sheet_layout_view=(v); Axlsx.validate_scale_0_10_400(v); @zoom_scale_sheet_layout_view = v end
+    def zoom_scale_sheet_layout_view=(v)
+      Axlsx.validate_scale_0_10_400(v)
+      @zoom_scale_sheet_layout_view = v
+    end
 
     # Serializes the data validation
     # @param [String] str

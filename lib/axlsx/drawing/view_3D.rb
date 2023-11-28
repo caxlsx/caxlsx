@@ -78,11 +78,17 @@ module Axlsx
     alias :rotY= :rot_y=
 
     # @see depth_percent
-    def depth_percent=(v) RegexValidator.validate "#{self.class}.depth_percent", DEPTH_PERCENT_REGEX, v; @depth_percent = v; end
+    def depth_percent=(v)
+      RegexValidator.validate "#{self.class}.depth_percent", DEPTH_PERCENT_REGEX, v
+      @depth_percent = v
+    end
     alias :depthPercent= :depth_percent=
 
     # @see r_ang_ax
-    def r_ang_ax=(v) Axlsx.validate_boolean(v); @r_ang_ax = v; end
+    def r_ang_ax=(v)
+      Axlsx.validate_boolean(v)
+      @r_ang_ax = v
+    end
     alias :rAngAx= :r_ang_ax=
 
     # @see perspective
