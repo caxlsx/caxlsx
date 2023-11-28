@@ -35,12 +35,8 @@ class TestLine3DChart < Test::Unit::TestCase
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
     doc = Nokogiri::XML(@chart.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      errors.push error
-      puts error.message
-    end
+    errors = schema.validate(doc)
 
-    assert_empty(errors, "error free validation")
+    assert_empty(errors)
   end
 end

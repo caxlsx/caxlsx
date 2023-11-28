@@ -116,13 +116,9 @@ class TestWorkbook < Test::Unit::TestCase
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@wb.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      errors.push error
-      puts error.message
-    end
+    errors = schema.validate(doc)
 
-    assert_empty(errors, "error free validation")
+    assert_empty(errors)
   end
 
   def test_to_xml_reversed

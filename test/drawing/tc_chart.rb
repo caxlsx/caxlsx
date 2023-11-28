@@ -137,9 +137,9 @@ class TestChart < Test::Unit::TestCase
   def test_to_xml_string
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
     doc = Nokogiri::XML(@chart.to_xml_string)
-    errors = schema.validate(doc).map { |error| puts error.message; error }
+    errors = schema.validate(doc)
 
-    assert_empty(errors, "error free validation")
+    assert_empty(errors)
   end
 
   def test_to_xml_string_for_display_blanks_as

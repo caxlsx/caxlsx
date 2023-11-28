@@ -20,19 +20,13 @@ class TestRelationships < Test::Unit::TestCase
     @rels = Axlsx::Relationships.new
     schema = Nokogiri::XML::Schema(File.open(Axlsx::RELS_XSD))
     doc = Nokogiri::XML(@rels.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      puts error.message
-      errors << error
-    end
+    errors = schema.validate(doc)
+
+    assert_empty(errors)
 
     @rels << Axlsx::Relationship.new(nil, Axlsx::WORKSHEET_R, "bar")
     doc = Nokogiri::XML(@rels.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      puts error.message
-      errors << error
-    end
+    errors = schema.validate(doc)
 
     assert_empty(errors)
   end

@@ -83,12 +83,8 @@ class TestDrawing < Test::Unit::TestCase
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
     @ws.add_chart(Axlsx::Pie3DChart)
     doc = Nokogiri::XML(@ws.drawing.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      errors.push error
-      puts error.message
-    end
+    errors = schema.validate(doc)
 
-    assert_empty(errors, "error free validation")
+    assert_empty(errors)
   end
 end

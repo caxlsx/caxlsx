@@ -65,13 +65,9 @@ class TestTable < Test::Unit::TestCase
     table = @ws.add_table("A1:D5")
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(table.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      errors.push error
-      puts error.message
-    end
+    errors = schema.validate(doc)
 
-    assert_empty(errors, "error free validation")
+    assert_empty(errors)
   end
 
   def test_to_xml_string_for_special_characters
@@ -80,8 +76,7 @@ class TestTable < Test::Unit::TestCase
 
     table = @ws.add_table("A1:D5")
     doc = Nokogiri::XML(table.to_xml_string)
-    errors = doc.errors
 
-    assert_empty(errors, "invalid xml: #{errors.map(&:to_s).join(', ')}")
+    assert_empty(doc.errors)
   end
 end
