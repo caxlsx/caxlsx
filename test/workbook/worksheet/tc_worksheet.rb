@@ -40,7 +40,7 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_name_unique_only_checks_other_worksheet_names
-    assert_nothing_raised { @ws.name = @ws.name }
+    assert_nothing_raised { @ws.name = @ws.name } # rubocop:disable Lint/SelfAssignment
     assert_nothing_raised { Axlsx::Package.new.workbook.add_worksheet name: 'Sheet1' }
   end
 
