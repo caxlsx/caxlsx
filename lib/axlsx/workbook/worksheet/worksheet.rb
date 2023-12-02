@@ -35,7 +35,7 @@ module Axlsx
     # @param [Hash] options Options passed in from the initializer
     def initialize_page_options(options)
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
-      @page_setup = PageSetup.new options[:page_setup]  if options[:page_setup]
+      @page_setup = PageSetup.new options[:page_setup] if options[:page_setup]
       @print_options = PrintOptions.new options[:print_options] if options[:print_options]
       @header_footer = HeaderFooter.new options[:header_footer] if options[:header_footer]
       @row_breaks = RowBreaks.new

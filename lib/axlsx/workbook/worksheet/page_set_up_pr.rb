@@ -17,8 +17,7 @@ module Axlsx
 
     serializable_attributes :auto_page_breaks, :fit_to_page
 
-    attr_reader :auto_page_breaks
-    attr_reader :fit_to_page
+    attr_reader :auto_page_breaks, :fit_to_page
 
     # Flag indicating whether the Fit to Page print option is enabled.
     # @param [Boolean] value

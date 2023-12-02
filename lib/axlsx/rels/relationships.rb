@@ -8,7 +8,7 @@ module Axlsx
   class Relationships < SimpleTypedList
     # Creates a new Relationships collection based on SimpleTypedList
     def initialize
-      super Relationship
+      super(Relationship)
     end
 
     # The relationship instance for the given source object, or nil if none exists.

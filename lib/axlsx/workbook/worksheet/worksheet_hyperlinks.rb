@@ -8,7 +8,7 @@ module Axlsx
     def initialize(worksheet)
       DataTypeValidator.validate "Hyperlinks.worksheet", [Worksheet], worksheet
       @worksheet = worksheet
-      super WorksheetHyperlink
+      super(WorksheetHyperlink)
     end
 
     # Creates and adds a new hyperlink based on the options provided

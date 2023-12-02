@@ -7,7 +7,7 @@ module Axlsx
     def initialize(worksheet)
       raise ArgumentError, "you must provide a worksheet" unless worksheet.is_a?(Worksheet)
 
-      super Table
+      super(Table)
       @worksheet = worksheet
     end
 

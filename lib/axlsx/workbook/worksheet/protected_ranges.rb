@@ -9,7 +9,7 @@ module Axlsx
     def initialize(worksheet)
       raise ArgumentError, 'You must provide a worksheet' unless worksheet.is_a?(Worksheet)
 
-      super ProtectedRange
+      super(ProtectedRange)
       @worksheet = worksheet
     end
 

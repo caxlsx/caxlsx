@@ -5,7 +5,7 @@ module Axlsx
 
   class RowBreaks < SimpleTypedList
     def initialize
-      super Break
+      super(Break)
     end
 
     # Adds a row break

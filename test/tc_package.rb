@@ -329,7 +329,7 @@ class TestPackage < Test::Unit::TestCase
     assert(stream.is_a?(StringIO))
     # this is just a roundabout guess for a package as it is build now
     # in testing.
-    assert(stream.size > 80_000)
+    assert_operator(stream.size, :>, 80_000)
     # Stream (of zipped contents) should have appropriate default encoding
     assert_predicate stream.string, :valid_encoding?
     assert_equal(stream.external_encoding, Encoding::ASCII_8BIT)

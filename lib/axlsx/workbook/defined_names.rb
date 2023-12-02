@@ -5,7 +5,7 @@ module Axlsx
   class DefinedNames < SimpleTypedList
     # creates the DefinedNames object
     def initialize
-      super DefinedName
+      super(DefinedName)
     end
 
     # Serialize to xml
