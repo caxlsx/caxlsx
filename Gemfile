@@ -3,10 +3,12 @@
 source 'https://rubygems.org'
 gemspec
 
-group :development, :test do
-  gem 'rubocop', '~> 1.50.2'
-  gem 'rubocop-minitest', '~> 0.30.0'
-  gem 'rubocop-performance', '~> 1.17.1'
+if RUBY_VERSION >= '2.7'
+  group :development, :test do
+    gem 'rubocop', '~> 1.58.0'
+    gem 'rubocop-minitest', '~> 0.33.0'
+    gem 'rubocop-performance', '~> 1.19.1'
+  end
 end
 
 group :test do
