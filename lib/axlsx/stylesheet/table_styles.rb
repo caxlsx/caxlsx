@@ -12,7 +12,7 @@ module Axlsx
     def initialize(options = {})
       @defaultTableStyle = options[:defaultTableStyle] || "TableStyleMedium9"
       @defaultPivotStyle = options[:defaultPivotStyle] || "PivotStyleLight16"
-      super TableStyle
+      super(TableStyle)
     end
 
     serializable_attributes :defaultTableStyle, :defaultPivotStyle

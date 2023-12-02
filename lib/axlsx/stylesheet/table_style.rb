@@ -15,7 +15,7 @@ module Axlsx
     def initialize(name, options = {})
       self.name = name
       parse_options options
-      super TableStyleElement
+      super(TableStyleElement)
     end
 
     serializable_attributes :name, :pivot, :table

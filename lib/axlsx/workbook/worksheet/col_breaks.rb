@@ -7,7 +7,7 @@ module Axlsx
   class ColBreaks < SimpleTypedList
     # Instantiates a new list restricted to Break types
     def initialize
-      super Break
+      super(Break)
     end
 
     # A column break specific helper for adding a break.

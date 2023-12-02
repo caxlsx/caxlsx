@@ -5,7 +5,7 @@ module Axlsx
   class WorkbookViews < SimpleTypedList
     # creates the book views object
     def initialize
-      super WorkbookView
+      super(WorkbookView)
     end
 
     # Serialize to xml

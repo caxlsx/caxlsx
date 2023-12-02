@@ -8,7 +8,7 @@ module Axlsx
     def initialize(worksheet)
       raise ArgumentError, 'you must provide a worksheet' unless worksheet.is_a?(Worksheet)
 
-      super String
+      super(String)
     end
 
     # adds cells to the merged cells collection

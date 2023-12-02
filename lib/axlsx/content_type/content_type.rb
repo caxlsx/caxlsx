@@ -8,7 +8,7 @@ module Axlsx
   # ContentTypes used in the package. This is automatically managed by the package package.
   class ContentType < SimpleTypedList
     def initialize
-      super [Override, Default]
+      super([Override, Default])
     end
 
     # Serializes the object
