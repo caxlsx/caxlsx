@@ -5,6 +5,7 @@ module Axlsx
   # @note Worksheet#add_chart is the recommended way to create charts for your worksheets.
   # @see README for examples
   class Chart
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     # Creates a new chart object
     # @param [GraphicalFrame] frame The frame that holds this chart.
@@ -58,14 +59,8 @@ module Axlsx
 
     # Indicates that colors should be varied by datum
     # @return [Boolean]
-    attr_reader :vary_colors
-
-    # Configures the vary_colors options for this chart
-    # @param [Boolean] v The value to set
-    def vary_colors=(v)
-      Axlsx.validate_boolean(v)
-      @vary_colors = v
-    end
+    # @!attribute
+    boolean_attr_accessor :vary_colors
 
     # The title object for the chart.
     # @return [Title]
@@ -78,7 +73,8 @@ module Axlsx
 
     # Show the legend in the chart
     # @return [Boolean]
-    attr_reader :show_legend
+    # @!attribute
+    boolean_attr_accessor :show_legend
 
     # Set the location of the chart's legend
     # @return [Symbol] The position of this legend
@@ -98,7 +94,8 @@ module Axlsx
     # * zero: Display as if the value were zero, not blank
     # @return [Symbol]
     # Default :gap (although this really should vary by chart type and grouping)
-    attr_reader :display_blanks_as
+    # @!attribute
+    validated_attr_accessor :display_blanks_as, :validate_display_blanks_as
 
     # Background color for the chart
     # @return [String]
@@ -106,11 +103,13 @@ module Axlsx
 
     # Whether only data from visible cells should be plotted.
     # @return [Boolean]
-    attr_reader :plot_visible_only
+    # @!attribute
+    boolean_attr_accessor :plot_visible_only
 
     # Whether the chart area shall have rounded corners.
     # @return [Boolean]
-    attr_reader :rounded_corners
+    # @!attribute
+    boolean_attr_accessor :rounded_corners
 
     # The relationship object for this chart.
     # @return [Relationship]
@@ -147,23 +146,6 @@ module Axlsx
     # @see Title
     def title_size=(v)
       @title.text_size = v unless v.to_s.empty?
-    end
-
-    # Show the legend in the chart
-    # @param [Boolean] v
-    # @return [Boolean]
-    def show_legend=(v)
-      Axlsx.validate_boolean(v)
-      @show_legend = v
-    end
-
-    # How to display blank values
-    # @see display_blanks_as
-    # @param [Symbol] v
-    # @return [Symbol]
-    def display_blanks_as=(v)
-      Axlsx.validate_display_blanks_as(v)
-      @display_blanks_as = v
     end
 
     # The style for the chart.
@@ -204,22 +186,6 @@ module Axlsx
     def bg_color=(v)
       DataTypeValidator.validate(:color, Color, Color.new(rgb: v))
       @bg_color = v
-    end
-
-    # Whether only data from visible cells should be plotted.
-    # @param [Boolean] v
-    # @return [Boolean]
-    def plot_visible_only=(v)
-      Axlsx.validate_boolean(v)
-      @plot_visible_only = v
-    end
-
-    # Whether the chart area shall have rounded corners.
-    # @param [Boolean] v
-    # @return [Boolean]
-    def rounded_corners=(v)
-      Axlsx.validate_boolean(v)
-      @rounded_corners = v
     end
 
     # Serializes the object

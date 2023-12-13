@@ -4,6 +4,7 @@ module Axlsx
   # A NumFmt object defines an identifier and formatting code for data in cells.
   # @note The recommended way to manage styles is Styles#add_style
   class NumFmt
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -21,7 +22,8 @@ module Axlsx
 
     # @return [String] The formatting to use for this number format.
     # @see https://support.microsoft.com/kb/264372
-    attr_reader :formatCode
+    # @!attribute
+    string_attr_accessor :formatCode
 
     # @return [Integer] An unsigned integer referencing a standard or custom number format.
     # @note
@@ -58,19 +60,8 @@ module Axlsx
     #   48 ##0.0E+0
     #   49 @
     # @see Axlsx
-    attr_reader :numFmtId
-
-    # @see numFmtId
-    def numFmtId=(v)
-      Axlsx.validate_unsigned_int v
-      @numFmtId = v
-    end
-
-    # @see formatCode
-    def formatCode=(v)
-      Axlsx.validate_string v
-      @formatCode = v
-    end
+    # @!attribute
+    unsigned_int_attr_accessor :numFmtId
 
     # Serializes the object
     # @param [String] str

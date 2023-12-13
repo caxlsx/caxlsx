@@ -4,6 +4,7 @@ module Axlsx
   # When multiple values are chosen to filter by, or when a group of date values are chosen to filter by,
   # this object groups those criteria together.
   class Filters
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -28,7 +29,7 @@ module Axlsx
 
     # Flag indicating whether to filter by blank.
     # @return [Boolean]
-    attr_reader :blank
+    boolean_attr_accessor :blank
 
     # Calendar type for date grouped items.
     # Used to interpret the values in dateGroupItem.
@@ -66,13 +67,6 @@ module Axlsx
     def calendar_type=(calendar)
       RestrictionValidator.validate 'Filters.calendar_type', CALENDAR_TYPES, calendar
       @calendar_type = calendar
-    end
-
-    # Set the value for blank
-    # @see blank
-    def blank=(use_blank)
-      Axlsx.validate_boolean use_blank
-      @blank = use_blank
     end
 
     # Serialize the object to xml

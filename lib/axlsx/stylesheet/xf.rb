@@ -6,6 +6,7 @@ module Axlsx
   class Xf
     # does not support extList (ExtensionList)
 
+    include Axlsx::Accessors
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
     # Creates a new Xf object
@@ -44,55 +45,68 @@ module Axlsx
 
     # id of the numFmt to apply to this style
     # @return [Integer]
-    attr_reader :numFmtId
+    # @!attribute
+    unsigned_int_attr_accessor :numFmtId
 
     # index (0 based) of the font to be used in this style
     # @return [Integer]
-    attr_reader :fontId
+    # @!attribute
+    unsigned_int_attr_accessor :fontId
 
     # index (0 based) of the fill to be used in this style
     # @return [Integer]
-    attr_reader :fillId
+    # @!attribute
+    unsigned_int_attr_accessor :fillId
 
     # index (0 based) of the border to be used in this style
     # @return [Integer]
-    attr_reader :borderId
+    # @!attribute
+    unsigned_int_attr_accessor :borderId
 
     # index (0 based) of cellStylesXfs item to be used in this style. Only applies to cellXfs items
     # @return [Integer]
-    attr_reader :xfId
+    # @!attribute
+    unsigned_int_attr_accessor :xfId
 
     # indecates if text should be prefixed by a single quote in the cell
     # @return [Boolean]
-    attr_reader :quotePrefix
+    # @!attribute
+    boolean_attr_accessor :quotePrefix
 
     # indicates if the cell has a pivot table drop down button
     # @return [Boolean]
-    attr_reader :pivotButton
+    # @!attribute
+    boolean_attr_accessor :pivotButton
 
     # indicates if the numFmtId should be applied
     # @return [Boolean]
-    attr_reader :applyNumberFormat
+    # @!attribute
+    boolean_attr_accessor :applyNumberFormat
 
     # indicates if the fontId should be applied
     # @return [Boolean]
-    attr_reader :applyFont
+    # @!attribute
+    boolean_attr_accessor :applyFont
 
     # indicates if the fillId should be applied
     # @return [Boolean]
-    attr_reader :applyFill
+    # @!attribute
+    boolean_attr_accessor :applyFill
 
     # indicates if the borderId should be applied
     # @return [Boolean]
-    attr_reader :applyBorder
+    # @!attribute
+    boolean_attr_accessor :applyBorder
 
     # Indicates if the alignment options should be applied
     # @return [Boolean]
-    attr_reader :applyAlignment
+    # @!attribute
+    boolean_attr_accessor :applyAlignment
 
     # Indicates if the protection options should be applied
     # @return [Boolean]
-    attr_reader :applyProtection
+    # @!attribute
+    boolean_attr_accessor :applyProtection
 
     # @see Xf#alignment
     def alignment=(v)
@@ -104,84 +118,6 @@ module Axlsx
     def protection=(v)
       DataTypeValidator.validate "Xf.protection", CellProtection, v
       @protection = v
-    end
-
-    # @see numFmtId
-    def numFmtId=(v)
-      Axlsx.validate_unsigned_int v
-      @numFmtId = v
-    end
-
-    # @see fontId
-    def fontId=(v)
-      Axlsx.validate_unsigned_int v
-      @fontId = v
-    end
-
-    # @see fillId
-    def fillId=(v)
-      Axlsx.validate_unsigned_int v
-      @fillId = v
-    end
-
-    # @see borderId
-    def borderId=(v)
-      Axlsx.validate_unsigned_int v
-      @borderId = v
-    end
-
-    # @see xfId
-    def xfId=(v)
-      Axlsx.validate_unsigned_int v
-      @xfId = v
-    end
-
-    # @see quotePrefix
-    def quotePrefix=(v)
-      Axlsx.validate_boolean v
-      @quotePrefix = v
-    end
-
-    # @see pivotButton
-    def pivotButton=(v)
-      Axlsx.validate_boolean v
-      @pivotButton = v
-    end
-
-    # @see applyNumberFormat
-    def applyNumberFormat=(v)
-      Axlsx.validate_boolean v
-      @applyNumberFormat = v
-    end
-
-    # @see applyFont
-    def applyFont=(v)
-      Axlsx.validate_boolean v
-      @applyFont = v
-    end
-
-    # @see applyFill
-    def applyFill=(v)
-      Axlsx.validate_boolean v
-      @applyFill = v
-    end
-
-    # @see applyBorder
-    def applyBorder=(v)
-      Axlsx.validate_boolean v
-      @applyBorder = v
-    end
-
-    # @see applyAlignment
-    def applyAlignment=(v)
-      Axlsx.validate_boolean v
-      @applyAlignment = v
-    end
-
-    # @see applyProtection
-    def applyProtection=(v)
-      Axlsx.validate_boolean v
-      @applyProtection = v
     end
 
     # Serializes the object

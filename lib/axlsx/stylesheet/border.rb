@@ -3,6 +3,7 @@
 module Axlsx
   # This class details a border used in Office Open XML spreadsheet styles.
   class Border
+    include Axlsx::Accessors
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
 
@@ -29,38 +30,23 @@ module Axlsx
     serializable_attributes :diagonal_up, :diagonal_down, :outline
 
     # @return [Boolean] The diagonal up property for the border that indicates if the border should include a diagonal line from the bottom left to the top right of the cell.
-    attr_reader :diagonal_up
+    # @!attribute
+    boolean_attr_accessor :diagonal_up
     alias :diagonalUp :diagonal_up
+    alias :diagonalUp= :diagonal_up=
 
     # @return [Boolean] The diagonal down property for the border that indicates if the border should include a diagonal line from the top left to the top right of the cell.
-    attr_reader :diagonal_down
+    # @!attribute
+    boolean_attr_accessor :diagonal_down
     alias :diagonalDown :diagonal_down
+    alias :diagonalDown= :diagonal_down=
 
     # @return [Boolean] The outline property for the border indicating that top, left, right and bottom borders should only be applied to the outside border of a range of cells.
-    attr_reader :outline
+    # @!attribute
+    boolean_attr_accessor :outline
 
     # @return [SimpleTypedList] A list of BorderPr objects for this border.
     attr_reader :prs
-
-    # @see diagonalUp
-    def diagonal_up=(v)
-      Axlsx.validate_boolean v
-      @diagonal_up = v
-    end
-    alias :diagonalUp= :diagonal_up=
-
-    # @see diagonalDown
-    def diagonal_down=(v)
-      Axlsx.validate_boolean v
-      @diagonal_down = v
-    end
-    alias :diagonalDown= :diagonal_down=
-
-    # @see outline
-    def outline=(v)
-      Axlsx.validate_boolean v
-      @outline = v
-    end
 
     # Serializes the object
     # @param [String] str

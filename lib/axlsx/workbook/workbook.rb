@@ -84,6 +84,8 @@ module Axlsx
   #
   #   *workbookPr is only supported to the extend of date1904
   class Workbook
+    include Axlsx::Accessors
+
     BOLD_FONT_MULTIPLIER = 1.5
     FONT_SCALE_DIVISOR = 10.0
 
@@ -91,22 +93,13 @@ module Axlsx
     # adhere to the ECMA specification that dictates string may be inline in the sheet.
     # Using this option will increase the time required to serialize the document as every string in every cell must be analzed and referenced.
     # @return [Boolean]
-    attr_reader :use_shared_strings
-
-    # @see use_shared_strings
-    def use_shared_strings=(v)
-      Axlsx.validate_boolean(v)
-      @use_shared_strings = v
-    end
+    # @!attribute
+    boolean_attr_accessor :use_shared_strings
 
     # If true reverse the order in which the workbook is serialized
     # @return [Boolean]
-    attr_reader :is_reversed
-
-    def is_reversed=(v)
-      Axlsx.validate_boolean(v)
-      @is_reversed = v
-    end
+    # @!attribute
+    boolean_attr_accessor :is_reversed
 
     # A collection of worksheets associated with this workbook.
     # @note The recommended way to manage worksheets is add_worksheet
@@ -276,14 +269,8 @@ module Axlsx
     # Allowing user-generated data to be interpreted as formulas is a security risk.
     # See https://www.owasp.org/index.php/CSV_Injection for details.
     # @return [Boolean]
-    attr_reader :escape_formulas
-
-    # Sets whether to treat values starting with an equals sign as formulas or as literal strings.
-    # @param [Boolean] value The value to set.
-    def escape_formulas=(value)
-      Axlsx.validate_boolean(value)
-      @escape_formulas = value
-    end
+    # @!attribute
+    boolean_attr_accessor :escape_formulas
 
     # Indicates if the workbook should use autowidths or not.
     # @note This gem no longer depends on RMagick for autowidth
@@ -301,22 +288,14 @@ module Axlsx
     # Font size of bold fonts is multiplied with this
     # Used for automatic calculation of cell widths with bold text
     # @return [Float]
-    attr_reader :bold_font_multiplier
-
-    def bold_font_multiplier=(v)
-      Axlsx.validate_float v
-      @bold_font_multiplier = v
-    end
+    # @!attribute
+    float_attr_accessor :bold_font_multiplier
 
     # Font scale is calculated with this value (font_size / font_scale_divisor)
     # Used for automatic calculation of cell widths
     # @return [Float]
-    attr_reader :font_scale_divisor
-
-    def font_scale_divisor=(v)
-      Axlsx.validate_float v
-      @font_scale_divisor = v
-    end
+    # @!attribute
+    float_attr_accessor :font_scale_divisor
 
     # inserts a worksheet into this workbook at the position specified.
     # It the index specified is out of range, the worksheet will be added to the end of the

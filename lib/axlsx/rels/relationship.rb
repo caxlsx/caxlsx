@@ -4,6 +4,8 @@ module Axlsx
   # A relationship defines a reference between package parts.
   # @note Packages automatically manage relationships.
   class Relationship
+    include Axlsx::Accessors
+
     class << self
       # Keeps track of relationship ids in use.
       # @return [Array]
@@ -50,7 +52,8 @@ module Axlsx
 
     # The location of the relationship target
     # @return [String]
-    attr_reader :Target
+    # @!attribute Target
+    string_attr_accessor :Target
 
     # The type of relationship
     # @note Supported types are defined as constants in Axlsx:
@@ -66,7 +69,8 @@ module Axlsx
     # @see CHART_R
     # @see DRAWING_R
     # @return [String]
-    attr_reader :Type
+    # @!attribute Type
+    validated_attr_accessor :Type, :validate_relationship_type
 
     # The target mode of the relationship
     # used for hyperlink type relationships to mark the relationship to an external resource
@@ -89,18 +93,6 @@ module Axlsx
       self.Type = type
       self.TargetMode = options[:target_mode] if options[:target_mode]
       @Id = (self.class.ids_cache[ids_cache_key] ||= self.class.next_free_id)
-    end
-
-    # @see Target
-    def Target=(v)
-      Axlsx.validate_string v
-      @Target = v
-    end
-
-    # @see Type
-    def Type=(v)
-      Axlsx.validate_relationship_type v
-      @Type = v
     end
 
     # @see TargetMode

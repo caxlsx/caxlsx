@@ -5,6 +5,7 @@ module Axlsx
   # @note using the hyperlink option when calling add_image on a drawing object is the recommended way to manage hyperlinks
   # @see {file:README} README
   class Hyperlink
+    include Axlsx::Accessors
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
 
@@ -46,41 +47,22 @@ module Axlsx
 
     # Specifies if all sound events should be terminated when this link is clicked.
     # @return [Boolean]
-    attr_reader :end_snd
+    # @!attribute
+    boolean_attr_accessor :end_snd
     alias :endSnd :end_snd
-
-    # @see endSnd
-    # @param [Boolean] v The boolean value indicating the termination of playing sounds on click
-    # @return [Boolean]
-    def end_snd=(v)
-      Axlsx.validate_boolean(v)
-      @end_snd = v
-    end
     alias :endSnd= :end_snd=
 
     # indicates that the link has already been clicked.
     # @return [Boolean]
-    attr_reader :highlight_click
+    # @!attribute
+    boolean_attr_accessor :highlight_click
     alias :highlightClick :highlight_click
-
-    # @see highlightClick
-    # @param [Boolean] v The value to assign
-    def highlight_click=(v)
-      Axlsx.validate_boolean(v)
-      @highlight_click = v
-    end
     alias :highlightClick= :highlight_click=
 
     # From the specs: Specifies whether to add this URI to the history when navigating to it. This allows for the viewing of this presentation without the storing of history information on the viewing machine. If this attribute is omitted, then a value of 1 or true is assumed.
     # @return [Boolean]
-    attr_reader :history
-
-    # @see history
-    # param [Boolean] v The value to assing
-    def history=(v)
-      Axlsx.validate_boolean(v)
-      @history = v
-    end
+    # @!attribute
+    boolean_attr_accessor :history
 
     # From the specs: Specifies the target frame that is to be used when opening this hyperlink. When the hyperlink is activated this attribute is used to determine if a new window is launched for viewing or if an existing one can be used. If this attribute is omitted, than a new window is opened.
     # @return [String]

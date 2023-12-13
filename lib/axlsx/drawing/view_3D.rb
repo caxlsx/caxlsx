@@ -3,6 +3,7 @@
 module Axlsx
   # 3D attributes for a chart.
   class View3D
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
 
     # Creates a new View3D for charts
@@ -49,8 +50,10 @@ module Axlsx
 
     # Chart axis are at right angles
     # @return [Boolean]
-    attr_reader :r_ang_ax
+    # @!attribute
+    boolean_attr_accessor :r_ang_ax
     alias :rAngAx :r_ang_ax
+    alias :rAngAx= :r_ang_ax=
 
     # field of view angle
     # @return [Integer]
@@ -83,13 +86,6 @@ module Axlsx
       @depth_percent = v
     end
     alias :depthPercent= :depth_percent=
-
-    # @see r_ang_ax
-    def r_ang_ax=(v)
-      Axlsx.validate_boolean(v)
-      @r_ang_ax = v
-    end
-    alias :rAngAx= :r_ang_ax=
 
     # @see perspective
     def perspective=(v)

@@ -4,6 +4,7 @@ module Axlsx
   # Page setup properties of the worksheet
   # This class name is not a typo, its spec.
   class PageSetUpPr
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -17,23 +18,15 @@ module Axlsx
 
     serializable_attributes :auto_page_breaks, :fit_to_page
 
-    attr_reader :auto_page_breaks, :fit_to_page
+    # Flag indicating whether the sheet displays Automatic Page Breaks.
+    # @return [Boolean]
+    # @!attribute
+    boolean_attr_accessor :auto_page_breaks
 
     # Flag indicating whether the Fit to Page print option is enabled.
-    # @param [Boolean] value
     # @return [Boolean]
-    def fit_to_page=(value)
-      Axlsx.validate_boolean value
-      @fit_to_page = value
-    end
-
-    # Flag indicating whether the sheet displays Automatic Page Breaks.
-    # @param [Boolean] value
-    # @return [Boolean]
-    def auto_page_breaks=(value)
-      Axlsx.validate_boolean value
-      @auto_page_breaks = value
-    end
+    # @!attribute
+    boolean_attr_accessor :fit_to_page
 
     # serialize to xml
     def to_xml_string(str = +'')

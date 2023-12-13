@@ -5,6 +5,7 @@ module Axlsx
   # @note Using Styles#add_style is the recommended way to manage cell protection.
   # @see Styles#add_style
   class CellProtection
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -12,29 +13,19 @@ module Axlsx
 
     # specifies locking for cells that have the style containing this protection
     # @return [Boolean]
-    attr_reader :hidden
+    # @!attribute
+    boolean_attr_accessor :hidden
 
     # specifies if the cells that have the style containing this protection
     # @return [Boolean]
-    attr_reader :locked
+    # @!attribute
+    boolean_attr_accessor :locked
 
     # Creates a new CellProtection
     # @option options [Boolean] hidden value for hidden protection
     # @option options [Boolean] locked value for locked protection
     def initialize(options = {})
       parse_options options
-    end
-
-    # @see hidden
-    def hidden=(v)
-      Axlsx.validate_boolean v
-      @hidden = v
-    end
-
-    # @see locked
-    def locked=(v)
-      Axlsx.validate_boolean v
-      @locked = v
     end
 
     # Serializes the object

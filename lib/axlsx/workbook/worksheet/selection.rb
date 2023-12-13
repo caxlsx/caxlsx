@@ -6,6 +6,7 @@ module Axlsx
   # @note The recommended way to manage the selection pane options is via SheetView#add_selection
   # @see SheetView#add_selection
   class Selection
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -36,7 +37,8 @@ module Axlsx
     # @see type
     # @return [Integer]
     # default nil
-    attr_reader :active_cell_id
+    # @!attribute
+    unsigned_int_attr_accessor :active_cell_id
 
     # Pane
     # The pane to which this selection belongs.
@@ -70,7 +72,8 @@ module Axlsx
     # @see type
     # @return [String]
     # default nil
-    attr_reader :sqref
+    # @!attribute
+    string_attr_accessor :sqref
 
     # @see active_cell
     def active_cell=(v)
@@ -79,22 +82,10 @@ module Axlsx
       @active_cell = cell
     end
 
-    # @see active_cell_id
-    def active_cell_id=(v)
-      Axlsx.validate_unsigned_int(v)
-      @active_cell_id = v
-    end
-
     # @see pane
     def pane=(v)
       Axlsx.validate_pane_type(v)
       @pane = Axlsx.camel(v, false)
-    end
-
-    # @see sqref
-    def sqref=(v)
-      Axlsx.validate_string(v)
-      @sqref = v
     end
 
     # Serializes the data validation

@@ -3,10 +3,13 @@
 module Axlsx
   # This class specifies data for a particular data point.
   class NumVal < StrVal
+    include Axlsx::Accessors
+
     # A string representing the format code to apply.
     # For more information see see the SpreadsheetML numFmt element's (§18.8.30) formatCode attribute.
     # @return [String]
-    attr_reader :format_code
+    # @!attribute
+    string_attr_accessor :format_code
 
     # creates a new NumVal object
     # @option options [String] formatCode
@@ -14,12 +17,6 @@ module Axlsx
     def initialize(options = {})
       @format_code = "General"
       super(options)
-    end
-
-    # @see format_code
-    def format_code=(v)
-      Axlsx.validate_string(v)
-      @format_code = v
     end
 
     # serialize the object

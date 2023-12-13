@@ -4,6 +4,7 @@ module Axlsx
   # TableStyles represents a collection of style definitions for table styles and pivot table styles.
   # @note Support for custom table styles does not exist in this version. Many of the classes required are defined in preparation for future release. Please do not attempt to add custom table styles.
   class TableStyles < SimpleTypedList
+    include Axlsx::Accessors
     include Axlsx::SerializedAttributes
 
     # Creates a new TableStyles object that is a container for TableStyle objects
@@ -19,23 +20,13 @@ module Axlsx
 
     # The default table style. The default value is 'TableStyleMedium9'
     # @return [String]
-    attr_reader :defaultTableStyle
+    # @!attribute
+    string_attr_accessor :defaultTableStyle
 
     # The default pivot table style. The default value is  'PivotStyleLight6'
     # @return [String]
-    attr_reader :defaultPivotStyle
-
-    # @see defaultTableStyle
-    def defaultTableStyle=(v)
-      Axlsx.validate_string(v)
-      @defaultTableStyle = v
-    end
-
-    # @see defaultPivotStyle
-    def defaultPivotStyle=(v)
-      Axlsx.validate_string(v)
-      @defaultPivotStyle = v
-    end
+    # @!attribute
+    string_attr_accessor :defaultPivotStyle
 
     # Serializes the object
     # @param [String] str

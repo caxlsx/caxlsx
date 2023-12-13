@@ -11,6 +11,7 @@ module Axlsx
   # @see Worksheet#page_margins
   # @see Worksheet#initialize
   class PageMargins
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -45,27 +46,33 @@ module Axlsx
 
     # Left margin (in inches)
     # @return [Float]
-    attr_reader :left
+    # @!attribute
+    unsigned_numeric_attr_accessor :left
 
     # Right margin (in inches)
     # @return [Float]
-    attr_reader :right
+    # @!attribute
+    unsigned_numeric_attr_accessor :right
 
     # Top margin (in inches)
     # @return [Float]
-    attr_reader :top
+    # @!attribute
+    unsigned_numeric_attr_accessor :top
 
     # Bottom margin (in inches)
     # @return [Float]
-    attr_reader :bottom
+    # @!attribute
+    unsigned_numeric_attr_accessor :bottom
 
     # Header margin (in inches)
     # @return [Float]
-    attr_reader :header
+    # @!attribute
+    unsigned_numeric_attr_accessor :header
 
     # Footer margin (in inches)
     # @return [Float]
-    attr_reader :footer
+    # @!attribute
+    unsigned_numeric_attr_accessor :footer
 
     # Set some or all margins at once.
     # @param [Hash] margins the margins to set. See {MARGIN_KEYS} for a list of possible keys.
@@ -75,42 +82,6 @@ module Axlsx
 
         send("#{k}=", v)
       end
-    end
-
-    # @see left
-    def left=(v)
-      Axlsx.validate_unsigned_numeric(v)
-      @left = v
-    end
-
-    # @see right
-    def right=(v)
-      Axlsx.validate_unsigned_numeric(v)
-      @right = v
-    end
-
-    # @see top
-    def top=(v)
-      Axlsx.validate_unsigned_numeric(v)
-      @top = v
-    end
-
-    # @see bottom
-    def bottom=(v)
-      Axlsx.validate_unsigned_numeric(v)
-      @bottom = v
-    end
-
-    # @see header
-    def header=(v)
-      Axlsx.validate_unsigned_numeric(v)
-      @header = v
-    end
-
-    # @see footer
-    def footer=(v)
-      Axlsx.validate_unsigned_numeric(v)
-      @footer = v
     end
 
     # Serializes the page margins element

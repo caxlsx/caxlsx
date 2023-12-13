@@ -3,6 +3,7 @@
 module Axlsx
   # This class extracts the common parts from Default and Override
   class AbstractContentType
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
 
     # Initializes an abstract content type
@@ -13,15 +14,9 @@ module Axlsx
 
     # The type of content.
     # @return [String]
-    attr_reader :content_type
+    # @!attribute
+    validated_attr_accessor :content_type, :validate_content_type
     alias :ContentType :content_type
-
-    # The content type.
-    # @see Axlsx#validate_content_type
-    def content_type=(v)
-      Axlsx.validate_content_type v
-      @content_type = v
-    end
     alias :ContentType= :content_type=
 
     # Serialize the contenty type to xml

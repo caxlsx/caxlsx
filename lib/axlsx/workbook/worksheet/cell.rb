@@ -7,6 +7,7 @@ module Axlsx
   #
   # @see Worksheet#add_row
   class Cell
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
 
     # @param [Row] row The row this cell belongs to.
@@ -353,7 +354,8 @@ module Axlsx
 
     # The Shared Strings Table index for this cell
     # @return [Integer]
-    attr_reader :ssti
+    # @!attribute
+    unsigned_int_attr_accessor :ssti
 
     # @return [Integer] The index of the cell in the containing row.
     def index
@@ -504,12 +506,6 @@ module Axlsx
       Axlsx.send(validator, value) unless validator.nil?
       instance_variable_set :"@#{attr}", value
       @is_text_run = true
-    end
-
-    # @see ssti
-    def ssti=(v)
-      Axlsx.validate_unsigned_int(v)
-      @ssti = v
     end
 
     # Determines the cell type based on the cell value.

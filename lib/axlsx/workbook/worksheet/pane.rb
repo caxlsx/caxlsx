@@ -6,6 +6,7 @@ module Axlsx
   # @note The recommended way to manage the pane options is via SheetView#pane
   # @see SheetView#pane
   class Pane
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
     # Creates a new {Pane} object
@@ -83,7 +84,8 @@ module Axlsx
     # @see type
     # @return [Integer]
     # default 0
-    attr_reader :x_split
+    # @!attribute
+    unsigned_int_attr_accessor :x_split
 
     # Vertical Split Position
     # Vertical position of the split, in 1/20th of a point; 0 (zero)
@@ -92,7 +94,8 @@ module Axlsx
     # @see type
     # @return [Integer]
     # default 0
-    attr_reader :y_split
+    # @!attribute
+    unsigned_int_attr_accessor :y_split
 
     # @see active_pane
     def active_pane=(v)
@@ -111,18 +114,6 @@ module Axlsx
       cell = (v.instance_of?(Axlsx::Cell) ? v.r_abs : v)
       Axlsx.validate_string(cell)
       @top_left_cell = cell
-    end
-
-    # @see x_split
-    def x_split=(v)
-      Axlsx.validate_unsigned_int(v)
-      @x_split = v
-    end
-
-    # @see y_split
-    def y_split=(v)
-      Axlsx.validate_unsigned_int(v)
-      @y_split = v
     end
 
     # Serializes the data validation

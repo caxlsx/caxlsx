@@ -8,6 +8,7 @@ module Axlsx
   # @see Worksheet#add_conditional_formatting
   # @see ConditionalFormattingRule#initialize
   class ConditionalFormattingRule
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -48,29 +49,34 @@ module Axlsx
     # notContainsBlanks, containsErrors, notContainsErrors,
     # timePeriod, aboveAverage
     # @return [Symbol]
-    attr_reader :type
+    # @!attribute
+    validated_attr_accessor :type, :validate_conditional_formatting_type
 
     # Above average rule
     # Indicates whether the rule is an "above average" rule. True
     # indicates 'above average'. This attribute is ignored if type is
     # not equal to aboveAverage.
     # @return [Boolean]
-    attr_reader :aboveAverage
+    # @!attribute
+    boolean_attr_accessor :aboveAverage
 
     # Bottom N rule
     # @return [Boolean]
-    attr_reader :bottom
+    # @!attribute
+    boolean_attr_accessor :bottom
 
     # Differential Formatting Id
     # @return [Integer]
-    attr_reader :dxfId
+    # @!attribute
+    unsigned_numeric_attr_accessor :dxfId
 
     # Equal Average
     # Flag indicating whether the 'aboveAverage' and 'belowAverage'
     # criteria is inclusive of the average itself, or exclusive of
     # that value.
     # @return [Boolean]
-    attr_reader :equalAverage
+    # @!attribute
+    boolean_attr_accessor :equalAverage
 
     # Operator
     # The operator in a "cell value is" conditional formatting
@@ -80,7 +86,8 @@ module Axlsx
     # notEqual, greaterThanOrEqual, greaterThan, between, notBetween,
     # containsText, notContains, beginsWith, endsWith
     # @return [Symbol]
-    attr_reader :operator
+    # @!attribute
+    validated_attr_accessor :operator, :validate_conditional_formatting_operator
 
     # Priority
     # The priority of this conditional formatting rule. This value is
@@ -88,26 +95,30 @@ module Axlsx
     # rendered. Lower numeric values are higher priority than higher
     # numeric values, where '1' is the highest priority.
     # @return [Integer]
-    attr_reader :priority
+    # @!attribute
+    unsigned_numeric_attr_accessor :priority
 
     # Text
     # used in a "text contains" conditional formatting
     # rule.
     # @return [String]
-    attr_reader :text
+    # @!attribute
+    string_attr_accessor :text
 
     # percent (Top 10 Percent)
     # indicates whether a "top/bottom n" rule is a "top/bottom n
     # percent" rule. This attribute is ignored if type is not equal to
     # top10.
     # @return [Boolean]
-    attr_reader :percent
+    # @!attribute
+    boolean_attr_accessor :percent
 
     # rank (Rank)
     # The value of "n" in a "top/bottom n" conditional formatting
     # rule. This attribute is ignored if type is not equal to top10.
     # @return [Integer]
-    attr_reader :rank
+    # @!attribute
+    unsigned_numeric_attr_accessor :rank
 
     # stdDev (StdDev)
     # The number of standard deviations to include above or below the
@@ -117,13 +128,15 @@ module Axlsx
     # rule is automatically an "above or below N standard deviations"
     # rule.
     # @return [Integer]
-    attr_reader :stdDev
+    # @!attribute
+    unsigned_numeric_attr_accessor :stdDev
 
     # stopIfTrue (Stop If True)
     # If this flag is '1', no rules with lower priority shall be
     # applied over this rule, when this rule evaluates to true.
     # @return [Boolean]
-    attr_reader :stopIfTrue
+    # @!attribute
+    boolean_attr_accessor :stopIfTrue
 
     # timePeriod (Time Period)
     # The applicable time period in a "date occurring…" conditional
@@ -131,7 +144,8 @@ module Axlsx
     # to timePeriod.
     # Valid types are today, yesterday, tomorrow, last7Days,
     # thisMonth, lastMonth, nextMonth, thisWeek, lastWeek, nextWeek
-    attr_reader :timePeriod
+    # @!attribute
+    validated_attr_accessor :timePeriod, :validate_time_period_type
 
     # colorScale (Color Scale)
     # The color scale to apply to this conditional formatting
@@ -152,84 +166,6 @@ module Axlsx
     # @return [IconSet]
     def icon_set
       @icon_set ||= IconSet.new
-    end
-
-    # @see type
-    def type=(v)
-      Axlsx.validate_conditional_formatting_type(v)
-      @type = v
-    end
-
-    # @see aboveAverage
-    def aboveAverage=(v)
-      Axlsx.validate_boolean(v)
-      @aboveAverage = v
-    end
-
-    # @see bottom
-    def bottom=(v)
-      Axlsx.validate_boolean(v)
-      @bottom = v
-    end
-
-    # @see dxfId
-    def dxfId=(v)
-      Axlsx.validate_unsigned_numeric(v)
-      @dxfId = v
-    end
-
-    # @see equalAverage
-    def equalAverage=(v)
-      Axlsx.validate_boolean(v)
-      @equalAverage = v
-    end
-
-    # @see priority
-    def priority=(v)
-      Axlsx.validate_unsigned_numeric(v)
-      @priority = v
-    end
-
-    # @see operator
-    def operator=(v)
-      Axlsx.validate_conditional_formatting_operator(v)
-      @operator = v
-    end
-
-    # @see text
-    def text=(v)
-      Axlsx.validate_string(v)
-      @text = v
-    end
-
-    # @see percent
-    def percent=(v)
-      Axlsx.validate_boolean(v)
-      @percent = v
-    end
-
-    # @see rank
-    def rank=(v)
-      Axlsx.validate_unsigned_numeric(v)
-      @rank = v
-    end
-
-    # @see stdDev
-    def stdDev=(v)
-      Axlsx.validate_unsigned_numeric(v)
-      @stdDev = v
-    end
-
-    # @see stopIfTrue
-    def stopIfTrue=(v)
-      Axlsx.validate_boolean(v)
-      @stopIfTrue = v
-    end
-
-    # @see timePeriod
-    def timePeriod=(v)
-      Axlsx.validate_time_period_type(v)
-      @timePeriod = v
     end
 
     # @see formula

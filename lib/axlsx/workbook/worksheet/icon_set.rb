@@ -8,6 +8,7 @@ module Axlsx
   # @see Worksheet#add_conditional_formatting
   # @see ConditionalFormattingRule#initialize
   class IconSet
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -33,57 +34,37 @@ module Axlsx
     # Allowed values are: 3Arrows, 3ArrowsGray, 3Flags, 3TrafficLights1, 3TrafficLights2, 3Signs, 3Symbols, 3Symbols2, 4Arrows, 4ArrowsGray, 4RedToBlack, 4Rating, 4TrafficLights, 5Arrows, 5ArrowsGray, 5Rating, 5Quarters
     # The default value is 3TrafficLights1
     # @return [String]
-    attr_reader :iconSet
+    # @!attribute
+    validated_attr_accessor :iconSet, :validate_icon_set
 
     # Indicates whether the thresholds indicate percentile values, instead of number values.
     # The default value is true
     # @return [Boolean]
-    attr_reader :percent
+    # @!attribute
+    boolean_attr_accessor :percent
 
     # If true, reverses the default order of the icons in this icon set.maxLength attribute
     # The default value is false
     # @return [Boolean]
-    attr_reader :reverse
+    # @!attribute
+    boolean_attr_accessor :reverse
 
     # Indicates whether to show the values of the cells on which this data bar is applied.
     # The default value is true
     # @return [Boolean]
-    attr_reader :showValue
+    # @!attribute
+    boolean_attr_accessor :showValue
 
     # Sets the values of the interpolation points in the scale.
     # The default value is [0, 33, 67]
     # @return [Integer]
     attr_reader :interpolationPoints
 
-    # @see iconSet
-    def iconSet=(v)
-      Axlsx.validate_icon_set(v)
-      @iconSet = v
-    end
-
     # @see interpolationPoints
     def interpolationPoints=(v)
       v.each { |point| Axlsx.validate_int(point) }
       @value_objects = nil
       @interpolationPoints = v
-    end
-
-    # @see showValue
-    def showValue=(v)
-      Axlsx.validate_boolean(v)
-      @showValue = v
-    end
-
-    # @see percent
-    def percent=(v)
-      Axlsx.validate_boolean(v)
-      @percent = v
-    end
-
-    # @see reverse
-    def reverse=(v)
-      Axlsx.validate_boolean(v)
-      @reverse = v
     end
 
     # Serialize this object to an xml string

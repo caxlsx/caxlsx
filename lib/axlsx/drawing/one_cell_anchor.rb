@@ -6,6 +6,7 @@ module Axlsx
   # @see Worksheet#add_chart
   # @see Worksheet#add_image
   class OneCellAnchor
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
 
     # Creates a new OneCellAnchor object and an Pic associated with it.
@@ -42,12 +43,14 @@ module Axlsx
     # the width of the graphic object in pixels.
     # this is converted to EMU at a 92 ppi resolution
     # @return [Integer]
-    attr_reader :width
+    # @!attribute
+    unsigned_int_attr_accessor :width
 
     # the height of the graphic object in pixels
     # this is converted to EMU at a 92 ppi resolution
     # @return [Integer]
-    attr_reader :height
+    # @!attribute
+    unsigned_int_attr_accessor :height
 
     # sets the starting position for the anchor.
     # You can provide a String like "A1", an array like [0,0] or a cell object for the x parameter.
@@ -56,19 +59,6 @@ module Axlsx
     # @param [Integer] y When x is an integer, this value is used for the row index at which the anchor starts.
     def start_at(x, y = 0)
       from.coord x, y
-    end
-
-    #
-    # @see height
-    def height=(v)
-      Axlsx.validate_unsigned_int(v)
-      @height = v
-    end
-
-    # @see width
-    def width=(v)
-      Axlsx.validate_unsigned_int(v)
-      @width = v
     end
 
     # The index of this anchor in the drawing

@@ -3,6 +3,7 @@
 module Axlsx
   # The color class represents a color used for borders, fills an fonts
   class Color
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -19,7 +20,8 @@ module Axlsx
 
     # Determines if the color is system color dependant
     # @return [Boolean]
-    attr_reader :auto
+    # @!attribute
+    boolean_attr_accessor :auto
 
     # The color as defined in rgb terms.
     # @note
@@ -44,13 +46,8 @@ module Axlsx
     # The tint value.
     # @note valid values are between -1.0 and 1.0
     # @return [Float]
-    attr_reader :tint
-
-    # @see auto
-    def auto=(v)
-      Axlsx.validate_boolean v
-      @auto = v
-    end
+    # @!attribute
+    float_attr_accessor :tint
 
     # @see color
     def rgb=(v)
@@ -61,12 +58,6 @@ module Axlsx
       raise ArgumentError, "Invalid color rgb value: #{v}." unless /[0-9A-F]{8}/.match?(v)
 
       @rgb = v
-    end
-
-    # @see tint
-    def tint=(v)
-      Axlsx.validate_float v
-      @tint = v
     end
 
     # This version does not support themes
