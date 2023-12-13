@@ -552,6 +552,19 @@ module Axlsx
       end
     end
 
+    # This is a helper method that lets you specify a default style for multiple columns in a worksheet in one go.
+    # This style will be applied for all not-yet-defined cells in a column.
+    # Note that you must call column_styles BEFORE adding data, otherwise the styles will not be set successfully for new cells.
+    # @param [Integer] styles the cellXfs indexes
+    def column_styles(*styles)
+      styles.each_with_index do |style, index|
+        next if style.nil?
+
+        Axlsx.validate_unsigned_int(style)
+        find_or_create_column_info(index).style = style
+      end
+    end
+
     # Set the style for cells in a specific column
     # @param [Integer] index the index of the column
     # @param [Integer] style the cellXfs index
