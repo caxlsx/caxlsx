@@ -336,16 +336,53 @@ module Axlsx
     end
 
     # parses add_style options for fills. If the options hash contains :type => :dxf we return a Fill object. If not, we return the index of the fill after being added to the fills collection.
-    # @note noop if :bg_color is not specified in options
-    # @option options [String] bg_color The rgb color to apply to the fill
+    # @note noop unless at least one of the documented attributes is specified in options
+    # @option options [String] bg_color The rgb color to apply to the fill. An alias for pattern_bg_color if you need only a solid background
+    # @option options [String] pattern_type The fill pattern to apply to the fill
+    # @option options [String] pattern_bg_color The rgb color to apply to the fill as the first color
+    # @option options [String] pattern_fg_color The rgb color to apply to the fill as the second color
     # @return [Fill|Integer]
     def parse_fill_options(options = {})
-      return unless options[:bg_color]
+      return unless options[:bg_color] || options[:pattern_type] || options[:pattern_bg_color] || options[:pattern_fg_color]
 
-      color = Color.new(rgb: options[:bg_color])
+      pattern_type = options[:pattern_type] || :solid
       dxf = options[:type] == :dxf
-      color_key = dxf ? :bgColor : :fgColor
-      pattern = PatternFill.new(:patternType => :solid, color_key => color)
+
+      pattern_options = {
+        patternType: pattern_type
+      }
+
+      if options[:pattern_bg_color] && options[:bg_color]
+        warn 'Both `bg_color` and `pattern_bg_color` got defined. To get a solid background without defining it in `patter_type`, use only `bg_color`, otherwise use only `pattern_bg_color` to avoid confusion.'
+      end
+
+      bg_color = options[:pattern_bg_color] || options[:bg_color]
+      fg_color = options[:pattern_fg_color]
+
+      # Both bgColor and fgColor happens to configure the background of the cell.
+      # One of them sets the "background" of the cell, while the other one is
+      # responsibe for the "pattern" of the cell. When you pick "solid" pattern for
+      # a normal xf style, then it's a rectangle covering all bgColor with fgColor,
+      # which means we need to to set the given background color to fgColor as well.
+      # For some reason I wasn't able find, it works the opposite for dxf styles
+      # (differential formatting records), so to get the expected color, we need
+      # to put it into bgColor. We only need these cross-assignments when using
+      # "solid" pattern and the user provided only one color to get the least
+      # amount of surprise
+
+      if bg_color
+        pattern_options[:bgColor] = Color.new(rgb: bg_color)
+      elsif pattern_type == :solid && fg_color
+        pattern_options[:bgColor] = Color.new(rgb: fg_color)
+      end
+
+      if fg_color
+        pattern_options[:fgColor] = Color.new(rgb: fg_color)
+      elsif pattern_type == :solid && bg_color
+        pattern_options[:fgColor] = Color.new(rgb: bg_color)
+      end
+
+      pattern = PatternFill.new(pattern_options)
       fill = Fill.new(pattern)
       dxf ? fill : fills << fill
     end

@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 require 'tc_helper'
+require 'support/capture_warnings'
 
 class TestStyles < Test::Unit::TestCase
+  include CaptureWarnings
+
   def setup
     @styles = Axlsx::Styles.new
   end
@@ -188,11 +191,41 @@ class TestStyles < Test::Unit::TestCase
 
   def test_parse_fill_options
     assert_nil(@styles.parse_fill_options, "noop if no fill keys are set")
-    assert_kind_of(Integer, @styles.parse_fill_options(bg_color: "DE"), "return index of fill if not :dxf type")
-    assert_equal(@styles.parse_fill_options(bg_color: "DE", type: :dxf).class, Axlsx::Fill, "return fill object if :dxf type")
-    f = @styles.parse_fill_options(bg_color: "DE", type: :dxf)
 
-    assert_equal("FFDEDEDE", f.fill_type.bgColor.rgb)
+    assert_instance_of(Axlsx::Fill, @styles.parse_fill_options(bg_color: "AB", type: :dxf), "return fill object if :dxf type")
+    @styles.parse_fill_options(bg_color: "CD", type: :dxf).tap do |fill|
+      assert_equal("FFCDCDCD", fill.fill_type.bgColor.rgb)
+      assert_equal(:solid, fill.fill_type.patternType)
+    end
+
+    assert_instance_of(Integer, @styles.parse_fill_options(bg_color: "AB"), "return index of fill if not :dxf type")
+    @styles.parse_fill_options(bg_color: "DE").tap do |fill_id|
+      fill = @styles.fills[fill_id]
+
+      assert_equal("FFDEDEDE", fill.fill_type.fgColor.rgb)
+      assert_equal(:solid, fill.fill_type.patternType)
+    end
+  end
+
+  def test_parse_fill_options_fill_type
+    @styles.parse_fill_options(pattern_type: :darkHorizontal, pattern_bg_color: 'AB', pattern_fg_color: 'BC', type: :dxf).tap do |fill|
+      assert_equal("FFABABAB", fill.fill_type.bgColor.rgb)
+      assert_equal("FFBCBCBC", fill.fill_type.fgColor.rgb)
+      assert_equal(:darkHorizontal, fill.fill_type.patternType)
+    end
+
+    @styles.parse_fill_options(pattern_type: :darkHorizontal, bg_color: 'AB', type: :dxf).tap do |fill|
+      assert_equal("FFABABAB", fill.fill_type.bgColor.rgb, "use bg_color if pattern_bg_color is not defined")
+    end
+
+    warnings = capture_warnings do
+      @styles.parse_fill_options(pattern_type: :darkHorizontal, bg_color: 'AB', pattern_bg_color: 'BC', type: :dxf).tap do |fill|
+        assert_equal("FFBCBCBC", fill.fill_type.bgColor.rgb, "use pattern_bg_color if both bg_color and pattern_bg_color is defined")
+      end
+    end
+
+    assert_equal 1, warnings.size
+    assert_includes warnings.first, 'Both `bg_color` and `pattern_bg_color` got defined. To get a solid background without defining it in `patter_type`, use only `bg_color`, otherwise use only `pattern_bg_color` to avoid confusion.'
   end
 
   def test_parse_protection_options
