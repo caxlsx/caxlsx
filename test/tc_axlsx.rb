@@ -112,15 +112,15 @@ class TestAxlsx < Test::Unit::TestCase
     sanitized_str = Axlsx.sanitize(needs_sanitize)
 
     assert_equal('legit', sanitized_str, 'should strip control chars')
-    assert_equal(sanitized_str.object_id, sanitized_str.object_id, 'should preserve object')
+    assert_same(sanitized_str, sanitized_str, 'should preserve object')
   end
 
   def test_sanitize_unfrozen_no_sanitize
     legit_str = +'legit'
     sanitized_str = Axlsx.sanitize(legit_str)
 
-    assert_equal(sanitized_str,           legit_str,            'should preserve value')
-    assert_equal(sanitized_str.object_id, legit_str.object_id,  'should preserve object')
+    assert_equal(sanitized_str, legit_str, 'should preserve value')
+    assert_same(sanitized_str, legit_str, 'should preserve object')
   end
 
   class InstanceValuesSubject

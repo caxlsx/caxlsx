@@ -28,7 +28,7 @@ class TestTableStyleInfo < Test::Unit::TestCase
   def test_boolean_properties
     table_style = Axlsx::TableStyleInfo.new
     @options.each_key do |key|
-      assert_nothing_raised { table_style.send("#{key.to_sym}=", true) }
+      assert_nothing_raised { table_style.send(:"#{key.to_sym}=", true) }
       assert_raises(ArgumentError) { table_style.send(key.to_sym, 'foo') }
     end
   end

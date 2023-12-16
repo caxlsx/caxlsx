@@ -18,15 +18,15 @@ class TestWorkbookView < Test::Unit::TestCase
 
   def test_boolean_attribute_validation
     %w(minimized show_horizontal_scroll show_vertical_scroll show_sheet_tabs auto_filter_date_grouping).each do |attr|
-      assert_raise(ArgumentError, 'only booleanish allowed in boolean attributes') { @book_view.send("#{attr}=", "banana") }
-      assert_nothing_raised { @book_view.send("#{attr}=", false) }
+      assert_raise(ArgumentError, 'only booleanish allowed in boolean attributes') { @book_view.send(:"#{attr}=", "banana") }
+      assert_nothing_raised { @book_view.send(:"#{attr}=", false) }
     end
   end
 
   def test_integer_attribute_validation
     %w(tab_ratio first_sheet active_tab x_window y_window window_width window_height).each do |attr|
-      assert_raise(ArgumentError, 'only integer allowed in integer attributes') { @book_view.send("#{attr}=", "b") }
-      assert_nothing_raised { @book_view.send("#{attr}=", 7) }
+      assert_raise(ArgumentError, 'only integer allowed in integer attributes') { @book_view.send(:"#{attr}=", "b") }
+      assert_nothing_raised { @book_view.send(:"#{attr}=", 7) }
     end
   end
 

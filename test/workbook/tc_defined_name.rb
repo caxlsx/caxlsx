@@ -13,15 +13,15 @@ class TestDefinedNames < Test::Unit::TestCase
 
   def test_string_attributes
     %w(short_cut_key status_bar help description custom_menu comment).each do |attr|
-      assert_raise(ArgumentError, 'only strings allowed in string attributes') { @dn.send("#{attr}=", 1) }
-      assert_nothing_raised { @dn.send("#{attr}=", '_xlnm.Sheet_Title') }
+      assert_raise(ArgumentError, 'only strings allowed in string attributes') { @dn.send(:"#{attr}=", 1) }
+      assert_nothing_raised { @dn.send(:"#{attr}=", '_xlnm.Sheet_Title') }
     end
   end
 
   def test_boolean_attributes
     %w(workbook_parameter publish_to_server xlm vb_proceedure function hidden).each do |attr|
-      assert_raise(ArgumentError, 'only booleanish allowed in string attributes') { @dn.send("#{attr}=", 'foo') }
-      assert_nothing_raised { @dn.send("#{attr}=", 1) }
+      assert_raise(ArgumentError, 'only booleanish allowed in string attributes') { @dn.send(:"#{attr}=", 'foo') }
+      assert_nothing_raised { @dn.send(:"#{attr}=", 1) }
     end
   end
 

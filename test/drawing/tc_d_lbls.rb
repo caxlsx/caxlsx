@@ -39,9 +39,9 @@ class TestDLbls < Test::Unit::TestCase
 
   def test_boolean_attributes
     @boolean_attributes.each do |attr|
-      assert_raise(ArgumentError, "rejects non boolean value for #{attr}") { @d_lbls.send("#{attr}=", :foo) }
-      assert_nothing_raised("accepts boolean value for #{attr}") { @d_lbls.send("#{attr}=", true) }
-      assert_nothing_raised("accepts boolean value for #{attr}") { @d_lbls.send("#{attr}=", false) }
+      assert_raise(ArgumentError, "rejects non boolean value for #{attr}") { @d_lbls.send(:"#{attr}=", :foo) }
+      assert_nothing_raised("accepts boolean value for #{attr}") { @d_lbls.send(:"#{attr}=", true) }
+      assert_nothing_raised("accepts boolean value for #{attr}") { @d_lbls.send(:"#{attr}=", false) }
     end
   end
 

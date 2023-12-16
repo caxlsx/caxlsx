@@ -86,12 +86,12 @@ class TestSimpleTypedList < Test::Unit::TestCase
   end
 
   def test_to_a
-    refute_equal(@list.object_id, @list.to_a.object_id)
+    refute_same(@list, @list.to_a)
     assert_instance_of(Array, @list.to_a)
   end
 
   def test_to_ary
-    assert_equal(@list.object_id, @list.to_ary.object_id)
+    assert_same(@list, @list.to_ary)
   end
 
   def test_insert
