@@ -69,7 +69,7 @@ module Axlsx
       options[:href] = v
       if hyperlink.is_a?(Hyperlink)
         options.each do |o|
-          hyperlink.send("#{o[0]}=", o[1]) if hyperlink.respond_to? "#{o[0]}="
+          hyperlink.send(:"#{o[0]}=", o[1]) if hyperlink.respond_to? :"#{o[0]}="
         end
       else
         @hyperlink = Hyperlink.new(self, options)

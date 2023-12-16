@@ -73,7 +73,7 @@ module Axlsx
       margins.select do |k, v|
         next unless MARGIN_KEYS.include? k
 
-        send("#{k}=", v)
+        send(:"#{k}=", v)
       end
     end
 
