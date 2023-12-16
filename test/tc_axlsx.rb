@@ -101,18 +101,18 @@ class TestAxlsx < Test::Unit::TestCase
     assert_equal([['Z5', 'AA5', 'AB5'], ['Z6', 'AA6', 'AB6']], Axlsx.range_to_a('Z5:AB6'))
   end
 
-  def test_sanitize_frozen_control_strippped
+  def test_sanitize_frozen_control_stripped
     needs_sanitize = "legit\x08" # Backspace control char
 
     assert_equal('legit', Axlsx.sanitize(needs_sanitize), 'should strip control chars')
   end
 
-  def test_sanitize_unfrozen_control_strippped
+  def test_sanitize_unfrozen_control_stripped
     needs_sanitize = +"legit\x08" # Backspace control char
     sanitized_str = Axlsx.sanitize(needs_sanitize)
 
     assert_equal('legit', sanitized_str, 'should strip control chars')
-    assert_same(sanitized_str, sanitized_str, 'should preserve object')
+    assert_same(sanitized_str, needs_sanitize, 'should preserve object')
   end
 
   def test_sanitize_unfrozen_no_sanitize
