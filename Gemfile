@@ -9,8 +9,8 @@ group :development, :test do
 
   if RUBY_VERSION >= '2.7'
     gem 'rubocop', '~> 1.59.0'
-    gem 'rubocop-minitest', '~> 0.33.0'
-    gem 'rubocop-performance', '~> 1.19.1'
+    gem 'rubocop-minitest', '~> 0.34.1'
+    gem 'rubocop-performance', '~> 1.20.0'
   end
 end
 
