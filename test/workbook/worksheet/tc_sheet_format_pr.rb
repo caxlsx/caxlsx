@@ -27,7 +27,7 @@ class TestSheetFormatPr < Test::Unit::TestCase
 
   def test_initialization_with_options
     @options.each do |key, value|
-      assert_equal value, @sheet_format_pr.instance_variable_get("@#{key}")
+      assert_equal value, @sheet_format_pr.instance_variable_get(:"@#{key}")
     end
   end
 

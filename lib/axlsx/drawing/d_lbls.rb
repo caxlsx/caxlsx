@@ -38,7 +38,7 @@ module Axlsx
       [:show_legend_key, :show_val, :show_cat_name,
        :show_ser_name, :show_percent, :show_bubble_size,
        :show_leader_lines].each do |attr|
-        send("#{attr}=", false)
+        send(:"#{attr}=", false)
       end
     end
 
