@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+
 files = if !ARGV.empty?
           ARGV.select { |file| File.exist?(file) }
         else
@@ -10,6 +12,6 @@ files.each do |file|
   puts "Executing #{file.split('.')[0].tr('_', ' ')}"
   code = File.read(file).match(/```ruby(?<code>.+)```/m)[:code]
   unless code.nil?
-    eval(['$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"', code].join("\n"))
+    eval(code)
   end
 end
