@@ -8,8 +8,8 @@ require 'ruby-prof'
 row = []
 input1 = (32..126).to_a.pack('U*').chars.to_a # these will need to be escaped
 input2 = (65..122).to_a.pack('U*').chars.to_a # these do not need to be escaped
-10.times { row << input1.shuffle.join }
-10.times { row << input2.shuffle.join }
+10.times { row << input1.join }
+10.times { row << input2.join }
 
 result = RubyProf::Profile.profile do
   p = Axlsx::Package.new
