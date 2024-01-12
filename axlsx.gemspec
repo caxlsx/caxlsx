@@ -16,7 +16,12 @@ Gem::Specification.new do |s|
   MSG
   s.files = Dir.glob("{lib/**/*,examples/**/*.rb,examples/**/*.jpeg}") + %w[LICENSE README.md Rakefile CHANGELOG.md .yardopts .yardopts_guide]
 
-  s.metadata = { 'rubygems_mfa_required' => 'true' }
+  s.metadata = {
+    'bug_tracker_uri' => 'https://github.com/caxlsx/caxlsx/issues',
+    'changelog_uri' => 'https://github.com/caxlsx/caxlsx/blob/master/CHANGELOG.md',
+    'source_code_uri' => 'https://github.com/caxlsx/caxlsx',
+    'rubygems_mfa_required' => 'true'
+  }
 
   s.add_runtime_dependency "htmlentities", "~> 4.3", '>= 4.3.4'
   s.add_runtime_dependency "marcel", '~> 1.0'
