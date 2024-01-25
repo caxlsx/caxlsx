@@ -105,8 +105,8 @@ class TestSheetView < Test::Unit::TestCase
 
   def test_show_outline_symbols
     assert_raise(ArgumentError) { @sv.show_outline_symbols = 'foo' }
-    assert_nothing_raised { @sv.show_outline_symbols = false }
-    refute(@sv.show_outline_symbols)
+    assert_nothing_raised { @sv.show_outline_symbols = true }
+    assert(@sv.show_outline_symbols)
   end
 
   def test_show_row_col_headers
