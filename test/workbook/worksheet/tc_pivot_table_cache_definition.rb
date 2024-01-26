@@ -14,7 +14,7 @@ class TestPivotTableCacheDefinition < Test::Unit::TestCase
   end
 
   def test_initialization
-    assert(@cache_definition.is_a?(Axlsx::PivotTableCacheDefinition), "must create a pivot table cache definition")
+    assert_kind_of(Axlsx::PivotTableCacheDefinition, @cache_definition, "must create a pivot table cache definition")
     assert_equal(@pivot_table, @cache_definition.pivot_table, 'refers back to its pivot table')
   end
 

@@ -13,7 +13,7 @@ class TestBorder < Test::Unit::TestCase
     assert_nil(@b.diagonalUp)
     assert_nil(@b.diagonalDown)
     assert_nil(@b.outline)
-    assert(@b.prs.is_a?(Axlsx::SimpleTypedList))
+    assert_kind_of(Axlsx::SimpleTypedList, @b.prs)
   end
 
   def test_diagonalUp

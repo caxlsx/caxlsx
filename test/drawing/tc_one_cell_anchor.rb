@@ -21,11 +21,11 @@ class TestOneCellAnchor < Test::Unit::TestCase
   end
 
   def test_from
-    assert(@anchor.from.is_a?(Axlsx::Marker))
+    assert_kind_of(Axlsx::Marker, @anchor.from)
   end
 
   def test_object
-    assert(@anchor.object.is_a?(Axlsx::Pic))
+    assert_kind_of(Axlsx::Pic, @anchor.object)
   end
 
   def test_index

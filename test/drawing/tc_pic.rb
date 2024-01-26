@@ -34,11 +34,11 @@ class TestPic < Test::Unit::TestCase
 
   def test_anchor_swapping
     # swap from one cell to two cell when end_at is specified
-    assert(@image.anchor.is_a?(Axlsx::OneCellAnchor))
+    assert_kind_of(Axlsx::OneCellAnchor, @image.anchor)
     start_at = @image.anchor.from
     @image.end_at 10, 5
 
-    assert(@image.anchor.is_a?(Axlsx::TwoCellAnchor))
+    assert_kind_of(Axlsx::TwoCellAnchor, @image.anchor)
     assert_equal(start_at.col, @image.anchor.from.col)
     assert_equal(start_at.row, @image.anchor.from.row)
     assert_equal(10, @image.anchor.to.col)
@@ -47,7 +47,7 @@ class TestPic < Test::Unit::TestCase
     # swap from two cell to one cell when width or height are specified
     @image.width = 200
 
-    assert(@image.anchor.is_a?(Axlsx::OneCellAnchor))
+    assert_kind_of(Axlsx::OneCellAnchor, @image.anchor)
     assert_equal(start_at.col, @image.anchor.from.col)
     assert_equal(start_at.row, @image.anchor.from.row)
     assert_equal(200, @image.width)

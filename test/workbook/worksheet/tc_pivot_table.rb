@@ -30,7 +30,7 @@ class TestPivotTable < Test::Unit::TestCase
     assert_equal('G5:G6', pivot_table.ref, 'ref assigned from first parameter')
     assert_equal('A1:D5', pivot_table.range, 'range assigned from second parameter')
     assert_equal('PivotTable1', pivot_table.name, 'name automatically generated')
-    assert(pivot_table.is_a?(Axlsx::PivotTable), "must create a pivot table")
+    assert_kind_of(Axlsx::PivotTable, pivot_table, "must create a pivot table")
     assert_equal(@ws.workbook.pivot_tables.last, pivot_table, "must be added to workbook pivot tables collection")
     assert_equal(@ws.pivot_tables.last, pivot_table, "must be added to worksheet pivot tables collection")
   end

@@ -27,8 +27,8 @@ class TestBubbleChart < Test::Unit::TestCase
 
   def test_initialization
     assert_equal(@chart.series_type, Axlsx::BubbleSeries, "series type incorrect")
-    assert(@chart.xValAxis.is_a?(Axlsx::ValAxis), "independant value axis not created")
-    assert(@chart.yValAxis.is_a?(Axlsx::ValAxis), "dependant value axis not created")
+    assert_kind_of(Axlsx::ValAxis, @chart.xValAxis, "independant value axis not created")
+    assert_kind_of(Axlsx::ValAxis, @chart.yValAxis, "dependant value axis not created")
   end
 
   def test_to_xml_string

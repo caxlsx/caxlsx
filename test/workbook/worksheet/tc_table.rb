@@ -27,7 +27,7 @@ class TestTable < Test::Unit::TestCase
     name = "test"
     table = @ws.add_table("A1:D5", name: name)
 
-    assert(table.is_a?(Axlsx::Table), "must create a table")
+    assert_kind_of(Axlsx::Table, table, "must create a table")
     assert_equal(@ws.workbook.tables.last, table, "must be added to workbook table collection")
     assert_equal(@ws.tables.last, table, "must be added to worksheet table collection")
     assert_equal(table.name, name, "options for name are applied")

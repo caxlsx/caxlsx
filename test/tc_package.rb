@@ -118,9 +118,9 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def test_default_objects_are_created
-    assert(Axlsx.instance_values_for(@package)["app"].is_a?(Axlsx::App), 'App object not created')
-    assert(Axlsx.instance_values_for(@package)["core"].is_a?(Axlsx::Core), 'Core object not created')
-    assert(@package.workbook.is_a?(Axlsx::Workbook), 'Workbook object not created')
+    assert_kind_of(Axlsx::App, Axlsx.instance_values_for(@package)["app"], 'App object not created')
+    assert_kind_of(Axlsx::Core, Axlsx.instance_values_for(@package)["core"], 'Core object not created')
+    assert_kind_of(Axlsx::Workbook, @package.workbook, 'Workbook object not created')
     assert_empty(Axlsx::Package.new.workbook.worksheets, 'Workbook should not have sheets by default')
   end
 
@@ -296,7 +296,7 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def test_workbook_is_a_workbook
-    assert @package.workbook.is_a? Axlsx::Workbook
+    assert_kind_of Axlsx::Workbook, @package.workbook
   end
 
   def test_base_content_types
@@ -326,7 +326,7 @@ class TestPackage < Test::Unit::TestCase
   def test_to_stream
     stream = @package.to_stream
 
-    assert(stream.is_a?(StringIO))
+    assert_kind_of(StringIO, stream)
     # this is just a roundabout guess for a package as it is build now
     # in testing.
     assert_operator(stream.size, :>, 80_000)

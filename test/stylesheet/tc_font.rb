@@ -119,7 +119,7 @@ class TestFont < Test::Unit::TestCase
   def test_color
     assert_raise(ArgumentError) { @item.color = -7 }
     assert_nothing_raised { @item.color = Axlsx::Color.new(rgb: "00000000") }
-    assert(@item.color.is_a?(Axlsx::Color))
+    assert_kind_of(Axlsx::Color, @item.color)
   end
 
   # def sz=(v) Axlsx::validate_unsigned_int v; @sz=v end
