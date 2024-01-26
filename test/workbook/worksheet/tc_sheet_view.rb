@@ -5,7 +5,7 @@ require 'tc_helper'
 class TestSheetView < Test::Unit::TestCase
   def setup
     # inverse defaults for booleans
-    @boolean_options = { right_to_left: true, show_formulas: true, show_outline_symbols: true,
+    @boolean_options = { right_to_left: true, show_formulas: true, show_outline_symbols: false,
                          show_white_space: true, tab_selected: true, default_grid_color: false, show_grid_lines: false,
                          show_row_col_headers: false, show_ruler: false, show_zeros: false, window_protection: true }
     @symbol_options = { view: :page_break_preview }
@@ -105,8 +105,8 @@ class TestSheetView < Test::Unit::TestCase
 
   def test_show_outline_symbols
     assert_raise(ArgumentError) { @sv.show_outline_symbols = 'foo' }
-    assert_nothing_raised { @sv.show_outline_symbols = false }
-    refute(@sv.show_outline_symbols)
+    assert_nothing_raised { @sv.show_outline_symbols = true }
+    assert(@sv.show_outline_symbols)
   end
 
   def test_show_row_col_headers
@@ -198,7 +198,7 @@ class TestSheetView < Test::Unit::TestCase
 
     assert_equal(1, doc.xpath("//sheetView[@tabSelected=0]").size)
 
-    assert_equal(1, doc.xpath("//sheetView[@tabSelected=0][@showWhiteSpace=0][@showOutlineSymbols=0][@showFormulas=0]
+    assert_equal(1, doc.xpath("//sheetView[@tabSelected=0][@showWhiteSpace=0][@showOutlineSymbols=1][@showFormulas=0]
         [@rightToLeft=0][@windowProtection=0][@showZeros=1][@showRuler=1]
         [@showRowColHeaders=1][@showGridLines=1][@defaultGridColor=1]
         [@zoomScale='100'][@workbookViewId='0'][@zoomScaleSheetLayoutView='0'][@zoomScalePageLayoutView='0']

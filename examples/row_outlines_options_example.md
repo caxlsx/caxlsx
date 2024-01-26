@@ -19,9 +19,6 @@ wb.add_worksheet(name: 'Row outlines options') do |sheet|
   # This option specifies whether summary rows go above or below detail, worksheet-wide
   sheet.sheet_pr.outline_pr.summary_below = false
 
-  # When specifying outline levels without helper methods, you must enable outline symbols manually.
-  sheet.sheet_view.show_outline_symbols = true
-
   (1..4).map do |x|
     sub_group_hidden = x % 2 == 0
 
