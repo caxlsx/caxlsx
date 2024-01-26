@@ -10,7 +10,7 @@ class TestFill < Test::Unit::TestCase
   def teardown; end
 
   def test_initialiation
-    assert(@item.fill_type.is_a?(Axlsx::PatternFill))
+    assert_kind_of(Axlsx::PatternFill, @item.fill_type)
     assert_raise(ArgumentError) { Axlsx::Fill.new }
     assert_nothing_raised { Axlsx::Fill.new(Axlsx::GradientFill.new) }
   end

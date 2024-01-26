@@ -39,8 +39,8 @@ class TestChart < Test::Unit::TestCase
   end
 
   def test_to_from_marker_access
-    assert(@chart.to.is_a?(Axlsx::Marker))
-    assert(@chart.from.is_a?(Axlsx::Marker))
+    assert_kind_of(Axlsx::Marker, @chart.to)
+    assert_kind_of(Axlsx::Marker, @chart.from)
   end
 
   def test_bg_color
@@ -115,7 +115,7 @@ class TestChart < Test::Unit::TestCase
     assert_nil(Axlsx.instance_values_for(@chart)[:d_lbls])
     @chart.d_lbls.d_lbl_pos = :t
 
-    assert(@chart.d_lbls.is_a?(Axlsx::DLbls), 'DLbls instantiated on access')
+    assert_kind_of(Axlsx::DLbls, @chart.d_lbls, 'DLbls instantiated on access')
   end
 
   def test_plot_visible_only

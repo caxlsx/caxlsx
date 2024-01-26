@@ -22,13 +22,13 @@ class TestAutoFilter < Test::Unit::TestCase
   end
 
   def test_columns
-    assert @auto_filter.columns.is_a?(Axlsx::SimpleTypedList)
+    assert_kind_of Axlsx::SimpleTypedList, @auto_filter.columns
     assert_equal @auto_filter.columns.allowed_types, [Axlsx::FilterColumn]
   end
 
   def test_add_column
     @auto_filter.add_column(0, :filters) do |column|
-      assert column.is_a? FilterColumn
+      assert_kind_of FilterColumn, column
     end
   end
 

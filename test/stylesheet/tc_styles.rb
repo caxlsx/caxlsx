@@ -80,8 +80,8 @@ class TestStyles < Test::Unit::TestCase
     @styles.parse_num_fmt_options(f_code)
 
     assert_equal(@styles.numFmts.last.numFmtId, max + 1, "new numfmts gets next available id")
-    assert(@styles.parse_num_fmt_options(num_fmt).is_a?(Integer), "Should return the provided num_fmt if not dxf")
-    assert(@styles.parse_num_fmt_options(num_fmt.merge({ type: :dxf })).is_a?(Axlsx::NumFmt), "Makes a new NumFmt if dxf")
+    assert_kind_of(Integer, @styles.parse_num_fmt_options(num_fmt), "Should return the provided num_fmt if not dxf")
+    assert_kind_of(Axlsx::NumFmt, @styles.parse_num_fmt_options(num_fmt.merge({ type: :dxf })), "Makes a new NumFmt if dxf")
   end
 
   def test_parse_border_options_hash_required_keys
@@ -94,7 +94,7 @@ class TestStyles < Test::Unit::TestCase
     b_opts = { border: { diagonalUp: 1, edges: [:left, :right], color: "FFDADADA", style: :thick } }
     b = @styles.parse_border_options b_opts
 
-    assert(b.is_a?(Integer))
+    assert_kind_of(Integer, b)
     assert_equal(@styles.parse_border_options(b_opts.merge({ type: :dxf })).class, Axlsx::Border)
     assert_equal(1, @styles.borders.last.diagonalUp, "border options are passed in to the initializer")
   end
@@ -110,8 +110,8 @@ class TestStyles < Test::Unit::TestCase
 
     assert_nil(top, "unspecified top edge should not be created")
     assert_nil(bottom, "unspecified bottom edge should not be created")
-    assert(left.is_a?(Axlsx::BorderPr), "specified left edge is set")
-    assert(right.is_a?(Axlsx::BorderPr), "specified right edge is set")
+    assert_kind_of(Axlsx::BorderPr, left, "specified left edge is set")
+    assert_kind_of(Axlsx::BorderPr, right, "specified right edge is set")
     assert_equal(left.style, right.style, "edge parts have the same style")
     assert_equal(:thick, left.style, "the style is THICK")
     assert_equal(right.color.rgb, left.color.rgb, "edge parts are colors are the same")
@@ -132,12 +132,12 @@ class TestStyles < Test::Unit::TestCase
     b = @styles.parse_border_options(b_opts)
     b2 = @styles.parse_border_options(border: b, type: :dxf)
 
-    assert(b2.is_a?(Axlsx::Border), "Cloned existing border object")
+    assert_kind_of(Axlsx::Border, b2, "Cloned existing border object")
   end
 
   def test_parse_alignment_options
     assert_nil(@styles.parse_alignment_options, "noop if :alignment is not set")
-    assert(@styles.parse_alignment_options(alignment: {}).is_a?(Axlsx::CellAlignment))
+    assert_kind_of(Axlsx::CellAlignment, @styles.parse_alignment_options(alignment: {}))
   end
 
   def test_parse_font_using_defaults
@@ -173,7 +173,7 @@ class TestStyles < Test::Unit::TestCase
     }
 
     assert_nil(@styles.parse_font_options, "noop if no font keys are set")
-    assert(@styles.parse_font_options(b: 1).is_a?(Integer), "return index of font if not :dxf type")
+    assert_kind_of(Integer, @styles.parse_font_options(b: 1), "return index of font if not :dxf type")
     assert_equal(@styles.parse_font_options(b: 1, type: :dxf).class, Axlsx::Font, "return font object if :dxf type")
 
     f = @styles.parse_font_options(options.merge(type: :dxf))
@@ -188,7 +188,7 @@ class TestStyles < Test::Unit::TestCase
 
   def test_parse_fill_options
     assert_nil(@styles.parse_fill_options, "noop if no fill keys are set")
-    assert(@styles.parse_fill_options(bg_color: "DE").is_a?(Integer), "return index of fill if not :dxf type")
+    assert_kind_of(Integer, @styles.parse_fill_options(bg_color: "DE"), "return index of fill if not :dxf type")
     assert_equal(@styles.parse_fill_options(bg_color: "DE", type: :dxf).class, Axlsx::Fill, "return fill object if :dxf type")
     f = @styles.parse_fill_options(bg_color: "DE", type: :dxf)
 
@@ -222,7 +222,7 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(xf.borderId, Axlsx::STYLE_THIN_BORDER, "border id is set")
     assert_equal(xf.numFmtId, Axlsx::NUM_FMT_PERCENT, "number format id is set")
 
-    assert(xf.alignment.is_a?(Axlsx::CellAlignment), "alignment was created")
+    assert_kind_of(Axlsx::CellAlignment, xf.alignment, "alignment was created")
     assert_equal(:left, xf.alignment.horizontal, "horizontal alignment applied")
     assert(xf.protection.hidden, "hidden protection set")
     assert(xf.protection.locked, "cell locking set")
@@ -261,10 +261,10 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(font_count, @styles.fonts.size, "font not created under styles")
     assert_equal(fill_count, @styles.fills.size, "fill not created under styles")
 
-    assert(dxf.border.is_a?(Axlsx::Border), "border is set")
+    assert_kind_of(Axlsx::Border, dxf.border, "border is set")
     assert_nil(dxf.numFmt, "number format is not set")
 
-    assert(dxf.alignment.is_a?(Axlsx::CellAlignment), "alignment was created")
+    assert_kind_of(Axlsx::CellAlignment, dxf.alignment, "alignment was created")
     assert_equal(:left, dxf.alignment.horizontal, "horizontal alignment applied")
     assert(dxf.protection.hidden, "hidden protection set")
     assert(dxf.protection.locked, "cell locking set")

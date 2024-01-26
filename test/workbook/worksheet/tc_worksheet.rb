@@ -60,45 +60,45 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_page_margins
-    assert(@ws.page_margins.is_a?(Axlsx::PageMargins))
+    assert_kind_of(Axlsx::PageMargins, @ws.page_margins)
   end
 
   def test_page_margins_yeild
     @ws.page_margins do |pm|
-      assert(pm.is_a?(Axlsx::PageMargins))
+      assert_kind_of(Axlsx::PageMargins, pm)
       assert_equal(@ws.page_margins, pm)
     end
   end
 
   def test_page_setup
-    assert(@ws.page_setup.is_a?(Axlsx::PageSetup))
+    assert_kind_of(Axlsx::PageSetup, @ws.page_setup)
   end
 
   def test_page_setup_yield
     @ws.page_setup do |ps|
-      assert(ps.is_a?(Axlsx::PageSetup))
+      assert_kind_of(Axlsx::PageSetup, ps)
       assert_equal(@ws.page_setup, ps)
     end
   end
 
   def test_print_options
-    assert(@ws.print_options.is_a?(Axlsx::PrintOptions))
+    assert_kind_of(Axlsx::PrintOptions, @ws.print_options)
   end
 
   def test_print_options_yield
     @ws.print_options do |po|
-      assert(po.is_a?(Axlsx::PrintOptions))
+      assert_kind_of(Axlsx::PrintOptions, po)
       assert_equal(@ws.print_options, po)
     end
   end
 
   def test_header_footer
-    assert(@ws.header_footer.is_a?(Axlsx::HeaderFooter))
+    assert_kind_of(Axlsx::HeaderFooter, @ws.header_footer)
   end
 
   def test_header_footer_yield
     @ws.header_footer do |hf|
-      assert(hf.is_a?(Axlsx::HeaderFooter))
+      assert_kind_of(Axlsx::HeaderFooter, hf)
       assert_equal(@ws.header_footer, hf)
     end
   end
@@ -235,7 +235,7 @@ class TestWorksheet < Test::Unit::TestCase
     assert_nil @ws.drawing
     @ws.add_chart(Axlsx::Pie3DChart)
 
-    assert @ws.drawing.is_a?(Axlsx::Drawing)
+    assert_kind_of Axlsx::Drawing, @ws.drawing
   end
 
   def test_add_pivot_table
@@ -456,7 +456,7 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_styles
-    assert(@ws.styles.is_a?(Axlsx::Styles), 'worksheet provides access to styles')
+    assert_kind_of(Axlsx::Styles, @ws.styles, 'worksheet provides access to styles')
   end
 
   def test_column_styles
@@ -585,7 +585,7 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_protect_range
-    assert(@ws.send(:protected_ranges).is_a?(Axlsx::SimpleTypedList))
+    assert_kind_of(Axlsx::SimpleTypedList, @ws.send(:protected_ranges))
     assert_equal(0, @ws.send(:protected_ranges).size)
     @ws.protect_range('A1:A3')
 

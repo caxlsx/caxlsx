@@ -15,9 +15,9 @@ class TestLine3DChart < Test::Unit::TestCase
   def test_initialization
     assert_equal(:standard, @chart.grouping, "grouping defualt incorrect")
     assert_equal(@chart.series_type, Axlsx::LineSeries, "series type incorrect")
-    assert(@chart.catAxis.is_a?(Axlsx::CatAxis), "category axis not created")
-    assert(@chart.valAxis.is_a?(Axlsx::ValAxis), "value access not created")
-    assert(@chart.serAxis.is_a?(Axlsx::SerAxis), "value access not created")
+    assert_kind_of(Axlsx::CatAxis, @chart.catAxis, "category axis not created")
+    assert_kind_of(Axlsx::ValAxis, @chart.valAxis, "value access not created")
+    assert_kind_of(Axlsx::SerAxis, @chart.serAxis, "value access not created")
   end
 
   def test_grouping

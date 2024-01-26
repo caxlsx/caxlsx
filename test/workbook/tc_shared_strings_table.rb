@@ -14,7 +14,7 @@ class TestSharedStringsTable < Test::Unit::TestCase
   end
 
   def test_workbook_has_shared_strings
-    assert(@p.workbook.shared_strings.is_a?(Axlsx::SharedStringsTable), "shared string table was not created")
+    assert_kind_of(Axlsx::SharedStringsTable, @p.workbook.shared_strings, "shared string table was not created")
   end
 
   def test_count

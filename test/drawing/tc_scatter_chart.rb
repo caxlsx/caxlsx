@@ -33,8 +33,8 @@ class TestScatterChart < Test::Unit::TestCase
   def test_initialization
     assert_equal(:lineMarker, @chart.scatterStyle, "scatterStyle defualt incorrect")
     assert_equal(@chart.series_type, Axlsx::ScatterSeries, "series type incorrect")
-    assert(@chart.xValAxis.is_a?(Axlsx::ValAxis), "independant value axis not created")
-    assert(@chart.yValAxis.is_a?(Axlsx::ValAxis), "dependant value axis not created")
+    assert_kind_of(Axlsx::ValAxis, @chart.xValAxis, "independant value axis not created")
+    assert_kind_of(Axlsx::ValAxis, @chart.yValAxis, "dependant value axis not created")
   end
 
   def test_to_xml_string

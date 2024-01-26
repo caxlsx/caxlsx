@@ -22,8 +22,8 @@ class TestBarSeries < Test::Unit::TestCase
     assert_equal(@series.data.class, Axlsx::NumDataSource, "data option applied")
     assert_equal(:cone, @series.shape, "series shape has been applied")
     assert_equal('5A5A5A', @series.series_color, 'series color has been applied')
-    assert(@series.data.is_a?(Axlsx::NumDataSource))
-    assert(@series.labels.is_a?(Axlsx::AxDataSource))
+    assert_kind_of(Axlsx::NumDataSource, @series.data)
+    assert_kind_of(Axlsx::AxDataSource, @series.labels)
   end
 
   def test_colors

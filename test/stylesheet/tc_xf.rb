@@ -30,13 +30,13 @@ class TestXf < Test::Unit::TestCase
   def test_alignment
     assert_raise(ArgumentError) { @item.alignment = -1.1 }
     assert_nothing_raised { @item.alignment = Axlsx::CellAlignment.new }
-    assert(@item.alignment.is_a?(Axlsx::CellAlignment))
+    assert_kind_of(Axlsx::CellAlignment, @item.alignment)
   end
 
   def test_protection
     assert_raise(ArgumentError) { @item.protection = -1.1 }
     assert_nothing_raised { @item.protection = Axlsx::CellProtection.new }
-    assert(@item.protection.is_a?(Axlsx::CellProtection))
+    assert_kind_of(Axlsx::CellProtection, @item.protection)
   end
 
   def test_numFmtId

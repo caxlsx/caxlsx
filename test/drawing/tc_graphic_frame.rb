@@ -13,7 +13,7 @@ class TestGraphicFrame < Test::Unit::TestCase
   def teardown; end
 
   def test_initialization
-    assert(@frame.anchor.is_a?(Axlsx::TwoCellAnchor))
+    assert_kind_of(Axlsx::TwoCellAnchor, @frame.anchor)
     assert_equal(@frame.chart, @chart)
   end
 

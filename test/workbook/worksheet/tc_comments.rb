@@ -13,7 +13,7 @@ class TestComments < Test::Unit::TestCase
 
   def test_initialize
     assert_raise(ArgumentError) { Axlsx::Comments.new }
-    assert(@ws.comments.vml_drawing.is_a?(Axlsx::VmlDrawing))
+    assert_kind_of(Axlsx::VmlDrawing, @ws.comments.vml_drawing)
   end
 
   def test_add_comment

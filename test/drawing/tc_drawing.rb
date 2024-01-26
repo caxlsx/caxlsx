@@ -15,7 +15,7 @@ class TestDrawing < Test::Unit::TestCase
   def test_add_chart
     chart = @ws.add_chart(Axlsx::Pie3DChart, title: "bob", start_at: [0, 0], end_at: [1, 1])
 
-    assert(chart.is_a?(Axlsx::Pie3DChart), "must create a chart")
+    assert_kind_of(Axlsx::Pie3DChart, chart, "must create a chart")
     assert_equal(@ws.workbook.charts.last, chart, "must be added to workbook charts collection")
     assert_equal(@ws.drawing.anchors.last.object.chart, chart, "an anchor has been created and holds a reference to this chart")
     anchor = @ws.drawing.anchors.last
@@ -29,8 +29,8 @@ class TestDrawing < Test::Unit::TestCase
     src = "#{File.dirname(__FILE__)}/../fixtures/image1.jpeg"
     image = @ws.add_image(image_src: src, start_at: [0, 0], width: 600, height: 400)
 
-    assert(@ws.drawing.anchors.last.is_a?(Axlsx::OneCellAnchor))
-    assert(image.is_a?(Axlsx::Pic))
+    assert_kind_of(Axlsx::OneCellAnchor, @ws.drawing.anchors.last)
+    assert_kind_of(Axlsx::Pic, image)
     assert_equal(600, image.width)
     assert_equal(400, image.height)
   end
@@ -39,8 +39,8 @@ class TestDrawing < Test::Unit::TestCase
     src = "#{File.dirname(__FILE__)}/../fixtures/image1.jpeg"
     image = @ws.add_image(image_src: src, start_at: [0, 0], end_at: [15, 0])
 
-    assert(@ws.drawing.anchors.last.is_a?(Axlsx::TwoCellAnchor))
-    assert(image.is_a?(Axlsx::Pic))
+    assert_kind_of(Axlsx::TwoCellAnchor, @ws.drawing.anchors.last)
+    assert_kind_of(Axlsx::Pic, image)
   end
 
   def test_charts

@@ -25,12 +25,12 @@ class TestFilters < Test::Unit::TestCase
   end
 
   def test_filters_items
-    assert @filters.filter_items.is_a?(Array)
+    assert_kind_of Array, @filters.filter_items
     assert_equal 2, @filters.filter_items.size
   end
 
   def test_date_group_items
-    assert @filters.date_group_items.is_a?(Array)
+    assert_kind_of Array, @filters.date_group_items
     assert_equal 1, @filters.date_group_items.size
   end
 

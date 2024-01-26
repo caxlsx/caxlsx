@@ -35,9 +35,9 @@ class TestConditionalFormatting < Test::Unit::TestCase
                                                  data_bar: data_bar,
                                                  icon_set: icon_set })
 
-    assert(cfr.data_bar.is_a?(Axlsx::DataBar))
-    assert(cfr.icon_set.is_a?(Axlsx::IconSet))
-    assert(cfr.color_scale.is_a?(Axlsx::ColorScale))
+    assert_kind_of(Axlsx::DataBar, cfr.data_bar)
+    assert_kind_of(Axlsx::IconSet, cfr.icon_set)
+    assert_kind_of(Axlsx::ColorScale, cfr.color_scale)
     cfs = @ws.add_conditional_formatting("B2:B2", [cfr])
     doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
 

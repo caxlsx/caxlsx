@@ -17,7 +17,7 @@ class TestFilterColumn < Test::Unit::TestCase
   end
 
   def test_initailize_filter_type
-    assert @filter_column.filter.is_a?(Axlsx::Filters)
+    assert_kind_of Axlsx::Filters, @filter_column.filter
     assert_equal 1, @filter_column.filter.filter_items.size
   end
 

@@ -16,7 +16,7 @@ class TestGradientFill < Test::Unit::TestCase
     assert_nil(@item.right)
     assert_nil(@item.top)
     assert_nil(@item.bottom)
-    assert(@item.stop.is_a?(Axlsx::SimpleTypedList))
+    assert_kind_of(Axlsx::SimpleTypedList, @item.stop)
   end
 
   def test_type
@@ -59,7 +59,7 @@ class TestGradientFill < Test::Unit::TestCase
     @item.stop << Axlsx::GradientStop.new(Axlsx::Color.new(rgb: "00000000"), 0.5)
 
     assert_equal(1, @item.stop.size)
-    assert(@item.stop.last.is_a?(Axlsx::GradientStop))
+    assert_kind_of(Axlsx::GradientStop, @item.stop.last)
   end
 
   def test_to_xml_string

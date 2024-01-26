@@ -14,13 +14,13 @@ class TestSortState < Test::Unit::TestCase
   end
 
   def test_sort_conditions
-    assert @sort_state.sort_conditions.is_a?(Axlsx::SimpleTypedList)
+    assert_kind_of Axlsx::SimpleTypedList, @sort_state.sort_conditions
     assert_equal @sort_state.sort_conditions.allowed_types, [Axlsx::SortCondition]
   end
 
   def test_add_sort_conditions
     @sort_state.add_sort_condition(column_index: 0) do |condition|
-      assert condition.is_a? SortCondition
+      assert_kind_of SortCondition, condition
     end
   end
 
