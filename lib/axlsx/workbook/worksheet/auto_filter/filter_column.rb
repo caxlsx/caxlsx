@@ -43,7 +43,9 @@ module Axlsx
     # the filter button can be hidden, and not drawn.
     # @return [Boolean]
     def show_button
-      @show_button ||= true
+      return @show_button if defined?(@show_button)
+
+      true
     end
 
     # Flag indicating whether the AutoFilter button for this column is hidden.
@@ -83,7 +85,7 @@ module Axlsx
     # @return [Boolean]
     def show_button=(show)
       Axlsx.validate_boolean show
-      @show_botton = show
+      @show_button = show
     end
 
     # Serialize the object to xml

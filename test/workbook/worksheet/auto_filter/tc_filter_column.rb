@@ -48,6 +48,7 @@ class TestFilterColumn < Test::Unit::TestCase
       @filter_column.show_button = :foo
     end
     assert_nothing_raised { @filter_column.show_button = false }
+    refute @filter_column.show_button
   end
 
   def test_hidden_button
@@ -55,6 +56,7 @@ class TestFilterColumn < Test::Unit::TestCase
       @filter_column.hidden_button = :hoge
     end
     assert_nothing_raised { @filter_column.hidden_button = true }
+    assert @filter_column.hidden_button
   end
 
   def test_col_id=
