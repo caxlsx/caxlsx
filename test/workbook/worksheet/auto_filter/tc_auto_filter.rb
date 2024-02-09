@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestAutoFilter < Test::Unit::TestCase
+class TestAutoFilter < Minitest::Test
   def setup
     ws = Axlsx::Package.new.workbook.add_worksheet
     3.times { |index| ws.add_row [1 * index, 2 * index, 3 * index] }

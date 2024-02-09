@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestCellProtection < Test::Unit::TestCase
+class TestCellProtection < Minitest::Test
   def setup
     @item = Axlsx::CellProtection.new
   end
@@ -15,14 +15,14 @@ class TestCellProtection < Test::Unit::TestCase
   end
 
   def test_hidden
-    assert_raise(ArgumentError) { @item.hidden = -1 }
-    assert_nothing_raised { @item.hidden = false }
-    refute(@item.hidden)
+    assert_raises(ArgumentError) { @item.hidden = -1 }
+    refute_raises { @item.hidden = false }
+    assert_false(@item.hidden)
   end
 
   def test_locked
-    assert_raise(ArgumentError) { @item.locked = -1 }
-    assert_nothing_raised { @item.locked = false }
-    refute(@item.locked)
+    assert_raises(ArgumentError) { @item.locked = -1 }
+    refute_raises { @item.locked = false }
+    assert_false(@item.locked)
   end
 end

@@ -2,16 +2,16 @@
 
 require 'tc_helper'
 
-class TestFilterColumn < Test::Unit::TestCase
+class TestFilterColumn < Minitest::Test
   def setup
     @filter_column = Axlsx::FilterColumn.new(0, :filters, filter_items: [200])
   end
 
   def test_initialize_col_id
-    assert_raise ArgumentError do
+    assert_raises ArgumentError do
       Axlsx::FilterColumn.new(0, :bobs_house_of_filter)
     end
-    assert_raise ArgumentError do
+    assert_raises ArgumentError do
       Axlsx::FilterColumn.new(:penut, :filters)
     end
   end
@@ -40,30 +40,30 @@ class TestFilterColumn < Test::Unit::TestCase
   end
 
   def test_default_hidden_button
-    refute @filter_column.hidden_button
+    assert_false @filter_column.hidden_button
   end
 
   def test_show_button
-    assert_raise ArgumentError do
+    assert_raises ArgumentError do
       @filter_column.show_button = :foo
     end
-    assert_nothing_raised { @filter_column.show_button = false }
-    refute @filter_column.show_button
+    refute_raises { @filter_column.show_button = false }
+    assert_false @filter_column.show_button
   end
 
   def test_hidden_button
-    assert_raise ArgumentError do
+    assert_raises ArgumentError do
       @filter_column.hidden_button = :hoge
     end
-    assert_nothing_raised { @filter_column.hidden_button = true }
+    refute_raises { @filter_column.hidden_button = true }
     assert @filter_column.hidden_button
   end
 
   def test_col_id=
-    assert_raise ArgumentError do
+    assert_raises ArgumentError do
       @filter_column.col_id = :bar
     end
-    assert_nothing_raised { @filter_column.col_id = 7 }
+    refute_raises { @filter_column.col_id = 7 }
   end
 
   def test_to_xml_string

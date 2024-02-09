@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestPageSetup < Test::Unit::TestCase
+class TestPageSetup < Minitest::Test
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet name: "hmmm"
@@ -48,8 +48,8 @@ class TestPageSetup < Test::Unit::TestCase
   end
 
   def test_paper_size
-    assert_raise(ArgumentError) { @ps.paper_size = 119 }
-    assert_nothing_raised {  @ps.paper_size = 10 }
+    assert_raises(ArgumentError) { @ps.paper_size = 119 }
+    refute_raises { @ps.paper_size = 10 }
   end
 
   def test_set_some_values
@@ -102,38 +102,38 @@ class TestPageSetup < Test::Unit::TestCase
   end
 
   def test_fit_to_height
-    assert_raise(ArgumentError) { @ps.fit_to_height = 1.5 }
-    assert_nothing_raised { @ps.fit_to_height = 2 }
+    assert_raises(ArgumentError) { @ps.fit_to_height = 1.5 }
+    refute_raises { @ps.fit_to_height = 2 }
     assert_equal(2, @ps.fit_to_height)
   end
 
   def test_fit_to_width
-    assert_raise(ArgumentError) { @ps.fit_to_width = false }
-    assert_nothing_raised { @ps.fit_to_width = 1 }
+    assert_raises(ArgumentError) { @ps.fit_to_width = false }
+    refute_raises { @ps.fit_to_width = 1 }
     assert_equal(1, @ps.fit_to_width)
   end
 
   def test_orientation
-    assert_raise(ArgumentError) { @ps.orientation = "" }
-    assert_nothing_raised { @ps.orientation = :default }
+    assert_raises(ArgumentError) { @ps.orientation = "" }
+    refute_raises { @ps.orientation = :default }
     assert_equal(:default, @ps.orientation)
   end
 
   def test_paper_height
-    assert_raise(ArgumentError) { @ps.paper_height = 99 }
-    assert_nothing_raised { @ps.paper_height = "11in" }
+    assert_raises(ArgumentError) { @ps.paper_height = 99 }
+    refute_raises { @ps.paper_height = "11in" }
     assert_equal("11in", @ps.paper_height)
   end
 
   def test_paper_width
-    assert_raise(ArgumentError) { @ps.paper_width = "22" }
-    assert_nothing_raised { @ps.paper_width = "29.7cm" }
+    assert_raises(ArgumentError) { @ps.paper_width = "22" }
+    refute_raises { @ps.paper_width = "29.7cm" }
     assert_equal("29.7cm", @ps.paper_width)
   end
 
   def test_scale
-    assert_raise(ArgumentError) { @ps.scale = 50.5 }
-    assert_nothing_raised { @ps.scale = 99 }
+    assert_raises(ArgumentError) { @ps.scale = 50.5 }
+    refute_raises { @ps.scale = 99 }
     assert_equal(99, @ps.scale)
   end
 
@@ -147,6 +147,6 @@ class TestPageSetup < Test::Unit::TestCase
     fits = @ps.fit_to height: 7, width: 2
 
     assert_equal([2, 7], fits)
-    assert_raise(ArgumentError) { puts @ps.fit_to(width: true) }
+    assert_raises(ArgumentError) { puts @ps.fit_to(width: true) }
   end
 end

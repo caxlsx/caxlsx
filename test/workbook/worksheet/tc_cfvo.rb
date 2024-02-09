@@ -2,27 +2,27 @@
 
 require 'tc_helper'
 
-class TestCfvo < Test::Unit::TestCase
+class TestCfvo < Minitest::Test
   def setup
     @cfvo = Axlsx::Cfvo.new(val: "0", type: :min)
   end
 
   def test_val
-    assert_nothing_raised { @cfvo.val = "abc" }
+    refute_raises { @cfvo.val = "abc" }
     assert_equal("abc", @cfvo.val)
   end
 
   def test_type
-    assert_raise(ArgumentError) { @cfvo.type = :invalid_type }
-    assert_nothing_raised { @cfvo.type = :max }
+    assert_raises(ArgumentError) { @cfvo.type = :invalid_type }
+    refute_raises { @cfvo.type = :max }
     assert_equal(:max, @cfvo.type)
   end
 
   def test_gte
-    assert_raise(ArgumentError) { @cfvo.gte = :bob }
+    assert_raises(ArgumentError) { @cfvo.gte = :bob }
     assert(@cfvo.gte)
-    assert_nothing_raised { @cfvo.gte = false }
-    refute(@cfvo.gte)
+    refute_raises { @cfvo.gte = false }
+    assert_false(@cfvo.gte)
   end
 
   def test_to_xml_string

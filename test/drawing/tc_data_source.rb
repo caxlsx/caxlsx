@@ -2,15 +2,15 @@
 
 require 'tc_helper'
 
-class TestNumDataSource < Test::Unit::TestCase
+class TestNumDataSource < Minitest::Test
   def setup
     @data_source = Axlsx::NumDataSource.new data: ["1", "2", "3"]
   end
 
   def test_tag_name
-    assert_raise(ArgumentError) { @data_source.tag_name = :zVal }
-    assert_nothing_raised { @data_source.tag_name = :yVal }
-    assert_nothing_raised { @data_source.tag_name = :bubbleSize }
+    assert_raises(ArgumentError) { @data_source.tag_name = :zVal }
+    refute_raises { @data_source.tag_name = :yVal }
+    refute_raises { @data_source.tag_name = :bubbleSize }
   end
 
   def test_to_xml_string_strLit

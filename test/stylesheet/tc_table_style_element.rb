@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestTableStyleElement < Test::Unit::TestCase
+class TestTableStyleElement < Minitest::Test
   def setup
     @item = Axlsx::TableStyleElement.new
   end
@@ -21,20 +21,20 @@ class TestTableStyleElement < Test::Unit::TestCase
   end
 
   def test_type
-    assert_raise(ArgumentError) { @item.type = -1.1 }
-    assert_nothing_raised { @item.type = :blankRow }
+    assert_raises(ArgumentError) { @item.type = -1.1 }
+    refute_raises { @item.type = :blankRow }
     assert_equal(:blankRow, @item.type)
   end
 
   def test_size
-    assert_raise(ArgumentError) { @item.size = -1.1 }
-    assert_nothing_raised { @item.size = 2 }
+    assert_raises(ArgumentError) { @item.size = -1.1 }
+    refute_raises { @item.size = 2 }
     assert_equal(2, @item.size)
   end
 
   def test_dxfId
-    assert_raise(ArgumentError) { @item.dxfId = -1.1 }
-    assert_nothing_raised { @item.dxfId = 7 }
+    assert_raises(ArgumentError) { @item.dxfId = -1.1 }
+    refute_raises { @item.dxfId = 7 }
     assert_equal(7, @item.dxfId)
   end
 

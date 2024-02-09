@@ -10,7 +10,7 @@ def shared_test_pivot_table_xml_validity(pivot_table)
   assert_empty(errors)
 end
 
-class TestPivotTable < Test::Unit::TestCase
+class TestPivotTable < Minitest::Test
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet
@@ -173,7 +173,7 @@ class TestPivotTable < Test::Unit::TestCase
   end
 
   def test_pivot_table_with_more_than_one_data_row
-    ### https://github.com/caxlsx/caxlsx/issues/110
+    # https://github.com/caxlsx/caxlsx/issues/110
 
     pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5') do |pt|
       pt.rows = ["Date", "Name"]
@@ -203,7 +203,7 @@ class TestPivotTable < Test::Unit::TestCase
   end
 
   def test_pivot_table_with_only_one_data_row
-    ### https://github.com/caxlsx/caxlsx/issues/110
+    # https://github.com/caxlsx/caxlsx/issues/110
 
     pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5') do |pt|
       pt.rows = ["Date", "Name"]

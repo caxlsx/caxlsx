@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestDxf < Test::Unit::TestCase
+class TestDxf < Minitest::Test
   def setup
     @item = Axlsx::Dxf.new
     @styles = Axlsx::Styles.new
@@ -20,38 +20,38 @@ class TestDxf < Test::Unit::TestCase
   end
 
   def test_alignment
-    assert_raise(ArgumentError) { @item.alignment = -1.1 }
-    assert_nothing_raised { @item.alignment = Axlsx::CellAlignment.new }
+    assert_raises(ArgumentError) { @item.alignment = -1.1 }
+    refute_raises { @item.alignment = Axlsx::CellAlignment.new }
     assert_kind_of(Axlsx::CellAlignment, @item.alignment)
   end
 
   def test_protection
-    assert_raise(ArgumentError) { @item.protection = -1.1 }
-    assert_nothing_raised { @item.protection = Axlsx::CellProtection.new }
+    assert_raises(ArgumentError) { @item.protection = -1.1 }
+    refute_raises { @item.protection = Axlsx::CellProtection.new }
     assert_kind_of(Axlsx::CellProtection, @item.protection)
   end
 
   def test_numFmt
-    assert_raise(ArgumentError) { @item.numFmt = 1 }
-    assert_nothing_raised { @item.numFmt = Axlsx::NumFmt.new }
+    assert_raises(ArgumentError) { @item.numFmt = 1 }
+    refute_raises { @item.numFmt = Axlsx::NumFmt.new }
     assert_kind_of Axlsx::NumFmt, @item.numFmt
   end
 
   def test_fill
-    assert_raise(ArgumentError) { @item.fill = 1 }
-    assert_nothing_raised { @item.fill = Axlsx::Fill.new(Axlsx::PatternFill.new(patternType: :solid, fgColor: Axlsx::Color.new(rgb: "FF000000"))) }
+    assert_raises(ArgumentError) { @item.fill = 1 }
+    refute_raises { @item.fill = Axlsx::Fill.new(Axlsx::PatternFill.new(patternType: :solid, fgColor: Axlsx::Color.new(rgb: "FF000000"))) }
     assert_kind_of Axlsx::Fill, @item.fill
   end
 
   def test_font
-    assert_raise(ArgumentError) { @item.font = 1 }
-    assert_nothing_raised { @item.font = Axlsx::Font.new }
+    assert_raises(ArgumentError) { @item.font = 1 }
+    refute_raises { @item.font = Axlsx::Font.new }
     assert_kind_of Axlsx::Font, @item.font
   end
 
   def test_border
-    assert_raise(ArgumentError) { @item.border = 1 }
-    assert_nothing_raised { @item.border = Axlsx::Border.new }
+    assert_raises(ArgumentError) { @item.border = 1 }
+    refute_raises { @item.border = Axlsx::Border.new }
     assert_kind_of Axlsx::Border, @item.border
   end
 

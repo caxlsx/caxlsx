@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestStrData < Test::Unit::TestCase
+class TestStrData < Minitest::Test
   def setup
     @str_data = Axlsx::StrData.new data: ["1", "2", "3"]
   end

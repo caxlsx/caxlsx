@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 # require 'tc_helper.rb'
 
-# class TestNamedAxisData < Test::Unit::TestCase
+# class TestNamedAxisData < Minitest::Test
 
 #   def setup
 #     p = Axlsx::Package.new

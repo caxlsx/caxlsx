@@ -17,7 +17,7 @@ end
 group :test do
   gem 'rake'
   gem 'simplecov'
-  gem 'test-unit'
+  gem 'minitest'
   gem 'timecop'
   gem 'webmock'
 end

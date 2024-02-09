@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestWorksheet < Test::Unit::TestCase
+class TestWorksheet < Minitest::Test
   def setup
     @p = Axlsx::Package.new
     @wb = @p.workbook
@@ -33,19 +33,19 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_name_unique
-    assert_raise(ArgumentError, "worksheet name must be unique") do
-      n = @ws.name
+    n = @ws.name
+    assert_raises(ArgumentError, "worksheet name must be unique") do
       @ws.workbook.add_worksheet(name: n)
     end
   end
 
   def test_name_unique_only_checks_other_worksheet_names
-    assert_nothing_raised { @ws.name = @ws.name } # rubocop:disable Lint/SelfAssignment
-    assert_nothing_raised { Axlsx::Package.new.workbook.add_worksheet name: 'Sheet1' }
+    refute_raises { @ws.name = @ws.name } # rubocop:disable Lint/SelfAssignment
+    refute_raises { Axlsx::Package.new.workbook.add_worksheet name: 'Sheet1' }
   end
 
   def test_exception_if_name_too_long
-    assert_nothing_raised { @ws.name = 'x' * 31 }
+    refute_raises { @ws.name = 'x' * 31 }
     assert_raises(ArgumentError) { @ws.name = 'x' * 32 }
   end
 
@@ -54,9 +54,9 @@ class TestWorksheet < Test::Unit::TestCase
     assert_raises(ArgumentError, "name too long!") do
       @ws.name = four_characters_for_excel + ("x" * 28)
     end
-    assert_nothing_raised { @ws.name = "#{four_characters_for_excel}123456789012345678901234567" }
-    assert_nothing_raised { @ws.name = "123456789012345678901234567890…" }
-    assert_nothing_raised { @ws.name = "123456789012345678901234567890✔" }
+    refute_raises { @ws.name = "#{four_characters_for_excel}123456789012345678901234567" }
+    refute_raises { @ws.name = "123456789012345678901234567890…" }
+    refute_raises { @ws.name = "123456789012345678901234567890✔" }
   end
 
   def test_page_margins
@@ -108,8 +108,8 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_state_validation
-    assert_raise(ArgumentError) { @ws.state = :dead }
-    assert_nothing_raised { @ws.state = :very_hidden }
+    assert_raises(ArgumentError) { @ws.state = :dead }
+    refute_raises { @ws.state = :very_hidden }
   end
 
   def test_no_autowidth
@@ -142,14 +142,14 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   # def test_use_gridlines
-  #  assert_raise(ArgumentError) { @ws.show_gridlines = -1.1 }
-  #  assert_nothing_raised { @ws.show_gridlines = false }
+  #  assert_raises(ArgumentError) { @ws.show_gridlines = -1.1 }
+  #  refute_raises { @ws.show_gridlines = false }
   #  assert_equal(@ws.show_gridlines, false)
   # end
 
   # def test_selected
-  #  assert_raise(ArgumentError) { @ws.selected = -1.1 }
-  #  assert_nothing_raised { @ws.selected = true }
+  #  assert_raises(ArgumentError) { @ws.selected = -1.1 }
+  #  refute_raises { @ws.selected = true }
   #  assert_equal(@ws.selected, true)
   # end
 
@@ -263,7 +263,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1, 2, 3, 4]
     @ws.add_row [1]
     @ws.add_row [1, 2, 3, 4]
-    assert_nothing_raised { @ws.col_style(1, 1) }
+    refute_raises { @ws.col_style(1, 1) }
   end
 
   def test_cols
@@ -488,7 +488,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [cell_with_newline]
 
     assert_equal("foo\n\r\nbar", @ws.rows.last.cells.last.value)
-    assert_not_nil(@ws.to_xml_string.index("foo\n\r\nbar"))
+    refute_nil(@ws.to_xml_string.index("foo\n\r\nbar"))
   end
 
   # Make sure the XML for all optional elements (like pageMargins, autoFilter, ...)
@@ -549,8 +549,8 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.column_widths nil, 0.5
 
     assert_in_delta(@ws.column_info[1].width, 0.5, 0.001, 'eat my width')
-    assert_raise(ArgumentError, 'only accept unsigned ints') { @ws.column_widths 2, 7, -1 }
-    assert_raise(ArgumentError, 'only accept Integer or Float') { @ws.column_widths 2, 7, "-1" }
+    assert_raises(ArgumentError, 'only accept unsigned ints') { @ws.column_widths 2, 7, -1 }
+    assert_raises(ArgumentError, 'only accept Integer or Float') { @ws.column_widths 2, 7, "-1" }
   end
 
   def test_ranges
@@ -560,26 +560,26 @@ class TestWorksheet < Test::Unit::TestCase
     valid_range = "A1:B2"
     @ws[valid_range]
 
-    valid_range = "A1:E2" ### Missing middle cells (C1 - E1), still allowed
+    valid_range = "A1:E2" # Missing middle cells (C1 - E1), still allowed
     @ws[valid_range]
 
-    assert_raise ArgumentError, "Invalid cell definition" do
-      invalid_range_format = "A1:B2:C3"
+    invalid_range_format = "A1:B2:C3"
+    assert_raises ArgumentError, "Invalid cell definition" do
       @ws[invalid_range_format]
     end
 
-    assert_raise ArgumentError, "Missing cell `Z1` for the specified range." do
-      invalid_row_range = "A1:Z1"
+    invalid_row_range = "A1:Z1"
+    assert_raises ArgumentError, "Missing cell `Z1` for the specified range." do
       @ws[invalid_row_range]
     end
 
-    assert_raise ArgumentError, "Missing cell `D1` for the specified range." do
-      invalid_cell_range = "D1:E2" ### Missing start cell, not allowed
+    invalid_cell_range = "D1:E2" # Missing start cell, not allowed
+    assert_raises ArgumentError, "Missing cell `D1` for the specified range." do
       @ws[invalid_cell_range]
     end
 
-    assert_raise ArgumentError, "Missing cell `A99` for the specified range." do
-      invalid_cell_range = "A1:A99" ### Missing end cell, not allowed
+    invalid_cell_range = "A1:A99" # Missing end cell, not allowed
+    assert_raises ArgumentError, "Missing cell `A99` for the specified range." do
       @ws[invalid_cell_range]
     end
   end
@@ -594,7 +594,7 @@ class TestWorksheet < Test::Unit::TestCase
 
   def test_protect_range_with_cells
     @ws.add_row [1, 2, 3]
-    assert_nothing_raised { @ws.protect_range(@ws.rows.first.cells) }
+    refute_raises { @ws.protect_range(@ws.rows.first.cells) }
     assert_equal('A1:C1', @ws.send(:protected_ranges).last.sqref)
   end
 
@@ -622,7 +622,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_auto_filter
     assert_nil(@ws.auto_filter.range)
     assert(@wb.defined_names.none? { |defined_name| defined_name.name == '_xlnm._FilterDatabase' })
-    assert_raise(ArgumentError) { @ws.auto_filter = 123 }
+    assert_raises(ArgumentError) { @ws.auto_filter = 123 }
     @ws.auto_filter.range = "A1:D9"
 
     assert_equal("A1:D9", @ws.auto_filter.range)
@@ -637,7 +637,7 @@ class TestWorksheet < Test::Unit::TestCase
     assert_nil(@ws.auto_filter.range)
     assert_nil(other_ws.auto_filter.range)
     assert(@wb.defined_names.none? { |defined_name| defined_name.name == '_xlnm._FilterDatabase' })
-    assert_raise(ArgumentError) { @ws.auto_filter = 123 }
+    assert_raises(ArgumentError) { @ws.auto_filter = 123 }
 
     @ws.auto_filter = "A1:D9"
 
@@ -685,7 +685,7 @@ class TestWorksheet < Test::Unit::TestCase
 
   def test_worksheet_does_not_get_added_to_workbook_on_initialize_failure
     assert_equal(1, @wb.worksheets.size)
-    assert_raise(ArgumentError) { @wb.add_worksheet(name: 'Sheet1') }
+    assert_raises(ArgumentError) { @wb.add_worksheet(name: 'Sheet1') }
     assert_equal(1, @wb.worksheets.size)
   end
 

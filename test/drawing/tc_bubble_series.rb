@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestBubbleSeries < Test::Unit::TestCase
+class TestBubbleSeries < Minitest::Test
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet name: "hmmm"

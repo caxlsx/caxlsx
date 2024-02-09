@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestTableStyle < Test::Unit::TestCase
+class TestTableStyle < Minitest::Test
   def setup
     @item = Axlsx::TableStyle.new "fisher"
   end
@@ -21,20 +21,20 @@ class TestTableStyle < Test::Unit::TestCase
   end
 
   def test_name
-    assert_raise(ArgumentError) { @item.name = -1.1 }
-    assert_nothing_raised { @item.name = "lovely table style" }
+    assert_raises(ArgumentError) { @item.name = -1.1 }
+    refute_raises { @item.name = "lovely table style" }
     assert_equal("lovely table style", @item.name)
   end
 
   def test_pivot
-    assert_raise(ArgumentError) { @item.pivot = -1.1 }
-    assert_nothing_raised { @item.pivot = true }
+    assert_raises(ArgumentError) { @item.pivot = -1.1 }
+    refute_raises { @item.pivot = true }
     assert(@item.pivot)
   end
 
   def test_table
-    assert_raise(ArgumentError) { @item.table = -1.1 }
-    assert_nothing_raised { @item.table = true }
+    assert_raises(ArgumentError) { @item.table = -1.1 }
+    refute_raises { @item.table = true }
     assert(@item.table)
   end
 

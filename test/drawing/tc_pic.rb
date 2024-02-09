@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestPic < Test::Unit::TestCase
+class TestPic < Minitest::Test
   def setup
     stub_request(:get, 'https://example.com/sample-image.png')
       .to_return(body: File.new('examples/sample.png'), status: 200)
@@ -61,49 +61,49 @@ class TestPic < Test::Unit::TestCase
   end
 
   def test_name
-    assert_raise(ArgumentError) { @image.name = 49 }
-    assert_nothing_raised { @image.name = "unknown" }
+    assert_raises(ArgumentError) { @image.name = 49 }
+    refute_raises { @image.name = "unknown" }
     assert_equal("unknown", @image.name)
   end
 
   def test_start_at
-    assert_raise(ArgumentError) { @image.start_at "a", 1 }
-    assert_nothing_raised { @image.start_at 6, 7 }
+    assert_raises(ArgumentError) { @image.start_at "a", 1 }
+    refute_raises { @image.start_at 6, 7 }
     assert_equal(6, @image.anchor.from.col)
     assert_equal(7, @image.anchor.from.row)
   end
 
   def test_width
-    assert_raise(ArgumentError) { @image.width = "a" }
-    assert_nothing_raised { @image.width = 600 }
+    assert_raises(ArgumentError) { @image.width = "a" }
+    refute_raises { @image.width = 600 }
     assert_equal(600, @image.width)
   end
 
   def test_height
-    assert_raise(ArgumentError) { @image.height = "a" }
-    assert_nothing_raised { @image.height = 600 }
+    assert_raises(ArgumentError) { @image.height = "a" }
+    refute_raises { @image.height = 600 }
     assert_equal(600, @image.height)
   end
 
   def test_image_src
-    assert_raise(ArgumentError) { @image.image_src = __FILE__ }
-    assert_raise(ArgumentError) { @image.image_src = @test_img_fake }
-    assert_nothing_raised { @image.image_src = @test_img_gif }
-    assert_nothing_raised { @image.image_src = @test_img_png }
-    assert_nothing_raised { @image.image_src = @test_img_jpg }
+    assert_raises(ArgumentError) { @image.image_src = __FILE__ }
+    assert_raises(ArgumentError) { @image.image_src = @test_img_fake }
+    refute_raises { @image.image_src = @test_img_gif }
+    refute_raises { @image.image_src = @test_img_png }
+    refute_raises { @image.image_src = @test_img_jpg }
     assert_equal(@image.image_src, @test_img_jpg)
   end
 
   def test_remote_image_src
-    assert_raise(ArgumentError) { @image_remote.image_src = @test_img_fake }
-    assert_raise(ArgumentError) { @image_remote.image_src = @test_img_remote_fake }
-    assert_nothing_raised { @image_remote.image_src = @test_img_remote_png }
+    assert_raises(ArgumentError) { @image_remote.image_src = @test_img_fake }
+    assert_raises(ArgumentError) { @image_remote.image_src = @test_img_remote_fake }
+    refute_raises { @image_remote.image_src = @test_img_remote_png }
     assert_equal(@image_remote.image_src, @test_img_remote_png)
   end
 
   def test_descr
-    assert_raise(ArgumentError) { @image.descr = 49 }
-    assert_nothing_raised { @image.descr = "test" }
+    assert_raises(ArgumentError) { @image.descr = 49 }
+    refute_raises { @image.descr = "test" }
     assert_equal("test", @image.descr)
   end
 

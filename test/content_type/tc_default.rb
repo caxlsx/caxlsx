@@ -2,9 +2,9 @@
 
 require 'tc_helper'
 
-class TestDefault < Test::Unit::TestCase
+class TestDefault < Minitest::Test
   def test_content_type_restriction
-    assert_raise(ArgumentError, "raises argument error if invlalid ContentType is") { Axlsx::Default.new ContentType: "asdf" }
+    assert_raises(ArgumentError, "raises argument error if invlalid ContentType is") { Axlsx::Default.new ContentType: "asdf" }
   end
 
   def test_to_xml_string

@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class RichText < Test::Unit::TestCase
+class RichText < Minitest::Test
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet name: "hmmmz"
@@ -33,10 +33,10 @@ class RichText < Test::Unit::TestCase
     runs = @rt.runs
 
     assert_equal(27, runs.length)
-    refute(runs.first.b)
+    assert_false(runs.first.b)
     assert(runs.first.i)
     assert(runs[1].b)
-    refute(runs[1].i)
+    assert_false(runs[1].i)
   end
 
   def test_implicit_richtext

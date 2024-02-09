@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestChart < Test::Unit::TestCase
+class TestChart < Minitest::Test
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
@@ -33,8 +33,8 @@ class TestChart < Test::Unit::TestCase
   end
 
   def test_style
-    assert_raise(ArgumentError) { @chart.style = 49 }
-    assert_nothing_raised { @chart.style = 2 }
+    assert_raises(ArgumentError) { @chart.style = 49 }
+    refute_raises { @chart.style = 2 }
     assert_equal(2, @chart.style)
   end
 
@@ -44,29 +44,29 @@ class TestChart < Test::Unit::TestCase
   end
 
   def test_bg_color
-    assert_raise(ArgumentError) { @chart.bg_color = 2 }
-    assert_nothing_raised { @chart.bg_color = "FFFFFF" }
+    assert_raises(ArgumentError) { @chart.bg_color = 2 }
+    refute_raises { @chart.bg_color = "FFFFFF" }
     assert_equal("FFFFFF", @chart.bg_color)
   end
 
   def test_title_size
-    assert_raise(ArgumentError) { @chart.title_size = 2 }
-    assert_nothing_raised { @chart.title_size = "100" }
+    assert_raises(ArgumentError) { @chart.title_size = 2 }
+    refute_raises { @chart.title_size = "100" }
     assert_equal("100", @chart.title.text_size)
   end
 
   def test_vary_colors
     assert(@chart.vary_colors)
-    assert_raise(ArgumentError) { @chart.vary_colors = 7 }
-    assert_nothing_raised { @chart.vary_colors = false }
-    refute(@chart.vary_colors)
+    assert_raises(ArgumentError) { @chart.vary_colors = 7 }
+    refute_raises { @chart.vary_colors = false }
+    assert_false(@chart.vary_colors)
   end
 
   def test_display_blanks_as
     assert_equal(:gap, @chart.display_blanks_as, "default is not :gap")
-    assert_raise(ArgumentError, "did not validate possible values") { @chart.display_blanks_as = :hole }
-    assert_nothing_raised { @chart.display_blanks_as = :zero }
-    assert_nothing_raised { @chart.display_blanks_as = :span }
+    assert_raises(ArgumentError, "did not validate possible values") { @chart.display_blanks_as = :hole }
+    refute_raises { @chart.display_blanks_as = :zero }
+    refute_raises { @chart.display_blanks_as = :span }
     assert_equal(:span, @chart.display_blanks_as)
   end
 
@@ -123,7 +123,7 @@ class TestChart < Test::Unit::TestCase
     @chart.plot_visible_only = false
 
     assert_false(@chart.plot_visible_only)
-    assert_raise(ArgumentError) { @chart.plot_visible_only = "" }
+    assert_raises(ArgumentError) { @chart.plot_visible_only = "" }
   end
 
   def test_rounded_corners
@@ -131,7 +131,7 @@ class TestChart < Test::Unit::TestCase
     @chart.rounded_corners = false
 
     assert_false(@chart.rounded_corners)
-    assert_raise(ArgumentError) { @chart.rounded_corners = "" }
+    assert_raises(ArgumentError) { @chart.rounded_corners = "" }
   end
 
   def test_to_xml_string

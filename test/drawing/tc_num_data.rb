@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestNumData < Test::Unit::TestCase
+class TestNumData < Minitest::Test
   def setup
     @num_data = Axlsx::NumData.new data: [1, 2, 3]
   end
@@ -14,8 +14,8 @@ class TestNumData < Test::Unit::TestCase
   def test_formula_based_cell; end
 
   def test_format_code
-    assert_raise(ArgumentError) { @num_data.format_code = 7 }
-    assert_nothing_raised { @num_data.format_code = 'foo_bar' }
+    assert_raises(ArgumentError) { @num_data.format_code = 7 }
+    refute_raises { @num_data.format_code = 'foo_bar' }
   end
 
   def test_to_xml_string
