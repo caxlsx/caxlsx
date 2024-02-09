@@ -538,6 +538,17 @@ class TestWorksheet < Test::Unit::TestCase
     assert_nil(@ws.column_info[1].width, ":ignore does not set any data")
   end
 
+  def test_set_fixed_autowidth_column
+    @ws.add_row ["mule", "donkey", "horse"], fixed_autowidths: [20, nil, 10]
+    @ws.add_row ["mule", "donkey", "horse"], fixed_autowidths: [30, 100, 10]
+    @ws.add_row ["mule", "donkey", "horse"], fixed_autowidths: [nil, 5, 20]
+
+    assert_equal(3, @ws.column_info.size, "a data item for each column")
+    assert_equal(30, @ws.column_info[0].width, "fixed autowidth is respected")
+    assert_equal(100, @ws.column_info[1].width, "fixed autowidth is respected")
+    assert_equal(20, @ws.column_info[2].width, "fixed autowidth is respected")
+  end
+
   def test_fixed_height
     @ws.add_row [1, 2, 3], height: 40
 
