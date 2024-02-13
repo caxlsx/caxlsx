@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestAxlsx < Test::Unit::TestCase
+class TestAxlsx < Minitest::Test
   # rubocop:disable Layout/HashAlignment
   def setup_wide
     @wide_test_points = {
@@ -23,7 +23,7 @@ class TestAxlsx < Test::Unit::TestCase
   end
 
   def test_do_not_trust_input_by_default
-    refute Axlsx.trust_input
+    assert_false Axlsx.trust_input
   end
 
   def test_trust_input_can_be_set_to_true
@@ -173,7 +173,7 @@ class TestAxlsx < Test::Unit::TestCase
 
     Axlsx.escape_formulas = false
 
-    refute Axlsx.escape_formulas
+    assert_false Axlsx.escape_formulas
   ensure
     Axlsx.instance_variable_set(:@escape_formulas, nil)
   end

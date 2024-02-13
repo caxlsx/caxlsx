@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestOneCellAnchor < Test::Unit::TestCase
+class TestOneCellAnchor < Minitest::Test
   def setup
     @p = Axlsx::Package.new
     @ws = @p.workbook.add_worksheet
@@ -33,14 +33,14 @@ class TestOneCellAnchor < Test::Unit::TestCase
   end
 
   def test_width
-    assert_raise(ArgumentError) { @anchor.width = "a" }
-    assert_nothing_raised { @anchor.width = 600 }
+    assert_raises(ArgumentError) { @anchor.width = "a" }
+    refute_raises { @anchor.width = 600 }
     assert_equal(600, @anchor.width)
   end
 
   def test_height
-    assert_raise(ArgumentError) { @anchor.height = "a" }
-    assert_nothing_raised { @anchor.height = 400 }
+    assert_raises(ArgumentError) { @anchor.height = "a" }
+    refute_raises { @anchor.height = 400 }
     assert_equal(400, @anchor.height)
   end
 
@@ -52,7 +52,7 @@ class TestOneCellAnchor < Test::Unit::TestCase
   end
 
   def test_options
-    assert_raise(ArgumentError, 'invalid start_at') { @ws.add_image image_src: @test_img, start_at: [1] }
+    assert_raises(ArgumentError, 'invalid start_at') { @ws.add_image image_src: @test_img, start_at: [1] }
     i = @ws.add_image image_src: @test_img, start_at: [1, 2], width: 100, height: 200, name: "someimage", descr: "a neat image"
 
     assert_equal("a neat image", i.descr)

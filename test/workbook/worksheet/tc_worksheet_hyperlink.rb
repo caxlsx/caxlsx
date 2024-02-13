@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestWorksheetHyperlink < Test::Unit::TestCase
+class TestWorksheetHyperlink < Minitest::Test
   def setup
     p = Axlsx::Package.new
     wb = p.workbook
@@ -12,7 +12,7 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
   end
 
   def test_initailize
-    assert_raise(ArgumentError) { Axlsx::WorksheetHyperlink.new }
+    assert_raises(ArgumentError) { Axlsx::WorksheetHyperlink.new }
   end
 
   def test_location

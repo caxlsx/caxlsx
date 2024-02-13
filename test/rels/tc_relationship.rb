@@ -2,12 +2,12 @@
 
 require 'tc_helper'
 
-class TestRelationships < Test::Unit::TestCase
+class TestRelationships < Minitest::Test
   def test_instances_with_different_attributes_have_unique_ids
     rel_1 = Axlsx::Relationship.new(Object.new, Axlsx::WORKSHEET_R, 'target')
     rel_2 = Axlsx::Relationship.new(Object.new, Axlsx::COMMENT_R, 'foobar')
 
-    assert_not_equal rel_1.Id, rel_2.Id
+    refute_equal rel_1.Id, rel_2.Id
   end
 
   def test_instances_with_same_attributes_share_id
@@ -23,7 +23,7 @@ class TestRelationships < Test::Unit::TestCase
     t2 = Thread.new { cache2 = Axlsx::Relationship.ids_cache }
     [t1, t2].each(&:join)
 
-    assert_not_same(cache1, cache2)
+    refute_same(cache1, cache2)
   end
 
   def test_target_is_only_considered_for_same_attributes_check_if_target_mode_is_external
@@ -36,18 +36,18 @@ class TestRelationships < Test::Unit::TestCase
     rel_3 = Axlsx::Relationship.new(source_obj, Axlsx::HYPERLINK_R, 'target', target_mode: :External)
     rel_4 = Axlsx::Relationship.new(source_obj, Axlsx::HYPERLINK_R, '../target', target_mode: :External)
 
-    assert_not_equal rel_3.Id, rel_4.Id
+    refute_equal rel_3.Id, rel_4.Id
   end
 
   def test_type
-    assert_raise(ArgumentError) { Axlsx::Relationship.new nil, 'type', 'target' }
-    assert_nothing_raised { Axlsx::Relationship.new nil, Axlsx::WORKSHEET_R, 'target' }
-    assert_nothing_raised { Axlsx::Relationship.new nil, Axlsx::COMMENT_R, 'target' }
+    assert_raises(ArgumentError) { Axlsx::Relationship.new nil, 'type', 'target' }
+    refute_raises { Axlsx::Relationship.new nil, Axlsx::WORKSHEET_R, 'target' }
+    refute_raises { Axlsx::Relationship.new nil, Axlsx::COMMENT_R, 'target' }
   end
 
   def test_target_mode
-    assert_raise(ArgumentError) { Axlsx::Relationship.new nil, 'type', 'target', target_mode: "FISH" }
-    assert_nothing_raised { Axlsx::Relationship.new(nil, Axlsx::WORKSHEET_R, 'target', target_mode: :External) }
+    assert_raises(ArgumentError) { Axlsx::Relationship.new nil, 'type', 'target', target_mode: "FISH" }
+    refute_raises { Axlsx::Relationship.new(nil, Axlsx::WORKSHEET_R, 'target', target_mode: :External) }
   end
 
   def test_ampersand_escaping_in_target

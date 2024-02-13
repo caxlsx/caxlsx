@@ -10,7 +10,7 @@ class Funk
   attr_accessor :camel_symbol, :boolean, :integer
 end
 
-class TestSeralizedAttributes < Test::Unit::TestCase
+class TestSeralizedAttributes < Minitest::Test
   def setup
     @object = Funk.new
   end

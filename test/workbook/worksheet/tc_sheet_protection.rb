@@ -22,7 +22,7 @@ require 'tc_helper'
 # <xsd:attribute name="password" type="xsd:string" use="optional" default="nil"/>
 # </xsd:complexType>
 
-class TestSheetProtection < Test::Unit::TestCase
+class TestSheetProtection < Minitest::Test
   def setup
     # inverse defaults
     @boolean_options = { sheet: false, objects: true, scenarios: true, format_cells: false,
@@ -47,8 +47,8 @@ class TestSheetProtection < Test::Unit::TestCase
 
   def test_boolean_attribute_validation
     @boolean_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be boolean") { @sp.send(:"#{key}=", 'A') }
-      assert_nothing_raised { @sp.send(:"#{key}=", value) }
+      assert_raises(ArgumentError, "#{key} must be boolean") { @sp.send(:"#{key}=", 'A') }
+      refute_raises { @sp.send(:"#{key}=", value) }
     end
   end
 

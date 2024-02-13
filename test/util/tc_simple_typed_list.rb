@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestSimpleTypedList < Test::Unit::TestCase
+class TestSimpleTypedList < Minitest::Test
   def setup
     @list = Axlsx::SimpleTypedList.new Integer
   end
@@ -10,24 +10,24 @@ class TestSimpleTypedList < Test::Unit::TestCase
   def teardown; end
 
   def test_type_is_a_class_or_array_of_class
-    assert_nothing_raised { Axlsx::SimpleTypedList.new Integer }
-    assert_nothing_raised { Axlsx::SimpleTypedList.new [Integer, String] }
-    assert_raise(ArgumentError) { Axlsx::SimpleTypedList.new }
-    assert_raise(ArgumentError) { Axlsx::SimpleTypedList.new "1" }
-    assert_raise(ArgumentError) { Axlsx::SimpleTypedList.new [Integer, "Class"] }
+    refute_raises { Axlsx::SimpleTypedList.new Integer }
+    refute_raises { Axlsx::SimpleTypedList.new [Integer, String] }
+    assert_raises(ArgumentError) { Axlsx::SimpleTypedList.new }
+    assert_raises(ArgumentError) { Axlsx::SimpleTypedList.new "1" }
+    assert_raises(ArgumentError) { Axlsx::SimpleTypedList.new [Integer, "Class"] }
   end
 
   def test_indexed_based_assignment
     # should not allow nil assignment
-    assert_raise(ArgumentError) { @list[0] = nil }
-    assert_raise(ArgumentError) { @list[0] = "1" }
-    assert_nothing_raised { @list[0] = 1 }
+    assert_raises(ArgumentError) { @list[0] = nil }
+    assert_raises(ArgumentError) { @list[0] = "1" }
+    refute_raises { @list[0] = 1 }
   end
 
   def test_concat_assignment
-    assert_raise(ArgumentError) { @list << nil }
-    assert_raise(ArgumentError) { @list << "1" }
-    assert_nothing_raised { @list << 1 }
+    assert_raises(ArgumentError) { @list << nil }
+    assert_raises(ArgumentError) { @list << "1" }
+    refute_raises { @list << 1 }
   end
 
   def test_concat_should_return_index
@@ -55,18 +55,18 @@ class TestSimpleTypedList < Test::Unit::TestCase
     @list.push 3
     @list.lock
 
-    assert_raise(ArgumentError) { @list.delete 1  }
-    assert_raise(ArgumentError) { @list.delete_at 1 }
-    assert_raise(ArgumentError) { @list.delete_at 2 }
-    assert_raise(ArgumentError) { @list.insert(1, 3) }
-    assert_raise(ArgumentError) { @list[1] = 3 }
+    assert_raises(ArgumentError) { @list.delete 1  }
+    assert_raises(ArgumentError) { @list.delete_at 1 }
+    assert_raises(ArgumentError) { @list.delete_at 2 }
+    assert_raises(ArgumentError) { @list.insert(1, 3) }
+    assert_raises(ArgumentError) { @list[1] = 3 }
 
     @list.push 4
-    assert_nothing_raised { @list.delete_at 3 }
+    refute_raises { @list.delete_at 3 }
     @list.unlock
     # ignore garbage
-    assert_nothing_raised { @list.delete 0 }
-    assert_nothing_raised { @list.delete 9 }
+    refute_raises { @list.delete 0 }
+    refute_raises { @list.delete 9 }
   end
 
   def test_delete
@@ -95,7 +95,7 @@ class TestSimpleTypedList < Test::Unit::TestCase
   end
 
   def test_insert
-    assert_raise(ArgumentError) { @list << nil }
+    assert_raises(ArgumentError) { @list << nil }
 
     assert_equal(1, @list.insert(0, 1))
     assert_equal(2, @list.insert(1, 2))
@@ -105,7 +105,7 @@ class TestSimpleTypedList < Test::Unit::TestCase
   end
 
   def test_setter
-    assert_raise(ArgumentError) { @list[0] = nil }
+    assert_raises(ArgumentError) { @list[0] = nil }
 
     assert_equal(1, @list[0] = 1)
     assert_equal(2, @list[1] = 2)

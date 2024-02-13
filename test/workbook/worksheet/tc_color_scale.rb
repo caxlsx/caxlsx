@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestColorScale < Test::Unit::TestCase
+class TestColorScale < Minitest::Test
   def setup
     @color_scale = Axlsx::ColorScale.new
   end
@@ -52,7 +52,7 @@ class TestColorScale < Test::Unit::TestCase
 
   def test_delete_at
     @color_scale.add type: :max, val: 5, color: "FFDEDEDE"
-    assert_nothing_raised { @color_scale.delete_at 2 }
+    refute_raises { @color_scale.delete_at 2 }
     assert_equal(2, @color_scale.value_objects.size)
     assert_equal(2, @color_scale.colors.size)
   end

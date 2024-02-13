@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestSortState < Test::Unit::TestCase
+class TestSortState < Minitest::Test
   def setup
     ws = Axlsx::Package.new.workbook.add_worksheet
     ws.add_row ['first', 'second', 'third']

@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestNumVal < Test::Unit::TestCase
+class TestNumVal < Minitest::Test
   def setup
     @num_val = Axlsx::NumVal.new v: 1
   end
@@ -13,8 +13,8 @@ class TestNumVal < Test::Unit::TestCase
   end
 
   def test_format_code
-    assert_raise(ArgumentError) { @num_val.format_code = 7 }
-    assert_nothing_raised { @num_val.format_code = 'foo_bar' }
+    assert_raises(ArgumentError) { @num_val.format_code = 7 }
+    refute_raises { @num_val.format_code = 'foo_bar' }
   end
 
   def test_to_xml_string

@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestBubbleChart < Test::Unit::TestCase
+class TestBubbleChart < Minitest::Test
   def setup
     @p = Axlsx::Package.new
     @chart = nil

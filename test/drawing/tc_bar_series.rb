@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestBarSeries < Test::Unit::TestCase
+class TestBarSeries < Minitest::Test
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet name: "hmmm"
@@ -31,8 +31,8 @@ class TestBarSeries < Test::Unit::TestCase
   end
 
   def test_shape
-    assert_raise(ArgumentError, "require valid shape") { @series.shape = :teardropt }
-    assert_nothing_raised("allow valid shape") { @series.shape = :box }
+    assert_raises(ArgumentError, "require valid shape") { @series.shape = :teardropt }
+    refute_raises { @series.shape = :box }
     assert_equal(:box, @series.shape)
   end
 

@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestTableStyles < Test::Unit::TestCase
+class TestTableStyles < Minitest::Test
   def setup
     @item = Axlsx::TableStyles.new
   end
@@ -15,14 +15,14 @@ class TestTableStyles < Test::Unit::TestCase
   end
 
   def test_defaultTableStyle
-    assert_raise(ArgumentError) { @item.defaultTableStyle = -1.1 }
-    assert_nothing_raised { @item.defaultTableStyle = "anyones guess" }
+    assert_raises(ArgumentError) { @item.defaultTableStyle = -1.1 }
+    refute_raises { @item.defaultTableStyle = "anyones guess" }
     assert_equal("anyones guess", @item.defaultTableStyle)
   end
 
   def test_defaultPivotStyle
-    assert_raise(ArgumentError) { @item.defaultPivotStyle = -1.1 }
-    assert_nothing_raised { @item.defaultPivotStyle = "anyones guess" }
+    assert_raises(ArgumentError) { @item.defaultPivotStyle = -1.1 }
+    refute_raises { @item.defaultPivotStyle = "anyones guess" }
     assert_equal("anyones guess", @item.defaultPivotStyle)
   end
 end

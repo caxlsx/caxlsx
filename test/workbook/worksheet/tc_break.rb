@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestBreak < Test::Unit::TestCase
+class TestBreak < Minitest::Test
   def setup
     @break = Axlsx::Break.new(id: 1, min: 1, max: 10, man: true, pt: false)
   end
@@ -36,7 +36,7 @@ class TestBreak < Test::Unit::TestCase
   end
 
   def test_pt
-    refute(@break.pt)
+    assert_false(@break.pt)
     assert_raises ArgumentError do
       Axlsx::Break.new(pt: -1)
     end
