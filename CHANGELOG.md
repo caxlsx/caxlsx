@@ -1,6 +1,8 @@
 CHANGELOG
 ---------
 - **Unreleased**
+
+- **February.26.24**: 4.1.0
   - [PR #316](https://github.com/caxlsx/caxlsx/pull/316) Prevent camelization of hyperlink locations
   - [PR #312](https://github.com/caxlsx/caxlsx/pull/312) Added 2D/flat PieChart drawing
   - [PR #317](https://github.com/caxlsx/caxlsx/pull/317) Apply style for columns without defining cells
