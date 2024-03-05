@@ -13,10 +13,10 @@ class TestSheetView < Minitest::Test
     @int_0 = { zoom_scale_normal: 100, zoom_scale_page_layout_view: 100, zoom_scale_sheet_layout_view: 100, workbook_view_id: 2 }
     @int_100 = { zoom_scale: 10 }
 
-    @integer_options = { color_id: 2, workbook_view_id: 2 }.merge(@int_0).merge(@int_100)
+    @integer_options = { color_id: 2, workbook_view_id: 2 }.merge(@int_0, @int_100)
     @string_options = { top_left_cell: 'A2' }
 
-    @options = @boolean_options.merge(@boolean_options).merge(@symbol_options).merge(@nil_options).merge(@int_0).merge(@int_100)
+    @options = @boolean_options.merge(@boolean_options, @symbol_options, @nil_options, @int_0, @int_100)
 
     @sv = Axlsx::SheetView.new(@options)
   end
