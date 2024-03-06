@@ -16,7 +16,7 @@ class TestDataValidation < Minitest::Test
     @string_options = { formula1: 'foo', formula2: 'foo', error: 'foo', errorTitle: 'foo', prompt: 'foo', promptTitle: 'foo', sqref: 'foo' }
     @symbol_options = { errorStyle: :warning, operator: :lessThan, type: :whole }
 
-    @options = @boolean_options.merge(@nil_options).merge(@type_option).merge(@error_style_option)
+    @options = @boolean_options.merge(@nil_options, @type_option, @error_style_option)
 
     @dv = Axlsx::DataValidation.new(@options)
   end

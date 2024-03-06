@@ -245,7 +245,7 @@ module Axlsx
 
         font_defaults = { name: @fonts.first.name, sz: @fonts.first.sz, family: @fonts.first.family }
 
-        raw_style = { type: :xf }.merge(font_defaults).merge(options)
+        raw_style = { type: :xf }.merge(font_defaults, options)
 
         if raw_style[:format_code]
           raw_style.delete(:num_fmt)
