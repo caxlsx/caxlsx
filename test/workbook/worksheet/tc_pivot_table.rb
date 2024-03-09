@@ -107,9 +107,9 @@ class TestPivotTable < Minitest::Test
   end
 
   def test_no_grand_totals
-    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5', { no_grand_totals: row }) do |pt|
+    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5', { no_grand_totals: :row }) do |pt|
       pt.data = ['Sales']
-      pt.rows = ['Year','Month']
+      pt.rows = ['Year', 'Month']
     end
 
     assert_equal(:row, pivot_table.no_grand_totals)
