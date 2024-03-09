@@ -106,6 +106,17 @@ class TestPivotTable < Minitest::Test
     shared_test_pivot_table_xml_validity(pivot_table)
   end
 
+  def test_no_grand_totals
+    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5', { no_grand_totals: row }) do |pt|
+      pt.data = ['Sales']
+      pt.rows = ['Year','Month']
+    end
+
+    assert_equal(:row, pivot_table.no_grand_totals)
+
+    shared_test_pivot_table_xml_validity(pivot_table)
+  end
+
   def test_header_indices
     pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5')
 
