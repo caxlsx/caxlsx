@@ -5,6 +5,7 @@ module Axlsx
   # @note the recommended way to manage protected ranges with via Worksheet#protect_range
   # @see Worksheet#protect_range
   class ProtectedRange
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -19,23 +20,13 @@ module Axlsx
     serializable_attributes :sqref, :name
     # The reference for the protected range
     # @return [String]
-    attr_reader :sqref
+    # @!attribute
+    string_attr_accessor :sqref
 
     # The name of the protected range
     # @return [String]
-    attr_reader :name
-
-    # @see sqref
-    def sqref=(v)
-      Axlsx.validate_string(v)
-      @sqref = v
-    end
-
-    # @see name
-    def name=(v)
-      Axlsx.validate_string(v)
-      @name = v
-    end
+    # @!attribute
+    string_attr_accessor :name
 
     # serializes the proteted range
     # @param [String] str if this string object is provided we append

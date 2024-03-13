@@ -6,6 +6,7 @@ module Axlsx
   # @note The recommended way to manage data validations is via Worksheet#add_data_validation
   # @see Worksheet#add_data_validation
   class DataValidation
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
 
     # Creates a new {DataValidation} object
@@ -42,14 +43,16 @@ module Axlsx
     # @see type
     # @return [String]
     # default nil
-    attr_reader :formula1
+    # @!attribute
+    string_attr_accessor :formula1
 
     # Formula2
     # Available for type whole, decimal, date, time, textLength
     # @see type
     # @return [String]
     # default nil
-    attr_reader :formula2
+    # @!attribute
+    string_attr_accessor :formula2
 
     # Allow Blank
     # A boolean value indicating whether the data validation allows the use of empty or blank
@@ -58,7 +61,8 @@ module Axlsx
     # @see type
     # @return [Boolean]
     # default true
-    attr_reader :allowBlank
+    # @!attribute
+    boolean_attr_accessor :allowBlank
 
     # Error Message
     # Message text of error alert.
@@ -66,7 +70,8 @@ module Axlsx
     # @see type
     # @return [String]
     # default nil
-    attr_reader :error
+    # @!attribute
+    string_attr_accessor :error
 
     # Error Style (ST_DataValidationErrorStyle)
     # The style of error alert used for this data validation.
@@ -78,7 +83,8 @@ module Axlsx
     # @see type
     # @return [Symbol]
     # default :stop
-    attr_reader :errorStyle
+    # @!attribute
+    validated_attr_accessor :errorStyle, :validate_data_validation_error_style
 
     # Error Title
     # Title bar text of error alert.
@@ -86,7 +92,8 @@ module Axlsx
     # @see type
     # @return [String]
     # default nil
-    attr_reader :errorTitle
+    # @!attribute
+    string_attr_accessor :errorTitle
 
     # Operator (ST_DataValidationOperator)
     # The relational operator used with this data validation.
@@ -103,7 +110,8 @@ module Axlsx
     # @see type
     # @return [Symbol]
     # default nil
-    attr_reader :operator
+    # @!attribute
+    validated_attr_accessor :operator, :validate_data_validation_operator
 
     # Input prompt
     # Message text of input prompt.
@@ -111,7 +119,8 @@ module Axlsx
     # @see type
     # @return [String]
     # default nil
-    attr_reader :prompt
+    # @!attribute
+    string_attr_accessor :prompt
 
     # Prompt title
     # Title bar text of input prompt.
@@ -119,7 +128,8 @@ module Axlsx
     # @see type
     # @return [String]
     # default nil
-    attr_reader :promptTitle
+    # @!attribute
+    string_attr_accessor :promptTitle
 
     # Show drop down
     # A boolean value indicating whether to display a dropdown combo box for a list type data
@@ -146,7 +156,8 @@ module Axlsx
     # @see type
     # @return [Boolean]
     # default false
-    attr_reader :showErrorMessage
+    # @!attribute
+    boolean_attr_accessor :showErrorMessage
 
     # Show input message
     # A boolean value indicating whether to display the input prompt message.
@@ -154,14 +165,16 @@ module Axlsx
     # @see type
     # @return [Boolean]
     # default false
-    attr_reader :showInputMessage
+    # @!attribute
+    boolean_attr_accessor :showInputMessage
 
     # Range over which data validation is applied, in "A1:B2" format
     # Available for type whole, decimal, date, time, textLength, list, custom
     # @see type
     # @return [String]
     # default nil
-    attr_reader :sqref
+    # @!attribute
+    string_attr_accessor :sqref
 
     # The type (ST_DataValidationType) of data validation.
     # Options are:
@@ -175,61 +188,8 @@ module Axlsx
     #  * whole: Data validation which checks for whole number values satisfying the given condition.
     # @return [Symbol]
     # default none
-    attr_reader :type
-
-    # @see formula1
-    def formula1=(v)
-      Axlsx.validate_string(v)
-      @formula1 = v
-    end
-
-    # @see formula2
-    def formula2=(v)
-      Axlsx.validate_string(v)
-      @formula2 = v
-    end
-
-    # @see allowBlank
-    def allowBlank=(v)
-      Axlsx.validate_boolean(v)
-      @allowBlank = v
-    end
-
-    # @see error
-    def error=(v)
-      Axlsx.validate_string(v)
-      @error = v
-    end
-
-    # @see errorStyle
-    def errorStyle=(v)
-      Axlsx.validate_data_validation_error_style(v)
-      @errorStyle = v
-    end
-
-    # @see errorTitle
-    def errorTitle=(v)
-      Axlsx.validate_string(v)
-      @errorTitle = v
-    end
-
-    # @see operator
-    def operator=(v)
-      Axlsx.validate_data_validation_operator(v)
-      @operator = v
-    end
-
-    # @see prompt
-    def prompt=(v)
-      Axlsx.validate_string(v)
-      @prompt = v
-    end
-
-    # @see promptTitle
-    def promptTitle=(v)
-      Axlsx.validate_string(v)
-      @promptTitle = v
-    end
+    # @!attribute
+    validated_attr_accessor :type, :validate_data_validation_type
 
     # @see showDropDown
     def showDropDown=(v)
@@ -243,30 +203,6 @@ module Axlsx
       Axlsx.validate_boolean(v)
       # It's just an alias for the showDropDown attribute, hideDropDown should set the value of the original showDropDown.
       @showDropDown = v
-    end
-
-    # @see showErrorMessage
-    def showErrorMessage=(v)
-      Axlsx.validate_boolean(v)
-      @showErrorMessage = v
-    end
-
-    # @see showInputMessage
-    def showInputMessage=(v)
-      Axlsx.validate_boolean(v)
-      @showInputMessage = v
-    end
-
-    # @see sqref
-    def sqref=(v)
-      Axlsx.validate_string(v)
-      @sqref = v
-    end
-
-    # @see type
-    def type=(v)
-      Axlsx.validate_data_validation_type(v)
-      @type = v
     end
 
     # Serializes the data validation

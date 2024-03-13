@@ -5,6 +5,7 @@ module Axlsx
   # @note Using Styles#add_style is the recommended way to manage cell alignment.
   # @see Styles#add_style
   class CellAlignment
+    include Axlsx::Accessors
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
 
@@ -35,7 +36,8 @@ module Axlsx
     #   :centerContinuous
     #   :distributed
     # @return [Symbol]
-    attr_reader :horizontal
+    # @!attribute
+    validated_attr_accessor :horizontal, :validate_horizontal_alignment
 
     # The vertical alignment of the cell.
     # @note
@@ -46,103 +48,57 @@ module Axlsx
     #   :justify
     #   :distributed
     # @return [Symbol]
-    attr_reader :vertical
+    # @!attribute
+    validated_attr_accessor :vertical, :validate_vertical_alignment
 
     # The textRotation of the cell.
     # @return [Integer]
-    attr_reader :text_rotation
+    # @!attribute
+    unsigned_int_attr_accessor :text_rotation
     alias :textRotation :text_rotation
+    alias :textRotation= :text_rotation=
 
     # Indicate if the text of the cell should wrap
     # @return [Boolean]
-    attr_reader :wrap_text
+    # @!attribute
+    boolean_attr_accessor :wrap_text
     alias :wrapText :wrap_text
+    alias :wrapText= :wrap_text=
 
     # The amount of indent
     # @return [Integer]
-    attr_reader :indent
+    # @!attribute
+    unsigned_int_attr_accessor :indent
 
     # The amount of relativeIndent
     # @return [Integer]
-    attr_reader :relative_indent
+    # @!attribute
+    int_attr_accessor :relative_indent
     alias :relativeIndent :relative_indent
+    alias :relativeIndent= :relative_indent=
 
     # Indicate if the last line should be justified.
     # @return [Boolean]
-    attr_reader :justify_last_line
+    # @!attribute
+    boolean_attr_accessor :justify_last_line
     alias :justifyLastLine :justify_last_line
+    alias :justifyLastLine= :justify_last_line=
 
     # Indicate if the text should be shrunk to the fit in the cell.
     # @return [Boolean]
-    attr_reader :shrink_to_fit
+    # @!attribute
+    boolean_attr_accessor :shrink_to_fit
     alias :shrinkToFit :shrink_to_fit
+    alias :shrinkToFit= :shrink_to_fit=
 
     # The reading order of the text
     # 0 Context Dependent
     # 1 Left-to-Right
     # 2 Right-to-Left
     # @return [Integer]
-    attr_reader :reading_order
+    # @!attribute
+    unsigned_int_attr_accessor :reading_order
     alias :readingOrder :reading_order
-
-    # @see horizontal
-    def horizontal=(v)
-      Axlsx.validate_horizontal_alignment v
-      @horizontal = v
-    end
-
-    # @see vertical
-    def vertical=(v)
-      Axlsx.validate_vertical_alignment v
-      @vertical = v
-    end
-
-    # @see textRotation
-    def text_rotation=(v)
-      Axlsx.validate_unsigned_int v
-      @text_rotation = v
-    end
-    alias :textRotation= :text_rotation=
-
-    # @see wrapText
-    def wrap_text=(v)
-      Axlsx.validate_boolean v
-      @wrap_text = v
-    end
-    alias :wrapText= :wrap_text=
-
-    # @see indent
-    def indent=(v)
-      Axlsx.validate_unsigned_int v
-      @indent = v
-    end
-
-    # @see relativeIndent
-    def relative_indent=(v)
-      Axlsx.validate_int v
-      @relative_indent = v
-    end
-    alias :relativeIndent= :relative_indent=
-
-    # @see justifyLastLine
-    def justify_last_line=(v)
-      Axlsx.validate_boolean v
-      @justify_last_line = v
-    end
-    alias :justifyLastLine= :justify_last_line=
-
-    # @see shrinkToFit
-    def shrink_to_fit=(v)
-      Axlsx.validate_boolean v
-      @shrink_to_fit = v
-    end
-    alias :shrinkToFit= :shrink_to_fit=
-
-    # @see readingOrder
-    def reading_order=(v)
-      Axlsx.validate_unsigned_int v
-      @reading_order = v
-    end
     alias :readingOrder= :reading_order=
 
     # Serializes the object

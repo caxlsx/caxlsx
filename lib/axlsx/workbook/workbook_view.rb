@@ -54,7 +54,7 @@ module Axlsx
     unsigned_int_attr_accessor :x_window, :y_window, :window_width, :window_height,
                                :tab_ratio, :first_sheet, :active_tab
 
-    validated_attr_accessor [:visibility], :validate_view_visibility
+    validated_attr_accessor :visibility, :validate_view_visibility
 
     serializable_attributes :visibility, :minimized,
                             :show_horizontal_scroll, :show_vertical_scroll,

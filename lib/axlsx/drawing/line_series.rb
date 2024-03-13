@@ -6,6 +6,8 @@ module Axlsx
   # @see Worksheet#add_chart
   # @see Chart#add_series
   class LineSeries < Series
+    include Axlsx::Accessors
+
     # The data for this series.
     # @return [ValAxisData]
     attr_reader :data
@@ -21,15 +23,18 @@ module Axlsx
 
     # show markers on values
     # @return [Boolean]
-    attr_reader :show_marker
+    # @!attribute
+    boolean_attr_accessor :show_marker
 
     # custom marker symbol
     # @return [String]
-    attr_reader :marker_symbol
+    # @!attribute
+    validated_attr_accessor :marker_symbol, :validate_marker_symbol
 
     # line smoothing on values
     # @return [Boolean]
-    attr_reader :smooth
+    # @!attribute
+    boolean_attr_accessor :smooth
 
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
@@ -48,24 +53,6 @@ module Axlsx
     # @see color
     def color=(v)
       @color = v
-    end
-
-    # @see show_marker
-    def show_marker=(v)
-      Axlsx.validate_boolean(v)
-      @show_marker = v
-    end
-
-    # @see marker_symbol
-    def marker_symbol=(v)
-      Axlsx.validate_marker_symbol(v)
-      @marker_symbol = v
-    end
-
-    # @see smooth
-    def smooth=(v)
-      Axlsx.validate_boolean(v)
-      @smooth = v
     end
 
     # Serializes the object

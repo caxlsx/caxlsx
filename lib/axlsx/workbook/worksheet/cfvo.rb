@@ -9,6 +9,7 @@ module Axlsx
   # @see ConditionalFormattingRule#initialize
   #
   class Cfvo
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -26,30 +27,20 @@ module Axlsx
     # Type (ST_CfvoType)
     # The type of this conditional formatting value object. options are num, percent, max, min, formula and percentile
     # @return [Symbol]
-    attr_reader :type
+    # @!attribute
+    validated_attr_accessor :type, :validate_conditional_formatting_value_object_type
 
     # Type (xsd:boolean)
     # For icon sets, determines whether this threshold value uses the greater than or equal to operator. 0 indicates 'greater than' is used instead of 'greater than or equal to'.
     # The default value is true
     # @return [Boolean]
-    attr_reader :gte
+    # @!attribute
+    boolean_attr_accessor :gte
 
     # Type (ST_Xstring)
     # The value of the conditional formatting object
     # This library will accept any value so long as it supports to_s
     attr_reader :val
-
-    # @see type
-    def type=(v)
-      Axlsx.validate_conditional_formatting_value_object_type(v)
-      @type = v
-    end
-
-    # @see gte
-    def gte=(v)
-      Axlsx.validate_boolean(v)
-      @gte = v
-    end
 
     # @see val
     def val=(v)

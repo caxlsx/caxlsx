@@ -7,6 +7,7 @@ module Axlsx
   # @see Worksheet#add_conditional_formatting
   # @see ConditionalFormattingRule
   class ConditionalFormatting
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
 
     # Creates a new {ConditionalFormatting} object
@@ -19,7 +20,8 @@ module Axlsx
 
     # Range over which the formatting is applied, in "A1:B2" format
     # @return [String]
-    attr_reader :sqref
+    # @!attribute
+    string_attr_accessor :sqref
 
     # Rules to apply the formatting to. Can be either a hash of
     # options to create a {ConditionalFormattingRule}, an array of hashes
@@ -63,12 +65,6 @@ module Axlsx
     # @see rules
     def rules=(v)
       @rules = v
-    end
-
-    # @see sqref
-    def sqref=(v)
-      Axlsx.validate_string(v)
-      @sqref = v
     end
 
     # Serializes the conditional formatting element

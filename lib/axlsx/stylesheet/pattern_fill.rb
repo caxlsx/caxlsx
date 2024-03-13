@@ -5,6 +5,7 @@ module Axlsx
   # @note The recommended way to manage styles is with Styles#add_style
   # @see Style#add_style
   class PatternFill
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     # Creates a new PatternFill Object
     # @option options [Symbol] patternType
@@ -46,7 +47,8 @@ module Axlsx
     #   :gray125
     #   :gray0625
     # @see Office Open XML Part 1 18.18.55
-    attr_reader :patternType
+    # @!attribute
+    validated_attr_accessor :patternType, :validate_pattern_type
 
     # @see fgColor
     def fgColor=(v)
@@ -58,12 +60,6 @@ module Axlsx
     def bgColor=(v)
       DataTypeValidator.validate "PatternFill.bgColor", Color, v
       @bgColor = v
-    end
-
-    # @see patternType
-    def patternType=(v)
-      Axlsx.validate_pattern_type v
-      @patternType = v
     end
 
     # Serializes the object

@@ -7,6 +7,8 @@ require 'axlsx/workbook/worksheet/auto_filter/sort_state'
 module Axlsx
   # This class represents an auto filter range in a worksheet
   class AutoFilter
+    include Axlsx::Accessors
+
     # creates a new Autofilter object
     # @param [Worksheet] worksheet
     def initialize(worksheet)
@@ -16,7 +18,14 @@ module Axlsx
       @sort_on_generate = true
     end
 
-    attr_reader :worksheet, :sort_on_generate
+    attr_reader :worksheet
+
+    # Flag indicating whether the AutoFilter should sort the rows when generating the
+    # file. If false, the sorting rules will need to be applied manually after generating to alter
+    # the order of the rows.
+    # @return [Boolean]
+    # @!attribute
+    boolean_attr_accessor :sort_on_generate
 
     # The range the autofilter should be applied to.
     # This should be a string like 'A1:B8'
@@ -108,15 +117,6 @@ module Axlsx
     # @return [SortState]
     def sort_state
       @sort_state ||= SortState.new self
-    end
-
-    # @param [Boolean] v Flag indicating whether the AutoFilter should sort the rows when generating the
-    # file. If false, the sorting rules will need to be applied manually after generating to alter
-    # the order of the rows.
-    # @return [Boolean]
-    def sort_on_generate=(v)
-      Axlsx.validate_boolean v
-      @sort_on_generate = v
     end
 
     # serialize the object

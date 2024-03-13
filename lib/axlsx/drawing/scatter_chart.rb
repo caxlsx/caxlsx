@@ -11,8 +11,10 @@ module Axlsx
     # The Style for the scatter chart
     # must be one of :none | :line | :lineMarker | :marker | :smooth | :smoothMarker
     # return [Symbol]
-    attr_reader :scatter_style
+    # @!attribute
+    validated_attr_accessor :scatter_style, :validate_scatter_style
     alias :scatterStyle :scatter_style
+    alias :scatterStyle= :scatter_style=
 
     # the x value axis
     # @return [ValAxis]
@@ -38,13 +40,6 @@ module Axlsx
       @d_lbls = nil
       parse_options options
     end
-
-    # see #scatterStyle
-    def scatter_style=(v)
-      Axlsx.validate_scatter_style(v)
-      @scatter_style = v
-    end
-    alias :scatterStyle= :scatter_style=
 
     # Serializes the object
     # @param [String] str

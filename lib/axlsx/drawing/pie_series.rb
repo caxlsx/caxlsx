@@ -6,6 +6,8 @@ module Axlsx
   # @see Worksheet#add_chart
   # @see Chart#add_series
   class PieSeries < Series
+    include Axlsx::Accessors
+
     # The data for this series.
     # @return [SimpleTypedList]
     attr_reader :data
@@ -16,7 +18,8 @@ module Axlsx
 
     # The explosion for this series
     # @return [Integert]
-    attr_reader :explosion
+    # @!attribute
+    unsigned_int_attr_accessor :explosion
 
     # An array of rgb colors to apply to your bar chart.
     attr_reader :colors
@@ -39,12 +42,6 @@ module Axlsx
     def colors=(v)
       DataTypeValidator.validate "BarSeries.colors", [Array], v
       @colors = v
-    end
-
-    # @see explosion
-    def explosion=(v)
-      Axlsx.validate_unsigned_int(v)
-      @explosion = v
     end
 
     # Serializes the object

@@ -7,6 +7,8 @@ module Axlsx
   # @see Chart#add_series
   # @see examples/example.rb
   class ScatterSeries < Series
+    include Axlsx::Accessors
+
     # The x data for this series.
     # @return [NamedAxisData]
     attr_reader :xData
@@ -25,7 +27,8 @@ module Axlsx
 
     # Line smoothing between data points
     # @return [Boolean]
-    attr_reader :smooth
+    # @!attribute
+    boolean_attr_accessor :smooth
 
     # Line markers presence
     # @return [Boolean]
@@ -33,7 +36,8 @@ module Axlsx
 
     # custom marker symbol
     # @return [String]
-    attr_reader :marker_symbol
+    # @!attribute
+    validated_attr_accessor :marker_symbol, :validate_marker_symbol
 
     # Creates a new ScatterSeries
     def initialize(chart, options = {})
@@ -60,21 +64,9 @@ module Axlsx
       @color = v
     end
 
-    # @see smooth
-    def smooth=(v)
-      Axlsx.validate_boolean(v)
-      @smooth = v
-    end
-
     # @see ln_width
     def ln_width=(v)
       @ln_width = v
-    end
-
-    # @see marker_symbol
-    def marker_symbol=(v)
-      Axlsx.validate_marker_symbol(v)
-      @marker_symbol = v
     end
 
     # Serializes the object

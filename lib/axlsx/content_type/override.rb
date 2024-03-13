@@ -3,19 +3,16 @@
 module Axlsx
   # An override content part. These parts are automatically created by for you based on the content of your package.
   class Override < AbstractContentType
+    include Axlsx::Accessors
+
     # Serialization node name for this object
     NODE_NAME = 'Override'
 
     # The name and location of the part.
     # @return [String]
-    attr_reader :part_name
+    # @!attribute
+    string_attr_accessor :part_name
     alias :PartName :part_name
-
-    # The name and location of the part.
-    def part_name=(v)
-      Axlsx.validate_string v
-      @part_name = v
-    end
     alias :PartName= :part_name=
 
     # Serializes this object to xml

@@ -56,8 +56,9 @@ module Axlsx
 
     # Outlining level of the row, when outlining is on
     # @return [Integer]
-    attr_reader :outline_level
+    unsigned_numeric_attr_accessor :outline_level
     alias :outlineLevel :outline_level
+    alias :outlineLevel= :outline_level=
 
     # The style applied to the row. This affects the entire row.
     # @return [Integer]
@@ -69,14 +70,6 @@ module Axlsx
       @custom_format = true
       @s = v
     end
-
-    # @see Row#outline
-    def outline_level=(v)
-      Axlsx.validate_unsigned_numeric(v)
-      @outline_level = v
-    end
-
-    alias :outlineLevel= :outline_level=
 
     # The index of this row in the worksheet
     # @return [Integer]

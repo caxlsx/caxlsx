@@ -3,6 +3,7 @@
 module Axlsx
   # the access class defines common properties and values for a chart axis.
   class Axis
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
 
     # Creates an Axis object
@@ -60,7 +61,8 @@ module Axlsx
     # The number format format code for this axis
     # default :General
     # @return [String]
-    attr_reader :format_code
+    # @!attribute
+    string_attr_accessor :format_code
 
     # specifies how the perpendicular axis is crossed
     # must be one of [:autoZero, :min, :max]
@@ -73,11 +75,13 @@ module Axlsx
 
     # specifies if gridlines should be shown in the chart
     # @return [Boolean]
-    attr_reader :gridlines
+    # @!attribute
+    boolean_attr_accessor :gridlines
 
     # specifies if gridlines should be shown in the chart
     # @return [Boolean]
-    attr_reader :delete
+    # @!attribute
+    boolean_attr_accessor :delete
 
     # the title for the axis. This can be a cell or a fixed string.
     attr_reader :title
@@ -112,27 +116,6 @@ module Axlsx
       @tick_lbl_pos = v
     end
     alias :tickLblPos= :tick_lbl_pos=
-
-    # The number format format code for this axis
-    # default :General
-    def format_code=(v)
-      Axlsx.validate_string(v)
-      @format_code = v
-    end
-
-    # Specify if gridlines should be shown for this axis
-    # default true
-    def gridlines=(v)
-      Axlsx.validate_boolean(v)
-      @gridlines = v
-    end
-
-    # Specify if axis should be removed from the chart
-    # default false
-    def delete=(v)
-      Axlsx.validate_boolean(v)
-      @delete = v
-    end
 
     # specifies how the perpendicular axis is crossed
     # must be one of [:autoZero, :min, :max]

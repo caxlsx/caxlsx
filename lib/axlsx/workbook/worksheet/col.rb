@@ -7,6 +7,7 @@ module Axlsx
     # https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3
     MAX_WIDTH = 255
 
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
     # Create a new Col objects
@@ -46,11 +47,13 @@ module Axlsx
 
     # Flag indicating if the outlining of the affected column(s) is in the collapsed state.
     # @return [Boolean]
-    attr_reader :collapsed
+    # @!attribute
+    boolean_attr_accessor :collapsed
 
     # Flag indicating if the affected column(s) are hidden on this worksheet.
     # @return [Boolean]
-    attr_reader :hidden
+    # @!attribute
+    boolean_attr_accessor :hidden
 
     # Outline level of affected column(s). Range is 0 to 7.
     # @return [Integer]
@@ -59,11 +62,13 @@ module Axlsx
 
     # Flag indicating if the phonetic information should be displayed by default for the affected column(s) of the worksheet.
     # @return [Boolean]
-    attr_reader :phonetic
+    # @!attribute
+    boolean_attr_accessor :phonetic
 
     # Default style for the affected column(s). Affects cells not yet allocated in the column(s). In other words, this style applies to new columns.
     # @return [Integer]
-    attr_reader :style
+    # @!attribute
+    unsigned_int_attr_accessor :style
 
     # The width of the column
     # @return [Numeric]
@@ -73,18 +78,6 @@ module Axlsx
     attr_reader :custom_width
     alias :customWidth :custom_width
 
-    # @see Col#collapsed
-    def collapsed=(v)
-      Axlsx.validate_boolean(v)
-      @collapsed = v
-    end
-
-    # @see Col#hidden
-    def hidden=(v)
-      Axlsx.validate_boolean(v)
-      @hidden = v
-    end
-
     # @see Col#outline
     def outline_level=(v)
       Axlsx.validate_unsigned_numeric(v)
@@ -93,18 +86,6 @@ module Axlsx
       @outline_level = v
     end
     alias :outlineLevel= :outline_level=
-
-    # @see Col#phonetic
-    def phonetic=(v)
-      Axlsx.validate_boolean(v)
-      @phonetic = v
-    end
-
-    # @see Col#style
-    def style=(v)
-      Axlsx.validate_unsigned_int(v)
-      @style = v
-    end
 
     # @see Col#width
     def width=(v)

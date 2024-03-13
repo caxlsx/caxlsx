@@ -5,6 +5,7 @@ module Axlsx
   # Worksheet#add_image is the recommended way to manage images in your sheets
   # @see Worksheet#add_image
   class Pic
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
 
     # Creates a new Pic(ture) object
@@ -34,11 +35,13 @@ module Axlsx
 
     # The name to use for this picture
     # @return [String]
-    attr_reader :name
+    # @!attribute
+    string_attr_accessor :name
 
     # A description of the picture
     # @return [String]
-    attr_reader :descr
+    # @!attribute
+    string_attr_accessor :descr
 
     # The path to the image you want to include
     # Only local images are supported at this time.
@@ -60,7 +63,8 @@ module Axlsx
 
     # Flag for remote picture (from URI)
     # @return [Boolean]
-    attr_reader :remote
+    # @!attribute
+    boolean_attr_accessor :remote
 
     # sets or updates a hyperlink for this image.
     # @param [String] v The href value for the hyper link
@@ -88,24 +92,6 @@ module Axlsx
       end
 
       @image_src = v
-    end
-
-    # @see name
-    def name=(v)
-      Axlsx.validate_string(v)
-      @name = v
-    end
-
-    # @see descr
-    def descr=(v)
-      Axlsx.validate_string(v)
-      @descr = v
-    end
-
-    # @see remote
-    def remote=(v)
-      Axlsx.validate_boolean(v)
-      @remote = v
     end
 
     def remote?

@@ -3,6 +3,8 @@
 module Axlsx
   # A CatAxis object defines a chart category axis
   class CatAxis < Axis
+    include Axlsx::Accessors
+
     # Creates a new CatAxis object
     # @option options [Integer] tick_lbl_skip
     # @option options [Integer] tick_mark_skip
@@ -17,7 +19,8 @@ module Axlsx
 
     # From the docs: This element specifies that this axis is a date or text axis based on the data that is used for the axis labels, not a specific choice.
     # @return [Boolean]
-    attr_reader :auto
+    # @!attribute
+    boolean_attr_accessor :auto
 
     # specifies how the perpendicular axis is crossed
     # must be one of [:ctr, :l, :r]
@@ -33,36 +36,20 @@ module Axlsx
 
     # The number of tick lables to skip between labels
     # @return [Integer]
-    attr_reader :tick_lbl_skip
+    # @!attribute
+    unsigned_int_attr_accessor :tick_lbl_skip
     alias :tickLblSkip :tick_lbl_skip
+    alias :tickLblSkip= :tick_lbl_skip=
 
     # The number of tickmarks to be skipped before the next one is rendered.
-    # @return [Boolean]
-    attr_reader :tick_mark_skip
+    # @return [Integer]
+    # @!attribute
+    unsigned_int_attr_accessor :tick_mark_skip
     alias :tickMarkSkip :tick_mark_skip
+    alias :tickMarkSkip= :tick_mark_skip=
 
     # regex for validating label offset
     LBL_OFFSET_REGEX = /0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)/.freeze
-
-    # @see tick_lbl_skip
-    def tick_lbl_skip=(v)
-      Axlsx.validate_unsigned_int(v)
-      @tick_lbl_skip = v
-    end
-    alias :tickLblSkip= :tick_lbl_skip=
-
-    # @see tick_mark_skip
-    def tick_mark_skip=(v)
-      Axlsx.validate_unsigned_int(v)
-      @tick_mark_skip = v
-    end
-    alias :tickMarkSkip= :tick_mark_skip=
-
-    # From the docs: This element specifies that this axis is a date or text axis based on the data that is used for the axis labels, not a specific choice.
-    def auto=(v)
-      Axlsx.validate_boolean(v)
-      @auto = v
-    end
 
     # specifies how the perpendicular axis is crossed
     # must be one of [:ctr, :l, :r]

@@ -74,7 +74,8 @@ module Axlsx
     # @see type
     # @return [Integer]
     # default nil
-    attr_reader :color_id
+    # @!attribute
+    unsigned_int_attr_accessor :color_id
 
     # Top Left Visible Cell
     # Location of the top left visible cell Location
@@ -94,7 +95,8 @@ module Axlsx
     # @see type
     # @return [Symbol]
     # default :normal
-    attr_reader :view
+    # @!attribute
+    validated_attr_accessor :view, :validate_sheet_view_type
 
     # Workbook View Index
     # Zero-based index of this workbook view, pointing
@@ -102,7 +104,8 @@ module Axlsx
     # @see type
     # @return [Integer]
     # default 0
-    attr_reader :workbook_view_id
+    # @!attribute
+    unsigned_int_attr_accessor :workbook_view_id
 
     # Zoom Scale
     # Window zoom magnification for current view
@@ -114,7 +117,8 @@ module Axlsx
     # @see type
     # @return [Integer]
     # default 100
-    attr_reader :zoom_scale
+    # @!attribute
+    validated_attr_accessor :zoom_scale, :validate_scale_0_10_400
 
     # Zoom Scale Normal View
     # Zoom magnification to use when in normal view,
@@ -126,7 +130,8 @@ module Axlsx
     # @see type
     # @return [Integer]
     # default 0
-    attr_reader :zoom_scale_normal
+    # @!attribute
+    validated_attr_accessor :zoom_scale_normal, :validate_scale_0_10_400
 
     # Zoom Scale Page Layout View
     # Zoom magnification to use when in page layout
@@ -138,7 +143,8 @@ module Axlsx
     # @see type
     # @return [Integer]
     # default 0
-    attr_reader :zoom_scale_page_layout_view
+    # @!attribute
+    validated_attr_accessor :zoom_scale_page_layout_view, :validate_scale_0_10_400
 
     # Zoom Scale Page Break Preview
     # Zoom magnification to use when in page break
@@ -151,7 +157,8 @@ module Axlsx
     # @see type
     # @return [Integer]
     # default 0
-    attr_reader :zoom_scale_sheet_layout_view
+    # @!attribute
+    validated_attr_accessor :zoom_scale_sheet_layout_view, :validate_scale_0_10_400
 
     # Adds a new selection
     # param [Symbol] pane
@@ -161,53 +168,11 @@ module Axlsx
       @selections[pane] = Selection.new(options.merge(pane: pane))
     end
 
-    # @see color_id
-    def color_id=(v)
-      Axlsx.validate_unsigned_int(v)
-      @color_id = v
-    end
-
     # @see top_left_cell
     def top_left_cell=(v)
       cell = (v.instance_of?(Axlsx::Cell) ? v.r_abs : v)
       Axlsx.validate_string(cell)
       @top_left_cell = cell
-    end
-
-    # @see view
-    def view=(v)
-      Axlsx.validate_sheet_view_type(v)
-      @view = v
-    end
-
-    # @see workbook_view_id
-    def workbook_view_id=(v)
-      Axlsx.validate_unsigned_int(v)
-      @workbook_view_id = v
-    end
-
-    # @see zoom_scale
-    def zoom_scale=(v)
-      Axlsx.validate_scale_0_10_400(v)
-      @zoom_scale = v
-    end
-
-    # @see zoom_scale_normal
-    def zoom_scale_normal=(v)
-      Axlsx.validate_scale_0_10_400(v)
-      @zoom_scale_normal = v
-    end
-
-    # @see zoom_scale_page_layout_view
-    def zoom_scale_page_layout_view=(v)
-      Axlsx.validate_scale_0_10_400(v)
-      @zoom_scale_page_layout_view = v
-    end
-
-    # @see zoom_scale_sheet_layout_view
-    def zoom_scale_sheet_layout_view=(v)
-      Axlsx.validate_scale_0_10_400(v)
-      @zoom_scale_sheet_layout_view = v
     end
 
     # Serializes the data validation

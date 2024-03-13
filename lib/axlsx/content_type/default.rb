@@ -3,19 +3,16 @@
 module Axlsx
   # An default content part. These parts are automatically created by for you based on the content of your package.
   class Default < AbstractContentType
+    include Axlsx::Accessors
+
     # The serialization node name for this class
     NODE_NAME = 'Default'
 
     # The extension of the content type.
     # @return [String]
-    attr_reader :extension
+    # @!attribute
+    string_attr_accessor :extension
     alias :Extension :extension
-
-    # Sets the file extension for this content type.
-    def extension=(v)
-      Axlsx.validate_string v
-      @extension = v
-    end
     alias :Extension= :extension=
 
     # Serializes this object to xml

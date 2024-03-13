@@ -7,6 +7,7 @@ module Axlsx
   # @see Worksheet#print_options
   # @see Worksheet#initialize
   class PageSetup
+    include Axlsx::Accessors
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
@@ -41,29 +42,35 @@ module Axlsx
     # @note PageSetup#fit_to is the recomended way to manage page fitting as only specifying one of fit_to_width/fit_to_height will result in the counterpart
     # being set to 1.
     # @return [Integer]
-    attr_reader :fit_to_height
+    # @!attribute
+    unsigned_int_attr_accessor :fit_to_height
 
     # Number of horizontal pages to fit on.
     # @note PageSetup#fit_to is the recomended way to manage page fitting as only specifying one of width/height will result in the counterpart
     # being set to 1.
     # @return [Integer]
-    attr_reader :fit_to_width
+    # @!attribute
+    unsigned_int_attr_accessor :fit_to_width
 
     # Orientation of the page (:default, :landscape, :portrait)
     # @return [Symbol]
-    attr_reader :orientation
+    # @!attribute
+    validated_attr_accessor :orientation, :validate_page_orientation
 
     # Height of paper (string containing a number followed by a unit identifier: "297mm", "11in")
     # @return [String]
-    attr_reader :paper_height
+    # @!attribute
+    validated_attr_accessor :paper_height, :validate_number_with_unit
 
     # Width of paper (string containing a number followed by a unit identifier: "210mm", "8.5in")
     # @return [String]
-    attr_reader :paper_width
+    # @!attribute
+    validated_attr_accessor :paper_width, :validate_number_with_unit
 
     # Print scaling (percent value, given as integer ranging from 10 to 400)
     # @return [Integer]
-    attr_reader :scale
+    # @!attribute
+    validated_attr_accessor :scale, :validate_scale_10_400
 
     # The paper size to use in printing
     # 1 = Letter paper (8.5 in. by 11 in.)
@@ -195,42 +202,6 @@ module Axlsx
     # @param [Hash] options The page settings to set (possible keys are :fit_to_height, :fit_to_width, :orientation, :paper_height, :paper_width, and :scale).
     def set(options)
       parse_options options
-    end
-
-    # @see fit_to_height
-    def fit_to_height=(v)
-      Axlsx.validate_unsigned_int(v)
-      @fit_to_height = v
-    end
-
-    # @see fit_to_width
-    def fit_to_width=(v)
-      Axlsx.validate_unsigned_int(v)
-      @fit_to_width = v
-    end
-
-    # @see orientation
-    def orientation=(v)
-      Axlsx.validate_page_orientation(v)
-      @orientation = v
-    end
-
-    # @see paper_height
-    def paper_height=(v)
-      Axlsx.validate_number_with_unit(v)
-      @paper_height = v
-    end
-
-    # @see paper_width
-    def paper_width=(v)
-      Axlsx.validate_number_with_unit(v)
-      @paper_width = v
-    end
-
-    # @see scale
-    def scale=(v)
-      Axlsx.validate_scale_10_400(v)
-      @scale = v
     end
 
     # convenience method to achieve sanity when setting fit_to_width and fit_to_height
