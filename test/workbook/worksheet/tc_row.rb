@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestRow < Test::Unit::TestCase
+class TestRow < Minitest::Test
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet name: "hmmm"
@@ -106,7 +106,7 @@ class TestRow < Test::Unit::TestCase
     @ws.add_row row, escape_formulas: [true, false, true]
 
     assert(@ws.rows.last.cells.first.escape_formulas)
-    refute(@ws.rows.last.cells[1].escape_formulas)
+    assert_false(@ws.rows.last.cells[1].escape_formulas)
     assert(@ws.rows.last.cells[2].escape_formulas)
   end
 
@@ -117,32 +117,32 @@ class TestRow < Test::Unit::TestCase
   end
 
   def test_height
-    assert_raise(ArgumentError) { @row.height = -3 }
-    assert_nothing_raised { @row.height = 15 }
+    assert_raises(ArgumentError) { @row.height = -3 }
+    refute_raises { @row.height = 15 }
     assert_equal(15, @row.height)
   end
 
   def test_ph
-    assert_raise(ArgumentError) { @row.ph = -3 }
-    assert_nothing_raised { @row.ph = true }
+    assert_raises(ArgumentError) { @row.ph = -3 }
+    refute_raises { @row.ph = true }
     assert(@row.ph)
   end
 
   def test_hidden
-    assert_raise(ArgumentError) { @row.hidden = -3 }
-    assert_nothing_raised { @row.hidden = true }
+    assert_raises(ArgumentError) { @row.hidden = -3 }
+    refute_raises { @row.hidden = true }
     assert(@row.hidden)
   end
 
   def test_collapsed
-    assert_raise(ArgumentError) { @row.collapsed = -3 }
-    assert_nothing_raised { @row.collapsed = true }
+    assert_raises(ArgumentError) { @row.collapsed = -3 }
+    refute_raises { @row.collapsed = true }
     assert(@row.collapsed)
   end
 
   def test_outlineLevel
-    assert_raise(ArgumentError) { @row.outlineLevel = -3 }
-    assert_nothing_raised { @row.outlineLevel = 2 }
+    assert_raises(ArgumentError) { @row.outlineLevel = -3 }
+    refute_raises { @row.outlineLevel = 2 }
     assert_equal(2, @row.outlineLevel)
   end
 
@@ -178,7 +178,11 @@ class TestRow < Test::Unit::TestCase
     r = @ws.add_row(values, offset: offset, style: 1)
     r.cells.each_with_index do |c, index|
       assert_equal(c.style, index < offset ? 0 : 1)
-      assert_equal(c.value, index < offset ? nil : values[index - offset])
+      if index < offset
+        assert_nil(c.value)
+      else
+        assert_equal(c.value, values[index - offset])
+      end
     end
   end
 
@@ -189,7 +193,11 @@ class TestRow < Test::Unit::TestCase
     r = @ws.add_row(values, offset: offset, style: styles)
     r.cells.each_with_index do |c, index|
       assert_equal(c.style, index < offset ? 0 : styles[index - offset])
-      assert_equal(c.value, index < offset ? nil : values[index - offset])
+      if index < offset
+        assert_nil(c.value)
+      else
+        assert_equal(c.value, values[index - offset])
+      end
     end
   end
 

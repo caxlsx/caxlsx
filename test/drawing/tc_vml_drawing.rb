@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestVmlDrawing < Test::Unit::TestCase
+class TestVmlDrawing < Minitest::Test
   def setup
     p = Axlsx::Package.new
     wb = p.workbook
@@ -13,7 +13,7 @@ class TestVmlDrawing < Test::Unit::TestCase
   end
 
   def test_initialize
-    assert_raise(ArgumentError) { Axlsx::VmlDrawing.new }
+    assert_raises(ArgumentError) { Axlsx::VmlDrawing.new }
   end
 
   def test_pn

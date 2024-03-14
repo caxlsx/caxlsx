@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestConditionalFormatting < Test::Unit::TestCase
+class TestConditionalFormatting < Minitest::Test
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet name: "hmmm"
@@ -149,86 +149,86 @@ class TestConditionalFormatting < Test::Unit::TestCase
   end
 
   def test_sqref
-    assert_raise(ArgumentError) { @cf.sqref = 10 }
-    assert_nothing_raised { @cf.sqref = "A1:A1" }
+    assert_raises(ArgumentError) { @cf.sqref = 10 }
+    refute_raises { @cf.sqref = "A1:A1" }
     assert_equal("A1:A1", @cf.sqref)
   end
 
   def test_type
-    assert_raise(ArgumentError) { @cfr.type = "illegal" }
-    assert_nothing_raised { @cfr.type = :containsBlanks }
+    assert_raises(ArgumentError) { @cfr.type = "illegal" }
+    refute_raises { @cfr.type = :containsBlanks }
     assert_equal(:containsBlanks, @cfr.type)
   end
 
   def test_above_average
-    assert_raise(ArgumentError) { @cfr.aboveAverage = "illegal" }
-    assert_nothing_raised { @cfr.aboveAverage = true }
+    assert_raises(ArgumentError) { @cfr.aboveAverage = "illegal" }
+    refute_raises { @cfr.aboveAverage = true }
     assert(@cfr.aboveAverage)
   end
 
   def test_equal_average
-    assert_raise(ArgumentError) { @cfr.equalAverage = "illegal" }
-    assert_nothing_raised { @cfr.equalAverage = true }
+    assert_raises(ArgumentError) { @cfr.equalAverage = "illegal" }
+    refute_raises { @cfr.equalAverage = true }
     assert(@cfr.equalAverage)
   end
 
   def test_bottom
-    assert_raise(ArgumentError) { @cfr.bottom = "illegal" }
-    assert_nothing_raised { @cfr.bottom = true }
+    assert_raises(ArgumentError) { @cfr.bottom = "illegal" }
+    refute_raises { @cfr.bottom = true }
     assert(@cfr.bottom)
   end
 
   def test_operator
-    assert_raise(ArgumentError) { @cfr.operator = "cellIs" }
-    assert_nothing_raised { @cfr.operator = :notBetween }
+    assert_raises(ArgumentError) { @cfr.operator = "cellIs" }
+    refute_raises { @cfr.operator = :notBetween }
     assert_equal(:notBetween, @cfr.operator)
   end
 
   def test_dxf_id
-    assert_raise(ArgumentError) { @cfr.dxfId = "illegal" }
-    assert_nothing_raised { @cfr.dxfId = 1 }
+    assert_raises(ArgumentError) { @cfr.dxfId = "illegal" }
+    refute_raises { @cfr.dxfId = 1 }
     assert_equal(1, @cfr.dxfId)
   end
 
   def test_priority
-    assert_raise(ArgumentError) { @cfr.priority = -1.0 }
-    assert_nothing_raised { @cfr.priority = 1 }
+    assert_raises(ArgumentError) { @cfr.priority = -1.0 }
+    refute_raises { @cfr.priority = 1 }
     assert_equal(1, @cfr.priority)
   end
 
   def test_text
-    assert_raise(ArgumentError) { @cfr.text = 1.0 }
-    assert_nothing_raised { @cfr.text = "testing" }
+    assert_raises(ArgumentError) { @cfr.text = 1.0 }
+    refute_raises { @cfr.text = "testing" }
     assert_equal("testing", @cfr.text)
   end
 
   def test_percent
-    assert_raise(ArgumentError) { @cfr.percent = "10%" } # WRONG!
-    assert_nothing_raised { @cfr.percent = true }
+    assert_raises(ArgumentError) { @cfr.percent = "10%" } # WRONG!
+    refute_raises { @cfr.percent = true }
     assert(@cfr.percent)
   end
 
   def test_rank
-    assert_raise(ArgumentError) { @cfr.rank = -1 }
-    assert_nothing_raised { @cfr.rank = 1 }
+    assert_raises(ArgumentError) { @cfr.rank = -1 }
+    refute_raises { @cfr.rank = 1 }
     assert_equal(1, @cfr.rank)
   end
 
   def test_std_dev
-    assert_raise(ArgumentError) { @cfr.stdDev = -1 }
-    assert_nothing_raised { @cfr.stdDev = 1 }
+    assert_raises(ArgumentError) { @cfr.stdDev = -1 }
+    refute_raises { @cfr.stdDev = 1 }
     assert_equal(1, @cfr.stdDev)
   end
 
   def test_stop_if_true
-    assert_raise(ArgumentError) { @cfr.stopIfTrue = "illegal" }
-    assert_nothing_raised { @cfr.stopIfTrue = false }
-    refute(@cfr.stopIfTrue)
+    assert_raises(ArgumentError) { @cfr.stopIfTrue = "illegal" }
+    refute_raises { @cfr.stopIfTrue = false }
+    assert_false(@cfr.stopIfTrue)
   end
 
   def test_time_period
-    assert_raise(ArgumentError) { @cfr.timePeriod = "illegal" }
-    assert_nothing_raised { @cfr.timePeriod = :today }
+    assert_raises(ArgumentError) { @cfr.timePeriod = "illegal" }
+    refute_raises { @cfr.timePeriod = :today }
     assert_equal(:today, @cfr.timePeriod)
   end
 end

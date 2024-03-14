@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestPatternFill < Test::Unit::TestCase
+class TestPatternFill < Minitest::Test
   def setup
     @item = Axlsx::PatternFill.new
   end
@@ -16,20 +16,20 @@ class TestPatternFill < Test::Unit::TestCase
   end
 
   def test_bgColor
-    assert_raise(ArgumentError) { @item.bgColor = -1.1 }
-    assert_nothing_raised { @item.bgColor = Axlsx::Color.new }
+    assert_raises(ArgumentError) { @item.bgColor = -1.1 }
+    refute_raises { @item.bgColor = Axlsx::Color.new }
     assert_equal("FF000000", @item.bgColor.rgb)
   end
 
   def test_fgColor
-    assert_raise(ArgumentError) { @item.fgColor = -1.1 }
-    assert_nothing_raised { @item.fgColor = Axlsx::Color.new }
+    assert_raises(ArgumentError) { @item.fgColor = -1.1 }
+    refute_raises { @item.fgColor = Axlsx::Color.new }
     assert_equal("FF000000", @item.fgColor.rgb)
   end
 
   def test_pattern_type
-    assert_raise(ArgumentError) { @item.patternType = -1.1 }
-    assert_nothing_raised { @item.patternType = :lightUp }
+    assert_raises(ArgumentError) { @item.patternType = -1.1 }
+    refute_raises { @item.patternType = :lightUp }
     assert_equal(:lightUp, @item.patternType)
   end
 

@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestBorderCreator < Test::Unit::TestCase
+class TestBorderCreator < Minitest::Test
   def setup
     @p = Axlsx::Package.new
     @wb = @p.workbook

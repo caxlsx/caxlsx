@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestDateTimeConverter < Test::Unit::TestCase
+class TestDateTimeConverter < Minitest::Test
   def setup
     @margin_of_error = 0.000_001
   end

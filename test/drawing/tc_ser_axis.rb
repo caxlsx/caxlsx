@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestSerAxis < Test::Unit::TestCase
+class TestSerAxis < Minitest::Test
   def setup
     @axis = Axlsx::SerAxis.new
   end
@@ -17,14 +17,14 @@ class TestSerAxis < Test::Unit::TestCase
   end
 
   def test_tick_lbl_skip
-    assert_raise(ArgumentError, "requires valid tick_lbl_skip") { @axis.tick_lbl_skip = -1 }
-    assert_nothing_raised("accepts valid tick_lbl_skip") { @axis.tick_lbl_skip = 1 }
+    assert_raises(ArgumentError, "requires valid tick_lbl_skip") { @axis.tick_lbl_skip = -1 }
+    refute_raises { @axis.tick_lbl_skip = 1 }
     assert_equal(1, @axis.tick_lbl_skip)
   end
 
   def test_tick_mark_skip
-    assert_raise(ArgumentError, "requires valid tick_mark_skip") { @axis.tick_mark_skip = :my_eyes }
-    assert_nothing_raised("accepts valid tick_mark_skip") { @axis.tick_mark_skip = 2 }
+    assert_raises(ArgumentError, "requires valid tick_mark_skip") { @axis.tick_mark_skip = :my_eyes }
+    refute_raises { @axis.tick_mark_skip = 2 }
     assert_equal(2, @axis.tick_mark_skip)
   end
 end

@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestDataBar < Test::Unit::TestCase
+class TestDataBar < Minitest::Test
   def setup
     @data_bar = Axlsx::DataBar.new color: "FF638EC6"
   end
@@ -21,21 +21,21 @@ class TestDataBar < Test::Unit::TestCase
   end
 
   def test_minLength
-    assert_raise(ArgumentError) { @data_bar.minLength = :invalid_type }
-    assert_nothing_raised { @data_bar.minLength = 0 }
+    assert_raises(ArgumentError) { @data_bar.minLength = :invalid_type }
+    refute_raises { @data_bar.minLength = 0 }
     assert_equal(0, @data_bar.minLength)
   end
 
   def test_maxLength
-    assert_raise(ArgumentError) { @data_bar.maxLength = :invalid_type }
-    assert_nothing_raised { @data_bar.maxLength = 0 }
+    assert_raises(ArgumentError) { @data_bar.maxLength = :invalid_type }
+    refute_raises { @data_bar.maxLength = 0 }
     assert_equal(0, @data_bar.maxLength)
   end
 
   def test_showValue
-    assert_raise(ArgumentError) { @data_bar.showValue = :invalid_type }
-    assert_nothing_raised { @data_bar.showValue = false }
-    refute(@data_bar.showValue)
+    assert_raises(ArgumentError) { @data_bar.showValue = :invalid_type }
+    refute_raises { @data_bar.showValue = false }
+    assert_false(@data_bar.showValue)
   end
 
   def test_to_xml_string

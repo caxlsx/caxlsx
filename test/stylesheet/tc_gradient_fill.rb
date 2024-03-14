@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestGradientFill < Test::Unit::TestCase
+class TestGradientFill < Minitest::Test
   def setup
     @item = Axlsx::GradientFill.new
   end
@@ -20,38 +20,38 @@ class TestGradientFill < Test::Unit::TestCase
   end
 
   def test_type
-    assert_raise(ArgumentError) { @item.type = 7 }
-    assert_nothing_raised { @item.type = :path }
+    assert_raises(ArgumentError) { @item.type = 7 }
+    refute_raises { @item.type = :path }
     assert_equal(:path, @item.type)
   end
 
   def test_degree
-    assert_raise(ArgumentError) { @item.degree = -7 }
-    assert_nothing_raised { @item.degree = 5.0 }
+    assert_raises(ArgumentError) { @item.degree = -7 }
+    refute_raises { @item.degree = 5.0 }
     assert_in_delta(@item.degree, 5.0)
   end
 
   def test_left
-    assert_raise(ArgumentError) { @item.left = -1.1 }
-    assert_nothing_raised { @item.left = 1.0 }
+    assert_raises(ArgumentError) { @item.left = -1.1 }
+    refute_raises { @item.left = 1.0 }
     assert_in_delta(@item.left, 1.0)
   end
 
   def test_right
-    assert_raise(ArgumentError) { @item.right = -1.1 }
-    assert_nothing_raised { @item.right = 0.5 }
+    assert_raises(ArgumentError) { @item.right = -1.1 }
+    refute_raises { @item.right = 0.5 }
     assert_in_delta(@item.right, 0.5)
   end
 
   def test_top
-    assert_raise(ArgumentError) { @item.top = -1.1 }
-    assert_nothing_raised { @item.top = 1.0 }
+    assert_raises(ArgumentError) { @item.top = -1.1 }
+    refute_raises { @item.top = 1.0 }
     assert_in_delta(@item.top, 1.0)
   end
 
   def test_bottom
-    assert_raise(ArgumentError) { @item.bottom = -1.1 }
-    assert_nothing_raised { @item.bottom = 0.0 }
+    assert_raises(ArgumentError) { @item.bottom = -1.1 }
+    refute_raises { @item.bottom = 0.0 }
     assert_in_delta(@item.bottom, 0.0)
   end
 

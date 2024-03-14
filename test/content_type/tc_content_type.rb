@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestContentType < Test::Unit::TestCase
+class TestContentType < Minitest::Test
   def setup
     @package = Axlsx::Package.new
     @doc = Nokogiri::XML(@package.send(:content_types).to_xml_string)

@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestDLbls < Test::Unit::TestCase
+class TestDLbls < Minitest::Test
   def setup
     @d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart)
     @boolean_attributes = [:show_legend_key,
@@ -17,7 +17,7 @@ class TestDLbls < Test::Unit::TestCase
   def test_initialization
     assert_equal(:bestFit, @d_lbls.d_lbl_pos)
     @boolean_attributes.each do |attr|
-      refute(@d_lbls.send(attr))
+      assert_false(@d_lbls.send(attr))
     end
   end
 
@@ -33,15 +33,15 @@ class TestDLbls < Test::Unit::TestCase
   end
 
   def test_d_lbl_pos
-    assert_raise(ArgumentError, 'invlaid label positions are rejected') { @d_lbls.d_lbl_pos = :upside_down }
-    assert_nothing_raised('accepts valid label position') { @d_lbls.d_lbl_pos = :ctr }
+    assert_raises(ArgumentError, 'invlaid label positions are rejected') { @d_lbls.d_lbl_pos = :upside_down }
+    refute_raises { @d_lbls.d_lbl_pos = :ctr }
   end
 
   def test_boolean_attributes
     @boolean_attributes.each do |attr|
-      assert_raise(ArgumentError, "rejects non boolean value for #{attr}") { @d_lbls.send(:"#{attr}=", :foo) }
-      assert_nothing_raised("accepts boolean value for #{attr}") { @d_lbls.send(:"#{attr}=", true) }
-      assert_nothing_raised("accepts boolean value for #{attr}") { @d_lbls.send(:"#{attr}=", false) }
+      assert_raises(ArgumentError, "rejects non boolean value for #{attr}") { @d_lbls.send(:"#{attr}=", :foo) }
+      refute_raises { @d_lbls.send(:"#{attr}=", true) }
+      refute_raises { @d_lbls.send(:"#{attr}=", false) }
     end
   end
 

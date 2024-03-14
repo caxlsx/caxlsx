@@ -2,13 +2,13 @@
 
 require 'tc_helper'
 
-class TestSheetCalcPr < Test::Unit::TestCase
+class TestSheetCalcPr < Minitest::Test
   def setup
     @sheet_calc_pr = Axlsx::SheetCalcPr.new(full_calc_on_load: false)
   end
 
   def test_full_calc_on_load
-    refute @sheet_calc_pr.full_calc_on_load
+    assert_false @sheet_calc_pr.full_calc_on_load
     assert Axlsx::SheetCalcPr.new.full_calc_on_load
   end
 

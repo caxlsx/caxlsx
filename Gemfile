@@ -8,8 +8,8 @@ group :development, :test do
   gem 'yard'
 
   if RUBY_VERSION >= '2.7'
-    gem 'rubocop', '1.60.2'
-    gem 'rubocop-minitest', '0.34.5'
+    gem 'rubocop', '1.62.0'
+    gem 'rubocop-minitest', '0.35.0'
     gem 'rubocop-performance', '1.20.2'
   end
 end
@@ -17,7 +17,7 @@ end
 group :test do
   gem 'rake'
   gem 'simplecov'
-  gem 'test-unit'
+  gem 'minitest'
   gem 'timecop'
   gem 'webmock'
 end

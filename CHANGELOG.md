@@ -1,12 +1,15 @@
 CHANGELOG
 ---------
 - **Unreleased**
+
+- **February.26.24**: 4.1.0
   - [PR #316](https://github.com/caxlsx/caxlsx/pull/316) Prevent camelization of hyperlink locations
   - [PR #312](https://github.com/caxlsx/caxlsx/pull/312) Added 2D/flat PieChart drawing
   - [PR #317](https://github.com/caxlsx/caxlsx/pull/317) Apply style for columns without defining cells
   - [PR #345](https://github.com/caxlsx/caxlsx/pull/345) Show outline symbols by default to match original behavior
   - [PR #334](https://github.com/caxlsx/caxlsx/pull/334) Add pattern fill options to add_style
   - [PR #342](https://github.com/caxlsx/caxlsx/pull/342) Fix show button for filter columns
+  - [PR #349](https://github.com/caxlsx/caxlsx/pull/349) Convert test suite to Minitest
 
 - **October.30.23**: 4.0.0
   - [PR #189](https://github.com/caxlsx/caxlsx/pull/189) **breaking** Make `Axlsx::escape_formulas` true by default to mitigate [Formula Injection](https://www.owasp.org/index.php/CSV_Injection) vulnerabilities.

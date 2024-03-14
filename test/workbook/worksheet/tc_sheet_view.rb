@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestSheetView < Test::Unit::TestCase
+class TestSheetView < Minitest::Test
   def setup
     # inverse defaults for booleans
     @boolean_options = { right_to_left: true, show_formulas: true, show_outline_symbols: false,
@@ -13,10 +13,10 @@ class TestSheetView < Test::Unit::TestCase
     @int_0 = { zoom_scale_normal: 100, zoom_scale_page_layout_view: 100, zoom_scale_sheet_layout_view: 100, workbook_view_id: 2 }
     @int_100 = { zoom_scale: 10 }
 
-    @integer_options = { color_id: 2, workbook_view_id: 2 }.merge(@int_0).merge(@int_100)
+    @integer_options = { color_id: 2, workbook_view_id: 2 }.merge(@int_0, @int_100)
     @string_options = { top_left_cell: 'A2' }
 
-    @options = @boolean_options.merge(@boolean_options).merge(@symbol_options).merge(@nil_options).merge(@int_0).merge(@int_100)
+    @options = @boolean_options.merge(@boolean_options, @symbol_options, @nil_options, @int_0, @int_100)
 
     @sv = Axlsx::SheetView.new(@options)
   end
@@ -47,143 +47,143 @@ class TestSheetView < Test::Unit::TestCase
 
   def test_boolean_attribute_validation
     @boolean_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be boolean") { @sv.send(:"#{key}=", 'A') }
-      assert_nothing_raised { @sv.send(:"#{key}=", value) }
+      assert_raises(ArgumentError, "#{key} must be boolean") { @sv.send(:"#{key}=", 'A') }
+      refute_raises { @sv.send(:"#{key}=", value) }
     end
   end
 
   def test_string_attribute_validation
     @string_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be string") { @sv.send(:"#{key}=", :symbol) }
-      assert_nothing_raised { @sv.send(:"#{key}=", value) }
+      assert_raises(ArgumentError, "#{key} must be string") { @sv.send(:"#{key}=", :symbol) }
+      refute_raises { @sv.send(:"#{key}=", value) }
     end
   end
 
   def test_symbol_attribute_validation
     @symbol_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be symbol") { @sv.send(:"#{key}=", "foo") }
-      assert_nothing_raised { @sv.send(:"#{key}=", value) }
+      assert_raises(ArgumentError, "#{key} must be symbol") { @sv.send(:"#{key}=", "foo") }
+      refute_raises { @sv.send(:"#{key}=", value) }
     end
   end
 
   def test_integer_attribute_validation
     @integer_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be integer") { @sv.send(:"#{key}=", "foo") }
-      assert_nothing_raised { @sv.send(:"#{key}=", value) }
+      assert_raises(ArgumentError, "#{key} must be integer") { @sv.send(:"#{key}=", "foo") }
+      refute_raises { @sv.send(:"#{key}=", value) }
     end
   end
 
   def test_color_id
-    assert_raise(ArgumentError) { @sv.color_id = "10" }
-    assert_nothing_raised { @sv.color_id = 2 }
+    assert_raises(ArgumentError) { @sv.color_id = "10" }
+    refute_raises { @sv.color_id = 2 }
     assert_equal(2, @sv.color_id)
   end
 
   def test_default_grid_color
-    assert_raise(ArgumentError) { @sv.default_grid_color = "foo" }
-    assert_nothing_raised { @sv.default_grid_color = false }
-    refute(@sv.default_grid_color)
+    assert_raises(ArgumentError) { @sv.default_grid_color = "foo" }
+    refute_raises { @sv.default_grid_color = false }
+    assert_false(@sv.default_grid_color)
   end
 
   def test_right_to_left
-    assert_raise(ArgumentError) { @sv.right_to_left = "foo´" }
-    assert_nothing_raised { @sv.right_to_left = true }
+    assert_raises(ArgumentError) { @sv.right_to_left = "foo´" }
+    refute_raises { @sv.right_to_left = true }
     assert(@sv.right_to_left)
   end
 
   def test_show_formulas
-    assert_raise(ArgumentError) { @sv.show_formulas = 'foo' }
-    assert_nothing_raised { @sv.show_formulas = false }
-    refute(@sv.show_formulas)
+    assert_raises(ArgumentError) { @sv.show_formulas = 'foo' }
+    refute_raises { @sv.show_formulas = false }
+    assert_false(@sv.show_formulas)
   end
 
   def test_show_grid_lines
-    assert_raise(ArgumentError) { @sv.show_grid_lines = "foo" }
-    assert_nothing_raised { @sv.show_grid_lines = false }
-    refute(@sv.show_grid_lines)
+    assert_raises(ArgumentError) { @sv.show_grid_lines = "foo" }
+    refute_raises { @sv.show_grid_lines = false }
+    assert_false(@sv.show_grid_lines)
   end
 
   def test_show_outline_symbols
-    assert_raise(ArgumentError) { @sv.show_outline_symbols = 'foo' }
-    assert_nothing_raised { @sv.show_outline_symbols = true }
+    assert_raises(ArgumentError) { @sv.show_outline_symbols = 'foo' }
+    refute_raises { @sv.show_outline_symbols = true }
     assert(@sv.show_outline_symbols)
   end
 
   def test_show_row_col_headers
-    assert_raise(ArgumentError) { @sv.show_row_col_headers = "foo" }
-    assert_nothing_raised { @sv.show_row_col_headers = false }
-    refute(@sv.show_row_col_headers)
+    assert_raises(ArgumentError) { @sv.show_row_col_headers = "foo" }
+    refute_raises { @sv.show_row_col_headers = false }
+    assert_false(@sv.show_row_col_headers)
   end
 
   def test_show_ruler
-    assert_raise(ArgumentError) { @sv.show_ruler = 'foo' }
-    assert_nothing_raised { @sv.show_ruler = false }
-    refute(@sv.show_ruler)
+    assert_raises(ArgumentError) { @sv.show_ruler = 'foo' }
+    refute_raises { @sv.show_ruler = false }
+    assert_false(@sv.show_ruler)
   end
 
   def test_show_white_space
-    assert_raise(ArgumentError) { @sv.show_white_space = 'foo' }
-    assert_nothing_raised { @sv.show_white_space = false }
-    refute(@sv.show_white_space)
+    assert_raises(ArgumentError) { @sv.show_white_space = 'foo' }
+    refute_raises { @sv.show_white_space = false }
+    assert_false(@sv.show_white_space)
   end
 
   def test_show_zeros
-    assert_raise(ArgumentError) { @sv.show_zeros = "foo" }
-    assert_nothing_raised { @sv.show_zeros = false }
-    refute(@sv.show_zeros)
+    assert_raises(ArgumentError) { @sv.show_zeros = "foo" }
+    refute_raises { @sv.show_zeros = false }
+    assert_false(@sv.show_zeros)
   end
 
   def test_tab_selected
-    assert_raise(ArgumentError) { @sv.tab_selected = "foo" }
-    assert_nothing_raised { @sv.tab_selected = false }
-    refute(@sv.tab_selected)
+    assert_raises(ArgumentError) { @sv.tab_selected = "foo" }
+    refute_raises { @sv.tab_selected = false }
+    assert_false(@sv.tab_selected)
   end
 
   def test_top_left_cell
-    assert_raise(ArgumentError) { @sv.top_left_cell = :cell_adress }
-    assert_nothing_raised { @sv.top_left_cell = "A2" }
+    assert_raises(ArgumentError) { @sv.top_left_cell = :cell_adress }
+    refute_raises { @sv.top_left_cell = "A2" }
     assert_equal("A2", @sv.top_left_cell)
   end
 
   def test_view
-    assert_raise(ArgumentError) { @sv.view = 'view' }
-    assert_nothing_raised { @sv.view = :page_break_preview }
+    assert_raises(ArgumentError) { @sv.view = 'view' }
+    refute_raises { @sv.view = :page_break_preview }
     assert_equal(:page_break_preview, @sv.view)
   end
 
   def test_window_protection
-    assert_raise(ArgumentError) { @sv.window_protection = "foo" }
-    assert_nothing_raised { @sv.window_protection = false }
-    refute(@sv.window_protection)
+    assert_raises(ArgumentError) { @sv.window_protection = "foo" }
+    refute_raises { @sv.window_protection = false }
+    assert_false(@sv.window_protection)
   end
 
   def test_workbook_view_id
-    assert_raise(ArgumentError) { @sv.workbook_view_id = "1" }
-    assert_nothing_raised { @sv.workbook_view_id = 1 }
+    assert_raises(ArgumentError) { @sv.workbook_view_id = "1" }
+    refute_raises { @sv.workbook_view_id = 1 }
     assert_equal(1, @sv.workbook_view_id)
   end
 
   def test_zoom_scale
-    assert_raise(ArgumentError) { @sv.zoom_scale = "50" }
-    assert_nothing_raised { @sv.zoom_scale = 50 }
+    assert_raises(ArgumentError) { @sv.zoom_scale = "50" }
+    refute_raises { @sv.zoom_scale = 50 }
     assert_equal(50, @sv.zoom_scale)
   end
 
   def test_zoom_scale_normal
-    assert_raise(ArgumentError) { @sv.zoom_scale_normal = "50" }
-    assert_nothing_raised { @sv.zoom_scale_normal = 50 }
+    assert_raises(ArgumentError) { @sv.zoom_scale_normal = "50" }
+    refute_raises { @sv.zoom_scale_normal = 50 }
     assert_equal(50, @sv.zoom_scale_normal)
   end
 
   def test_zoom_scale_page_layout_view
-    assert_raise(ArgumentError) { @sv.zoom_scale_page_layout_view = "50" }
-    assert_nothing_raised { @sv.zoom_scale_page_layout_view = 50 }
+    assert_raises(ArgumentError) { @sv.zoom_scale_page_layout_view = "50" }
+    refute_raises { @sv.zoom_scale_page_layout_view = 50 }
     assert_equal(50, @sv.zoom_scale_page_layout_view)
   end
 
   def test_zoom_scale_sheet_layout_view
-    assert_raise(ArgumentError) { @sv.zoom_scale_sheet_layout_view = "50" }
-    assert_nothing_raised { @sv.zoom_scale_sheet_layout_view = 50 }
+    assert_raises(ArgumentError) { @sv.zoom_scale_sheet_layout_view = "50" }
+    refute_raises { @sv.zoom_scale_sheet_layout_view = 50 }
     assert_equal(50, @sv.zoom_scale_sheet_layout_view)
   end
 

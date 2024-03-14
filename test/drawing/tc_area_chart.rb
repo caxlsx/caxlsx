@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestAreaChart < Test::Unit::TestCase
+class TestAreaChart < Minitest::Test
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
@@ -20,8 +20,8 @@ class TestAreaChart < Test::Unit::TestCase
   end
 
   def test_grouping
-    assert_raise(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
-    assert_nothing_raised("allow valid grouping") { @chart.grouping = :stacked }
+    assert_raises(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
+    refute_raises { @chart.grouping = :stacked }
     assert_equal(:stacked, @chart.grouping)
   end
 

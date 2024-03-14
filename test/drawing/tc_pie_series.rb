@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestPieSeries < Test::Unit::TestCase
+class TestPieSeries < Minitest::Test
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet name: "hmmm"
@@ -18,11 +18,11 @@ class TestPieSeries < Test::Unit::TestCase
   end
 
   def test_explosion
-    assert_raise(ArgumentError, "require valid explosion") { @series.explosion = :lots }
-    assert_nothing_raised("allow valid explosion") { @series.explosion = 20 }
+    assert_raises(ArgumentError, "require valid explosion") { @series.explosion = :lots }
+    refute_raises { @series.explosion = 20 }
     assert_equal(20, @series.explosion)
     # issue 58 - explosion caused to_xml_string to fail - now tested
-    assert_nothing_raised("allow to_xml_string") { @series.to_xml_string }
+    refute_raises { @series.to_xml_string }
   end
 
   def test_to_xml_string

@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestDrawing < Test::Unit::TestCase
+class TestDrawing < Minitest::Test
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet

@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestPie3DChart < Test::Unit::TestCase
+class TestPie3DChart < Minitest::Test
   def setup
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet

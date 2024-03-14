@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestCatAxis < Test::Unit::TestCase
+class TestCatAxis < Minitest::Test
   def setup
     @axis = Axlsx::CatAxis.new
   end
@@ -16,17 +16,17 @@ class TestCatAxis < Test::Unit::TestCase
   end
 
   def test_auto
-    assert_raise(ArgumentError, "requires valid auto") { @axis.auto = :nowhere }
-    assert_nothing_raised("accepts valid auto") { @axis.auto = false }
+    assert_raises(ArgumentError, "requires valid auto") { @axis.auto = :nowhere }
+    refute_raises { @axis.auto = false }
   end
 
   def test_lbl_algn
-    assert_raise(ArgumentError, "requires valid label alignment") { @axis.lbl_algn = :nowhere }
-    assert_nothing_raised("accepts valid label alignment") { @axis.lbl_algn = :r }
+    assert_raises(ArgumentError, "requires valid label alignment") { @axis.lbl_algn = :nowhere }
+    refute_raises { @axis.lbl_algn = :r }
   end
 
   def test_lbl_offset
-    assert_raise(ArgumentError, "requires valid label offset") { @axis.lbl_offset = 'foo' }
-    assert_nothing_raised("accepts valid label offset") { @axis.lbl_offset = "20" }
+    assert_raises(ArgumentError, "requires valid label offset") { @axis.lbl_offset = 'foo' }
+    refute_raises { @axis.lbl_offset = "20" }
   end
 end

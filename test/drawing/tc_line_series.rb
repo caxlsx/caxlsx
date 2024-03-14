@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestLineSeries < Test::Unit::TestCase
+class TestLineSeries < Minitest::Test
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet name: "hmmm"
@@ -27,14 +27,14 @@ class TestLineSeries < Test::Unit::TestCase
     assert(@series.show_marker)
     @series.show_marker = false
 
-    refute(@series.show_marker)
+    assert_false(@series.show_marker)
   end
 
   def test_smooth
     assert(@series.smooth)
     @series.smooth = false
 
-    refute(@series.smooth)
+    assert_false(@series.smooth)
   end
 
   def test_marker_symbol

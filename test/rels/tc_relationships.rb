@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestRelationships < Test::Unit::TestCase
+class TestRelationships < Minitest::Test
   def test_for
     source_obj_1 = Object.new
     source_obj_2 = Object.new

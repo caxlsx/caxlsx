@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestNumFmt < Test::Unit::TestCase
+class TestNumFmt < Minitest::Test
   def setup
     @item = Axlsx::NumFmt.new
   end
@@ -15,14 +15,14 @@ class TestNumFmt < Test::Unit::TestCase
   end
 
   def test_numFmtId
-    assert_raise(ArgumentError) { @item.numFmtId = -1.1 }
-    assert_nothing_raised { @item.numFmtId = 2 }
+    assert_raises(ArgumentError) { @item.numFmtId = -1.1 }
+    refute_raises { @item.numFmtId = 2 }
     assert_equal(2, @item.numFmtId)
   end
 
   def test_fomatCode
-    assert_raise(ArgumentError) { @item.formatCode = -1.1 }
-    assert_nothing_raised { @item.formatCode = "0" }
+    assert_raises(ArgumentError) { @item.formatCode = -1.1 }
+    refute_raises { @item.formatCode = "0" }
     assert_equal("0", @item.formatCode)
   end
 end

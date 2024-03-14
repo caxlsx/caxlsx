@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestCore < Test::Unit::TestCase
+class TestCore < Minitest::Test
   def setup
     @core = Axlsx::Core.new
     # could still see some false positives if the second changes between the next two calls

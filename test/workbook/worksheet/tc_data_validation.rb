@@ -3,7 +3,7 @@
 require 'tc_helper'
 require 'support/capture_warnings'
 
-class TestDataValidation < Test::Unit::TestCase
+class TestDataValidation < Minitest::Test
   include CaptureWarnings
 
   def setup
@@ -16,7 +16,7 @@ class TestDataValidation < Test::Unit::TestCase
     @string_options = { formula1: 'foo', formula2: 'foo', error: 'foo', errorTitle: 'foo', prompt: 'foo', promptTitle: 'foo', sqref: 'foo' }
     @symbol_options = { errorStyle: :warning, operator: :lessThan, type: :whole }
 
-    @options = @boolean_options.merge(@nil_options).merge(@type_option).merge(@error_style_option)
+    @options = @boolean_options.merge(@nil_options, @type_option, @error_style_option)
 
     @dv = Axlsx::DataValidation.new(@options)
   end
@@ -47,84 +47,84 @@ class TestDataValidation < Test::Unit::TestCase
 
   def test_boolean_attribute_validation
     @boolean_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be boolean") { @dv.send(:"#{key}=", 'A') }
-      assert_nothing_raised { @dv.send(:"#{key}=", value) }
+      assert_raises(ArgumentError, "#{key} must be boolean") { @dv.send(:"#{key}=", 'A') }
+      refute_raises { @dv.send(:"#{key}=", value) }
     end
   end
 
   def test_string_attribute_validation
     @string_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be string") { @dv.send(:"#{key}=", :symbol) }
-      assert_nothing_raised { @dv.send(:"#{key}=", value) }
+      assert_raises(ArgumentError, "#{key} must be string") { @dv.send(:"#{key}=", :symbol) }
+      refute_raises { @dv.send(:"#{key}=", value) }
     end
   end
 
   def test_symbol_attribute_validation
     @symbol_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be symbol") { @dv.send(:"#{key}=", "foo") }
-      assert_nothing_raised { @dv.send(:"#{key}=", value) }
+      assert_raises(ArgumentError, "#{key} must be symbol") { @dv.send(:"#{key}=", "foo") }
+      refute_raises { @dv.send(:"#{key}=", value) }
     end
   end
 
   def test_formula1
-    assert_raise(ArgumentError) { @dv.formula1 = 10 }
-    assert_nothing_raised { @dv.formula1 = "=SUM(A1:A1)" }
+    assert_raises(ArgumentError) { @dv.formula1 = 10 }
+    refute_raises { @dv.formula1 = "=SUM(A1:A1)" }
     assert_equal("=SUM(A1:A1)", @dv.formula1)
   end
 
   def test_formula2
-    assert_raise(ArgumentError) { @dv.formula2 = 10 }
-    assert_nothing_raised { @dv.formula2 = "=SUM(A1:A1)" }
+    assert_raises(ArgumentError) { @dv.formula2 = 10 }
+    refute_raises { @dv.formula2 = "=SUM(A1:A1)" }
     assert_equal("=SUM(A1:A1)", @dv.formula2)
   end
 
   def test_allowBlank
-    assert_raise(ArgumentError) { @dv.allowBlank = "foo´" }
-    assert_nothing_raised { @dv.allowBlank = false }
-    refute(@dv.allowBlank)
+    assert_raises(ArgumentError) { @dv.allowBlank = "foo´" }
+    refute_raises { @dv.allowBlank = false }
+    assert_false(@dv.allowBlank)
   end
 
   def test_error
-    assert_raise(ArgumentError) { @dv.error = :symbol }
-    assert_nothing_raised { @dv.error = "This is a error message" }
+    assert_raises(ArgumentError) { @dv.error = :symbol }
+    refute_raises { @dv.error = "This is a error message" }
     assert_equal("This is a error message", @dv.error)
   end
 
   def test_errorStyle
-    assert_raise(ArgumentError) { @dv.errorStyle = "foo" }
-    assert_nothing_raised { @dv.errorStyle = :information }
+    assert_raises(ArgumentError) { @dv.errorStyle = "foo" }
+    refute_raises { @dv.errorStyle = :information }
     assert_equal(:information, @dv.errorStyle)
   end
 
   def test_errorTitle
-    assert_raise(ArgumentError) { @dv.errorTitle = :symbol }
-    assert_nothing_raised { @dv.errorTitle = "This is the error title" }
+    assert_raises(ArgumentError) { @dv.errorTitle = :symbol }
+    refute_raises { @dv.errorTitle = "This is the error title" }
     assert_equal("This is the error title", @dv.errorTitle)
   end
 
   def test_operator
-    assert_raise(ArgumentError) { @dv.operator = "foo" }
-    assert_nothing_raised { @dv.operator = :greaterThan }
+    assert_raises(ArgumentError) { @dv.operator = "foo" }
+    refute_raises { @dv.operator = :greaterThan }
     assert_equal(:greaterThan, @dv.operator)
   end
 
   def test_prompt
-    assert_raise(ArgumentError) { @dv.prompt = :symbol }
-    assert_nothing_raised { @dv.prompt = "This is a prompt message" }
+    assert_raises(ArgumentError) { @dv.prompt = :symbol }
+    refute_raises { @dv.prompt = "This is a prompt message" }
     assert_equal("This is a prompt message", @dv.prompt)
   end
 
   def test_promptTitle
-    assert_raise(ArgumentError) { @dv.promptTitle = :symbol }
-    assert_nothing_raised { @dv.promptTitle = "This is the prompt title" }
+    assert_raises(ArgumentError) { @dv.promptTitle = :symbol }
+    refute_raises { @dv.promptTitle = "This is the prompt title" }
     assert_equal("This is the prompt title", @dv.promptTitle)
   end
 
   def test_showDropDown
     warnings = capture_warnings do
-      assert_raise(ArgumentError) { @dv.showDropDown = "foo´" }
-      assert_nothing_raised { @dv.showDropDown = false }
-      refute(@dv.showDropDown)
+      assert_raises(ArgumentError) { @dv.showDropDown = "foo´" }
+      refute_raises { @dv.showDropDown = false }
+      assert_false(@dv.showDropDown)
     end
 
     assert_equal 2, warnings.size
@@ -132,34 +132,34 @@ class TestDataValidation < Test::Unit::TestCase
   end
 
   def test_hideDropDown
-    assert_raise(ArgumentError) { @dv.hideDropDown = "foo´" }
-    assert_nothing_raised { @dv.hideDropDown = false }
-    refute(@dv.hideDropDown)
+    assert_raises(ArgumentError) { @dv.hideDropDown = "foo´" }
+    refute_raises { @dv.hideDropDown = false }
+    assert_false(@dv.hideDropDown)
     # As hideDropdown is just an alias for showDropDown, we should test the original value too
-    refute(@dv.showDropDown)
+    assert_false(@dv.showDropDown)
   end
 
   def test_showErrorMessage
-    assert_raise(ArgumentError) { @dv.showErrorMessage = "foo´" }
-    assert_nothing_raised { @dv.showErrorMessage = false }
-    refute(@dv.showErrorMessage)
+    assert_raises(ArgumentError) { @dv.showErrorMessage = "foo´" }
+    refute_raises { @dv.showErrorMessage = false }
+    assert_false(@dv.showErrorMessage)
   end
 
   def test_showInputMessage
-    assert_raise(ArgumentError) { @dv.showInputMessage = "foo´" }
-    assert_nothing_raised { @dv.showInputMessage = false }
-    refute(@dv.showInputMessage)
+    assert_raises(ArgumentError) { @dv.showInputMessage = "foo´" }
+    refute_raises { @dv.showInputMessage = false }
+    assert_false(@dv.showInputMessage)
   end
 
   def test_sqref
-    assert_raise(ArgumentError) { @dv.sqref = 10 }
-    assert_nothing_raised { @dv.sqref = "A1:A1" }
+    assert_raises(ArgumentError) { @dv.sqref = 10 }
+    refute_raises { @dv.sqref = "A1:A1" }
     assert_equal("A1:A1", @dv.sqref)
   end
 
   def test_type
-    assert_raise(ArgumentError) { @dv.type = "foo" }
-    assert_nothing_raised { @dv.type = :list }
+    assert_raises(ArgumentError) { @dv.type = "foo" }
+    refute_raises { @dv.type = :list }
     assert_equal(:list, @dv.type)
   end
 

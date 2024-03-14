@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestCellAlignment < Test::Unit::TestCase
+class TestCellAlignment < Minitest::Test
   def setup
     @item = Axlsx::CellAlignment.new
   end
@@ -28,56 +28,56 @@ class TestCellAlignment < Test::Unit::TestCase
   end
 
   def test_horizontal
-    assert_raise(ArgumentError) { @item.horizontal = :red }
-    assert_nothing_raised { @item.horizontal = :left }
+    assert_raises(ArgumentError) { @item.horizontal = :red }
+    refute_raises { @item.horizontal = :left }
     assert_equal(:left, @item.horizontal)
   end
 
   def test_vertical
-    assert_raise(ArgumentError) { @item.vertical = :red }
-    assert_nothing_raised { @item.vertical = :top }
+    assert_raises(ArgumentError) { @item.vertical = :red }
+    refute_raises { @item.vertical = :top }
     assert_equal(:top, @item.vertical)
   end
 
   def test_textRotation
-    assert_raise(ArgumentError) { @item.textRotation = -1 }
-    assert_nothing_raised { @item.textRotation = 5 }
+    assert_raises(ArgumentError) { @item.textRotation = -1 }
+    refute_raises { @item.textRotation = 5 }
     assert_equal(5, @item.textRotation)
   end
 
   def test_wrapText
-    assert_raise(ArgumentError) { @item.wrapText = -1 }
-    assert_nothing_raised { @item.wrapText = false }
-    refute(@item.wrapText)
+    assert_raises(ArgumentError) { @item.wrapText = -1 }
+    refute_raises { @item.wrapText = false }
+    assert_false(@item.wrapText)
   end
 
   def test_indent
-    assert_raise(ArgumentError) { @item.indent = -1 }
-    assert_nothing_raised { @item.indent = 5 }
+    assert_raises(ArgumentError) { @item.indent = -1 }
+    refute_raises { @item.indent = 5 }
     assert_equal(5, @item.indent)
   end
 
   def test_relativeIndent
-    assert_raise(ArgumentError) { @item.relativeIndent = :symbol }
-    assert_nothing_raised { @item.relativeIndent = 5 }
+    assert_raises(ArgumentError) { @item.relativeIndent = :symbol }
+    refute_raises { @item.relativeIndent = 5 }
     assert_equal(5, @item.relativeIndent)
   end
 
   def test_justifyLastLine
-    assert_raise(ArgumentError) { @item.justifyLastLine = -1 }
-    assert_nothing_raised { @item.justifyLastLine = true }
+    assert_raises(ArgumentError) { @item.justifyLastLine = -1 }
+    refute_raises { @item.justifyLastLine = true }
     assert(@item.justifyLastLine)
   end
 
   def test_shrinkToFit
-    assert_raise(ArgumentError) { @item.shrinkToFit = -1 }
-    assert_nothing_raised { @item.shrinkToFit = true }
+    assert_raises(ArgumentError) { @item.shrinkToFit = -1 }
+    refute_raises { @item.shrinkToFit = true }
     assert(@item.shrinkToFit)
   end
 
   def test_readingOrder
-    assert_raise(ArgumentError) { @item.readingOrder = -1 }
-    assert_nothing_raised { @item.readingOrder = 2 }
+    assert_raises(ArgumentError) { @item.readingOrder = -1 }
+    refute_raises { @item.readingOrder = 2 }
     assert_equal(2, @item.readingOrder)
   end
 end

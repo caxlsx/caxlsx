@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestComment < Test::Unit::TestCase
+class TestComment < Minitest::Test
   def setup
     p = Axlsx::Package.new
     wb = p.workbook
@@ -12,7 +12,7 @@ class TestComment < Test::Unit::TestCase
   end
 
   def test_initailize
-    assert_raise(ArgumentError) { Axlsx::Comment.new }
+    assert_raises(ArgumentError) { Axlsx::Comment.new }
   end
 
   def test_author
@@ -31,7 +31,7 @@ class TestComment < Test::Unit::TestCase
   end
 
   def test_visible
-    refute(@c1.visible)
+    assert_false(@c1.visible)
     assert(@c2.visible)
   end
 

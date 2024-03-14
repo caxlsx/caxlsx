@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestStrVal < Test::Unit::TestCase
+class TestStrVal < Minitest::Test
   def setup
     @str_val = Axlsx::StrVal.new v: "1"
     @str_val_with_special_characters = Axlsx::StrVal.new v: "a & b <c>"

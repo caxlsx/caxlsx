@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestCol < Test::Unit::TestCase
+class TestCol < Minitest::Test
   def setup
     @col = Axlsx::Col.new 1, 1
   end
@@ -16,14 +16,14 @@ class TestCol < Test::Unit::TestCase
   end
 
   def test_min_max_required
-    assert_raise(ArgumentError, 'min and max must be specified when creating a new column') { Axlsx::Col.new }
-    assert_raise(ArgumentError, 'min and max must be specified when creating a new column') { Axlsx::Col.new nil, nil }
-    assert_nothing_raised { Axlsx::Col.new 1, 1 }
+    assert_raises(ArgumentError, 'min and max must be specified when creating a new column') { Axlsx::Col.new }
+    assert_raises(ArgumentError, 'min and max must be specified when creating a new column') { Axlsx::Col.new nil, nil }
+    refute_raises { Axlsx::Col.new 1, 1 }
   end
 
   def test_bestFit
     assert_nil(@col.bestFit)
-    assert_raise(NoMethodError, 'bestFit is read only') { @col.bestFit = 'bob' }
+    assert_raises(NoMethodError, 'bestFit is read only') { @col.bestFit = 'bob' }
     @col.width = 1.999
 
     assert(@col.bestFit, 'bestFit should be true when width has been set')
@@ -31,14 +31,14 @@ class TestCol < Test::Unit::TestCase
 
   def test_collapsed
     assert_nil(@col.collapsed)
-    assert_raise(ArgumentError, 'collapsed must be boolean(ish)') { @col.collapsed = 'bob' }
-    assert_nothing_raised('collapsed must be boolean(ish)') { @col.collapsed = true }
+    assert_raises(ArgumentError, 'collapsed must be boolean(ish)') { @col.collapsed = 'bob' }
+    refute_raises { @col.collapsed = true }
   end
 
   def test_customWidth
     assert_nil(@col.customWidth)
     @col.width = 3
-    assert_raise(NoMethodError, 'customWidth is read only') { @col.customWidth = 3 }
+    assert_raises(NoMethodError, 'customWidth is read only') { @col.customWidth = 3 }
     assert(@col.customWidth, 'customWidth is true when width is set')
   end
 
@@ -62,21 +62,21 @@ class TestCol < Test::Unit::TestCase
 
   def test_hidden
     assert_nil(@col.hidden)
-    assert_raise(ArgumentError, 'hidden must be boolean(ish)') { @col.hidden = 'bob' }
-    assert_nothing_raised(ArgumentError, 'hidden must be boolean(ish)') { @col.hidden = true }
+    assert_raises(ArgumentError, 'hidden must be boolean(ish)') { @col.hidden = 'bob' }
+    refute_raises { @col.hidden = true }
   end
 
   def test_outlineLevel
     assert_nil(@col.outlineLevel)
-    assert_raise(ArgumentError, 'outline level cannot be negative') { @col.outlineLevel = -1 }
-    assert_raise(ArgumentError, 'outline level cannot be greater than 7') { @col.outlineLevel = 8 }
-    assert_nothing_raised('can set outlineLevel') { @col.outlineLevel = 1 }
+    assert_raises(ArgumentError, 'outline level cannot be negative') { @col.outlineLevel = -1 }
+    assert_raises(ArgumentError, 'outline level cannot be greater than 7') { @col.outlineLevel = 8 }
+    refute_raises { @col.outlineLevel = 1 }
   end
 
   def test_phonetic
     assert_nil(@col.phonetic)
-    assert_raise(ArgumentError, 'phonetic must be boolean(ish)') { @col.phonetic = 'bob' }
-    assert_nothing_raised(ArgumentError, 'phonetic must be boolean(ish)') { @col.phonetic = true }
+    assert_raises(ArgumentError, 'phonetic must be boolean(ish)') { @col.phonetic = 'bob' }
+    refute_raises { @col.phonetic = true }
   end
 
   def test_to_xml_string
