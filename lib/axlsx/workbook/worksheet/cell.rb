@@ -32,6 +32,7 @@ module Axlsx
     # @option options [Boolean] escape_formulas Whether to treat values starting with an equals
     #   sign as formulas or as literal strings. Allowing user-generated data to be interpreted as
     #   formulas is a security risk. See https://www.owasp.org/index.php/CSV_Injection for details.
+    # @option options [Number] fixed_autowidth Do not calculate width for autowidth but use this fixed value
     def initialize(row, value = nil, options = {})
       @row = row
       # Do not use instance vars if not needed to use less RAM
@@ -46,6 +47,8 @@ module Axlsx
       self.formula_value = val unless val.nil?
       val = options.delete(:escape_formulas)
       self.escape_formulas = val unless val.nil?
+      val = options.delete(:fixed_autowidth)
+      self.fixed_autowidth = val unless val.nil?
 
       parse_options(options) unless options.empty?
 
@@ -162,6 +165,16 @@ module Axlsx
     def value=(v)
       # TODO: consider doing value based type determination first?
       @value = cast_value(v)
+    end
+
+    # The fixed width to use for autowidth instead of automatic calculation.
+    # @return [Float]
+    attr_reader :fixed_autowidth
+
+    # @see fixed_autowidth
+    def fixed_autowidth=(value)
+      Axlsx.validate_unsigned_numeric(value)
+      @fixed_autowidth = value
     end
 
     # Indicates that the cell has one or more of the custom cell styles applied.
@@ -445,6 +458,7 @@ module Axlsx
     # Attempts to determine the correct width for this cell's content
     # @return [Float]
     def autowidth
+      return fixed_autowidth unless fixed_autowidth.nil?
       return if value.nil? || is_formula?
 
       if contains_rich_text?
