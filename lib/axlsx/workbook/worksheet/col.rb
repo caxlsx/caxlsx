@@ -132,8 +132,10 @@ module Axlsx
           fixed_width
         when nil, :auto
           cell.autowidth if use_autowidth
+        when :ignore
+          nil
         else
-          raise ArgumentError, "fixed_with must be a Numeric, :auto or nil, but is '#{fixed_width.inspect}'"
+          raise ArgumentError, "fixed_with must be a Numeric, :auto, :ignore or nil, but is '#{fixed_width.inspect}'"
         end
 
       self.width = cell_width unless (width || 0) > (cell_width || 0)
