@@ -121,8 +121,14 @@ module Axlsx
     # updates the width for this col based on the cells autowidth and
     # an optionally specified fixed width
     # @param [Cell] cell The cell to use in updating this col's width
-    # @param [Integer] fixed_width If this is specified the width is set
-    # to this value and the cell's attributes are ignored.
+    # @param [Numeric, :auto, :ignore, nil] fixed_width Decides how the width
+    # of the cell should be updated. If this is specified as as Numeric the
+    # width is set to this value and the cell's attributes are ignored. If set
+    # to `nil` or `:auto` and `use_autowidth` is true, it uses the autowidth of
+    # the cell. If set to `:ignore`, the cell's width is not changed. In any
+    # case the col's width is set to the new value only if the current width is
+    # smaller than the new one, so that the largest width of all cells in this
+    # column is used.
     # @param [Boolean] use_autowidth If this is false, the cell's
     # autowidth value will be ignored.
     def update_width(cell, fixed_width = nil, use_autowidth = true)
