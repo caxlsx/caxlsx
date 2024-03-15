@@ -127,10 +127,13 @@ module Axlsx
     # autowidth value will be ignored.
     def update_width(cell, fixed_width = nil, use_autowidth = true)
       cell_width =
-        if fixed_width.is_a?(Numeric)
+        case fixed_width
+        when Numeric
           fixed_width
-        elsif use_autowidth
-          cell.autowidth
+        when nil, :auto
+          cell.autowidth if use_autowidth
+        else
+          raise ArgumentError, "fixed_with must be a Numeric, :auto or nil, but is '#{fixed_width.inspect}'"
         end
 
       self.width = cell_width unless (width || 0) > (cell_width || 0)
