@@ -26,6 +26,7 @@ module Axlsx
       @pages = []
       @subtotal = nil
       @no_subtotals_on_headers = []
+      @grand_totals = :both
       @sort_on_headers = {}
       @style_info = {}
       parse_options options
@@ -51,8 +52,16 @@ module Axlsx
       @sort_on_headers = headers
     end
 
-    # Set to :row, :col, or :both to remove Grand Totals on pivot table
-    attr_accessor :no_grand_totals
+    # Set to :both, :row_only, :col_only, or :none to remove Grand Totals on pivot table
+    # @return [Symbol]
+    attr_reader :grand_totals
+
+    # (see #grand_totals)
+    def grand_totals=(value)
+      raise ArgumentError, "Invalid option: #{value}" unless value.in? %s[both row_only col_only none]
+
+      @grand_totals = value
+    end
 
     # Style info for the pivot table
     # @return [Hash]
@@ -194,8 +203,8 @@ module Axlsx
 
       str << '<pivotTableDefinition xmlns="' << XML_NS << '" name="' << name << '" cacheId="' << cache_definition.cache_id.to_s << '"'
       str << ' dataOnRows="1"' if data.size <= 1
-      str << ' rowGrandTotals="0"' if no_grand_totals == :row || no_grand_totals == :both
-      str << ' colGrandTotals="0"' if no_grand_totals == :col || no_grand_totals == :both
+      str << ' rowGrandTotals="0"' if grand_totals == :col_only || grand_totals == :none
+      str << ' colGrandTotals="0"' if grand_totals == :row_only || grand_totals == :none
       str << ' applyNumberFormats="0" applyBorderFormats="0" applyFontFormats="0" applyPatternFormats="0" applyAlignmentFormats="0" applyWidthHeightFormats="1" dataCaption="Data" showMultipleLabel="0" showMemberPropertyTips="0" useAutoFormatting="1" indent="0" compact="0" compactData="0" gridDropZones="1" multipleFieldFilters="0">'
 
       str << '<location firstDataCol="1" firstDataRow="1" firstHeaderRow="1" ref="' << ref << '"/>'
