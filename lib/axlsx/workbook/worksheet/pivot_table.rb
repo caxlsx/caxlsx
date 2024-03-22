@@ -52,7 +52,8 @@ module Axlsx
       @sort_on_headers = headers
     end
 
-    # Set to :both, :row_only, :col_only, or :none to remove Grand Totals on pivot table
+    # Defines which Grand Totals are to be shown.
+    # @param value [Symbol] Set to `:both` to show both row & column grand totals (default), `:row_only`, `:col_only`, or `:none`
     # @return [Symbol]
     attr_reader :grand_totals
 
