@@ -53,8 +53,9 @@ module Axlsx
     end
 
     # Defines which Grand Totals are to be shown.
-    # @param value [Symbol] Set to `:both` to show both row & column grand totals (default), `:row_only`, `:col_only`, or `:none`
-    # @return [Symbol]
+    # @return [Symbol] The row and/or column Grand Totals that are to be shown.
+    # Defaults to `:both` to show both row & column grand totals.
+    # Set to `:row_only`, `:col_only`, or `:none` to hide one or both Grand Totals.
     attr_reader :grand_totals
 
     # (see #grand_totals)
