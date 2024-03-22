@@ -127,7 +127,7 @@ module Axlsx
     end
 
     # The data as an array of either headers (String) or hashes or mix of the two.
-    # Hash in format of { ref: header, num_fmt: numFmts, subtotal: subtotal }, where header is String, numFmts is Integer, and subtotal one of %w[count average max min product countNums stdDev stdDevp var varp]
+    # Hash in format of { ref: header, num_fmt: numFmts, subtotal: subtotal }, where header is String, numFmts is Integer, and subtotal one of %w[count average max min product countNums stdDev stdDevp var varp]; leave subtotal blank to sum values
     # @return [Array]
     attr_reader :data
 
@@ -261,8 +261,7 @@ module Axlsx
       unless data.empty?
         str << "<dataFields count=\"#{data.size}\">"
         data.each do |datum_value|
-          # The correct name prefix in ["Sum","Average", etc...]
-          str << "<dataField name='#{datum_value[:subtotal]&.capitalize || ''} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
+          str << "<dataField name='#{(datum_value[:subtotal] || 'sum').capitalize} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
           str << " numFmtId='#{datum_value[:num_fmt]}'" if datum_value[:num_fmt]
           str << " subtotal='#{datum_value[:subtotal]}' " if datum_value[:subtotal]
           str << "/>"

@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 - **Unreleased**
-  - [PR #359](https://github.com/caxlsx/caxlsx/pull/359) Add `PivotTable#no_grand_totals` option to remove grand totals row/col
+  - [PR #359](https://github.com/caxlsx/caxlsx/pull/359) Add `PivotTable#grand_totals` option to remove grand totals row/col
 
 - **February.26.24**: 4.1.0
   - [PR #316](https://github.com/caxlsx/caxlsx/pull/316) Prevent camelization of hyperlink locations
