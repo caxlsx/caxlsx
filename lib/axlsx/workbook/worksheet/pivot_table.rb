@@ -58,7 +58,7 @@ module Axlsx
 
     # (see #grand_totals)
     def grand_totals=(value)
-      raise ArgumentError, "Invalid option: #{value}" unless value.in? %s[both row_only col_only none]
+      raise ArgumentError, "Invalid option: #{value}" unless [:both, :row_only, :col_only, :none].include?(value)
 
       @grand_totals = value
     end
