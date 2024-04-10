@@ -12,9 +12,12 @@ AllCops:
   DisplayStyleGuide: true
   ExtraDetails: true
   Exclude:
-    - 'docs/**/*'
-    - 'examples/**/*'
-    - 'vendor/bundle/**/*'
+    - .git/**/*
+    - .github/**/*
+    - docs/**/*
+    - examples/**/*
+    - tmp/**/*
+    - vendor/**/*
 
 Gemspec:
   Enabled: true
