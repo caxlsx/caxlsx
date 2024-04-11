@@ -60,7 +60,7 @@ module Axlsx
 
     # (see #grand_totals)
     def grand_totals=(value)
-      raise ArgumentError, "Invalid option: #{value}" unless [:both, :row_only, :col_only, :none].include?(value)
+      RestrictionValidator.validate "PivotTable.grand_totals", [:both, :row_only, :col_only, :none], value
 
       @grand_totals = value
     end
