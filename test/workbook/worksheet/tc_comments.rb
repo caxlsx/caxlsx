@@ -47,12 +47,8 @@ class TestComments < Minitest::Test
   def test_to_xml_string
     doc = Nokogiri::XML(@ws.comments.to_xml_string)
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
-    errors = []
-    schema.validate(doc).each do |error|
-      errors << error
-    end
 
-    assert_equal(0, errors.length)
+    assert_equal(0, schema.validate(doc).length)
 
     # TODO: figure out why these xpath expressions dont work!
     # assert(doc.xpath("//comments"))

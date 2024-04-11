@@ -282,11 +282,8 @@ module Axlsx
     def validate_single_doc(schema, doc)
       schema = Nokogiri::XML::Schema(File.open(schema))
       doc = Nokogiri::XML(doc)
-      errors = []
-      schema.validate(doc).each do |error|
-        errors << error
-      end
-      errors
+
+      schema.validate(doc)
     end
 
     # Appends override objects for drawings, charts, and sheets as they exist in your workbook to the default content types.

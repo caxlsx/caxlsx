@@ -1,6 +1,7 @@
 CHANGELOG
 ---------
 - **Unreleased**
+  - [PR #359](https://github.com/caxlsx/caxlsx/pull/359) Add `PivotTable#grand_totals` option to remove grand totals row/col
   - [PR #362](https://github.com/caxlsx/caxlsx/pull/362) Use widest width even if provided as fixed value
 
 - **February.26.24**: 4.1.0
