@@ -129,7 +129,7 @@ module Axlsx
     end
 
     # The data as an array of either headers (String) or hashes or mix of the two.
-    # Hash in format of { ref: header, num_fmt: numFmts, subtotal: subtotal }, where header is String, numFmts is Integer, and subtotal one of %w[count average max min product countNums stdDev stdDevp var varp]; leave subtotal blank to sum values
+    # Hash in format of { ref: header, num_fmt: numFmts, subtotal: subtotal }, where header is String, numFmts is Integer, and subtotal one of %w[sum count average max min product countNums stdDev stdDevp var varp]; leave subtotal blank to sum values
     # @return [Array]
     attr_reader :data
 
