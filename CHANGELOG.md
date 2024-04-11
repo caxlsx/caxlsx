@@ -1,6 +1,7 @@
 CHANGELOG
 ---------
 - **Unreleased**
+  - [PR #362](https://github.com/caxlsx/caxlsx/pull/362) Use widest width even if provided as fixed value
 
 - **February.26.24**: 4.1.0
   - [PR #316](https://github.com/caxlsx/caxlsx/pull/316) Prevent camelization of hyperlink locations
