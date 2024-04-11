@@ -530,12 +530,34 @@ class TestWorksheet < Minitest::Test
     assert_equal(4, @ws.relationships.size, "adding a pivot table adds 1 relationship")
   end
 
-  def test_set_fixed_width_column
+  def test_set_fixed_width_column_ignore
     @ws.add_row ["mule", "donkey", "horse"], widths: [20, :ignore, nil]
 
     assert_equal(3, @ws.column_info.size, "a data item for each column")
     assert_equal(20, @ws.column_info[0].width, "adding a row with fixed width updates :fixed attribute")
     assert_nil(@ws.column_info[1].width, ":ignore does not set any data")
+  end
+
+  def test_set_fixed_width_column_auto
+    @ws.add_row ["mule", "donkey", "horse"], widths: [20, :auto]
+
+    assert_equal(3, @ws.column_info.size, "a data item for each column")
+    assert_equal(20, @ws.column_info[0].width, "adding a row with fixed width updates :fixed attribute")
+    assert_in_delta(9.9, @ws.column_info[1].width, 0.001, ":auto sets column width")
+  end
+
+  def test_set_fixed_width_column_invalid_value
+    assert_raises(ArgumentError, 'fails on invalid width') do
+      @ws.add_row ["mule", "donkey", "horse"], widths: [20, :unknown, nil]
+    end
+  end
+
+  def test_set_fixed_width_uses_widest_one
+    @ws.add_row ["mule", "donkey", "horse"], widths: [200]
+    @ws.add_row ["mule", "donkey", "horse"], widths: [:auto]
+    @ws.add_row ["mule", "donkey", "horse"], widths: [1]
+
+    assert_equal(200, @ws.column_info[0].width, "adding multiple rows with fixed width sets widht to widest one")
   end
 
   def test_fixed_height

@@ -855,7 +855,6 @@ module Axlsx
       cells.each_with_index do |cell, index|
         width = widths ? widths[index] : nil
         col = find_or_create_column_info(index)
-        next if width == :ignore
 
         col.update_width(cell, width, workbook.use_autowidth)
       end
