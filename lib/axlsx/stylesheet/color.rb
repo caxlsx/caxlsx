@@ -17,7 +17,7 @@ module Axlsx
 
     serializable_attributes :auto, :rgb, :tint
 
-    # Determines if the color is system color dependant
+    # Determines if the color is system color dependent
     # @return [Boolean]
     attr_reader :auto
 
@@ -72,7 +72,7 @@ module Axlsx
     # This version does not support themes
     # def theme=(v) Axlsx::validate_unsigned_integer v; @theme = v end
 
-    # Indexed colors are for backward compatability which I am choosing not to support
+    # Indexed colors are for backward compatibility which I am choosing not to support
     # def indexed=(v) Axlsx::validate_unsigned_integer v; @indexed = v end
 
     # Serializes the object

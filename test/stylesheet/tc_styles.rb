@@ -70,8 +70,8 @@ class TestStyles < Minitest::Test
     options = { border: { style: :thin, color: "FF000000" } }
     @styles.add_style options
 
-    assert_equal(:thin, options[:border][:style], 'thin style is stil in option')
-    assert_equal("FF000000", options[:border][:color], 'color is stil in option')
+    assert_equal(:thin, options[:border][:style], 'thin style is still in option')
+    assert_equal("FF000000", options[:border][:color], 'color is still in option')
   end
 
   def test_parse_num_fmt

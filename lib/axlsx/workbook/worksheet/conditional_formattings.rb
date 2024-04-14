@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Axlsx
-  # A simple, self serializing class for storing conditional formattings
+  # A simple, self serializing class for storing conditional formatting
   class ConditionalFormattings < SimpleTypedList
     # creates a new Tables object
     def initialize(worksheet)
@@ -15,7 +15,7 @@ module Axlsx
     # @return [Worksheet]
     attr_reader :worksheet
 
-    # serialize the conditional formattings
+    # serialize the conditional formatting
     def to_xml_string(str = +'')
       return if empty?
 

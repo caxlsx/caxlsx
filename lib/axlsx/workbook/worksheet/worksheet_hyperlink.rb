@@ -55,7 +55,7 @@ module Axlsx
       Relationship.new(self, HYPERLINK_R, location, target_mode: :External)
     end
 
-    # Seralize the object
+    # Serialize the object
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')

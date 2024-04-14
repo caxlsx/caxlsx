@@ -7,7 +7,7 @@ module Axlsx
       # Calls the proper serialization method based on type.
       # @param [Integer] row_index The index of the cell's row
       # @param [Integer] column_index The index of the cell's column
-      # @param [String] str The string to apend serialization to.
+      # @param [String] str The string to append serialization to.
       # @return [String]
       def to_xml_string(row_index, column_index, cell, str = +'')
         str << '<c r="'

@@ -557,7 +557,7 @@ class TestWorksheet < Minitest::Test
     @ws.add_row ["mule", "donkey", "horse"], widths: [:auto]
     @ws.add_row ["mule", "donkey", "horse"], widths: [1]
 
-    assert_equal(200, @ws.column_info[0].width, "adding multiple rows with fixed width sets widht to widest one")
+    assert_equal(200, @ws.column_info[0].width, "adding multiple rows with fixed width sets width to widest one")
   end
 
   def test_fixed_height

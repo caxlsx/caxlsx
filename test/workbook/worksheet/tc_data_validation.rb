@@ -168,18 +168,18 @@ class TestDataValidation < Minitest::Test
     @ws = p.workbook.add_worksheet name: "data_validation"
     @ws.add_data_validation("A1", { type: :whole, operator: :between, formula1: '5', formula2: '10',
                                     showErrorMessage: true, errorTitle: 'Wrong input', error: 'Only values between 5 and 10',
-                                    errorStyle: :information, showInputMessage: true, promptTitle: 'Be carful!',
+                                    errorStyle: :information, showInputMessage: true, promptTitle: 'Be careful!',
                                     prompt: 'Only values between 5 and 10' })
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
     # test attributes
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='1']/xmlns:dataValidation[@sqref='A1']
-      [@promptTitle='Be carful!'][@prompt='Only values between 5 and 10'][@operator='between'][@errorTitle='Wrong input']
+      [@promptTitle='Be careful!'][@prompt='Only values between 5 and 10'][@operator='between'][@errorTitle='Wrong input']
       [@error='Only values between 5 and 10'][@showErrorMessage=1][@allowBlank=1][@showInputMessage=1][@type='whole']
       [@errorStyle='information']").size)
     assert doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='1']/xmlns:dataValidation[@sqref='A1']
-      [@promptTitle='Be carful!'][@prompt='Only values between 5 and 10'][@operator='between'][@errorTitle='Wrong input']
+      [@promptTitle='Be careful!'][@prompt='Only values between 5 and 10'][@operator='between'][@errorTitle='Wrong input']
       [@error='Only values between 5 and 10'][@showErrorMessage=1][@allowBlank=1][@showInputMessage=1]
       [@type='whole'][@errorStyle='information']")
 
@@ -197,18 +197,18 @@ class TestDataValidation < Minitest::Test
     @ws = p.workbook.add_worksheet name: "data_validation"
     @ws.add_data_validation("A1", { type: :list, formula1: 'A1:A5',
                                     showErrorMessage: true, errorTitle: 'Wrong input', error: 'Only values from list',
-                                    errorStyle: :stop, showInputMessage: true, promptTitle: 'Be carful!',
+                                    errorStyle: :stop, showInputMessage: true, promptTitle: 'Be careful!',
                                     prompt: 'Only values from list', hideDropDown: true })
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
     # test attributes
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='1']/xmlns:dataValidation[@sqref='A1']
-      [@promptTitle='Be carful!'][@prompt='Only values from list'][@errorTitle='Wrong input'][@error='Only values from list']
+      [@promptTitle='Be careful!'][@prompt='Only values from list'][@errorTitle='Wrong input'][@error='Only values from list']
       [@showErrorMessage=1][@allowBlank=1][@showInputMessage=1][@showDropDown=1][@type='list']
       [@errorStyle='stop']").size)
     assert doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='1']/xmlns:dataValidation[@sqref='A1']
-      [@promptTitle='Be carful!'][@prompt='Only values from list'][@errorTitle='Wrong input'][@error='Only values from list']
+      [@promptTitle='Be careful!'][@prompt='Only values from list'][@errorTitle='Wrong input'][@error='Only values from list']
       [@showErrorMessage=1][@allowBlank=1][@showInputMessage=1][@showDropDown=1][@type='list'][@errorStyle='stop']")
 
     # test forumula1
@@ -221,16 +221,16 @@ class TestDataValidation < Minitest::Test
     @ws = p.workbook.add_worksheet name: "data_validation"
     @ws.add_data_validation("A1", { type: :custom, formula1: '=5/2',
                                     showErrorMessage: true, errorTitle: 'Wrong input', error: 'Only values corresponding formula',
-                                    errorStyle: :stop, showInputMessage: true, promptTitle: 'Be carful!',
+                                    errorStyle: :stop, showInputMessage: true, promptTitle: 'Be careful!',
                                     prompt: 'Only values corresponding formula' })
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
     # test attributes
-    assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='1']/xmlns:dataValidation[@sqref='A1'][@promptTitle='Be carful!']
+    assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='1']/xmlns:dataValidation[@sqref='A1'][@promptTitle='Be careful!']
       [@prompt='Only values corresponding formula'][@errorTitle='Wrong input'][@error='Only values corresponding formula'][@showErrorMessage=1]
       [@allowBlank=1][@showInputMessage=1][@type='custom'][@errorStyle='stop']").size)
-    assert doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='1']/xmlns:dataValidation[@sqref='A1'][@promptTitle='Be carful!']
+    assert doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='1']/xmlns:dataValidation[@sqref='A1'][@promptTitle='Be careful!']
       [@prompt='Only values corresponding formula'][@errorTitle='Wrong input'][@error='Only values corresponding formula']
       [@showErrorMessage=1][@allowBlank=1][@showInputMessage=1][@type='custom'][@errorStyle='stop']")
 
@@ -262,32 +262,32 @@ class TestDataValidation < Minitest::Test
     @ws = p.workbook.add_worksheet name: "data_validation"
     @ws.add_data_validation("A1", { type: :whole, operator: :between, formula1: '5', formula2: '10',
                                     showErrorMessage: true, errorTitle: 'Wrong input', error: 'Only values between 5 and 10',
-                                    errorStyle: :information, showInputMessage: true, promptTitle: 'Be carful!',
+                                    errorStyle: :information, showInputMessage: true, promptTitle: 'Be careful!',
                                     prompt: 'Only values between 5 and 10' })
     @ws.add_data_validation("B1", { type: :list, formula1: 'A1:A5',
                                     showErrorMessage: true, errorTitle: 'Wrong input', error: 'Only values from list',
-                                    errorStyle: :stop, showInputMessage: true, promptTitle: 'Be carful!',
+                                    errorStyle: :stop, showInputMessage: true, promptTitle: 'Be careful!',
                                     prompt: 'Only values from list', hideDropDown: true })
 
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
 
     # test attributes
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='2']/xmlns:dataValidation[@sqref='A1']
-      [@promptTitle='Be carful!'][@prompt='Only values between 5 and 10'][@operator='between'][@errorTitle='Wrong input']
+      [@promptTitle='Be careful!'][@prompt='Only values between 5 and 10'][@operator='between'][@errorTitle='Wrong input']
       [@error='Only values between 5 and 10'][@showErrorMessage=1][@allowBlank=1][@showInputMessage=1][@type='whole']
       [@errorStyle='information']").size)
     assert doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='2']/xmlns:dataValidation[@sqref='A1']
-      [@promptTitle='Be carful!'][@prompt='Only values between 5 and 10'][@operator='between'][@errorTitle='Wrong input']
+      [@promptTitle='Be careful!'][@prompt='Only values between 5 and 10'][@operator='between'][@errorTitle='Wrong input']
       [@error='Only values between 5 and 10'][@showErrorMessage=1][@allowBlank=1][@showInputMessage=1]
       [@type='whole'][@errorStyle='information']")
 
     # test attributes
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='2']/xmlns:dataValidation[@sqref='B1']
-      [@promptTitle='Be carful!'][@prompt='Only values from list'][@errorTitle='Wrong input'][@error='Only values from list']
+      [@promptTitle='Be careful!'][@prompt='Only values from list'][@errorTitle='Wrong input'][@error='Only values from list']
       [@showErrorMessage=1][@allowBlank=1][@showInputMessage=1][@showDropDown=1][@type='list']
       [@errorStyle='stop']").size)
     assert doc.xpath("//xmlns:worksheet/xmlns:dataValidations[@count='2']/xmlns:dataValidation[@sqref='B1']
-      [@promptTitle='Be carful!'][@prompt='Only values from list'][@errorTitle='Wrong input'][@error='Only values from list']
+      [@promptTitle='Be careful!'][@prompt='Only values from list'][@errorTitle='Wrong input'][@error='Only values from list']
       [@showErrorMessage=1][@allowBlank=1][@showInputMessage=1][@showDropDown=1][@type='list'][@errorStyle='stop']")
   end
 

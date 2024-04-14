@@ -31,7 +31,7 @@ module Axlsx
     attr_reader :lbl_offset
     alias :lblOffset :lbl_offset
 
-    # The number of tick lables to skip between labels
+    # The number of tick labels to skip between labels
     # @return [Integer]
     attr_reader :tick_lbl_skip
     alias :tickLblSkip :tick_lbl_skip

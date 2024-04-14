@@ -30,7 +30,7 @@ class TestContentType < Minitest::Test
 
     assert_equal(node["Extension"], Axlsx::RELS_EX.to_s, "relationships content type invalid")
 
-    # overrride
+    # override
     assert_equal(4, @doc.xpath("//xmlns:Override").size, "There should be 4 Override types")
 
     node = @doc.xpath(format(o_path, Axlsx::APP_CT)).first
@@ -74,13 +74,13 @@ class TestContentType < Minitest::Test
     doc = Nokogiri::XML(@package.send(:content_types).to_xml_string)
 
     assert_equal(7, doc.xpath("//xmlns:Override").size, "expected 7 types got #{doc.css('Types Override').size}")
-    assert_equal(doc.xpath(format(o_path, Axlsx::DRAWING_CT)).first["PartName"], "/xl/#{ws.drawing.pn}", "Drawing part name invlid")
-    assert_equal(doc.xpath(format(o_path, Axlsx::CHART_CT)).last["PartName"], "/xl/#{c.pn}", "Chart part name invlid")
+    assert_equal(doc.xpath(format(o_path, Axlsx::DRAWING_CT)).first["PartName"], "/xl/#{ws.drawing.pn}", "Drawing part name invalid")
+    assert_equal(doc.xpath(format(o_path, Axlsx::CHART_CT)).last["PartName"], "/xl/#{c.pn}", "Chart part name invalid")
 
     c = ws.add_chart Axlsx::Pie3DChart
     doc = Nokogiri::XML(@package.send(:content_types).to_xml_string)
 
     assert_equal(8, doc.xpath("//xmlns:Override").size, "expected 7 types got #{doc.css('Types Override').size}")
-    assert_equal(doc.xpath(format(o_path, Axlsx::CHART_CT)).last["PartName"], "/xl/#{c.pn}", "Chart part name invlid")
+    assert_equal(doc.xpath(format(o_path, Axlsx::CHART_CT)).last["PartName"], "/xl/#{c.pn}", "Chart part name invalid")
   end
 end

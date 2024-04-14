@@ -27,7 +27,7 @@ module Axlsx
       map(&:relationship)
     end
 
-    # seralize the collection of hyperlinks
+    # serialize the collection of hyperlinks
     # @return [String]
     def to_xml_string(str = +'')
       return if empty?

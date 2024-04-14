@@ -55,11 +55,11 @@ module Axlsx
     # @raise ArgumentError if workbook parameter is not a Workbook instance.
     # @note As there are multiple ways to instantiate a workbook for the package,
     #   here are a few examples:
-    #     # assign directly during package instanciation
+    #     # assign directly during package instantiation
     #     wb = Package.new(:workbook => Workbook.new).workbook
     #
     #     # get a fresh workbook automatically from the package
-    #     wb = Pacakge.new().workbook
+    #     wb = Package.new().workbook
     #     #     # set the workbook after creating the package
     #     wb = Package.new().workbook = Workbook.new
     def workbook
@@ -207,7 +207,7 @@ module Axlsx
     # Note: {Core#created} also defaults to the current time – so to generate identical axlsx packages you have
     # to set this explicitly, too (eg. with `Package.new(created_at: Time.local(2013, 1, 1))`).
     #
-    # @param part A hash describing a part of this pacakge (see {#parts})
+    # @param part A hash describing a part of this package (see {#parts})
     # @return [Zip::Entry]
     def zip_entry_for_part(part)
       timestamp = Zip::DOSTime.at(@core.created.to_i)
@@ -273,7 +273,7 @@ module Axlsx
       ]
     end
 
-    # Performs xsd validation for a signle document
+    # Performs xsd validation for a single document
     #
     # @param [String] schema path to the xsd schema to be used in validation.
     # @param [String] doc The xml text to be validated

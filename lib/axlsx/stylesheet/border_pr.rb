@@ -7,7 +7,7 @@ module Axlsx
     # @return [Color] The color of this border part.
     attr_reader :color
 
-    # @return [Symbol] The syle of this border part.
+    # @return [Symbol] The style of this border part.
     # @note
     #  The following are allowed
     #   :none

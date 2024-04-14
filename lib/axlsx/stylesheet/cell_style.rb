@@ -8,7 +8,7 @@ module Axlsx
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
-    # Creats a new CellStyle object
+    # Creates a new CellStyle object
     # @option options [String] name
     # @option options [Integer] xfId
     # @option options [Integer] buildinId

@@ -154,7 +154,7 @@ module Axlsx
     end
   end
 
-  # performs the increadible feat of changing snake_case to CamelCase
+  # performs the incredible feat of changing snake_case to CamelCase
   # @param [String] s The snake case string to camelize
   # @return [String]
   def self.camel(s = "", all_caps = true)
@@ -163,7 +163,7 @@ module Axlsx
     s.gsub(/_(.)/) { ::Regexp.last_match(1).upcase }
   end
 
-  # returns the provided string with all invalid control charaters
+  # returns the provided string with all invalid control characters
   # removed.
   # @param [String] str The string to process
   # @return [String]

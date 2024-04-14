@@ -62,7 +62,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :xfId
 
-    # indecates if text should be prefixed by a single quote in the cell
+    # indicates if text should be prefixed by a single quote in the cell
     # @return [Boolean]
     attr_reader :quotePrefix
 

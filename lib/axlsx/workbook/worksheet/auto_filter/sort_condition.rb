@@ -6,7 +6,7 @@ module Axlsx
     # Creates a new SortCondition object
     # @param [Integer] column_index Zero-based index indicating the AutoFilter column to which the sorting should be applied to
     # @param [Symbol] order The order the column should be sorted on, can only be :asc or :desc
-    # @param [Array] custom_list An array containg a custom sorting list in order.
+    # @param [Array] custom_list An array containing a custom sorting list in order.
     def initialize(column_index:, order:, custom_list:)
       Axlsx.validate_int column_index
       @column_index = column_index

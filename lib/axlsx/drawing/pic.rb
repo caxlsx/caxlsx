@@ -118,7 +118,7 @@ module Axlsx
       File.basename(image_src) unless remote? || image_src.nil?
     end
 
-    # returns the extension of image_src without the preceeding '.'
+    # returns the extension of image_src without the preceding '.'
     # @return [String]
     def extname
       File.extname(image_src).delete('.') unless image_src.nil?
