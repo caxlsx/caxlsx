@@ -325,11 +325,7 @@ module Axlsx
     def parse_font_options(options = {})
       return if (options.keys & [:fg_color, :sz, :b, :i, :u, :strike, :outline, :shadow, :charset, :family, :font_name]).empty?
 
-      Axlsx.instance_values_for(fonts.first).each do |key, value|
-        # Thanks for that 1.8.7 - can't do a simple merge...
-        options[key.to_sym] = value unless options.key?(key.to_sym)
-      end
-      font = Font.new(options)
+      font = Font.new(Axlsx.instance_values_for(fonts.first).merge(options))
       font.color = Color.new(rgb: options[:fg_color]) if options[:fg_color]
       font.name = options[:font_name] if options[:font_name]
       options[:type] == :dxf ? font : fonts << font
