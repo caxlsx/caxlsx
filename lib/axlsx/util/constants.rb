@@ -259,7 +259,7 @@ module Axlsx
   # drawing validation schema
   DRAWING_XSD = "#{SCHEMA_BASE}dml-spreadsheetDrawing.xsd"
 
-  # number format id for pecentage formatting using the default formatting id.
+  # number format id for percentage formatting using the default formatting id.
   NUM_FMT_PERCENT = 9
 
   # number format id for date format like 2011/11/13

@@ -27,8 +27,8 @@ class TestBubbleChart < Minitest::Test
 
   def test_initialization
     assert_equal(@chart.series_type, Axlsx::BubbleSeries, "series type incorrect")
-    assert_kind_of(Axlsx::ValAxis, @chart.xValAxis, "independant value axis not created")
-    assert_kind_of(Axlsx::ValAxis, @chart.yValAxis, "dependant value axis not created")
+    assert_kind_of(Axlsx::ValAxis, @chart.xValAxis, "independent value axis not created")
+    assert_kind_of(Axlsx::ValAxis, @chart.yValAxis, "dependent value axis not created")
   end
 
   def test_to_xml_string

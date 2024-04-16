@@ -86,7 +86,7 @@ class TestWorkbook < Minitest::Test
   end
 
   def test_add_worksheet
-    assert_empty(@wb.worksheets, "worbook has no worksheets by default")
+    assert_empty(@wb.worksheets, "workbook has no worksheets by default")
     ws = @wb.add_worksheet(name: "bob")
 
     assert_equal(1, @wb.worksheets.size, "add_worksheet adds a worksheet!")

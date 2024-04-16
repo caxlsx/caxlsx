@@ -23,7 +23,7 @@ module Axlsx
         validated_attr_accessor(symbols, :validate_string)
       end
 
-      # Creates one or more usigned integer attr_accessors
+      # Creates one or more unsigned integer attr_accessors
       # @param [Array] symbols An array of symbols representing the
       # names of the attributes you will add to your class
       def unsigned_int_attr_accessor(*symbols)

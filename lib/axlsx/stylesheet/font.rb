@@ -33,7 +33,7 @@ module Axlsx
     # The charset of the font
     # @return [Integer]
     # @note
-    #  The following values are defined in the OOXML specification and are OS dependant values
+    #  The following values are defined in the OOXML specification and are OS dependent values
     #   0   ANSI_CHARSET
     #   1   DEFAULT_CHARSET
     #   2   SYMBOL_CHARSET

@@ -25,7 +25,7 @@ module Axlsx
 
     # The horizontal alignment of the cell.
     # @note
-    #  The horizontal cell alignement style must be one of
+    #  The horizontal cell alignment style must be one of
     #   :general
     #   :left
     #   :center

@@ -22,7 +22,7 @@
 # <xsd:attribute name="shortcutKey" type="s:ST_Xstring" use="optional"/>
 # <xsd:attribute name="publishToServer" type="xsd:boolean" use="optional"￼ default="false"/>
 # <xsd:attribute name="workbookParameter" type="xsd:boolean" use="optional" default="false"/>
-# </xsd:extenstion>
+# </xsd:extension>
 # </xsd:simpleContent>
 
 module Axlsx

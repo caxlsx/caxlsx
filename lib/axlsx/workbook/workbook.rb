@@ -61,7 +61,7 @@ module Axlsx
   require 'axlsx/workbook/worksheet/selection'
 
   # The Workbook class is an xlsx workbook that manages worksheets, charts, drawings and styles.
-  # The following parts of the Office Open XML spreadsheet specification are not implimented in this version.
+  # The following parts of the Office Open XML spreadsheet specification are not implemented in this version.
   #
   #   bookViews
   #   calcPr
@@ -217,7 +217,7 @@ module Axlsx
     # Indicates if the epoc date for serialization should be 1904. If false, 1900 is used.
     @@date1904 = false
 
-    # A quick helper to retrive a worksheet by name
+    # A quick helper to retrieve a worksheet by name
     # @param [String] name The name of the sheet you are looking for
     # @return [Worksheet] The sheet found, or nil
     def sheet_by_name(name)
@@ -386,7 +386,7 @@ module Axlsx
     end
 
     # The xml:space attribute for the worksheet.
-    # This determines how whitespace is handled withing the document.
+    # This determines how whitespace is handled within the document.
     # The most relevant part being whitespace in the cell text.
     # allowed values are :preserve and :default. Axlsx uses :preserve unless
     # you explicily set this to :default.

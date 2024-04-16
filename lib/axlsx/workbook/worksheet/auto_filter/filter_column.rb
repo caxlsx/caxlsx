@@ -10,7 +10,7 @@ module Axlsx
     include Axlsx::SerializedAttributes
 
     # Creates a new FilterColumn object
-    # @note This class yeilds its filter object as that is where the vast majority of processing will be done
+    # @note This class yields its filter object as that is where the vast majority of processing will be done
     # @param [Integer|Cell] col_id The zero based index for the column to which this filter will be applied
     # @param [Symbol] filter_type The symbolized class name of the filter to apply to this column.
     # @param [Hash] options options for this object and the filter

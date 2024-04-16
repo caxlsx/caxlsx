@@ -13,7 +13,7 @@ class TestLineChart < Minitest::Test
   def teardown; end
 
   def test_initialization
-    assert_equal(:standard, @chart.grouping, "grouping defualt incorrect")
+    assert_equal(:standard, @chart.grouping, "grouping default incorrect")
     assert_equal(@chart.series_type, Axlsx::LineSeries, "series type incorrect")
     assert_kind_of(Axlsx::CatAxis, @chart.cat_axis, "category axis not created")
     assert_kind_of(Axlsx::ValAxis, @chart.val_axis, "value access not created")

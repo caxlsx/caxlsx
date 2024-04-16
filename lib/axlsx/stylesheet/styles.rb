@@ -21,7 +21,7 @@ module Axlsx
 
   # The Styles class manages worksheet styles
   # In addition to creating the require style objects for a valid xlsx package, this class provides the key mechanism for adding styles to your workbook, and safely applying them to the cells of your worksheet.
-  # All portions of the stylesheet are implemented here exception colors, which specify legacy and modified pallete colors, and exLst, whic is used as a future feature data storage area.
+  # All portions of the stylesheet are implemented here exception colors, which specify legacy and modified palette colors, and exLst, which is used as a future feature data storage area.
   # @see  Office Open XML Part 1 18.8.11 for gory details on how this stuff gets put together
   # @see  Styles#add_style
   # @note The recommended way to manage styles is with add_style
@@ -212,7 +212,7 @@ module Axlsx
     #                              :fg_color=>"#FF000000",
     #                              :type => :dxf)
     #
-    #   ws.add_row ["Genreated At:", Time.now], :styles=>[nil, date_time]
+    #   ws.add_row ["Generated At:", Time.now], :styles=>[nil, date_time]
     #   ws.add_row ["Previous Year Quarterly Profits (JPY)"], :style=>title
     #   ws.add_row ["Quarter", "Profit", "% of Total"], :style=>title
     #   ws.add_row ["Q1", 4000, 40], :style=>[title, currency, percent]
@@ -275,7 +275,7 @@ module Axlsx
       if options[:type] == :xf
         xf_index = (cellXfs << style)
 
-        # Add styles to style_index cache for re-use
+        # Add styles to style_index cache for reuse
         style_index[xf_index] = raw_style
 
         xf_index
@@ -298,7 +298,7 @@ module Axlsx
 
     # parses add_style options for alignment
     # noop if options hash does not include :alignment key
-    # @option options [Hash] alignment A hash of options to prive the CellAlignment intializer
+    # @option options [Hash] alignment A hash of options to prive the CellAlignment initializer
     # @return [CellAlignment]
     # @see CellAlignment
     def parse_alignment_options(options = {})
@@ -357,7 +357,7 @@ module Axlsx
 
       # Both bgColor and fgColor happens to configure the background of the cell.
       # One of them sets the "background" of the cell, while the other one is
-      # responsibe for the "pattern" of the cell. When you pick "solid" pattern for
+      # responsible for the "pattern" of the cell. When you pick "solid" pattern for
       # a normal xf style, then it's a rectangle covering all bgColor with fgColor,
       # which means we need to to set the given background color to fgColor as well.
       # For some reason I wasn't able find, it works the opposite for dxf styles

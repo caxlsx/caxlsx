@@ -24,7 +24,7 @@ module Axlsx
     # @option options [Integer] rank If a top/bottom N rule, the value of N
     # @option options [Integer] stdDev The number of standard deviations above or below the average to match
     # @option options [Boolean] stopIfTrue Stop evaluating rules after this rule matches
-    # @option options [Symbol]  timePeriod The time period in a date occuring... rule
+    # @option options [Symbol]  timePeriod The time period in a date occurring... rule
     # @option options [String] formula The formula to match against in i.e. an equal rule. Use a [minimum, maximum] array for cellIs between/notBetween conditionals.
     def initialize(options = {})
       @color_scale = @data_bar = @icon_set = @formula = nil

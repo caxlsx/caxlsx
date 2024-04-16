@@ -76,7 +76,7 @@ module Axlsx
     attr_reader :history
 
     # @see history
-    # param [Boolean] v The value to assing
+    # param [Boolean] v The value to assign
     def history=(v)
       Axlsx.validate_boolean(v)
       @history = v

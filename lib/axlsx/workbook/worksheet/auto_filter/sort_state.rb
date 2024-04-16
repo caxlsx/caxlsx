@@ -21,7 +21,7 @@ module Axlsx
     # It requires a column_index for the sorting, descending and the custom order are optional.
     # @param [Integer] column_index Zero-based index indicating the AutoFilter column to which the sorting should be applied to
     # @param [Symbol] order The order the column should be sorted on, can only be :asc or :desc
-    # @param [Array] custom_list An array containg a custom sorting list in order.
+    # @param [Array] custom_list An array containing a custom sorting list in order.
     # @return [SortCondition]
     def add_sort_condition(column_index:, order: :asc, custom_list: [])
       sort_conditions << SortCondition.new(column_index: column_index, order: order, custom_list: custom_list)
