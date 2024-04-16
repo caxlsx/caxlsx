@@ -37,7 +37,7 @@ module Axlsx
     # @note the author, text and ref options are required
     # @option options [String] author The name of the author for this comment
     # @option options [String] text The text for this comment
-    # @option options [Stirng|Cell] ref The cell that this comment is attached to.
+    # @option options [String|Cell] ref The cell that this comment is attached to.
     def add_comment(options = {})
       raise ArgumentError, "Comment require an author" unless options[:author]
       raise ArgumentError, "Comment requires text" unless options[:text]

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Axlsx
-  # The Bar3DChart is a three dimentional barchart (who would have guessed?) that you can add to your worksheet.
+  # The Bar3DChart is a three dimensional barchart (who would have guessed?) that you can add to your worksheet.
   # @see Worksheet#add_chart
   # @see Chart#add_series
   # @see Package#serialize

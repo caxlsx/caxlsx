@@ -16,7 +16,7 @@ module Axlsx
       end
     end
 
-    # [] provides assiciative access to a specic axis store in an axes
+    # [] provides associative access to a specific axis store in an axes
     # instance.
     # @return [Axis]
     def [](name)

@@ -143,7 +143,7 @@ module Axlsx
     # It must be one of :none, :single, :double, :singleAccounting, :doubleAccounting, true
     # @return [Boolean]
     # @return [String]
-    # @note true is for backwards compatability and is reassigned to :single
+    # @note true is for backwards compatibility and is reassigned to :single
     attr_reader :u
 
     # @see u

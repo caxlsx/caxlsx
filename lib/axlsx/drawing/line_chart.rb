@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Axlsx
-  # The LineChart is a two dimentional line chart (who would have guessed?) that you can add to your worksheet.
+  # The LineChart is a two dimensional line chart (who would have guessed?) that you can add to your worksheet.
   # @example Creating a chart
   #   # This example creates a line in a single sheet.
   #   require "rubygems" # if that is your preferred way to manage gems!

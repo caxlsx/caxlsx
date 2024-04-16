@@ -13,7 +13,7 @@ class TestBarChart < Minitest::Test
   def teardown; end
 
   def test_initialization
-    assert_equal(:clustered, @chart.grouping, "grouping defualt incorrect")
+    assert_equal(:clustered, @chart.grouping, "grouping default incorrect")
     assert_equal(@chart.series_type, Axlsx::BarSeries, "series type incorrect")
     assert_equal(:bar, @chart.bar_dir, " bar direction incorrect")
     assert_kind_of(Axlsx::CatAxis, @chart.cat_axis, "category axis not created")

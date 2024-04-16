@@ -39,7 +39,7 @@ module Axlsx
       parse_options options
 
       # bit of a hack to work around the fact that the coords for start at and end at
-      # are passed in as an array when specified in intialization options - however
+      # are passed in as an array when specified in initialization options - however
       start_at(*options[:start_at]) if options[:start_at]
       end_at(*options[:end_at]) if options[:end_at]
     end

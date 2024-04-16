@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Axlsx
-  # A GradientFill defines the color and positioning for gradiant cell fill.
+  # A GradientFill defines the color and positioning for gradient cell fill.
   # @see Open Office XML Part 1 §18.8.24
   class GradientFill
     include Axlsx::OptionsParser

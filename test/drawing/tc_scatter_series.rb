@@ -47,7 +47,7 @@ class TestScatterSeries < Minitest::Test
     @series = @chart.add_series xData: [1, 2, 4], yData: [1, 3, 9], title: "ln_width"
     @series.ln_width = 12_700
 
-    assert_equal(12_700, @series.ln_width, 'line width assigment is allowed')
+    assert_equal(12_700, @series.ln_width, 'line width assignment is allowed')
   end
 
   def test_to_xml_string

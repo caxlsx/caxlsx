@@ -99,7 +99,7 @@ module Axlsx
 
     private
 
-    # Initalize the simple typed list of value objects
+    # Initialize the simple typed list of value objects
     def initialize_value_objects
       @value_objects = SimpleTypedList.new Cfvo
       @interpolationPoints.each { |point| @value_objects << Cfvo.new(type: :percent, val: point) }

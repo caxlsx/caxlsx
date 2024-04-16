@@ -13,7 +13,7 @@ module Axlsx
     # @option [Boolean] blank @see blank
     # @option [String] calendar_type @see calendar_type
     # @option [Array] filter_items An array of values that will be used to create filter objects.
-    # @option [Array] date_group_items An array of hases defining date group item filters to apply.
+    # @option [Array] date_group_items An array of hashes defining date group item filters to apply.
     # @note The recommended way to interact with filter objects is via AutoFilter#add_column
     # @example
     #   ws.auto_filter.add_column(0, :filters, :blank => true, :calendar_type => 'japan', :filter_items => [100, 'a'])
@@ -36,7 +36,7 @@ module Axlsx
     # even when those dates are not using the same calendar system / date formatting.
     attr_reader :calendar_type
 
-    # Tells us if the row of the cell provided should be filterd as it
+    # Tells us if the row of the cell provided should be filtered as it
     # does not meet any of the specified filter_items or
     # date_group_items restrictions.
     # @param [Cell] cell The cell to test against items
@@ -138,7 +138,7 @@ module Axlsx
 
       # Creates a new DateGroupItem
       # @param [Hash] options A hash of options to use when
-      # instanciating the object
+      # instantiating the object
       # @option [String] date_time_grouping the part of the date this
       # filter should apply for grouping
       # @option [Integer|String] year @see year

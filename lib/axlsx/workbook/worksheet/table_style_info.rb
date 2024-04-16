@@ -41,7 +41,7 @@ module Axlsx
     # The name of the table style.
     attr_accessor :name
 
-    # seralizes this object to an xml string
+    # serializes this object to an xml string
     # @param [String] str the string to contact this objects serialization to.
     def to_xml_string(str = +'')
       serialized_tag('tableStyleInfo', str)
