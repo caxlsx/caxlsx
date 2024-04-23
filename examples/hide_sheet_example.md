@@ -15,11 +15,11 @@ wb.add_worksheet(name: 'normal') do |sheet|
 end
 
 wb.add_worksheet(name: 'hidden', state: :hidden) do |sheet|
-  sheet.add_row ['you cant see me!']
+  sheet.add_row ["you can't see me!"]
 end
 
 wb.add_worksheet(name: 'very hidden', state: :very_hidden) do |sheet|
-  sheet.add_row ['you really cant see me!']
+  sheet.add_row ["you really can't see me!"]
 end
 
 p.serialize 'hide_sheet_example.xlsx'
