@@ -4,8 +4,8 @@
 - `u` (Boolean) - Underline
 - `fg_color` (String) - Text Color - Ex: `000000`
 - `bg_color` (String) - Cell background color - Ex: `CCCCCC`
-- `alignment` (Hash) - Text alignment. 
-    - Available sub-options are `:horizontal`, `:vertical`, `:wrap_text`. 
+- `alignment` (Hash) - Text alignment.
+    - Available sub-options are `:horizontal`, `:vertical`, `:wrap_text`.
     - Example:  `alignment: {horizontal: true, vertical: true, wrap_text: false}`
 - `strike` (Boolean) - Indicates if the text should be rendered with a strikethrough
 - `outline` (Boolean) - Indicates if the text should be rendered with a shadow
@@ -19,7 +19,7 @@
   - `5` - Decorative
 - `charset` (Integer) - The character set to use. Axlsx documentation says this setting is ignored most of the time.
 - `type` (Symbol) - Type of the cell. Options are: `:xf` (Default) or `:dxf`
-- `border` (Hash) - Borders support style, color and edges options. Example: `border: {style: :thin, color: "000000", edges: [:top, :bottom, :left, :right]}`. Available styles for the border are: 
+- `border` (Hash) - Borders support style, color and edges options. Example: `border: {style: :thin, color: "000000", edges: [:top, :bottom, :left, :right]}`. Available styles for the border are:
   - `:none`
   - `:thin`
   - `:medium`
@@ -40,10 +40,10 @@
 - `num_fmt` (Integer) - See section below
 
 # `format_code` and `num_fmt`
-To output a dollar sign, comma's every three values, and minumum two decimal places use: 
+To output a dollar sign, comma's every three values, and minimum two decimal places use:
 `format_code: '\$#,##0.00'`
 
-This will output a nicely formatted date/time: 
+This will output a nicely formatted date/time:
 `m/d/yyyy h:mm:ss AM/PM`
 
 I think its much more preferable to write out the `format_code` manually instead of using `num_fmt` however the option is there.
@@ -51,7 +51,7 @@ I think its much more preferable to write out the `format_code` manually instead
 Heres a list of the `num_fmt` code (left side) and corresponding `format_code` string (right side)
 
 - `1` - `'0'`
-- `2` - `'0.00'` 
+- `2` - `'0.00'`
 - `3` - `'#,##0'`
 - `4` - `'#,##0.00'`
 - `5` - `'$#,##0_);($#,##0)'`
