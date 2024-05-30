@@ -40,7 +40,7 @@ module Axlsx
       @marker_symbol = options[:marker_symbol] || :default
       @smooth = false
       @labels, @data = nil, nil
-      super(chart, options)
+      super
       @labels = AxDataSource.new(data: options[:labels]) unless options[:labels].nil?
       @data = NumDataSource.new(options) unless options[:data].nil?
     end
@@ -72,7 +72,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      super(str) do
+      super do
         if color
           str << '<c:spPr><a:solidFill>'
           str << '<a:srgbClr val="' << color << '"/>'

@@ -33,7 +33,7 @@ module Axlsx
       @vary_colors = 0
       @scatter_style = :lineMarker
 
-      super(frame, options)
+      super
       @series_type = ScatterSeries
       @d_lbls = nil
       parse_options options
@@ -50,7 +50,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      super(str) do
+      super do
         str << '<c:scatterChart>'
         str << '<c:scatterStyle val="' << scatter_style.to_s << '"/>'
         str << '<c:varyColors val="' << vary_colors.to_s << '"/>'

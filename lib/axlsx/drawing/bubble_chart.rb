@@ -26,7 +26,7 @@ module Axlsx
     def initialize(frame, options = {})
       @vary_colors = 0
 
-      super(frame, options)
+      super
       @series_type = BubbleSeries
       @d_lbls = nil
       parse_options options
@@ -36,7 +36,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      super(str) do
+      super do
         str << '<c:bubbleChart>'
         str << '<c:varyColors val="' << vary_colors.to_s << '"/>'
         @series.each { |ser| ser.to_xml_string(str) }
