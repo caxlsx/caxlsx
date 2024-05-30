@@ -68,7 +68,7 @@ module Axlsx
     def initialize(frame, options = {})
       @vary_colors = true
       @gap_width, @overlap, @shape = nil, nil, nil
-      super(frame, options)
+      super
       @series_type = BarSeries
       @d_lbls = nil
     end
@@ -111,7 +111,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      super(str) do
+      super do
         str << '<c:barChart>'
         str << '<c:barDir val="' << bar_dir.to_s << '"/>'
         str << '<c:grouping val="' << grouping.to_s << '"/>'

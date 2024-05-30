@@ -47,7 +47,7 @@ module Axlsx
     def initialize(frame, options = {})
       @vary_colors = false
       @grouping = :standard
-      super(frame, options)
+      super
       @series_type = LineSeries
       @d_lbls = nil
     end
@@ -75,7 +75,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      super(str) do
+      super do
         str << "<c:" << node_name << ">"
         str << '<c:grouping val="' << grouping.to_s << '"/>'
         str << '<c:varyColors val="' << vary_colors.to_s << '"/>'

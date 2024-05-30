@@ -50,7 +50,7 @@ module Axlsx
       @show_marker = [:lineMarker, :marker, :smoothMarker].include?(chart.scatter_style)
       @marker_symbol = :default
 
-      super(chart, options)
+      super
       @xData = AxDataSource.new(tag_name: :xVal, data: options[:xData]) unless options[:xData].nil?
       @yData = NumDataSource.new({ tag_name: :yVal, data: options[:yData] }) unless options[:yData].nil?
     end
@@ -81,7 +81,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      super(str) do
+      super do
         # needs to override the super color here to push in ln/and something else!
         if color
           str << '<c:spPr><a:solidFill>'

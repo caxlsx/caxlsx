@@ -43,7 +43,7 @@ module Axlsx
     def initialize(frame, options = {})
       @gap_depth = nil
       @view_3D = View3D.new({ r_ang_ax: 1 }.merge(options))
-      super(frame, options)
+      super
       axes.add_axis :ser_axis, SerAxis
     end
 
@@ -58,7 +58,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      super(str) do
+      super do
         str << '<c:gapDepth val="' << @gap_depth.to_s << '"/>' unless @gap_depth.nil?
       end
     end
