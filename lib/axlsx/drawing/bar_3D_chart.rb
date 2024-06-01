@@ -75,7 +75,7 @@ module Axlsx
     def initialize(frame, options = {})
       @vary_colors = true
       @gap_width, @gap_depth, @shape = nil, nil, nil
-      super(frame, options)
+      super
       @series_type = BarSeries
       @view_3D = View3D.new({ r_ang_ax: 1 }.merge(options))
       @d_lbls = nil
@@ -121,7 +121,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      super(str) do
+      super do
         str << '<c:bar3DChart>'
         str << '<c:barDir val="' << bar_dir.to_s << '"/>'
         str << '<c:grouping val="' << grouping.to_s << '"/>'

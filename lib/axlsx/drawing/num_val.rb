@@ -13,7 +13,7 @@ module Axlsx
     # @option options [Integer] v
     def initialize(options = {})
       @format_code = "General"
-      super(options)
+      super
     end
 
     # @see format_code
