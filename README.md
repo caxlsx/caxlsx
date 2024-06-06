@@ -107,7 +107,7 @@ Additional documentation is listed below:
 - [Style Reference](https://github.com/caxlsx/caxlsx/blob/master/docs/style_reference.md)
 - [Header and Footer Codes](https://github.com/caxlsx/caxlsx/blob/master/docs/header_and_footer_codes.md)
 
-⚠ Please __do not create issues__ for questions regarding the usage of axlsx / caxlsx. Look through this README, the [examples](https://github.com/caxlsx/caxlsx/tree/master/examples/example.rb), and the [FAQ](https://github.com/caxlsx/caxlsx/wiki/FAQ), and also check [questions tagged `axlsx` on Stack Overflow](https://stackoverflow.com/questions/tagged/axlsx).
+⚠ Please __do not create issues__ for questions regarding the usage of axlsx / caxlsx. Look through this README, the [examples folder](https://github.com/caxlsx/caxlsx/tree/master/examples), and the [FAQ](https://github.com/caxlsx/caxlsx/wiki/FAQ), and also check [questions tagged `axlsx` on Stack Overflow](https://stackoverflow.com/questions/tagged/axlsx).
 
 Feel free to add your question (including an answer!) to the FAQ if you think it is of general interest.
 
