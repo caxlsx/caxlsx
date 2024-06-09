@@ -156,7 +156,7 @@ module Axlsx
     #   ws = p.workbook.add_worksheet
     #
     #   # black text on a white background at 14pt with thin borders!
-    #   title = ws.styles.add_style(:bg_color => "FFFF0000", :fg_color=>"#FF000000", :sz=>14,  :border=> {:style => :thin, :color => "FFFF0000"}
+    #   title = ws.styles.add_style(:bg_color => "FFFF0000", :fg_color=>"FF000000", :sz=>14,  :border=> {:style => :thin, :color => "FFFF0000"}
     #
     #   ws.add_row ["Least Popular Pets"]
     #   ws.add_row ["", "Dry Skinned Reptiles", "Bald Cats", "Violent Parrots"], :style=>title
@@ -174,7 +174,7 @@ module Axlsx
     #
     #   # define your styles
     #   title = ws.styles.add_style(:bg_color => "FFFF0000",
-    #                              :fg_color=>"#FF000000",
+    #                              :fg_color=>"FF000000",
     #                              :border=>Axlsx::STYLE_THIN_BORDER,
     #                              :alignment=>{:horizontal => :center})
     #
@@ -209,7 +209,7 @@ module Axlsx
     #
     #   # define your styles
     #   profitable = wb.styles.add_style(:bg_color => "FFFF0000",
-    #                              :fg_color=>"#FF000000",
+    #                              :fg_color=>"FF000000",
     #                              :type => :dxf)
     #
     #   ws.add_row ["Generated At:", Time.now], :styles=>[nil, date_time]
