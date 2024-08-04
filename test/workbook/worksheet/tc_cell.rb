@@ -144,7 +144,8 @@ class TestCell < Minitest::Test
     assert_equal(:boolean, @c.send(:cell_type_from_value, false))
     assert_equal(:float, @c.send(:cell_type_from_value, 1.0 / (10**6)))
     assert_equal(:richtext, @c.send(:cell_type_from_value, Axlsx::RichText.new))
-    assert_equal(:iso_8601, @c.send(:cell_type_from_value, '2008-08-30T01:45:36.123+09:00'))
+    assert_equal(:string, @c.send(:cell_type_from_value, '2008-08-30T01:45:36.123+09:00')) # see https://github.com/caxlsx/caxlsx/issues/354
+    assert_equal(:iso_8601, @c.send(:cell_type_from_value, '2008-08-30T01:45:36.123'))
   end
 
   def test_cell_type_from_value_looks_like_number_but_is_not
