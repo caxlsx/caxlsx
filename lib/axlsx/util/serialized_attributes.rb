@@ -92,7 +92,7 @@ module Axlsx
     # serialized instance values at text nodes on a camelized element of the
     # attribute name. You may pass in a block for evaluation against non nil
     # values. We use an array for element attributes because misordering will
-    # break the xml and 1.8.7 does not support ordered hashes.
+    # break the xml.
     # @param [String] str The string instance to which serialized data is appended
     # @param [Array] additional_attributes An array of additional attribute names.
     # @return [String] The serialized output.
