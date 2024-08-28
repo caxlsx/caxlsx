@@ -62,7 +62,7 @@ class TestStyles < Minitest::Test
     parts = @styles.borders.last.prs
 
     parts.each { |pr| assert_equal("0000FFFF", pr.color.rgb, "Style is applied to #{pr.name} properly") }
-    assert_equal(2, (parts.map { |pr| pr.name.to_s }.sort && ['bottom', 'top']).size, "specify two edges, and you get two border prs")
+    assert_equal(2, (parts.map { |pr| pr.name.to_s }.sort & ['bottom', 'top']).size, "specify two edges, and you get two border prs")
   end
 
   def test_do_not_alter_options_in_add_style
