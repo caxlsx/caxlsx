@@ -1,6 +1,7 @@
 inherit_from: .rubocop_todo.yml
 
 require:
+  - rubocop-packaging
   - rubocop-performance
   - rubocop-minitest
 
@@ -41,6 +42,9 @@ Minitest/RefuteFalse:
   Enabled: false
 
 Naming:
+  Enabled: true
+
+Packaging:
   Enabled: true
 
 Performance:
