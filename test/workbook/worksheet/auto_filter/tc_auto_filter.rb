@@ -27,9 +27,7 @@ class TestAutoFilter < Minitest::Test
   end
 
   def test_add_column
-    @auto_filter.add_column(0, :filters) do |column|
-      assert_kind_of FilterColumn, column
-    end
+    assert_kind_of Axlsx::FilterColumn, @auto_filter.add_column(0, :filters)
   end
 
   def test_applya
