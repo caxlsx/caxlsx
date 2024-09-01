@@ -21,11 +21,6 @@ Layout/HashAlignment:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/border_creator.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-Lint/AmbiguousOperatorPrecedence:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowSafeAssignment.
 Lint/AssignmentInCondition:
