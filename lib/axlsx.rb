@@ -33,6 +33,7 @@ require 'bigdecimal'
 require 'cgi'
 require 'set'
 require 'time'
+require 'uri'
 
 if Gem.loaded_specs.key?("axlsx_styler")
   raise StandardError, "Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly."
@@ -228,5 +229,20 @@ module Axlsx
   def self.escape_formulas=(value)
     Axlsx.validate_boolean(value)
     @escape_formulas = value
+  end
+
+  # Returns a URI parser instance, preferring RFC2396_PARSER if available,
+  # otherwise falling back to DEFAULT_PARSER. This method ensures consistent
+  # URI parsing across different Ruby versions.
+  # This method can be removed when dropping compatibility for Ruby < 3.4
+  # See https://github.com/ruby/uri/pull/114 for details.
+  # @return [Object]
+  def self.uri_parser
+    @uri_parser ||=
+      if defined?(URI::RFC2396_PARSER)
+        URI::RFC2396_PARSER
+      else
+        URI::DEFAULT_PARSER
+      end
   end
 end
