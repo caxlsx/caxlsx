@@ -9,7 +9,6 @@ require 'nokogiri'
 require 'zip'
 
 # Ruby core dependencies
-require 'bigdecimal'
 require 'cgi'
 require 'set'
 require 'time'
