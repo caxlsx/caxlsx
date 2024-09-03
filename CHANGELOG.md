@@ -4,6 +4,7 @@ CHANGELOG
   - [PR #359](https://github.com/caxlsx/caxlsx/pull/359) Add `PivotTable#grand_totals` option to remove grand totals row/col
   - [PR #362](https://github.com/caxlsx/caxlsx/pull/362) Use widest width even if provided as fixed value
   - [PR #398](https://github.com/caxlsx/caxlsx/pull/398) Add `Axlsx#uri_parser` method for RFC2396 compatibility
+  - [PR #390](https://github.com/caxlsx/caxlsx/pull/390) Change ISO_8601_REGEX to match how Excel handles ISO 8601 formats
 
 - **February.26.24**: 4.1.0
   - [PR #316](https://github.com/caxlsx/caxlsx/pull/316) Prevent camelization of hyperlink locations
