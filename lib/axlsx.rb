@@ -1,8 +1,19 @@
 # frozen_string_literal: true
 
-require 'htmlentities'
 require 'axlsx/version'
+
+# gemspec dependencies
+require 'htmlentities'
 require 'marcel'
+require 'nokogiri'
+require 'zip'
+
+# Ruby core dependencies
+require 'bigdecimal'
+require 'cgi'
+require 'set'
+require 'time'
+require 'uri'
 
 require 'axlsx/util/simple_typed_list'
 require 'axlsx/util/constants'
@@ -24,16 +35,6 @@ require 'axlsx/rels/relationships'
 require 'axlsx/drawing/drawing'
 require 'axlsx/workbook/workbook'
 require 'axlsx/package'
-# required gems
-require 'nokogiri'
-require 'zip'
-
-# core dependencies
-require 'bigdecimal'
-require 'cgi'
-require 'set'
-require 'time'
-require 'uri'
 
 if Gem.loaded_specs.key?("axlsx_styler")
   raise StandardError, "Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly."
