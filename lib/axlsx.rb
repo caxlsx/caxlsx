@@ -1,8 +1,19 @@
 # frozen_string_literal: true
 
-require 'htmlentities'
 require 'axlsx/version'
+
+# gemspec dependencies
+require 'htmlentities'
 require 'marcel'
+require 'nokogiri'
+require 'zip'
+
+# Ruby core dependencies
+require 'bigdecimal'
+require 'cgi'
+require 'set'
+require 'time'
+require 'uri'
 
 require 'axlsx/util/simple_typed_list'
 require 'axlsx/util/constants'
@@ -24,15 +35,6 @@ require 'axlsx/rels/relationships'
 require 'axlsx/drawing/drawing'
 require 'axlsx/workbook/workbook'
 require 'axlsx/package'
-# required gems
-require 'nokogiri'
-require 'zip'
-
-# core dependencies
-require 'bigdecimal'
-require 'cgi'
-require 'set'
-require 'time'
 
 if Gem.loaded_specs.key?("axlsx_styler")
   raise StandardError, "Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly."
@@ -228,5 +230,20 @@ module Axlsx
   def self.escape_formulas=(value)
     Axlsx.validate_boolean(value)
     @escape_formulas = value
+  end
+
+  # Returns a URI parser instance, preferring RFC2396_PARSER if available,
+  # otherwise falling back to DEFAULT_PARSER. This method ensures consistent
+  # URI parsing across different Ruby versions.
+  # This method can be removed when dropping compatibility for Ruby < 3.4
+  # See https://github.com/ruby/uri/pull/114 for details.
+  # @return [Object]
+  def self.uri_parser
+    @uri_parser ||=
+      if defined?(URI::RFC2396_PARSER)
+        URI::RFC2396_PARSER
+      else
+        URI::DEFAULT_PARSER
+      end
   end
 end

@@ -80,7 +80,7 @@ module Axlsx
     def image_src=(v)
       Axlsx.validate_string(v)
       if remote?
-        RegexValidator.validate('Pic.image_src', /\A#{URI::DEFAULT_PARSER.make_regexp}\z/, v)
+        RegexValidator.validate('Pic.image_src', /\A#{Axlsx.uri_parser.make_regexp}\z/, v)
         RestrictionValidator.validate 'Pic.image_src', ALLOWED_MIME_TYPES, MimeTypeUtils.get_mime_type_from_uri(v)
       else
         RestrictionValidator.validate 'Pic.image_src', ALLOWED_MIME_TYPES, MimeTypeUtils.get_mime_type(v)
