@@ -24,13 +24,13 @@ class TestSimpleTypedList < Minitest::Test
     refute_raises { @list[0] = 1 }
   end
 
-  def test_concat_assignment
+  def test_push_operator_assignment
     assert_raises(ArgumentError) { @list << nil }
     assert_raises(ArgumentError) { @list << "1" }
     refute_raises { @list << 1 }
   end
 
-  def test_concat_should_return_index
+  def test_push_operator_returns_index
     assert_empty(@list)
     assert_equal(0, @list << 1)
     assert_equal(1, @list << 2)
@@ -40,19 +40,47 @@ class TestSimpleTypedList < Minitest::Test
     assert_equal(0, @list.index(2))
   end
 
-  def test_push_should_return_index
-    assert_equal(0, @list.push(1))
-    assert_equal(1, @list.push(2))
-    @list.delete_at 0
+  # rubocop:disable Style/ConcatArrayLiterals
+  def test_concat_assignment
+    assert_raises(ArgumentError) { @list.concat([1, nil]) }
+    refute_raises { @list.concat [1] }
+  end
 
-    assert_equal(1, @list.push(3))
-    assert_equal(0, @list.index(2))
+  def test_concat_multiple_arrays
+    @list.concat([1], [2])
+
+    assert_equal([1, 2], @list)
+  end
+
+  def test_concat_returns_self
+    assert_equal(@list, @list.concat([1]))
+  end
+
+  def test_concat_mutates_object
+    @list.concat([1])
+
+    assert_equal([1], @list)
+  end
+  # rubocop:enable Style/ConcatArrayLiterals
+
+  def test_push_assignment
+    assert_raises(ArgumentError) { @list.push("1") }
+    assert_raises(ArgumentError) { @list.push(1, nil) }
+    refute_raises { @list.push(1, 2) }
+  end
+
+  def test_push_returns_self
+    assert_equal(@list, @list.push(1))
+  end
+
+  def test_push_mutates_object
+    @list.push(1)
+
+    assert_equal([1], @list)
   end
 
   def test_locking
-    @list.push 1
-    @list.push 2
-    @list.push 3
+    @list.push 1, 2, 3
     @list.lock
 
     assert_raises(ArgumentError) { @list.delete 1  }
@@ -79,8 +107,7 @@ class TestSimpleTypedList < Minitest::Test
   end
 
   def test_equality
-    @list.push 1
-    @list.push 2
+    @list.push 1, 2
 
     assert_equal([1, 2], @list)
   end
