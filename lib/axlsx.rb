@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'axlsx/version'
+require_relative 'axlsx/version'
 
 # gemspec dependencies
 require 'htmlentities'
@@ -14,26 +14,26 @@ require 'set'
 require 'time'
 require 'uri'
 
-require 'axlsx/util/simple_typed_list'
-require 'axlsx/util/constants'
-require 'axlsx/util/validators'
-require 'axlsx/util/accessors'
-require 'axlsx/util/serialized_attributes'
-require 'axlsx/util/options_parser'
-require 'axlsx/util/mime_type_utils'
-require 'axlsx/util/buffered_zip_output_stream'
-require 'axlsx/util/zip_command'
+require_relative 'axlsx/util/simple_typed_list'
+require_relative 'axlsx/util/constants'
+require_relative 'axlsx/util/validators'
+require_relative 'axlsx/util/accessors'
+require_relative 'axlsx/util/serialized_attributes'
+require_relative 'axlsx/util/options_parser'
+require_relative 'axlsx/util/mime_type_utils'
+require_relative 'axlsx/util/buffered_zip_output_stream'
+require_relative 'axlsx/util/zip_command'
 
-require 'axlsx/stylesheet/styles'
+require_relative 'axlsx/stylesheet/styles'
 
-require 'axlsx/doc_props/app'
-require 'axlsx/doc_props/core'
-require 'axlsx/content_type/content_type'
-require 'axlsx/rels/relationships'
+require_relative 'axlsx/doc_props/app'
+require_relative 'axlsx/doc_props/core'
+require_relative 'axlsx/content_type/content_type'
+require_relative 'axlsx/rels/relationships'
 
-require 'axlsx/drawing/drawing'
-require 'axlsx/workbook/workbook'
-require 'axlsx/package'
+require_relative 'axlsx/drawing/drawing'
+require_relative 'axlsx/workbook/workbook'
+require_relative 'axlsx/package'
 
 if Gem.loaded_specs.key?("axlsx_styler")
   raise StandardError, "Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly."
