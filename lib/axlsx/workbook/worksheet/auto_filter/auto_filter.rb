@@ -80,7 +80,7 @@ module Axlsx
                            condition.order == :asc ? index1 <=> index2 : index2 <=> index1
                          end
 
-            break unless comparison.zero?
+            break unless comparison == 0
           end
 
           comparison
