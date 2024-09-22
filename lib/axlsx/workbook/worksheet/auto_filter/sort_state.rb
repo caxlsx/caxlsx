@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'axlsx/workbook/worksheet/auto_filter/sort_condition'
+require_relative 'sort_condition'
 
 module Axlsx
   # This class performs sorting on a range in a worksheet
