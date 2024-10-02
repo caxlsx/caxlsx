@@ -24,7 +24,7 @@ module Axlsx
     end
     alias :ContentType= :content_type=
 
-    # Serialize the contenty type to xml
+    # Serialize the content type to xml
     def to_xml_string(node_name = '', str = +'')
       str << '<' << node_name << ' '
       Axlsx.instance_values_for(self).each_with_index do |key_value, index|
