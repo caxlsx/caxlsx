@@ -63,19 +63,19 @@ module Axlsx
     end
 
     def first_row
-      @first_row ||= first_cell.scan(/\d+/).first
+      @first_row ||= first_cell[/\d+/]
     end
 
     def first_col
-      @first_col ||= first_cell.scan(/\D+/).first
+      @first_col ||= first_cell[/\D+/]
     end
 
     def last_row
-      @last_row ||= last_cell.scan(/\d+/).first
+      @last_row ||= last_cell[/\d+/]
     end
 
     def last_col
-      @last_col ||= last_cell.scan(/\D+/).first
+      @last_col ||= last_cell[/\D+/]
     end
   end
 end
