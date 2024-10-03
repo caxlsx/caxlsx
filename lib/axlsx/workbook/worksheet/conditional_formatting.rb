@@ -83,7 +83,7 @@ module Axlsx
     def to_xml_string(str = +'')
       str << '<conditionalFormatting sqref="' << sqref << '">'
       rules.each_with_index do |rule, index|
-        str << ' ' unless index.zero?
+        str << ' ' unless index == 0
         rule.to_xml_string(str)
       end
       str << '</conditionalFormatting>'
