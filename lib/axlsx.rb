@@ -89,12 +89,10 @@ module Axlsx
     letters_str = name[/[A-Z]+/]
 
     # capitalization?!?
-    v = letters_str.reverse.chars.reduce({ base: 1, i: 0 }) do |val, c|
+    v = letters_str.reverse.chars.each_with_object({ base: 1, i: 0 }) do |c, val|
       val[:i] += ((c.bytes.first - 64) * val[:base])
 
       val[:base] *= 26
-
-      next val
     end
 
     col_index = (v[:i] - 1)
