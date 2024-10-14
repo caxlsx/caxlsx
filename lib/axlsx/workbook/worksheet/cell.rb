@@ -41,7 +41,7 @@ module Axlsx
       self.type = type unless type == :string
 
       val = options.delete(:style)
-      self.style = val unless val.nil? || val.zero?
+      self.style = val unless val.nil? || val == 0
       val = options.delete(:formula_value)
       self.formula_value = val unless val.nil?
       val = options.delete(:escape_formulas)
@@ -549,14 +549,14 @@ module Axlsx
 
       case type
       when :date
-        self.style = STYLE_DATE if style.zero?
+        self.style = STYLE_DATE if style == 0
         if !v.is_a?(Date) && v.respond_to?(:to_date)
           v.to_date
         else
           v
         end
       when :time
-        self.style = STYLE_DATE if style.zero?
+        self.style = STYLE_DATE if style == 0
         if !v.is_a?(Time) && v.respond_to?(:to_time)
           v.to_time
         else

@@ -57,7 +57,7 @@ module Axlsx
     # Transposes the list (without blowing up like ruby does)
     # any non populated cell in the matrix will be a nil value
     def transpose
-      return clone if size.zero?
+      return clone if size == 0
 
       row_count = size
       max_column_count = map { |row| row.cells.size }.max
