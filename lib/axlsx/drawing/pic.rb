@@ -222,9 +222,9 @@ module Axlsx
     # Return correct xml relationship string portion
     def relationship_xml_portion
       if remote?
-        (+'<a:blip xmlns:r ="' << XML_NS_R << '" r:link="' << relationship.Id << '">')
+        (+'<a:blip xmlns:r="' << XML_NS_R << '" r:link="' << relationship.Id << '">')
       else
-        (+'<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
+        (+'<a:blip xmlns:r="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
       end
     end
 
