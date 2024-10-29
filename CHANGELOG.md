@@ -5,6 +5,9 @@ CHANGELOG
   - [PR #362](https://github.com/caxlsx/caxlsx/pull/362) Use widest width even if provided as fixed value
   - [PR #398](https://github.com/caxlsx/caxlsx/pull/398) Add `Axlsx#uri_parser` method for RFC2396 compatibility
   - [PR #390](https://github.com/caxlsx/caxlsx/pull/390) Change ISO_8601_REGEX to match how Excel handles ISO 8601 formats
+  - [PR #402](https://github.com/caxlsx/caxlsx/pull/402) Refactor `Axlsx::SimpleTypedList` to better match `Array` API
+  - [PR #409](https://github.com/caxlsx/caxlsx/pull/409) Prefer `require_relative` for internal requires
+  - Minor performance improvements ([PR #406](https://github.com/caxlsx/caxlsx/pull/406), [PR #407](https://github.com/caxlsx/caxlsx/pull/407), [PR #408](https://github.com/caxlsx/caxlsx/pull/408))
 
 - **February.26.24**: 4.1.0
   - [PR #316](https://github.com/caxlsx/caxlsx/pull/316) Prevent camelization of hyperlink locations
