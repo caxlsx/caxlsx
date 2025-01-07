@@ -43,4 +43,4 @@ jobs:
 
     - name: Run tests
       run: |
-        bundle exec rake
+        RUBYOPT="--enable-frozen-string-literal" bundle exec rake
