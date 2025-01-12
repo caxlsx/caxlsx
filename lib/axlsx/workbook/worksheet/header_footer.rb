@@ -7,7 +7,7 @@ module Axlsx
   # of plain text and control characters. A fairly comprehensive list of control
   # characters can be found here:
   # https://github.com/randym/axlsx/blob/master/notes_on_header_footer.md
-  #     
+  #
   # @note The recommended way of managing header/footers is via Worksheet#header_footer
   # @see Worksheet#initialize
   class HeaderFooter
