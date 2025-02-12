@@ -7,7 +7,7 @@ on:
 
 jobs:
   test_ruby_versions:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     continue-on-error: ${{ matrix.allow_failures == 'allow failures' || false }}
 
