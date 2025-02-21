@@ -64,7 +64,7 @@ module Axlsx
     # def spPr=(v) DataTypeValidator.validate 'Title.spPr', SpPr, v; @spPr = v; end
 
     # Serializes the object
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @return [String]
     def to_xml_string(str = +'')
       str << '<c:title>'

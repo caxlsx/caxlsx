@@ -86,7 +86,7 @@ module Axlsx
 
     # Serializes the row
     # @param [Integer] r_index The row index, 0 based.
-    # @param [String] str The string this rows xml will be appended to.
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @return [String]
     def to_xml_string(r_index, str = +'')
       serialized_tag('row', str, r: Axlsx.row_ref(r_index)) do

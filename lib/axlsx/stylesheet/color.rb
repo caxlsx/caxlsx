@@ -76,7 +76,7 @@ module Axlsx
     # def indexed=(v) Axlsx::validate_unsigned_integer v; @indexed = v end
 
     # Serializes the object
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @return [String]
     def to_xml_string(str = +'', tag_name = 'color')
       serialized_tag(tag_name.to_s, str)

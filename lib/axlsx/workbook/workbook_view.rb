@@ -66,7 +66,7 @@ module Axlsx
                           :show_sheet_tabs, :auto_filter_date_grouping
 
     # Serialize the WorkbookView
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @return [String]
     def to_xml_string(str = +'')
       str << '<workbookView '

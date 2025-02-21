@@ -48,7 +48,7 @@ module Axlsx
     attr_reader :tab_color
 
     # Serialize the object
-    # @param [String] str serialized output will be appended to this object if provided.
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @return [String]
     def to_xml_string(str = +'')
       update_properties

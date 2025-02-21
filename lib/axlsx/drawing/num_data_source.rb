@@ -43,7 +43,7 @@ module Axlsx
     end
 
     # serialize the object
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     def to_xml_string(str = +'')
       str << '<c:' << tag_name.to_s << '>'
       if @f

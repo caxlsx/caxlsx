@@ -121,7 +121,7 @@ module Axlsx
       attr_accessor :val
 
       # Serializes the filter value object
-      # @param [String] str The string to concact the serialization information to.
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
       def to_xml_string(str = +'')
         str << "<filter val='#{@val}' />"
       end
@@ -238,7 +238,7 @@ module Axlsx
       end
 
       # Serialize the object to xml
-      # @param [String] str The string object this serialization will be concatenated to.
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
       def to_xml_string(str = +'')
         serialized_tag('dateGroupItem', str)
       end

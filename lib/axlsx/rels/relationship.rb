@@ -110,7 +110,7 @@ module Axlsx
     end
 
     # serialize relationship
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @return [String]
     def to_xml_string(str = +'')
       h = Axlsx.instance_values_for(self).reject { |k, _| k == "source_obj" }
