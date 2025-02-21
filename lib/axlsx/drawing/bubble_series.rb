@@ -40,7 +40,7 @@ module Axlsx
 
     # Serializes the object
     # @param [#<<] str A String, buffer or IO to append the serialization to.
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'')
       super do
         # needs to override the super color here to push in ln/and something else!

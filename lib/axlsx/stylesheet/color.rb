@@ -77,7 +77,7 @@ module Axlsx
 
     # Serializes the object
     # @param [#<<] str A String, buffer or IO to append the serialization to.
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'', tag_name = 'color')
       serialized_tag(tag_name.to_s, str)
     end

@@ -70,7 +70,7 @@ module Axlsx
 
     # Serializes the object
     # @param [#<<] str A String, buffer or IO to append the serialization to.
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'')
       [:col, :colOff, :row, :rowOff].each do |k|
         str << '<xdr:' << k.to_s << '>' << send(k).to_s << '</xdr:' << k.to_s << '>'

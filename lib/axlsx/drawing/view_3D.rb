@@ -101,7 +101,7 @@ module Axlsx
 
     # Serializes the object
     # @param [#<<] str A String, buffer or IO to append the serialization to.
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'')
       str << '<c:view3D>'
       %w(rot_x h_percent rot_y depth_percent r_ang_ax perspective).each do |key|

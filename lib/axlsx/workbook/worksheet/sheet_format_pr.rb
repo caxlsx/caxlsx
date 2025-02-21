@@ -47,7 +47,7 @@ module Axlsx
 
     # serializes this object to an xml string
     # @param [#<<] str A String, buffer or IO to append the serialization to.
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'')
       str << '<sheetFormatPr '
       serialized_attributes(str)

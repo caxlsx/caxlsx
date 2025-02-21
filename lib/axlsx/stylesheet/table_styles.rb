@@ -39,7 +39,7 @@ module Axlsx
 
     # Serializes the object
     # @param [#<<] str A String, buffer or IO to append the serialization to.
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'')
       str << '<tableStyles '
       serialized_attributes str, { count: size }

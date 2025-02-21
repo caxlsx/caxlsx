@@ -417,7 +417,7 @@ module Axlsx
 
     # Serialize the workbook
     # @param [#<<] str A String, buffer or IO to append the serialization to.
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'')
       add_worksheet(name: 'Sheet1') if worksheets.empty?
       str << '<?xml version="1.0" encoding="UTF-8"?>'

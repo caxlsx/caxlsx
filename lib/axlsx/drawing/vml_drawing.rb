@@ -19,7 +19,7 @@ module Axlsx
 
     # serialize the vml_drawing to xml.
     # @param [#<<] str A String, buffer or IO to append the serialization to.
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'')
       str << <<~XML
         <xml xmlns:v="urn:schemas-microsoft-com:vml"

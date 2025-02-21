@@ -5,7 +5,7 @@ module Axlsx
   class SeriesTitle < Title
     # Serializes the object
     # @param [#<<] str A String, buffer or IO to append the serialization to.
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'')
       clean_value = Axlsx.trust_input ? @text.to_s : ::CGI.escapeHTML(Axlsx.sanitize(@text.to_s))
 
