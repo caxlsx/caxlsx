@@ -28,7 +28,6 @@ module Axlsx
       Dir.mktmpdir do |dir|
         @dir = dir
         yield(self)
-        warn @files.inspect
         run_zip_command(write_to_file_at_path)
       end
     end
