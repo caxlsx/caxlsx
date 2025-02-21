@@ -184,6 +184,14 @@ module Axlsx
     # @param [ZipKit::Streamer] streamer (or a compatible object)
     # @return [void]
     def write_parts(zip)
+      # Generate a Entry for the given package part.
+      # The important part here is to explicitly set the timestamp for the zip entry: Serializing axlsx packages
+      # with identical contents should result in identical zip files – however, the timestamp of a zip entry
+      # defaults to the time of serialization and therefore the zip file contents would be different every time
+      # the package is serialized.
+      #
+      # Note: {Core#created} also defaults to the current time – so to generate identical axlsx packages you have
+      # to set this explicitly, too (eg. with `Package.new(created_at: Time.local(2013, 1, 1))`).
       time_of_writing = @core.created || Time.now
       parts.each do |part|
         if part[:doc]
@@ -197,23 +205,6 @@ module Axlsx
         end
       end
       zip
-    end
-
-    # Generate a Entry for the given package part.
-    # The important part here is to explicitly set the timestamp for the zip entry: Serializing axlsx packages
-    # with identical contents should result in identical zip files – however, the timestamp of a zip entry
-    # defaults to the time of serialization and therefore the zip file contents would be different every time
-    # the package is serialized.
-    #
-    # Note: {Core#created} also defaults to the current time – so to generate identical axlsx packages you have
-    # to set this explicitly, too (eg. with `Package.new(created_at: Time.local(2013, 1, 1))`).
-    #
-    # @param part A hash describing a part of this package (see {#parts})
-    # @return [Zip::Entry]
-    def zip_entry_for_part(part)
-      {filename: part.fetch(:entry), }
-      timestamp = Zip::DOSTime.at(@core.created.to_i)
-      Zip::Entry.new("", part[:entry], time: timestamp)
     end
 
     # The parts of a package

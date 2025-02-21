@@ -224,7 +224,8 @@ class TestPackage < Minitest::Test
     File.delete(@fname)
   end
 
-  # See comment for Package#zip_entry_for_part
+  # The timestamp gets set on the files in the ZIP, we want to ensure it stays correct
+  # and takes precedence over the current system time
   def test_serialization_creates_identical_files_at_any_time_if_created_at_is_set
     @package.core.created = Time.now.utc # This must be UTC otherwise Timecop returns a TZ-local value and the test fails
     zip_content_now = @package.to_stream.string
