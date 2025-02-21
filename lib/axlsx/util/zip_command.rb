@@ -9,8 +9,8 @@ module Axlsx
   #
   # The methods provided here mimic `Zip::OutputStream` so that `ZipCommand` can
   # be used as a drop-in replacement. Note that method signatures are not
-  # identical to `Zip::OutputStream`, they are only sufficiently close so that
-  # `ZipCommand` and `Zip::OutputStream` can be interchangeably used within
+  # identical to `ZipKitOutputStream`, they are only sufficiently close so that
+  # `ZipCommand` and `ZipKitOutputStream` can be interchangeably used within
   # `caxlsx`.
   class ZipCommand
     # Raised when the zip command exits with a non-zero status.
@@ -24,6 +24,8 @@ module Axlsx
     # Create a temporary directory for writing files to.
     #
     # The directory and its contents are removed at the end of the block.
+    #
+    # @param write_to_file_at_path[String] path for the XLSX to write 
     def open(write_to_file_at_path)
       Dir.mktmpdir do |dir|
         @dir = dir
@@ -32,14 +34,20 @@ module Axlsx
       end
     end
 
-    # Closes the current entry and opens a new for writing.
-    def write_file(filename, modification_time:)
+    # Adds a file to the ZIP. Yields an IO the file data can be written to.
+    # Works the same as `ZipKit::Streamer#write_file`
+    # @param filename[String] the name of the file in the ZIP
+    # @param modification_time[Time] the mtime to set for the entry in the ZIP
+    # @yield [#write] the writable IO for the file' binary data
+    #
+    # @return [void]
+    def write_file(filename, modification_time:, &blk)
       raise ArgumentError, "@dir not set" unless @dir
 
       tempfile_path = File.join(@dir, filename)
 
       FileUtils.mkdir_p(File.dirname(tempfile_path))
-      File.open(tempfile_path, "wb") { |fo| yield(fo) }
+      File.open(tempfile_path, "wb", &blk)
       File.utime(modification_time, modification_time, tempfile_path)
 
       @filenames << filename

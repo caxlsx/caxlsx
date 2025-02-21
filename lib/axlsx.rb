@@ -6,7 +6,7 @@ require_relative 'axlsx/version'
 require 'htmlentities'
 require 'marcel'
 require 'nokogiri'
-require 'zip'
+require 'zip_kit'
 
 # Ruby core dependencies
 require 'cgi'

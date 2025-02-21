@@ -2,6 +2,7 @@
 
 require 'tc_helper'
 require 'support/capture_warnings'
+require 'zip' # We still use Rubyzip in tests
 
 class TestPackage < Minitest::Test
   include CaptureWarnings
