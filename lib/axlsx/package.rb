@@ -117,8 +117,8 @@ module Axlsx
                        ZipKitOutputStream
                      end
       Relationship.initialize_ids_cache
-      zip_provider.open(output) do |zip|
-        write_parts(zip)
+      zip_provider.open(output) do |zip_kit_streamer|
+        write_parts(zip_kit_streamer)
       end
       true
     ensure
@@ -136,6 +136,9 @@ module Axlsx
       return false unless !confirm_valid || validate.empty?
 
       Relationship.initialize_ids_cache
+      # TODO: At the moment this returns a StringIO. But this can be
+      # changed to generate the ZIP lazily and to return an IO that
+      # can be read() from instead. This is for the future.
       stream = ZipKitOutputStream.write_buffer do |zip|
         write_parts(zip)
       end
@@ -183,7 +186,8 @@ module Axlsx
     # Writes the package parts to a zip archive.
     # @param [ZipKit::Streamer] streamer (or a compatible object)
     # @return [void]
-    def write_parts(zip)
+    # @private
+    def write_parts(zip_kit_streamer)
       # Generate a Entry for the given package part.
       # The important part here is to explicitly set the timestamp for the zip entry: Serializing axlsx packages
       # with identical contents should result in identical zip files – however, the timestamp of a zip entry
@@ -195,16 +199,16 @@ module Axlsx
       time_of_writing = @core.created || Time.now
       parts.each do |part|
         if part[:doc]
-          zip.write_file(part.fetch(:entry), modification_time: time_of_writing) do |into_sink|
+          zip_kit_streamer.write_file(part.fetch(:entry), modification_time: time_of_writing) do |into_sink|
             into_sink.write(part[:doc].to_xml_string)
           end
         elsif part[:path]
-          zip.write_file(part.fetch(:entry), modification_time: time_of_writing) do |into_sink|
+          zip_kit_streamer.write_file(part.fetch(:entry), modification_time: time_of_writing) do |into_sink|
             File.open(part[:path], "rb") { |source_file| IO.copy_stream(source_file, into_sink) }
           end
         end
       end
-      zip
+      nil
     end
 
     # The parts of a package
