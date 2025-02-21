@@ -60,7 +60,7 @@ module Axlsx
 
     # Serializes the object
     # @param [#<<] str A String, buffer or IO to append the serialization to.
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'')
       str << '<c:scaling>'
       str << '<c:logBase val="' << @logBase.to_s << '"/>' unless @logBase.nil?
