@@ -226,12 +226,11 @@ class TestPackage < Minitest::Test
 
   # See comment for Package#zip_entry_for_part
   def test_serialization_creates_identical_files_at_any_time_if_created_at_is_set
-    @package.core.created = Time.now
+    @package.core.created = Time.now.utc # This must be UTC otherwise Timecop returns a TZ-local value and the test fails
     zip_content_now = @package.to_stream.string
     Timecop.travel(3600) do
       zip_content_then = @package.to_stream.string
-
-      assert_equal zip_content_then, zip_content_now, "zip files are not identical"
+      assert_same_bytes zip_content_then, zip_content_now, "zip files are not identical"
     end
   end
 
@@ -355,5 +354,26 @@ class TestPackage < Minitest::Test
   def test_encrypt
     # this is no where near close to ready yet
     assert_false(@package.encrypt('your_mom.xlsxl', 'has a password'))
+  end
+
+  def assert_same_bytes(expected_bin_string, actual_bin_string, message = "Byte content differs")
+    assert_equal expected_bin_string.bytesize, actual_bin_string.bytesize, "#{message} (byte size #{expected_bin_string.bytesize} expected vs. #{actual_bin_string.bytesize} actual)"
+    chunk_size = 65 * 1024
+    (expected_bin_string.bytesize.to_f / chunk_size).ceil.times do |chunk_n|
+      slice_a = expected_bin_string.byteslice(chunk_n * chunk_size, chunk_size)
+      slice_b = actual_bin_string.byteslice(chunk_n * chunk_size, chunk_size)
+      next if slice_a == slice_b
+
+      # Figure out at which offset the data differs
+      slice_a.bytesize.times do |at_byte|
+        offset_in_str = (chunk_n * chunk_size) + at_byte
+        next if expected_bin_string[offset_in_str] == actual_bin_string[offset_in_str]
+
+        a = expected_bin_string.byteslice([offset_in_str - 32, 0].max, 32*2)
+        b = actual_bin_string.byteslice([offset_in_str - 32, 0].max, 32*2)
+
+        assert_equal expected_bin_string[offset_in_str], actual_bin_string[offset_in_str], "#{message} (at offset #{offset_in_str}). Expected #{a.inspect} but got #{b.inspect}"
+      end
+    end
   end
 end
