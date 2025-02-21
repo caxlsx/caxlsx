@@ -5,13 +5,9 @@ require 'shellwords'
 
 module Axlsx
   # The ZipCommand class supports zipping the Excel file contents using
-  # a binary zip program instead of RubyZip's `Zip::OutputStream`.
+  # a binary zip program instead of a Ruby library.
   #
-  # The methods provided here mimic `Zip::OutputStream` so that `ZipCommand` can
-  # be used as a drop-in replacement. Note that method signatures are not
-  # identical to `ZipKitOutputStream`, they are only sufficiently close so that
-  # `ZipCommand` and `ZipKitOutputStream` can be interchangeably used within
-  # `caxlsx`.
+  # The methods provided here mimic ZipKitOutputStream.
   class ZipCommand
     # Raised when the zip command exits with a non-zero status.
     class ZipError < StandardError; end
@@ -25,12 +21,12 @@ module Axlsx
     #
     # The directory and its contents are removed at the end of the block.
     #
-    # @param write_to_file_at_path[String] path for the XLSX to write 
-    def open(write_to_file_at_path)
+    # @param write_to_file_named[String] filename for the XLSX to write
+    def open(write_to_file_named)
       Dir.mktmpdir do |dir|
         @dir = dir
         yield(self)
-        run_zip_command(write_to_file_at_path)
+        run_zip_command(write_to_file_named)
       end
     end
 
