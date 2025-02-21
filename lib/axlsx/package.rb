@@ -114,7 +114,7 @@ module Axlsx
       zip_provider = if zip_command
                        ZipCommand.new(zip_command)
                      else
-                       BufferedZipOutputStream
+                       ZipKitOutputStream
                      end
       Relationship.initialize_ids_cache
       zip_provider.open(output) do |zip|
@@ -136,7 +136,7 @@ module Axlsx
       return false unless !confirm_valid || validate.empty?
 
       Relationship.initialize_ids_cache
-      stream = BufferedZipOutputStream.write_buffer do |zip|
+      stream = ZipKitOutputStream.write_buffer do |zip|
         write_parts(zip)
       end
       stream.rewind
@@ -181,18 +181,19 @@ module Axlsx
     private
 
     # Writes the package parts to a zip archive.
-    # @param [Zip::OutputStream, ZipCommand] zip
-    # @return [Zip::OutputStream, ZipCommand]
+    # @param [ZipKit::Streamer] streamer (or a compatible object)
+    # @return [void]
     def write_parts(zip)
-      p = parts
-      p.each do |part|
-        unless part[:doc].nil?
-          zip.put_next_entry(zip_entry_for_part(part))
-          part[:doc].to_xml_string(zip)
-        end
-        unless part[:path].nil?
-          zip.put_next_entry(zip_entry_for_part(part))
-          zip.write File.read(part[:path], mode: "rb")
+      time_of_writing = @core.created || Time.now
+      parts.each do |part|
+        if part[:doc]
+          zip.write_file(part.fetch(:entry), modification_time: time_of_writing) do |into_sink|
+            into_sink.write(part[:doc].to_xml_string)
+          end
+        elsif part[:path]
+          zip.write_file(part.fetch(:entry), modification_time: time_of_writing) do |into_sink|
+            File.open(part[:path], "rb") { |source_file| IO.copy_stream(source_file, into_sink) }
+          end
         end
       end
       zip
@@ -210,8 +211,8 @@ module Axlsx
     # @param part A hash describing a part of this package (see {#parts})
     # @return [Zip::Entry]
     def zip_entry_for_part(part)
+      {filename: part.fetch(:entry), }
       timestamp = Zip::DOSTime.at(@core.created.to_i)
-
       Zip::Entry.new("", part[:entry], time: timestamp)
     end
 

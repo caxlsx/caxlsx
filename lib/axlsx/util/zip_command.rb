@@ -17,7 +17,6 @@ module Axlsx
     class ZipError < StandardError; end
 
     def initialize(zip_command)
-      @current_file = nil
       @files = []
       @zip_command = zip_command
     end
@@ -25,40 +24,32 @@ module Axlsx
     # Create a temporary directory for writing files to.
     #
     # The directory and its contents are removed at the end of the block.
-    def open(output)
+    def open(write_to_file_at_path)
       Dir.mktmpdir do |dir|
         @dir = dir
         yield(self)
-        write_file
-        zip_parts(output)
+        warn @files.inspect
+        run_zip_command(write_to_file_at_path)
       end
     end
 
     # Closes the current entry and opens a new for writing.
-    def put_next_entry(entry)
-      write_file
-      @current_file = "#{@dir}/#{entry.name}"
-      @files << entry.name
-      FileUtils.mkdir_p(File.dirname(@current_file))
-      @io = File.open(@current_file, "wb")
-    end
+    def write_file(filename, modification_time:)
+      raise ArgumentError, "@dir not set" unless @dir
+      tempfile_path = File.join(@dir, filename)
 
-    # Write to a buffer that will be written to the current entry
-    def write(content)
-      @io << content
+      FileUtils.mkdir_p(File.dirname(tempfile_path))
+      File.open(tempfile_path, "wb") { |fo| yield(fo) }
+      File.utime(modification_time, modification_time, tempfile_path)
+
+      @files << tempfile_path
     end
-    alias << write
 
     private
 
-    def write_file
-      @io.close if @current_file
-      @current_file = nil
-      @io = nil
-    end
-
-    def zip_parts(output)
-      output = Shellwords.shellescape(File.absolute_path(output))
+    def run_zip_command(write_to_file_at_path)
+      # Note that the number of files may overflow the shell argument list
+      output = Shellwords.shellescape(File.absolute_path(write_to_file_at_path))
       inputs = Shellwords.shelljoin(@files)
       escaped_dir = Shellwords.shellescape(@dir)
       command = "cd #{escaped_dir} && #{@zip_command} #{output} #{inputs}"

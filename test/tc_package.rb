@@ -188,11 +188,11 @@ class TestPackage < Minitest::Test
   end
 
   def assert_created_with_rubyzip(fname, package)
-    assert_equal 2098, get_mtime(fname, package).year, "XLSX files created with RubyZip have 2098 as the file mtime"
+    assert_equal 2098, get_mtime(fname, package).year, "entry inside XLSX created with ZipKit must have 2098 as the mtime year"
   end
 
   def assert_created_with_zip_command(fname, package)
-    assert_equal Time.now.utc.year, get_mtime(fname, package).year, "XLSX files created with a zip command have the current year as the file mtime"
+    assert_equal Time.now.utc.year, get_mtime(fname, package).year, "entry inside XLSX created with ZipKit must have current year as the mtime year"
   end
 
   def get_mtime(fname, package)

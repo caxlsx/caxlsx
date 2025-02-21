@@ -22,6 +22,7 @@ require_relative 'axlsx/util/serialized_attributes'
 require_relative 'axlsx/util/options_parser'
 require_relative 'axlsx/util/mime_type_utils'
 require_relative 'axlsx/util/buffered_zip_output_stream'
+require_relative 'axlsx/util/zip_kit_output_stream'
 require_relative 'axlsx/util/zip_command'
 
 require_relative 'axlsx/stylesheet/styles'
