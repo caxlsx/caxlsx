@@ -17,7 +17,7 @@ module Axlsx
     class ZipError < StandardError; end
 
     def initialize(zip_command)
-      @files = []
+      @filenames = []
       @zip_command = zip_command
     end
 
@@ -35,13 +35,14 @@ module Axlsx
     # Closes the current entry and opens a new for writing.
     def write_file(filename, modification_time:)
       raise ArgumentError, "@dir not set" unless @dir
+
       tempfile_path = File.join(@dir, filename)
 
       FileUtils.mkdir_p(File.dirname(tempfile_path))
       File.open(tempfile_path, "wb") { |fo| yield(fo) }
       File.utime(modification_time, modification_time, tempfile_path)
 
-      @files << tempfile_path
+      @filenames << filename
     end
 
     private
@@ -49,7 +50,7 @@ module Axlsx
     def run_zip_command(write_to_file_at_path)
       # Note that the number of files may overflow the shell argument list
       output = Shellwords.shellescape(File.absolute_path(write_to_file_at_path))
-      inputs = Shellwords.shelljoin(@files)
+      inputs = Shellwords.shelljoin(@filenames)
       escaped_dir = Shellwords.shellescape(@dir)
       command = "cd #{escaped_dir} && #{@zip_command} #{output} #{inputs}"
       stdout_and_stderr, status = Open3.capture2e(command)
