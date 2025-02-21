@@ -19,7 +19,7 @@ module Axlsx
     end
 
     # serialize relationships
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @return [String]
     def to_xml_string(str = +'')
       str << '<?xml version="1.0" encoding="UTF-8"?>'

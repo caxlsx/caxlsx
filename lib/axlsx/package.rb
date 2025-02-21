@@ -4,6 +4,27 @@ module Axlsx
   # Package is responsible for managing all the bits and pieces that Open Office XML requires to make a valid
   # xlsx document including validation and serialization.
   class Package
+    # Most to_xml_string methods accept an empty String as default argument that
+    # will accept the writes. Luckily, only `<<` ever gets called on that `str` to
+    # append output to it - so the entire serialization is a visitor. We can pass in
+    # our ZIP IO as write destination, and not have that many string allocations at all -
+    # the various modules will just write into it, as if it were a `str`. But for the off-chance
+    # that it a method attempts to use the return value that is this `str`, for example, we want
+    # to be careful and wrap our "fake `str`" in an object that restricts its API to just `<<`. That
+    # way, should that `str` be used somewhere, it should blow up.
+    class ShovelOnly
+      def initialize(io)
+        @io = io
+      end
+
+      def <<(bytes)
+        @io.write(bytes.b)
+        self
+      end
+
+      undef :to_s
+    end
+
     include Axlsx::OptionsParser
 
     # provides access to the app doc properties for this package
@@ -200,7 +221,13 @@ module Axlsx
       parts.each do |part|
         if part[:doc]
           zip_kit_streamer.write_file(part.fetch(:entry), modification_time: time_of_writing) do |into_sink|
-            into_sink.write(part[:doc].to_xml_string)
+            # This is a bit of a hack, but the `str` argument for all implementations of `to_xml_string`
+            # is uses as a buffer to append to. It never gets returned - it just gets visited by the various
+            # objects, with them appending XML fragments to it. Since the only method used is `#<<` (so it
+            # does not have to be a String - just something that is appendable) - we can give this
+            # method our writable sink for the file instead, saving memory. The data appended to the sink
+            # will be properly compressed and shipped off into the destination IO as it gets produced.
+            part.fetch(:doc).to_xml_string(ShovelOnly.new(into_sink))
           end
         elsif part[:path]
           zip_kit_streamer.write_file(part.fetch(:entry), modification_time: time_of_writing) do |into_sink|

@@ -81,7 +81,7 @@ module Axlsx
     alias :lblOffset= :lbl_offset=
 
     # Serializes the object
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @return [String]
     def to_xml_string(str = +'')
       str << '<c:catAx>'

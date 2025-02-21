@@ -55,7 +55,7 @@ module Axlsx
 
     # serializes the instance values of the defining object based on the
     # list of serializable attributes.
-    # @param [String] str The string instance to append this
+    # @param [#<<] str A String, buffer or IO to append the serialization to. The string instance to append this
     # serialization to.
     # @param [Hash] additional_attributes An option key value hash for
     # defining values that are not serializable attributes list.
@@ -93,7 +93,7 @@ module Axlsx
     # attribute name. You may pass in a block for evaluation against non nil
     # values. We use an array for element attributes because misordering will
     # break the xml.
-    # @param [String] str The string instance to which serialized data is appended
+    # @param [#<<] str A String, buffer or IO to append the serialization to. The string instance to which serialized data is appended
     # @param [Array] additional_attributes An array of additional attribute names.
     # @return [String] The serialized output.
     def serialized_element_attributes(str = +'', additional_attributes = [])

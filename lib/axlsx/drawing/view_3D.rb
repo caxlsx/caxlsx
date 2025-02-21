@@ -100,7 +100,7 @@ module Axlsx
     # DataTypeValidator.validate "#{self.class}.perspective", [Integer], v, lambda {|arg| arg >= 0 && arg <= 240 }; @perspective = v; end
 
     # Serializes the object
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @return [String]
     def to_xml_string(str = +'')
       str << '<c:view3D>'

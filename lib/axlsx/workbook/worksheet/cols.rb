@@ -12,7 +12,7 @@ module Axlsx
     end
 
     # Serialize the Cols object
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @return [String]
     def to_xml_string(str = +'')
       return if empty?

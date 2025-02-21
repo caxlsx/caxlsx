@@ -35,7 +35,7 @@ module Axlsx
     boolean_attr_accessor :visible
 
     # serialize the shape to a string
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @return [String]
     def to_xml_string(str = +'')
       str << <<~XML

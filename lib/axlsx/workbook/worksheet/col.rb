@@ -148,7 +148,7 @@ module Axlsx
     end
 
     # Serialize this columns data to an xml string
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @return [String]
     def to_xml_string(str = +'')
       serialized_tag('col', str)
