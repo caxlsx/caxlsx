@@ -140,8 +140,8 @@ class TestPackage < Minitest::Test
   def test_serialization_with_zip_command
     @package.serialize(@fname, zip_command: "zip")
 
-    assert_zip_file_matches_package(@fname, @package)
-    assert_created_with_zip_command(@fname, @package)
+    assert_zip_file_contains_files_per_package_part(@fname, @package)
+    assert_current_year_mtime_for_entry(@fname, @package)
     File.delete(@fname)
   end
 
@@ -149,8 +149,8 @@ class TestPackage < Minitest::Test
     fname = "#{Dir.tmpdir}/#{@fname}"
     @package.serialize(fname, zip_command: "zip")
 
-    assert_zip_file_matches_package(fname, @package)
-    assert_created_with_zip_command(fname, @package)
+    assert_zip_file_contains_files_per_package_part(fname, @package)
+    assert_current_year_mtime_for_entry(fname, @package)
     File.delete(fname)
   end
 
@@ -533,6 +533,10 @@ class TestPackage < Minitest::Test
     end
   end
 
+  # For comparing byte output it is not very useful to see that "this nearly unprintable kilobyte of random data is not equal to
+  # that other nearly unprintable kilobyte of random data". It also busts terminals sometimes. It is better to do a fast check
+  # first, and then narrow down on the chunk where the first mismatch is. Once found, we print the offset where there is a
+  # mismatch, 32 bytes behind and 32 bytes ahead of the mismatch. This gives much better failed assertion messages and aids debugging.
   def assert_same_bytes(expected_bin_string, actual_bin_string, message = "Byte content differs")
     assert_equal expected_bin_string.bytesize, actual_bin_string.bytesize, "#{message} (byte size #{expected_bin_string.bytesize} expected vs. #{actual_bin_string.bytesize} actual)"
     chunk_size = 65 * 1024
@@ -546,8 +550,8 @@ class TestPackage < Minitest::Test
         offset_in_str = (chunk_n * chunk_size) + at_byte
         next if expected_bin_string[offset_in_str] == actual_bin_string[offset_in_str]
 
-        a = expected_bin_string.byteslice([offset_in_str - 32, 0].max, 32*2)
-        b = actual_bin_string.byteslice([offset_in_str - 32, 0].max, 32*2)
+        a = expected_bin_string.byteslice([offset_in_str - 32, 0].max, 32 * 2)
+        b = actual_bin_string.byteslice([offset_in_str - 32, 0].max, 32 * 2)
 
         assert_equal expected_bin_string[offset_in_str], actual_bin_string[offset_in_str], "#{message} (at offset #{offset_in_str}). Expected #{a.inspect} but got #{b.inspect}"
       end
