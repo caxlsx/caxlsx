@@ -9,21 +9,16 @@ module Axlsx
     # At the end of the block the central directory and EOCD marker will be written into the output.
     #
     # @yield [ZipKit::Streamer]
-    # @param file_path_or_writable[String,#IO] Either a path to a file - the ZIP will be written there, or an object that responds to #write -
+    # @param file_path_or_writable[String,#write] Either a path to a file - the ZIP will be written there, or an object that responds to #write -
     #     that object will receive the ZIP binary data.
-    def self.open(file_path_or_writable)
-      if file_path_or_writable.respond_to?(:write) # Assume it is something writable, like a Rails `stream`
-        ZipKit::Streamer.open(file_path_or_writable) do |streamer|
-          yield(new(streamer))
-        end
-      elsif file_path_or_writable.is_a?(String) # Assume it is a path
-        File.open(file_path_or_writable, "wb") do |f|
-          ZipKit::Streamer.open(f) do |streamer|
-            yield(streamer)
-          end
-        end
+    def self.open(file_path_or_writable, &blk)
+      if file_path_or_writable.is_a?(String)
+        # Assume it is a path
+        File.open(file_path_or_writable, "wb") { |f| open (f, &blk) }
       else
-        raise ArgumentError, "file_path_or_writable muse be a path to file or respond to write()"
+        # Assume it is something writable, like a Rails `stream` or any other destination
+        # for ZipKit
+        ZipKit::Streamer.open(file_path_or_writable, &blk)
       end
     end
 
