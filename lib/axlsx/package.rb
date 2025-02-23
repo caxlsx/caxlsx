@@ -97,7 +97,7 @@ module Axlsx
 
     # Serialize your workbook to disk as an xlsx document.
     #
-    # @param [String] output The name of the file you want to serialize your package to
+    # @param [String,IO] output The name of the file you want to serialize your package to, or an IO you can `write()` the file to
     # @param [Hash] options
     # @option options [Boolean] :confirm_valid Validate the package prior to serialization.
     # @option options [String] :zip_command When `nil`, `#serialize` with RubyZip to
