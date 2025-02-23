@@ -158,7 +158,8 @@ module Axlsx
       Relationship.initialize_ids_cache
       # TODO: At the moment this returns a StringIO. But this can be
       # changed to generate the ZIP lazily and to return an IO that
-      # can be read() from instead. This is for the future.
+      # can be read() from instead. Strictly speaking the method is
+      # misnamed - it's more of a `to_string_io` than `to_stream`.
       stream = ZipKitOutputStream.write_buffer do |zip|
         write_parts(zip)
       end
