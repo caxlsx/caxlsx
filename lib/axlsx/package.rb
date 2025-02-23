@@ -121,9 +121,8 @@ module Axlsx
     #   p.serialize("example.xlsx", zip_command: "/path/to/zip")
     #   p.serialize("example.xlsx", zip_command: "zip -1")
     #
-    #   # Serialize to a stream
-    #   s = p.to_stream()
-    #   File.open('example_streamed.xlsx', 'wb') { |f| f.write(s.read) }
+    #   # Serialize to a writable IO (will never seek or rewind)
+    #   File.open('example_streamed.xlsx', 'wb') { |f| p.serialize(f) }
     def serialize(output, options = {}, secondary_options = nil)
       unless workbook.styles_applied
         workbook.apply_styles
