@@ -3,6 +3,7 @@
 require 'tc_helper'
 require 'support/capture_warnings'
 require 'zip' # We still use Rubyzip in tests
+require 'fileutils'
 
 class TestPackage < Minitest::Test
   include CaptureWarnings
@@ -95,6 +96,10 @@ class TestPackage < Minitest::Test
     ws.add_page_break "B2"
   end
 
+  def teardown
+    FileUtils.rm_f(@fname)
+  end
+
   def test_use_autowidth
     @package.use_autowidth = false
 
@@ -132,12 +137,37 @@ class TestPackage < Minitest::Test
     assert_equal(time, p.core.created)
   end
 
-  def test_serialization
+  def test_serialization_to_file_at_path
     @package.serialize(@fname)
 
     assert_zip_file_contains_files_per_package_part(@fname, @package)
     assert_current_year_mtime_for_entry(@fname, @package)
-    File.delete(@fname)
+  end
+
+  def test_serialization_into_writable
+    # We want to ensure only `write()` gets
+    # called on the output, and the output never
+    # seeks or rewinds
+    writable_class = Class.new do
+      attr_reader :buf_string
+
+      def initialize
+        @buf_string = (+"").b
+      end
+
+      def write(bytes)
+        @buf_string << bytes
+        bytes.bytesize
+      end
+    end
+
+    out_io = writable_class.new
+    @package.serialize(out_io)
+
+    File.open(@fname, "wb") {|f| f.write(out_io.buf_string) }
+
+    assert_zip_file_contains_files_per_package_part(@fname, @package)
+    assert_current_year_mtime_for_entry(@fname, @package)
   end
 
   def test_serialization_with_zip_command
@@ -145,7 +175,6 @@ class TestPackage < Minitest::Test
 
     assert_zip_file_contains_files_per_package_part(@fname, @package)
     assert_current_year_mtime_for_entry(@fname, @package)
-    File.delete(@fname)
   end
 
   def test_serialization_with_zip_command_and_absolute_path
@@ -179,8 +208,6 @@ class TestPackage < Minitest::Test
 
     assert wb.styles_applied
     assert_equal 1, wb.styles.style_index.count
-
-    File.delete(@fname)
   end
 
   def assert_zip_file_contains_files_per_package_part(fname, package)
@@ -206,7 +233,6 @@ class TestPackage < Minitest::Test
 
     assert_equal 1, warnings.size
     assert_includes warnings.first, "confirm_valid as a boolean is deprecated"
-    File.delete(@fname)
   end
 
   def test_serialization_with_deprecated_three_arguments
@@ -218,7 +244,6 @@ class TestPackage < Minitest::Test
     assert_current_year_mtime_for_entry(@fname, @package)
     assert_equal 2, warnings.size
     assert_includes warnings.first, "with 3 arguments is deprecated"
-    File.delete(@fname)
   end
 
   # The timestamp gets set on the files in the ZIP, we want to ensure it stays correct
