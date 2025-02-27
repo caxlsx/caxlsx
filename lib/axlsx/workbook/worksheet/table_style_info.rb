@@ -42,7 +42,7 @@ module Axlsx
     attr_accessor :name
 
     # serializes this object to an xml string
-    # @param [String] str the string to contact this objects serialization to.
+    # @param [#<<] str A String, buffer or IO to append the serialization to. the string to contact this objects serialization to.
     def to_xml_string(str = +'')
       serialized_tag('tableStyleInfo', str)
     end
