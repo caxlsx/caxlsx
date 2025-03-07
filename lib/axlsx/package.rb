@@ -229,7 +229,7 @@ module Axlsx
     private
 
     # Writes the package parts to a zip archive.
-    # @param [ZipKit::Streamer] zip_kit_streamer (or a compatible object)
+    # @param [ZipKit::Streamer] zip_kit_streamer Streamer to add entries to (or a compatible object)
     # @return [void]
     # @private
     def write_parts(zip_kit_streamer)
