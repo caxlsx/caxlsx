@@ -275,6 +275,7 @@ class TestPackage < Minitest::Test
     zip_content_now = @package.to_stream.string
     Timecop.travel(3600) do
       zip_content_then = @package.to_stream.string
+
       assert_same_bytes zip_content_then, zip_content_now, "zip files are not identical"
     end
   end

@@ -14,7 +14,7 @@ module Axlsx
     def self.open(file_path_or_writable, &blk)
       if file_path_or_writable.is_a?(String)
         # Assume it is a path
-        File.open(file_path_or_writable, "wb") { |f| open(f, &blk) }
+        File.open(file_path_or_writable, "wb") { |f| self.open(f, &blk) }
       else
         # Assume it is something writable, like a Rails `stream` or any other destination
         # for ZipKit
