@@ -164,7 +164,7 @@ class TestPackage < Minitest::Test
     out_io = writable_class.new
     @package.serialize(out_io)
 
-    File.open(@fname, "wb") { |f| f.write(out_io.buf_string) }
+    File.binwrite(@fname, out_io.buf_string)
 
     assert_zip_file_contains_files_per_package_part(@fname, @package)
     assert_current_year_mtime_for_entry(@fname, @package)
@@ -253,6 +253,7 @@ class TestPackage < Minitest::Test
     zip_content_now = @package.to_stream.string
     Timecop.travel(3600) do
       zip_content_then = @package.to_stream.string
+
       assert_same_bytes zip_content_then, zip_content_now, "zip files are not identical"
     end
   end
