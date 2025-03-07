@@ -164,7 +164,7 @@ class TestPackage < Minitest::Test
     out_io = writable_class.new
     @package.serialize(out_io)
 
-    File.open(@fname, "wb") {|f| f.write(out_io.buf_string) }
+    File.open(@fname, "wb") { |f| f.write(out_io.buf_string) }
 
     assert_zip_file_contains_files_per_package_part(@fname, @package)
     assert_current_year_mtime_for_entry(@fname, @package)
