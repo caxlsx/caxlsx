@@ -189,7 +189,8 @@ class TestPackage < Minitest::Test
     @package.serialize(@fname, password: password)
 
     decrypted_fname = 'axlsx_test_serialization_decrypted.xlsx'
-    assert_nothing_raised { OoxmlCrypt.decrypt_file(@fname, password, decrypted_fname) }
+    OoxmlCrypt.decrypt_file(@fname, password, decrypted_fname)
+
     assert_zip_file_matches_package(decrypted_fname, @package)
     assert_created_with_rubyzip(decrypted_fname, @package)
 
@@ -205,7 +206,8 @@ class TestPackage < Minitest::Test
     @package.serialize(fname, zip_command: 'zip', password: password)
 
     decrypted_fname = 'axlsx_test_serialization_decrypted.xlsx'
-    assert_nothing_raised { OoxmlCrypt.decrypt_file(fname, password, decrypted_fname) }
+    OoxmlCrypt.decrypt_file(fname, password, decrypted_fname)
+
     assert_zip_file_matches_package(decrypted_fname, @package)
     assert_created_with_zip_command(decrypted_fname, @package)
 
@@ -397,7 +399,9 @@ class TestPackage < Minitest::Test
     stream = @package.to_stream(password: password)
 
     assert_kind_of(StringIO, stream)
-    assert_nothing_raised { OoxmlCrypt.decrypt(stream.read, password) }
+    OoxmlCrypt.decrypt(stream.read, password)
+
+    assert true, 'no error raised'
   end
 
   # def test_to_stream_with_password_no_ooxml_crypt
