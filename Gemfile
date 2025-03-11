@@ -25,7 +25,7 @@ group :test do
   gem 'minitest'
   gem 'timecop'
   gem 'webmock'
-  # gem 'rspec-mocks'
+  gem 'rspec-mocks'
 end
 
 group :profile do

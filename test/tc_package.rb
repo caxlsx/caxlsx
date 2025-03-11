@@ -215,12 +215,13 @@ class TestPackage < Minitest::Test
     File.delete(decrypted_fname)
   end
 
-  # def test_serialize_with_password_no_ooxml_crypt
-  #   hide_const('OoxmlCrypt')
-  #   assert_raises(RuntimeError, 'Axlsx encryption requires ooxml_crypt gem') do
-  #     @package.to_stream(password: 'abc123')
-  #   end
-  # end
+  def test_serialize_with_password_no_ooxml_crypt
+    hide_const('OoxmlCrypt')
+
+    assert_raises(RuntimeError, 'Axlsx encryption requires ooxml_crypt gem') do
+      @package.to_stream(password: 'abc123')
+    end
+  end
 
   def assert_zip_file_matches_package(fname, package)
     zf = Zip::File.open(fname)
@@ -404,10 +405,11 @@ class TestPackage < Minitest::Test
     assert true, 'no error raised'
   end
 
-  # def test_to_stream_with_password_no_ooxml_crypt
-  #   hide_const('OoxmlCrypt')
-  #   assert_raises(RuntimeError, 'Axlsx encryption requires ooxml_crypt gem') do
-  #     @package.to_stream(password: 'abc123')
-  #   end
-  # end
+  def test_to_stream_with_password_no_ooxml_crypt
+    hide_const('OoxmlCrypt')
+
+    assert_raises(RuntimeError, 'Axlsx encryption requires ooxml_crypt gem') do
+      @package.to_stream(password: 'abc123')
+    end
+  end
 end

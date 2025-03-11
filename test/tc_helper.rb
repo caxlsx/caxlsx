@@ -8,6 +8,7 @@ SimpleCov.start do
 end
 
 require 'minitest/autorun'
+require 'rspec/mocks/minitest_integration'
 require 'timecop'
 require 'webmock/minitest'
 require 'axlsx'
