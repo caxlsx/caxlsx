@@ -3,7 +3,7 @@
 require 'tc_helper'
 require 'support/capture_warnings'
 
-class TestPackage < Test::Unit::TestCase
+class TestPackage < Minitest::Test
   include CaptureWarnings
 
   def setup
@@ -97,23 +97,23 @@ class TestPackage < Test::Unit::TestCase
   def test_use_autowidth
     @package.use_autowidth = false
 
-    refute(@package.workbook.use_autowidth)
+    assert_false(@package.workbook.use_autowidth)
   end
 
   def test_core_accessor
     assert_equal(@package.core, Axlsx.instance_values_for(@package)["core"])
-    assert_raise(NoMethodError) { @package.core = nil }
+    assert_raises(NoMethodError) { @package.core = nil }
   end
 
   def test_app_accessor
     assert_equal(@package.app, Axlsx.instance_values_for(@package)["app"])
-    assert_raise(NoMethodError) { @package.app = nil }
+    assert_raises(NoMethodError) { @package.app = nil }
   end
 
   def test_use_shared_strings
     assert_nil(@package.use_shared_strings)
-    assert_raise(ArgumentError) { @package.use_shared_strings 9 }
-    assert_nothing_raised { @package.use_shared_strings = true }
+    assert_raises(ArgumentError) { @package.use_shared_strings 9 }
+    refute_raises { @package.use_shared_strings = true }
     assert_equal(@package.use_shared_strings, @package.workbook.use_shared_strings)
   end
 
@@ -305,7 +305,7 @@ class TestPackage < Test::Unit::TestCase
     assert_equal(1, p.count { |part| part[:entry].include?('xl/_rels/workbook.xml.rels') }, "workbook rels missing")
     assert_equal(1, p.count { |part| part[:entry].include?('xl/workbook.xml') }, "workbook missing")
     assert_equal(1, p.count { |part| part[:entry].include?('[Content_Types].xml') }, "content types missing")
-    assert_equal(1, p.count { |part| part[:entry].include?('xl/styles.xml') }, "styles missin")
+    assert_equal(1, p.count { |part| part[:entry].include?('xl/styles.xml') }, "styles missing")
     assert_equal(p.count { |part| %r{xl/drawings/_rels/drawing\d\.xml\.rels}.match?(part[:entry]) }, @package.workbook.drawings.size, "one or more drawing rels missing")
     assert_equal(p.count { |part| %r{xl/drawings/drawing\d\.xml}.match?(part[:entry]) }, @package.workbook.drawings.size, "one or more drawings missing")
     assert_equal(p.count { |part| %r{xl/charts/chart\d\.xml}.match?(part[:entry]) }, @package.workbook.charts.size, "one or more charts missing")

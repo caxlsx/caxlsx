@@ -80,7 +80,7 @@ module Axlsx
     def image_src=(v)
       Axlsx.validate_string(v)
       if remote?
-        RegexValidator.validate('Pic.image_src', /\A#{URI::DEFAULT_PARSER.make_regexp}\z/, v)
+        RegexValidator.validate('Pic.image_src', /\A#{Axlsx.uri_parser.make_regexp}\z/, v)
         RestrictionValidator.validate 'Pic.image_src', ALLOWED_MIME_TYPES, MimeTypeUtils.get_mime_type_from_uri(v)
       else
         RestrictionValidator.validate 'Pic.image_src', ALLOWED_MIME_TYPES, MimeTypeUtils.get_mime_type(v)
@@ -118,7 +118,7 @@ module Axlsx
       File.basename(image_src) unless remote? || image_src.nil?
     end
 
-    # returns the extension of image_src without the preceeding '.'
+    # returns the extension of image_src without the preceding '.'
     # @return [String]
     def extname
       File.extname(image_src).delete('.') unless image_src.nil?
@@ -222,9 +222,9 @@ module Axlsx
     # Return correct xml relationship string portion
     def relationship_xml_portion
       if remote?
-        (+'<a:blip xmlns:r ="' << XML_NS_R << '" r:link="' << relationship.Id << '">')
+        (+'<a:blip xmlns:r="' << XML_NS_R << '" r:link="' << relationship.Id << '">')
       else
-        (+'<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
+        (+'<a:blip xmlns:r="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
       end
     end
 

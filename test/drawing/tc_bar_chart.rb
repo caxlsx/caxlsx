@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestBarChart < Test::Unit::TestCase
+class TestBarChart < Minitest::Test
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
@@ -13,7 +13,7 @@ class TestBarChart < Test::Unit::TestCase
   def teardown; end
 
   def test_initialization
-    assert_equal(:clustered, @chart.grouping, "grouping defualt incorrect")
+    assert_equal(:clustered, @chart.grouping, "grouping default incorrect")
     assert_equal(@chart.series_type, Axlsx::BarSeries, "series type incorrect")
     assert_equal(:bar, @chart.bar_dir, " bar direction incorrect")
     assert_kind_of(Axlsx::CatAxis, @chart.cat_axis, "category axis not created")
@@ -21,34 +21,34 @@ class TestBarChart < Test::Unit::TestCase
   end
 
   def test_bar_direction
-    assert_raise(ArgumentError, "require valid bar direction") { @chart.bar_dir = :left }
-    assert_nothing_raised("allow valid bar direction") { @chart.bar_dir = :col }
+    assert_raises(ArgumentError, "require valid bar direction") { @chart.bar_dir = :left }
+    refute_raises { @chart.bar_dir = :col }
     assert_equal(:col, @chart.bar_dir)
   end
 
   def test_grouping
-    assert_raise(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
-    assert_nothing_raised("allow valid grouping") { @chart.grouping = :standard }
+    assert_raises(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
+    refute_raises { @chart.grouping = :standard }
     assert_equal(:standard, @chart.grouping)
   end
 
   def test_gap_width
-    assert_raise(ArgumentError, "require valid gap width") { @chart.gap_width = -1 }
-    assert_raise(ArgumentError, "require valid gap width") { @chart.gap_width = 501 }
-    assert_nothing_raised("allow valid gap width") { @chart.gap_width = 200 }
+    assert_raises(ArgumentError, "require valid gap width") { @chart.gap_width = -1 }
+    assert_raises(ArgumentError, "require valid gap width") { @chart.gap_width = 501 }
+    refute_raises { @chart.gap_width = 200 }
     assert_equal(200, @chart.gap_width, 'gap width is incorrect')
   end
 
   def test_overlap
-    assert_raise(ArgumentError, "require valid overlap") { @chart.overlap = -101 }
-    assert_raise(ArgumentError, "require valid overlap") { @chart.overlap = 101 }
-    assert_nothing_raised("allow valid overlap") { @chart.overlap = 100 }
+    assert_raises(ArgumentError, "require valid overlap") { @chart.overlap = -101 }
+    assert_raises(ArgumentError, "require valid overlap") { @chart.overlap = 101 }
+    refute_raises { @chart.overlap = 100 }
     assert_equal(100, @chart.overlap, 'overlap is incorrect')
   end
 
   def test_shape
-    assert_raise(ArgumentError, "require valid shape") { @chart.shape = :star }
-    assert_nothing_raised("allow valid shape") { @chart.shape = :cone }
+    assert_raises(ArgumentError, "require valid shape") { @chart.shape = :star }
+    refute_raises { @chart.shape = :cone }
     assert_equal(:cone, @chart.shape)
   end
 

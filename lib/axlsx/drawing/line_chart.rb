@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Axlsx
-  # The LineChart is a two dimentional line chart (who would have guessed?) that you can add to your worksheet.
+  # The LineChart is a two dimensional line chart (who would have guessed?) that you can add to your worksheet.
   # @example Creating a chart
   #   # This example creates a line in a single sheet.
   #   require "rubygems" # if that is your preferred way to manage gems!
@@ -47,7 +47,7 @@ module Axlsx
     def initialize(frame, options = {})
       @vary_colors = false
       @grouping = :standard
-      super(frame, options)
+      super
       @series_type = LineSeries
       @d_lbls = nil
     end
@@ -75,7 +75,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      super(str) do
+      super do
         str << "<c:" << node_name << ">"
         str << '<c:grouping val="' << grouping.to_s << '"/>'
         str << '<c:varyColors val="' << vary_colors.to_s << '"/>'

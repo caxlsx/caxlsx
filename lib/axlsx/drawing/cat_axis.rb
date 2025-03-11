@@ -12,7 +12,7 @@ module Axlsx
       self.auto = 1
       self.lbl_algn = :ctr
       self.lbl_offset = "100"
-      super(options)
+      super
     end
 
     # From the docs: This element specifies that this axis is a date or text axis based on the data that is used for the axis labels, not a specific choice.
@@ -31,7 +31,7 @@ module Axlsx
     attr_reader :lbl_offset
     alias :lblOffset :lbl_offset
 
-    # The number of tick lables to skip between labels
+    # The number of tick labels to skip between labels
     # @return [Integer]
     attr_reader :tick_lbl_skip
     alias :tickLblSkip :tick_lbl_skip
@@ -85,7 +85,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = +'')
       str << '<c:catAx>'
-      super(str)
+      super
       str << '<c:auto val="' << @auto.to_s << '"/>'
       str << '<c:lblAlgn val="' << @lbl_algn.to_s << '"/>'
       str << '<c:lblOffset val="' << @lbl_offset.to_i.to_s << '"/>'

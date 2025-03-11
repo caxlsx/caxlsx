@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestMimeTypeUtils < Test::Unit::TestCase
+class TestMimeTypeUtils < Minitest::Test
   def setup
     stub_request(:get, 'https://example.com/sample-image.png')
       .to_return(body: File.new('examples/sample.png'), status: 200)
@@ -19,6 +19,6 @@ class TestMimeTypeUtils < Test::Unit::TestCase
   end
 
   def test_escape_uri
-    assert_raise(URI::InvalidURIError) { Axlsx::MimeTypeUtils.get_mime_type_from_uri('| ls') }
+    assert_raises(URI::InvalidURIError) { Axlsx::MimeTypeUtils.get_mime_type_from_uri('| ls') }
   end
 end

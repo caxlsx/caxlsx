@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestSheetPr < Test::Unit::TestCase
+class TestSheetPr < Minitest::Test
   def setup
     worksheet = Axlsx::Package.new.workbook.add_worksheet
     @options = {

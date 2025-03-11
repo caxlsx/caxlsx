@@ -11,7 +11,7 @@ module Axlsx
       @tag_name = :cat
       @data_type = StrData
       @ref_tag_name = :strRef
-      super(options)
+      super
     end
 
     # allowed element tag names for serialization

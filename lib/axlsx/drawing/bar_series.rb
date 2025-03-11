@@ -37,7 +37,7 @@ module Axlsx
     def initialize(chart, options = {})
       @shape = :box
       @colors = []
-      super(chart, options)
+      super
       self.labels = AxDataSource.new({ data: options[:labels] }) unless options[:labels].nil?
       self.data = NumDataSource.new(options) unless options[:data].nil?
     end
@@ -62,7 +62,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      super(str) do
+      super do
         colors.each_with_index do |c, index|
           str << '<c:dPt>'
           str << '<c:idx val="' << index.to_s << '"/>'

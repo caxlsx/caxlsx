@@ -1,27 +1,27 @@
 # frozen_string_literal: true
 
 module Axlsx
-  require 'axlsx/stylesheet/border'
-  require 'axlsx/stylesheet/border_pr'
-  require 'axlsx/stylesheet/cell_alignment'
-  require 'axlsx/stylesheet/cell_style'
-  require 'axlsx/stylesheet/color'
-  require 'axlsx/stylesheet/fill'
-  require 'axlsx/stylesheet/font'
-  require 'axlsx/stylesheet/gradient_fill'
-  require 'axlsx/stylesheet/gradient_stop'
-  require 'axlsx/stylesheet/num_fmt'
-  require 'axlsx/stylesheet/pattern_fill'
-  require 'axlsx/stylesheet/table_style'
-  require 'axlsx/stylesheet/table_styles'
-  require 'axlsx/stylesheet/table_style_element'
-  require 'axlsx/stylesheet/dxf'
-  require 'axlsx/stylesheet/xf'
-  require 'axlsx/stylesheet/cell_protection'
+  require_relative 'border'
+  require_relative 'border_pr'
+  require_relative 'cell_alignment'
+  require_relative 'cell_style'
+  require_relative 'color'
+  require_relative 'fill'
+  require_relative 'font'
+  require_relative 'gradient_fill'
+  require_relative 'gradient_stop'
+  require_relative 'num_fmt'
+  require_relative 'pattern_fill'
+  require_relative 'table_style'
+  require_relative 'table_styles'
+  require_relative 'table_style_element'
+  require_relative 'dxf'
+  require_relative 'xf'
+  require_relative 'cell_protection'
 
   # The Styles class manages worksheet styles
   # In addition to creating the require style objects for a valid xlsx package, this class provides the key mechanism for adding styles to your workbook, and safely applying them to the cells of your worksheet.
-  # All portions of the stylesheet are implemented here exception colors, which specify legacy and modified pallete colors, and exLst, whic is used as a future feature data storage area.
+  # All portions of the stylesheet are implemented here exception colors, which specify legacy and modified palette colors, and exLst, which is used as a future feature data storage area.
   # @see  Office Open XML Part 1 18.8.11 for gory details on how this stuff gets put together
   # @see  Styles#add_style
   # @note The recommended way to manage styles is with add_style
@@ -156,7 +156,7 @@ module Axlsx
     #   ws = p.workbook.add_worksheet
     #
     #   # black text on a white background at 14pt with thin borders!
-    #   title = ws.styles.add_style(:bg_color => "FFFF0000", :fg_color=>"#FF000000", :sz=>14,  :border=> {:style => :thin, :color => "FFFF0000"}
+    #   title = ws.styles.add_style(:bg_color => "FFFF0000", :fg_color=>"FF000000", :sz=>14,  :border=> {:style => :thin, :color => "FFFF0000"}
     #
     #   ws.add_row ["Least Popular Pets"]
     #   ws.add_row ["", "Dry Skinned Reptiles", "Bald Cats", "Violent Parrots"], :style=>title
@@ -174,7 +174,7 @@ module Axlsx
     #
     #   # define your styles
     #   title = ws.styles.add_style(:bg_color => "FFFF0000",
-    #                              :fg_color=>"#FF000000",
+    #                              :fg_color=>"FF000000",
     #                              :border=>Axlsx::STYLE_THIN_BORDER,
     #                              :alignment=>{:horizontal => :center})
     #
@@ -209,10 +209,10 @@ module Axlsx
     #
     #   # define your styles
     #   profitable = wb.styles.add_style(:bg_color => "FFFF0000",
-    #                              :fg_color=>"#FF000000",
+    #                              :fg_color=>"FF000000",
     #                              :type => :dxf)
     #
-    #   ws.add_row ["Genreated At:", Time.now], :styles=>[nil, date_time]
+    #   ws.add_row ["Generated At:", Time.now], :styles=>[nil, date_time]
     #   ws.add_row ["Previous Year Quarterly Profits (JPY)"], :style=>title
     #   ws.add_row ["Quarter", "Profit", "% of Total"], :style=>title
     #   ws.add_row ["Q1", 4000, 40], :style=>[title, currency, percent]
@@ -245,7 +245,7 @@ module Axlsx
 
         font_defaults = { name: @fonts.first.name, sz: @fonts.first.sz, family: @fonts.first.family }
 
-        raw_style = { type: :xf }.merge(font_defaults).merge(options)
+        raw_style = { type: :xf }.merge(font_defaults, options)
 
         if raw_style[:format_code]
           raw_style.delete(:num_fmt)
@@ -275,7 +275,7 @@ module Axlsx
       if options[:type] == :xf
         xf_index = (cellXfs << style)
 
-        # Add styles to style_index cache for re-use
+        # Add styles to style_index cache for reuse
         style_index[xf_index] = raw_style
 
         xf_index
@@ -298,7 +298,7 @@ module Axlsx
 
     # parses add_style options for alignment
     # noop if options hash does not include :alignment key
-    # @option options [Hash] alignment A hash of options to prive the CellAlignment intializer
+    # @option options [Hash] alignment A hash of options to prive the CellAlignment initializer
     # @return [CellAlignment]
     # @see CellAlignment
     def parse_alignment_options(options = {})
@@ -325,11 +325,7 @@ module Axlsx
     def parse_font_options(options = {})
       return if (options.keys & [:fg_color, :sz, :b, :i, :u, :strike, :outline, :shadow, :charset, :family, :font_name]).empty?
 
-      Axlsx.instance_values_for(fonts.first).each do |key, value|
-        # Thanks for that 1.8.7 - cant do a simple merge...
-        options[key.to_sym] = value unless options.key?(key.to_sym)
-      end
-      font = Font.new(options)
+      font = Font.new(Axlsx.instance_values_for(fonts.first).merge(options))
       font.color = Color.new(rgb: options[:fg_color]) if options[:fg_color]
       font.name = options[:font_name] if options[:font_name]
       options[:type] == :dxf ? font : fonts << font
@@ -361,7 +357,7 @@ module Axlsx
 
       # Both bgColor and fgColor happens to configure the background of the cell.
       # One of them sets the "background" of the cell, while the other one is
-      # responsibe for the "pattern" of the cell. When you pick "solid" pattern for
+      # responsible for the "pattern" of the cell. When you pick "solid" pattern for
       # a normal xf style, then it's a rectangle covering all bgColor with fgColor,
       # which means we need to to set the given background color to fgColor as well.
       # For some reason I wasn't able find, it works the opposite for dxf styles

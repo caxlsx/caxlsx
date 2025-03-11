@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestApp < Test::Unit::TestCase
+class TestApp < Minitest::Test
   def setup
     options = {
       Template: 'Foo.xlt',

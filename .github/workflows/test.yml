@@ -7,7 +7,7 @@ on:
 
 jobs:
   test_ruby_versions:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     continue-on-error: ${{ matrix.allow_failures == 'allow failures' || false }}
 
@@ -24,6 +24,7 @@ jobs:
           - ruby: 3.1
           - ruby: 3.2
           - ruby: 3.3
+          - ruby: 3.4
           - ruby: jruby-9.3
           - ruby: jruby-9.4
           - ruby: head

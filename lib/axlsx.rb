@@ -1,38 +1,39 @@
 # frozen_string_literal: true
 
+require_relative 'axlsx/version'
+
+# gemspec dependencies
 require 'htmlentities'
-require 'axlsx/version'
 require 'marcel'
-
-require 'axlsx/util/simple_typed_list'
-require 'axlsx/util/constants'
-require 'axlsx/util/validators'
-require 'axlsx/util/accessors'
-require 'axlsx/util/serialized_attributes'
-require 'axlsx/util/options_parser'
-require 'axlsx/util/mime_type_utils'
-require 'axlsx/util/buffered_zip_output_stream'
-require 'axlsx/util/zip_command'
-
-require 'axlsx/stylesheet/styles'
-
-require 'axlsx/doc_props/app'
-require 'axlsx/doc_props/core'
-require 'axlsx/content_type/content_type'
-require 'axlsx/rels/relationships'
-
-require 'axlsx/drawing/drawing'
-require 'axlsx/workbook/workbook'
-require 'axlsx/package'
-# required gems
 require 'nokogiri'
 require 'zip'
 
-# core dependencies
-require 'bigdecimal'
+# Ruby core dependencies
 require 'cgi'
 require 'set'
 require 'time'
+require 'uri'
+
+require_relative 'axlsx/util/simple_typed_list'
+require_relative 'axlsx/util/constants'
+require_relative 'axlsx/util/validators'
+require_relative 'axlsx/util/accessors'
+require_relative 'axlsx/util/serialized_attributes'
+require_relative 'axlsx/util/options_parser'
+require_relative 'axlsx/util/mime_type_utils'
+require_relative 'axlsx/util/buffered_zip_output_stream'
+require_relative 'axlsx/util/zip_command'
+
+require_relative 'axlsx/stylesheet/styles'
+
+require_relative 'axlsx/doc_props/app'
+require_relative 'axlsx/doc_props/core'
+require_relative 'axlsx/content_type/content_type'
+require_relative 'axlsx/rels/relationships'
+
+require_relative 'axlsx/drawing/drawing'
+require_relative 'axlsx/workbook/workbook'
+require_relative 'axlsx/package'
 
 if Gem.loaded_specs.key?("axlsx_styler")
   raise StandardError, "Please remove `axlsx_styler` from your Gemfile, the associated functionality is now built-in to `caxlsx` directly."
@@ -88,12 +89,10 @@ module Axlsx
     letters_str = name[/[A-Z]+/]
 
     # capitalization?!?
-    v = letters_str.reverse.chars.reduce({ base: 1, i: 0 }) do |val, c|
+    v = letters_str.reverse.chars.each_with_object({ base: 1, i: 0 }) do |c, val|
       val[:i] += ((c.bytes.first - 64) * val[:base])
 
       val[:base] *= 26
-
-      next val
     end
 
     col_index = (v[:i] - 1)
@@ -154,7 +153,7 @@ module Axlsx
     end
   end
 
-  # performs the increadible feat of changing snake_case to CamelCase
+  # performs the incredible feat of changing snake_case to CamelCase
   # @param [String] s The snake case string to camelize
   # @return [String]
   def self.camel(s = "", all_caps = true)
@@ -163,7 +162,7 @@ module Axlsx
     s.gsub(/_(.)/) { ::Regexp.last_match(1).upcase }
   end
 
-  # returns the provided string with all invalid control charaters
+  # returns the provided string with all invalid control characters
   # removed.
   # @param [String] str The string to process
   # @return [String]
@@ -228,5 +227,20 @@ module Axlsx
   def self.escape_formulas=(value)
     Axlsx.validate_boolean(value)
     @escape_formulas = value
+  end
+
+  # Returns a URI parser instance, preferring RFC2396_PARSER if available,
+  # otherwise falling back to DEFAULT_PARSER. This method ensures consistent
+  # URI parsing across different Ruby versions.
+  # This method can be removed when dropping compatibility for Ruby < 3.4
+  # See https://github.com/ruby/uri/pull/114 for details.
+  # @return [Object]
+  def self.uri_parser
+    @uri_parser ||=
+      if defined?(URI::RFC2396_PARSER)
+        URI::RFC2396_PARSER
+      else
+        URI::DEFAULT_PARSER
+      end
   end
 end

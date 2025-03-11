@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestFilters < Test::Unit::TestCase
+class TestFilters < Minitest::Test
   def setup
     @filters = Axlsx::Filters.new(filter_items: [1, 'a'],
                                   date_group_items: [{ date_time_grouping: :year, year: 2011, month: 11, day: 11, hour: 0, minute: 0, second: 0 }],
@@ -11,14 +11,14 @@ class TestFilters < Test::Unit::TestCase
 
   def test_blank
     assert @filters.blank
-    assert_raise(ArgumentError) { @filters.blank = :only_if_you_want_it }
+    assert_raises(ArgumentError) { @filters.blank = :only_if_you_want_it }
     @filters.blank = true
 
     assert @filters.blank
   end
 
   def test_calendar_type
-    assert_raise(ArgumentError) { @filters.calendar_type = 'monkey calendar' }
+    assert_raises(ArgumentError) { @filters.calendar_type = 'monkey calendar' }
     @filters.calendar_type = 'japan'
 
     assert_equal('japan', @filters.calendar_type)
@@ -40,7 +40,7 @@ class TestFilters < Test::Unit::TestCase
       'a'
     end
 
-    refute @filters.apply(keeper)
+    assert_false @filters.apply(keeper)
   end
 
   def test_apply_is_true_for_non_matching_values

@@ -31,7 +31,7 @@ module Axlsx
 
     serializable_attributes :sheet_id, :state
 
-    # Initalizes page margin, setup and print options
+    # Initializes page margin, setup and print options
     # @param [Hash] options Options passed in from the initializer
     def initialize_page_options(options)
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
@@ -181,7 +181,7 @@ module Axlsx
       @auto_filter ||= AutoFilter.new self
     end
 
-    # Indicates if the worksheet will be fit by witdh or height to a specific number of pages.
+    # Indicates if the worksheet will be fit by width or height to a specific number of pages.
     # To alter the width or height for page fitting, please use page_setup.fit_to_widht or page_setup.fit_to_height.
     # If you want the worksheet to fit on more pages (e.g. 2x2), set {PageSetup#fit_to_width} and {PageSetup#fit_to_height} accordingly.
     # @return Boolean
@@ -421,7 +421,7 @@ module Axlsx
     # @option options [Array] values
     # @option options [Array, Symbol] types
     # @option options [Array, Integer] style
-    # @option options [Array] widths each member of the widths array will affect how auto_fit behavies.
+    # @option options [Array] widths each member of the widths array will affect how auto_fit behaves.
     # @option options [Float] height the row's height (in points)
     # @option options [Integer] offset - add empty columns before values
     # @option options [Array, Boolean] escape_formulas - Whether to treat a value starting with an equal
@@ -666,12 +666,11 @@ module Axlsx
     # @return [Relationships]
     def relationships
       r = Relationships.new
-      r + [tables.relationships,
-           worksheet_comments.relationships,
-           hyperlinks.relationships,
-           worksheet_drawing.relationship,
-           pivot_tables.relationships].flatten.compact || []
-      r
+      r.concat [tables.relationships,
+                worksheet_comments.relationships,
+                hyperlinks.relationships,
+                worksheet_drawing.relationship,
+                pivot_tables.relationships].flatten.compact
     end
 
     # Returns the cell or cells defined using Excel style A1:B3 references.
@@ -728,7 +727,7 @@ module Axlsx
     end
 
     # shortcut level to specify the outline level for a series of rows
-    # Oulining is what lets you add collapse and expand to a data set.
+    # Outlining is what lets you add collapse and expand to a data set.
     # @param [Integer] start_index The zero based index of the first row of outlining.
     # @param [Integer] end_index The zero based index of  the last row to be outlined
     # @param [integer] level The level of outline to apply
@@ -738,7 +737,7 @@ module Axlsx
     end
 
     # shortcut level to specify the outline level for a series of columns
-    # Oulining is what lets you add collapse and expand to a data set.
+    # Outlining is what lets you add collapse and expand to a data set.
     # @param [Integer] start_index The zero based index of the first column of outlining.
     # @param [Integer] end_index The zero based index of  the last column to be outlined
     # @param [integer] level The level of outline to apply
@@ -855,7 +854,6 @@ module Axlsx
       cells.each_with_index do |cell, index|
         width = widths ? widths[index] : nil
         col = find_or_create_column_info(index)
-        next if width == :ignore
 
         col.update_width(cell, width, workbook.use_autowidth)
       end

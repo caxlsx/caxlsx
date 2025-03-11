@@ -81,7 +81,7 @@ module Axlsx
     raise ArgumentError, format(ERR_ANGLE, v.inspect) unless v.to_i >= -5400000 && v.to_i <= 5400000
   end
 
-  # Validates an unsigned intger
+  # Validates an unsigned integer
   UINT_VALIDATOR = ->(arg) { arg.respond_to?(:>=) && arg >= 0 }
 
   # Requires that the value is a Integer and is greater or equal to 0

@@ -2,9 +2,9 @@
 
 require 'tc_helper'
 
-class TestOverride < Test::Unit::TestCase
+class TestOverride < Minitest::Test
   def test_content_type_restriction
-    assert_raise(ArgumentError, "requires known content type") { Axlsx::Override.new ContentType: "asdf" }
+    assert_raises(ArgumentError, "requires known content type") { Axlsx::Override.new ContentType: "asdf" }
   end
 
   def test_to_xml

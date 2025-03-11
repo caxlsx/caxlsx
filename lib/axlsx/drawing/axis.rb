@@ -84,7 +84,7 @@ module Axlsx
 
     # The color for this axis. This value is used when rendering the axis line in the chart.
     # colors should be in 6 character rbg format
-    # @return [String] the rbg color assinged.
+    # @return [String] the rbg color assigned.
     # @see color
     def color=(color_rgb)
       @color = color_rgb

@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestAutoFilter < Test::Unit::TestCase
+class TestAutoFilter < Minitest::Test
   def setup
     ws = Axlsx::Package.new.workbook.add_worksheet
     3.times { |index| ws.add_row [1 * index, 2 * index, 3 * index] }
@@ -27,9 +27,7 @@ class TestAutoFilter < Test::Unit::TestCase
   end
 
   def test_add_column
-    @auto_filter.add_column(0, :filters) do |column|
-      assert_kind_of FilterColumn, column
-    end
+    assert_kind_of Axlsx::FilterColumn, @auto_filter.add_column(0, :filters)
   end
 
   def test_applya

@@ -15,7 +15,7 @@ module Axlsx
       #
       # This should be called before serializing a package (see {Package#serialize} and
       # {Package#to_stream}) to make sure that serialization is idempotent (i.e.
-      # Relationship instances are generated with the same IDs everytime the package
+      # Relationship instances are generated with the same IDs every time the package
       # is serialized).
       def initialize_ids_cache
         Thread.current[:axlsx_relationship_ids_cache] = {}
@@ -116,7 +116,7 @@ module Axlsx
       h = Axlsx.instance_values_for(self).reject { |k, _| k == "source_obj" }
       str << '<Relationship '
       h.each_with_index do |key_value, index|
-        str << ' ' unless index.zero?
+        str << ' ' unless index == 0
         str << key_value.first.to_s << '="' << Axlsx.coder.encode(key_value.last.to_s) << '"'
       end
       str << '/>'

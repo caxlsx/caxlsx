@@ -19,7 +19,7 @@ module Axlsx
     end
 
     # These attributes are all boolean so I'm doing a bit of a hand
-    # waving magic show to set up the attriubte accessors
+    # waving magic show to set up the attribute accessors
     # @note
     #   not all charts support all methods!
     #   Bar3DChart and Line3DChart and ScatterChart do not support d_lbl_pos or show_leader_lines
@@ -42,7 +42,7 @@ module Axlsx
       end
     end
 
-    # The chart type that is using this data lables instance.
+    # The chart type that is using this data labels instance.
     # This affects the xml output as not all chart types support the
     # same data label attributes.
     attr_reader :chart_type
@@ -57,11 +57,11 @@ module Axlsx
     end
 
     # @see DLbls#d_lbl_pos
-    # Assigns the label postion for this data labels on this chart.
+    # Assigns the label position for this data labels on this chart.
     # Allowed positions are :bestFit, :b, :ctr, :inBase, :inEnd, :l,
     # :outEnd, :r and :t
     # The default is :bestFit
-    # @param [Symbol] label_position the postion you want to use.
+    # @param [Symbol] label_position the position you want to use.
     def d_lbl_pos=(label_position)
       return unless [PieChart, Pie3DChart, LineChart].include? @chart_type
 

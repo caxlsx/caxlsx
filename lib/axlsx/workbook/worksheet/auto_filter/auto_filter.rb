@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'axlsx/workbook/worksheet/auto_filter/filter_column'
-require 'axlsx/workbook/worksheet/auto_filter/filters'
-require 'axlsx/workbook/worksheet/auto_filter/sort_state'
+require_relative 'filter_column'
+require_relative 'filters'
+require_relative 'sort_state'
 
 module Axlsx
   # This class represents an auto filter range in a worksheet
@@ -80,7 +80,7 @@ module Axlsx
                            condition.order == :asc ? index1 <=> index2 : index2 <=> index1
                          end
 
-            break unless comparison.zero?
+            break unless comparison == 0
           end
 
           comparison

@@ -2,7 +2,7 @@
 
 module Axlsx
   # A cell in a worksheet.
-  # Cell stores inforamation requried to serialize a single worksheet cell to xml. You must provde the Row that the cell belongs to and the cells value. The data type will automatically be determed if you do not specify the :type option. The default style will be applied if you do not supply the :style option. Changing the cell's type will recast the value to the type specified. Altering the cell's value via the property accessor will also automatically cast the provided value to the cell's type.
+  # Cell stores information required to serialize a single worksheet cell to xml. You must provide the Row that the cell belongs to and the cells value. The data type will automatically be determed if you do not specify the :type option. The default style will be applied if you do not supply the :style option. Changing the cell's type will recast the value to the type specified. Altering the cell's value via the property accessor will also automatically cast the provided value to the cell's type.
   # @note The recommended way to generate cells is via Worksheet#add_row
   #
   # @see Worksheet#add_row
@@ -41,7 +41,7 @@ module Axlsx
       self.type = type unless type == :string
 
       val = options.delete(:style)
-      self.style = val unless val.nil? || val.zero?
+      self.style = val unless val.nil? || val == 0
       val = options.delete(:formula_value)
       self.formula_value = val unless val.nil?
       val = options.delete(:escape_formulas)
@@ -57,11 +57,11 @@ module Axlsx
     # you need to set this.
     attr_accessor :formula_value
 
-    # An array of available inline styes.
+    # An array of available inline styles.
     # TODO change this to a hash where each key defines attr name and validator (and any info the validator requires)
-    # then move it out to a module so we can re-use in in other classes.
+    # then move it out to a module so we can reuse in in other classes.
     # needs to define bla=(v) and bla methods on the class that hook into a
-    # set_attr method that kicks the suplied validator and updates the instance_variable
+    # set_attr method that kicks the supplied validator and updates the instance_variable
     # for the key
     INLINE_STYLES = [:value, :type, :font_name, :charset,
                      :family, :b, :i, :strike, :outline,
@@ -549,14 +549,14 @@ module Axlsx
 
       case type
       when :date
-        self.style = STYLE_DATE if style.zero?
+        self.style = STYLE_DATE if style == 0
         if !v.is_a?(Date) && v.respond_to?(:to_date)
           v.to_date
         else
           v
         end
       when :time
-        self.style = STYLE_DATE if style.zero?
+        self.style = STYLE_DATE if style == 0
         if !v.is_a?(Time) && v.respond_to?(:to_time)
           v.to_time
         else

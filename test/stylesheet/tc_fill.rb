@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestFill < Test::Unit::TestCase
+class TestFill < Minitest::Test
   def setup
     @item = Axlsx::Fill.new Axlsx::PatternFill.new
   end
@@ -11,7 +11,7 @@ class TestFill < Test::Unit::TestCase
 
   def test_initialiation
     assert_kind_of(Axlsx::PatternFill, @item.fill_type)
-    assert_raise(ArgumentError) { Axlsx::Fill.new }
-    assert_nothing_raised { Axlsx::Fill.new(Axlsx::GradientFill.new) }
+    assert_raises(ArgumentError) { Axlsx::Fill.new }
+    refute_raises { Axlsx::Fill.new(Axlsx::GradientFill.new) }
   end
 end

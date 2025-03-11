@@ -28,7 +28,7 @@ module Axlsx
 
     attr_reader :worksheet
 
-    # the full refernece for this dimension
+    # the full reference for this dimension
     # @return [String]
     def sqref
       "#{first_cell_reference}:#{last_cell_reference}"

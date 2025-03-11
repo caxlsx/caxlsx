@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestPageMargins < Test::Unit::TestCase
+class TestPageMargins < Minitest::Test
   def setup
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet name: "hmmm"
@@ -64,38 +64,38 @@ class TestPageMargins < Test::Unit::TestCase
   end
 
   def test_left
-    assert_raise(ArgumentError) { @pm.left = -1.2 }
-    assert_nothing_raised { @pm.left = 1.5 }
+    assert_raises(ArgumentError) { @pm.left = -1.2 }
+    refute_raises { @pm.left = 1.5 }
     assert_in_delta(@pm.left, 1.5)
   end
 
   def test_right
-    assert_raise(ArgumentError) { @pm.right = -1.2 }
-    assert_nothing_raised { @pm.right = 1.5 }
+    assert_raises(ArgumentError) { @pm.right = -1.2 }
+    refute_raises { @pm.right = 1.5 }
     assert_in_delta(@pm.right, 1.5)
   end
 
   def test_top
-    assert_raise(ArgumentError) { @pm.top = -1.2 }
-    assert_nothing_raised { @pm.top = 1.5 }
+    assert_raises(ArgumentError) { @pm.top = -1.2 }
+    refute_raises { @pm.top = 1.5 }
     assert_in_delta(@pm.top, 1.5)
   end
 
   def test_bottom
-    assert_raise(ArgumentError) { @pm.bottom = -1.2 }
-    assert_nothing_raised { @pm.bottom = 1.5 }
+    assert_raises(ArgumentError) { @pm.bottom = -1.2 }
+    refute_raises { @pm.bottom = 1.5 }
     assert_in_delta(@pm.bottom, 1.5)
   end
 
   def test_header
-    assert_raise(ArgumentError) { @pm.header = -1.2 }
-    assert_nothing_raised { @pm.header = 1.5 }
+    assert_raises(ArgumentError) { @pm.header = -1.2 }
+    refute_raises { @pm.header = 1.5 }
     assert_in_delta(@pm.header, 1.5)
   end
 
   def test_footer
-    assert_raise(ArgumentError) { @pm.footer = -1.2 }
-    assert_nothing_raised { @pm.footer = 1.5 }
+    assert_raises(ArgumentError) { @pm.footer = -1.2 }
+    refute_raises { @pm.footer = 1.5 }
     assert_in_delta(@pm.footer, 1.5)
   end
 end

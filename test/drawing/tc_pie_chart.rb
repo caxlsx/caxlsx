@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestPieChart < Test::Unit::TestCase
+class TestPieChart < Minitest::Test
   def setup
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet

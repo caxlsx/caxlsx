@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestPrintOptions < Test::Unit::TestCase
+class TestPrintOptions < Minitest::Test
   def setup
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet name: "hmmm"
@@ -10,10 +10,10 @@ class TestPrintOptions < Test::Unit::TestCase
   end
 
   def test_initialize
-    refute(@po.grid_lines)
-    refute(@po.headings)
-    refute(@po.horizontal_centered)
-    refute(@po.vertical_centered)
+    assert_false(@po.grid_lines)
+    assert_false(@po.headings)
+    assert_false(@po.horizontal_centered)
+    assert_false(@po.vertical_centered)
   end
 
   def test_initialize_with_options
@@ -39,8 +39,8 @@ class TestPrintOptions < Test::Unit::TestCase
 
     assert(@po.grid_lines)
     assert(@po.headings)
-    refute(@po.horizontal_centered)
-    refute(@po.vertical_centered)
+    assert_false(@po.horizontal_centered)
+    assert_false(@po.vertical_centered)
   end
 
   def test_to_xml
@@ -51,26 +51,26 @@ class TestPrintOptions < Test::Unit::TestCase
   end
 
   def test_grid_lines
-    assert_raise(ArgumentError) { @po.grid_lines = 99 }
-    assert_nothing_raised { @po.grid_lines = true }
+    assert_raises(ArgumentError) { @po.grid_lines = 99 }
+    refute_raises { @po.grid_lines = true }
     assert(@po.grid_lines)
   end
 
   def test_headings
-    assert_raise(ArgumentError) { @po.headings = 99 }
-    assert_nothing_raised { @po.headings = true }
+    assert_raises(ArgumentError) { @po.headings = 99 }
+    refute_raises { @po.headings = true }
     assert(@po.headings)
   end
 
   def test_horizontal_centered
-    assert_raise(ArgumentError) { @po.horizontal_centered = 99 }
-    assert_nothing_raised { @po.horizontal_centered = true }
+    assert_raises(ArgumentError) { @po.horizontal_centered = 99 }
+    refute_raises { @po.horizontal_centered = true }
     assert(@po.horizontal_centered)
   end
 
   def test_vertical_centered
-    assert_raise(ArgumentError) { @po.vertical_centered = 99 }
-    assert_nothing_raised { @po.vertical_centered = true }
+    assert_raises(ArgumentError) { @po.vertical_centered = 99 }
+    refute_raises { @po.vertical_centered = true }
     assert(@po.vertical_centered)
   end
 end

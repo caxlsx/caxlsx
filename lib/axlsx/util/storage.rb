@@ -85,16 +85,16 @@ module Axlsx
     # @return [Integer] sector
     attr_accessor :sector
 
-    # The 0 based index in the directoies chain for this the left sibling of this storage.
+    # The 0 based index in the directories chain for this the left sibling of this storage.
 
     # @return [Integer] left
     attr_accessor :left
 
-    # The 0 based index in the directoies chain for this the right sibling of this storage.
+    # The 0 based index in the directories chain for this the right sibling of this storage.
     # @return [Integer] right
     attr_accessor :right
 
-    # The 0 based index in the directoies chain for the child of this storage.
+    # The 0 based index in the directories chain for the child of this storage.
     # @return [Integer] child
     attr_accessor :child
 

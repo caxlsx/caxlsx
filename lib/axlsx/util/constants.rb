@@ -259,7 +259,7 @@ module Axlsx
   # drawing validation schema
   DRAWING_XSD = "#{SCHEMA_BASE}dml-spreadsheetDrawing.xsd"
 
-  # number format id for pecentage formatting using the default formatting id.
+  # number format id for percentage formatting using the default formatting id.
   NUM_FMT_PERCENT = 9
 
   # number format id for date format like 2011/11/13
@@ -404,7 +404,7 @@ module Axlsx
   CONTROL_CHARS = pattern.freeze
 
   # ISO 8601 date recognition
-  ISO_8601_REGEX = /\A(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?\Z/.freeze
+  ISO_8601_REGEX = /\A(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?\Z/.freeze
 
   # FLOAT recognition
   SAFE_FLOAT_REGEX = /\A[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]{1,2})?\Z/.freeze

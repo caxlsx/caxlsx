@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestPageSetUpPr < Test::Unit::TestCase
+class TestPageSetUpPr < Minitest::Test
   def setup
     @page_setup_pr = Axlsx::PageSetUpPr.new(fit_to_page: true, auto_page_breaks: true)
   end

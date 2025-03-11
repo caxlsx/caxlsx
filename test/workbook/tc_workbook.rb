@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestWorkbook < Test::Unit::TestCase
+class TestWorkbook < Minitest::Test
   def setup
     p = Axlsx::Package.new
     @wb = p.workbook
@@ -27,20 +27,20 @@ class TestWorkbook < Test::Unit::TestCase
     @wb.xml_space = :default
 
     assert_equal(:default, @wb.xml_space)
-    assert_raise(ArgumentError) { @wb.xml_space = :none }
+    assert_raises(ArgumentError) { @wb.xml_space = :none }
   end
 
   def test_no_autowidth
     assert(@wb.use_autowidth)
-    assert_raise(ArgumentError) { @wb.use_autowidth = 0.1 }
-    assert_nothing_raised { @wb.use_autowidth = false }
-    refute(@wb.use_autowidth)
+    assert_raises(ArgumentError) { @wb.use_autowidth = 0.1 }
+    refute_raises { @wb.use_autowidth = false }
+    assert_false(@wb.use_autowidth)
   end
 
   def test_is_reversed
     assert_nil(@wb.is_reversed)
-    assert_raise(ArgumentError) { @wb.is_reversed = 0.1 }
-    assert_nothing_raised { @wb.is_reversed = true }
+    assert_raises(ArgumentError) { @wb.is_reversed = 0.1 }
+    refute_raises { @wb.is_reversed = true }
     assert(@wb.use_autowidth)
   end
 
@@ -54,7 +54,7 @@ class TestWorkbook < Test::Unit::TestCase
   end
 
   def test_worksheet_empty_name
-    assert_raise(ArgumentError) { @wb.add_worksheet(name: '') }
+    assert_raises(ArgumentError) { @wb.add_worksheet(name: '') }
   end
 
   def test_date1904
@@ -81,12 +81,12 @@ class TestWorkbook < Test::Unit::TestCase
 
   def test_shared_strings
     assert_nil(@wb.use_shared_strings)
-    assert_raise(ArgumentError) { @wb.use_shared_strings = 'bpb' }
-    assert_nothing_raised { @wb.use_shared_strings = :true }
+    assert_raises(ArgumentError) { @wb.use_shared_strings = 'bpb' }
+    refute_raises { @wb.use_shared_strings = :true }
   end
 
   def test_add_worksheet
-    assert_empty(@wb.worksheets, "worbook has no worksheets by default")
+    assert_empty(@wb.worksheets, "workbook has no worksheets by default")
     ws = @wb.add_worksheet(name: "bob")
 
     assert_equal(1, @wb.worksheets.size, "add_worksheet adds a worksheet!")
@@ -134,7 +134,7 @@ class TestWorkbook < Test::Unit::TestCase
     ws = @wb.add_worksheet name: 'fish'
     ws.add_row [1, 2, 3]
     ws.add_row [4, 5, 6]
-    assert_raise(ArgumentError, "no sheet name part") { @wb["A1:C2"] }
+    assert_raises(ArgumentError, "no sheet name part") { @wb["A1:C2"] }
     assert_equal(6, @wb['fish!A1:C2'].size)
   end
 

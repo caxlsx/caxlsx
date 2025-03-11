@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Axlsx
-  # The Line3DChart is a three dimentional line chart (who would have guessed?) that you can add to your worksheet.
+  # The Line3DChart is a three dimensional line chart (who would have guessed?) that you can add to your worksheet.
   # @example Creating a chart
   #   # This example creates a line in a single sheet.
   #   require "rubygems" # if that is your preferred way to manage gems!
@@ -43,7 +43,7 @@ module Axlsx
     def initialize(frame, options = {})
       @gap_depth = nil
       @view_3D = View3D.new({ r_ang_ax: 1 }.merge(options))
-      super(frame, options)
+      super
       axes.add_axis :ser_axis, SerAxis
     end
 
@@ -58,7 +58,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      super(str) do
+      super do
         str << '<c:gapDepth val="' << @gap_depth.to_s << '"/>' unless @gap_depth.nil?
       end
     end

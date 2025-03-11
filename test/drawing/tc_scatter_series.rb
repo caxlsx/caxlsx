@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestScatterSeries < Test::Unit::TestCase
+class TestScatterSeries < Minitest::Test
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet name: "hmmm"
@@ -47,7 +47,7 @@ class TestScatterSeries < Test::Unit::TestCase
     @series = @chart.add_series xData: [1, 2, 4], yData: [1, 3, 9], title: "ln_width"
     @series.ln_width = 12_700
 
-    assert_equal(12_700, @series.ln_width, 'line width assigment is allowed')
+    assert_equal(12_700, @series.ln_width, 'line width assignment is allowed')
   end
 
   def test_to_xml_string

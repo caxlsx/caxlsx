@@ -15,7 +15,7 @@ module Axlsx
     # @see Chart
     def initialize(frame, options = {})
       @vary_colors = true
-      super(frame, options)
+      super
       @series_type = PieSeries
       @d_lbls = nil
     end
@@ -24,7 +24,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = +'')
-      super(str) do
+      super do
         str << '<c:pieChart>'
         str << '<c:varyColors val="' << vary_colors.to_s << '"/>'
         @series.each { |ser| ser.to_xml_string(str) }

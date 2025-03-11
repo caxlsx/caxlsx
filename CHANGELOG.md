@@ -2,12 +2,25 @@ CHANGELOG
 ---------
 - **Unreleased**
   - [PR #350](https://github.com/caxlsx/caxlsx/pull/350) Add package-level encryption and password protection
+  - [PR #421](https://github.com/caxlsx/caxlsx/pull/421) Add Rubyzip >= 2.4 support
+
+- **December.15.24**: 4.2.0
+  - [PR #359](https://github.com/caxlsx/caxlsx/pull/359) Add `PivotTable#grand_totals` option to remove grand totals row/col
+  - [PR #362](https://github.com/caxlsx/caxlsx/pull/362) Use widest width even if provided as fixed value
+  - [PR #398](https://github.com/caxlsx/caxlsx/pull/398) Add `Axlsx#uri_parser` method for RFC2396 compatibility
+  - [PR #390](https://github.com/caxlsx/caxlsx/pull/390) Change ISO_8601_REGEX to match how Excel handles ISO 8601 formats
+  - [PR #402](https://github.com/caxlsx/caxlsx/pull/402) Refactor `Axlsx::SimpleTypedList` to better match `Array` API
+  - [PR #409](https://github.com/caxlsx/caxlsx/pull/409) Prefer `require_relative` for internal requires
+  - Minor performance improvements ([PR #406](https://github.com/caxlsx/caxlsx/pull/406), [PR #407](https://github.com/caxlsx/caxlsx/pull/407), [PR #408](https://github.com/caxlsx/caxlsx/pull/408))
+
+- **February.26.24**: 4.1.0
   - [PR #316](https://github.com/caxlsx/caxlsx/pull/316) Prevent camelization of hyperlink locations
   - [PR #312](https://github.com/caxlsx/caxlsx/pull/312) Added 2D/flat PieChart drawing
   - [PR #317](https://github.com/caxlsx/caxlsx/pull/317) Apply style for columns without defining cells
   - [PR #345](https://github.com/caxlsx/caxlsx/pull/345) Show outline symbols by default to match original behavior
   - [PR #334](https://github.com/caxlsx/caxlsx/pull/334) Add pattern fill options to add_style
   - [PR #342](https://github.com/caxlsx/caxlsx/pull/342) Fix show button for filter columns
+  - [PR #349](https://github.com/caxlsx/caxlsx/pull/349) Convert test suite to Minitest
 
 - **October.30.23**: 4.0.0
   - [PR #189](https://github.com/caxlsx/caxlsx/pull/189) **breaking** Make `Axlsx::escape_formulas` true by default to mitigate [Formula Injection](https://www.owasp.org/index.php/CSV_Injection) vulnerabilities.
@@ -29,7 +42,7 @@ CHANGELOG
   - [PR #186](https://github.com/caxlsx/caxlsx/pull/186) - `escape_formulas` should handle all [OWASP-designated formula prefixes](https://owasp.org/www-community/attacks/CSV_Injection).
   - Fix bug when calling `worksheet.add_border("A1:B2", nil)`
   - Change `BorderCreator#initialize` arguments handling
-  - Fix `add_border` to work with singluar cell refs
+  - Fix `add_border` to work with singular cell refs
   - [PR #196](https://github.com/caxlsx/caxlsx/pull/196) - Fix tab color reassignment
   - Add support for remote image source in `Pic` using External Relationship (supported in Excel documents)
 
@@ -163,7 +176,7 @@ CHANGELOG
     and charts to the same worksheet drawing.
   - Added outline_level_rows and outline_level_columns to worksheet to simplify setting up outlining in the worksheet.
   - Added support for pivot tables
-  - Added support for descrete border edge styles
+  - Added support for discrete border edge styles
   - Improved validation of sheet names
   - Added support for formula value caching so that iOS and OSX preview can show the proper values. See Cell.add_row and the formula_values option.
 
@@ -195,7 +208,7 @@ CHANGELOG
     from the initial master.
 
 - **September.8.12**: 1.2.3
-  - enhance exponential float/bigdecimal values rendering as strings intead
+  - enhance exponential float/bigdecimal values rendering as strings instead
     of 'numbers' in excel.
   - added support for :none option on chart axis labels
   - added support for paper_size option on worksheet.page_setup
@@ -229,14 +242,14 @@ CHANGELOG
    - added in interop requirements so that charts are properly exported
      to PDF from Libra Office
    - various readability improvements and work standardizing attribute
-     names to snake_case. Aliases are provided for backward compatiblity
+     names to snake_case. Aliases are provided for backward compatibility
 
 - **June.11.12**: 1.1.7
    - fix chart rendering issue when label offset is specified as a
      percentage in serialization and ensure that formula are not stored
 in value caches
    - fix bug that causes repair warnings when using a text only title reference.
-   - Add title property to axis so you can lable the x/y/series axis for
+   - Add title property to axis so you can label the x/y/series axis for
      charts.
    - Add sheet views with panes
 
@@ -246,14 +259,14 @@ in value caches
    - added support for two cell anchors for images
    - test coverage now back up to 100%
    - bugfix for merge cell sorting algorithm
-   - added fit_to method for page_setup to simplify managing witdh/height
+   - added fit_to method for page_setup to simplify managing width/height
    - added ph (phonetics) and s (style) attributes for row.
    - resolved all warnings generating from this gem.
    - improved comment relationship management for multiple comments
 
 - **May.13.12**: 1.1.5
    - MOAR print options! You can now specify paper size, orientation,
-     fit to width, page margings and gridlines for printing.
+     fit to width, page margins and gridlines for printing.
    - Support for adding comments to your worksheets
    - bugfix for applying style to empty cells
    - bugfix for parsing formula with multiple '='
@@ -328,7 +341,7 @@ in value caches
 
 - **January.6.12**: 1.0.15
    https://github.com/randym/axlsx/compare/1.0.14...1.0.15
-   - Bug fix add_style specified number formats must be explicity applied for libraOffice
+   - Bug fix add_style specified number formats must be explicitly applied for libraOffice
    - performance improvements from ochko when creating cells with options.
    - Bug fix setting types=>[:n] when adding a row incorrectly determines the cell type to be string as the value is null during creation.
    - Release in preparation for password protection merge
@@ -360,7 +373,7 @@ in value caches
 - **October.30.11**: 1.0.10
   - Updating gemspec to lower gem version requirements.
   - Added row.style assignation for updating the cell style for an entire row
-  - Added col_style method to worksheet upate a the style for a column of cells
+  - Added col_style method to worksheet update a the style for a column of cells
   - Added cols for an easy reference to columns in a worksheet.
   - prep for pre release of acts_as_xlsx gem
   - added in travis.ci configuration and build status
@@ -375,14 +388,14 @@ in value caches
   - Added support for images (jpg, gif, png) in worksheets.
 
 - **October.23.11**: 1.0.7 released
-  - Added support for 3D options when creating a new chart. This lets you set the persective, rotation and other 3D attributes when using worksheet.add_chart
+  - Added support for 3D options when creating a new chart. This lets you set the perspective, rotation and other 3D attributes when using worksheet.add_chart
   - Updated serialization write test to verify write permissions and warn if it cannot run the test due to permission restrcitions.
   - updated rake to include build, genoc and deploy tasks.
   - rebuilt documentation.
   - moved version constant to its own file
   - fixed bug in SerAxis that was requiring tickLblSkip and tickMarkSkip to be boolean. Should be unsigned int.
   - Review and improve docs
-  - rebuild of anchor positioning to remove some spagetti code. Chart now supports a start_at and end_at method that accept an arrar for col/row positioning. See example6 for an example. You can still pass :start_at and :end_at options to worksheet.add_chart.
+  - rebuild of anchor positioning to remove some spaghetti code. Chart now supports a start_at and end_at method that accept an arrar for col/row positioning. See example6 for an example. You can still pass :start_at and :end_at options to worksheet.add_chart.
   - Refactored cat and val axis data to keep series serialization a bit more DRY
 
 - **October.22.11**: 1.0.6
@@ -402,7 +415,7 @@ in value caches
   - BugFix: shape attribute for bar chart is now properly serialized
   - BugFix: date1904 property now properly set for charts
   - Added style property to charts
-  - Removed serialization write test as it most commonly fails when run from the gem's intalled directory
+  - Removed serialization write test as it most commonly fails when run from the gem's installed directory
 
 - **October.21.11**: 1.0.4
   - altered package to accept a filename string for serialization instead of a File object.

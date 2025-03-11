@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestSeriesTitle < Test::Unit::TestCase
+class TestSeriesTitle < Minitest::Test
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
@@ -19,7 +19,7 @@ class TestSeriesTitle < Test::Unit::TestCase
   end
 
   def test_text
-    assert_raise(ArgumentError, "text must be a string") { @title.text = 123 }
+    assert_raises(ArgumentError, "text must be a string") { @title.text = 123 }
     @title.cell = @row.cells.first
     @title.text = "bob"
 
@@ -27,7 +27,7 @@ class TestSeriesTitle < Test::Unit::TestCase
   end
 
   def test_cell
-    assert_raise(ArgumentError, "cell must be a Cell") { @title.cell = "123" }
+    assert_raises(ArgumentError, "cell must be a Cell") { @title.cell = "123" }
     @title.cell = @row.cells.first
 
     assert_equal("one", @title.text)

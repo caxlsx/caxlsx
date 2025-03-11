@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestColor < Test::Unit::TestCase
+class TestColor < Minitest::Test
   def setup
     @item = Axlsx::Color.new
   end
@@ -16,14 +16,14 @@ class TestColor < Test::Unit::TestCase
   end
 
   def test_auto
-    assert_raise(ArgumentError) { @item.auto = -1 }
-    assert_nothing_raised { @item.auto = true }
+    assert_raises(ArgumentError) { @item.auto = -1 }
+    refute_raises { @item.auto = true }
     assert(@item.auto)
   end
 
   def test_rgb
-    assert_raise(ArgumentError) { @item.rgb = -1 }
-    assert_nothing_raised { @item.rgb = "FF00FF00" }
+    assert_raises(ArgumentError) { @item.rgb = -1 }
+    refute_raises { @item.rgb = "FF00FF00" }
     assert_equal("FF00FF00", @item.rgb)
   end
 
@@ -35,8 +35,8 @@ class TestColor < Test::Unit::TestCase
   end
 
   def test_tint
-    assert_raise(ArgumentError) { @item.tint = -1 }
-    assert_nothing_raised { @item.tint = -1.0 }
+    assert_raises(ArgumentError) { @item.tint = -1 }
+    refute_raises { @item.tint = -1.0 }
     assert_in_delta(@item.tint, -1.0)
   end
 end

@@ -18,7 +18,7 @@ module Axlsx
                             :sync_ref
 
     # These attributes are all boolean so I'm doing a bit of a hand
-    # waving magic show to set up the attriubte accessors
+    # waving magic show to set up the attribute accessors
     boolean_attr_accessor :sync_horizontal,
                           :sync_vertical,
                           :transition_evaluation,

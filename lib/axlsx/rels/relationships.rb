@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Axlsx
-  require 'axlsx/rels/relationship'
+  require_relative 'relationship'
 
   # Relationships are a collection of Relations that define how package parts are related.
-  # @note The package automatically manages releationships.
+  # @note The package automatically manages relationships.
   class Relationships < SimpleTypedList
     # Creates a new Relationships collection based on SimpleTypedList
     def initialize

@@ -13,7 +13,7 @@ module Axlsx
     # @option options [Symbol] crosses_between
     def initialize(options = {})
       self.cross_between = :between
-      super(options)
+      super
     end
 
     # @see cross_between
@@ -28,7 +28,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = +'')
       str << '<c:valAx>'
-      super(str)
+      super
       str << '<c:crossBetween val="' << @cross_between.to_s << '"/>'
       str << '</c:valAx>'
     end

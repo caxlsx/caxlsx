@@ -278,7 +278,7 @@ module Axlsx
 
       str << '<dataValidation '
       h.each_with_index do |key_value, index|
-        str << ' ' unless index.zero?
+        str << ' ' unless index == 0
         str << key_value.first << '="' << Axlsx.booleanize(key_value.last).to_s << '"'
       end
       str << '>'

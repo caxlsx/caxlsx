@@ -21,7 +21,7 @@ module Axlsx
     alias :== :equal?
     alias :eql? :equal?
 
-    # Creats a new typed list
+    # Creates a new typed list
     # @param [Array, Class] type An array of Class objects or a single Class object
     # @param [String] serialize_as The tag name to use in serialization
     # @raise [ArgumentError] if all members of type are not Class objects
@@ -57,7 +57,7 @@ module Axlsx
     # Transposes the list (without blowing up like ruby does)
     # any non populated cell in the matrix will be a nil value
     def transpose
-      return clone if size.zero?
+      return clone if size == 0
 
       row_count = size
       max_column_count = map { |row| row.cells.size }.max
@@ -90,21 +90,24 @@ module Axlsx
       self
     end
 
-    # join operator
-    # @param [Array] other the array to join
+    # Appends the elements of +others+ to self.
+    # @param [Array<Array>] others one or more arrays to join
     # @raise [ArgumentError] if any of the values being joined are not
     # one of the allowed types
     # @return [SimpleTypedList]
-    def +(other)
-      other.each do |item|
-        self << item
+    def concat(*others)
+      others.each do |other|
+        other.each do |item|
+          self << item
+        end
       end
-      super
+      self
     end
 
-    # Concat operator
+    # Pushes the given object on to the end of this array and returns the index
+    # of the item added.
     # @param [Any] v the data to be added
-    # @raise [ArgumentError] if the value being added is not one fo the allowed types
+    # @raise [ArgumentError] if the value being added is not one of the allowed types
     # @return [Integer] returns the index of the item added.
     def <<(v)
       DataTypeValidator.validate :SimpleTypedList_push, @allowed_types, v
@@ -112,7 +115,17 @@ module Axlsx
       size - 1
     end
 
-    alias :push :<<
+    # Pushes the given object(s) on to the end of this array. This expression
+    # returns the array itself, so several appends may be chained together.
+    # @param [Any] values the data to be added
+    # @raise [ArgumentError] if any of the values being joined are not
+    # @return [SimpleTypedList]
+    def push(*values)
+      values.each do |value|
+        self << value
+      end
+      self
+    end
 
     # delete the item from the list
     # @param [Any] v The item to be deleted.
@@ -147,7 +160,7 @@ module Axlsx
       super
     end
 
-    # inserts an item at the index specfied
+    # inserts an item at the index specified
     # @param [Integer] index
     # @param [Any] v
     # @raise [ArgumentError] if the index is protected by locking

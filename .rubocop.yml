@@ -1,6 +1,7 @@
 inherit_from: .rubocop_todo.yml
 
 require:
+  - rubocop-packaging
   - rubocop-performance
   - rubocop-minitest
 
@@ -12,9 +13,12 @@ AllCops:
   DisplayStyleGuide: true
   ExtraDetails: true
   Exclude:
-    - 'docs/**/*'
-    - 'examples/**/*'
-    - 'vendor/bundle/**/*'
+    - .git/**/*
+    - .github/**/*
+    - docs/**/*
+    - examples/**/*
+    - tmp/**/*
+    - vendor/**/*
 
 Gemspec:
   Enabled: true
@@ -34,7 +38,13 @@ Lint:
 Minitest:
   Enabled: true
 
+Minitest/RefuteFalse:
+  Enabled: false
+
 Naming:
+  Enabled: true
+
+Packaging:
   Enabled: true
 
 Performance:
@@ -46,6 +56,13 @@ Security:
 Style:
   Enabled: true
 
+# Disabled for performance. Reconsider when dropping Ruby < 3.4 support
+Style/MultipleComparison:
+  Enabled: false
+
 Style/NumericLiterals:
   Exclude:
     - 'lib/**/*'
+
+Style/NumericPredicate:
+  EnforcedStyle: comparison

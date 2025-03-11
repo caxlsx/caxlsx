@@ -2,33 +2,33 @@
 
 require 'tc_helper'
 
-class TestSelection < Test::Unit::TestCase
+class TestSelection < Minitest::Test
   def setup
     @options = { active_cell: 'A2', active_cell_id: 1, pane: :top_left, sqref: 'A2' }
     @selection = Axlsx::Selection.new(@options)
   end
 
   def test_active_cell
-    assert_raise(ArgumentError) { @selection.active_cell = :active_cell }
-    assert_nothing_raised { @selection.active_cell = "F5" }
+    assert_raises(ArgumentError) { @selection.active_cell = :active_cell }
+    refute_raises { @selection.active_cell = "F5" }
     assert_equal("F5", @selection.active_cell)
   end
 
   def test_active_cell_id
-    assert_raise(ArgumentError) { @selection.active_cell_id = "foo" }
-    assert_nothing_raised { @selection.active_cell_id = 11 }
+    assert_raises(ArgumentError) { @selection.active_cell_id = "foo" }
+    refute_raises { @selection.active_cell_id = 11 }
     assert_equal(11, @selection.active_cell_id)
   end
 
   def test_pane
-    assert_raise(ArgumentError) { @selection.pane = "foo´" }
-    assert_nothing_raised { @selection.pane = :bottom_right }
+    assert_raises(ArgumentError) { @selection.pane = "foo´" }
+    refute_raises { @selection.pane = :bottom_right }
     assert_equal("bottomRight", @selection.pane)
   end
 
   def test_sqref
-    assert_raise(ArgumentError) { @selection.sqref = :sqref }
-    assert_nothing_raised { @selection.sqref = "G32" }
+    assert_raises(ArgumentError) { @selection.sqref = :sqref }
+    refute_raises { @selection.sqref = "G32" }
     assert_equal("G32", @selection.sqref)
   end
 
