@@ -2,6 +2,8 @@ inherit_from: .rubocop_todo.yml
 
 require:
   - rubocop-packaging
+
+plugins:
   - rubocop-performance
   - rubocop-minitest
 
@@ -55,6 +57,10 @@ Security:
 
 Style:
   Enabled: true
+
+# Disabled for performance.
+Style/ComparableBetween:
+  Enabled: false
 
 # Disabled for performance. Reconsider when dropping Ruby < 3.4 support
 Style/MultipleComparison:
