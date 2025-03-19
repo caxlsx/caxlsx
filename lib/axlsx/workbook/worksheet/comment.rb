@@ -59,8 +59,8 @@ module Axlsx
     end
 
     # serialize the object
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       author = @comments.authors[author_index]
       str << '<comment ref="' << ref << '" authorId="' << author_index.to_s << '">'
