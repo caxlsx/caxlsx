@@ -99,8 +99,8 @@ module Axlsx
     end
 
     # Serializes the object
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       serialized_tag 'a:hlinkClick', str, { 'r:id': relationship.Id, 'xmlns:r': XML_NS_R }
     end

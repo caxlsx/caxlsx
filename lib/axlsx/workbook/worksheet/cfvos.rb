@@ -9,8 +9,8 @@ module Axlsx
     end
 
     # Serialize the Cfvo object
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       each { |cfvo| cfvo.to_xml_string(str) }
     end
