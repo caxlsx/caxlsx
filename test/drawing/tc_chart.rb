@@ -15,7 +15,7 @@ class TestChart < Minitest::Test
   def test_initialization
     assert_equal(@p.workbook.charts.last, @chart, "the chart is in the workbook")
     assert_equal("fishery", @chart.title.text, "the title option has been applied")
-    assert((@chart.series.is_a?(Axlsx::SimpleTypedList) && @chart.series.empty?), "The series is initialized and empty")
+    assert(@chart.series.is_a?(Axlsx::SimpleTypedList) && @chart.series.empty?, "The series is initialized and empty")
   end
 
   def test_title

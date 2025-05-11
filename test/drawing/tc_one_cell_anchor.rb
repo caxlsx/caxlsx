@@ -47,8 +47,8 @@ class TestOneCellAnchor < Minitest::Test
   def test_ext
     ext = @anchor.send(:ext)
 
-    assert_equal(ext[:cx], (@anchor.width * 914_400 / 96))
-    assert_equal(ext[:cy], (@anchor.height * 914_400 / 96))
+    assert_equal(ext[:cx], @anchor.width * 914_400 / 96)
+    assert_equal(ext[:cy], @anchor.height * 914_400 / 96)
   end
 
   def test_options
