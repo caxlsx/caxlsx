@@ -44,7 +44,7 @@ class TestStyles < Minitest::Test
 
     @styles.add_style(border: borders_array)
 
-    assert_equal(@styles.borders.size, (prev_border_count + 1))
+    assert_equal(@styles.borders.size, prev_border_count + 1)
 
     current_border = @styles.borders.last
 
@@ -245,10 +245,10 @@ class TestStyles < Minitest::Test
     assert_equal(@styles.cellXfs.size, xf_count + 1)
     xf = @styles.cellXfs.last
 
-    assert_equal(xf.fillId, (@styles.fills.size - 1), "points to the last created fill")
+    assert_equal(xf.fillId, @styles.fills.size - 1, "points to the last created fill")
     assert_equal("FF000000", @styles.fills.last.fill_type.fgColor.rgb, "fill created with color")
 
-    assert_equal(xf.fontId, (@styles.fonts.size - 1), "points to the last created font")
+    assert_equal(xf.fontId, @styles.fonts.size - 1, "points to the last created font")
     assert_equal(13, @styles.fonts.last.sz, "font sz applied")
     assert_equal("FFFFFFFF", @styles.fonts.last.color.rgb, "font color applied")
 
