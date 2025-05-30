@@ -4,8 +4,8 @@ module Axlsx
   # A series title is a Title with a slightly different serialization than chart titles.
   class SeriesTitle < Title
     # Serializes the object
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       clean_value = Axlsx.trust_input ? @text.to_s : ::CGI.escapeHTML(Axlsx.sanitize(@text.to_s))
 

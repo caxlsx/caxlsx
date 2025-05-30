@@ -40,7 +40,7 @@ module Axlsx
     end
 
     # serialize the object
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'')
       return if sort_conditions.empty?
 

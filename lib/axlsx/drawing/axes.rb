@@ -24,7 +24,7 @@ module Axlsx
     end
 
     # Serializes the object
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @param [Hash] options
     # @option options ids
     # If the ids option is specified only the axis identifier is
