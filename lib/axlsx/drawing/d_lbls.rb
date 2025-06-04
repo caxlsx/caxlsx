@@ -70,7 +70,7 @@ module Axlsx
     end
 
     # serializes the data labels
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'')
       validate_attributes_for_chart_type
       str << '<c:dLbls>'

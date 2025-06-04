@@ -2,6 +2,8 @@
 
 require 'tc_helper'
 require 'support/capture_warnings'
+require 'zip' # We still use Rubyzip in tests
+require 'fileutils'
 
 class TestPackage < Minitest::Test
   include CaptureWarnings
@@ -94,6 +96,10 @@ class TestPackage < Minitest::Test
     ws.add_page_break "B2"
   end
 
+  def teardown
+    FileUtils.rm_f(@fname)
+  end
+
   def test_use_autowidth
     @package.use_autowidth = false
 
@@ -131,28 +137,52 @@ class TestPackage < Minitest::Test
     assert_equal(time, p.core.created)
   end
 
-  def test_serialization
+  def test_serialization_to_file_at_path
     @package.serialize(@fname)
 
-    assert_zip_file_matches_package(@fname, @package)
-    assert_created_with_rubyzip(@fname, @package)
-    File.delete(@fname)
+    assert_zip_file_contains_files_per_package_part(@fname, @package)
+    assert_current_year_mtime_for_entry(@fname, @package)
+  end
+
+  def test_serialization_into_writable
+    # We want to ensure only `write()` gets
+    # called on the output, and the output never
+    # seeks or rewinds
+    writable_class = Class.new do
+      attr_reader :buf_string
+
+      def initialize
+        @buf_string = (+"").b
+      end
+
+      def write(bytes)
+        @buf_string << bytes
+        bytes.bytesize
+      end
+    end
+
+    out_io = writable_class.new
+    @package.serialize(out_io)
+
+    File.binwrite(@fname, out_io.buf_string)
+
+    assert_zip_file_contains_files_per_package_part(@fname, @package)
+    assert_current_year_mtime_for_entry(@fname, @package)
   end
 
   def test_serialization_with_zip_command
     @package.serialize(@fname, zip_command: "zip")
 
-    assert_zip_file_matches_package(@fname, @package)
-    assert_created_with_zip_command(@fname, @package)
-    File.delete(@fname)
+    assert_zip_file_contains_files_per_package_part(@fname, @package)
+    assert_current_year_mtime_for_entry(@fname, @package)
   end
 
   def test_serialization_with_zip_command_and_absolute_path
     fname = "#{Dir.tmpdir}/#{@fname}"
     @package.serialize(fname, zip_command: "zip")
 
-    assert_zip_file_matches_package(fname, @package)
-    assert_created_with_zip_command(fname, @package)
+    assert_zip_file_contains_files_per_package_part(fname, @package)
+    assert_current_year_mtime_for_entry(fname, @package)
     File.delete(fname)
   end
 
@@ -178,21 +208,15 @@ class TestPackage < Minitest::Test
 
     assert wb.styles_applied
     assert_equal 1, wb.styles.style_index.count
-
-    File.delete(@fname)
   end
 
-  def assert_zip_file_matches_package(fname, package)
+  def assert_zip_file_contains_files_per_package_part(fname, package)
     zf = Zip::File.open(fname)
     package.send(:parts).each { |part| zf.get_entry(part[:entry]) }
   end
 
-  def assert_created_with_rubyzip(fname, package)
-    assert_equal 2098, get_mtime(fname, package).year, "XLSX files created with RubyZip have 2098 as the file mtime"
-  end
-
-  def assert_created_with_zip_command(fname, package)
-    assert_equal Time.now.utc.year, get_mtime(fname, package).year, "XLSX files created with a zip command have the current year as the file mtime"
+  def assert_current_year_mtime_for_entry(entry_filename_in_zip, package)
+    assert_equal Time.now.utc.year, get_mtime(entry_filename_in_zip, package).year, "entry inside XLSX must have current year as the mtime year"
   end
 
   def get_mtime(fname, package)
@@ -209,7 +233,6 @@ class TestPackage < Minitest::Test
 
     assert_equal 1, warnings.size
     assert_includes warnings.first, "confirm_valid as a boolean is deprecated"
-    File.delete(@fname)
   end
 
   def test_serialization_with_deprecated_three_arguments
@@ -217,21 +240,21 @@ class TestPackage < Minitest::Test
       @package.serialize(@fname, true, zip_command: "zip")
     end
 
-    assert_zip_file_matches_package(@fname, @package)
-    assert_created_with_zip_command(@fname, @package)
+    assert_zip_file_contains_files_per_package_part(@fname, @package)
+    assert_current_year_mtime_for_entry(@fname, @package)
     assert_equal 2, warnings.size
     assert_includes warnings.first, "with 3 arguments is deprecated"
-    File.delete(@fname)
   end
 
-  # See comment for Package#zip_entry_for_part
+  # The timestamp gets set on the files in the ZIP, we want to ensure it stays correct
+  # and takes precedence over the current system time
   def test_serialization_creates_identical_files_at_any_time_if_created_at_is_set
-    @package.core.created = Time.now
+    @package.core.created = Time.now.utc # This must be UTC otherwise Timecop returns a TZ-local value and the test fails
     zip_content_now = @package.to_stream.string
     Timecop.travel(3600) do
       zip_content_then = @package.to_stream.string
 
-      assert_equal zip_content_then, zip_content_now, "zip files are not identical"
+      assert_same_bytes zip_content_then, zip_content_now, "zip files are not identical"
     end
   end
 
@@ -355,5 +378,30 @@ class TestPackage < Minitest::Test
   def test_encrypt
     # this is no where near close to ready yet
     assert_false(@package.encrypt('your_mom.xlsxl', 'has a password'))
+  end
+
+  # For comparing byte output it is not very useful to see that "this nearly unprintable kilobyte of random data is not equal to
+  # that other nearly unprintable kilobyte of random data". It also busts terminals sometimes. It is better to do a fast check
+  # first, and then narrow down on the chunk where the first mismatch is. Once found, we print the offset where there is a
+  # mismatch, 32 bytes behind and 32 bytes ahead of the mismatch. This gives much better failed assertion messages and aids debugging.
+  def assert_same_bytes(expected_bin_string, actual_bin_string, message = "Byte content differs")
+    assert_equal expected_bin_string.bytesize, actual_bin_string.bytesize, "#{message} (byte size #{expected_bin_string.bytesize} expected vs. #{actual_bin_string.bytesize} actual)"
+    chunk_size = 65 * 1024
+    (expected_bin_string.bytesize.to_f / chunk_size).ceil.times do |chunk_n|
+      slice_a = expected_bin_string.byteslice(chunk_n * chunk_size, chunk_size)
+      slice_b = actual_bin_string.byteslice(chunk_n * chunk_size, chunk_size)
+      next if slice_a == slice_b
+
+      # Figure out at which offset the data differs
+      slice_a.bytesize.times do |at_byte|
+        offset_in_str = (chunk_n * chunk_size) + at_byte
+        next if expected_bin_string[offset_in_str] == actual_bin_string[offset_in_str]
+
+        a = expected_bin_string.byteslice([offset_in_str - 32, 0].max, 32 * 2)
+        b = actual_bin_string.byteslice([offset_in_str - 32, 0].max, 32 * 2)
+
+        assert_equal expected_bin_string[offset_in_str], actual_bin_string[offset_in_str], "#{message} (at offset #{offset_in_str}). Expected #{a.inspect} but got #{b.inspect}"
+      end
+    end
   end
 end
