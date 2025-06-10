@@ -8,9 +8,11 @@ SimpleCov.start do
 end
 
 require 'minitest/autorun'
+require 'rspec/mocks/minitest_integration'
 require 'timecop'
 require 'webmock/minitest'
 require 'axlsx'
+require 'ooxml_crypt' if RUBY_ENGINE == 'ruby'
 
 module Minitest
   class Test
