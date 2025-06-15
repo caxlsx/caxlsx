@@ -141,7 +141,17 @@ module Axlsx
     # category axes specified via axes[:val_axes] and axes[:cat_axis]
     # @return [Axes]
     def axes
-      @axes ||= Axes.new(cat_axis: CatAxis, val_axis: ValAxis)
+      @axes ||= begin
+        a = Axes.new(cat_axis: CatAxis, val_axis: ValAxis)
+
+        if bar_dir == :col
+          a[:val_axis].ax_pos = :l
+        else
+          a[:cat_axis].ax_pos = :l
+        end
+
+        a
+      end
     end
   end
 end

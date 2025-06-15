@@ -83,4 +83,17 @@ class TestBar3DChart < Minitest::Test
 
     assert_equal(doc.xpath("//c:bar3DChart/c:gapWidth").first.attribute('val').value, gap_width_value.to_s)
   end
+
+  def test_cat_axis_position_for_horizontal_3d_bar_chart
+    axes = @chart.axes
+
+    assert_equal(:l, axes[:cat_axis].ax_pos, "cat_axis.ax_pos must be :l for horizontal bar charts")
+  end
+
+  def test_val_axis_position_for_vertical_3d_bar_chart
+    @chart.bar_dir = :col
+    axes = @chart.axes
+
+    assert_equal(:l, axes[:val_axis].ax_pos, "val_axis.ax_pos must be :l for vertical bar charts")
+  end
 end
