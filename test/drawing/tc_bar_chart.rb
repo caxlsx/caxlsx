@@ -83,4 +83,17 @@ class TestBarChart < Minitest::Test
 
     assert_equal(doc.xpath("//c:barChart/c:overlap").first.attribute('val').value, overlap_value.to_s)
   end
+
+  def test_cat_axis_position_for_horizontal_bar_chart
+    axes = @chart.axes
+
+    assert_equal(:l, axes[:cat_axis].ax_pos, "cat_axis.ax_pos must be :l for horizontal bar charts")
+  end
+
+  def test_val_axis_position_for_vertical_bar_chart
+    @chart.bar_dir = :col
+    axes = @chart.axes
+
+    assert_equal(:l, axes[:val_axis].ax_pos, "val_axis.ax_pos must be :l for vertical bar charts")
+  end
 end
