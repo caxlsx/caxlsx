@@ -43,8 +43,8 @@ module Axlsx
     end
 
     # Serializes the object
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<pivotCacheDefinition xmlns="' << XML_NS << '" xmlns:r="' << XML_NS_R << '" invalid="1" refreshOnLoad="1" recordCount="0">'

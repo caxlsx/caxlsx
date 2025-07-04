@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.add_dependency "marcel", '~> 1.0'
   s.add_dependency 'nokogiri', '~> 1.10', '>= 1.10.4'
   s.add_dependency 'rubyzip', '>= 2.4', '< 4'
+  s.add_dependency "zip_kit", "~> 6.0"
 
   s.required_ruby_version = '>= 2.6'
   s.require_path = 'lib'
