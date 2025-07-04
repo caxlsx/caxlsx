@@ -1,6 +1,7 @@
 CHANGELOG
 ---------
 - **Unreleased**
+  - [PR #350](https://github.com/caxlsx/caxlsx/pull/350) Add package-level encryption and password protection
   - [PR #421](https://github.com/caxlsx/caxlsx/pull/421) Add Rubyzip >= 2.4 support
   - [PR #448](https://github.com/caxlsx/caxlsx/pull/448) Fix Bar Chart: set axis position for Apple Numbers compatibility
 
