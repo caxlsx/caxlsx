@@ -56,7 +56,7 @@ module Axlsx
            <x:AutoFill>False</x:AutoFill>
            <x:Row>#{row}</x:Row>
            <x:Column>#{column}</x:Column>
-           #{@visible ? '<x:Visible/>' : ''}
+           #{'<x:Visible/>' if @visible}
           </x:ClientData>
          </v:shape>
       XML

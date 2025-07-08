@@ -343,7 +343,7 @@ module Axlsx
         attributes << 'dataField="1"'
       end
 
-      "<pivotField #{attributes.join(' ')}>#{include_items_tag ? items_tag : nil}</pivotField>"
+      "<pivotField #{attributes.join(' ')}>#{items_tag if include_items_tag}</pivotField>"
     end
 
     def data_refs
