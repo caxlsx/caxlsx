@@ -41,7 +41,7 @@ module Axlsx
     # date_group_items restrictions.
     # @param [Cell] cell The cell to test against items
     # TODO implement this for date filters as well!
-    def apply(cell)
+    def apply(cell) # rubocop:disable Naming/PredicateMethod
       return false unless cell
 
       filter_items.each do |filter|
