@@ -54,6 +54,7 @@ module Axlsx
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
     include Axlsx::Accessors
+
     # creates a new DefinedName.
     # @param [String] formula - the formula the defined name references
     # @param [Hash] options - A hash of key/value pairs that will be mapped to this instances attributes.

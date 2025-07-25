@@ -9,6 +9,7 @@ module Axlsx
   class DLbls
     include Axlsx::Accessors
     include Axlsx::OptionsParser
+
     # creates a new DLbls object
     def initialize(chart_type, options = {})
       raise ArgumentError, 'chart_type must inherit from Chart' unless [Chart, LineChart].include?(chart_type.superclass)

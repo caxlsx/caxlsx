@@ -5,6 +5,7 @@ require 'tc_helper'
 class Funk
   include Axlsx::Accessors
   include Axlsx::SerializedAttributes
+
   serializable_attributes :camel_symbol, :boolean, :integer
 
   attr_accessor :camel_symbol, :boolean, :integer

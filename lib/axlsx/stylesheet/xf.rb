@@ -8,6 +8,7 @@ module Axlsx
 
     include Axlsx::SerializedAttributes
     include Axlsx::OptionsParser
+
     # Creates a new Xf object
     # @option options [Integer] numFmtId
     # @option options [Integer] fontId
