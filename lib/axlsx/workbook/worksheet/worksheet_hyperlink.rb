@@ -6,6 +6,7 @@ module Axlsx
     include Axlsx::OptionsParser
     include Axlsx::Accessors
     include Axlsx::SerializedAttributes
+
     # Creates a new hyperlink object.
     # @note the preferred way to add hyperlinks to your worksheet is the Worksheet#add_hyperlink method
     # @param [Worksheet] worksheet the Worksheet that owns this hyperlink
