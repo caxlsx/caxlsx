@@ -517,8 +517,8 @@ module Axlsx
     end
 
     # Serializes the object
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       str << '<styleSheet xmlns="' << XML_NS << '">'
       instance_vals = Axlsx.instance_values_for(self)

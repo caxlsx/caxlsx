@@ -404,7 +404,7 @@ module Axlsx
     # Serializes the cell
     # @param [Integer] r_index The row index for the cell
     # @param [Integer] c_index The cell index in the row.
-    # @param [String] str The string index the cell content will be appended to. Defaults to empty string.
+    # @param [#<<] str A String, buffer or IO to append the serialization to. The string index the cell content will be appended to. Defaults to empty string.
     # @return [String] xml text for the cell
     def to_xml_string(r_index, c_index, str = +'')
       CellSerializer.to_xml_string r_index, c_index, self, str

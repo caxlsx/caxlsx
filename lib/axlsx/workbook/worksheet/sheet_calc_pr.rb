@@ -20,9 +20,9 @@ module Axlsx
     serializable_attributes :full_calc_on_load
 
     # Serialize the object
-    # @param [String] str the string to append this objects serialized
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # content to.
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'')
       str << '<sheetCalcPr '
       serialized_attributes(str)

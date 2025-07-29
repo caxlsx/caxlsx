@@ -31,8 +31,8 @@ module Axlsx
 
     # Serializes the page options element.
     # @note As all attributes default to "false" according to the xml schema definition, the generated xml includes only those attributes that are set to true.
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       serialized_tag 'printOptions', str
     end

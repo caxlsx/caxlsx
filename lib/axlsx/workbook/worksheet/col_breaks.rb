@@ -21,7 +21,7 @@ module Axlsx
     end
 
     # Serialize the collection to xml
-    # @param [String] str The string to append this lists xml to.
+    # @param [#<<] str A String, buffer or IO to append the serialization to. The string to append this lists xml to.
     # <colBreaks count="1" manualBreakCount="1">
     # <brk id="3" max="1048575" man="1"/>
     # </colBreaks>

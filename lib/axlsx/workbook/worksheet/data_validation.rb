@@ -270,8 +270,8 @@ module Axlsx
     end
 
     # Serializes the data validation
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       valid_attributes = get_valid_attributes
       h = Axlsx.instance_values_for(self).select { |key, _| valid_attributes.include?(key.to_sym) && !CHILD_ELEMENTS.include?(key.to_sym) }

@@ -28,7 +28,7 @@ module Axlsx
     end
 
     # serialize the collection of hyperlinks
-    # @return [String]
+    # @return [void]
     def to_xml_string(str = +'')
       return if empty?
 

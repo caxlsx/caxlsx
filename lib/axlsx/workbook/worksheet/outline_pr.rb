@@ -25,8 +25,8 @@ module Axlsx
     end
 
     # Serialize the object
-    # @param [String] str serialized output will be appended to this object if provided.
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to. serialized output will be appended to this object if provided.
+    # @return [void]
     def to_xml_string(str = +'')
       str << '<outlinePr '
       serialized_attributes(str)

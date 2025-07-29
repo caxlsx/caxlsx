@@ -55,8 +55,8 @@ module Axlsx
     alias :gapDepth= :gap_depth=
 
     # Serializes the object
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       super do
         str << '<c:gapDepth val="' << @gap_depth.to_s << '"/>' unless @gap_depth.nil?
