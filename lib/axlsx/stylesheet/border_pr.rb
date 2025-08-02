@@ -4,6 +4,7 @@ module Axlsx
   # A border part.
   class BorderPr
     include Axlsx::OptionsParser
+
     # @return [Color] The color of this border part.
     attr_reader :color
 
