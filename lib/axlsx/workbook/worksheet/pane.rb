@@ -8,6 +8,7 @@ module Axlsx
   class Pane
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
+
     # Creates a new {Pane} object
     # @option options [Symbol] active_pane Active Pane
     # @option options [Symbol] state Split State

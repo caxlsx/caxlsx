@@ -10,6 +10,7 @@ module Axlsx
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
     include Axlsx::Accessors
+
     # Creates a new PrintOptions object
     # @option options [Boolean] grid_lines Whether grid lines should be printed
     # @option options [Boolean] headings Whether row and column headings should be printed

@@ -9,6 +9,7 @@ module Axlsx
 
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
+
     # Create a new Col objects
     # @param min First column affected by this 'column info' record.
     # @param max Last column affected by this 'column info' record.
