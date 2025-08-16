@@ -1,9 +1,9 @@
 name: Test
 on:
   push:
-    branches: ['*']
+    branches: ["*"]
   pull_request:
-    branches: ['*']
+    branches: ["*"]
 
 jobs:
   test_ruby_versions:
@@ -27,20 +27,21 @@ jobs:
           - ruby: 3.4
           - ruby: jruby-9.3
           - ruby: jruby-9.4
+          - ruby: jruby-10.0
           - ruby: head
-            allow_failures: 'allow failures'
+            allow_failures: "allow failures"
           - ruby: jruby-head
-            allow_failures: 'allow failures'
+            allow_failures: "allow failures"
 
     steps:
-    - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
 
-    - name: Install ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: "${{ matrix.ruby }}"
-        bundler-cache: true
+      - name: Install ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "${{ matrix.ruby }}"
+          bundler-cache: true
 
-    - name: Run tests
-      run: |
-        bundle exec rake
+      - name: Run tests
+        run: |
+          bundle exec rake
