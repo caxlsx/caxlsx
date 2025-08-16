@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
-require File.expand_path("#{File.dirname(__FILE__)}/lib/axlsx/version.rb")
-
-task build: :gendoc do
-  system "gem build axlsx.gemspec"
-end
+require 'bundler'
+Bundler::GemHelper.install_tasks
 
 task :benchmark do
   require File.expand_path("#{File.dirname(__FILE__)}/test/benchmark.rb")
@@ -21,10 +18,6 @@ Rake::TestTask.new do |t|
   t.test_files = FileList['test/**/tc_*.rb']
   t.verbose = false
   t.warning = true
-end
-
-task release: :build do
-  system "gem push caxlsx-#{Axlsx::VERSION}.gem"
 end
 
 task default: :test
