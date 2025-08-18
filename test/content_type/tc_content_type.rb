@@ -31,7 +31,7 @@ class TestContentType < Minitest::Test
     assert_equal(node["Extension"], Axlsx::RELS_EX.to_s, "relationships content type invalid")
 
     # override
-    assert_equal(4, @doc.xpath("//xmlns:Override").size, "There should be 4 Override types")
+    assert_equal(5, @doc.xpath("//xmlns:Override").size, "There should be 5 Override types")
 
     node = @doc.xpath(format(o_path, Axlsx::APP_CT)).first
 
@@ -45,6 +45,10 @@ class TestContentType < Minitest::Test
 
     assert_equal(node["PartName"], "/xl/#{Axlsx::STYLES_PN}", "Styles part name invalid")
 
+    node = @doc.xpath(format(o_path, Axlsx::THEME_CT)).first
+
+    assert_equal(node["PartName"], "/xl/#{Axlsx::THEME_PN}", "Theme part name invalid")
+
     node = @doc.xpath(format(o_path, Axlsx::WORKBOOK_CT)).first
 
     assert_equal(node["PartName"], "/#{Axlsx::WORKBOOK_PN}", "Workbook part invalid")
@@ -56,13 +60,13 @@ class TestContentType < Minitest::Test
     ws = @package.workbook.add_worksheet
     doc = Nokogiri::XML(@package.send(:content_types).to_xml_string)
 
-    assert_equal(5, doc.xpath("//xmlns:Override").size, "adding a worksheet should add another type")
+    assert_equal(6, doc.xpath("//xmlns:Override").size, "adding a worksheet should add another type")
     assert_equal(doc.xpath(format(o_path, Axlsx::WORKSHEET_CT)).last["PartName"], "/xl/#{ws.pn}", "Worksheet part invalid")
 
     ws = @package.workbook.add_worksheet
     doc = Nokogiri::XML(@package.send(:content_types).to_xml_string)
 
-    assert_equal(6, doc.xpath("//xmlns:Override").size, "adding workship should add another type")
+    assert_equal(7, doc.xpath("//xmlns:Override").size, "adding workship should add another type")
     assert_equal(doc.xpath(format(o_path, Axlsx::WORKSHEET_CT)).last["PartName"], "/xl/#{ws.pn}", "Worksheet part invalid")
   end
 
@@ -73,14 +77,14 @@ class TestContentType < Minitest::Test
     c = ws.add_chart Axlsx::Pie3DChart
     doc = Nokogiri::XML(@package.send(:content_types).to_xml_string)
 
-    assert_equal(7, doc.xpath("//xmlns:Override").size, "expected 7 types got #{doc.css('Types Override').size}")
+    assert_equal(8, doc.xpath("//xmlns:Override").size, "expected 8 types got #{doc.css('Types Override').size}")
     assert_equal(doc.xpath(format(o_path, Axlsx::DRAWING_CT)).first["PartName"], "/xl/#{ws.drawing.pn}", "Drawing part name invalid")
     assert_equal(doc.xpath(format(o_path, Axlsx::CHART_CT)).last["PartName"], "/xl/#{c.pn}", "Chart part name invalid")
 
     c = ws.add_chart Axlsx::Pie3DChart
     doc = Nokogiri::XML(@package.send(:content_types).to_xml_string)
 
-    assert_equal(8, doc.xpath("//xmlns:Override").size, "expected 7 types got #{doc.css('Types Override').size}")
+    assert_equal(9, doc.xpath("//xmlns:Override").size, "expected 9 types got #{doc.css('Types Override').size}")
     assert_equal(doc.xpath(format(o_path, Axlsx::CHART_CT)).last["PartName"], "/xl/#{c.pn}", "Chart part name invalid")
   end
 end
