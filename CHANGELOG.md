@@ -1,6 +1,7 @@
 CHANGELOG
 ---------
-- **Unreleased**
+- **Unreleased**: 4.4.0
+  - [PR #XXX](https://github.com/caxlsx/caxlsx/pull/XXX) Add default theme file to Excel package.
 
 
 - **August.16.25**: 4.3.0
