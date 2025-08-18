@@ -268,6 +268,9 @@ module Axlsx
   # drawing validation schema
   DRAWING_XSD = "#{SCHEMA_BASE}dml-spreadsheetDrawing.xsd"
 
+  # theme validation schema
+  THEME_XSD = "#{SCHEMA_BASE}dml-main.xsd".freeze
+
   # number format id for percentage formatting using the default formatting id.
   NUM_FMT_PERCENT = 9
 

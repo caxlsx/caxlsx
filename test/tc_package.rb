@@ -260,6 +260,7 @@ class TestPackage < Minitest::Test
 
   def test_parts
     p = @package.send(:parts)
+
     # all parts have an entry
     assert_equal(1, p.count { |part| part[:entry].include?('_rels/.rels') }, "rels missing")
     assert_equal(1, p.count { |part| part[:entry].include?('docProps/core.xml') }, "core missing")
@@ -268,6 +269,7 @@ class TestPackage < Minitest::Test
     assert_equal(1, p.count { |part| part[:entry].include?('xl/workbook.xml') }, "workbook missing")
     assert_equal(1, p.count { |part| part[:entry].include?('[Content_Types].xml') }, "content types missing")
     assert_equal(1, p.count { |part| part[:entry].include?('xl/styles.xml') }, "styles missing")
+    assert_equal(1, p.count { |part| part[:entry].include?('xl/theme/theme1.xml') }, "theme missing")
     assert_equal(p.count { |part| %r{xl/drawings/_rels/drawing\d\.xml\.rels}.match?(part[:entry]) }, @package.workbook.drawings.size, "one or more drawing rels missing")
     assert_equal(p.count { |part| %r{xl/drawings/drawing\d\.xml}.match?(part[:entry]) }, @package.workbook.drawings.size, "one or more drawings missing")
     assert_equal(p.count { |part| %r{xl/charts/chart\d\.xml}.match?(part[:entry]) }, @package.workbook.charts.size, "one or more charts missing")
@@ -279,12 +281,142 @@ class TestPackage < Minitest::Test
     assert_equal(p.count { |part| %r{xl/pivotCache/pivotCacheDefinition\d\.xml}.match?(part[:entry]) }, @package.workbook.worksheets.first.pivot_tables.size, "one or more pivot tables missing")
 
     # no mystery parts
-    assert_equal(25, p.size)
+    assert_equal(26, p.size)
 
     # sorted for correct MIME detection
     assert_equal("[Content_Types].xml", p[0][:entry], "first entry should be `[Content_Types].xml`")
     assert_equal("_rels/.rels", p[1][:entry], "second entry should be `_rels/.rels`")
     assert_match(%r{\Axl/}, p[2][:entry], "third entry should begin with `xl/`")
+  end
+
+  def test_part_styles
+    styles_part = @package.send(:parts).find { |part| part[:entry].include?('xl/styles.xml') }
+
+    assert_equal(Axlsx::SML_XSD, styles_part[:schema], "styles should use SML_XSD schema")
+    assert_kind_of(Axlsx::Styles, styles_part[:doc], "styles document should be a Styles instance")
+  end
+
+  def test_part_theme
+    theme_part = @package.send(:parts).find { |part| part[:entry].include?('xl/theme/theme1.xml') }
+
+    assert_equal(Axlsx::THEME_XSD, theme_part[:schema], "theme should use THEME_XSD schema")
+    assert_kind_of(Axlsx::Theme, theme_part[:doc], "theme document should be a Theme instance")
+  end
+
+  def test_part_core
+    core_part = @package.send(:parts).find { |part| part[:entry].include?('docProps/core.xml') }
+
+    assert_equal(Axlsx::CORE_XSD, core_part[:schema], "core should use CORE_XSD schema")
+    assert_kind_of(Axlsx::Core, core_part[:doc], "core document should be a Core instance")
+  end
+
+  def test_part_app
+    app_part = @package.send(:parts).find { |part| part[:entry].include?('docProps/app.xml') }
+
+    assert_equal(Axlsx::APP_XSD, app_part[:schema], "app should use APP_XSD schema")
+    assert_kind_of(Axlsx::App, app_part[:doc], "app document should be an App instance")
+  end
+
+  def test_part_workbook
+    workbook_part = @package.send(:parts).find { |part| part[:entry].include?('xl/workbook.xml') }
+
+    assert_equal(Axlsx::SML_XSD, workbook_part[:schema], "workbook should use SML_XSD schema")
+    assert_kind_of(Axlsx::Workbook, workbook_part[:doc], "workbook document should be a Workbook instance")
+  end
+
+  def test_part_content_types
+    content_types_part = @package.send(:parts).find { |part| part[:entry].include?('[Content_Types].xml') }
+
+    assert_equal(Axlsx::CONTENT_TYPES_XSD, content_types_part[:schema], "content types should use CONTENT_TYPES_XSD schema")
+    assert_kind_of(Axlsx::ContentType, content_types_part[:doc], "content types document should be a ContentType instance")
+  end
+
+  def test_part_main_rels
+    main_rels_part = @package.send(:parts).find { |part| part[:entry].include?('_rels/.rels') }
+
+    assert_equal(Axlsx::RELS_XSD, main_rels_part[:schema], "main relationships should use RELS_XSD schema")
+    assert_kind_of(Axlsx::Relationships, main_rels_part[:doc], "main relationships document should be a Relationships instance")
+  end
+
+  def test_part_workbook_rels
+    workbook_rels_part = @package.send(:parts).find { |part| part[:entry].include?('xl/_rels/workbook.xml.rels') }
+
+    assert_equal(Axlsx::RELS_XSD, workbook_rels_part[:schema], "workbook relationships should use RELS_XSD schema")
+    assert_kind_of(Axlsx::Relationships, workbook_rels_part[:doc], "workbook relationships document should be a Relationships instance")
+  end
+
+  def test_part_worksheets
+    worksheet_parts = @package.send(:parts).select { |part| %r{xl/worksheets/sheet\d\.xml}.match?(part[:entry]) }
+
+    assert_equal(1, worksheet_parts.size, "should have 1 worksheet part")
+    assert_equal(@package.workbook.worksheets.size, worksheet_parts.size, "worksheet parts count should match worksheets count")
+    worksheet_parts.each do |ws_part|
+      assert_equal(Axlsx::SML_XSD, ws_part[:schema], "worksheet #{ws_part[:entry]} should use SML_XSD schema")
+      assert_kind_of(Axlsx::Worksheet, ws_part[:doc], "worksheet document should be a Worksheet instance")
+    end
+  end
+
+  def test_part_worksheet_rels
+    ws_rels_parts = @package.send(:parts).select { |part| %r{xl/worksheets/_rels/sheet\d\.xml\.rels}.match?(part[:entry]) }
+
+    assert_equal(1, ws_rels_parts.size, "should have 1 worksheet relationship part")
+    assert_equal(@package.workbook.worksheets.size, ws_rels_parts.size, "worksheet relationship parts count should match worksheets count")
+    ws_rels_parts.each do |ws_rels_part|
+      assert_equal(Axlsx::RELS_XSD, ws_rels_part[:schema], "worksheet relationships #{ws_rels_part[:entry]} should use RELS_XSD schema")
+      assert_kind_of(Axlsx::Relationships, ws_rels_part[:doc], "worksheet relationships document should be a Relationships instance")
+    end
+  end
+
+  def test_part_drawings
+    drawing_parts = @package.send(:parts).select { |part| %r{xl/drawings/drawing\d\.xml}.match?(part[:entry]) }
+
+    assert_equal(1, drawing_parts.size, "should have 1 drawing part")
+    assert_equal(@package.workbook.drawings.size, drawing_parts.size, "drawing parts count should match drawings count")
+    drawing_parts.each do |drawing_part|
+      assert_equal(Axlsx::DRAWING_XSD, drawing_part[:schema], "drawing #{drawing_part[:entry]} should use DRAWING_XSD schema")
+      assert_kind_of(Axlsx::Drawing, drawing_part[:doc], "drawing document should be a Drawing instance")
+    end
+  end
+
+  def test_part_charts
+    chart_parts = @package.send(:parts).select { |part| %r{xl/charts/chart\d\.xml}.match?(part[:entry]) }
+
+    assert_equal(5, chart_parts.size, "should have 5 chart parts")
+    assert_equal(@package.workbook.charts.size, chart_parts.size, "chart parts count should match charts count")
+    chart_parts.each do |chart_part|
+      assert_equal(Axlsx::DRAWING_XSD, chart_part[:schema], "chart #{chart_part[:entry]} should use DRAWING_XSD schema")
+    end
+  end
+
+  def test_part_comments
+    comment_parts = @package.send(:parts).select { |part| %r{xl/comments\d\.xml}.match?(part[:entry]) }
+
+    assert_equal(1, comment_parts.size, "should have 1 comment part")
+    assert_equal(@package.workbook.comments.size, comment_parts.size, "comment parts count should match comments count")
+    comment_parts.each do |comment_part|
+      assert_equal(Axlsx::SML_XSD, comment_part[:schema], "comment #{comment_part[:entry]} should use SML_XSD schema")
+      assert_kind_of(Axlsx::Comments, comment_part[:doc], "comment document should be a Comments instance")
+    end
+  end
+
+  def test_part_tables
+    table_parts = @package.send(:parts).select { |part| %r{xl/tables/table\d\.xml}.match?(part[:entry]) }
+
+    assert_equal(1, table_parts.size, "should have 1 table part")
+    table_parts.each do |table_part|
+      assert_equal(Axlsx::SML_XSD, table_part[:schema], "table #{table_part[:entry]} should use SML_XSD schema")
+      assert_kind_of(Axlsx::Table, table_part[:doc], "table document should be a Table instance")
+    end
+  end
+
+  def test_part_pivot_rels
+    pivot_rels_parts = @package.send(:parts).select { |part| %r{xl/pivotTables/_rels/pivotTable\d\.xml\.rels}.match?(part[:entry]) }
+
+    assert_equal(1, pivot_rels_parts.size, "should have 1 pivot table relationship part")
+    pivot_rels_parts.each do |pivot_rels_part|
+      assert_equal(Axlsx::RELS_XSD, pivot_rels_part[:schema], "pivot table relationships #{pivot_rels_part[:entry]} should use RELS_XSD schema")
+      assert_kind_of(Axlsx::Relationships, pivot_rels_part[:doc], "pivot table relationships document should be a Relationships instance")
+    end
   end
 
   def test_shared_strings_requires_part
@@ -293,6 +425,12 @@ class TestPackage < Minitest::Test
     p = @package.send(:parts)
 
     assert_equal(1, p.count { |part| part[:entry].include?('xl/sharedStrings.xml') }, "shared strings table missing")
+
+    # Verify shared strings part uses correct schema
+    shared_strings_part = p.find { |part| part[:entry].include?('xl/sharedStrings.xml') }
+
+    assert_equal(Axlsx::SML_XSD, shared_strings_part[:schema], "shared strings should use SML_XSD schema")
+    assert_kind_of(Axlsx::SharedStringsTable, shared_strings_part[:doc], "shared strings document should be a SharedStringsTable instance")
   end
 
   def test_workbook_is_a_workbook
@@ -307,8 +445,9 @@ class TestPackage < Minitest::Test
     assert_equal(1, ct.count { |c| c.ContentType == Axlsx::APP_CT }, "app content type missing")
     assert_equal(1, ct.count { |c| c.ContentType == Axlsx::CORE_CT }, "core content type missing")
     assert_equal(1, ct.count { |c| c.ContentType == Axlsx::STYLES_CT }, "styles content type missing")
+    assert_equal(1, ct.count { |c| c.ContentType == Axlsx::THEME_CT }, "theme content type missing")
     assert_equal(1, ct.count { |c| c.ContentType == Axlsx::WORKBOOK_CT }, "workbook content type missing")
-    assert_equal(6, ct.size)
+    assert_equal(7, ct.size)
   end
 
   def test_content_type_added_with_shared_strings
@@ -355,5 +494,96 @@ class TestPackage < Minitest::Test
   def test_encrypt
     # this is no where near close to ready yet
     assert_false(@package.encrypt('your_mom.xlsxl', 'has a password'))
+  end
+
+  def test_xml_valid
+    assert_valid_xml_for_part('xl/styles.xml')
+    assert_valid_xml_for_part('xl/theme/theme1.xml')
+    assert_valid_xml_for_part('docProps/core.xml')
+    assert_valid_xml_for_part('docProps/app.xml')
+    assert_valid_xml_for_part('xl/workbook.xml')
+    assert_valid_xml_for_part('[Content_Types].xml')
+    assert_valid_xml_for_part('_rels/.rels')
+    assert_valid_xml_for_part('xl/_rels/workbook.xml.rels')
+  end
+
+  def test_xml_valid_worksheets
+    worksheet_parts = @package.send(:parts).select { |part| %r{xl/worksheets/sheet\d\.xml}.match?(part[:entry]) }
+
+    worksheet_parts.each do |ws_part|
+      assert_valid_xml_for_doc(ws_part[:doc], "worksheet #{ws_part[:entry]}")
+    end
+  end
+
+  def test_xml_valid_worksheet_rels
+    ws_rels_parts = @package.send(:parts).select { |part| %r{xl/worksheets/_rels/sheet\d\.xml\.rels}.match?(part[:entry]) }
+
+    ws_rels_parts.each do |ws_rels_part|
+      assert_valid_xml_for_doc(ws_rels_part[:doc], "worksheet relationships #{ws_rels_part[:entry]}")
+    end
+  end
+
+  def test_xml_valid_drawings
+    drawing_parts = @package.send(:parts).select { |part| %r{xl/drawings/drawing\d\.xml}.match?(part[:entry]) }
+
+    drawing_parts.each do |drawing_part|
+      assert_valid_xml_for_doc(drawing_part[:doc], "drawing #{drawing_part[:entry]}")
+    end
+  end
+
+  def test_xml_valid_charts
+    chart_parts = @package.send(:parts).select { |part| %r{xl/charts/chart\d\.xml}.match?(part[:entry]) }
+
+    chart_parts.each do |chart_part|
+      assert_valid_xml_for_doc(chart_part[:doc], "chart #{chart_part[:entry]}")
+    end
+  end
+
+  def test_xml_valid_comments
+    comment_parts = @package.send(:parts).select { |part| %r{xl/comments\d\.xml}.match?(part[:entry]) }
+
+    comment_parts.each do |comment_part|
+      assert_valid_xml_for_doc(comment_part[:doc], "comment #{comment_part[:entry]}")
+    end
+  end
+
+  def test_xml_valid_tables
+    table_parts = @package.send(:parts).select { |part| %r{xl/tables/table\d\.xml}.match?(part[:entry]) }
+
+    table_parts.each do |table_part|
+      assert_valid_xml_for_doc(table_part[:doc], "table #{table_part[:entry]}")
+    end
+  end
+
+  def test_xml_valid_shared_strings
+    @package.use_shared_strings = true
+    @package.to_stream # ensure all cell_serializer paths are hit
+
+    assert_valid_xml_for_part('xl/sharedStrings.xml')
+  end
+
+  private
+
+  def assert_valid_xml_for_doc(doc, part_name)
+    refute_nil(doc, "Document for #{part_name} should not be nil")
+
+    xml_string = doc.to_xml_string
+
+    refute_empty(xml_string, "XML string for #{part_name} should not be empty")
+
+    # Verify the XML is well-formed using strict parsing
+    refute_raises { Nokogiri::XML(xml_string, &:strict) }
+
+    # Verify XML has a root element
+    parsed_doc = Nokogiri::XML(xml_string)
+
+    refute_nil(parsed_doc.root, "XML for #{part_name} should have a root element")
+  end
+
+  def assert_valid_xml_for_part(entry_name)
+    part = @package.send(:parts).find { |p| p[:entry].include?(entry_name) }
+
+    refute_nil(part, "Part #{entry_name} not found")
+    assert_valid_xml_for_doc(part[:doc], entry_name)
   end
 end
