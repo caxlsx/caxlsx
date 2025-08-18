@@ -288,8 +288,8 @@ class TestPackage < Minitest::Test
     assert_equal(1, @package.workbook.drawings.size)
     assert_equal(5, @package.workbook.charts.size)
     assert_equal(1, @package.workbook.comments.size)
-    assert_equal(1, @@package.workbook.worksheets.first.pivot_tables.size)
-    assert_equal(1, @@package.workbook.worksheets.first.pivot_tables.size)
+    assert_equal(1, @package.workbook.worksheets.first.pivot_tables.size)
+    assert_equal(1, @package.workbook.worksheets.first.pivot_tables.size)
 
     # no mystery parts
     assert_equal(26, p.size)

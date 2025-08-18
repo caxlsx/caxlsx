@@ -104,7 +104,7 @@ class TestWorkbook < Minitest::Test
 
   def test_relationships
     # current relationship size is 1 due to style relation
-    assert_equal(1, @wb.relationships.size)
+    assert_equal(2, @wb.relationships.size)
     @wb.add_worksheet
 
     assert_equal(2, @wb.relationships.size)

@@ -12,7 +12,7 @@ class TestTheme < Minitest::Test
   end
 
   def test_to_xml_is_valid
-    xml_string = theme.to_xml_string
+    xml_string = @theme.to_xml_string
 
     # Verify the XML is well-formed
     refute_raises { Nokogiri::XML(xml_string, &:strict) }
@@ -31,13 +31,11 @@ class TestTheme < Minitest::Test
   end
 
   def test_to_xml_string_with_string_parameter
-    str = ''
+    str = +''
     result = @theme.to_xml_string(str)
 
-    # Should return the same string object that was passed in
     assert_same(str, result)
-    refute_empty(str)
-    refute_includes(str, '<a:theme')
+    assert_includes(str, '<?xml version="1.0" encoding="')
   end
 
   def test_xml_is_single_line_with_no_whitespace_padding
