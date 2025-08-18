@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Axlsx
   # Theme represents the theme part of the package and is responsible for
   # generating the default Office theme that is required for encryption compatibility
@@ -12,7 +14,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << <<~XML.gsub("\n", '')
+      str << <<~XML.delete("\n")
         <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="Office Theme">
         <a:themeElements>

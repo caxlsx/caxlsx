@@ -80,7 +80,7 @@ module Axlsx
   SHARED_STRINGS_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings"
 
   # theme rels namespace
-  THEME_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme".freeze
+  THEME_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme"
 
   # drawing rels namespace
   DRAWING_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/drawing"
@@ -137,7 +137,7 @@ module Axlsx
   SHARED_STRINGS_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"
 
   # theme content type
-  THEME_CT = "application/vnd.openxmlformats-officedocument.theme+xml".freeze
+  THEME_CT = "application/vnd.openxmlformats-officedocument.theme+xml"
 
   # core content type
   CORE_CT = "application/vnd.openxmlformats-package.core-properties+xml"
@@ -194,7 +194,7 @@ module Axlsx
   SHARED_STRINGS_PN = "sharedStrings.xml"
 
   # theme part
-  THEME_PN = "theme/theme1.xml".freeze
+  THEME_PN = "theme/theme1.xml"
 
   # app part
   APP_PN = "docProps/app.xml"
@@ -269,7 +269,7 @@ module Axlsx
   DRAWING_XSD = "#{SCHEMA_BASE}dml-spreadsheetDrawing.xsd"
 
   # theme validation schema
-  THEME_XSD = "#{SCHEMA_BASE}dml-main.xsd".freeze
+  THEME_XSD = "#{SCHEMA_BASE}dml-main.xsd"
 
   # number format id for percentage formatting using the default formatting id.
   NUM_FMT_PERCENT = 9
