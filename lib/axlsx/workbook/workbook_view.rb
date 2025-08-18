@@ -38,7 +38,7 @@ module Axlsx
     # @option [Boolean] show_horizontal_scroll Specifies a boolean value that indicates whether to display the horizontal scroll bar in the user interface.
     # @option [Boolean] show_vertical_scroll Specifies a boolean value that indicates whether to display the vertical scroll bar.
     # @option [Boolean] show_sheet_tabs Specifies a boolean value that indicates whether to display the sheet tabs in the user interface.
-    # @option [Integer] tab_ratio Specifies ratio between the workbook tabs bar and the horizontal scroll bar.
+    # @option [Integer] tab_ratio Specifies the ratio between the workbook tabs bar and the horizontal scroll bar (from 0 to 1000, higher values mean more space for tabs). May only be supported on some clients.
     # @option [Integer] first_sheet Specifies the index to the first sheet in this book view.
     # @option [Integer] active_tab Specifies an unsignedInt that contains the index to the active sheet in this book view.
     # @option [Integer] x_window Specifies the X coordinate for the upper left corner of the workbook window. The unit of measurement for this value is twips.
