@@ -13,7 +13,7 @@ module Axlsx
     # Serializes the default theme to XML
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = +'')
       str << <<~XML.delete("\n")
         <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="Office Theme">
