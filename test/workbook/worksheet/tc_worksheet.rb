@@ -250,7 +250,7 @@ class TestWorksheet < Minitest::Test
     @ws.add_row [1, 2, 3, 4]
     @ws.add_row [1, 2, 3, 4]
     @ws.add_row [1, 2, 3, 4]
-    @ws.col_style((1..2), 1, row_offset: 1)
+    @ws.col_style(1..2, 1, row_offset: 1)
     @ws.rows[(1..-1)].each do |r|
       assert_equal(1, r.cells[1].style)
       assert_equal(1, r.cells[2].style)
@@ -886,7 +886,7 @@ class TestWorksheet < Minitest::Test
       family: 1
     }
 
-    assert_equal b2_cell_style, (wb.styles.style_index.values.find { |x| x == b2_cell_style })
+    assert_equal(b2_cell_style, wb.styles.style_index.values.find { |x| x == b2_cell_style })
 
     d3_cell_style = {
       border: {
@@ -900,7 +900,7 @@ class TestWorksheet < Minitest::Test
       family: 1
     }
 
-    assert_equal d3_cell_style, (wb.styles.style_index.values.find { |x| x == d3_cell_style })
+    assert_equal(d3_cell_style, wb.styles.style_index.values.find { |x| x == d3_cell_style })
   end
 
   def test_mixed_borders_1

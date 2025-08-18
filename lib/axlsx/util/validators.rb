@@ -9,7 +9,7 @@ module Axlsx
     # @param [Any] v The value to be validated
     # @raise [ArgumentError] Raised if the value provided is not in the list of choices.
     # @return [Boolean] true if validation succeeds.
-    def self.validate(name, choices, v)
+    def self.validate(name, choices, v) # rubocop:disable Naming/PredicateMethod
       raise ArgumentError, format(ERR_RESTRICTION, v.to_s, name, choices.inspect) unless choices.include?(v)
 
       true

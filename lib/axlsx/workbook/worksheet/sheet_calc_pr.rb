@@ -7,6 +7,7 @@ module Axlsx
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
     include Axlsx::Accessors
+
     # creates a new SheetCalcPr
     # @param [Hash] options Options for this object
     # @option [Boolean] full_calc_on_load @see full_calc_on_load

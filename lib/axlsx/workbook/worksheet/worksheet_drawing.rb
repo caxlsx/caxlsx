@@ -42,7 +42,7 @@ module Axlsx
 
     # helper method to tell us if the drawing has something in it or not
     # @return [Boolean]
-    def has_drawing? # rubocop:disable Naming/PredicateName
+    def has_drawing? # rubocop:disable Naming/PredicatePrefix
       @drawing.is_a? Drawing
     end
 

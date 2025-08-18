@@ -6,6 +6,7 @@ module Axlsx
   # @see Style#add_style
   class PatternFill
     include Axlsx::OptionsParser
+
     # Creates a new PatternFill Object
     # @option options [Symbol] patternType
     # @option options [Color] fgColor

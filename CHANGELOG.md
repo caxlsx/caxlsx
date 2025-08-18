@@ -2,7 +2,12 @@ CHANGELOG
 ---------
 - **Unreleased**
   - [PR #350](https://github.com/caxlsx/caxlsx/pull/350) Add package-level encryption and password protection
+
+- **August.16.25**: 4.3.0
   - [PR #421](https://github.com/caxlsx/caxlsx/pull/421) Add Rubyzip >= 2.4 support
+  - [PR #448](https://github.com/caxlsx/caxlsx/pull/448) Fix Bar Chart: set axis position for Apple Numbers compatibility
+  - [PR #466](https://github.com/caxlsx/caxlsx/pull/466) Use RubyGem's trusted publishing
+  - [PR #467](https://github.com/caxlsx/caxlsx/pull/467) Add JRuby 10.0 to the CI
 
 - **December.15.24**: 4.2.0
   - [PR #359](https://github.com/caxlsx/caxlsx/pull/359) Add `PivotTable#grand_totals` option to remove grand totals row/col

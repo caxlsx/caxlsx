@@ -169,6 +169,14 @@ module Axlsx
       Relationship.clear_ids_cache
     end
 
+    # Encrypt the package into a CFB using the password provided
+    # This is not ready yet
+    def encrypt(file_name, password) # rubocop:disable Naming/PredicateMethod
+      false
+      # moc = MsOffCrypto.new(file_name, password)
+      # moc.save
+    end
+
     # Validate all parts of the package against xsd schema.
     # @return [Array] An array of all validation errors found.
     # @note This gem includes all schema from OfficeOpenXML-XMLSchema-Transitional.zip and OpenPackagingConventions-XMLSchema.zip

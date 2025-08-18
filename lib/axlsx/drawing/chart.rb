@@ -6,6 +6,7 @@ module Axlsx
   # @see README for examples
   class Chart
     include Axlsx::OptionsParser
+
     # Creates a new chart object
     # @param [GraphicalFrame] frame The frame that holds this chart.
     # @option options [Cell, String] title
