@@ -104,13 +104,13 @@ class TestWorkbook < Minitest::Test
 
   def test_relationships
     # current relationship size is 1 due to style relation
-    assert_equal(1, @wb.relationships.size)
+    assert_equal(2, @wb.relationships.size)
     @wb.add_worksheet
 
-    assert_equal(2, @wb.relationships.size)
+    assert_equal(3, @wb.relationships.size)
     @wb.use_shared_strings = true
 
-    assert_equal(3, @wb.relationships.size)
+    assert_equal(4, @wb.relationships.size)
   end
 
   def test_to_xml

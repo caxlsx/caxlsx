@@ -1,6 +1,7 @@
 CHANGELOG
 ---------
-- **Unreleased**
+- **Unreleased**: 4.4.0
+  - [PR #469](https://github.com/caxlsx/caxlsx/pull/469) Add default theme file to Excel package.
   - [PR #350](https://github.com/caxlsx/caxlsx/pull/350) Add package-level encryption and password protection
 
 - **August.16.25**: 4.3.0

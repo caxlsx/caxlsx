@@ -245,6 +245,7 @@ module Axlsx
     def parts
       parts = [
         { entry: "xl/#{STYLES_PN}", doc: workbook.styles, schema: SML_XSD },
+        { entry: "xl/#{THEME_PN}", doc: workbook.theme, schema: THEME_XSD },
         { entry: CORE_PN, doc: @core, schema: CORE_XSD },
         { entry: APP_PN, doc: @app, schema: APP_XSD },
         { entry: WORKBOOK_RELS_PN, doc: workbook.relationships, schema: RELS_XSD },
@@ -381,6 +382,7 @@ module Axlsx
       c_types << Override.new(PartName: "/#{APP_PN}", ContentType: APP_CT)
       c_types << Override.new(PartName: "/#{CORE_PN}", ContentType: CORE_CT)
       c_types << Override.new(PartName: "/xl/#{STYLES_PN}", ContentType: STYLES_CT)
+      c_types << Override.new(PartName: "/xl/#{THEME_PN}", ContentType: THEME_CT)
       c_types << Axlsx::Override.new(PartName: "/#{WORKBOOK_PN}", ContentType: WORKBOOK_CT)
       c_types.lock
       c_types
