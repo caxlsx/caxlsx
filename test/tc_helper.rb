@@ -36,15 +36,15 @@ module Minitest
     end
 
     def mri?
-      !jruby? && !truffleruby?
+      RUBY_ENGINE == 'ruby'
     end
 
     def jruby?
-      defined?(JRUBY_VERSION)
+      RUBY_ENGINE == 'jruby'
     end
 
     def truffleruby?
-      defined?(TruffleRuby)
+      RUBY_ENGINE == 'truffleruby'
     end
   end
 end
