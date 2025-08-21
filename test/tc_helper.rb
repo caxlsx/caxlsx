@@ -27,12 +27,20 @@ module Minitest
       raise Minitest::Assertion, "Expected no exception, but raised: #{e.class.name} with message '#{e.message}'"
     end
 
-    def macos_platform?
-      RUBY_PLATFORM.include?('darwin')
+    def macos?
+      RbConfig::CONFIG['host_os'].match?(/darwin/i)
     end
 
-    def windows_platform?
-      RUBY_PLATFORM =~ /mswin|mingw|cygwin/
+    def windows?
+      RbConfig::CONFIG['host_os'].match?(/windows|mswin|mingw|cygwin/i)
+    end
+
+    def jruby?
+      defined?(JRUBY_VERSION)
+    end
+
+    def truffleruby?
+      defined?(TruffleRuby)
     end
   end
 end

@@ -98,7 +98,7 @@ class TestPic < Minitest::Test
   end
 
   def test_remote_image_src
-    assert_raises(windows_platform? ? URI::InvalidURIError : ArgumentError) { @image_remote.image_src = @test_img_fake }
+    assert_raises(windows? ? URI::InvalidURIError : ArgumentError) { @image_remote.image_src = @test_img_fake }
     assert_raises(ArgumentError) { @image_remote.image_src = @test_img_remote_fake }
     refute_raises { @image_remote.image_src = @test_img_remote_png }
     assert_equal(@image_remote.image_src, @test_img_remote_png)
