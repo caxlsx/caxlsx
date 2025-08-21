@@ -30,7 +30,8 @@ class TestExcelWindows < Minitest::Test
   end
 
   def refute_excel_file_opens(file_path, password: nil)
-    with_workbook(file_path, password: password) {}
+    with_workbook(file_path, password: password) {} # File opened successfully
+
     flunk("Excel opened file '#{file_path}' when it should have failed")
   rescue StandardError
     true
