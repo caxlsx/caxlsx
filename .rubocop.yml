@@ -48,6 +48,10 @@ Minitest/RefuteFalse:
 Naming:
   Enabled: true
 
+Naming/PredicateMethod:
+  Exclude:
+    - 'test/**/*'
+
 Packaging:
   Enabled: true
 
