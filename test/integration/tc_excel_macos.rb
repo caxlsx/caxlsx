@@ -202,7 +202,7 @@ class TestExcelMacOS < Minitest::Test
   end
 
   def macos_platform?
-    RUBY_PLATFORM =~ /darwin/
+    RUBY_PLATFORM.include?('darwin')
   end
 
   def excel_macos?

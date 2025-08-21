@@ -90,6 +90,8 @@ jobs:
           bundler-cache: true
 
       - name: Run tests
+        env:
+          CI_EXCEL_WINDOWS: true
         run: |
           bundle exec rake
 
@@ -150,5 +152,7 @@ jobs:
           bundler-cache: true
 
       - name: Run tests
+        env:
+          CI_EXCEL_MACOS: true
         run: |
           bundle exec rake
