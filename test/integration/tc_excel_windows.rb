@@ -2,7 +2,7 @@
 
 require 'tc_helper'
 
-class TestExcelIntegration < Test::Unit::TestCase
+class TestExcelIntegration < Minitest::Test
   def setup
     skip_unless_windows_with_excel
     setup_excel_application
@@ -78,14 +78,14 @@ class TestExcelIntegration < Test::Unit::TestCase
 
     # Verify file opens and check worksheet contents
     assert_excel_file_opens(test_file)
-    
+
     # Verify Sheet1 contents
     assert_excel_cell_values_by_sheet(test_file, 'Sheet1', {
       'A1' => 'Data',
       'B1' => 'Sheet',
       'C1' => 1
     })
-    
+
     # Verify Sheet2 contents
     assert_excel_cell_values_by_sheet(test_file, 'Sheet2', {
       'A1' => 'Second',
@@ -97,11 +97,11 @@ class TestExcelIntegration < Test::Unit::TestCase
   private
 
   def skip_unless_windows_with_excel
-    unless self.class.windows_platform?
+    unless windows_platform?
       skip("Excel integration tests only run on Windows")
     end
 
-    return if self.class.excel_windows?
+    return if excel_windows?
 
     skip("Excel integration tests require Microsoft Excel to be installed")
   end
@@ -163,11 +163,11 @@ class TestExcelIntegration < Test::Unit::TestCase
     workbook&.Close(false)
   end
 
-  def self.windows_platform?
+  def windows_platform?
     RUBY_PLATFORM =~ /mswin|mingw|cygwin/
   end
 
-  def self.excel_windows?
+  def excel_windows?
     return @excel_windows if defined?(@excel_windows)
 
     @excel_windows = windows_platform? &&
