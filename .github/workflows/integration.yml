@@ -1,0 +1,55 @@
+name: Integration Tests
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  test-excel-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Install Office via Chocolatey
+        shell: powershell
+        run: |
+          Write-Host "Installing Microsoft Excel (this will take 10-20 minutes)..."
+          choco install office365business --params '/exclude:"Access Groove Lync OneDrive OneNote Outlook PowerPoint Publisher Teams Word"' -y --no-progress
+        timeout-minutes: 25
+
+      - name: Wait for Office installation to complete
+        shell: powershell
+        run: |
+          Write-Host "Waiting for Excel COM objects to register..."
+          Start-Sleep -Seconds 30
+
+      - name: Verify Excel COM objects are available
+        shell: powershell
+        run: |
+          try {
+            Write-Host "Testing Excel COM object..."
+            $excel = New-Object -ComObject Excel.Application
+            $excel.Visible = $false
+            Write-Host "Excel COM object created successfully"
+            Write-Host "Excel Version: $($excel.Version)"
+            $excel.Quit()
+            [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
+          } catch {
+            Write-Error "Failed to create COM objects"
+            Write-Error $_.Exception.Message
+            exit 1
+          }
+
+      - name: Install ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      - name: Run tests
+        env:
+          CI_EXCEL_WINDOWS: true
+        run: |
+          bundle exec rake
