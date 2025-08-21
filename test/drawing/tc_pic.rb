@@ -4,8 +4,11 @@ require 'tc_helper'
 
 class TestPic < Minitest::Test
   def setup
+    stub_request(:head, 'https://example.com/sample-image.png')
+      .to_return(status: 501)
+
     stub_request(:get, 'https://example.com/sample-image.png')
-      .to_return(body: File.new('examples/sample.png'), status: 200)
+      .to_return(body: File.new('examples/sample.png'), status: 200, headers: { 'Content-Type' => 'image/png' })
 
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
@@ -95,7 +98,7 @@ class TestPic < Minitest::Test
   end
 
   def test_remote_image_src
-    assert_raises(ArgumentError) { @image_remote.image_src = @test_img_fake }
+    assert_raises(windows? ? URI::InvalidURIError : ArgumentError) { @image_remote.image_src = @test_img_fake }
     assert_raises(ArgumentError) { @image_remote.image_src = @test_img_remote_fake }
     refute_raises { @image_remote.image_src = @test_img_remote_png }
     assert_equal(@image_remote.image_src, @test_img_remote_png)
