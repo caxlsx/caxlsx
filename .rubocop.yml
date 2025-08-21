@@ -35,6 +35,10 @@ Layout/ExtraSpacing:
 Lint:
   Enabled: true
 
+Lint/SuppressedException:
+  Exclude:
+    - 'test/**/*'
+
 Minitest:
   Enabled: true
 

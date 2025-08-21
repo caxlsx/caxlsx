@@ -1,7 +1,8 @@
 CHANGELOG
 ---------
-- **Unreleased**
-
+- **Unreleased**: 4.4.0
+  - [PR #470](https://github.com/caxlsx/caxlsx/pull/470) Add Excel for Windows integration testing.
+  - [PR #470](https://github.com/caxlsx/caxlsx/pull/470) Add Excel for MacOS integration testing.
 
 - **August.16.25**: 4.3.0
   - [PR #421](https://github.com/caxlsx/caxlsx/pull/421) Add Rubyzip >= 2.4 support

@@ -1,0 +1,154 @@
+name: Integration Tests
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  test-excel-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Cache Office installation
+        id: cache-office
+        uses: actions/cache@v4
+        with:
+          path: |
+            C:\Program Files\Microsoft Office
+            C:\Program Files (x86)\Microsoft Office
+            C:\ProgramData\Microsoft\Office
+          key: ${{ runner.os }}-office365-excel-${{ hashFiles('.github/workflows/excel-integration.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-office365-excel-
+
+      - name: Install Office via Chocolatey (if not cached)
+        if: steps.cache-office.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          Write-Host "Installing Microsoft Excel (this will take 10-20 minutes)..."
+          choco install office365business --params '/exclude:"Access Groove Lync OneDrive OneNote Outlook PowerPoint Publisher Teams Word"' -y --no-progress
+        timeout-minutes: 25
+
+      - name: Wait for Office installation to complete (if not cached)
+        if: steps.cache-office.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          Write-Host "Waiting for Excel COM objects to register..."
+          Start-Sleep -Seconds 30
+
+      - name: Re-register Excel COM objects (if cached)
+        if: steps.cache-office.outputs.cache-hit == 'true'
+        shell: powershell
+        run: |
+          Write-Host "Re-registering Excel COM objects from cache..."
+
+          # Find Office installation path
+          $officePath = if (Test-Path "C:\Program Files\Microsoft Office\Office16") {
+            "C:\Program Files\Microsoft Office\Office16"
+          } elseif (Test-Path "C:\Program Files (x86)\Microsoft Office\Office16") {
+            "C:\Program Files (x86)\Microsoft Office\Office16"
+          } else {
+            Write-Error "Office installation not found"
+            exit 1
+          }
+
+          Write-Host "Office found at: $officePath"
+
+          # Re-register Excel COM objects
+          $excelPath = Join-Path $officePath "EXCEL.EXE"
+          if (Test-Path $excelPath) {
+            Write-Host "Registering Excel..."
+            Start-Process -FilePath $excelPath -ArgumentList "/regserver" -Wait -NoNewWindow
+          }
+
+          Start-Sleep -Seconds 5
+
+      - name: Verify Excel COM objects are available
+        shell: powershell
+        run: |
+          try {
+            Write-Host "Testing Excel COM object..."
+            $excel = New-Object -ComObject Excel.Application
+            $excel.Visible = $false
+            Write-Host "Excel COM object created successfully"
+            Write-Host "Excel Version: $($excel.Version)"
+            $excel.Quit()
+            [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
+          } catch {
+            Write-Error "Failed to create COM objects"
+            Write-Error $_.Exception.Message
+            exit 1
+          }
+
+      - name: Install ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      - name: Run tests
+        run: |
+          bundle exec rake
+
+  test-excel-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Cache Homebrew packages
+        id: cache-brew
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/Library/Caches/Homebrew
+            /usr/local/Cellar/microsoft-excel
+            /Applications/Microsoft Excel.app
+          key: ${{ runner.os }}-brew-excel-${{ hashFiles('.github/workflows/excel-integration.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-brew-excel-
+
+      - name: Install Excel via Homebrew Cask (if not cached)
+        if: steps.cache-brew.outputs.cache-hit != 'true'
+        run: |
+          echo "Installing Microsoft Excel via Homebrew..."
+          brew update
+          brew install --cask microsoft-excel || true  # Continue even if activation fails
+        timeout-minutes: 20
+        continue-on-error: true  # Don't fail if license activation is required
+
+      - name: Verify Excel can launch without license
+        run: |
+          if [ -d "/Applications/Microsoft Excel.app" ]; then
+            echo "✓ Excel app bundle found"
+
+            # Just verify the app can launch and quit immediately
+            osascript -e 'try
+              tell application "Microsoft Excel"
+                activate
+                delay 2
+                quit
+              end tell
+              return "Excel launched successfully"
+            on error errMsg
+              return "Excel launch test: " & errMsg
+            end try' || true
+
+            echo "Basic Excel launch test completed"
+          else
+            echo "❌ Excel not found - failing build"
+            exit 1
+          fi
+
+      - name: Install ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      - name: Run tests
+        run: |
+          bundle exec rake
