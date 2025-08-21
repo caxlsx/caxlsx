@@ -6,6 +6,7 @@ module TestExcelShared
     require_or_skip!
     setup_excel_application
     @temp_files = []
+    @test_password = 'test123'
   end
 
   def teardown
@@ -66,6 +67,7 @@ module TestExcelShared
 
     ws1 = workbook.add_worksheet(name: 'Sheet1')
     ws1.add_row ['Data', 'Sheet', 1]
+    ws1.add_row ['Foo', 2, 'Bar']
 
     ws2 = workbook.add_worksheet(name: 'Sheet2')
     ws2.add_row ['Second', 'Worksheet', 2]
@@ -81,8 +83,11 @@ module TestExcelShared
     # Verify Sheet1 contents
     assert_excel_cell_values_by_sheet(test_file, 'Sheet1', {
       'A1' => 'Data',
+      'A2' => 'Foo',
       'B1' => 'Sheet',
-      'C1' => 1
+      'B2' => 2,
+      'C1' => 1,
+      'C2' => 'Bar'
     })
 
     # Verify Sheet2 contents
@@ -91,5 +96,43 @@ module TestExcelShared
       'B1' => 'Worksheet',
       'C1' => 2
     })
+  end
+
+  def test_encrypted_file
+    # Create a workbook with multiple sheets
+    package = Axlsx::Package.new
+    workbook = package.workbook
+
+    ws1 = workbook.add_worksheet(name: 'Sheet1')
+    ws1.add_row ['Data', 'Sheet', 1]
+    ws1.add_row ['Foo', 2, 'Bar']
+
+    ws2 = workbook.add_worksheet(name: 'Sheet2')
+    ws2.add_row ['Second', 'Worksheet', 2]
+
+    # Generate encrypted file
+    encrypted_file = 'test_encrypted.xlsx'
+    package.serialize(encrypted_file, password: @test_password)
+    @temp_files << encrypted_file
+
+    # Verify encrypted file opens with password
+    assert_excel_file_opens(encrypted_file, password: @test_password)
+
+    # Verify Sheet1 contents
+    assert_excel_cell_values_by_sheet(encrypted_file, 'Sheet1', {
+      'A1' => 'Data',
+      'A2' => 'Foo',
+      'B1' => 'Sheet',
+      'B2' => 2,
+      'C1' => 1,
+      'C2' => 'Bar'
+    }, password: @test_password)
+
+    # Verify Sheet2 contents
+    assert_excel_cell_values_by_sheet(encrypted_file, 'Sheet2', {
+      'A1' => 'Second',
+      'B1' => 'Worksheet',
+      'C1' => 2
+    }, password: @test_password)
   end
 end
