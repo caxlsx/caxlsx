@@ -26,9 +26,14 @@ class TestExcelWindows < Minitest::Test
     with_workbook(file_path, password: password) {} # File opened successfully
     true
   rescue StandardError => e
-    # Re-raise the error for test failure
-    error_msg = "Excel failed to open file '#{file_path}': #{e.message}"
-    flunk(error_msg)
+    flunk("Excel failed to open file '#{file_path}': #{e.message}")
+  end
+
+  def refute_excel_file_opens(file_path, password: nil)
+    with_workbook(file_path, password: password) {}
+    flunk("Excel opened file '#{file_path}' when it should have failed")
+  rescue StandardError
+    true
   end
 
   def assert_excel_cell_values(file_path, expected_values, password: nil)

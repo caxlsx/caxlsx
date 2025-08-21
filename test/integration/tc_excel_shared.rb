@@ -118,6 +118,9 @@ module TestExcelShared
     # Verify encrypted file opens with password
     assert_excel_file_opens(encrypted_file, password: @test_password)
 
+    # Verify encrypted file does NOT open with wrong password
+    refute_excel_file_opens(encrypted_file, password: 'wrong_password')
+
     # Verify Sheet1 contents
     assert_excel_cell_values_by_sheet(encrypted_file, 'Sheet1', {
       'A1' => 'Data',
