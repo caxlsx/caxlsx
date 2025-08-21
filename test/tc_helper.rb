@@ -35,12 +35,16 @@ module Minitest
       RbConfig::CONFIG['host_os'].match?(/windows|mswin|mingw|cygwin/i)
     end
 
+    def mri?
+      RUBY_ENGINE == 'ruby'
+    end
+
     def jruby?
-      defined?(JRUBY_VERSION)
+      RUBY_ENGINE == 'jruby'
     end
 
     def truffleruby?
-      defined?(TruffleRuby)
+      RUBY_ENGINE == 'truffleruby'
     end
   end
 end
