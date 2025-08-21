@@ -110,7 +110,7 @@ class TestEncryptionCompatibility < Test::Unit::TestCase
       skip("Excel encryption compatibility tests only run on Windows")
     end
 
-    unless excel_available?
+    unless excel_windows?
       skip("Excel encryption compatibility tests require Microsoft Excel to be installed")
     end
 
@@ -120,7 +120,7 @@ class TestEncryptionCompatibility < Test::Unit::TestCase
   end
 
   def assert_excel_file_opens(file_path, password = nil, message = nil)
-    return true unless excel_available?
+    return true unless excel_windows?
 
     begin
       require 'win32ole'
@@ -159,5 +159,23 @@ class TestEncryptionCompatibility < Test::Unit::TestCase
       rescue StandardError
       end
     end
+  end
+
+  def windows?
+    RUBY_PLATFORM =~ /mswin|mingw|cygwin/
+  end
+
+  def excel_windows?
+    return @excel_windows if defined?(@excel_windows)
+
+    @excel_windows = windows? &&
+                     defined?(WIN32OLE) &&
+                     begin
+                       excel = WIN32OLE.new('Excel.Application')
+                       excel.Quit
+                       true
+                     rescue StandardError
+                       false
+                     end
   end
 end

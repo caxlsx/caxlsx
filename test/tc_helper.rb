@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+
 require 'simplecov'
 SimpleCov.start do
   add_filter "/test/"
@@ -11,6 +12,10 @@ require 'minitest/autorun'
 require 'timecop'
 require 'webmock/minitest'
 require 'axlsx'
+begin
+  require 'win32ole'
+rescue LoadError
+end
 
 module Minitest
   class Test
