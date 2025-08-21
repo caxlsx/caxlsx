@@ -76,14 +76,16 @@ class TestExcelWindows < Minitest::Test
   def excel_windows?
     return @excel_windows if defined?(@excel_windows)
 
-    @excel_windows = windows_platform? &&
-                     defined?(WIN32OLE) &&
-                     begin
-                       excel = WIN32OLE.new('Excel.Application')
-                       excel.Quit
-                       true
-                     rescue StandardError
-                       false
-                     end
+    @excel_windows = windows_platform? && excel_app_available?
+  end
+
+  def excel_app_available?
+    return false unless defined?(WIN32OLE)
+
+    excel = WIN32OLE.new('Excel.Application')
+    excel.Quit
+    true
+  rescue StandardError
+    false
   end
 end
