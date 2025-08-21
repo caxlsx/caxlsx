@@ -100,7 +100,7 @@ class TestExcelMacOS < Minitest::Test
       try
         tell application "Microsoft Excel"
           activate
-          set workbook_ref to open "#{absolute_path}"
+          set workbook_ref to (open workbook "#{absolute_path}")
           set workbook_name to name of workbook_ref
           return workbook_name
         end tell
