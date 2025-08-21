@@ -15,6 +15,7 @@ module Axlsx
   require_relative 'table_style'
   require_relative 'table_styles'
   require_relative 'table_style_element'
+  require_relative 'theme'
   require_relative 'dxf'
   require_relative 'xf'
   require_relative 'cell_protection'

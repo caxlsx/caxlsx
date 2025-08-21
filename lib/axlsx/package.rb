@@ -82,6 +82,8 @@ module Axlsx
     # @option options [String] :zip_command When `nil`, `#serialize` with RubyZip to
     #   zip the XLSX file contents. When a String, the provided zip command (e.g.,
     #   "zip") is used to zip the file contents (may be faster for large files)
+    # @option options [String] :password When specified, the serialized packaged will be
+    #   encrypted with the password. Requires ooxml_crypt gem.
     # @return [Boolean] False if confirm_valid and validation errors exist. True if the package was serialized
     # @note A tremendous amount of effort has gone into ensuring that you cannot create invalid xlsx documents.
     #   options[:confirm_valid] should be used in the rare case that you cannot open the serialized file.
@@ -108,7 +110,7 @@ module Axlsx
         workbook.apply_styles
       end
 
-      confirm_valid, zip_command = parse_serialize_options(options, secondary_options)
+      confirm_valid, zip_command, password = parse_serialize_options(options, secondary_options)
       return false unless !confirm_valid || validate.empty?
 
       zip_provider = if zip_command
@@ -120,15 +122,31 @@ module Axlsx
       zip_provider.open(output) do |zip|
         write_parts(zip)
       end
+
+      if password && !password.empty?
+        require_ooxml_crypt!
+        OoxmlCrypt.encrypt_file(output, password, output)
+      end
+
       true
     ensure
       Relationship.clear_ids_cache
     end
 
     # Serialize your workbook to a StringIO instance
-    # @param [Boolean] confirm_valid Validate the package prior to serialization.
-    # @return [StringIO|Boolean] False if confirm_valid and validation errors exist. rewound string IO if not.
-    def to_stream(confirm_valid = false)
+    # @param [Boolean] old_confirm_valid (Deprecated) Validate the package prior to serialization.
+    #   Use :confirm_valid keyword arg instead.
+    # @option kwargs [Boolean] :confirm_valid Validate the package prior to serialization.
+    # @option kwargs [String] :password When specified, the serialized packaged will be
+    #   encrypted with the password. Requires ooxml_crypt gem.
+    # @return [StringIO|Boolean] False if confirm_valid and validation errors exist. Rewound string IO if not.
+    def to_stream(old_confirm_valid = nil, confirm_valid: false, password: nil)
+      unless old_confirm_valid.nil?
+        warn "[DEPRECATION] Axlsx::Package#to_stream with confirm_valid as a non-keyword arg is deprecated. " \
+             "Use keyword arg instead e.g., package.to_stream(confirm_valid: false)"
+        confirm_valid ||= old_confirm_valid
+      end
+
       unless workbook.styles_applied
         workbook.apply_styles
       end
@@ -140,6 +158,12 @@ module Axlsx
         write_parts(zip)
       end
       stream.rewind
+
+      if password && !password.empty?
+        require_ooxml_crypt!
+        stream = StringIO.new(OoxmlCrypt.encrypt(stream.read, password))
+      end
+
       stream
     ensure
       Relationship.clear_ids_cache
@@ -221,6 +245,7 @@ module Axlsx
     def parts
       parts = [
         { entry: "xl/#{STYLES_PN}", doc: workbook.styles, schema: SML_XSD },
+        { entry: "xl/#{THEME_PN}", doc: workbook.theme, schema: THEME_XSD },
         { entry: CORE_PN, doc: @core, schema: CORE_XSD },
         { entry: APP_PN, doc: @app, schema: APP_XSD },
         { entry: WORKBOOK_RELS_PN, doc: workbook.relationships, schema: RELS_XSD },
@@ -357,6 +382,7 @@ module Axlsx
       c_types << Override.new(PartName: "/#{APP_PN}", ContentType: APP_CT)
       c_types << Override.new(PartName: "/#{CORE_PN}", ContentType: CORE_CT)
       c_types << Override.new(PartName: "/xl/#{STYLES_PN}", ContentType: STYLES_CT)
+      c_types << Override.new(PartName: "/xl/#{THEME_PN}", ContentType: THEME_CT)
       c_types << Axlsx::Override.new(PartName: "/#{WORKBOOK_PN}", ContentType: WORKBOOK_CT)
       c_types.lock
       c_types
@@ -375,8 +401,8 @@ module Axlsx
     end
 
     # Parse the arguments of `#serialize`
-    # @return [Boolean, (String or nil)] Returns an array where the first value is
-    #   `confirm_valid` and the second is the `zip_command`.
+    # @return [Boolean, (String or nil), (String or nil)] Returns a 3-tuple where values are
+    #   `confirm_valid`, `zip_command`, and `password`.
     # @private
     def parse_serialize_options(options, secondary_options)
       if secondary_options
@@ -385,17 +411,23 @@ module Axlsx
       end
       if options.is_a?(Hash)
         options.merge!(secondary_options || {})
-        invalid_keys = options.keys - [:confirm_valid, :zip_command]
+        invalid_keys = options.keys - [:confirm_valid, :zip_command, :password]
         if invalid_keys.any?
           raise ArgumentError, "Invalid keyword arguments: #{invalid_keys}"
         end
 
-        [options.fetch(:confirm_valid, false), options.fetch(:zip_command, nil)]
+        [options.fetch(:confirm_valid, false), options.fetch(:zip_command, nil), options.fetch(:password, nil)]
       else
         warn "[DEPRECATION] Axlsx::Package#serialize with confirm_valid as a boolean is deprecated. " \
              "Use keyword args instead e.g., package.serialize(output, confirm_valid: false)"
         parse_serialize_options((secondary_options || {}).merge(confirm_valid: options), nil)
       end
+    end
+
+    def require_ooxml_crypt!
+      return if defined?(OoxmlCrypt)
+
+      raise 'Axlsx encryption requires ooxml_crypt gem'
     end
   end
 end

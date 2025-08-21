@@ -184,6 +184,12 @@ module Axlsx
       @styles
     end
 
+    # The theme associated with this workbook
+    # @return [Theme]
+    def theme
+      @theme ||= Theme.new
+    end
+
     # An array that holds all cells with styles
     # @return Set
     def styled_cells
@@ -373,6 +379,7 @@ module Axlsx
         r << Relationship.new(pivot_table.cache_definition, PIVOT_TABLE_CACHE_DEFINITION_R, format(PIVOT_TABLE_CACHE_DEFINITION_PN, index + 1))
       end
       r << Relationship.new(self, STYLES_R, STYLES_PN)
+      r << Relationship.new(self, THEME_R, THEME_PN)
       if use_shared_strings
         r << Relationship.new(self, SHARED_STRINGS_R, SHARED_STRINGS_PN)
       end

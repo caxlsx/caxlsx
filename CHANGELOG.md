@@ -1,6 +1,8 @@
 CHANGELOG
 ---------
 - **Unreleased**: 4.4.0
+  - [PR #477](https://github.com/caxlsx/caxlsx/pull/477) Add package-level encryption and password protection.
+  - [PR #469](https://github.com/caxlsx/caxlsx/pull/469) Add default theme file to Excel package.
   - [PR #476](https://github.com/caxlsx/caxlsx/pull/476) Add Excel for Windows integration testing.
   - [PR #476](https://github.com/caxlsx/caxlsx/pull/476) Add Excel for MacOS integration testing.
   - [PR #474](https://github.com/caxlsx/caxlsx/pull/474) Add Windows and MacOS to the CI.
