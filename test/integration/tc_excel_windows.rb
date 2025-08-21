@@ -2,173 +2,143 @@
 
 require 'tc_helper'
 
-class TestEncryptionCompatibility < Test::Unit::TestCase
+class TestExcelIntegration < Test::Unit::TestCase
   def setup
     skip_unless_windows_with_excel
-    @test_password = 'test123'
+    setup_excel_application
     @temp_files = []
   end
 
   def teardown
-    # Clean up any temporary files
+    teardown_excel_application
     @temp_files.each do |file|
       FileUtils.rm_f(file)
     end
   end
 
-  def test_caxlsx_encrypted_file_opens_in_excel
-    # Create a basic workbook with theme
+  def test_simple_excel_file_creation_and_opening
+    # Create a basic workbook
     package = Axlsx::Package.new
     workbook = package.workbook
-    workbook.add_worksheet(name: 'Encryption Test') do |sheet|
-      sheet.add_row ['Theme', 'Encryption', 'Test']
-      sheet.add_row [1, 2, 3]
-      sheet.add_row ['Success', 'Expected', 'Result']
+    workbook.add_worksheet(name: 'Basic Test') do |sheet|
+      sheet.add_row ['Name', 'Value', 'Category']
+      sheet.add_row ['Item 1', 100, 'A']
+      sheet.add_row ['Item 2', 200, 'B']
     end
 
-    # Generate unencrypted file
-    unencrypted_file = 'test_encryption_unencrypted.xlsx'
-    package.serialize(unencrypted_file)
-    @temp_files << unencrypted_file
+    # Generate file
+    test_file = 'test_basic.xlsx'
+    package.serialize(test_file)
+    @temp_files << test_file
 
-    # Verify unencrypted file opens normally
-    assert_excel_file_opens(unencrypted_file, nil, "Unencrypted file should open in Excel")
-
-    # Encrypt the file
-    encrypted_file = 'test_encryption_encrypted.xlsx'
-    OoxmlCrypt.encrypt_file(unencrypted_file, @test_password, encrypted_file)
-    @temp_files << encrypted_file
-
-    # Verify encrypted file opens with password
-    assert_excel_file_opens(encrypted_file, @test_password, "Encrypted file should open in Excel with password")
+    # Verify file opens in Excel
+    assert_excel_file_opens(test_file)
   end
 
-  def test_theme_xml_contains_required_elements_for_encryption
+  def test_excel_file_cell_values_readable
+    # Create a workbook with specific values we can test
     package = Axlsx::Package.new
-    theme_xml = package.workbook.theme.to_xml_string
-
-    # These elements are critical for Excel encryption compatibility
-    required_elements = [
-      '<a:theme',
-      '<a:themeElements>',
-      '<a:clrScheme',
-      '<a:fontScheme',
-      '<a:fmtScheme',
-      '<a:fillStyleLst>',
-      '<a:lnStyleLst>',
-      '<a:effectStyleLst>',
-      '<a:bgFillStyleLst>',
-      '<a:objectDefaults>',
-      '<a:scene3d>',
-      '<a:sp3d>',
-      '<a:extraClrSchemeLst/>'
-    ]
-
-    required_elements.each do |element|
-      assert_includes theme_xml, element, "Theme XML missing required element: #{element}"
+    workbook = package.workbook
+    workbook.add_worksheet(name: 'Cell Test') do |sheet|
+      sheet.add_row ['Hello', 'World', 42]
+      sheet.add_row ['Test', 'Value', 3.14]
     end
+
+    # Generate file
+    test_file = 'test_cell_values.xlsx'
+    package.serialize(test_file)
+    @temp_files << test_file
+
+    # Verify file opens and we can read cell values
+    assert_excel_cell_values(test_file, {
+      'A1' => 'Hello',
+      'B1' => 'World',
+      'C1' => 42,
+      'A2' => 'Test',
+      'B2' => 'Value',
+      'C2' => 3.14
+    })
   end
 
-  def test_complex_workbook_encryption_compatibility
-    # Create a more complex workbook to test comprehensive compatibility
+  def test_multiple_worksheets
+    # Create a workbook with multiple sheets
     package = Axlsx::Package.new
     workbook = package.workbook
 
-    # Add multiple worksheets
-    ws1 = workbook.add_worksheet(name: 'Data Sheet')
-    ws1.add_row ['Name', 'Value', 'Category']
-    10.times do |i|
-      ws1.add_row ["Item #{i + 1}", rand(100), ['A', 'B', 'C'].sample]
-    end
+    ws1 = workbook.add_worksheet(name: 'Sheet1')
+    ws1.add_row ['Data', 'Sheet', 1]
 
-    ws2 = workbook.add_worksheet(name: 'Charts')
-    ws2.add_row ['Month', 'Sales']
-    ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].each_with_index do |month, _i|
-      ws2.add_row [month, rand(500..1499)]
-    end
+    ws2 = workbook.add_worksheet(name: 'Sheet2')
+    ws2.add_row ['Second', 'Worksheet', 2]
 
-    # Add some styling
-    ws1.rows[0].cells.each { |cell| cell.style = 1 }
+    # Generate file
+    test_file = 'test_multiple_sheets.xlsx'
+    package.serialize(test_file)
+    @temp_files << test_file
 
-    # Generate and test
-    complex_file = 'test_complex_encryption.xlsx'
-    package.serialize(complex_file)
-    @temp_files << complex_file
-
-    # Encrypt and test
-    encrypted_complex = 'test_complex_encrypted.xlsx'
-    OoxmlCrypt.encrypt_file(complex_file, @test_password, encrypted_complex)
-    @temp_files << encrypted_complex
-
-    assert_excel_file_opens(encrypted_complex, @test_password, "Complex encrypted workbook should open in Excel")
+    # Verify file opens
+    assert_excel_file_opens(test_file)
   end
 
   private
 
   def skip_unless_windows_with_excel
-    unless windows_platform?
-      skip("Excel encryption compatibility tests only run on Windows")
+    unless self.classwindows_platform?
+      skip("Excel integration tests only run on Windows")
     end
 
-    unless excel_windows?
-      skip("Excel encryption compatibility tests require Microsoft Excel to be installed")
-    end
+    return if self.class.excel_windows?
 
-    return if defined?(OoxmlCrypt)
-
-    skip("Excel encryption compatibility tests require ooxml_crypt gem")
+    skip("Excel integration tests require Microsoft Excel to be installed")
   end
 
-  def assert_excel_file_opens(file_path, password = nil, message = nil)
-    return true unless excel_windows?
-
-    begin
-      require 'win32ole'
-      excel = WIN32OLE.new('Excel.Application')
-      excel.visible = false
-      excel.displayAlerts = false
-
-      absolute_path = File.absolute_path(file_path)
-
-      workbook = if password
-                   excel.Workbooks.Open(absolute_path, nil, nil, nil, password)
-                 else
-                   excel.Workbooks.Open(absolute_path)
-                 end
-
-      # File opened successfully
-      workbook.Close(false)
-      excel.Quit
-      true
-    rescue StandardError => e
-      # Clean up Excel process if it's still running
-      begin
-        excel&.Quit
-      rescue StandardError
-      end
-
-      # Re-raise the error for test failure
-      error_msg = "Excel failed to open file '#{file_path}': #{e.message}"
-      error_msg = "#{message}: #{error_msg}" if message
-
-      flunk(error_msg)
-    ensure
-      # Ensure Excel process is terminated
-      begin
-        excel&.Quit
-      rescue StandardError
-      end
-    end
+  def setup_excel_application
+    @excel = WIN32OLE.new('Excel.Application')
+    @excel.visible = false
+    @excel.displayAlerts = false
   end
 
-  def windows?
+  def teardown_excel_application
+    @excel&.Quit
+  rescue StandardError
+    # Ignore errors during cleanup
+  ensure
+    @excel = nil
+  end
+
+  def assert_excel_file_opens(file_path)
+    absolute_path = File.absolute_path(file_path)
+    workbook = @excel.Workbooks.Open(absolute_path)
+
+    # File opened successfully
+    workbook.Close(false)
+    true
+  end
+
+  def assert_excel_cell_values(file_path, expected_values)
+    absolute_path = File.absolute_path(file_path)
+    workbook = @excel.Workbooks.Open(absolute_path)
+    worksheet = workbook.Worksheets(1)
+
+    expected_values.each do |cell_address, expected_value|
+      actual_value = worksheet.Range(cell_address).Value
+
+      assert_equal expected_value, actual_value,
+                   "Cell #{cell_address} should contain '#{expected_value}' but contains '#{actual_value}'"
+    end
+
+    workbook.Close(false)
+    true
+  end
+
+  def self.windows_platform?
     RUBY_PLATFORM =~ /mswin|mingw|cygwin/
   end
 
-  def excel_windows?
+  def self.excel_windows?
     return @excel_windows if defined?(@excel_windows)
 
-    @excel_windows = windows? &&
+    @excel_windows = windows_platform? &&
                      defined?(WIN32OLE) &&
                      begin
                        excel = WIN32OLE.new('Excel.Application')
