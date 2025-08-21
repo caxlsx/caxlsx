@@ -76,14 +76,28 @@ class TestExcelIntegration < Test::Unit::TestCase
     package.serialize(test_file)
     @temp_files << test_file
 
-    # Verify file opens
+    # Verify file opens and check worksheet contents
     assert_excel_file_opens(test_file)
+    
+    # Verify Sheet1 contents
+    assert_excel_cell_values_by_sheet(test_file, 'Sheet1', {
+      'A1' => 'Data',
+      'B1' => 'Sheet',
+      'C1' => 1
+    })
+    
+    # Verify Sheet2 contents
+    assert_excel_cell_values_by_sheet(test_file, 'Sheet2', {
+      'A1' => 'Second',
+      'B1' => 'Worksheet',
+      'C1' => 2
+    })
   end
 
   private
 
   def skip_unless_windows_with_excel
-    unless self.classwindows_platform?
+    unless self.class.windows_platform?
       skip("Excel integration tests only run on Windows")
     end
 
@@ -107,28 +121,46 @@ class TestExcelIntegration < Test::Unit::TestCase
   end
 
   def assert_excel_file_opens(file_path)
-    absolute_path = File.absolute_path(file_path)
-    workbook = @excel.Workbooks.Open(absolute_path)
-
-    # File opened successfully
-    workbook.Close(false)
+    with_workbook(file_path) do |workbook|
+      # File opened successfully
+    end
     true
   end
 
   def assert_excel_cell_values(file_path, expected_values)
+    with_workbook(file_path) do |workbook|
+      worksheet = workbook.Worksheets(1)
+
+      expected_values.each do |cell_address, expected_value|
+        actual_value = worksheet.Range(cell_address).Value
+
+        assert_equal expected_value, actual_value,
+                     "Cell #{cell_address} should contain '#{expected_value}' but contains '#{actual_value}'"
+      end
+    end
+    true
+  end
+
+  def assert_excel_cell_values_by_sheet(file_path, sheet_name, expected_values)
+    with_workbook(file_path) do |workbook|
+      worksheet = workbook.Worksheets(sheet_name)
+
+      expected_values.each do |cell_address, expected_value|
+        actual_value = worksheet.Range(cell_address).Value
+
+        assert_equal expected_value, actual_value,
+                     "Cell #{cell_address} in sheet '#{sheet_name}' should contain '#{expected_value}' but contains '#{actual_value}'"
+      end
+    end
+    true
+  end
+
+  def with_workbook(file_path)
     absolute_path = File.absolute_path(file_path)
     workbook = @excel.Workbooks.Open(absolute_path)
-    worksheet = workbook.Worksheets(1)
-
-    expected_values.each do |cell_address, expected_value|
-      actual_value = worksheet.Range(cell_address).Value
-
-      assert_equal expected_value, actual_value,
-                   "Cell #{cell_address} should contain '#{expected_value}' but contains '#{actual_value}'"
-    end
-
-    workbook.Close(false)
-    true
+    yield workbook
+  ensure
+    workbook&.Close(false)
   end
 
   def self.windows_platform?
