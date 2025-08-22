@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 - **Unreleased**
-
+  - [PR #475](https://github.com/caxlsx/caxlsx/pull/475) Use timecop to fix transient time failure in tests
 
 - **August.16.25**: 4.3.0
   - [PR #421](https://github.com/caxlsx/caxlsx/pull/421) Add Rubyzip >= 2.4 support
