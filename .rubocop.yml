@@ -35,6 +35,10 @@ Layout/ExtraSpacing:
 Lint:
   Enabled: true
 
+Lint/SuppressedException:
+  Exclude:
+    - 'test/**/*'
+
 Minitest:
   Enabled: true
 
@@ -43,6 +47,10 @@ Minitest/RefuteFalse:
 
 Naming:
   Enabled: true
+
+Naming/PredicateMethod:
+  Exclude:
+    - 'test/**/*'
 
 Packaging:
   Enabled: true
@@ -70,3 +78,6 @@ Style/NumericLiterals:
 
 Style/NumericPredicate:
   EnforcedStyle: comparison
+
+Style/SafeNavigationChainLength:
+  Max: 5
