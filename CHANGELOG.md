@@ -3,6 +3,7 @@ CHANGELOG
 - **Unreleased**: 4.4.0
   - [PR #476](https://github.com/caxlsx/caxlsx/pull/476) Add Excel for Windows integration testing.
   - [PR #476](https://github.com/caxlsx/caxlsx/pull/476) Add Excel for MacOS integration testing.
+  - [PR #475](https://github.com/caxlsx/caxlsx/pull/475) Use timecop to fix transient time failure in tests
   - [PR #474](https://github.com/caxlsx/caxlsx/pull/474) Add Windows and MacOS to the CI.
   - [PR #474](https://github.com/caxlsx/caxlsx/pull/474) Fix local image file MIME type detection on Windows.
   - [PR #474](https://github.com/caxlsx/caxlsx/pull/474) Load only HTTP headers when determining remote file MIME type.
