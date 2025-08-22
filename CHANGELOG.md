@@ -1,7 +1,10 @@
 CHANGELOG
 ---------
-- **Unreleased**
+- **Unreleased**:
   - [PR #475](https://github.com/caxlsx/caxlsx/pull/475) Use timecop to fix transient time failure in tests
+  - [PR #474](https://github.com/caxlsx/caxlsx/pull/474) Add Windows and MacOS to the CI.
+  - [PR #474](https://github.com/caxlsx/caxlsx/pull/474) Fix local image file MIME type detection on Windows.
+  - [PR #474](https://github.com/caxlsx/caxlsx/pull/474) Load only HTTP headers when determining remote file MIME type.
 
 - **August.16.25**: 4.3.0
   - [PR #421](https://github.com/caxlsx/caxlsx/pull/421) Add Rubyzip >= 2.4 support

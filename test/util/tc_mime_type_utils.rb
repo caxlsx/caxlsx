@@ -4,8 +4,11 @@ require 'tc_helper'
 
 class TestMimeTypeUtils < Minitest::Test
   def setup
+    stub_request(:head, 'https://example.com/sample-image.png')
+      .to_return(status: 501)
+
     stub_request(:get, 'https://example.com/sample-image.png')
-      .to_return(body: File.new('examples/sample.png'), status: 200)
+      .to_return(body: File.new('examples/sample.png'), status: 200, headers: { 'Content-Type' => 'image/png' })
 
     @test_img = "#{File.dirname(__FILE__)}/../fixtures/image1.jpeg"
     @test_img_url = "https://example.com/sample-image.png"
