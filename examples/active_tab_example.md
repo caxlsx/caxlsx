@@ -1,6 +1,6 @@
 ## Description
 
-Book views let you specify which sheet the show as active when the user opens the work book as well as a bunch of other.
+Book views let you specify which sheet will be shown as active when the user opens the workbook, as well as several other options.
 
 ## Code
 
@@ -20,7 +20,7 @@ wb.add_worksheet(name: 'Second Worksheet') do |sheet|
   sheet.add_row [1, 2, 3]
 end
 
-# The horizontal scrollbar will be smaller
+# The horizontal scrollbar will be smaller on some clients (e.g., Excel for Windows)
 # The second tab will be selected
 wb.add_view tab_ratio: 800, active_tab: 1
 

@@ -5,9 +5,10 @@ require 'tc_helper'
 class TestCore < Minitest::Test
   def setup
     @core = Axlsx::Core.new
-    # could still see some false positives if the second changes between the next two calls
-    @time = Time.now.strftime('%Y-%m-%dT%H:%M:%SZ')
-    @doc = Nokogiri::XML(@core.to_xml_string)
+    Timecop.freeze do
+      @time = Time.now.strftime('%Y-%m-%dT%H:%M:%SZ')
+      @doc = Nokogiri::XML(@core.to_xml_string)
+    end
   end
 
   def test_valid_document
