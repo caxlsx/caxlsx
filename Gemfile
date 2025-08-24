@@ -21,6 +21,7 @@ group :test do
   gem 'minitest'
   gem 'timecop'
   gem 'webmock'
+  gem 'win32ole', platforms: [:mingw, :x64_mingw, :mswin, :mswin64]
 end
 
 group :profile do
