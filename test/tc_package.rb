@@ -183,7 +183,7 @@ class TestPackage < Minitest::Test
   end
 
   def test_serialize_with_password
-    skip("Encryption only supported on MRI Ruby") unless mri?
+    skip("Encryption is only supported on MRI Ruby") unless mri?
 
     password = 'abc123'
     @package.serialize(@fname, password: password)
@@ -199,7 +199,7 @@ class TestPackage < Minitest::Test
   end
 
   def test_serialization_with_password_and_zip_command
-    skip("Encryption only supported on MRI Ruby") unless mri?
+    skip("Encryption is only supported on MRI Ruby") unless mri?
 
     fname = "#{Dir.tmpdir}/#{@fname}"
     password = 'abc123'
@@ -435,7 +435,7 @@ class TestPackage < Minitest::Test
   end
 
   def test_to_stream_with_password
-    skip("Encryption only supported on MRI Ruby") unless mri?
+    skip("Encryption is only supported on MRI Ruby") unless mri?
 
     password = 'abc123'
     stream = @package.to_stream(password: password)
