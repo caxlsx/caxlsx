@@ -21,7 +21,12 @@ group :test do
   gem 'minitest'
   gem 'timecop'
   gem 'webmock'
+  gem 'rspec-mocks'
   gem 'win32ole', platforms: [:mingw, :x64_mingw, :mswin, :mswin64]
+
+  if RUBY_ENGINE == 'ruby'
+    gem 'ooxml_crypt'
+  end
 end
 
 group :profile do

@@ -22,13 +22,23 @@ class TestExcelWindows < Minitest::Test
     @excel = nil
   end
 
-  def assert_excel_file_opens(file_path)
-    with_workbook(file_path) {} # File opened successfully
+  def assert_excel_file_opens(file_path, password: nil)
+    with_workbook(file_path, password: password) {} # File opened successfully
+    true
+  rescue StandardError => e
+    flunk("Excel failed to open file '#{file_path}': #{e.message}")
+  end
+
+  def refute_excel_file_opens(file_path, password: nil)
+    with_workbook(file_path, password: password) {} # File opened successfully
+
+    flunk("Excel opened file '#{file_path}' when it should have failed")
+  rescue StandardError
     true
   end
 
-  def assert_excel_cell_values(file_path, expected_values)
-    with_workbook(file_path) do |workbook|
+  def assert_excel_cell_values(file_path, expected_values, password: nil)
+    with_workbook(file_path, password: password) do |workbook|
       worksheet = workbook.Worksheets(1)
 
       expected_values.each do |cell_address, expected_value|
@@ -41,8 +51,8 @@ class TestExcelWindows < Minitest::Test
     true
   end
 
-  def assert_excel_cell_values_by_sheet(file_path, sheet_name, expected_values)
-    with_workbook(file_path) do |workbook|
+  def assert_excel_cell_values_by_sheet(file_path, sheet_name, expected_values, password: nil)
+    with_workbook(file_path, password: password) do |workbook|
       worksheet = workbook.Worksheets(sheet_name)
 
       expected_values.each do |cell_address, expected_value|
@@ -55,9 +65,13 @@ class TestExcelWindows < Minitest::Test
     true
   end
 
-  def with_workbook(file_path)
+  def with_workbook(file_path, password: nil)
     absolute_path = File.absolute_path(file_path)
-    workbook = @excel.Workbooks.Open(absolute_path)
+    workbook = if password
+                 @excel.Workbooks.Open(absolute_path, nil, nil, nil, password)
+               else
+                 @excel.Workbooks.Open(absolute_path)
+               end
     yield workbook
   ensure
     workbook&.Close(false)
