@@ -84,6 +84,7 @@ module Axlsx
     #   "zip") is used to zip the file contents (may be faster for large files)
     # @option options [String] :password When specified, the serialized packaged will be
     #   encrypted with the password. Requires ooxml_crypt gem.
+    # @option options [Boolean] :zip64_support When true, enable Zip64 support with RubyZip 3.0+
     # @return [Boolean] False if confirm_valid and validation errors exist. True if the package was serialized
     # @note A tremendous amount of effort has gone into ensuring that you cannot create invalid xlsx documents.
     #   options[:confirm_valid] should be used in the rare case that you cannot open the serialized file.
@@ -110,8 +111,13 @@ module Axlsx
         workbook.apply_styles
       end
 
-      confirm_valid, zip_command, password = parse_serialize_options(options, secondary_options)
+      confirm_valid, zip_command, zip64_support, password = parse_serialize_options(options, secondary_options)
       return false unless !confirm_valid || validate.empty?
+
+      if Zip.respond_to?(:write_zip64_support)
+        @original_zip64_support = Zip.write_zip64_support
+        Zip.write_zip64_support = zip64_support
+      end
 
       zip_provider = if zip_command
                        ZipCommand.new(zip_command)
@@ -119,6 +125,7 @@ module Axlsx
                        BufferedZipOutputStream
                      end
       Relationship.initialize_ids_cache
+
       zip_provider.open(output) do |zip|
         write_parts(zip)
       end
@@ -130,6 +137,9 @@ module Axlsx
 
       true
     ensure
+      if Zip.respond_to?(:write_zip64_support)
+        Zip.write_zip64_support = @original_zip64_support
+      end
       Relationship.clear_ids_cache
     end
 
@@ -139,8 +149,9 @@ module Axlsx
     # @option kwargs [Boolean] :confirm_valid Validate the package prior to serialization.
     # @option kwargs [String] :password When specified, the serialized packaged will be
     #   encrypted with the password. Requires ooxml_crypt gem.
+    # @option kwargs [Boolean] :zip64_support When true, enable Zip64 support with RubyZip 3.0+
     # @return [StringIO|Boolean] False if confirm_valid and validation errors exist. Rewound string IO if not.
-    def to_stream(old_confirm_valid = nil, confirm_valid: false, password: nil)
+    def to_stream(old_confirm_valid = nil, confirm_valid: false, password: nil, zip64_support: false)
       unless old_confirm_valid.nil?
         warn "[DEPRECATION] Axlsx::Package#to_stream with confirm_valid as a non-keyword arg is deprecated. " \
              "Use keyword arg instead e.g., package.to_stream(confirm_valid: false)"
@@ -154,6 +165,12 @@ module Axlsx
       return false unless !confirm_valid || validate.empty?
 
       Relationship.initialize_ids_cache
+
+      if Zip.respond_to?(:write_zip64_support)
+        @original_zip64_support = Zip.write_zip64_support
+        Zip.write_zip64_support = zip64_support
+      end
+
       stream = BufferedZipOutputStream.write_buffer do |zip|
         write_parts(zip)
       end
@@ -166,6 +183,9 @@ module Axlsx
 
       stream
     ensure
+      if Zip.respond_to?(:write_zip64_support)
+        Zip.write_zip64_support = @original_zip64_support
+      end
       Relationship.clear_ids_cache
     end
 
@@ -411,12 +431,17 @@ module Axlsx
       end
       if options.is_a?(Hash)
         options.merge!(secondary_options || {})
-        invalid_keys = options.keys - [:confirm_valid, :zip_command, :password]
+        invalid_keys = options.keys - [:confirm_valid, :zip_command, :zip64_support, :password]
         if invalid_keys.any?
           raise ArgumentError, "Invalid keyword arguments: #{invalid_keys}"
         end
 
-        [options.fetch(:confirm_valid, false), options.fetch(:zip_command, nil), options.fetch(:password, nil)]
+        [
+          options.fetch(:confirm_valid, false),
+          options.fetch(:zip_command, nil),
+          options.fetch(:zip64_support, false),
+          options.fetch(:password, nil)
+        ]
       else
         warn "[DEPRECATION] Axlsx::Package#serialize with confirm_valid as a boolean is deprecated. " \
              "Use keyword args instead e.g., package.serialize(output, confirm_valid: false)"
