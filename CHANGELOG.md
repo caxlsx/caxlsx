@@ -1,6 +1,8 @@
 CHANGELOG
 ---------
-- **Unreleased**: 4.4.0
+- **Unreleased**
+
+- **September.01.25**: 4.4.0
   - [PR #477](https://github.com/caxlsx/caxlsx/pull/477) Add package-level encryption and password protection.
   - [PR #476](https://github.com/caxlsx/caxlsx/pull/476) Add Excel for Windows integration testing.
   - [PR #476](https://github.com/caxlsx/caxlsx/pull/476) Add Excel for MacOS integration testing.
