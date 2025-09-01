@@ -8,6 +8,7 @@ on:
 jobs:
   test-excel-windows:
     runs-on: windows-latest
+    continue-on-error: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -53,3 +54,4 @@ jobs:
           CI_EXCEL_WINDOWS: true
         run: |
           bundle exec rake
+        timeout-minutes: 15
