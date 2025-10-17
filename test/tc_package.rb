@@ -136,6 +136,7 @@ class TestPackage < Minitest::Test
 
     assert_zip_file_matches_package(@fname, @package)
     assert_created_with_rubyzip(@fname, @package)
+    assert_zip_file_has_no_zip64(@fname)
     File.delete(@fname)
   end
 
@@ -226,6 +227,14 @@ class TestPackage < Minitest::Test
   def assert_zip_file_matches_package(fname, package)
     zf = Zip::File.open(fname)
     package.send(:parts).each { |part| zf.get_entry(part[:entry]) }
+  end
+
+  def assert_zip_file_has_no_zip64(fname)
+    return unless defined?(Zip::VERSION) && Zip::VERSION >= '3.2'
+
+    zf = Zip::File.open(fname)
+
+    assert(zf.entries.none?(&:zip64?))
   end
 
   def assert_created_with_rubyzip(fname, package)
