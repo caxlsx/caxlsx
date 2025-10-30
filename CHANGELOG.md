@@ -1,6 +1,7 @@
 CHANGELOG
 ---------
 - **Unreleased**
+  - [PR #482](https://github.com/caxlsx/caxlsx/pull/482) Suppress Zip64 when it't not necessary
 
 - **September.01.25**: 4.4.0
   - [PR #477](https://github.com/caxlsx/caxlsx/pull/477) Add package-level encryption and password protection.

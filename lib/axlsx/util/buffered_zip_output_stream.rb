@@ -9,6 +9,10 @@ module Axlsx
     # The 4_096 was chosen somewhat arbitrary, however, it was difficult to see any obvious improvement with larger
     # buffer sizes.
     BUFFER_SIZE = 4_096
+    # The suppress_extra_fields method was introduced in rubyzip 3.2
+    # Between rubyzip 3.0 and 3.2, it automatically writes zip64 support to the xlsx files
+    # See: https://github.com/caxlsx/caxlsx/issues/481
+    SUPPRESS_ZIP64 = Zip::OutputStream.method(:open).parameters.any? { |_, key| key == :suppress_extra_fields } ? { suppress_extra_fields: :zip64 } : {}
 
     def initialize(zos)
       @zos = zos
@@ -19,7 +23,7 @@ module Axlsx
     #
     # The directory and its contents are removed at the end of the block.
     def self.open(file_name, encrypter = nil)
-      Zip::OutputStream.open(file_name, encrypter: encrypter) do |zos|
+      Zip::OutputStream.open(file_name, encrypter: encrypter, **SUPPRESS_ZIP64) do |zos|
         bzos = new(zos)
         yield(bzos)
       ensure
@@ -28,7 +32,7 @@ module Axlsx
     end
 
     def self.write_buffer(io = ::StringIO.new, encrypter = nil)
-      Zip::OutputStream.write_buffer(io, encrypter: encrypter) do |zos|
+      Zip::OutputStream.write_buffer(io, encrypter: encrypter, **SUPPRESS_ZIP64) do |zos|
         bzos = new(zos)
         yield(bzos)
       ensure
