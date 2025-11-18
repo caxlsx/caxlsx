@@ -3,6 +3,10 @@
 module Axlsx
   autoload :SheetCalcPr,              File.expand_path('worksheet/sheet_calc_pr', __dir__)
   autoload :AutoFilter,               File.expand_path('worksheet/auto_filter/auto_filter', __dir__)
+  autoload :FilterColumn,             File.expand_path('worksheet/auto_filter/filter_column', __dir__)
+  autoload :Filters,                  File.expand_path('worksheet/auto_filter/filters', __dir__)
+  autoload :SortState,                File.expand_path('worksheet/auto_filter/sort_state', __dir__)
+  autoload :SortCondition,            File.expand_path('worksheet/auto_filter/sort_condition', __dir__)
   autoload :DateTimeConverter,        File.expand_path('worksheet/date_time_converter', __dir__)
   autoload :ProtectedRange,           File.expand_path('worksheet/protected_range', __dir__)
   autoload :ProtectedRanges,          File.expand_path('worksheet/protected_ranges', __dir__)
@@ -44,6 +48,7 @@ module Axlsx
   autoload :WorkbookView,             File.expand_path('workbook_view', __dir__)
   autoload :WorkbookViews,            File.expand_path('workbook_views', __dir__)
   autoload :Worksheet,                File.expand_path('worksheet/worksheet', __dir__)
+  autoload :BorderCreator,            File.expand_path('worksheet/border_creator', __dir__)
   autoload :SharedStringsTable,       File.expand_path('shared_strings_table', __dir__)
   autoload :DefinedName,              File.expand_path('defined_name', __dir__)
   autoload :DefinedNames,             File.expand_path('defined_names', __dir__)

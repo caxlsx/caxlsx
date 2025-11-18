@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "border_creator"
-
 module Axlsx
   # The Worksheet class represents a worksheet in the workbook.
   class Worksheet
