@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
 module Axlsx
-  require_relative 'border'
-  require_relative 'border_pr'
-  require_relative 'cell_alignment'
-  require_relative 'cell_style'
-  require_relative 'color'
-  require_relative 'fill'
-  require_relative 'font'
-  require_relative 'gradient_fill'
-  require_relative 'gradient_stop'
-  require_relative 'num_fmt'
-  require_relative 'pattern_fill'
-  require_relative 'table_style'
-  require_relative 'table_styles'
-  require_relative 'table_style_element'
-  require_relative 'theme'
-  require_relative 'dxf'
-  require_relative 'xf'
-  require_relative 'cell_protection'
+  autoload :Border,           File.expand_path('border', __dir__)
+  autoload :BorderPr,         File.expand_path('border_pr', __dir__)
+  autoload :CellAlignment,    File.expand_path('cell_alignment', __dir__)
+  autoload :CellStyle,        File.expand_path('cell_style', __dir__)
+  autoload :Color,            File.expand_path('color', __dir__)
+  autoload :Fill,             File.expand_path('fill', __dir__)
+  autoload :Font,             File.expand_path('font', __dir__)
+  autoload :GradientFill,     File.expand_path('gradient_fill', __dir__)
+  autoload :GradientStop,     File.expand_path('gradient_stop', __dir__)
+  autoload :NumFmt,           File.expand_path('num_fmt', __dir__)
+  autoload :PatternFill,      File.expand_path('pattern_fill', __dir__)
+  autoload :TableStyle,       File.expand_path('table_style', __dir__)
+  autoload :TableStyles,      File.expand_path('table_styles', __dir__)
+  autoload :TableStyleElement,File.expand_path('table_style_element', __dir__)
+  autoload :Theme,            File.expand_path('theme', __dir__)
+  autoload :Dxf,              File.expand_path('dxf', __dir__)
+  autoload :Xf,               File.expand_path('xf', __dir__)
+  autoload :CellProtection,   File.expand_path('cell_protection', __dir__)
 
   # The Styles class manages worksheet styles
   # In addition to creating the require style objects for a valid xlsx package, this class provides the key mechanism for adding styles to your workbook, and safely applying them to the cells of your worksheet.
