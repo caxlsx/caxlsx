@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'filter_column'
-require_relative 'filters'
-require_relative 'sort_state'
-
 module Axlsx
   # This class represents an auto filter range in a worksheet
   class AutoFilter
