@@ -1,64 +1,64 @@
 # frozen_string_literal: true
 
 module Axlsx
-  require_relative 'worksheet/sheet_calc_pr'
-  require_relative 'worksheet/auto_filter/auto_filter'
-  require_relative 'worksheet/date_time_converter'
-  require_relative 'worksheet/protected_range'
-  require_relative 'worksheet/protected_ranges'
-  require_relative 'worksheet/rich_text_run'
-  require_relative 'worksheet/rich_text'
-  require_relative 'worksheet/cell_serializer'
-  require_relative 'worksheet/cell'
-  require_relative 'worksheet/page_margins'
-  require_relative 'worksheet/page_set_up_pr'
-  require_relative 'worksheet/outline_pr'
-  require_relative 'worksheet/page_setup'
-  require_relative 'worksheet/header_footer'
-  require_relative 'worksheet/print_options'
-  require_relative 'worksheet/cfvo'
-  require_relative 'worksheet/cfvos'
-  require_relative 'worksheet/color_scale'
-  require_relative 'worksheet/data_bar'
-  require_relative 'worksheet/icon_set'
-  require_relative 'worksheet/conditional_formatting'
-  require_relative 'worksheet/conditional_formatting_rule'
-  require_relative 'worksheet/conditional_formattings'
-  require_relative 'worksheet/row'
-  require_relative 'worksheet/col'
-  require_relative 'worksheet/cols'
-  require_relative 'worksheet/comments'
-  require_relative 'worksheet/comment'
-  require_relative 'worksheet/merged_cells'
-  require_relative 'worksheet/sheet_protection'
-  require_relative 'worksheet/sheet_pr'
-  require_relative 'worksheet/dimension'
-  require_relative 'worksheet/sheet_data'
-  require_relative 'worksheet/worksheet_drawing'
-  require_relative 'worksheet/worksheet_comments'
-  require_relative 'worksheet/worksheet_hyperlink'
-  require_relative 'worksheet/worksheet_hyperlinks'
-  require_relative 'worksheet/break'
-  require_relative 'worksheet/row_breaks'
-  require_relative 'worksheet/col_breaks'
-  require_relative 'workbook_view'
-  require_relative 'workbook_views'
-  require_relative 'worksheet/worksheet'
-  require_relative 'shared_strings_table'
-  require_relative 'defined_name'
-  require_relative 'defined_names'
-  require_relative 'worksheet/table_style_info'
-  require_relative 'worksheet/table'
-  require_relative 'worksheet/tables'
-  require_relative 'worksheet/pivot_table_cache_definition'
-  require_relative 'worksheet/pivot_table'
-  require_relative 'worksheet/pivot_tables'
-  require_relative 'worksheet/data_validation'
-  require_relative 'worksheet/data_validations'
-  require_relative 'worksheet/sheet_view'
-  require_relative 'worksheet/sheet_format_pr'
-  require_relative 'worksheet/pane'
-  require_relative 'worksheet/selection'
+  autoload :SheetCalcPr,              File.expand_path('worksheet/sheet_calc_pr', __dir__)
+  autoload :AutoFilter,               File.expand_path('worksheet/auto_filter/auto_filter', __dir__)
+  autoload :DateTimeConverter,        File.expand_path('worksheet/date_time_converter', __dir__)
+  autoload :ProtectedRange,           File.expand_path('worksheet/protected_range', __dir__)
+  autoload :ProtectedRanges,          File.expand_path('worksheet/protected_ranges', __dir__)
+  autoload :RichTextRun,              File.expand_path('worksheet/rich_text_run', __dir__)
+  autoload :RichText,                 File.expand_path('worksheet/rich_text', __dir__)
+  autoload :CellSerializer,           File.expand_path('worksheet/cell_serializer', __dir__)
+  autoload :Cell,                     File.expand_path('worksheet/cell', __dir__)
+  autoload :PageMargins,              File.expand_path('worksheet/page_margins', __dir__)
+  autoload :PageSetUpPr,              File.expand_path('worksheet/page_set_up_pr', __dir__)
+  autoload :OutlinePr,                File.expand_path('worksheet/outline_pr', __dir__)
+  autoload :PageSetup,                File.expand_path('worksheet/page_setup', __dir__)
+  autoload :HeaderFooter,             File.expand_path('worksheet/header_footer', __dir__)
+  autoload :PrintOptions,             File.expand_path('worksheet/print_options', __dir__)
+  autoload :Cfvo,                     File.expand_path('worksheet/cfvo', __dir__)
+  autoload :Cfvos,                    File.expand_path('worksheet/cfvos', __dir__)
+  autoload :ColorScale,               File.expand_path('worksheet/color_scale', __dir__)
+  autoload :DataBar,                  File.expand_path('worksheet/data_bar', __dir__)
+  autoload :IconSet,                  File.expand_path('worksheet/icon_set', __dir__)
+  autoload :ConditionalFormatting,    File.expand_path('worksheet/conditional_formatting', __dir__)
+  autoload :ConditionalFormattingRule,File.expand_path('worksheet/conditional_formatting_rule', __dir__)
+  autoload :ConditionalFormattings,   File.expand_path('worksheet/conditional_formattings', __dir__)
+  autoload :Row,                      File.expand_path('worksheet/row', __dir__)
+  autoload :Col,                      File.expand_path('worksheet/col', __dir__)
+  autoload :Cols,                     File.expand_path('worksheet/cols', __dir__)
+  autoload :Comments,                 File.expand_path('worksheet/comments', __dir__)
+  autoload :Comment,                  File.expand_path('worksheet/comment', __dir__)
+  autoload :MergedCells,              File.expand_path('worksheet/merged_cells', __dir__)
+  autoload :SheetProtection,          File.expand_path('worksheet/sheet_protection', __dir__)
+  autoload :SheetPr,                  File.expand_path('worksheet/sheet_pr', __dir__)
+  autoload :Dimension,                File.expand_path('worksheet/dimension', __dir__)
+  autoload :SheetData,                File.expand_path('worksheet/sheet_data', __dir__)
+  autoload :WorksheetDrawing,         File.expand_path('worksheet/worksheet_drawing', __dir__)
+  autoload :WorksheetComments,        File.expand_path('worksheet/worksheet_comments', __dir__)
+  autoload :WorksheetHyperlink,       File.expand_path('worksheet/worksheet_hyperlink', __dir__)
+  autoload :WorksheetHyperlinks,      File.expand_path('worksheet/worksheet_hyperlinks', __dir__)
+  autoload :Break,                    File.expand_path('worksheet/break', __dir__)
+  autoload :RowBreaks,                File.expand_path('worksheet/row_breaks', __dir__)
+  autoload :ColBreaks,                File.expand_path('worksheet/col_breaks', __dir__)
+  autoload :WorkbookView,             File.expand_path('workbook_view', __dir__)
+  autoload :WorkbookViews,            File.expand_path('workbook_views', __dir__)
+  autoload :Worksheet,                File.expand_path('worksheet/worksheet', __dir__)
+  autoload :SharedStringsTable,       File.expand_path('shared_strings_table', __dir__)
+  autoload :DefinedName,              File.expand_path('defined_name', __dir__)
+  autoload :DefinedNames,             File.expand_path('defined_names', __dir__)
+  autoload :TableStyleInfo,           File.expand_path('worksheet/table_style_info', __dir__)
+  autoload :Table,                    File.expand_path('worksheet/table', __dir__)
+  autoload :Tables,                   File.expand_path('worksheet/tables', __dir__)
+  autoload :PivotTableCacheDefinition,File.expand_path('worksheet/pivot_table_cache_definition', __dir__)
+  autoload :PivotTable,               File.expand_path('worksheet/pivot_table', __dir__)
+  autoload :PivotTables,              File.expand_path('worksheet/pivot_tables', __dir__)
+  autoload :DataValidation,           File.expand_path('worksheet/data_validation', __dir__)
+  autoload :DataValidations,          File.expand_path('worksheet/data_validations', __dir__)
+  autoload :SheetView,                File.expand_path('worksheet/sheet_view', __dir__)
+  autoload :SheetFormatPr,            File.expand_path('worksheet/sheet_format_pr', __dir__)
+  autoload :Pane,                     File.expand_path('worksheet/pane', __dir__)
+  autoload :Selection,                File.expand_path('worksheet/selection', __dir__)
 
   # The Workbook class is an xlsx workbook that manages worksheets, charts, drawings and styles.
   # The following parts of the Office Open XML spreadsheet specification are not implemented in this version.
