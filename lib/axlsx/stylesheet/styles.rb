@@ -14,7 +14,7 @@ module Axlsx
   autoload :PatternFill,      File.expand_path('pattern_fill', __dir__)
   autoload :TableStyle,       File.expand_path('table_style', __dir__)
   autoload :TableStyles,      File.expand_path('table_styles', __dir__)
-  autoload :TableStyleElement,File.expand_path('table_style_element', __dir__)
+  autoload :TableStyleElement, File.expand_path('table_style_element', __dir__)
   autoload :Theme,            File.expand_path('theme', __dir__)
   autoload :Dxf,              File.expand_path('dxf', __dir__)
   autoload :Xf,               File.expand_path('xf', __dir__)
