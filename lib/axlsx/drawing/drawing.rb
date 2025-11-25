@@ -1,56 +1,56 @@
 # frozen_string_literal: true
 
 module Axlsx
-  require_relative 'd_lbls'
-  require_relative 'title'
-  require_relative 'series_title'
-  require_relative 'series'
-  require_relative 'pie_series'
-  require_relative 'bar_series'
-  require_relative 'line_series'
-  require_relative 'scatter_series'
-  require_relative 'bubble_series'
-  require_relative 'area_series'
+  autoload :DLbls,            File.expand_path('d_lbls', __dir__)
+  autoload :Title,            File.expand_path('title', __dir__)
+  autoload :SeriesTitle,      File.expand_path('series_title', __dir__)
+  autoload :Series,           File.expand_path('series', __dir__)
+  autoload :PieSeries,        File.expand_path('pie_series', __dir__)
+  autoload :BarSeries,        File.expand_path('bar_series', __dir__)
+  autoload :LineSeries,       File.expand_path('line_series', __dir__)
+  autoload :ScatterSeries,    File.expand_path('scatter_series', __dir__)
+  autoload :BubbleSeries,     File.expand_path('bubble_series', __dir__)
+  autoload :AreaSeries,       File.expand_path('area_series', __dir__)
 
-  require_relative 'scaling'
-  require_relative 'axis'
+  autoload :Scaling,          File.expand_path('scaling', __dir__)
+  autoload :Axis,             File.expand_path('axis', __dir__)
 
-  require_relative 'str_val'
-  require_relative 'num_val'
-  require_relative 'str_data'
-  require_relative 'num_data'
-  require_relative 'num_data_source'
-  require_relative 'ax_data_source'
+  autoload :StrVal,           File.expand_path('str_val', __dir__)
+  autoload :NumVal,           File.expand_path('num_val', __dir__)
+  autoload :StrData,          File.expand_path('str_data', __dir__)
+  autoload :NumData,          File.expand_path('num_data', __dir__)
+  autoload :NumDataSource,    File.expand_path('num_data_source', __dir__)
+  autoload :AxDataSource,     File.expand_path('ax_data_source', __dir__)
 
-  require_relative 'ser_axis'
-  require_relative 'cat_axis'
-  require_relative 'val_axis'
-  require_relative 'axes'
+  autoload :SerAxis,          File.expand_path('ser_axis', __dir__)
+  autoload :CatAxis,          File.expand_path('cat_axis', __dir__)
+  autoload :ValAxis,          File.expand_path('val_axis', __dir__)
+  autoload :Axes,             File.expand_path('axes', __dir__)
 
-  require_relative 'marker'
+  autoload :Marker,           File.expand_path('marker', __dir__)
 
-  require_relative 'one_cell_anchor'
-  require_relative 'two_cell_anchor'
-  require_relative 'graphic_frame'
+  autoload :OneCellAnchor,    File.expand_path('one_cell_anchor', __dir__)
+  autoload :TwoCellAnchor,    File.expand_path('two_cell_anchor', __dir__)
+  autoload :GraphicFrame,     File.expand_path('graphic_frame', __dir__)
 
-  require_relative 'view_3D'
-  require_relative 'chart'
-  require_relative 'pie_3D_chart'
-  require_relative 'pie_chart'
-  require_relative 'bar_3D_chart'
-  require_relative 'bar_chart'
-  require_relative 'line_chart'
-  require_relative 'line_3D_chart'
-  require_relative 'scatter_chart'
-  require_relative 'bubble_chart'
-  require_relative 'area_chart'
+  autoload :View3D,           File.expand_path('view_3D', __dir__)
+  autoload :Chart,            File.expand_path('chart', __dir__)
+  autoload :Pie3DChart,       File.expand_path('pie_3D_chart', __dir__)
+  autoload :PieChart,         File.expand_path('pie_chart', __dir__)
+  autoload :Bar3DChart,       File.expand_path('bar_3D_chart', __dir__)
+  autoload :BarChart,         File.expand_path('bar_chart', __dir__)
+  autoload :LineChart,        File.expand_path('line_chart', __dir__)
+  autoload :Line3DChart,      File.expand_path('line_3D_chart', __dir__)
+  autoload :ScatterChart,     File.expand_path('scatter_chart', __dir__)
+  autoload :BubbleChart,      File.expand_path('bubble_chart', __dir__)
+  autoload :AreaChart,        File.expand_path('area_chart', __dir__)
 
-  require_relative 'picture_locking'
-  require_relative 'pic'
-  require_relative 'hyperlink'
+  autoload :PictureLocking,   File.expand_path('picture_locking', __dir__)
+  autoload :Pic,              File.expand_path('pic', __dir__)
+  autoload :Hyperlink,        File.expand_path('hyperlink', __dir__)
 
-  require_relative 'vml_drawing'
-  require_relative 'vml_shape'
+  autoload :VmlDrawing,       File.expand_path('vml_drawing', __dir__)
+  autoload :VmlShape,         File.expand_path('vml_shape', __dir__)
 
   # A Drawing is a canvas for charts and images. Each worksheet has a single drawing that manages anchors.
   # The anchors reference the charts or images via graphical frames. This is not a trivial relationship so please do follow the advice in the note.

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'sort_condition'
-
 module Axlsx
   # This class performs sorting on a range in a worksheet
   class SortState
