@@ -231,6 +231,22 @@ module Axlsx
     @escape_formulas = value
   end
 
+  # Whether to validate the sheet name length.
+  # @return [Boolean]
+  def self.validate_sheet_name_length
+    !defined?(@validate_sheet_name_length) || @validate_sheet_name_length.then { |v| v.nil? || v }
+  end
+
+  # Sets whether to validate sheet name length.
+  # By default it validates the max length for sheet names to make it compatible with Microsoft Excel
+  # On paper, and by real world examples this is still a valid limitation, but some implementations (e.g. Libre Office) might not break on longer names.
+  # Use it if you are sure that the end users could still open the files.
+  # @param [Boolean] value The value to set.
+  def self.validate_sheet_name_length=(value)
+    Axlsx.validate_boolean(value)
+    @validate_sheet_name_length = value
+  end
+
   # Returns a URI parser instance, preferring RFC2396_PARSER if available,
   # otherwise falling back to DEFAULT_PARSER. This method ensures consistent
   # URI parsing across different Ruby versions.
