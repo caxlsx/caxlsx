@@ -47,6 +47,11 @@ class TestWorksheet < Minitest::Test
   def test_exception_if_name_too_long
     refute_raises { @ws.name = 'x' * 31 }
     assert_raises(ArgumentError) { @ws.name = 'x' * 32 }
+
+    Axlsx.validate_sheet_name_length = false
+    refute_raises { @ws.name = 'x' * 32 }
+  ensure
+    Axlsx.instance_variable_set(:@validate_sheet_name_length, nil)
   end
 
   def test_exception_if_name_too_long_because_of_multibyte_characters
@@ -57,6 +62,11 @@ class TestWorksheet < Minitest::Test
     refute_raises { @ws.name = "#{four_characters_for_excel}123456789012345678901234567" }
     refute_raises { @ws.name = "123456789012345678901234567890…" }
     refute_raises { @ws.name = "123456789012345678901234567890✔" }
+
+    Axlsx.validate_sheet_name_length = false
+    refute_raises { @ws.name = four_characters_for_excel + ("x" * 28) }
+  ensure
+    Axlsx.instance_variable_set(:@validate_sheet_name_length, nil)
   end
 
   def test_page_margins
