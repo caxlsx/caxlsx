@@ -9,7 +9,7 @@ require 'nokogiri'
 require 'zip'
 
 # Ruby core dependencies
-require 'cgi'
+require 'cgi/escape'
 require 'set'
 require 'time'
 require 'uri'

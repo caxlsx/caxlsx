@@ -1,6 +1,7 @@
 CHANGELOG
 ---------
 - **Unreleased**
+  - [PR #500](https://github.com/caxlsx/caxlsx/pull/500) Full Ruby 4.0 compatibility
 
 - **December.03.25**: 4.4.1
   - [PR #482](https://github.com/caxlsx/caxlsx/pull/482) Suppress Zip64 when it't not necessary
