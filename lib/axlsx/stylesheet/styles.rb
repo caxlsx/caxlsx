@@ -228,6 +228,8 @@ module Axlsx
     # An index for cell styles where keys are styles codes as per Axlsx::Style and values are Cell#raw_style
     # The reason for the backward key/value ordering is that style lookup must be most efficient, while `add_style` can be less efficient
     def add_style(options = {})
+      options = options.dup
+
       # Default to :xf
       options[:type] ||= :xf
 

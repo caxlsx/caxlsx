@@ -177,4 +177,20 @@ class TestAxlsx < Minitest::Test
   ensure
     Axlsx.instance_variable_set(:@escape_formulas, nil)
   end
+
+  def test_validate_sheet_name_length
+    Axlsx.instance_variable_set(:@validate_sheet_name_length, nil)
+
+    assert Axlsx.validate_sheet_name_length
+
+    Axlsx.validate_sheet_name_length = true
+
+    assert Axlsx.validate_sheet_name_length
+
+    Axlsx.validate_sheet_name_length = false
+
+    assert_false Axlsx.validate_sheet_name_length
+  ensure
+    Axlsx.instance_variable_set(:@validate_sheet_name_length, nil)
+  end
 end

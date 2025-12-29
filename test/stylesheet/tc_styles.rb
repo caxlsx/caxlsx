@@ -74,6 +74,15 @@ class TestStyles < Minitest::Test
     assert_equal("FF000000", options[:border][:color], 'color is still in option')
   end
 
+  def test_frozen_hash_in_add_style
+    # This should test all options, but for now - just the bits that we know caused some pain
+    options = { border: { style: :thin, color: "FF000000" } }.freeze
+    refute_raises { @styles.add_style options }
+
+    assert_equal(:thin, options[:border][:style], 'thin style is still in option')
+    assert_equal("FF000000", options[:border][:color], 'color is still in option')
+  end
+
   def test_parse_num_fmt
     f_code = { format_code: "YYYY/MM" }
     num_fmt = { num_fmt: 5 }

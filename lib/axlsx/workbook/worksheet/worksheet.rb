@@ -768,7 +768,7 @@ module Axlsx
       raise ArgumentError, ERR_SHEET_NAME_EMPTY if name.empty?
 
       character_length = name.encode("utf-16")[1..-1].encode("utf-16").bytesize / 2
-      raise ArgumentError, format(ERR_SHEET_NAME_TOO_LONG, name) if character_length > WORKSHEET_MAX_NAME_LENGTH
+      raise ArgumentError, format(ERR_SHEET_NAME_TOO_LONG, name) if character_length > WORKSHEET_MAX_NAME_LENGTH && Axlsx.validate_sheet_name_length
       raise ArgumentError, format(ERR_SHEET_NAME_CHARACTER_FORBIDDEN, name) if WORKSHEET_NAME_FORBIDDEN_CHARS.any? { |char| name.include? char }
 
       name = Axlsx.coder.encode(name)
