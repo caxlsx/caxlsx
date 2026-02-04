@@ -1,69 +1,69 @@
 # frozen_string_literal: true
 
 module Axlsx
-  autoload :SheetCalcPr,              File.expand_path('worksheet/sheet_calc_pr', __dir__)
-  autoload :AutoFilter,               File.expand_path('worksheet/auto_filter/auto_filter', __dir__)
-  autoload :FilterColumn,             File.expand_path('worksheet/auto_filter/filter_column', __dir__)
-  autoload :Filters,                  File.expand_path('worksheet/auto_filter/filters', __dir__)
-  autoload :SortState,                File.expand_path('worksheet/auto_filter/sort_state', __dir__)
-  autoload :SortCondition,            File.expand_path('worksheet/auto_filter/sort_condition', __dir__)
-  autoload :DateTimeConverter,        File.expand_path('worksheet/date_time_converter', __dir__)
-  autoload :ProtectedRange,           File.expand_path('worksheet/protected_range', __dir__)
-  autoload :ProtectedRanges,          File.expand_path('worksheet/protected_ranges', __dir__)
-  autoload :RichTextRun,              File.expand_path('worksheet/rich_text_run', __dir__)
-  autoload :RichText,                 File.expand_path('worksheet/rich_text', __dir__)
-  autoload :CellSerializer,           File.expand_path('worksheet/cell_serializer', __dir__)
-  autoload :Cell,                     File.expand_path('worksheet/cell', __dir__)
-  autoload :PageMargins,              File.expand_path('worksheet/page_margins', __dir__)
-  autoload :PageSetUpPr,              File.expand_path('worksheet/page_set_up_pr', __dir__)
-  autoload :OutlinePr,                File.expand_path('worksheet/outline_pr', __dir__)
-  autoload :PageSetup,                File.expand_path('worksheet/page_setup', __dir__)
-  autoload :HeaderFooter,             File.expand_path('worksheet/header_footer', __dir__)
-  autoload :PrintOptions,             File.expand_path('worksheet/print_options', __dir__)
-  autoload :Cfvo,                     File.expand_path('worksheet/cfvo', __dir__)
-  autoload :Cfvos,                    File.expand_path('worksheet/cfvos', __dir__)
-  autoload :ColorScale,               File.expand_path('worksheet/color_scale', __dir__)
-  autoload :DataBar,                  File.expand_path('worksheet/data_bar', __dir__)
-  autoload :IconSet,                  File.expand_path('worksheet/icon_set', __dir__)
-  autoload :ConditionalFormatting,    File.expand_path('worksheet/conditional_formatting', __dir__)
-  autoload :ConditionalFormattingRule, File.expand_path('worksheet/conditional_formatting_rule', __dir__)
-  autoload :ConditionalFormattings,   File.expand_path('worksheet/conditional_formattings', __dir__)
-  autoload :Row,                      File.expand_path('worksheet/row', __dir__)
-  autoload :Col,                      File.expand_path('worksheet/col', __dir__)
-  autoload :Cols,                     File.expand_path('worksheet/cols', __dir__)
-  autoload :Comments,                 File.expand_path('worksheet/comments', __dir__)
-  autoload :Comment,                  File.expand_path('worksheet/comment', __dir__)
-  autoload :MergedCells,              File.expand_path('worksheet/merged_cells', __dir__)
-  autoload :SheetProtection,          File.expand_path('worksheet/sheet_protection', __dir__)
-  autoload :SheetPr,                  File.expand_path('worksheet/sheet_pr', __dir__)
-  autoload :Dimension,                File.expand_path('worksheet/dimension', __dir__)
-  autoload :SheetData,                File.expand_path('worksheet/sheet_data', __dir__)
-  autoload :WorksheetDrawing,         File.expand_path('worksheet/worksheet_drawing', __dir__)
-  autoload :WorksheetComments,        File.expand_path('worksheet/worksheet_comments', __dir__)
-  autoload :WorksheetHyperlink,       File.expand_path('worksheet/worksheet_hyperlink', __dir__)
-  autoload :WorksheetHyperlinks,      File.expand_path('worksheet/worksheet_hyperlinks', __dir__)
-  autoload :Break,                    File.expand_path('worksheet/break', __dir__)
-  autoload :RowBreaks,                File.expand_path('worksheet/row_breaks', __dir__)
-  autoload :ColBreaks,                File.expand_path('worksheet/col_breaks', __dir__)
-  autoload :WorkbookView,             File.expand_path('workbook_view', __dir__)
-  autoload :WorkbookViews,            File.expand_path('workbook_views', __dir__)
-  autoload :Worksheet,                File.expand_path('worksheet/worksheet', __dir__)
-  autoload :BorderCreator,            File.expand_path('worksheet/border_creator', __dir__)
-  autoload :SharedStringsTable,       File.expand_path('shared_strings_table', __dir__)
-  autoload :DefinedName,              File.expand_path('defined_name', __dir__)
-  autoload :DefinedNames,             File.expand_path('defined_names', __dir__)
-  autoload :TableStyleInfo,           File.expand_path('worksheet/table_style_info', __dir__)
-  autoload :Table,                    File.expand_path('worksheet/table', __dir__)
-  autoload :Tables,                   File.expand_path('worksheet/tables', __dir__)
-  autoload :PivotTableCacheDefinition, File.expand_path('worksheet/pivot_table_cache_definition', __dir__)
-  autoload :PivotTable,               File.expand_path('worksheet/pivot_table', __dir__)
-  autoload :PivotTables,              File.expand_path('worksheet/pivot_tables', __dir__)
-  autoload :DataValidation,           File.expand_path('worksheet/data_validation', __dir__)
-  autoload :DataValidations,          File.expand_path('worksheet/data_validations', __dir__)
-  autoload :SheetView,                File.expand_path('worksheet/sheet_view', __dir__)
-  autoload :SheetFormatPr,            File.expand_path('worksheet/sheet_format_pr', __dir__)
-  autoload :Pane,                     File.expand_path('worksheet/pane', __dir__)
-  autoload :Selection,                File.expand_path('worksheet/selection', __dir__)
+  autoload :SheetCalcPr,              'axlsx/workbook/worksheet/sheet_calc_pr'
+  autoload :AutoFilter,               'axlsx/workbook/worksheet/auto_filter/auto_filter'
+  autoload :FilterColumn,             'axlsx/workbook/worksheet/auto_filter/filter_column'
+  autoload :Filters,                  'axlsx/workbook/worksheet/auto_filter/filters'
+  autoload :SortState,                'axlsx/workbook/worksheet/auto_filter/sort_state'
+  autoload :SortCondition,            'axlsx/workbook/worksheet/auto_filter/sort_condition'
+  autoload :DateTimeConverter,        'axlsx/workbook/worksheet/date_time_converter'
+  autoload :ProtectedRange,           'axlsx/workbook/worksheet/protected_range'
+  autoload :ProtectedRanges,          'axlsx/workbook/worksheet/protected_ranges'
+  autoload :RichTextRun,              'axlsx/workbook/worksheet/rich_text_run'
+  autoload :RichText,                 'axlsx/workbook/worksheet/rich_text'
+  autoload :CellSerializer,           'axlsx/workbook/worksheet/cell_serializer'
+  autoload :Cell,                     'axlsx/workbook/worksheet/cell'
+  autoload :PageMargins,              'axlsx/workbook/worksheet/page_margins'
+  autoload :PageSetUpPr,              'axlsx/workbook/worksheet/page_set_up_pr'
+  autoload :OutlinePr,                'axlsx/workbook/worksheet/outline_pr'
+  autoload :PageSetup,                'axlsx/workbook/worksheet/page_setup'
+  autoload :HeaderFooter,             'axlsx/workbook/worksheet/header_footer'
+  autoload :PrintOptions,             'axlsx/workbook/worksheet/print_options'
+  autoload :Cfvo,                     'axlsx/workbook/worksheet/cfvo'
+  autoload :Cfvos,                    'axlsx/workbook/worksheet/cfvos'
+  autoload :ColorScale,               'axlsx/workbook/worksheet/color_scale'
+  autoload :DataBar,                  'axlsx/workbook/worksheet/data_bar'
+  autoload :IconSet,                  'axlsx/workbook/worksheet/icon_set'
+  autoload :ConditionalFormatting,    'axlsx/workbook/worksheet/conditional_formatting'
+  autoload :ConditionalFormattingRule, 'axlsx/workbook/worksheet/conditional_formatting_rule'
+  autoload :ConditionalFormattings,   'axlsx/workbook/worksheet/conditional_formattings'
+  autoload :Row,                      'axlsx/workbook/worksheet/row'
+  autoload :Col,                      'axlsx/workbook/worksheet/col'
+  autoload :Cols,                     'axlsx/workbook/worksheet/cols'
+  autoload :Comments,                 'axlsx/workbook/worksheet/comments'
+  autoload :Comment,                  'axlsx/workbook/worksheet/comment'
+  autoload :MergedCells,              'axlsx/workbook/worksheet/merged_cells'
+  autoload :SheetProtection,          'axlsx/workbook/worksheet/sheet_protection'
+  autoload :SheetPr,                  'axlsx/workbook/worksheet/sheet_pr'
+  autoload :Dimension,                'axlsx/workbook/worksheet/dimension'
+  autoload :SheetData,                'axlsx/workbook/worksheet/sheet_data'
+  autoload :WorksheetDrawing,         'axlsx/workbook/worksheet/worksheet_drawing'
+  autoload :WorksheetComments,        'axlsx/workbook/worksheet/worksheet_comments'
+  autoload :WorksheetHyperlink,       'axlsx/workbook/worksheet/worksheet_hyperlink'
+  autoload :WorksheetHyperlinks,      'axlsx/workbook/worksheet/worksheet_hyperlinks'
+  autoload :Break,                    'axlsx/workbook/worksheet/break'
+  autoload :RowBreaks,                'axlsx/workbook/worksheet/row_breaks'
+  autoload :ColBreaks,                'axlsx/workbook/worksheet/col_breaks'
+  autoload :WorkbookView,             'axlsx/workbook/workbook_view'
+  autoload :WorkbookViews,            'axlsx/workbook/workbook_views'
+  autoload :Worksheet,                'axlsx/workbook/worksheet/worksheet'
+  autoload :BorderCreator,            'axlsx/workbook/worksheet/border_creator'
+  autoload :SharedStringsTable,       'axlsx/workbook/shared_strings_table'
+  autoload :DefinedName,              'axlsx/workbook/defined_name'
+  autoload :DefinedNames,             'axlsx/workbook/defined_names'
+  autoload :TableStyleInfo,           'axlsx/workbook/worksheet/table_style_info'
+  autoload :Table,                    'axlsx/workbook/worksheet/table'
+  autoload :Tables,                   'axlsx/workbook/worksheet/tables'
+  autoload :PivotTableCacheDefinition, 'axlsx/workbook/worksheet/pivot_table_cache_definition'
+  autoload :PivotTable,               'axlsx/workbook/worksheet/pivot_table'
+  autoload :PivotTables,              'axlsx/workbook/worksheet/pivot_tables'
+  autoload :DataValidation,           'axlsx/workbook/worksheet/data_validation'
+  autoload :DataValidations,          'axlsx/workbook/worksheet/data_validations'
+  autoload :SheetView,                'axlsx/workbook/worksheet/sheet_view'
+  autoload :SheetFormatPr,            'axlsx/workbook/worksheet/sheet_format_pr'
+  autoload :Pane,                     'axlsx/workbook/worksheet/pane'
+  autoload :Selection,                'axlsx/workbook/worksheet/selection'
 
   # The Workbook class is an xlsx workbook that manages worksheets, charts, drawings and styles.
   # The following parts of the Office Open XML spreadsheet specification are not implemented in this version.
