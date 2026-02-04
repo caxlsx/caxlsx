@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
 module Axlsx
-  autoload :Border,           File.expand_path('border', __dir__)
-  autoload :BorderPr,         File.expand_path('border_pr', __dir__)
-  autoload :CellAlignment,    File.expand_path('cell_alignment', __dir__)
-  autoload :CellStyle,        File.expand_path('cell_style', __dir__)
-  autoload :Color,            File.expand_path('color', __dir__)
-  autoload :Fill,             File.expand_path('fill', __dir__)
-  autoload :Font,             File.expand_path('font', __dir__)
-  autoload :GradientFill,     File.expand_path('gradient_fill', __dir__)
-  autoload :GradientStop,     File.expand_path('gradient_stop', __dir__)
-  autoload :NumFmt,           File.expand_path('num_fmt', __dir__)
-  autoload :PatternFill,      File.expand_path('pattern_fill', __dir__)
-  autoload :TableStyle,       File.expand_path('table_style', __dir__)
-  autoload :TableStyles,      File.expand_path('table_styles', __dir__)
-  autoload :TableStyleElement, File.expand_path('table_style_element', __dir__)
-  autoload :Theme,            File.expand_path('theme', __dir__)
-  autoload :Dxf,              File.expand_path('dxf', __dir__)
-  autoload :Xf,               File.expand_path('xf', __dir__)
-  autoload :CellProtection,   File.expand_path('cell_protection', __dir__)
+  autoload :Border,           'axlsx/stylesheet/border'
+  autoload :BorderPr,         'axlsx/stylesheet/border_pr'
+  autoload :CellAlignment,    'axlsx/stylesheet/cell_alignment'
+  autoload :CellStyle,        'axlsx/stylesheet/cell_style'
+  autoload :Color,            'axlsx/stylesheet/color'
+  autoload :Fill,             'axlsx/stylesheet/fill'
+  autoload :Font,             'axlsx/stylesheet/font'
+  autoload :GradientFill,     'axlsx/stylesheet/gradient_fill'
+  autoload :GradientStop,     'axlsx/stylesheet/gradient_stop'
+  autoload :NumFmt,           'axlsx/stylesheet/num_fmt'
+  autoload :PatternFill,      'axlsx/stylesheet/pattern_fill'
+  autoload :TableStyle,       'axlsx/stylesheet/table_style'
+  autoload :TableStyles,      'axlsx/stylesheet/table_styles'
+  autoload :TableStyleElement, 'axlsx/stylesheet/table_style_element'
+  autoload :Theme,            'axlsx/stylesheet/theme'
+  autoload :Dxf,              'axlsx/stylesheet/dxf'
+  autoload :Xf,               'axlsx/stylesheet/xf'
+  autoload :CellProtection,   'axlsx/stylesheet/cell_protection'
 
   # The Styles class manages worksheet styles
   # In addition to creating the require style objects for a valid xlsx package, this class provides the key mechanism for adding styles to your workbook, and safely applying them to the cells of your worksheet.
