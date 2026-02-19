@@ -4,33 +4,32 @@ module Axlsx
   # A SerAxis object defines a series axis
   class SerAxis < Axis
     # The number of tick labels to skip between labels
-    # @return [Integer]
+    # @return [Integer, nil]
     attr_reader :tick_lbl_skip
     alias :tickLblSkip :tick_lbl_skip
 
     # The number of tickmarks to be skipped before the next one is rendered.
-    # @return [Boolean]
+    # @return [Integer, nil]
     attr_reader :tick_mark_skip
     alias :tickMarkSkip :tick_mark_skip
 
     # Creates a new SerAxis object
-    # @option options [Integer] tick_lbl_skip
-    # @option options [Integer] tick_mark_skip
+    # @option options [Integer, nil] tick_lbl_skip
+    # @option options [Integer, nil] tick_mark_skip
     def initialize(options = {})
-      @tick_lbl_skip, @tick_mark_skip = 1, 1
       super
     end
 
     # @see tickLblSkip
     def tick_lbl_skip=(v)
-      Axlsx.validate_unsigned_int(v)
+      Axlsx.validate_unsigned_int(v) unless v.nil?
       @tick_lbl_skip = v
     end
     alias :tickLblSkip= :tick_lbl_skip=
 
     # @see tickMarkSkip
     def tick_mark_skip=(v)
-      Axlsx.validate_unsigned_int(v)
+      Axlsx.validate_unsigned_int(v) unless v.nil?
       @tick_mark_skip = v
     end
     alias :tickMarkSkip= :tick_mark_skip=

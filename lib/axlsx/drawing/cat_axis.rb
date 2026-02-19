@@ -4,11 +4,9 @@ module Axlsx
   # A CatAxis object defines a chart category axis
   class CatAxis < Axis
     # Creates a new CatAxis object
-    # @option options [Integer] tick_lbl_skip
-    # @option options [Integer] tick_mark_skip
+    # @option options [Integer, nil] tick_lbl_skip
+    # @option options [Integer, nil] tick_mark_skip
     def initialize(options = {})
-      @tick_lbl_skip = 1
-      @tick_mark_skip = 1
       self.auto = 1
       self.lbl_algn = :ctr
       self.lbl_offset = "100"
@@ -32,12 +30,12 @@ module Axlsx
     alias :lblOffset :lbl_offset
 
     # The number of tick labels to skip between labels
-    # @return [Integer]
+    # @return [Integer, nil]
     attr_reader :tick_lbl_skip
     alias :tickLblSkip :tick_lbl_skip
 
     # The number of tickmarks to be skipped before the next one is rendered.
-    # @return [Boolean]
+    # @return [Integer, nil]
     attr_reader :tick_mark_skip
     alias :tickMarkSkip :tick_mark_skip
 
@@ -46,14 +44,14 @@ module Axlsx
 
     # @see tick_lbl_skip
     def tick_lbl_skip=(v)
-      Axlsx.validate_unsigned_int(v)
+      Axlsx.validate_unsigned_int(v) unless v.nil?
       @tick_lbl_skip = v
     end
     alias :tickLblSkip= :tick_lbl_skip=
 
     # @see tick_mark_skip
     def tick_mark_skip=(v)
-      Axlsx.validate_unsigned_int(v)
+      Axlsx.validate_unsigned_int(v) unless v.nil?
       @tick_mark_skip = v
     end
     alias :tickMarkSkip= :tick_mark_skip=
@@ -89,8 +87,8 @@ module Axlsx
       str << '<c:auto val="' << @auto.to_s << '"/>'
       str << '<c:lblAlgn val="' << @lbl_algn.to_s << '"/>'
       str << '<c:lblOffset val="' << @lbl_offset.to_i.to_s << '"/>'
-      str << '<c:tickLblSkip val="' << @tick_lbl_skip.to_s << '"/>'
-      str << '<c:tickMarkSkip val="' << @tick_mark_skip.to_s << '"/>'
+      str << '<c:tickLblSkip val="' << @tick_lbl_skip.to_s << '"/>' unless @tick_lbl_skip.nil?
+      str << '<c:tickMarkSkip val="' << @tick_mark_skip.to_s << '"/>' unless @tick_mark_skip.nil?
       str << '</c:catAx>'
     end
   end
