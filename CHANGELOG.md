@@ -4,6 +4,7 @@ CHANGELOG
   - [PR #495](https://github.com/caxlsx/caxlsx/pull/495) Make worksheet name length validation optional
   - [PR #496](https://github.com/caxlsx/caxlsx/pull/496) Fix FrozenError when passing in a frozen hash to add_style
   - [PR #500](https://github.com/caxlsx/caxlsx/pull/500) Full Ruby 4.0 compatibility
+  - [PR #504](https://github.com/caxlsx/caxlsx/pull/504) Support automatic tick label intervals on chart axes
 
 - **December.03.25**: 4.4.1
   - [PR #482](https://github.com/caxlsx/caxlsx/pull/482) Suppress Zip64 when it't not necessary
