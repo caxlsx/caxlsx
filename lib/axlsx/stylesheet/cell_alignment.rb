@@ -87,12 +87,16 @@ module Axlsx
 
     # @see horizontal
     def horizontal=(v)
+      v = v.to_sym if v
+
       Axlsx.validate_horizontal_alignment v
       @horizontal = v
     end
 
     # @see vertical
     def vertical=(v)
+      v = v.to_sym if v
+
       Axlsx.validate_vertical_alignment v
       @vertical = v
     end
