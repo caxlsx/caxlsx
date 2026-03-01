@@ -26,7 +26,25 @@ module Axlsx
     def defined_name
       return unless range
 
-      Axlsx.cell_range(range.split(':').collect { |name| worksheet.name_to_cell(name) })
+      cells = range.split(':').collect do |name|
+        cell = worksheet.name_to_cell(name)
+        next cell if cell
+
+        # We're calculating the defined_name for the AutoFilter just before serializing,
+        # so in theory adding new rows or columns should not cause weird offset issues
+        col_index, row_index = *Axlsx.name_to_indices(name)
+        while (row = worksheet.rows[row_index]).nil?
+          worksheet.add_row
+        end
+
+        while (cell = row[col_index]).nil?
+          row.add_cell
+        end
+
+        cell
+      end
+
+      Axlsx.cell_range(cells)
     end
 
     # A collection of filterColumns for this auto_filter
