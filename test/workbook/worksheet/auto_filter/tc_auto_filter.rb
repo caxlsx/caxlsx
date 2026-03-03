@@ -15,6 +15,12 @@ class TestAutoFilter < Minitest::Test
     assert_equal("'Sheet1'!$A$1:$C$3", @auto_filter.defined_name)
   end
 
+  def test_defined_name_for_missing_cell
+    @auto_filter.range = 'A1:D4'
+
+    assert_equal("'Sheet1'!$A$1:$D$4", @auto_filter.defined_name)
+  end
+
   def test_to_xml_string
     doc = Nokogiri::XML(@auto_filter.to_xml_string)
 
@@ -30,7 +36,7 @@ class TestAutoFilter < Minitest::Test
     assert_kind_of Axlsx::FilterColumn, @auto_filter.add_column(0, :filters)
   end
 
-  def test_applya
+  def test_apply
     assert_nil @auto_filter.worksheet.rows.last.hidden
     @auto_filter.apply
 
