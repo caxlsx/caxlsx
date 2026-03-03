@@ -19,6 +19,8 @@ module Axlsx
       @title = @color = nil
       self.ax_pos = :b
       self.tick_lbl_pos = :nextTo
+      self.major_tick_mark = :cross
+      self.minor_tick_mark = :none
       self.format_code = "General"
       self.crosses = :autoZero
       self.gridlines = true
@@ -56,6 +58,18 @@ module Axlsx
     # @return [Symbol]
     attr_reader :tick_lbl_pos
     alias :tickLblPos :tick_lbl_pos
+
+    # the type of major tick mark
+    # must be one of [:cross, :in, :none, :out]
+    # @return [Symbol]
+    attr_reader :major_tick_mark
+    alias :majorTickMark :major_tick_mark
+
+    # the type of minor tick mark
+    # must be one of [:cross, :in, :none, :out]
+    # @return [Symbol]
+    attr_reader :minor_tick_mark
+    alias :minorTickMark :minor_tick_mark
 
     # The number format format code for this axis
     # default :General
@@ -112,6 +126,22 @@ module Axlsx
       @tick_lbl_pos = v
     end
     alias :tickLblPos= :tick_lbl_pos=
+
+    # the type of major tick mark
+    # must be one of [:cross, :in, :none, :out]
+    def major_tick_mark=(v)
+      RestrictionValidator.validate "#{self.class}.major_tick_mark", [:cross, :in, :none, :out], v
+      @major_tick_mark = v
+    end
+    alias :majorTickMark= :major_tick_mark=
+
+    # the type of minor tick mark
+    # must be one of [:cross, :in, :none, :out]
+    def minor_tick_mark=(v)
+      RestrictionValidator.validate "#{self.class}.minor_tick_mark", [:cross, :in, :none, :out], v
+      @minor_tick_mark = v
+    end
+    alias :minorTickMark= :minor_tick_mark=
 
     # The number format format code for this axis
     # default :General
@@ -186,8 +216,8 @@ module Axlsx
       # otherwise it will never take, as it will always prefer the 'General' formatting
       # of the cells themselves
       str << '<c:numFmt formatCode="' << @format_code << '" sourceLinked="' << (@format_code.eql?('General') ? '1' : '0') << '"/>'
-      str << '<c:majorTickMark val="none"/>'
-      str << '<c:minorTickMark val="none"/>'
+      str << '<c:majorTickMark val="' << @major_tick_mark.to_s << '"/>'
+      str << '<c:minorTickMark val="' << @minor_tick_mark.to_s << '"/>'
       str << '<c:tickLblPos val="' << @tick_lbl_pos.to_s << '"/>'
       # TODO: this is also being used for series colors
       # time to extract this into a class spPr - Shape Properties
