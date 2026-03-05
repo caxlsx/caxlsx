@@ -12,6 +12,8 @@ class TestAxis < Minitest::Test
     assert_equal(:nextTo, @axis.tick_lbl_pos, "tick label position default incorrect")
     assert_equal(:nextTo, @axis.tick_lbl_pos, "tick label position default incorrect")
     assert_equal(:autoZero, @axis.crosses, "tick label position default incorrect")
+    assert_equal(:cross, @axis.major_tick_mark, "major tick mark default incorrect")
+    assert_equal(:none, @axis.minor_tick_mark, "minor tick mark default incorrect")
     assert(@axis.scaling.is_a?(Axlsx::Scaling) && @axis.scaling.orientation == :minMax, "scaling default incorrect")
     assert_equal('Foo', @axis.title.text)
   end
@@ -91,6 +93,16 @@ class TestAxis < Minitest::Test
     end
   end
 
+  def test_major_tick_mark
+    assert_raises(ArgumentError, "requires valid major tick mark") { @axis.major_tick_mark = :nowhere }
+    refute_raises { @axis.major_tick_mark = :in }
+  end
+
+  def test_minor_tick_mark
+    assert_raises(ArgumentError, "requires valid minor tick mark") { @axis.minor_tick_mark = :nowhere }
+    refute_raises { @axis.minor_tick_mark = :out }
+  end
+
   def test_crosses
     assert_raises(ArgumentError, "requires valid crosses") { @axis.crosses = 1 }
     refute_raises { @axis.crosses = :min }
@@ -110,6 +122,8 @@ class TestAxis < Minitest::Test
     assert(doc.xpath('//a:noFill'))
     assert(doc.xpath("//c:crosses[@val='#{@axis.crosses}']"))
     assert(doc.xpath("//c:crossAx[@val='#{@axis.cross_axis}']"))
+    assert(doc.xpath("//c:majorTickMark[@val='#{@axis.major_tick_mark}']"))
+    assert(doc.xpath("//c:minorTickMark[@val='#{@axis.minor_tick_mark}']"))
     assert(doc.xpath("//a:bodyPr[@rot='#{@axis.label_rotation}']"))
     assert(doc.xpath("//a:t[text()='Foo']"))
   end
