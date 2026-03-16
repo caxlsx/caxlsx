@@ -40,7 +40,7 @@ module Axlsx
       @current_file = "#{@dir}/#{entry.name}"
       @files << entry.name
       FileUtils.mkdir_p(File.dirname(@current_file))
-      @io = File.open(@current_file, "wb")
+      @io = File.open(@current_file, "wb") # rubocop:disable Style/FileOpen -- we're passing over the file descriptor intentionally
     end
 
     # Write to a buffer that will be written to the current entry
