@@ -49,6 +49,7 @@ Types:
 
 Customizations:
 * [Axis label interval](chart_axis_label_interval_example.md)
+* [Axis tick marks](axis_tick_marks_example.md)
 * [Chart colors](chart_colors_example.md)
 * [Hide gridlines](hide_gridlines_in_chart_example.md)
 * [Chart series color](chart_series_color_example.md)
