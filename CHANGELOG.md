@@ -1,6 +1,8 @@
 CHANGELOG
 ---------
 - **Unreleased**
+
+- **March.23.26**: 4.4.2
   - [PR #510](https://github.com/caxlsx/caxlsx/pull/510) Add configurable `major_tick_mark` and `minor_tick_mark` attributes to chart axes
   - [PR #495](https://github.com/caxlsx/caxlsx/pull/495) Make worksheet name length validation optional
   - [PR #496](https://github.com/caxlsx/caxlsx/pull/496) Fix FrozenError when passing in a frozen hash to add_style
