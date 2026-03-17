@@ -7,6 +7,7 @@ CHANGELOG
   - [PR #500](https://github.com/caxlsx/caxlsx/pull/500) Full Ruby 4.0 compatibility
   - [PR #504](https://github.com/caxlsx/caxlsx/pull/504) Support automatic tick label intervals on chart axes
   - [PR #508](https://github.com/caxlsx/caxlsx/pull/508) Auto-insert missing rows or columns to make autofilter works when using not yet existing ranges
+  - [PR #512](https://github.com/caxlsx/caxlsx/pull/512) Freeze valid tick mark values constant
 
 - **December.03.25**: 4.4.1
   - [PR #482](https://github.com/caxlsx/caxlsx/pull/482) Suppress Zip64 when it't not necessary
