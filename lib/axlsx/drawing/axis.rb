@@ -127,10 +127,12 @@ module Axlsx
     end
     alias :tickLblPos= :tick_lbl_pos=
 
+    VALID_TICK_MARK_VALUES = [:cross, :in, :none, :out].freeze
+
     # the type of major tick mark
     # must be one of [:cross, :in, :none, :out]
     def major_tick_mark=(v)
-      RestrictionValidator.validate "#{self.class}.major_tick_mark", [:cross, :in, :none, :out], v
+      RestrictionValidator.validate "#{self.class}.major_tick_mark", VALID_TICK_MARK_VALUES, v
       @major_tick_mark = v
     end
     alias :majorTickMark= :major_tick_mark=
@@ -138,7 +140,7 @@ module Axlsx
     # the type of minor tick mark
     # must be one of [:cross, :in, :none, :out]
     def minor_tick_mark=(v)
-      RestrictionValidator.validate "#{self.class}.minor_tick_mark", [:cross, :in, :none, :out], v
+      RestrictionValidator.validate "#{self.class}.minor_tick_mark", VALID_TICK_MARK_VALUES, v
       @minor_tick_mark = v
     end
     alias :minorTickMark= :minor_tick_mark=
