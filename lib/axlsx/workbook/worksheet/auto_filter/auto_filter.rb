@@ -1,6 +1,7 @@
 
 require 'axlsx/workbook/worksheet/auto_filter/filter_column.rb'
 require 'axlsx/workbook/worksheet/auto_filter/filters.rb'
+require 'axlsx/workbook/worksheet/auto_filter/custom_filters.rb'
 
 module Axlsx
 

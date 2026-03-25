@@ -27,7 +27,7 @@ module Axlsx
     serializable_attributes :col_id, :hidden_button, :show_button
 
     # Allowed filters
-    FILTERS =  [:filters] #, :top10, :custom_filters, :dynamic_filters, :color_filters, :icon_filters]
+    FILTERS =  [:filters, :custom_filters] #, :top10, :dynamic_filters, :color_filters, :icon_filters]
 
     # Zero-based index indicating the AutoFilter column to which this filter information applies.
     # @return [Integer]

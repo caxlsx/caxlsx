@@ -63,6 +63,7 @@ Customizations:
 
 * [Auto filters](auto_filter_example.md)
 * [Filtered tables](filtered_table_example.md)
+* [Custom filters](custom_filters_example.md)
 
 ### Formulas
 
