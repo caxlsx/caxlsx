@@ -25,7 +25,9 @@ group :test do
   gem 'win32ole', platforms: [:mingw, :x64_mingw, :mswin, :mswin64]
 
   if RUBY_ENGINE == 'ruby'
-    gem 'ooxml_crypt'
+    # Latest version is failing to install in some images,
+    # See: https://github.com/teamsimplepay/ooxml_crypt/issues/45
+    gem 'ooxml_crypt', '0.1.3'
   end
 end
 
