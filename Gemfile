@@ -25,7 +25,9 @@ group :test do
   gem 'win32ole', platforms: [:mingw, :x64_mingw, :mswin, :mswin64]
 
   if RUBY_ENGINE == 'ruby'
-    gem 'ooxml_crypt'
+    # Temporary override until the fix gets merged and released
+    # See: https://github.com/teamsimplepay/ooxml_crypt/pull/47
+    gem 'ooxml_crypt', git: 'https://github.com/kiskoza/ooxml_crypt', branch: 'update-vendors'
   end
 end
 
