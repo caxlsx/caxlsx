@@ -126,6 +126,15 @@ module Axlsx
       end
     end
 
+    # Sets secure_formulas for every cell in this row. This determines whether to apply
+    # quotePrefix protection to cells starting with dangerous formula prefixes.
+    # @param [Array, Boolean] value The value to set.
+    def secure_formulas=(value)
+      each_with_index do |cell, index|
+        cell.secure_formulas = value.is_a?(Array) ? value[index] : value
+      end
+    end
+
     # @see height
     def height=(v)
       unless v.nil?
@@ -158,14 +167,16 @@ module Axlsx
     # @option options [Array, Symbol] types
     # @option options [Array, Integer] style
     # @option options [Array, Boolean] escape_formulas
+    # @option options [Array, Boolean] secure_formulas
     def array_to_cells(values, options = {})
       DataTypeValidator.validate :array_to_cells, Array, values
-      types, style, formula_values, escape_formulas, offset = options.delete(:types), options.delete(:style), options.delete(:formula_values), options.delete(:escape_formulas), options.delete(:offset)
+      types, style, formula_values, escape_formulas, secure_formulas, offset = options.delete(:types), options.delete(:style), options.delete(:formula_values), options.delete(:escape_formulas), options.delete(:secure_formulas), options.delete(:offset)
       offset.to_i.times { |index| self[index] = Cell.new(self) } if offset
       values.each_with_index do |value, index|
         options[:style] = (style.is_a?(Array) ? style[index] : style) || worksheet.column_info[index]&.style
         options[:type] = types.is_a?(Array) ? types[index] : types if types
         options[:escape_formulas] = escape_formulas.is_a?(Array) ? escape_formulas[index] : escape_formulas unless escape_formulas.nil?
+        options[:secure_formulas] = secure_formulas.is_a?(Array) ? secure_formulas[index] : secure_formulas unless secure_formulas.nil?
         options[:formula_value] = formula_values[index] if formula_values.is_a?(Array)
 
         self[index + offset.to_i] = Cell.new(self, value, options)

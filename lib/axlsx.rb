@@ -231,6 +231,24 @@ module Axlsx
     @escape_formulas = value
   end
 
+  # Whether to apply maximum formula injection protection. When true, this is a superset of
+  # escape_formulas — it prevents =‑prefixed values from being serialized as formula elements
+  # AND applies quotePrefix to all cells starting with dangerous prefixes (=, +, -, @).
+  # quotePrefix tells Excel to never re-evaluate the cell content as a formula, even on
+  # user interaction (click-in and press Enter).
+  # See https://owasp.org/www-community/attacks/CSV_Injection for details.
+  # @return [Boolean]
+  def self.secure_formulas
+    !defined?(@secure_formulas) || @secure_formulas.nil? ? false : @secure_formulas
+  end
+
+  # Sets whether to apply quotePrefix protection to dangerous formula prefixes.
+  # @param [Boolean] value The value to set.
+  def self.secure_formulas=(value)
+    Axlsx.validate_boolean(value)
+    @secure_formulas = value
+  end
+
   # Whether to validate the sheet name length.
   # @return [Boolean]
   def self.validate_sheet_name_length

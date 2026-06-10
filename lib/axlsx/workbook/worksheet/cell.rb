@@ -46,6 +46,8 @@ module Axlsx
       self.formula_value = val unless val.nil?
       val = options.delete(:escape_formulas)
       self.escape_formulas = val unless val.nil?
+      val = options.delete(:secure_formulas)
+      self.secure_formulas = val unless val.nil?
 
       parse_options(options) unless options.empty?
 
@@ -82,9 +84,20 @@ module Axlsx
       defined?(@style) ? @style : 0
     end
 
+    # Returns the effective style index for serialization, accounting for quotePrefix
+    # when secure_formulas is enabled for cells with dangerous prefixes.
+    # @return [Integer]
+    def effective_style_index
+      if needs_quote_prefix?
+        styles.quote_prefix_style_for(style)
+      else
+        style
+      end
+    end
+
     # Internal
     def style_str
-      defined?(@style) ? @style.to_s : '0'
+      effective_style_index.to_s
     end
 
     attr_accessor :raw_style
@@ -153,6 +166,55 @@ module Axlsx
       Axlsx.validate_boolean(value)
       @escape_formulas = value
     end
+
+    # Whether to apply quotePrefix protection to cells starting with dangerous formula prefixes.
+    # Falls back to the worksheet setting if not explicitly set on the cell.
+    # @return [Boolean]
+    def secure_formulas
+      defined?(@secure_formulas) ? @secure_formulas : row.worksheet.secure_formulas
+    end
+
+    # Sets whether to apply quotePrefix protection to dangerous formula prefixes.
+    # @param [Boolean] value The value to set.
+    def secure_formulas=(value)
+      Axlsx.validate_boolean(value)
+      @secure_formulas = value
+    end
+
+    # Whether this cell needs quotePrefix protection applied to its style.
+    # Returns true when secure_formulas is enabled and the cell value starts with
+    # a dangerous prefix (=, +, -, @) that Excel could re-evaluate as a formula.
+    # Also checks for leading whitespace before a dangerous prefix.
+    # Excludes bullet points ("- text") and plain negative numbers from protection.
+    # @return [Boolean]
+    def needs_quote_prefix?
+      return false unless secure_formulas
+      return false unless type == :string || type == :text
+      return false if @value.nil? || @value.empty?
+
+      stripped = @value.lstrip
+      return false if safe_negative?(stripped)
+
+      stripped.start_with?(FORMULA_PREFIX, *SECONDARY_FORMULA_PREFIXES)
+    end
+
+    private
+
+    # A string starting with "-" is safe if it's a bullet point ("- " prefix)
+    # or a plain negative number. Numeric values are already excluded by the
+    # type check above (axlsx casts them to :integer/:float), but string
+    # representations like "-1.5" entered as text are also safe.
+    def safe_negative?(string)
+      return false unless string.start_with?('-')
+
+      # Bullet point: "- " (dash followed by space)
+      return true if string.start_with?('- ')
+
+      # Plain negative number stored as string
+      Float(string, exception: false) != nil
+    end
+
+    public
 
     # The value of this cell.
     # @return [String, Integer, Float, Time, Boolean] casted value based on cell's type attribute.
@@ -411,13 +473,13 @@ module Axlsx
     end
 
     def is_formula? # rubocop:disable Naming/PredicatePrefix
-      return false if escape_formulas
+      return false if escape_formulas || secure_formulas
 
       type == :string && @value.to_s.start_with?(FORMULA_PREFIX)
     end
 
     def is_array_formula? # rubocop:disable Naming/PredicatePrefix
-      return false if escape_formulas
+      return false if escape_formulas || secure_formulas
 
       type == :string &&
         @value.to_s.start_with?(ARRAY_FORMULA_PREFIX) &&
