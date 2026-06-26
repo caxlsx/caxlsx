@@ -14,6 +14,14 @@ module Axlsx
       (offset_date - epoch).to_f
     end
 
+    # Converts an Excel serial number back to a Date object.
+    # @param [Numeric] serial The Excel date serial number
+    # @return [Date]
+    def self.date_from_serial(serial)
+      epoch = Axlsx::Workbook.date1904 ? Date.new(1904) : Date.new(1899, 12, 30)
+      epoch + serial.to_i
+    end
+
     # The time_to_serial methond converts a Time object its Excel serialized form.
     # @param [Time] time the time to be serialized
     # @return [Numeric]

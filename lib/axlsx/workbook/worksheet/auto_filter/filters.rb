@@ -107,6 +107,32 @@ module Axlsx
       end
     end
 
+    private
+
+    # Normalize a cell's value to a Hash with date/time components.
+    # Returns nil if the cell value is not a date or time.
+    # @param [Cell] cell
+    # @return [Hash, nil] { year:, month:, day:, hour:, minute:, second: } or nil
+    def normalize_cell_datetime(cell)
+      return nil if cell.nil?
+
+      v = cell.value
+      case v
+      when Time
+        { year: v.year, month: v.month, day: v.day,
+          hour: v.hour, minute: v.min, second: v.sec }
+      when Date
+        { year: v.year, month: v.month, day: v.day,
+          hour: 0, minute: 0, second: 0 }
+      when Numeric
+        d = DateTimeConverter.date_from_serial(v)
+        { year: d.year, month: d.month, day: d.day,
+          hour: 0, minute: 0, second: 0 }
+      end
+    end
+
+    public
+
     # This class expresses a filter criteria value.
     class Filter
       # Creates a new filter value object

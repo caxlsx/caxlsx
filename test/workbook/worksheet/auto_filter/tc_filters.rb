@@ -73,6 +73,46 @@ class TestFilters < Minitest::Test
     assert_equal(1, doc.xpath("//dateGroupItem[@dateTimeGrouping='day'][@year='2026'][@month='6'][@day='3']").size)
   end
 
+  def test_normalize_cell_datetime_with_date
+    cell = Object.new
+    cell.define_singleton_method(:value) { Date.new(2026, 5, 3) }
+    result = @filters.send(:normalize_cell_datetime, cell)
+
+    assert_equal({ year: 2026, month: 5, day: 3, hour: 0, minute: 0, second: 0 }, result)
+  end
+
+  def test_normalize_cell_datetime_with_time
+    t = Time.new(2026, 6, 3, 14, 30, 0)
+    cell = Object.new
+    cell.define_singleton_method(:value) { t }
+    result = @filters.send(:normalize_cell_datetime, cell)
+
+    assert_equal({ year: 2026, month: 6, day: 3, hour: 14, minute: 30, second: 0 }, result)
+  end
+
+  def test_normalize_cell_datetime_with_numeric_serial
+    Axlsx::Workbook.date1904 = false
+    cell = Object.new
+    cell.define_singleton_method(:value) { 46_145 }
+    result = @filters.send(:normalize_cell_datetime, cell)
+
+    assert_equal 2026, result[:year]
+    assert_equal 5,    result[:month]
+    assert_equal 3,    result[:day]
+  ensure
+    Axlsx::Workbook.date1904 = false
+  end
+
+  def test_normalize_cell_datetime_with_nil_cell
+    assert_nil @filters.send(:normalize_cell_datetime, nil)
+  end
+
+  def test_normalize_cell_datetime_with_non_date_value
+    cell = Object.new
+    cell.define_singleton_method(:value) { 'hello' }
+    assert_nil @filters.send(:normalize_cell_datetime, cell)
+  end
+
   def test_date_group_items_to_xml_string_multiple
     filters = Axlsx::Filters.new(date_group_items: [
       { date_time_grouping: :month, year: 2026, month: 5 },
