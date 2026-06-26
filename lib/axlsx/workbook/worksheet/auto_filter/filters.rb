@@ -263,6 +263,24 @@ module Axlsx
         @date_time_grouping = grouping.to_s
       end
 
+      GROUPING_FIELDS = {
+        'year'   => %i[year],
+        'month'  => %i[year month],
+        'day'    => %i[year month day],
+        'hour'   => %i[year month day hour],
+        'minute' => %i[year month day hour minute],
+        'second' => %i[year month day hour minute second]
+      }.freeze
+
+      # Returns true if this date group item matches the given normalized datetime hash.
+      # @param [Hash, nil] dt { year:, month:, day:, hour:, minute:, second: } from normalize_cell_datetime
+      # @return [Boolean]
+      def matches?(dt)
+        return false unless dt
+
+        GROUPING_FIELDS[date_time_grouping].all? { |f| send(f).to_i == dt[f].to_i }
+      end
+
       # Serialize the object to xml
       # @param [String] str The string object this serialization will be concatenated to.
       def to_xml_string(str = +'')
