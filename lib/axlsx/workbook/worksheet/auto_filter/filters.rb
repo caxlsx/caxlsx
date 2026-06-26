@@ -40,13 +40,16 @@ module Axlsx
     # does not meet any of the specified filter_items or
     # date_group_items restrictions.
     # @param [Cell] cell The cell to test against items
-    # TODO implement this for date filters as well!
     def apply(cell) # rubocop:disable Naming/PredicateMethod
       return false unless cell
 
-      filter_items.each do |filter|
-        return false if cell.value == filter.val
+      return false if filter_items.any? { |f| cell.value == f.val }
+
+      if date_group_items.any?
+        dt = normalize_cell_datetime(cell)
+        return false if date_group_items.any? { |dgi| dgi.matches?(dt) }
       end
+
       true
     end
 
@@ -97,8 +100,6 @@ module Axlsx
 
     # Date group items are date group filter items where you specify the
     # date_group and a value for that option as part of the auto_filter
-    # @note This can be specified, but will not be applied to the date
-    # values in your workbook at this time.
     def date_group_items=(options)
       options.each do |date_group|
         raise ArgumentError, "date_group_items should be an array of hashes specifying the options for each date_group_item" unless date_group.is_a?(Hash)

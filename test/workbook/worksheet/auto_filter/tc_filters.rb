@@ -144,4 +144,39 @@ class TestFilters < Minitest::Test
 
     assert_false dgi.matches?(nil)
   end
+
+  def test_apply_with_date_group_items_matching
+    filters = Axlsx::Filters.new(date_group_items: [
+      { date_time_grouping: :month, year: 2026, month: 5 }
+    ])
+    cell = Object.new
+    cell.define_singleton_method(:value) { Date.new(2026, 5, 3) }
+
+    assert_false filters.apply(cell)
+  end
+
+  def test_apply_with_date_group_items_not_matching
+    filters = Axlsx::Filters.new(date_group_items: [
+      { date_time_grouping: :month, year: 2026, month: 5 }
+    ])
+    cell = Object.new
+    cell.define_singleton_method(:value) { Date.new(2026, 6, 3) }
+
+    assert filters.apply(cell)
+  end
+
+  def test_apply_with_date_group_items_or_logic
+    filters = Axlsx::Filters.new(date_group_items: [
+      { date_time_grouping: :month, year: 2026, month: 5 },
+      { date_time_grouping: :day,   year: 2026, month: 6, day: 3 }
+    ])
+
+    may3 = Object.new; may3.define_singleton_method(:value) { Date.new(2026, 5, 3) }
+    jun3 = Object.new; jun3.define_singleton_method(:value) { Date.new(2026, 6, 3) }
+    jun4 = Object.new; jun4.define_singleton_method(:value) { Date.new(2026, 6, 4) }
+
+    assert_false filters.apply(may3)
+    assert_false filters.apply(jun3)
+    assert       filters.apply(jun4)
+  end
 end
