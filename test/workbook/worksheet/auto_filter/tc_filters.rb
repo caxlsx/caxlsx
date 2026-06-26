@@ -57,4 +57,29 @@ class TestFilters < Minitest::Test
 
     assert_equal(1, doc.xpath('//filters[@blank=1]').size)
   end
+
+  def test_date_group_items_to_xml_string_month_granularity
+    filters = Axlsx::Filters.new(date_group_items: [{ date_time_grouping: :month, year: 2026, month: 5 }])
+    doc = Nokogiri::XML(filters.to_xml_string)
+
+    assert_equal(1, doc.xpath("//dateGroupItem[@dateTimeGrouping='month'][@year='2026'][@month='5']").size)
+    assert_equal(0, doc.xpath('//dateGroupItem[@day]').size)
+  end
+
+  def test_date_group_items_to_xml_string_day_granularity
+    filters = Axlsx::Filters.new(date_group_items: [{ date_time_grouping: :day, year: 2026, month: 6, day: 3 }])
+    doc = Nokogiri::XML(filters.to_xml_string)
+
+    assert_equal(1, doc.xpath("//dateGroupItem[@dateTimeGrouping='day'][@year='2026'][@month='6'][@day='3']").size)
+  end
+
+  def test_date_group_items_to_xml_string_multiple
+    filters = Axlsx::Filters.new(date_group_items: [
+      { date_time_grouping: :month, year: 2026, month: 5 },
+      { date_time_grouping: :day, year: 2026, month: 6, day: 3 }
+    ])
+    doc = Nokogiri::XML(filters.to_xml_string)
+
+    assert_equal(2, doc.xpath('//dateGroupItem').size)
+  end
 end
