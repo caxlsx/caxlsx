@@ -69,8 +69,9 @@ class TestDateTimeConverter < Minitest::Test
 
   def test_date_from_serial_1900
     Axlsx::Workbook.date1904 = false
+
     {
-      2.0      => Date.new(1900, 1, 1),
+      2.0 => Date.new(1900, 1, 1),
       38_749.0 => Date.new(2006, 2, 1),
       46_145.0 => Date.new(2026, 5, 3)
     }.each do |serial, expected|
@@ -80,6 +81,7 @@ class TestDateTimeConverter < Minitest::Test
 
   def test_date_from_serial_1904
     Axlsx::Workbook.date1904 = true
+
     assert_equal Date.new(1904, 1, 1), Axlsx::DateTimeConverter.date_from_serial(0)
   ensure
     Axlsx::Workbook.date1904 = false
@@ -96,7 +98,7 @@ class TestDateTimeConverter < Minitest::Test
 
   def test_datetime_components_from_serial_with_time
     Axlsx::Workbook.date1904 = false
-    serial = 46_176 + (12 * 3600 + 30 * 60).to_f / 86400  # 2026-06-03 12:30:00
+    serial = 46_176 + (((12 * 3600) + (30 * 60)).to_f / 86_400)  # 2026-06-03 12:30:00
     result = Axlsx::DateTimeConverter.datetime_components_from_serial(serial)
 
     assert_equal 2026, result[:year]

@@ -130,8 +130,6 @@ module Axlsx
       end
     end
 
-    public
-
     # This class expresses a filter criteria value.
     class Filter
       # Creates a new filter value object
@@ -263,12 +261,12 @@ module Axlsx
       end
 
       GROUPING_FIELDS = {
-        'year'   => %i[year],
-        'month'  => %i[year month],
-        'day'    => %i[year month day],
-        'hour'   => %i[year month day hour],
-        'minute' => %i[year month day hour minute],
-        'second' => %i[year month day hour minute second]
+        'year' => [:year],
+        'month' => [:year, :month],
+        'day' => [:year, :month, :day],
+        'hour' => [:year, :month, :day, :hour],
+        'minute' => [:year, :month, :day, :hour, :minute],
+        'second' => [:year, :month, :day, :hour, :minute, :second]
       }.freeze
 
       # Returns true if this date group item matches the given normalized datetime hash.

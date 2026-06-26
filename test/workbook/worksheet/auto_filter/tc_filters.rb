@@ -114,7 +114,7 @@ class TestFilters < Minitest::Test
 
   def test_normalize_cell_datetime_with_numeric_serial_with_time
     Axlsx::Workbook.date1904 = false
-    serial = 46176 + (12 * 3600 + 30 * 60).to_f / 86400  # 12:30:00
+    serial = 46_176 + (((12 * 3600) + (30 * 60)).to_f / 86_400)  # 12:30:00
     cell = Object.new
     cell.define_singleton_method(:value) { serial }
     result = @filters.send(:normalize_cell_datetime, cell)
@@ -133,14 +133,15 @@ class TestFilters < Minitest::Test
   def test_normalize_cell_datetime_with_non_date_value
     cell = Object.new
     cell.define_singleton_method(:value) { 'hello' }
+
     assert_nil @filters.send(:normalize_cell_datetime, cell)
   end
 
   def test_date_group_items_to_xml_string_multiple
     filters = Axlsx::Filters.new(date_group_items: [
-      { date_time_grouping: :month, year: 2026, month: 5 },
-      { date_time_grouping: :day, year: 2026, month: 6, day: 3 }
-    ])
+                                   { date_time_grouping: :month, year: 2026, month: 5 },
+                                   { date_time_grouping: :day, year: 2026, month: 6, day: 3 }
+                                 ])
     doc = Nokogiri::XML(filters.to_xml_string)
 
     assert_equal(2, doc.xpath('//dateGroupItem').size)
@@ -170,8 +171,8 @@ class TestFilters < Minitest::Test
 
   def test_apply_with_date_group_items_matching
     filters = Axlsx::Filters.new(date_group_items: [
-      { date_time_grouping: :month, year: 2026, month: 5 }
-    ])
+                                   { date_time_grouping: :month, year: 2026, month: 5 }
+                                 ])
     cell = Object.new
     cell.define_singleton_method(:value) { Date.new(2026, 5, 3) }
 
@@ -180,8 +181,8 @@ class TestFilters < Minitest::Test
 
   def test_apply_with_date_group_items_not_matching
     filters = Axlsx::Filters.new(date_group_items: [
-      { date_time_grouping: :month, year: 2026, month: 5 }
-    ])
+                                   { date_time_grouping: :month, year: 2026, month: 5 }
+                                 ])
     cell = Object.new
     cell.define_singleton_method(:value) { Date.new(2026, 6, 3) }
 
@@ -190,13 +191,16 @@ class TestFilters < Minitest::Test
 
   def test_apply_with_date_group_items_or_logic
     filters = Axlsx::Filters.new(date_group_items: [
-      { date_time_grouping: :month, year: 2026, month: 5 },
-      { date_time_grouping: :day,   year: 2026, month: 6, day: 3 }
-    ])
+                                   { date_time_grouping: :month, year: 2026, month: 5 },
+                                   { date_time_grouping: :day, year: 2026, month: 6, day: 3 }
+                                 ])
 
-    may3 = Object.new; may3.define_singleton_method(:value) { Date.new(2026, 5, 3) }
-    jun3 = Object.new; jun3.define_singleton_method(:value) { Date.new(2026, 6, 3) }
-    jun4 = Object.new; jun4.define_singleton_method(:value) { Date.new(2026, 6, 4) }
+    may3 = Object.new
+    may3.define_singleton_method(:value) { Date.new(2026, 5, 3) }
+    jun3 = Object.new
+    jun3.define_singleton_method(:value) { Date.new(2026, 6, 3) }
+    jun4 = Object.new
+    jun4.define_singleton_method(:value) { Date.new(2026, 6, 4) }
 
     assert_false filters.apply(may3)
     assert_false filters.apply(jun3)

@@ -52,9 +52,9 @@ class TestAutoFilter < Minitest::Test
 
     ws.auto_filter.range = 'A1:A4'
     ws.auto_filter.add_column(0, :filters, date_group_items: [
-      { date_time_grouping: :month, year: 2026, month: 5 },
-      { date_time_grouping: :day,   year: 2026, month: 6, day: 3 }
-    ])
+                                { date_time_grouping: :month, year: 2026, month: 5 },
+                                { date_time_grouping: :day,   year: 2026, month: 6, day: 3 }
+                              ])
     ws.auto_filter.apply
 
     refute ws.rows[1].hidden
@@ -69,9 +69,9 @@ class TestAutoFilter < Minitest::Test
     ws.add_row [Date.new(2026, 6, 3)]
     ws.auto_filter.range = 'A1:A3'
     ws.auto_filter.add_column(0, :filters, date_group_items: [
-      { date_time_grouping: :month, year: 2026, month: 5 },
-      { date_time_grouping: :day,   year: 2026, month: 6, day: 3 }
-    ])
+                                { date_time_grouping: :month, year: 2026, month: 5 },
+                                { date_time_grouping: :day,   year: 2026, month: 6, day: 3 }
+                              ])
     doc = Nokogiri::XML(ws.auto_filter.to_xml_string)
 
     assert_equal(1, doc.xpath("//filterColumn[@colId='0']").size)
