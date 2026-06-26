@@ -103,6 +103,29 @@ class TestFilters < Minitest::Test
     Axlsx::Workbook.date1904 = false
   end
 
+  def test_normalize_cell_datetime_with_datetime
+    dt = DateTime.new(2026, 6, 3, 14, 30, 45)
+    cell = Object.new
+    cell.define_singleton_method(:value) { dt }
+    result = @filters.send(:normalize_cell_datetime, cell)
+
+    assert_equal({ year: 2026, month: 6, day: 3, hour: 14, minute: 30, second: 45 }, result)
+  end
+
+  def test_normalize_cell_datetime_with_numeric_serial_with_time
+    Axlsx::Workbook.date1904 = false
+    serial = 46176 + (12 * 3600 + 30 * 60).to_f / 86400  # 12:30:00
+    cell = Object.new
+    cell.define_singleton_method(:value) { serial }
+    result = @filters.send(:normalize_cell_datetime, cell)
+
+    assert_equal 12, result[:hour]
+    assert_equal 30, result[:minute]
+    assert_equal 0,  result[:second]
+  ensure
+    Axlsx::Workbook.date1904 = false
+  end
+
   def test_normalize_cell_datetime_with_nil_cell
     assert_nil @filters.send(:normalize_cell_datetime, nil)
   end
