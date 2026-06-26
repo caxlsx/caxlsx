@@ -119,24 +119,14 @@ module Axlsx
 
       v = cell.value
       case v
-      when Time
-        { year: v.year, month: v.month, day: v.day,
-          hour: v.hour, minute: v.min, second: v.sec }
-      when DateTime
+      when Time, DateTime
         { year: v.year, month: v.month, day: v.day,
           hour: v.hour, minute: v.min, second: v.sec }
       when Date
         { year: v.year, month: v.month, day: v.day,
           hour: 0, minute: 0, second: 0 }
       when Numeric
-        int_part = v.floor
-        d = DateTimeConverter.date_from_serial(int_part)
-        total_seconds = ((v - int_part) * 86400).round
-        h = total_seconds / 3600
-        m = (total_seconds % 3600) / 60
-        s = total_seconds % 60
-        { year: d.year, month: d.month, day: d.day,
-          hour: h, minute: m, second: s }
+        DateTimeConverter.datetime_components_from_serial(v)
       end
     end
 

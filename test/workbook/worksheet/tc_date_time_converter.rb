@@ -85,6 +85,30 @@ class TestDateTimeConverter < Minitest::Test
     Axlsx::Workbook.date1904 = false
   end
 
+  def test_datetime_components_from_serial_date_only
+    Axlsx::Workbook.date1904 = false
+    result = Axlsx::DateTimeConverter.datetime_components_from_serial(46_145)
+
+    assert_equal({ year: 2026, month: 5, day: 3, hour: 0, minute: 0, second: 0 }, result)
+  ensure
+    Axlsx::Workbook.date1904 = false
+  end
+
+  def test_datetime_components_from_serial_with_time
+    Axlsx::Workbook.date1904 = false
+    serial = 46_176 + (12 * 3600 + 30 * 60).to_f / 86400  # 2026-06-03 12:30:00
+    result = Axlsx::DateTimeConverter.datetime_components_from_serial(serial)
+
+    assert_equal 2026, result[:year]
+    assert_equal 6,    result[:month]
+    assert_equal 3,    result[:day]
+    assert_equal 12,   result[:hour]
+    assert_equal 30,   result[:minute]
+    assert_equal 0,    result[:second]
+  ensure
+    Axlsx::Workbook.date1904 = false
+  end
+
   def test_timezone
     utc = Time.utc 2012 # January 1st, 2012 at 0:00 UTC
     local = Time.parse "2012-01-01 09:00:00 +0900"
