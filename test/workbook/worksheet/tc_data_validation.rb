@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 require 'tc_helper'
-require 'support/capture_warnings'
 
 class TestDataValidation < Minitest::Test
-  include CaptureWarnings
-
   def setup
     # inverse defaults
     @boolean_options = { allowBlank: false, hideDropDown: true, showErrorMessage: false, showInputMessage: true }
@@ -121,14 +118,11 @@ class TestDataValidation < Minitest::Test
   end
 
   def test_showDropDown
-    warnings = capture_warnings do
+    assert_output(nil, /The `showDropDown` has an inverted logic, false shows the dropdown list!/) do
       assert_raises(ArgumentError) { @dv.showDropDown = "foo´" }
       refute_raises { @dv.showDropDown = false }
       assert_false(@dv.showDropDown)
     end
-
-    assert_equal 2, warnings.size
-    assert_includes warnings.first, 'The `showDropDown` has an inverted logic, false shows the dropdown list! You should use `hideDropDown` instead.'
   end
 
   def test_hideDropDown
