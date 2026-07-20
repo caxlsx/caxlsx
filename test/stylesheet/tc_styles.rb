@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 require 'tc_helper'
-require 'support/capture_warnings'
 
 class TestStyles < Minitest::Test
-  include CaptureWarnings
-
   def setup
     @styles = Axlsx::Styles.new
   end
@@ -227,14 +224,11 @@ class TestStyles < Minitest::Test
       assert_equal("FFABABAB", fill.fill_type.bgColor.rgb, "use bg_color if pattern_bg_color is not defined")
     end
 
-    warnings = capture_warnings do
+    assert_output(nil, /Both `bg_color` and `pattern_bg_color` got defined/) do
       @styles.parse_fill_options(pattern_type: :darkHorizontal, bg_color: 'AB', pattern_bg_color: 'BC', type: :dxf).tap do |fill|
         assert_equal("FFBCBCBC", fill.fill_type.bgColor.rgb, "use pattern_bg_color if both bg_color and pattern_bg_color is defined")
       end
     end
-
-    assert_equal 1, warnings.size
-    assert_includes warnings.first, 'Both `bg_color` and `pattern_bg_color` got defined. To get a solid background without defining it in `patter_type`, use only `bg_color`, otherwise use only `pattern_bg_color` to avoid confusion.'
   end
 
   def test_parse_protection_options
