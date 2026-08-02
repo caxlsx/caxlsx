@@ -112,6 +112,15 @@ class TestFilters < Minitest::Test
     assert_equal({ year: 2026, month: 6, day: 3, hour: 14, minute: 30, second: 45 }, result)
   end
 
+  def test_normalize_cell_datetime_with_datetime_non_utc_offset
+    dt = DateTime.new(2026, 6, 3, 14, 30, 45, '+09:00')
+    cell = Object.new
+    cell.define_singleton_method(:value) { dt }
+    result = @filters.send(:normalize_cell_datetime, cell)
+
+    assert_equal({ year: 2026, month: 6, day: 3, hour: 14, minute: 30, second: 45 }, result)
+  end
+
   def test_normalize_cell_datetime_with_numeric_serial_with_time
     Axlsx::Workbook.date1904 = false
     serial = 46_176 + (((12 * 3600) + (30 * 60)).to_f / 86_400)  # 12:30:00
@@ -175,6 +184,20 @@ class TestFilters < Minitest::Test
                                  ])
     cell = Object.new
     cell.define_singleton_method(:value) { Date.new(2026, 5, 3) }
+
+    assert_false filters.apply(cell)
+  end
+
+  def test_apply_with_date_group_items_matching_datetime_non_utc_offset
+    # DateTimeConverter.date_to_serial does not compensate for non-UTC offsets, so this
+    # value would serialize to 2026-06-02 17:00 if written to a cell. Filters#apply must
+    # still match it against the day the user actually supplied (2026-06-03), not the
+    # UTC-shifted serialized value.
+    filters = Axlsx::Filters.new(date_group_items: [
+                                   { date_time_grouping: :day, year: 2026, month: 6, day: 3 }
+                                 ])
+    cell = Object.new
+    cell.define_singleton_method(:value) { DateTime.new(2026, 6, 3, 2, 0, 0, '+09:00') }
 
     assert_false filters.apply(cell)
   end
