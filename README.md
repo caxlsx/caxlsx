@@ -147,6 +147,19 @@ To allow formulas globally by default (which was the behavior in axlsx 3.x and p
 Axlsx.escape_formulas = false
 ```
 
+### quotePrefix protection
+
+Excel can also re-evaluate string cells as formulas when a user double-clicks to edit them, if the value starts with `+`, `-`, or `@`. The `secure_formulas` option applies Excel's `quotePrefix` style attribute to these cells, which prevents re-evaluation without altering the displayed value:
+
+```ruby
+p = Axlsx::Package.new
+p.workbook.add_worksheet(secure_formulas: true) do |sheet|
+  sheet.add_row ["+cmd|'/C calc'!A0", "-SUM(A1)", "@SUM(A1)"]
+end
+```
+
+Bullet points (`"- text"`), negative numbers (`"-1.5"`), and non-string types are automatically excluded. You may set `secure_formulas` at the worksheet, row, or cell level.
+
 ## Known Software Interoperability Issues
 
 As axslx implements the Office Open XML (ECMA-376 spec) much of the

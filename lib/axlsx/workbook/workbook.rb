@@ -254,6 +254,7 @@ module Axlsx
       @font_scale_divisor = FONT_SCALE_DIVISOR
 
       self.escape_formulas = options[:escape_formulas].nil? ? Axlsx.escape_formulas : options[:escape_formulas]
+      self.secure_formulas = options[:secure_formulas].nil? ? Axlsx.secure_formulas : options[:secure_formulas]
       self.date1904 = !options[:date1904].nil? && options[:date1904]
       yield self if block_given?
     end
@@ -294,6 +295,17 @@ module Axlsx
     def escape_formulas=(value)
       Axlsx.validate_boolean(value)
       @escape_formulas = value
+    end
+
+    # Whether to apply quotePrefix protection to cells starting with dangerous formula prefixes.
+    # @return [Boolean]
+    attr_reader :secure_formulas
+
+    # Sets whether to apply quotePrefix protection to dangerous formula prefixes.
+    # @param [Boolean] value The value to set.
+    def secure_formulas=(value)
+      Axlsx.validate_boolean(value)
+      @secure_formulas = value
     end
 
     # Indicates if the workbook should use autowidths or not.

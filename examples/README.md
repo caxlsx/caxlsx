@@ -72,6 +72,7 @@ Customizations:
 * [Basic formula](basic_formula_example.md)
 * [Cached formula](cached_formula_example.md)
 * [Escape formula](escape_formula_example.md)
+* [Secure formula](secure_formula_example.md)
 * [Defined name](defined_name_example.md)
 
 ### Media

@@ -435,5 +435,10 @@ module Axlsx
   # Trailing character that indicates an array formula.
   ARRAY_FORMULA_SUFFIX = '}'
 
+  # Characters that can trigger formula evaluation in Excel upon user interaction,
+  # even when stored as plain strings. Used by secure_formulas to apply quotePrefix protection.
+  # See: https://owasp.org/www-community/attacks/CSV_Injection
+  SECONDARY_FORMULA_PREFIXES = ['+', '-', '@'].freeze
+
   BOOLEAN_VALUES = [true, false].freeze
 end
