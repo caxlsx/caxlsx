@@ -4,7 +4,7 @@ require 'tc_helper'
 
 class TestPackage < Minitest::Test
   def setup
-    @package = Axlsx::Package.new
+    @package = Axlsx::Package.new(created_at: Time.utc(2013, 1, 1, 12, 0))
     ws = @package.workbook.add_worksheet
     ws.add_row ['Can', 'we', 'build it?']
     ws.add_row ['Yes!', 'We', 'can!']
@@ -235,7 +235,7 @@ class TestPackage < Minitest::Test
   end
 
   def assert_created_with_rubyzip(fname, package)
-    assert_equal 2098, get_mtime(fname, package).year, "XLSX files created with RubyZip have 2098 as the file mtime"
+    assert_equal package.core.created.year, get_mtime(fname, package).year, "XLSX files created with RubyZip have the package creation year as the file mtime"
   end
 
   def assert_created_with_zip_command(fname, package)
