@@ -22,6 +22,7 @@ module Axlsx
       initialize_page_options(options)
       parse_options options
       self.escape_formulas = wb.escape_formulas unless defined? @escape_formulas
+      self.secure_formulas = wb.secure_formulas unless defined? @secure_formulas
       @workbook.worksheets << self
       @sheet_id = index + 1
       yield self if block_given?
@@ -58,6 +59,18 @@ module Axlsx
     def escape_formulas=(value)
       Axlsx.validate_boolean(value)
       @escape_formulas = value
+    end
+
+    # Whether to apply quotePrefix protection to cells starting with dangerous formula prefixes.
+    # @return [Boolean]
+    attr_reader :secure_formulas
+
+    # Sets whether to apply quotePrefix protection to dangerous formula prefixes.
+    # @param [Boolean] value The value to set.
+    # @return [Boolean]
+    def secure_formulas=(value)
+      Axlsx.validate_boolean(value)
+      @secure_formulas = value
     end
 
     # Specifies the visible state of this sheet. Allowed states are

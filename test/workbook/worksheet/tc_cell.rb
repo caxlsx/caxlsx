@@ -576,4 +576,166 @@ class TestCell < Minitest::Test
 
     assert_empty(errors)
   end
+
+  private
+
+  def add_secure_row(values, secure_formulas: true, **row_opts)
+    p = Axlsx::Package.new
+    ws = p.workbook.add_worksheet(secure_formulas: secure_formulas) do |sheet|
+      sheet.add_row values, **row_opts
+    end
+    [p, ws, ws.rows.first.cells]
+  end
+
+  public
+
+  def test_secure_formulas_applies_quote_prefix
+    pkg, _ws, cells = add_secure_row(["+cmd|'/C powershell'!A0", "-SUM(A1)", "@SUM(A1)", "normal text"])
+
+    assert_predicate cells[0], :needs_quote_prefix?
+    assert_predicate cells[1], :needs_quote_prefix?
+    assert_predicate cells[2], :needs_quote_prefix?
+    refute_predicate cells[3], :needs_quote_prefix?
+
+    assert_operator cells[0].effective_style_index, :>, 0
+    assert_equal 0, cells[3].effective_style_index
+
+    xf = pkg.workbook.styles.cellXfs[cells[0].effective_style_index]
+
+    assert xf.quotePrefix
+  end
+
+  def test_secure_formulas_does_not_affect_non_string_types
+    _p, _ws, cells = add_secure_row([-1, -2.5, "+44 7700 900000"])
+
+    refute_predicate cells[0], :needs_quote_prefix?
+    refute_predicate cells[1], :needs_quote_prefix?
+    assert_predicate cells[2], :needs_quote_prefix?
+  end
+
+  def test_secure_formulas_default_is_false
+    _p, _ws, cells = add_secure_row(["+cmd|'/C powershell'!A0"], secure_formulas: false)
+
+    refute_predicate cells.first, :needs_quote_prefix?
+  end
+
+  def test_secure_formulas_per_cell_override
+    p = Axlsx::Package.new
+    ws = p.workbook.add_worksheet(secure_formulas: true) do |sheet|
+      sheet.add_row ["+DDE attack", "+allowed"], secure_formulas: [true, false]
+    end
+    cells = ws.rows.first.cells
+
+    assert_predicate cells[0], :needs_quote_prefix?
+    refute_predicate cells[1], :needs_quote_prefix?
+  end
+
+  def test_secure_formulas_serializes_quote_prefix_in_styles
+    p, ws, _cells = add_secure_row(["+cmd|'/C powershell'!A0"])
+
+    doc = Nokogiri::XML(ws.to_xml_string)
+    doc.remove_namespaces!
+
+    cell_node = doc.xpath("//c").first
+    style_index = cell_node["s"].to_i
+
+    assert_operator style_index, :>, 0
+
+    styles_doc = Nokogiri::XML(p.workbook.styles.to_xml_string)
+    styles_doc.remove_namespaces!
+    xf_nodes = styles_doc.xpath("//cellXfs/xf")
+
+    assert_equal "1", xf_nodes[style_index]["quotePrefix"]
+  end
+
+  def test_secure_formulas_with_leading_whitespace
+    _p, _ws, cells = add_secure_row([" =IF(1=1,RUN(),0)", "  +cmd|'/C calc'!A0", "\t-SUM(A1)", " @SUM(A1)", " safe text"])
+
+    assert_predicate cells[0], :needs_quote_prefix?
+    assert_predicate cells[1], :needs_quote_prefix?
+    assert_predicate cells[2], :needs_quote_prefix?
+    assert_predicate cells[3], :needs_quote_prefix?
+    refute_predicate cells[4], :needs_quote_prefix?
+  end
+
+  # Data-driven tests for secure_formulas quote prefix behavior
+  SAFE_VALUES = {
+    "negative_numbers" => { values: ["-1", "-2.5", "-1.23e10", "-0.5", "-100", "-99.99", "-0", "-1000000"],
+                            types: Array.new(8, :string) },
+    "bullet_points" => { values: ["- VAT adjustment", "- Discount applied", "- Item one",
+                                  "- Not applicable", "- See attached document", "- "] },
+    "special_chars_in_middle" => { values: ["Name@email.com", "A+B", "2+2=4", "Item - description",
+                                            "C++", "Item = Value", "Hello world", "100"] },
+    "empty_and_nil" => { values: ["", nil] }
+  }.freeze
+
+  DANGEROUS_VALUES = {
+    "dash_prefixed" => ["-SUM(A1)", "-cmd|'/C calc'!A0", "-2+3+cmd|'/C calc'!A0",
+                        "-text", "--double", "-"],
+    "all_prefixes" => ["=cmd|/C calc!A0", "=SUM(A1:A10)", "=1+1", "=",
+                       "+cmd|'/C powershell'!A0", "+SUM(A1)", "++i", "+",
+                       "@SUM(A1)", "@@mention"]
+  }.freeze
+
+  SAFE_VALUES.each do |label, config|
+    define_method(:"test_secure_formulas_safe_#{label}") do
+      p = Axlsx::Package.new
+      ws = p.workbook.add_worksheet(secure_formulas: true) do |sheet|
+        sheet.add_row config[:values], **(config[:types] ? { types: config[:types] } : {})
+      end
+
+      ws.rows.first.cells.each do |cell|
+        refute_predicate cell, :needs_quote_prefix?,
+                         "#{cell.value.inspect} should be safe (#{label})"
+      end
+    end
+  end
+
+  DANGEROUS_VALUES.each do |label, values|
+    define_method(:"test_secure_formulas_dangerous_#{label}") do
+      p = Axlsx::Package.new
+      ws = p.workbook.add_worksheet(secure_formulas: true) do |sheet|
+        sheet.add_row values
+      end
+
+      ws.rows.first.cells.each do |cell|
+        assert_predicate cell, :needs_quote_prefix?,
+                         "#{cell.value.inspect} should be dangerous (#{label})"
+      end
+    end
+  end
+
+  def test_secure_formulas_serializes_no_quote_prefix_on_safe_values
+    _p, ws, _cells = add_secure_row(["-1", "- VAT adjustment", "Hello world", "Name@email.com"],
+                                    types: Array.new(4, :string))
+
+    doc = Nokogiri::XML(ws.to_xml_string)
+    doc.remove_namespaces!
+
+    doc.xpath("//c").each do |cell_node|
+      style_index = (cell_node["s"] || "0").to_i
+
+      assert_equal 0, style_index,
+                   "Cell #{cell_node.at_xpath('.//t')&.text.inspect} should use base style (index 0), got #{style_index}"
+    end
+  end
+
+  def test_secure_formulas_serializes_quote_prefix_on_dangerous_values
+    p, ws, _cells = add_secure_row(["=SUM(A1)", "+cmd|'/C calc'!A0", "-SUM(A1)", "@SUM(A1)"])
+
+    doc = Nokogiri::XML(ws.to_xml_string)
+    doc.remove_namespaces!
+
+    styles_doc = Nokogiri::XML(p.workbook.styles.to_xml_string)
+    styles_doc.remove_namespaces!
+    xf_nodes = styles_doc.xpath("//cellXfs/xf")
+
+    doc.xpath("//c").each do |cell_node|
+      style_index = (cell_node["s"] || "0").to_i
+      xf = xf_nodes[style_index]
+
+      assert_equal "1", xf["quotePrefix"],
+                   "Cell #{cell_node.at_xpath('.//t')&.text.inspect} should have quotePrefix=\"1\", style_index=#{style_index}"
+    end
+  end
 end

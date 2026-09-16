@@ -287,6 +287,19 @@ module Axlsx
       end
     end
 
+    # Returns the index of a cellXfs entry that is identical to the one at base_style_index
+    # but with quotePrefix set to true. Caches derived styles to avoid duplication.
+    # @param [Integer] base_style_index The index of the base style in cellXfs
+    # @return [Integer] The index of the quotePrefix-enabled style
+    def quote_prefix_style_for(base_style_index)
+      @quote_prefix_cache ||= {}
+      @quote_prefix_cache[base_style_index] ||= begin
+        new_xf = cellXfs[base_style_index].dup
+        new_xf.quotePrefix = true
+        cellXfs << new_xf
+      end
+    end
+
     # parses add_style options for protection styles
     # noop if options hash does not include :hide or :locked key
 
