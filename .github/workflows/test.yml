@@ -33,6 +33,7 @@ jobs:
           - jruby-9.3
           - jruby-9.4
           - jruby-10.0
+          - jruby-10.1
         include:
           - ruby: head
             allow_failures: 'allow failures'
@@ -40,8 +41,6 @@ jobs:
             allow_failures: 'allow failures'
         exclude:
           - ruby: jruby-9.4
-            os: windows-latest
-          - ruby: truffleruby
             os: windows-latest
 
     steps:
