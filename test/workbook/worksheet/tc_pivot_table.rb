@@ -120,11 +120,11 @@ class TestPivotTable < Minitest::Test
   def test_header_indices
     pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5')
 
-    assert_equal(0,   pivot_table.header_index_of('Year'))
-    assert_equal(1,   pivot_table.header_index_of('Month'))
-    assert_equal(2,   pivot_table.header_index_of('Region'))
-    assert_equal(3,   pivot_table.header_index_of('Type'))
-    assert_equal(4,   pivot_table.header_index_of('Sales'))
+    assert_equal(0, pivot_table.header_index_of('Year'))
+    assert_equal(1, pivot_table.header_index_of('Month'))
+    assert_equal(2, pivot_table.header_index_of('Region'))
+    assert_equal(3, pivot_table.header_index_of('Type'))
+    assert_equal(4, pivot_table.header_index_of('Sales'))
     assert_nil(pivot_table.header_index_of('Missing'))
     assert_equal(%w(A1 B1 C1 D1 E1), pivot_table.header_cell_refs)
   end
