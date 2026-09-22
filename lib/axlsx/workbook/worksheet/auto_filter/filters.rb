@@ -40,13 +40,16 @@ module Axlsx
     # does not meet any of the specified filter_items or
     # date_group_items restrictions.
     # @param [Cell] cell The cell to test against items
-    # TODO implement this for date filters as well!
     def apply(cell) # rubocop:disable Naming/PredicateMethod
       return false unless cell
 
-      filter_items.each do |filter|
-        return false if cell.value == filter.val
+      return false if filter_items.any? { |f| cell.value == f.val }
+
+      if date_group_items.any?
+        dt = normalize_cell_datetime(cell)
+        return false if date_group_items.any? { |dgi| dgi.matches?(dt) }
       end
+
       true
     end
 
@@ -97,13 +100,33 @@ module Axlsx
 
     # Date group items are date group filter items where you specify the
     # date_group and a value for that option as part of the auto_filter
-    # @note This can be specified, but will not be applied to the date
-    # values in your workbook at this time.
     def date_group_items=(options)
       options.each do |date_group|
         raise ArgumentError, "date_group_items should be an array of hashes specifying the options for each date_group_item" unless date_group.is_a?(Hash)
 
         date_group_items << DateGroupItem.new(date_group)
+      end
+    end
+
+    private
+
+    # Normalize a cell's value to a Hash with date/time components.
+    # Returns nil if the cell value is not a date or time.
+    # @param [Cell] cell
+    # @return [Hash, nil] { year:, month:, day:, hour:, minute:, second: } or nil
+    def normalize_cell_datetime(cell)
+      return nil if cell.nil?
+
+      v = cell.value
+      case v
+      when Time, DateTime
+        { year: v.year, month: v.month, day: v.day,
+          hour: v.hour, minute: v.min, second: v.sec }
+      when Date
+        { year: v.year, month: v.month, day: v.day,
+          hour: 0, minute: 0, second: 0 }
+      when Numeric
+        DateTimeConverter.datetime_components_from_serial(v)
       end
     end
 
@@ -235,6 +258,24 @@ module Axlsx
       def date_time_grouping=(grouping)
         RestrictionValidator.validate 'DateGroupItem.date_time_grouping', DATE_TIME_GROUPING, grouping.to_s
         @date_time_grouping = grouping.to_s
+      end
+
+      GROUPING_FIELDS = {
+        'year' => [:year],
+        'month' => [:year, :month],
+        'day' => [:year, :month, :day],
+        'hour' => [:year, :month, :day, :hour],
+        'minute' => [:year, :month, :day, :hour, :minute],
+        'second' => [:year, :month, :day, :hour, :minute, :second]
+      }.freeze
+
+      # Returns true if this date group item matches the given normalized datetime hash.
+      # @param [Hash, nil] dt { year:, month:, day:, hour:, minute:, second: } from normalize_cell_datetime
+      # @return [Boolean]
+      def matches?(dt)
+        return false unless dt
+
+        GROUPING_FIELDS[date_time_grouping].all? { |f| send(f).to_i == dt[f].to_i }
       end
 
       # Serialize the object to xml
