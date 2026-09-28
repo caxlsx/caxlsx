@@ -18,7 +18,7 @@ end
 group :test do
   gem 'rake'
   # There's a bug in simplecov 1.3.0, see: https://github.com/simplecov-ruby/simplecov/issues/1299
-  gem 'simplecov', '< 1.3'
+  gem 'simplecov', '< 1.4'
   gem 'minitest'
   gem 'timecop'
   gem 'webmock'
