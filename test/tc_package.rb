@@ -225,6 +225,28 @@ class TestPackage < Minitest::Test
     File.delete(decrypted_fname)
   end
 
+  def test_serialize_with_password_into_writable
+    skip("Encryption is only supported on MRI Ruby") unless mri?
+
+    password = 'abc123'
+    out_io = StringIO.new.binmode
+    @package.serialize(out_io, password: password)
+
+    decrypted_fname = 'axlsx_test_serialization_decrypted.xlsx'
+    File.binwrite(decrypted_fname, OoxmlCrypt.decrypt(out_io.string, password))
+
+    assert_zip_file_matches_package(decrypted_fname, @package)
+    assert_created_with_zip_kit(decrypted_fname, @package)
+
+    File.delete(decrypted_fname)
+  end
+
+  def test_serialization_with_zip_command_into_writable
+    assert_raises(ArgumentError) do
+      @package.serialize(StringIO.new, zip_command: 'zip')
+    end
+  end
+
   def test_serialization_with_password_and_zip_command
     skip("Encryption is only supported on MRI Ruby") unless mri?
 

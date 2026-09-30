@@ -151,19 +151,23 @@ module Axlsx
       confirm_valid, zip_command, password = parse_serialize_options(options, secondary_options)
       return false unless !confirm_valid || validate.empty?
 
-      zip_provider = if zip_command
-                       ZipCommand.new(zip_command)
-                     else
-                       ZipKitOutputStream
-                     end
-      Relationship.initialize_ids_cache
-      zip_provider.open(output) do |zip_kit_streamer|
-        write_parts(zip_kit_streamer)
-      end
+      writing_to_path = output.is_a?(String)
+      raise ArgumentError, "The :zip_command option requires the output to be a file path" if zip_command && !writing_to_path
 
-      if password && !password.empty?
-        require_ooxml_crypt!
-        OoxmlCrypt.encrypt_file(output, password, output)
+      encrypt = password && !password.empty?
+      require_ooxml_crypt! if encrypt
+
+      Relationship.initialize_ids_cache
+      if encrypt && !writing_to_path
+        # OoxmlCrypt needs the entire ZIP to encrypt it, so it can't be streamed into the IO
+        zip_buffer = ZipKitOutputStream.write_buffer { |zip_kit_streamer| write_parts(zip_kit_streamer) }
+        output.write(OoxmlCrypt.encrypt(zip_buffer.string, password))
+      else
+        zip_provider = zip_command ? ZipCommand.new(zip_command) : ZipKitOutputStream
+        zip_provider.open(output) do |zip_kit_streamer|
+          write_parts(zip_kit_streamer)
+        end
+        OoxmlCrypt.encrypt_file(output, password, output) if encrypt
       end
 
       true
