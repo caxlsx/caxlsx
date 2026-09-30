@@ -7,19 +7,37 @@ module Axlsx
     # Most to_xml_string methods accept an empty String as default argument that
     # will accept the writes. Luckily, only `<<` ever gets called on that `str` to
     # append output to it - so the entire serialization is a visitor. We can pass in
-    # our ZIP IO as write destination, and not have that many string allocations at all -
+    # our ZIP IO as write destination, and not have to build the entire XML of a part in memory -
     # the various modules will just write into it, as if it were a `str`. But for the off-chance
     # that it a method attempts to use the return value that is this `str`, for example, we want
     # to be careful and wrap our "fake `str`" in an object that restricts its API to just `<<`. That
     # way, should that `str` be used somewhere, it should blow up.
-    class ShovelOnly
+    #
+    # The fragments appended are tiny (often just a single `"` or `>`), and passing every one of them to
+    # the ZIP writer separately is very slow - every fragment would go through its own Zlib and CRC32 call.
+    # We therefore coalesce the fragments into a buffer, and pass it on to the ZIP writer once it is
+    # large enough. Call {#flush} once the part has been written.
+    class BufferedShovel
+      BUFFER_SIZE = 64 * 1024
+
       def initialize(io)
         @io = io
+        @buf = String.new(capacity: BUFFER_SIZE + 1024)
       end
 
-      def <<(bytes)
-        @io.write(bytes.b)
+      def <<(fragment)
+        @buf << fragment
+        flush if @buf.bytesize >= BUFFER_SIZE
         self
+      end
+
+      # Writes out the buffered data to the destination
+      # @return [void]
+      def flush
+        return if @buf.empty?
+
+        @io << @buf
+        @buf.clear
       end
 
       undef :to_s
@@ -251,7 +269,9 @@ module Axlsx
             # does not have to be a String - just something that is appendable) - we can give this
             # method our writable sink for the file instead, saving memory. The data appended to the sink
             # will be properly compressed and shipped off into the destination IO as it gets produced.
-            part.fetch(:doc).to_xml_string(ShovelOnly.new(into_sink))
+            shovel = BufferedShovel.new(into_sink)
+            part.fetch(:doc).to_xml_string(shovel)
+            shovel.flush
           end
         elsif part[:path]
           zip_kit_streamer.write_file(part.fetch(:entry), modification_time: time_of_writing) do |into_sink|
