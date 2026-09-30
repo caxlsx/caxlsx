@@ -93,6 +93,12 @@ Axlsx::Package.new do |p|
 end
 ```
 
+Instead of a file name you can also pass `serialize` any object that responds to `write`. The XLSX gets written into it as it is being generated, without ever seeking or rewinding. This allows sending the file to a socket or an HTTP response without holding the entire file in memory:
+
+```ruby
+File.open('simple.xlsx', 'wb') { |f| p.serialize(f) }
+```
+
 Please see the [examples folder](https://github.com/caxlsx/caxlsx/tree/master/examples) for further information on what you can do with this gem  Chances are that it has already been implemented. If it hasn't, let's take a look at adding it in.
 
 ## Documentation

@@ -40,8 +40,8 @@ module Axlsx
     end
 
     # Serializes the header/footer object.
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       serialized_tag('headerFooter', str) do
         serialized_element_attributes(str) do |value|

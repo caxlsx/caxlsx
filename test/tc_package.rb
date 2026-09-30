@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'tc_helper'
+require 'zip' # Rubyzip is used in tests as a second opinion for reading the output
 
 class TestPackage < Minitest::Test
   def setup
@@ -91,6 +92,10 @@ class TestPackage < Minitest::Test
     ws.add_page_break "B2"
   end
 
+  def teardown
+    FileUtils.rm_f(@fname)
+  end
+
   def test_use_autowidth
     @package.use_autowidth = false
 
@@ -128,13 +133,40 @@ class TestPackage < Minitest::Test
     assert_equal(time, p.core.created)
   end
 
-  def test_serialization
+  def test_serialization_to_file_at_path
     @package.serialize(@fname)
 
     assert_zip_file_matches_package(@fname, @package)
-    assert_created_with_rubyzip(@fname, @package)
+    assert_created_with_zip_kit(@fname, @package)
     assert_zip_file_has_no_zip64(@fname)
     File.delete(@fname)
+  end
+
+  def test_serialization_into_writable
+    # We want to ensure only `write()` gets
+    # called on the output, and the output never
+    # seeks or rewinds
+    writable_class = Class.new do
+      attr_reader :buf_string
+
+      def initialize
+        @buf_string = (+"").b
+      end
+
+      def write(bytes)
+        @buf_string << bytes
+        bytes.bytesize
+      end
+    end
+
+    out_io = writable_class.new
+    @package.serialize(out_io)
+
+    File.binwrite(@fname, out_io.buf_string)
+
+    assert_zip_file_matches_package(@fname, @package)
+    assert_created_with_zip_kit(@fname, @package)
+    assert_zip_file_has_no_zip64(@fname)
   end
 
   def test_serialization_with_zip_command
@@ -142,7 +174,6 @@ class TestPackage < Minitest::Test
 
     assert_zip_file_matches_package(@fname, @package)
     assert_created_with_zip_command(@fname, @package)
-    File.delete(@fname)
   end
 
   def test_serialization_with_zip_command_and_absolute_path
@@ -176,8 +207,6 @@ class TestPackage < Minitest::Test
 
     assert wb.styles_applied
     assert_equal 1, wb.styles.style_index.count
-
-    File.delete(@fname)
   end
 
   def test_serialize_with_password
@@ -190,10 +219,32 @@ class TestPackage < Minitest::Test
     OoxmlCrypt.decrypt_file(@fname, password, decrypted_fname)
 
     assert_zip_file_matches_package(decrypted_fname, @package)
-    assert_created_with_rubyzip(decrypted_fname, @package)
+    assert_created_with_zip_kit(decrypted_fname, @package)
 
     File.delete(@fname)
     File.delete(decrypted_fname)
+  end
+
+  def test_serialize_with_password_into_writable
+    skip("Encryption is only supported on MRI Ruby") unless mri?
+
+    password = 'abc123'
+    out_io = StringIO.new.binmode
+    @package.serialize(out_io, password: password)
+
+    decrypted_fname = 'axlsx_test_serialization_decrypted.xlsx'
+    File.binwrite(decrypted_fname, OoxmlCrypt.decrypt(out_io.string, password))
+
+    assert_zip_file_matches_package(decrypted_fname, @package)
+    assert_created_with_zip_kit(decrypted_fname, @package)
+
+    File.delete(decrypted_fname)
+  end
+
+  def test_serialization_with_zip_command_into_writable
+    assert_raises(ArgumentError) do
+      @package.serialize(StringIO.new, zip_command: 'zip')
+    end
   end
 
   def test_serialization_with_password_and_zip_command
@@ -234,12 +285,12 @@ class TestPackage < Minitest::Test
     assert(zf.entries.none?(&:zip64?))
   end
 
-  def assert_created_with_rubyzip(fname, package)
-    assert_equal package.core.created.year, get_mtime(fname, package).year, "XLSX files created with RubyZip have the package creation year as the file mtime"
+  def assert_created_with_zip_kit(fname, package)
+    assert_equal package.core.created.year, get_mtime(fname, package).year, "XLSX files created with ZipKit have the package creation year as the file mtime"
   end
 
   def assert_created_with_zip_command(fname, package)
-    assert_equal Time.now.utc.year, get_mtime(fname, package).year, "XLSX files created with a zip command have the current year as the file mtime"
+    assert_equal package.core.created.year, get_mtime(fname, package).year, "XLSX files created with a zip command have the package creation year as the file mtime"
   end
 
   def get_mtime(fname, package)
@@ -267,14 +318,15 @@ class TestPackage < Minitest::Test
     File.delete(@fname)
   end
 
-  # See comment for Package#zip_entry_for_part
+  # The timestamp gets set on the files in the ZIP, we want to ensure it stays correct
+  # and takes precedence over the current system time
   def test_serialization_creates_identical_files_at_any_time_if_created_at_is_set
-    @package.core.created = Time.now
+    @package.core.created = Time.now.utc # This must be UTC otherwise Timecop returns a TZ-local value and the test fails
     zip_content_now = @package.to_stream.string
     Timecop.travel(3600) do
       zip_content_then = @package.to_stream.string
 
-      assert_equal zip_content_then, zip_content_now, "zip files are not identical"
+      assert_same_bytes zip_content_then, zip_content_now, "zip files are not identical"
     end
   end
 
@@ -530,6 +582,31 @@ class TestPackage < Minitest::Test
 
     matching_parts.each do |part|
       assert_valid_xml(part[:doc], "#{description} #{part[:entry]}")
+    end
+  end
+
+  # For comparing byte output it is not very useful to see that "this nearly unprintable kilobyte of random data is not equal to
+  # that other nearly unprintable kilobyte of random data". It also busts terminals sometimes. It is better to do a fast check
+  # first, and then narrow down on the chunk where the first mismatch is. Once found, we print the offset where there is a
+  # mismatch, 32 bytes behind and 32 bytes ahead of the mismatch. This gives much better failed assertion messages and aids debugging.
+  def assert_same_bytes(expected_bin_string, actual_bin_string, message = "Byte content differs")
+    assert_equal expected_bin_string.bytesize, actual_bin_string.bytesize, "#{message} (byte size #{expected_bin_string.bytesize} expected vs. #{actual_bin_string.bytesize} actual)"
+    chunk_size = 65 * 1024
+    (expected_bin_string.bytesize.to_f / chunk_size).ceil.times do |chunk_n|
+      slice_a = expected_bin_string.byteslice(chunk_n * chunk_size, chunk_size)
+      slice_b = actual_bin_string.byteslice(chunk_n * chunk_size, chunk_size)
+      next if slice_a == slice_b
+
+      # Figure out at which offset the data differs
+      slice_a.bytesize.times do |at_byte|
+        offset_in_str = (chunk_n * chunk_size) + at_byte
+        next if expected_bin_string[offset_in_str] == actual_bin_string[offset_in_str]
+
+        a = expected_bin_string.byteslice([offset_in_str - 32, 0].max, 32 * 2)
+        b = actual_bin_string.byteslice([offset_in_str - 32, 0].max, 32 * 2)
+
+        assert_equal expected_bin_string[offset_in_str], actual_bin_string[offset_in_str], "#{message} (at offset #{offset_in_str}). Expected #{a.inspect} but got #{b.inspect}"
+      end
     end
   end
 end

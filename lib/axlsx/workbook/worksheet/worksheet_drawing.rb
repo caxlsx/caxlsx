@@ -55,7 +55,7 @@ module Axlsx
     end
 
     # Serialize the drawing for the worksheet
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     def to_xml_string(str = +'')
       return unless has_drawing?
 
