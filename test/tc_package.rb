@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'tc_helper'
+require 'zip' # Rubyzip is used in tests as a second opinion for reading the output
 
 class TestPackage < Minitest::Test
   def setup
@@ -136,24 +137,51 @@ class TestPackage < Minitest::Test
     @package.serialize(@fname)
 
     assert_zip_file_matches_package(@fname, @package)
-    assert_created_with_rubyzip(@fname, @package)
+    assert_created_with_zip_kit(@fname, @package)
     assert_zip_file_has_no_zip64(@fname)
     File.delete(@fname)
+  end
+
+  def test_serialization_into_writable
+    # We want to ensure only `write()` gets
+    # called on the output, and the output never
+    # seeks or rewinds
+    writable_class = Class.new do
+      attr_reader :buf_string
+
+      def initialize
+        @buf_string = (+"").b
+      end
+
+      def write(bytes)
+        @buf_string << bytes
+        bytes.bytesize
+      end
+    end
+
+    out_io = writable_class.new
+    @package.serialize(out_io)
+
+    File.binwrite(@fname, out_io.buf_string)
+
+    assert_zip_file_matches_package(@fname, @package)
+    assert_created_with_zip_kit(@fname, @package)
+    assert_zip_file_has_no_zip64(@fname)
   end
 
   def test_serialization_with_zip_command
     @package.serialize(@fname, zip_command: "zip")
 
-    assert_zip_file_contains_files_per_package_part(@fname, @package)
-    assert_current_year_mtime_for_entry(@fname, @package)
+    assert_zip_file_matches_package(@fname, @package)
+    assert_created_with_zip_command(@fname, @package)
   end
 
   def test_serialization_with_zip_command_and_absolute_path
     fname = "#{Dir.tmpdir}/#{@fname}"
     @package.serialize(fname, zip_command: "zip")
 
-    assert_zip_file_contains_files_per_package_part(fname, @package)
-    assert_current_year_mtime_for_entry(fname, @package)
+    assert_zip_file_matches_package(fname, @package)
+    assert_created_with_zip_command(fname, @package)
     File.delete(fname)
   end
 
@@ -191,7 +219,7 @@ class TestPackage < Minitest::Test
     OoxmlCrypt.decrypt_file(@fname, password, decrypted_fname)
 
     assert_zip_file_matches_package(decrypted_fname, @package)
-    assert_created_with_rubyzip(decrypted_fname, @package)
+    assert_created_with_zip_kit(decrypted_fname, @package)
 
     File.delete(@fname)
     File.delete(decrypted_fname)
@@ -235,12 +263,12 @@ class TestPackage < Minitest::Test
     assert(zf.entries.none?(&:zip64?))
   end
 
-  def assert_created_with_rubyzip(fname, package)
-    assert_equal package.core.created.year, get_mtime(fname, package).year, "XLSX files created with RubyZip have the package creation year as the file mtime"
+  def assert_created_with_zip_kit(fname, package)
+    assert_equal package.core.created.year, get_mtime(fname, package).year, "XLSX files created with ZipKit have the package creation year as the file mtime"
   end
 
   def assert_created_with_zip_command(fname, package)
-    assert_equal Time.now.utc.year, get_mtime(fname, package).year, "entry inside XLSX created with ZipKit must have current year as the mtime year"
+    assert_equal package.core.created.year, get_mtime(fname, package).year, "XLSX files created with a zip command have the package creation year as the file mtime"
   end
 
   def get_mtime(fname, package)
