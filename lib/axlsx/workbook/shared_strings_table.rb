@@ -43,8 +43,8 @@ module Axlsx
     end
 
     # Serializes the object
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       Axlsx.sanitize(@shared_xml_string)
       str << '<?xml version="1.0" encoding="UTF-8"?><sst xmlns="' << XML_NS << '"'
@@ -66,7 +66,9 @@ module Axlsx
           cell.send :ssti=, index
         else
           cell.send :ssti=, @index
-          @shared_xml_string << '<si>' << CellSerializer.run_xml_string(cell) << '</si>'
+          @shared_xml_string << '<si>'
+          CellSerializer.run_xml_string(cell, @shared_xml_string)
+          @shared_xml_string << '</si>'
           @unique_cells[cell_hash] = @index
           @index += 1
         end

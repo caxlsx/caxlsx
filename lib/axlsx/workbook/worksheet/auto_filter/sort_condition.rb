@@ -37,7 +37,7 @@ module Axlsx
     end
 
     # serialize the object
-    # @return [String]
+    # @return [void]
     def to_xml_string(str, ref)
       ref = ref_to_single_column(ref, column_index)
 
