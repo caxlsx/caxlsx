@@ -114,6 +114,16 @@ class TestCell < Minitest::Test
     assert_equal(:boolean, @row.add_cell(true).type, 'boolean should be boolean')
   end
 
+  def test_integer_inference_preserves_values_and_xml
+    [0, -37, 2**80, -(2**80)].each do |value|
+      cell = @row.add_cell(value)
+
+      assert_equal(:integer, cell.type)
+      assert_equal(value, cell.value)
+      assert_equal(value.to_s, Nokogiri::XML(cell.to_xml_string(0, 0)).at_xpath('//v').text)
+    end
+  end
+
   def test_value
     assert_raises(ArgumentError, "type must be :string, :integer, :float, :date, :time, :boolean") { @c.type = :array }
     refute_raises { @c.type = :string }
