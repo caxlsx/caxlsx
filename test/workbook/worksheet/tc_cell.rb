@@ -115,13 +115,26 @@ class TestCell < Minitest::Test
   end
 
   def test_integer_inference_preserves_values_and_xml
-    [0, -37, 2**80, -(2**80)].each do |value|
+    [0, -37, (2**53) + 1, 2**80, -(2**80), 10**1000, -(10**1000)].each do |value|
       cell = @row.add_cell(value)
 
       assert_equal(:integer, cell.type)
       assert_equal(value, cell.value)
       assert_equal(value.to_s, Nokogiri::XML(cell.to_xml_string(0, 0)).at_xpath('//v').text)
     end
+  end
+
+  def test_integer_inference_preserves_objects_overriding_is_a
+    value = Class.new(String) do
+      def is_a?(klass)
+        klass == Integer || super
+      end
+    end.new('not a number')
+    cell = @row.add_cell(value)
+
+    assert_equal(:string, cell.type)
+    assert_equal('not a number', cell.value)
+    assert_equal('not a number', Nokogiri::XML(cell.to_xml_string(0, 0)).at_xpath('//t').text)
   end
 
   def test_value
