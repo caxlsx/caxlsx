@@ -1,6 +1,7 @@
 CHANGELOG
 ---------
 - **Unreleased**
+  - Infer non-ASCII text cells as strings without running the numeric and date regular expressions, which Ruby recompiles each time their input switches encoding.
   - Add `secure_formulas` option to apply OOXML `quotePrefix` to cells with formula-like prefixes (`=`, `+`, `-`, `@`), preventing re-evaluation on user interaction. Solves [Issue #529](https://github.com/caxlsx/caxlsx/issues/529)
 
 - **June.09.26**: 4.5.0

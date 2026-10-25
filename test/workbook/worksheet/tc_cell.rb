@@ -138,6 +138,8 @@ class TestCell < Minitest::Test
     assert_equal(:time, @c.send(:cell_type_from_value, Time.now))
     assert_equal(:string, @c.send(:cell_type_from_value, []))
     assert_equal(:string, @c.send(:cell_type_from_value, "d"))
+    assert_equal(:string, @c.send(:cell_type_from_value, "Entrepôt"))
+    assert_equal(:string, @c.send(:cell_type_from_value, "１２"))
     assert_equal(:string, @c.send(:cell_type_from_value, nil))
     assert_equal(:integer, @c.send(:cell_type_from_value, -1))
     assert_equal(:boolean, @c.send(:cell_type_from_value, true))
