@@ -600,7 +600,7 @@ module Axlsx
         :iso_8601
       elsif v.is_a? RichText
         :richtext
-      else # rubocop:disable Lint/DuplicateBranch -- the non-ASCII guard above returns :string early
+      else # rubocop:disable Lint/DuplicateBranch
         :string
       end
     end
