@@ -127,6 +127,8 @@ class TestCell < Minitest::Test
 
   def test_cell_type_from_value
     assert_equal(:float, @c.send(:cell_type_from_value, 1.0))
+    assert_equal(:richtext, @c.send(:cell_type_from_value, Axlsx::RichText.new("Entrepôt")))
+    assert_equal(:richtext, @c.send(:cell_type_from_value, Axlsx::RichText.new("Depot")))
     assert_equal(:float, @c.send(:cell_type_from_value, "1e1"))
     assert_equal(:float, @c.send(:cell_type_from_value, "1e#{Float::MAX_10_EXP}"))
     assert_equal(:string, @c.send(:cell_type_from_value, "1e#{Float::MAX_10_EXP + 1}"))

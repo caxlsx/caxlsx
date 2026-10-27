@@ -589,6 +589,8 @@ module Axlsx
         :time
       elsif v.is_a?(TrueClass) || v.is_a?(FalseClass)
         :boolean
+      elsif v.is_a? RichText
+        :richtext
       elsif !(string = v.to_s).ascii_only?
         # Matching the US-ASCII regexps below against non-ASCII text recompiles them for each change of encoding
         :string
@@ -598,8 +600,6 @@ module Axlsx
         :float
       elsif Axlsx::ISO_8601_REGEX.match?(string)
         :iso_8601
-      elsif v.is_a? RichText
-        :richtext
       else # rubocop:disable Lint/DuplicateBranch
         :string
       end
