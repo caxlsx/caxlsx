@@ -589,15 +589,18 @@ module Axlsx
         :time
       elsif v.is_a?(TrueClass) || v.is_a?(FalseClass)
         :boolean
-      elsif v.respond_to?(:to_i) && Axlsx::NUMERIC_REGEX.match?(v.to_s)
-        :integer
-      elsif v.respond_to?(:to_f) && (Axlsx::SAFE_FLOAT_REGEX.match?(v.to_s) || ((matchdata = MAYBE_FLOAT_REGEX.match(v.to_s)) && matchdata[:exp].to_i.between?(Float::MIN_10_EXP, Float::MAX_10_EXP)))
-        :float
-      elsif Axlsx::ISO_8601_REGEX.match?(v.to_s)
-        :iso_8601
       elsif v.is_a? RichText
         :richtext
-      else
+      elsif !(string = v.to_s).ascii_only?
+        # Matching the US-ASCII regexps below against non-ASCII text recompiles them for each change of encoding
+        :string
+      elsif v.respond_to?(:to_i) && Axlsx::NUMERIC_REGEX.match?(string)
+        :integer
+      elsif v.respond_to?(:to_f) && (Axlsx::SAFE_FLOAT_REGEX.match?(string) || ((matchdata = MAYBE_FLOAT_REGEX.match(string)) && matchdata[:exp].to_i.between?(Float::MIN_10_EXP, Float::MAX_10_EXP)))
+        :float
+      elsif Axlsx::ISO_8601_REGEX.match?(string)
+        :iso_8601
+      else # rubocop:disable Lint/DuplicateBranch
         :string
       end
     end
