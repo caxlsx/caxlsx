@@ -3,7 +3,6 @@
 require_relative 'axlsx/version'
 
 # gemspec dependencies
-require 'htmlentities'
 require 'marcel'
 require 'nokogiri'
 require 'zip'
@@ -78,10 +77,12 @@ module Axlsx
     cells.sort_by(&:pos)
   end
 
-  # global reference html entity encoding
-  # @return [HtmlEntities]
-  def self.coder
-    @@coder ||= ::HTMLEntities.new
+  # XML-escapes the provided string, writing single quotes as &apos;
+  # (cell_range relies on that form to quote sheet names).
+  # @param [String] value The string to escape
+  # @return [String]
+  def self.escape_xml(value)
+    ::CGI.escapeHTML(value).gsub('&#39;', '&apos;')
   end
 
   # returns the x, y position of a cell

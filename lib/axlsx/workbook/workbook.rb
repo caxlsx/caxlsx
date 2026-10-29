@@ -232,7 +232,7 @@ module Axlsx
     # @param [String] name The name of the sheet you are looking for
     # @return [Worksheet] The sheet found, or nil
     def sheet_by_name(name)
-      encoded_name = Axlsx.coder.encode(name)
+      encoded_name = Axlsx.escape_xml(name)
       @worksheets.find { |sheet| sheet.name == encoded_name }
     end
 
