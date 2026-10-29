@@ -102,6 +102,12 @@ class TestAxlsx < Minitest::Test
     assert_equal('', Axlsx.escape_xml(nil))
   end
 
+  def test_coder_is_deprecated
+    assert_output(nil, /\[DEPRECATION\] Axlsx\.coder/) do
+      assert_raises(LoadError) { Axlsx.coder }
+    end
+  end
+
   def test_range_to_a
     assert_equal([['A1', 'B1', 'C1']],                         Axlsx.range_to_a('A1:C1'))
     assert_equal([['A1', 'B1', 'C1'], ['A2', 'B2', 'C2']],     Axlsx.range_to_a('A1:C2'))

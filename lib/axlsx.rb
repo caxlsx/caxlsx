@@ -85,6 +85,15 @@ module Axlsx
     ::CGI.escapeHTML(value.to_s).gsub('&#39;', '&apos;')
   end
 
+  # @deprecated Use {Axlsx.escape_xml}. Requires adding the htmlentities gem, which caxlsx no longer depends on.
+  # @return [HTMLEntities]
+  def self.coder
+    warn "[DEPRECATION] Axlsx.coder is deprecated and requires adding the htmlentities gem to your Gemfile. " \
+         "Use Axlsx.escape_xml instead e.g., Axlsx.escape_xml(name)"
+    require 'htmlentities'
+    @@coder ||= ::HTMLEntities.new
+  end
+
   # returns the x, y position of a cell
   def self.name_to_indices(name)
     raise ArgumentError, 'invalid cell name' unless name.size > 1

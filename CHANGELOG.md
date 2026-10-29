@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 - **Unreleased**
-  - [PR #553](https://github.com/caxlsx/caxlsx/pull/553) Drop the archived `htmlentities` dependency and `Axlsx.coder`, XML-escape with `CGI.escapeHTML` like cell values already do
+  - [PR #553](https://github.com/caxlsx/caxlsx/pull/553) Drop the archived `htmlentities` dependency and deprecate `Axlsx.coder`, XML-escape with `CGI.escapeHTML` like cell values already do
   - Add `secure_formulas` option to apply OOXML `quotePrefix` to cells with formula-like prefixes (`=`, `+`, `-`, `@`), preventing re-evaluation on user interaction. Solves [Issue #529](https://github.com/caxlsx/caxlsx/issues/529)
 
 - **June.09.26**: 4.5.0
