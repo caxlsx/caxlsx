@@ -45,6 +45,13 @@ class TestWorksheetHyperlink < Minitest::Test
     assert_equal(0, doc.xpath("//xmlns:hyperlink[@r:id]").size)
   end
 
+  def test_to_xml_string_without_location
+    @ws.add_hyperlink(ref: 'B1', target: :internal)
+    doc = Nokogiri::XML(@ws.to_xml_string)
+
+    assert_equal(1, doc.xpath("//xmlns:hyperlink[@ref='B1'][@location='']").size)
+  end
+
   def test_to_xml_stirng_with_external
     @a.target = :external
     doc = Nokogiri::XML(@ws.to_xml_string)
