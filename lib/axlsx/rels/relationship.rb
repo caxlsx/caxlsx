@@ -117,7 +117,7 @@ module Axlsx
       str << '<Relationship '
       h.each_with_index do |key_value, index|
         str << ' ' unless index == 0
-        str << key_value.first.to_s << '="' << Axlsx.escape_xml(key_value.last.to_s) << '"'
+        str << key_value.first.to_s << '="' << Axlsx.escape_xml(key_value.last) << '"'
       end
       str << '/>'
     end

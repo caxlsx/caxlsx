@@ -82,7 +82,7 @@ module Axlsx
   # @param [String] value The string to escape
   # @return [String]
   def self.escape_xml(value)
-    ::CGI.escapeHTML(value).gsub('&#39;', '&apos;')
+    ::CGI.escapeHTML(value.to_s).gsub('&#39;', '&apos;')
   end
 
   # returns the x, y position of a cell

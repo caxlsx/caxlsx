@@ -99,6 +99,7 @@ class TestAxlsx < Minitest::Test
     assert_equal('Q3 &amp; Q4 &lt;draft&gt;', Axlsx.escape_xml('Q3 & Q4 <draft>'))
     assert_equal('Alice&apos;s &quot;sales&quot;', Axlsx.escape_xml(%(Alice's "sales")))
     assert_equal('&amp;#39;', Axlsx.escape_xml('&#39;'))
+    assert_equal('', Axlsx.escape_xml(nil))
   end
 
   def test_range_to_a
