@@ -7,7 +7,8 @@ on:
 
 jobs:
   test_ruby_versions:
-    runs-on: ${{matrix.os || 'ubuntu-latest'}}
+    # ruby/setup-ruby has no Ruby < 3.2 nor JRuby 9.3 for ubuntu-26.04, which ubuntu-latest now points to
+    runs-on: ${{ matrix.os == 'ubuntu-latest' && contains(fromJSON('["2.6", "2.7", "3.0", "3.1", "jruby-9.3"]'), matrix.ruby) && 'ubuntu-24.04' || matrix.os || 'ubuntu-latest' }}
 
     continue-on-error: ${{ matrix.allow_failures == 'allow failures' || false }}
 
