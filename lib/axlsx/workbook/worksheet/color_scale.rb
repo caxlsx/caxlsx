@@ -82,8 +82,8 @@ module Axlsx
     end
 
     # Serialize this color_scale object data to an xml string
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       str << '<colorScale>'
       value_objects.to_xml_string(str)

@@ -223,8 +223,8 @@ module Axlsx
     end
 
     # Serializes the RichTextRun
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       valid = RichTextRun::INLINE_STYLES
       data = Axlsx.instance_values_for(self).transform_keys(&:to_sym)

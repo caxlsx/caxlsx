@@ -63,8 +63,8 @@ module Axlsx
     end
 
     # Serializes the object
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       str << '<border '
       serialized_attributes str

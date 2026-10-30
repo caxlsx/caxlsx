@@ -22,6 +22,7 @@ group :test do
   gem 'timecop'
   gem 'webmock'
   gem 'rspec-mocks'
+  gem 'rubyzip', '>= 2.4', '< 4' # Used as a second opinion for reading the generated files
   gem 'win32ole', platforms: [:mingw, :x64_mingw, :mswin, :mswin64]
 
   if RUBY_ENGINE == 'ruby'

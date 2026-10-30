@@ -5,61 +5,56 @@ require 'shellwords'
 
 module Axlsx
   # The ZipCommand class supports zipping the Excel file contents using
-  # a binary zip program instead of RubyZip's `Zip::OutputStream`.
+  # a binary zip program instead of a Ruby library.
   #
-  # The methods provided here mimic `Zip::OutputStream` so that `ZipCommand` can
-  # be used as a drop-in replacement. Note that method signatures are not
-  # identical to `Zip::OutputStream`, they are only sufficiently close so that
-  # `ZipCommand` and `Zip::OutputStream` can be interchangeably used within
-  # `caxlsx`.
+  # The methods provided here mimic ZipKitOutputStream.
   class ZipCommand
     # Raised when the zip command exits with a non-zero status.
     class ZipError < StandardError; end
 
     def initialize(zip_command)
-      @current_file = nil
-      @files = []
+      @filenames = []
       @zip_command = zip_command
     end
 
     # Create a temporary directory for writing files to.
     #
     # The directory and its contents are removed at the end of the block.
-    def open(output)
+    #
+    # @param write_to_file_named[String] filename for the XLSX to write
+    def open(write_to_file_named)
       Dir.mktmpdir do |dir|
         @dir = dir
         yield(self)
-        write_file
-        zip_parts(output)
+        run_zip_command(write_to_file_named)
       end
     end
 
-    # Closes the current entry and opens a new for writing.
-    def put_next_entry(entry)
-      write_file
-      @current_file = "#{@dir}/#{entry.name}"
-      @files << entry.name
-      FileUtils.mkdir_p(File.dirname(@current_file))
-      @io = File.open(@current_file, "wb")
-    end
+    # Adds a file to the ZIP. Yields an IO the file data can be written to.
+    # Works the same as `ZipKit::Streamer#write_file`
+    # @param filename[String] the name of the file in the ZIP
+    # @param modification_time[Time] the mtime to set for the entry in the ZIP
+    # @yield [#write] the writable IO for the file' binary data
+    #
+    # @return [void]
+    def write_file(filename, modification_time:, &blk)
+      raise ArgumentError, "@dir not set" unless @dir
 
-    # Write to a buffer that will be written to the current entry
-    def write(content)
-      @io << content
+      tempfile_path = File.join(@dir, filename)
+
+      FileUtils.mkdir_p(File.dirname(tempfile_path))
+      File.open(tempfile_path, "wb", &blk)
+      File.utime(modification_time, modification_time, tempfile_path)
+
+      @filenames << filename
     end
-    alias << write
 
     private
 
-    def write_file
-      @io.close if @current_file
-      @current_file = nil
-      @io = nil
-    end
-
-    def zip_parts(output)
-      output = Shellwords.shellescape(File.absolute_path(output))
-      inputs = Shellwords.shelljoin(@files)
+    def run_zip_command(write_to_file_at_path)
+      # Note that the number of files may overflow the shell argument list
+      output = Shellwords.shellescape(File.absolute_path(write_to_file_at_path))
+      inputs = Shellwords.shelljoin(@filenames)
       escaped_dir = Shellwords.shellescape(@dir)
       command = "cd #{escaped_dir} && #{@zip_command} #{output} #{inputs}"
       stdout_and_stderr, status = Open3.capture2e(command)

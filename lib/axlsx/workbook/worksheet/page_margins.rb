@@ -114,7 +114,7 @@ module Axlsx
     end
 
     # Serializes the page margins element
-    # @param [String] str
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
     # @return [String]
     # @note For compatibility, this is a noop unless custom margins have been specified.
     # @see #custom_margins_specified?

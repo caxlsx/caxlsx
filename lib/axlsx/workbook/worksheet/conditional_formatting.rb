@@ -78,8 +78,8 @@ module Axlsx
     #             <formula>0.5</formula>
     #        </cfRule>
     #    </conditionalFormatting>
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       str << '<conditionalFormatting sqref="' << sqref << '">'
       rules.each_with_index do |rule, index|

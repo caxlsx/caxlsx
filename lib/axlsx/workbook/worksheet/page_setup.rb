@@ -253,8 +253,8 @@ module Axlsx
     end
 
     # Serializes the page settings element.
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       serialized_tag('pageSetup', str)
     end
