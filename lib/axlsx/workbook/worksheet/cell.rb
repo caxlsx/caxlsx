@@ -579,7 +579,7 @@ module Axlsx
     #   1. If the value is an instance of Date, the type is set to :date
     #   2. If the value is an instance of Time, the type is set to :time
     #   3. If the value is an instance of TrueClass or FalseClass, the type is set to :boolean
-    #   4. :float and :integer types are determined by regular expression matching.
+    #   4. Integer values use :integer; other numeric types use regular expression matching.
     #   5. Anything that does not meet either of the above is determined to be :string.
     # @return [Symbol] The determined type
     def cell_type_from_value(v)
@@ -589,7 +589,7 @@ module Axlsx
         :time
       elsif v.is_a?(TrueClass) || v.is_a?(FalseClass)
         :boolean
-      elsif v.respond_to?(:to_i) && Axlsx::NUMERIC_REGEX.match?(v.to_s)
+      elsif v.is_a?(Integer) || (v.respond_to?(:to_i) && Axlsx::NUMERIC_REGEX.match?(v.to_s))
         :integer
       elsif v.respond_to?(:to_f) && (Axlsx::SAFE_FLOAT_REGEX.match?(v.to_s) || ((matchdata = MAYBE_FLOAT_REGEX.match(v.to_s)) && matchdata[:exp].to_i.between?(Float::MIN_10_EXP, Float::MAX_10_EXP)))
         :float
