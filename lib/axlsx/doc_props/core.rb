@@ -20,8 +20,9 @@ module Axlsx
     # Creation time of the document. If nil, the current time will be used.
     attr_accessor :created
 
-    # serializes the core.xml document
-    # @return [String]
+    # Serializes the core.xml document
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<cp:coreProperties xmlns:cp="' << CORE_NS << '" xmlns:dc="' << CORE_NS_DC << '" '

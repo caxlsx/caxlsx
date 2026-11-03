@@ -104,8 +104,8 @@ module Axlsx
     end
 
     # Serialize this object to an xml string
-    # @param [String] str
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       serialized_tag('dataBar', str) do
         value_objects.to_xml_string(str)

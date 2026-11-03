@@ -3,6 +3,7 @@ CHANGELOG
 - **Unreleased**
   - Avoid string conversion and regular expression matching when inferring native Integer cell types.
   - Add `secure_formulas` option to apply OOXML `quotePrefix` to cells with formula-like prefixes (`=`, `+`, `-`, `@`), preventing re-evaluation on user interaction. Solves [Issue #529](https://github.com/caxlsx/caxlsx/issues/529)
+  - [PR #432](https://github.com/caxlsx/caxlsx/pull/432) Replace rubyzip with zip_kit. `Package#serialize` now also accepts an IO (anything responding to `write`) and streams the XLSX into it without seeking or rewinding
 
 - **June.09.26**: 4.5.0
   - [PR #527](https://github.com/caxlsx/caxlsx/pull/527) Fix PivotTable countNums subtotal label never applied. Solves [Issue #526](https://github.com/caxlsx/caxlsx/issues/526)

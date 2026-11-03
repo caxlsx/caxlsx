@@ -7,8 +7,8 @@ module Axlsx
       # Calls the proper serialization method based on type.
       # @param [Integer] row_index The index of the cell's row
       # @param [Integer] column_index The index of the cell's column
-      # @param [String] str The string to append serialization to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def to_xml_string(row_index, column_index, cell, str = +'')
         str << '<c r="'
         str << Axlsx.col_ref(column_index) << Axlsx.row_ref(row_index)
@@ -21,8 +21,8 @@ module Axlsx
       end
 
       # builds an xml text run based on this cells attributes.
-      # @param [String] str The string instance this run will be concated to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def run_xml_string(cell, str = +'')
         if cell.is_text_run?
           valid = RichTextRun::INLINE_STYLES - [:value, :type]
@@ -34,61 +34,61 @@ module Axlsx
         else
           str << '<t>' << cell.clean_value << '</t>'
         end
-        str
+        nil
       end
 
       # serializes cells that are type iso_8601
       # @param [Cell] cell The cell that is being serialized
-      # @param [String] str The string the serialized content will be appended to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def iso_8601(cell, str = +'')
         value_serialization 'd', cell.value, str
       end
 
       # serializes cells that are type date
       # @param [Cell] cell The cell that is being serialized
-      # @param [String] str The string the serialized content will be appended to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def date(cell, str = +'')
         value_serialization false, DateTimeConverter.date_to_serial(cell.value).to_s, str
       end
 
       # Serializes cells that are type time
       # @param [Cell] cell The cell that is being serialized
-      # @param [String] str The string the serialized content will be appended to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def time(cell, str = +'')
         value_serialization false, DateTimeConverter.time_to_serial(cell.value).to_s, str
       end
 
       # Serializes cells that are type boolean
       # @param [Cell] cell The cell that is being serialized
-      # @param [String] str The string the serialized content will be appended to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def boolean(cell, str = +'')
         value_serialization 'b', cell.value.to_s, str
       end
 
       # Serializes cells that are type float
       # @param [Cell] cell The cell that is being serialized
-      # @param [String] str The string the serialized content will be appended to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def float(cell, str = +'')
         numeric cell, str
       end
 
       # Serializes cells that are type integer
       # @param [Cell] cell The cell that is being serialized
-      # @param [String] str The string the serialized content will be appended to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def integer(cell, str = +'')
         numeric cell, str
       end
 
       # Serializes cells that are type formula
       # @param [Cell] cell The cell that is being serialized
-      # @param [String] str The string the serialized content will be appended to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def formula_serialization(cell, str = +'')
         str << 't="str"><f>' << cell.clean_value.delete_prefix(FORMULA_PREFIX) << '</f>'
         str << '<v>' << cell.formula_value.to_s << '</v>' unless cell.formula_value.nil?
@@ -96,8 +96,8 @@ module Axlsx
 
       # Serializes cells that are type array formula
       # @param [Cell] cell The cell that is being serialized
-      # @param [String] str The string the serialized content will be appended to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def array_formula_serialization(cell, str = +'')
         str << 't="str">' << '<f t="array" ref="' << cell.r << '">' << cell.clean_value.delete_prefix(ARRAY_FORMULA_PREFIX).delete_suffix(ARRAY_FORMULA_SUFFIX) << '</f>'
         str << '<v>' << cell.formula_value.to_s << '</v>' unless cell.formula_value.nil?
@@ -105,8 +105,8 @@ module Axlsx
 
       # Serializes cells that are type inline_string
       # @param [Cell] cell The cell that is being serialized
-      # @param [String] str The string the serialized content will be appended to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def inline_string_serialization(cell, str = +'')
         str << 't="inlineStr"><is>'
         run_xml_string cell, str
@@ -115,8 +115,8 @@ module Axlsx
 
       # Serializes cells that are type string
       # @param [Cell] cell The cell that is being serialized
-      # @param [String] str The string the serialized content will be appended to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def string(cell, str = +'')
         if cell.is_array_formula?
           array_formula_serialization cell, str
@@ -131,8 +131,8 @@ module Axlsx
 
       # Serializes cells that are of the type richtext
       # @param [Cell] cell The cell that is being serialized
-      # @param [String] str The string the serialized content will be appended to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def richtext(cell, str)
         if cell.ssti.nil?
           inline_string_serialization cell, str
@@ -143,8 +143,8 @@ module Axlsx
 
       # Serializes cells that are of the type text
       # @param [Cell] cell The cell that is being serialized
-      # @param [String] str The string the serialized content will be appended to.
-      # @return [String]
+      # @param [#<<] str A String, buffer or IO to append the serialization to.
+      # @return [void]
       def text(cell, str)
         if cell.ssti.nil?
           inline_string_serialization cell, str

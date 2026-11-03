@@ -14,8 +14,8 @@ module Axlsx
     attr_reader :worksheet
 
     # Serialize the sheet data
-    # @param [String] str the string this objects serializaton will be concacted to.
-    # @return [String]
+    # @param [#<<] str A String, buffer or IO to append the serialization to.
+    # @return [void]
     def to_xml_string(str = +'')
       str << '<sheetData>'
       worksheet.rows.each_with_index do |row, index|
