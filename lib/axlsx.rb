@@ -77,12 +77,14 @@ module Axlsx
     cells.sort_by(&:pos)
   end
 
-  # XML-escapes the provided string, writing single quotes as &apos;
-  # (cell_range relies on that form to quote sheet names).
+  XML_ESCAPES = { '<' => '&lt;', '>' => '&gt;', "'" => '&apos;', '"' => '&quot;', '&' => '&amp;' }.freeze
+
+  # XML-escapes the provided string after converting it to UTF-8, as HTMLEntities#encode did.
+  # Single quotes become &apos;, which cell_range relies on to quote sheet names.
   # @param [String] value The string to escape
   # @return [String]
   def self.escape_xml(value)
-    ::CGI.escapeHTML(value.to_s).gsub('&#39;', '&apos;')
+    value.to_s.encode(Encoding::UTF_8).gsub(/[<>'"&]/, XML_ESCAPES)
   end
 
   # @deprecated Use {Axlsx.escape_xml}. Requires adding the htmlentities gem, which caxlsx no longer depends on.

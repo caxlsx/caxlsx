@@ -102,6 +102,17 @@ class TestAxlsx < Minitest::Test
     assert_equal('', Axlsx.escape_xml(nil))
   end
 
+  def test_escape_xml_converts_to_utf8
+    escaped = Axlsx.escape_xml('Café & co'.encode(Encoding::ISO_8859_1))
+
+    assert_equal('Café &amp; co', escaped)
+    assert_equal(Encoding::UTF_8, escaped.encoding)
+  end
+
+  def test_escape_xml_rejects_invalid_utf8
+    assert_raises(ArgumentError) { Axlsx.escape_xml((+"caf\xE9").force_encoding(Encoding::UTF_8)) }
+  end
+
   def test_coder_is_deprecated
     assert_output(nil, /\[DEPRECATION\] Axlsx\.coder/) do
       assert_raises(LoadError) { Axlsx.coder }
