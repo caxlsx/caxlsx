@@ -160,8 +160,8 @@ class TestFilters < Minitest::Test
     dgi = Axlsx::Filters::DateGroupItem.new(date_time_grouping: :month, year: 2026, month: 5)
 
     assert dgi.matches?({ year: 2026, month: 5, day:  3, hour: 0, minute: 0, second: 0 })
-    assert_false dgi.matches?({ year: 2026, month: 6, day:  3, hour: 0, minute: 0, second: 0 })
-    assert_false dgi.matches?({ year: 2025, month: 5, day:  3, hour: 0, minute: 0, second: 0 })
+    assert_false dgi.matches?({ year: 2026, month: 6, day: 3, hour: 0, minute: 0, second: 0 })
+    assert_false dgi.matches?({ year: 2025, month: 5, day: 3, hour: 0, minute: 0, second: 0 })
   end
 
   def test_date_group_item_matches_day_granularity
