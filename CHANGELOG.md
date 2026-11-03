@@ -2,6 +2,7 @@ CHANGELOG
 ---------
 - **Unreleased**
   - [PR #553](https://github.com/caxlsx/caxlsx/pull/553) Drop the archived `htmlentities` dependency and deprecate `Axlsx.coder`, XML-escape sheet names and links with the same rules in a few lines
+  - Avoid string conversion and regular expression matching when inferring native Integer cell types.
   - Add `secure_formulas` option to apply OOXML `quotePrefix` to cells with formula-like prefixes (`=`, `+`, `-`, `@`), preventing re-evaluation on user interaction. Solves [Issue #529](https://github.com/caxlsx/caxlsx/issues/529)
 
 - **June.09.26**: 4.5.0
