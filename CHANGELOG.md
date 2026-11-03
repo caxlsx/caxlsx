@@ -1,6 +1,7 @@
 CHANGELOG
 ---------
 - **Unreleased**
+  - Avoid string conversion and regular expression matching when inferring native Integer cell types.
   - Add `secure_formulas` option to apply OOXML `quotePrefix` to cells with formula-like prefixes (`=`, `+`, `-`, `@`), preventing re-evaluation on user interaction. Solves [Issue #529](https://github.com/caxlsx/caxlsx/issues/529)
   - [PR #552](https://github.com/caxlsx/caxlsx/pull/552) Speed up type inference of cells holding non-ASCII text
 
