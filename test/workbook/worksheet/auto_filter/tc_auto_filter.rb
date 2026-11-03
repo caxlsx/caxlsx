@@ -42,4 +42,41 @@ class TestAutoFilter < Minitest::Test
 
     assert @auto_filter.worksheet.rows.last.hidden
   end
+
+  def test_apply_with_date_group_items
+    ws = Axlsx::Package.new.workbook.add_worksheet
+    ws.add_row ['Date']
+    ws.add_row [Date.new(2026, 5, 3)]
+    ws.add_row [Date.new(2026, 6, 3)]
+    ws.add_row [Date.new(2026, 6, 4)]
+
+    ws.auto_filter.range = 'A1:A4'
+    ws.auto_filter.add_column(0, :filters, date_group_items: [
+                                { date_time_grouping: :month, year: 2026, month: 5 },
+                                { date_time_grouping: :day,   year: 2026, month: 6, day: 3 }
+                              ])
+    ws.auto_filter.apply
+
+    refute ws.rows[1].hidden
+    refute ws.rows[2].hidden
+    assert ws.rows[3].hidden
+  end
+
+  def test_add_column_with_date_group_items_xml
+    ws = Axlsx::Package.new.workbook.add_worksheet
+    ws.add_row ['Date']
+    ws.add_row [Date.new(2026, 5, 3)]
+    ws.add_row [Date.new(2026, 6, 3)]
+    ws.auto_filter.range = 'A1:A3'
+    ws.auto_filter.add_column(0, :filters, date_group_items: [
+                                { date_time_grouping: :month, year: 2026, month: 5 },
+                                { date_time_grouping: :day,   year: 2026, month: 6, day: 3 }
+                              ])
+    doc = Nokogiri::XML(ws.auto_filter.to_xml_string)
+
+    assert_equal(1, doc.xpath("//filterColumn[@colId='0']").size)
+    assert_equal(2, doc.xpath('//dateGroupItem').size)
+    assert_equal(1, doc.xpath("//dateGroupItem[@dateTimeGrouping='month']").size)
+    assert_equal(1, doc.xpath("//dateGroupItem[@dateTimeGrouping='day']").size)
+  end
 end
