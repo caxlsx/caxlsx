@@ -180,6 +180,14 @@ class TestWorkbook < Minitest::Test
     assert_equal sheet.name, wb_xml.xpath('//xmlns:workbook/xmlns:sheets/*[1]/@name').to_s
   end
 
+  def test_latin1_worksheet_name_is_serialized_as_utf8
+    @wb.add_worksheet(name: 'Café'.encode(Encoding::ISO_8859_1))
+    @wb.add_worksheet(name: 'Thé')
+    wb_xml = Nokogiri::XML(@wb.to_xml_string)
+
+    assert_equal %w[Café Thé], wb_xml.xpath('//xmlns:workbook/xmlns:sheets/*/@name').map(&:to_s)
+  end
+
   def test_escape_formulas
     Axlsx.escape_formulas = false
     p = Axlsx::Package.new

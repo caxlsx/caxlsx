@@ -338,7 +338,7 @@ module Axlsx
     # @param [String] name
     def name=(name)
       validate_sheet_name name
-      @name = Axlsx.coder.encode(name)
+      @name = Axlsx.escape_xml(name)
     end
 
     # The auto filter range for the worksheet
@@ -782,7 +782,7 @@ module Axlsx
       raise ArgumentError, format(ERR_SHEET_NAME_TOO_LONG, name) if character_length > WORKSHEET_MAX_NAME_LENGTH && Axlsx.validate_sheet_name_length
       raise ArgumentError, format(ERR_SHEET_NAME_CHARACTER_FORBIDDEN, name) if WORKSHEET_NAME_FORBIDDEN_CHARS.any? { |char| name.include? char }
 
-      name = Axlsx.coder.encode(name)
+      name = Axlsx.escape_xml(name)
       sheet_names = @workbook.worksheets.reject { |s| s == self }.map(&:name)
       raise ArgumentError, format(ERR_DUPLICATE_SHEET_NAME, name) if sheet_names.include?(name)
     end

@@ -3,7 +3,6 @@
 require_relative 'axlsx/version'
 
 # gemspec dependencies
-require 'htmlentities'
 require 'marcel'
 require 'nokogiri'
 require 'zip'
@@ -78,9 +77,22 @@ module Axlsx
     cells.sort_by(&:pos)
   end
 
-  # global reference html entity encoding
-  # @return [HtmlEntities]
+  XML_ESCAPES = { '<' => '&lt;', '>' => '&gt;', "'" => '&apos;', '"' => '&quot;', '&' => '&amp;' }.freeze
+
+  # XML-escapes the provided string after converting it to UTF-8, as HTMLEntities#encode did.
+  # Single quotes become &apos;, which cell_range relies on to quote sheet names.
+  # @param [String] value The string to escape
+  # @return [String]
+  def self.escape_xml(value)
+    value.to_s.encode(Encoding::UTF_8).gsub(/[<>'"&]/, XML_ESCAPES)
+  end
+
+  # @deprecated Use {Axlsx.escape_xml}. Requires adding the htmlentities gem, which caxlsx no longer depends on.
+  # @return [HTMLEntities]
   def self.coder
+    warn "[DEPRECATION] Axlsx.coder is deprecated and requires adding the htmlentities gem to your Gemfile. " \
+         "Use Axlsx.escape_xml instead e.g., Axlsx.escape_xml(name)"
+    require 'htmlentities'
     @@coder ||= ::HTMLEntities.new
   end
 

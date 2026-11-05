@@ -94,6 +94,31 @@ class TestAxlsx < Minitest::Test
     assert_equal('Z26', Axlsx.cell_r(25, 25))
   end
 
+  def test_escape_xml
+    assert_equal('Sheet1', Axlsx.escape_xml('Sheet1'))
+    assert_equal('Q3 &amp; Q4 &lt;draft&gt;', Axlsx.escape_xml('Q3 & Q4 <draft>'))
+    assert_equal('Alice&apos;s &quot;sales&quot;', Axlsx.escape_xml(%(Alice's "sales")))
+    assert_equal('&amp;#39;', Axlsx.escape_xml('&#39;'))
+    assert_equal('', Axlsx.escape_xml(nil))
+  end
+
+  def test_escape_xml_converts_to_utf8
+    escaped = Axlsx.escape_xml('Café & co'.encode(Encoding::ISO_8859_1))
+
+    assert_equal('Café &amp; co', escaped)
+    assert_equal(Encoding::UTF_8, escaped.encoding)
+  end
+
+  def test_escape_xml_rejects_invalid_utf8
+    assert_raises(ArgumentError) { Axlsx.escape_xml((+"caf\xE9").force_encoding(Encoding::UTF_8)) }
+  end
+
+  def test_coder_is_deprecated
+    assert_output(nil, /\[DEPRECATION\] Axlsx\.coder/) do
+      assert_raises(LoadError) { Axlsx.coder }
+    end
+  end
+
   def test_range_to_a
     assert_equal([['A1', 'B1', 'C1']],                         Axlsx.range_to_a('A1:C1'))
     assert_equal([['A1', 'B1', 'C1'], ['A2', 'B2', 'C2']],     Axlsx.range_to_a('A1:C2'))

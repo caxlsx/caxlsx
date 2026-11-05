@@ -70,7 +70,7 @@ module Axlsx
     # r:id should only be specified for external targets.
     # @return [Hash]
     def location_or_id
-      @target == :external ? { "r:id": relationship.Id } : { location: Axlsx.coder.encode(location) }
+      @target == :external ? { "r:id": relationship.Id } : { location: Axlsx.escape_xml(location) }
     end
   end
 end
