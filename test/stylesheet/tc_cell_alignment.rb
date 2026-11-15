@@ -30,12 +30,14 @@ class TestCellAlignment < Minitest::Test
   def test_horizontal
     assert_raises(ArgumentError) { @item.horizontal = :red }
     refute_raises { @item.horizontal = :left }
+    refute_raises { @item.horizontal = 'left' }
     assert_equal(:left, @item.horizontal)
   end
 
   def test_vertical
     assert_raises(ArgumentError) { @item.vertical = :red }
     refute_raises { @item.vertical = :top }
+    refute_raises { @item.vertical = 'top' }
     assert_equal(:top, @item.vertical)
   end
 
