@@ -41,17 +41,19 @@ class TestSeriesTitle < Minitest::Test
     doc = Nokogiri::XML(@chart.to_xml_string)
 
     assert_empty(doc.errors)
+    assert_equal(@title.text, doc.xpath('//c:ser/c:tx/c:v').text)
+    assert_empty(doc.xpath('//c:ser/c:tx/c:strRef'))
   end
 
   def test_to_xml_string_for_special_characters_in_cell
-    @chart.add_series(title: @title, data: [3, 7], labels: ['A', 'B'])
-
     cell = @row.cells.first
     cell.value = "&><'\""
-    @title.cell = cell
+    @chart.add_series(title: cell, data: [3, 7], labels: ['A', 'B'])
 
     doc = Nokogiri::XML(@chart.to_xml_string)
 
     assert_empty(doc.errors)
+    assert_equal("'Sheet1'!$A$1:$A$1", doc.xpath('//c:ser/c:tx/c:strRef/c:f').text)
+    assert_equal(cell.value, doc.xpath('//c:ser/c:tx/c:strRef/c:strCache/c:pt/c:v').text)
   end
 end
