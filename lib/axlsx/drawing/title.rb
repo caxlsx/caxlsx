@@ -38,7 +38,6 @@ module Axlsx
     def text_size=(v)
       DataTypeValidator.validate 'Title.text_size', String, v
       @text_size = v
-      @cell = nil
     end
 
     # @see cell

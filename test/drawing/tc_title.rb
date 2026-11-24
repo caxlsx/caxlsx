@@ -49,6 +49,7 @@ class TestTitle < Minitest::Test
 
   def test_to_xml_string_cell
     @chart.title.cell = @row.cells.first
+    @chart.title.text_size = '2400'
     doc = Nokogiri::XML(@chart.to_xml_string)
 
     assert_equal("'Sheet1'!$A$1:$A$1", doc.xpath('//c:strRef/c:f').text)
